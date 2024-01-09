@@ -37,11 +37,15 @@ public class Dashboard extends GBSubsystem {
 	public static String power = "power";
 	public static String type = "type";
 
+	public static double DEFAULT_ID = 999;
+	public static double SPARK_MAX_TYPE = 1;
+	public static double NUMBER_OF_MOTORS = 999;
+
 	public void createMotorsTabs(){
-		for (int i  = 0; i<4; i++){
-			TunableNumber id = new TunableNumber(Dashboard.id+ i, Dashboard.prototypesTabName,999);
+		for (int i  = 0; i<NUMBER_OF_MOTORS; i++){
+			TunableNumber id = new TunableNumber(Dashboard.id+ i, Dashboard.prototypesTabName,DEFAULT_ID);
 			TunableNumber power = new TunableNumber(Dashboard.power+ i, Dashboard.prototypesTabName);
-			TunableNumber type = new TunableNumber(Dashboard.type+ i, Dashboard.prototypesTabName,1);
+			TunableNumber type = new TunableNumber(Dashboard.type+ i, Dashboard.prototypesTabName,SPARK_MAX_TYPE);
 			TunableNumberManager.getInstance().addTunableNumber(Dashboard.id+ i, id);
 			TunableNumberManager.getInstance().addTunableNumber(Dashboard.power+ i, power);
 			TunableNumberManager.getInstance().addTunableNumber(Dashboard.type+ i, type);
