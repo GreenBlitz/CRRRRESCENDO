@@ -238,6 +238,13 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         setModuleStates(desaturatedStates);
     }
 
+    public void moveByRobotRelativeSpeeds(ChassisSpeeds ChassisSpeeds){
+        moveByChassisSpeeds(
+                ChassisSpeeds.fromRobotRelativeSpeeds(ChassisSpeeds, Rotation2d.fromRadians(gyroInputs.yaw))
+        );
+    }
+
+
     /**
      * makes sure no module is requested to move faster than possible by linearly scaling all module velocities to comply with the constraint
      *
@@ -259,6 +266,13 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     public ChassisSpeeds getChassisSpeeds() {
         return kinematics.toChassisSpeeds(
                 getSwerveModuleStates()
+        );
+    }
+
+    public ChassisSpeeds getRobotRelativeChassisSpeeds(){
+        return ChassisSpeeds.fromFieldRelativeSpeeds(
+                getChassisSpeeds(),
+                Rotation2d.fromRadians(gyroInputs.yaw)
         );
     }
 

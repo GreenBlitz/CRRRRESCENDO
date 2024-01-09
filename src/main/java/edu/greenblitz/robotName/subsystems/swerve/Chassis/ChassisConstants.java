@@ -1,11 +1,17 @@
 package edu.greenblitz.robotName.subsystems.swerve.Chassis;
 
+import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
+import com.pathplanner.lib.util.PIDConstants;
+import com.pathplanner.lib.util.ReplanningConfig;
+import edu.greenblitz.robotName.RobotConstants;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 
 public class ChassisConstants {
 
+    public static final double ROBOT_WIDTH_IN_METERS = 0.79;
+    public static final double BUMPER_WIDTH = 0.13;
     static final Pose2d INITIAL_ROBOT_POSITION = new Pose2d(0, 0, new Rotation2d(0));
     public static final double FRONT_LEFT_X_POSITION = 0.3020647;
     public static final double FRONT_LEFT_Y_POSITION = 0.25265;
@@ -28,5 +34,21 @@ public class ChassisConstants {
 
     public static final boolean ANGULAR_JOYSTICK_INVERTED = true;
     public static final boolean LINEAR_JOYSTICK_INVERTED = false;
+    public static final PIDConstants TRANSLATION_PID = new PIDConstants(2, 0, 0);
+    public static final PIDConstants ROTATION_PID = new PIDConstants(2, 0, 0);
+    public static final double TOTAL_ERROR_FOR_REPLANNING = 0.05;
+    public static final double ERROR_SPIKE_FOR_REPLANNING = 0.1;
+    public static final HolonomicPathFollowerConfig PATH_FOLLOWER_CONFIG = new HolonomicPathFollowerConfig(
+            TRANSLATION_PID,
+            ROTATION_PID,
+            MAX_VELOCITY,
+            (ROBOT_WIDTH_IN_METERS+BUMPER_WIDTH)/2,
+            new ReplanningConfig(
+                    true,
+                    true,
+                    TOTAL_ERROR_FOR_REPLANNING,
+                    ERROR_SPIKE_FOR_REPLANNING
+            )
+    );
 
 }
