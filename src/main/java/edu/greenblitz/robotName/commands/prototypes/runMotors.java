@@ -1,9 +1,11 @@
 package edu.greenblitz.robotName.commands.prototypes;
 
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.prototypes.Prototypes;
 import edu.greenblitz.robotName.utils.GBCommand;
 import edu.greenblitz.robotName.utils.tuneableNumber.TunableNumberManager;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import static edu.greenblitz.robotName.subsystems.Dashboard.*;
 
@@ -19,8 +21,10 @@ public class runMotors extends GBCommand {
 			if (id != DEFAULT_ID) {
 				if (type == SPARK_MAX_TYPE)
 					Prototypes.getSparkMax(id).set(power);
-				else
+				else if (type == TALON_SRX_TYPE)
 					Prototypes.getTalon(id).set(power);
+				else
+					Prototypes.getTalonRX(id).set(TalonSRXControlMode.PercentOutput, power);
 			}
 		}
 	}
@@ -30,12 +34,13 @@ public class runMotors extends GBCommand {
 		for (int i = 0; i < NUMBER_OF_MOTORS; i++) {
 			int id = (int) TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.id + i).getValue();
 			double type = TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.type + i).getValue();
-			double power = TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.power + i).getValue();
 			if (id != DEFAULT_ID) {
 				if (type == SPARK_MAX_TYPE)
 					Prototypes.getSparkMax(id).set(0);
-				else
+				else if (type == TALON_SRX_TYPE)
 					Prototypes.getTalon(id).set(0);
+				else
+					Prototypes.getTalonRX(id).set(TalonSRXControlMode.PercentOutput, 0);
 			}
 		}
 	}
