@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName;
 
 
+import edu.greenblitz.robotName.commands.prototypes.runMotors;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 
 public class OI {
@@ -19,6 +20,14 @@ public class OI {
             instance = new OI();
         }
         return instance;
+    }
+
+    public void initButt(){
+        butt();
+    }
+
+    public void butt(){
+        secondJoystick.B.whileTrue(new runMotors());
     }
 
     public SmartJoystick getMainJoystick() {
