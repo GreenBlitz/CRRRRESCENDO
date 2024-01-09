@@ -5,7 +5,6 @@ import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.prototypes.Prototypes;
 import edu.greenblitz.robotName.utils.GBCommand;
 import edu.greenblitz.robotName.utils.tuneableNumber.TunableNumberManager;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import static edu.greenblitz.robotName.subsystems.Dashboard.*;
 
@@ -22,9 +21,9 @@ public class runMotors extends GBCommand {
 				if (type == SPARK_MAX_TYPE)
 					Prototypes.getSparkMax(id).set(power);
 				else if (type == TALON_SRX_TYPE)
-					Prototypes.getTalon(id).set(power);
+					Prototypes.getTalonSRX(id).set(TalonSRXControlMode.PercentOutput, power);
 				else
-					Prototypes.getTalonRX(id).set(TalonSRXControlMode.PercentOutput, power);
+					Prototypes.getTalonFX(id).set(power);
 			}
 		}
 	}
@@ -38,9 +37,9 @@ public class runMotors extends GBCommand {
 				if (type == SPARK_MAX_TYPE)
 					Prototypes.getSparkMax(id).set(0);
 				else if (type == TALON_SRX_TYPE)
-					Prototypes.getTalon(id).set(0);
+					Prototypes.getTalonFX(id).set(0);
 				else
-					Prototypes.getTalonRX(id).set(TalonSRXControlMode.PercentOutput, 0);
+					Prototypes.getTalonSRX(id).set(TalonSRXControlMode.PercentOutput, 0);
 			}
 		}
 	}

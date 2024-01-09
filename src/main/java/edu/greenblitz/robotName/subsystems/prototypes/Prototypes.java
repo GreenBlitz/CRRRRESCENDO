@@ -9,9 +9,9 @@ import java.util.HashMap;
 
 public class Prototypes {
 	public static final HashMap<Integer, GBSparkMax> sparks = new HashMap<>();
-	public static final HashMap<Integer, TalonFX> talons = new HashMap<>();
+	public static final HashMap<Integer, TalonFX> talonFXs = new HashMap<>();
 
-	public static final HashMap<Integer, TalonSRX> talonsRX = new HashMap<>();
+	public static final HashMap<Integer, TalonSRX> talonSRX = new HashMap<>();
 
 	public static GBSparkMax getSparkMax(int id){
 		if (!sparks.containsKey(id)){
@@ -20,17 +20,17 @@ public class Prototypes {
 		return sparks.get(id);
 	}
 
-	public static TalonFX getTalon(int id){
-		if (!talons.containsKey(id)){
-			talons.put(id, new TalonFX(id));
+	public static TalonFX getTalonFX(int id){
+		if (!talonFXs.containsKey(id)){
+			talonFXs.put(id, new TalonFX(id));
 		}
-		return talons.get(id);
+		return talonFXs.get(id);
 	}
 
-	public static TalonSRX getTalonRX(int id){
-		if (!talonsRX.containsKey(id)){
-			talonsRX.put(id, new TalonSRX(id));
+	public static TalonSRX getTalonSRX(int id){
+		if (!talonSRX.containsKey(id)){
+			talonSRX.put(id, new TalonSRX(id));
 		}
-		return talonsRX.get(id);
+		return talonSRX.get(id);
 	}
 }
