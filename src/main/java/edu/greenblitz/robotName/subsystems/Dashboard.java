@@ -26,45 +26,19 @@ public class Dashboard extends GBSubsystem {
 	
 	
 	public static String prototypesTabName = "Prototypes";
-	public static String numberOfMotors = "NumberOfMotors";
 	
 	public void prototypesDashboard(){
 		ShuffleboardTab prototypesTab = Shuffleboard.getTab(Dashboard.prototypesTabName);
-		
-		AutoSetterTunableNumber numberOfMotors = new AutoSetterTunableNumber(
-				Dashboard.numberOfMotors,
-				Dashboard.prototypesTabName,
-				aDouble -> createMotorsTabs(aDouble)
-				);
-		TunableNumberManager.getInstance().addTunableNumber(Dashboard.numberOfMotors, numberOfMotors);
-		
-		
-		//check
-		prototypesTab.addDouble("Motor1Check", () ->
-				TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.id+0).getValue());
-		prototypesTab.addDouble("Motor2Check", () ->
-				TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.id+1).getValue());
-		prototypesTab.addDouble("Motor3Check", () ->
-				TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.id+2).getValue());
-		prototypesTab.addDouble("Motor1CheckPower", () ->
-				TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.power+0).getValue());
-		prototypesTab.addDouble("Motor2CheckPower", () ->
-				TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.power+1).getValue());
-		prototypesTab.addDouble("Motor3CheckPower", () ->
-				TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.power+2).getValue());
-		prototypesTab.addDouble("Motor1CheckType", () ->
-				TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.type+0).getValue());
-		prototypesTab.addDouble("Motor2CheckType", () ->
-				TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.type+1).getValue());
-		prototypesTab.addDouble("Motor3CheckType", () ->
-				TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.type+2).getValue());
-		
+
+		createMotorsTabs();
 	}
+
 	public static String id = "id";
 	public static String power = "power";
 	public static String type = "type";
-	public void createMotorsTabs(double numberOfMotors){
-		for (int i  = 0; i<numberOfMotors; i++){
+
+	public void createMotorsTabs(){
+		for (int i  = 0; i<4; i++){
 			TunableNumber id = new TunableNumber(Dashboard.id+ i, Dashboard.prototypesTabName);
 			TunableNumber power = new TunableNumber(Dashboard.power+ i, Dashboard.prototypesTabName);
 			TunableNumber type = new TunableNumber(Dashboard.type+ i, Dashboard.prototypesTabName);
@@ -72,10 +46,5 @@ public class Dashboard extends GBSubsystem {
 			TunableNumberManager.getInstance().addTunableNumber(Dashboard.power+ i, power);
 			TunableNumberManager.getInstance().addTunableNumber(Dashboard.type+ i, type);
 		}
-	}
-	
-	@Override
-	public void periodic() {
-		super.periodic();
 	}
 }
