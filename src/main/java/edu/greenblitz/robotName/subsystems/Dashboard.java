@@ -46,6 +46,18 @@ public class Dashboard extends GBSubsystem {
 				TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.id+1).getValue());
 		prototypesTab.addDouble("Motor3Check", () ->
 				TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.id+2).getValue());
+		prototypesTab.addDouble("Motor1CheckPower", () ->
+				TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.power+0).getValue());
+		prototypesTab.addDouble("Motor2CheckPower", () ->
+				TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.power+1).getValue());
+		prototypesTab.addDouble("Motor3CheckPower", () ->
+				TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.power+2).getValue());
+		prototypesTab.addDouble("Motor1CheckType", () ->
+				TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.type+0).getValue());
+		prototypesTab.addDouble("Motor2CheckType", () ->
+				TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.type+1).getValue());
+		prototypesTab.addDouble("Motor3CheckType", () ->
+				TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.type+2).getValue());
 		
 	}
 	public static String id = "id";

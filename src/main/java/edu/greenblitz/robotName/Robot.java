@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
+import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
@@ -26,7 +27,7 @@ public class Robot extends LoggedRobot {
     @Override
     public void robotInit() {
         initializeLogger();
-
+        Dashboard.init();
         SwerveChassis.init();
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
         SwerveChassis.getInstance().resetAllEncoders();

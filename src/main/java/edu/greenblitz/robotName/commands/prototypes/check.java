@@ -18,10 +18,7 @@ public class check extends GBCommand {
 	@Override
 	public void execute() {
 		for (int i = 0; i < numberOfMotors; i++){
-			int finalI = i;
-			Shuffleboard.getTab(Dashboard.prototypesTabName).
-					addDouble("MotorCheck1", () ->
-							TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.id+ finalI).getValue());
+		
 		}
 	}
 }
