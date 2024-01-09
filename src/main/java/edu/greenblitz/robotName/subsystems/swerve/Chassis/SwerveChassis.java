@@ -26,6 +26,8 @@ import org.photonvision.EstimatedRobotPose;
 
 import java.util.Optional;
 
+import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.TIME_STEP;
+
 public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
     public enum Module {
@@ -223,6 +225,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
                 angSpeed,
                 currentAng
         );
+        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds,TIME_STEP);
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
         SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
         setModuleStates(desaturatedStates);
@@ -233,6 +236,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
                 fieldRelativeSpeeds,
                 currentAng
         );
+        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds,TIME_STEP);
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
         SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
         setModuleStates(desaturatedStates);
