@@ -25,8 +25,8 @@ public class Dashboard extends GBSubsystem {
 	}
 	
 	
-	static String prototypesTabName = "Prototypes";
-	static String numberOfMotors = "NumberOfMotors";
+	public static String prototypesTabName = "Prototypes";
+	public static String numberOfMotors = "NumberOfMotors";
 	
 	public void prototypesDashboard(){
 		ShuffleboardTab prototypesTab = Shuffleboard.getTab(Dashboard.prototypesTabName);
@@ -39,16 +39,26 @@ public class Dashboard extends GBSubsystem {
 		TunableNumberManager.getInstance().addTunableNumber(Dashboard.numberOfMotors, numberOfMotors);
 		
 		
+		//check
+		prototypesTab.addDouble("Motor1Check", () ->
+				TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.id+0).getValue());
+		prototypesTab.addDouble("Motor2Check", () ->
+				TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.id+1).getValue());
+		prototypesTab.addDouble("Motor3Check", () ->
+				TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.id+2).getValue());
+		
 	}
-	
+	public static String id = "id";
+	public static String power = "power";
+	public static String type = "type";
 	public void createMotorsTabs(double numberOfMotors){
 		for (int i  = 0; i<numberOfMotors; i++){
-			TunableNumber id = new TunableNumber("id"+ i, Dashboard.prototypesTabName);
-			TunableNumber power = new TunableNumber("power"+ i, Dashboard.prototypesTabName);
-			TunableNumber type = new TunableNumber("type"+ i, Dashboard.prototypesTabName);
-			TunableNumberManager.getInstance().addTunableNumber("id"+ i, id);
-			TunableNumberManager.getInstance().addTunableNumber("power"+ i, power);
-			TunableNumberManager.getInstance().addTunableNumber("type"+ i, type);
+			TunableNumber id = new TunableNumber(Dashboard.id+ i, Dashboard.prototypesTabName);
+			TunableNumber power = new TunableNumber(Dashboard.power+ i, Dashboard.prototypesTabName);
+			TunableNumber type = new TunableNumber(Dashboard.type+ i, Dashboard.prototypesTabName);
+			TunableNumberManager.getInstance().addTunableNumber(Dashboard.id+ i, id);
+			TunableNumberManager.getInstance().addTunableNumber(Dashboard.power+ i, power);
+			TunableNumberManager.getInstance().addTunableNumber(Dashboard.type+ i, type);
 		}
 	}
 	
