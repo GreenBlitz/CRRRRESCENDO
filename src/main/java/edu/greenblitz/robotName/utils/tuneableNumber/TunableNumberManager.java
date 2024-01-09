@@ -8,7 +8,7 @@ public class TunableNumberManager extends GBSubsystem {
     private static TunableNumberManager instance;
     private static HashMap<String, TunableNumber> tunableNumbers;
 
-    private static void init() {
+    public static void init() {
         if (instance == null) {
             instance = new TunableNumberManager();
         }

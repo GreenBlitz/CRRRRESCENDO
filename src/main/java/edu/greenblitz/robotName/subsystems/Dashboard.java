@@ -39,9 +39,9 @@ public class Dashboard extends GBSubsystem {
 
 	public void createMotorsTabs(){
 		for (int i  = 0; i<4; i++){
-			TunableNumber id = new TunableNumber(Dashboard.id+ i, Dashboard.prototypesTabName);
+			TunableNumber id = new TunableNumber(Dashboard.id+ i, Dashboard.prototypesTabName,999);
 			TunableNumber power = new TunableNumber(Dashboard.power+ i, Dashboard.prototypesTabName);
-			TunableNumber type = new TunableNumber(Dashboard.type+ i, Dashboard.prototypesTabName);
+			TunableNumber type = new TunableNumber(Dashboard.type+ i, Dashboard.prototypesTabName,1);
 			TunableNumberManager.getInstance().addTunableNumber(Dashboard.id+ i, id);
 			TunableNumberManager.getInstance().addTunableNumber(Dashboard.power+ i, power);
 			TunableNumberManager.getInstance().addTunableNumber(Dashboard.type+ i, type);
