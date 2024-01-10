@@ -1,7 +1,15 @@
 package edu.greenblitz.robotName;
 
 
+import com.pathplanner.lib.path.PathConstraints;
+import edu.greenblitz.robotName.commands.auto.MoveToPose;
+import edu.greenblitz.robotName.commands.swerve.SwerveCommand;
+import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
+import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
+import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 
 public class OI {
     private static OI instance;
@@ -12,6 +20,7 @@ public class OI {
     private OI() {
         mainJoystick = new SmartJoystick(RobotConstants.Joystick.MAIN);
         secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
+        initButtons();
     }
 
     public static OI getInstance() {
@@ -27,5 +36,15 @@ public class OI {
 
     public SmartJoystick getSecondJoystick() {
         return secondJoystick;
+    }
+
+    private void initButtons(){
+        buttons();
+    }
+
+    private void buttons(){
+            mainJoystick.A.whileTrue(
+                    MoveToPose.getPathCommand(new Pose2d(2, 2, Rotation2d.fromDegrees(0)), ChassisConstants.CONSTRAINTS)
+            );
     }
 }

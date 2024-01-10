@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.swerve.Chassis;
 
+import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.ReplanningConfig;
@@ -23,8 +24,9 @@ public class ChassisConstants {
     };
 
     public static final double MAX_VELOCITY = 4.1818320981472068;
-    public static final double MAX_ACCELERATION = 14.37979171376739;
+    public static final double MAX_ACCELERATION = 2;
     public static final double MAX_ANGULAR_SPEED = 10.454580245368017;
+    public static final double MAX_ANGULAR_ACCELERATION = 4;
 
     public static final double DRIVER_ANGULAR_SPEED_FACTOR = MAX_ANGULAR_SPEED / 2;
     public static final double DRIVER_LINEAR_SPEED_FACTOR = MAX_VELOCITY;
@@ -35,20 +37,28 @@ public class ChassisConstants {
     public static final boolean ANGULAR_JOYSTICK_INVERTED = true;
     public static final boolean LINEAR_JOYSTICK_INVERTED = false;
     public static final PIDConstants TRANSLATION_PID = new PIDConstants(2, 0, 0);
-    public static final PIDConstants ROTATION_PID = new PIDConstants(2, 0, 0);
-    public static final double TOTAL_ERROR_FOR_REPLANNING = 0.05;
-    public static final double ERROR_SPIKE_FOR_REPLANNING = 0.1;
+    public static final PIDConstants ROTATION_PID = new PIDConstants(3.6, 0, 0);
+    public static final double TOTAL_ERROR_FOR_REPLANNING = 0.5;
+    public static final double ERROR_SPIKE_FOR_REPLANNING = 1;
     public static final HolonomicPathFollowerConfig PATH_FOLLOWER_CONFIG = new HolonomicPathFollowerConfig(
             TRANSLATION_PID,
             ROTATION_PID,
             MAX_VELOCITY,
-            (ROBOT_WIDTH_IN_METERS+BUMPER_WIDTH)/2,
+            Math.sqrt(
+                    Math.pow((ROBOT_WIDTH_IN_METERS+BUMPER_WIDTH),2) * 2
+            ),
             new ReplanningConfig(
                     true,
                     true,
                     TOTAL_ERROR_FOR_REPLANNING,
                     ERROR_SPIKE_FOR_REPLANNING
             )
+    );
+    public static final PathConstraints CONSTRAINTS = new PathConstraints(
+            MAX_VELOCITY,
+            MAX_ACCELERATION,
+            MAX_ANGULAR_SPEED,
+            MAX_ANGULAR_ACCELERATION
     );
 
 }
