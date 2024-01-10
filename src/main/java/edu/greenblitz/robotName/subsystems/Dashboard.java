@@ -40,13 +40,14 @@ public class Dashboard extends GBSubsystem {
 	public static double DEFAULT_ID = 999;
 	public static double SPARK_MAX_TYPE = 1;
 	public static double TALON_SRX_TYPE = 2;
+	public static double TALON_FX_TYPE = 3;
 	public static double NUMBER_OF_MOTORS = 2;
 
 	public void createMotorsTabs(){
 		for (int i  = 0; i<NUMBER_OF_MOTORS; i++){
 			TunableNumber id = new TunableNumber(Dashboard.id+ i, Dashboard.prototypesTabName,DEFAULT_ID);
 			TunableNumber power = new TunableNumber(Dashboard.power+ i, Dashboard.prototypesTabName);
-			TunableNumber type = new TunableNumber(Dashboard.type+ i, Dashboard.prototypesTabName,SPARK_MAX_TYPE);
+			TunableNumber type = new TunableNumber(Dashboard.type+ i, Dashboard.prototypesTabName);
 			TunableNumberManager.getInstance().addTunableNumber(Dashboard.id+ i, id);
 			TunableNumberManager.getInstance().addTunableNumber(Dashboard.power+ i, power);
 			TunableNumberManager.getInstance().addTunableNumber(Dashboard.type+ i, type);
