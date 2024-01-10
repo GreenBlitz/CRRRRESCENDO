@@ -17,7 +17,10 @@ public class ChassisConstants {
             new Translation2d(-FRONT_LEFT_X_POSITION, -FRONT_LEFT_Y_POSITION)
     };
 
-    public static final PIDController ROTATION_PID_CONTROLLER = new PIDController(0,0,0);
+    public static final PIDController ROTATION_PID_CONTROLLER = new PIDController(2,0,0);
+    static {
+        ROTATION_PID_CONTROLLER.enableContinuousInput(-Math.PI, Math.PI);
+    }
     public static final double MAX_VELOCITY = 4.1818320981472068;
     public static final double MAX_ACCELERATION = 14.37979171376739;
     public static final double MAX_ANGULAR_SPEED = 10.454580245368017;
