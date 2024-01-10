@@ -183,7 +183,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     }
 
     public void resetPoseByVision() {
-        if (MultiLimelight.getInstance().isConnected()) {
+        if (MultiLimelight.getInstance().isConnected(0)) {
             if (MultiLimelight.getInstance().getFirstAvailableTarget().isPresent()) {
                 Pose2d visionPose = MultiLimelight.getInstance().getFirstAvailableTarget().get().getFirst();
                 getGyro().updateYaw(Rotation2d.fromRadians(0));

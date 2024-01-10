@@ -18,15 +18,12 @@ class Limelight {
 
     Limelight(String limelightName) {
         this.name = limelightName;
-        String robotPoseQuery = "botpose_wpiblue";
+        String robotPoseQuery = FMSUtils.getAlliance() == DriverStation.Alliance.Red ? "botpose_wpired" : "botpose_wpiblue";
         robotPoseEntry = NetworkTableInstance.getDefault().getTable(name).getEntry(robotPoseQuery);
         idEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("tid");
     }
     
-    public void updateRobotPoseEntry(){
-        String robotPoseQuery = FMSUtils.getAlliance() == DriverStation.Alliance.Red ? "botpose_wpired" : "botpose_wpiblue";
-        robotPoseEntry = NetworkTableInstance.getDefault().getTable(name).getEntry(robotPoseQuery);
-    }
+
 
 
 

@@ -5,7 +5,7 @@ import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation3d;
 
 public class VisionConstants {
-	public static final String[] LIMELIGHT_NAMES = new String[]{"limelight-front"};
+	public static final String[] LIMELIGHT_NAMES = new String[]{"limelight-front","limelight-back","limelight-gb"};
 	public static double STANDARD_DEVIATION_ODOMETRY = 0.001;
 	public static double STANDARD_DEVIATION_VISION2D = 0.3;
 	public static double STANDARD_DEVIATION_VISION_ANGLE = 0.6;

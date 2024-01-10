@@ -4,6 +4,8 @@ import edu.greenblitz.robotName.VisionConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.ArrayList;
@@ -22,12 +24,7 @@ public class MultiLimelight extends GBSubsystem {
 			limelights.add(new Limelight(limelightName));
 		}
 	}
-	
-	public void updateRobotPoseAlliance(){
-		for(Limelight limelight : limelights){
-			limelight.updateRobotPoseEntry();
-		}
-	}
+
 
 	public static MultiLimelight getInstance() {
 		if (instance == null) {
@@ -44,14 +41,33 @@ public class MultiLimelight extends GBSubsystem {
 	public List<Optional<Pair<Pose2d, Double>>> getAllEstimates(){
 		ArrayList<Optional<Pair<Pose2d, Double>>> estimates = new ArrayList<>();
 		for (Limelight limelight : limelights){
+			limelight.getUpdatedPoseEstimation();
 			estimates.add(limelight.getUpdatedPoseEstimation());
 		}
 		return estimates;
 	}
-	
-	public boolean isConnected(){
-		return limelights.get(0).hasTarget();
+
+	public Pose2d getAveragePos() {
+		double avgX = 0;
+		double avgY = 0;
+		double avgRotation = 0;
+		for(Limelight limelight : limelights) {
+			avgX += limelight.getUpdatedPoseEstimation().get().getFirst().getX();
+			avgY += limelight.getUpdatedPoseEstimation().get().getFirst().getY();
+			avgRotation += limelight.getUpdatedPoseEstimation().get().getFirst().getRotation().getRadians();
+		}
+		avgX /= limelights.size();
+		avgY /= limelights.size();
+		avgRotation /= limelights.size();
+		System.out.println("amirrimon");
+		System.out.println("(" + avgX + "," + avgY + ") - " + Math.toDegrees(avgRotation));
+		return new Pose2d(new Translation2d(avgX,avgY),new Rotation2d(avgRotation));
 	}
+	
+	public boolean isConnected(int limelightId){
+		return limelights.get(limelightId).hasTarget();
+	}
+
 
 	public Optional<Pair<Pose2d, Double>> getFirstAvailableTarget(){
 		for(Optional<Pair<Pose2d, Double>> output : getAllEstimates()){
