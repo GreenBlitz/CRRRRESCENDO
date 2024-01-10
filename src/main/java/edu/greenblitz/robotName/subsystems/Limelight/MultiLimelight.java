@@ -59,8 +59,8 @@ public class MultiLimelight extends GBSubsystem {
 		avgX /= limelights.size();
 		avgY /= limelights.size();
 		avgRotation /= limelights.size();
-		System.out.println("amirrimon");
-		System.out.println("(" + avgX + "," + avgY + ") - " + Math.toDegrees(avgRotation));
+//		System.out.println("amirrimon");
+//		System.out.println("(" + avgX + "," + avgY + ") - " + Math.toDegrees(avgRotation));
 		return new Pose2d(new Translation2d(avgX,avgY),new Rotation2d(avgRotation));
 	}
 	
