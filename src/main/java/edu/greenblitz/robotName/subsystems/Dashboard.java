@@ -70,9 +70,8 @@ public class Dashboard extends GBSubsystem {
 
         //field
         driversTab.add("Field", SwerveChassis.getInstance().getField()).withPosition(5, 2).withSize(3, 2);
-        driversTab.add("limelight sum",MultiLimelight.getInstance().getAveragePos());
-
-
+        driversTab.addDouble("limelight sum x",()->MultiLimelight.getInstance().getAveragePos().getX());
+        driversTab.addDouble("limelight sum y",()->MultiLimelight.getInstance().getAveragePos().getY());
 
         //ready to place
         //todo check if at place and arm in pos

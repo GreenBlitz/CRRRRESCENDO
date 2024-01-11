@@ -52,9 +52,11 @@ public class MultiLimelight extends GBSubsystem {
 		double avgY = 0;
 		double avgRotation = 0;
 		for(Limelight limelight : limelights) {
-			avgX += limelight.getUpdatedPoseEstimation().get().getFirst().getX();
-			avgY += limelight.getUpdatedPoseEstimation().get().getFirst().getY();
-			avgRotation += limelight.getUpdatedPoseEstimation().get().getFirst().getRotation().getRadians();
+			if(limelight.getUpdatedPoseEstimation().isPresent()) {
+				avgX += limelight.getUpdatedPoseEstimation().get().getFirst().getX();
+				avgY += limelight.getUpdatedPoseEstimation().get().getFirst().getY();
+				avgRotation += limelight.getUpdatedPoseEstimation().get().getFirst().getRotation().getRadians();
+			}
 		}
 		avgX /= limelights.size();
 		avgY /= limelights.size();
