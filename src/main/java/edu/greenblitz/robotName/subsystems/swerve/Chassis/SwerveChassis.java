@@ -226,7 +226,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
                 angSpeed,
                 currentAng
         );
-//        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds,TIME_STEP);
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
         SwerveModuleState[] discretizedStates = discretizeStates(states,angSpeed);
         SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(discretizedStates);
@@ -245,9 +244,9 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
                 fieldRelativeSpeeds,
                 currentAng
         );
-        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds,TIME_STEP);
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
-        SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
+        SwerveModuleState[] discretizedStates = discretizeStates(states, fieldRelativeSpeeds.omegaRadiansPerSecond);
+        SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(discretizedStates);
         setModuleStates(desaturatedStates);
     }
 
