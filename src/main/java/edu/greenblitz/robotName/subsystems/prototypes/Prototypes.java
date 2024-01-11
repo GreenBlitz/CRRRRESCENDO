@@ -15,7 +15,9 @@ public class Prototypes {
 
 	public static GBSparkMax getSparkMax(int id){
 		if (!sparks.containsKey(id)){
-			sparks.put(id, new GBSparkMax(id, CANSparkMaxLowLevel.MotorType.kBrushless));
+			GBSparkMax motor = new GBSparkMax(id, CANSparkMaxLowLevel.MotorType.kBrushless);
+			motor.setOpenLoopRampRate(1.5);
+			sparks.put(id, motor);
 		}
 		return sparks.get(id);
 	}

@@ -13,10 +13,13 @@ public class runMotors extends GBCommand {
 
 	@Override
 	public void execute() {
+		double type;
+		double power;
+		int id;
 		for (int i = 0; i < NUMBER_OF_MOTORS; i++) {
-			int id = (int) TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.id + i).getValue();
-			double type = TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.type + i).getValue();
-			double power = TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.power + i).getValue();
+			id = (int) TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.id + i).getValue();
+			type = TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.type + i).getValue();
+			power = TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.power + i).getValue();
 			if (id != DEFAULT_ID) {
 				if (type == SPARK_MAX_TYPE) {
 					Prototypes.getSparkMax(id).set(power);
@@ -41,10 +44,10 @@ public class runMotors extends GBCommand {
 					Prototypes.getSparkMax(id).set(0);
 				}
 				else if (type == TALON_SRX_TYPE) {
-					Prototypes.getTalonFX(id).set(0);
+					Prototypes.getTalonSRX(id).set(TalonSRXControlMode.PercentOutput, 0);
 				}
 				else if (type == TALON_FX_TYPE) {
-					Prototypes.getTalonSRX(id).set(TalonSRXControlMode.PercentOutput, 0);
+					Prototypes.getTalonFX(id).set(0);
 				}
 			}
 		}
