@@ -226,17 +226,21 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
                 angSpeed,
                 currentAng
         );
+        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds,TIME_STEP);
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
-        SwerveModuleState[] discretizedStates = discretizeStates(states,angSpeed);
-        SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(discretizedStates);
+        SwerveModuleState[] discreteStates = discreteStates(states,angSpeed);
+        SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(discreteStates);
         setModuleStates(desaturatedStates);
     }
-    public SwerveModuleState[] discretizeStates(SwerveModuleState[] states, double chassisAngSpeed) {
-        SwerveModuleState[] discretizedStates = new SwerveModuleState[states.length];
+    public SwerveModuleState[] discreteStates(SwerveModuleState[] states, double chassisAngSpeed) {
+        SwerveModuleState[] discreteStates = new SwerveModuleState[states.length];
         for (int i = 0; i < states.length; i++) {
-            discretizedStates[i] = new SwerveModuleState(states[i].speedMetersPerSecond,states[i].angle.minus(Rotation2d.fromRadians(Units.rotationsPerMinuteToRadiansPerSecond(chassisAngSpeed)/2)));
+
+            discreteStates[i] = new SwerveModuleState(states[i].speedMetersPerSecond,states[i].angle.minus(Rotation2d.fromRadians(
+                    (Units.rotationsPerMinuteToRadiansPerSecond(chassisAngSpeed))/3)
+            ));
         }
-        return discretizedStates;
+        return discreteStates;
     }
 
     public void moveByChassisSpeeds(ChassisSpeeds fieldRelativeSpeeds, Rotation2d currentAng) {
@@ -245,8 +249,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
                 currentAng
         );
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
-        SwerveModuleState[] discretizedStates = discretizeStates(states, fieldRelativeSpeeds.omegaRadiansPerSecond);
-        SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(discretizedStates);
+        SwerveModuleState[] discreteStates = discreteStates(states, fieldRelativeSpeeds.omegaRadiansPerSecond);
+        SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(discreteStates);
         setModuleStates(desaturatedStates);
     }
 
