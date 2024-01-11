@@ -1,6 +1,8 @@
 package edu.greenblitz.robotName.subsystems.swerve.Chassis;
 
 import edu.greenblitz.robotName.OdometryConstants;
+import edu.greenblitz.robotName.Robot;
+import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.VisionConstants;
 import edu.greenblitz.robotName.subsystems.Gyros.GyroFactory;
 import edu.greenblitz.robotName.subsystems.Gyros.GyroInputsAutoLogged;
@@ -10,6 +12,7 @@ import edu.greenblitz.robotName.subsystems.Photonvision;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModule;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.mk4iSwerveModule.MK4iSwerveConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
+import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.MatBuilder;
 import edu.wpi.first.math.Nat;
 import edu.wpi.first.math.Pair;
@@ -18,7 +21,6 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.*;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -50,6 +52,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     public static final double ROTATION_TOLERANCE = 2;
     private boolean doVision;
     public final double CURRENT_TOLERANCE = 0.5;
+    public static final double DISCRETION_CONSTANT = 8;
 
     private SwerveChassisInputsAutoLogged ChassisInputs = new SwerveChassisInputsAutoLogged();
     private GyroInputsAutoLogged gyroInputs = new GyroInputsAutoLogged();
@@ -226,21 +229,13 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
                 angSpeed,
                 currentAng
         );
-        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds,TIME_STEP);
+        double timeStep = TIME_STEP;
+        if (RobotConstants.ROBOT_TYPE.equals(Robot.RobotType.ROBOT_NAME))
+            timeStep = RoborioUtils.getCurrentRoborioCycle();
+        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds,timeStep * DISCRETION_CONSTANT);
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
-        SwerveModuleState[] discreteStates = discreteStates(states,angSpeed);
-        SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(discreteStates);
+        SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
         setModuleStates(desaturatedStates);
-    }
-    public SwerveModuleState[] discreteStates(SwerveModuleState[] states, double chassisAngSpeed) {
-        SwerveModuleState[] discreteStates = new SwerveModuleState[states.length];
-        for (int i = 0; i < states.length; i++) {
-
-            discreteStates[i] = new SwerveModuleState(states[i].speedMetersPerSecond,states[i].angle.minus(Rotation2d.fromRadians(
-                    (Units.rotationsPerMinuteToRadiansPerSecond(chassisAngSpeed))/3)
-            ));
-        }
-        return discreteStates;
     }
 
     public void moveByChassisSpeeds(ChassisSpeeds fieldRelativeSpeeds, Rotation2d currentAng) {
@@ -249,8 +244,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
                 currentAng
         );
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
-        SwerveModuleState[] discreteStates = discreteStates(states, fieldRelativeSpeeds.omegaRadiansPerSecond);
-        SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(discreteStates);
+        SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
         setModuleStates(desaturatedStates);
     }
 
