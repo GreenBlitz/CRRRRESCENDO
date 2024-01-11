@@ -2,6 +2,7 @@ package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -37,6 +38,7 @@ public class Robot extends LoggedRobot {
     @Override
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
+        RoborioUtils.updateCurrentCycleTime();
     }
 
     private void initializeLogger(){
