@@ -7,27 +7,28 @@ import edu.greenblitz.robotName.utils.GBCommand;
 import edu.greenblitz.robotName.utils.tuneableNumber.TunableNumberManager;
 
 import static edu.greenblitz.robotName.subsystems.Dashboard.*;
+import static edu.greenblitz.robotName.subsystems.Dashboard.motorType.SPARK_MAX;
+import static edu.greenblitz.robotName.subsystems.Dashboard.motorType.TALON_SRX;
 
 public class runMotors extends GBCommand {
 
 
 	@Override
 	public void execute() {
-		double type;
 		double power;
 		int id;
 		for (int i = 0; i < NUMBER_OF_MOTORS; i++) {
 			id = (int) TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.id + i).getValue();
-			type = TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.type + i).getValue();
-			power = TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.power + i).getValue();
 			if (id != DEFAULT_ID) {
-				if (type == SPARK_MAX_TYPE) {
+				power = TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.power + i).getValue();
+				Object selected = types.get(i).getSelected();
+				if (selected.equals(SPARK_MAX)) {
 					Prototypes.getSparkMax(id).set(power);
 				}
-				else if (type == TALON_SRX_TYPE){
+				else if (selected.equals(TALON_SRX)) {
 					Prototypes.getTalonSRX(id).set(TalonSRXControlMode.PercentOutput, power);
 				}
-				else if (type == TALON_FX_TYPE) {
+				else {
 					Prototypes.getTalonFX(id).set(power);
 				}
 			}
@@ -38,15 +39,15 @@ public class runMotors extends GBCommand {
 	public void end(boolean interrupted) {
 		for (int i = 0; i < NUMBER_OF_MOTORS; i++) {
 			int id = (int) TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.id + i).getValue();
-			double type = TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.type + i).getValue();
 			if (id != DEFAULT_ID) {
-				if (type == SPARK_MAX_TYPE) {
+				Object selected = types.get(i).getSelected();
+				if (selected.equals(SPARK_MAX)) {
 					Prototypes.getSparkMax(id).set(0);
 				}
-				else if (type == TALON_SRX_TYPE) {
+				else if (selected.equals(TALON_SRX)) {
 					Prototypes.getTalonSRX(id).set(TalonSRXControlMode.PercentOutput, 0);
 				}
-				else if (type == TALON_FX_TYPE) {
+				else {
 					Prototypes.getTalonFX(id).set(0);
 				}
 			}
