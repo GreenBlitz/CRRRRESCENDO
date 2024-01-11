@@ -18,6 +18,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.*;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -225,10 +226,18 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
                 angSpeed,
                 currentAng
         );
-        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds,TIME_STEP);
+//        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds,TIME_STEP);
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
-        SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
+        SwerveModuleState[] discretizedStates = discretizeStates(states,angSpeed);
+        SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(discretizedStates);
         setModuleStates(desaturatedStates);
+    }
+    public SwerveModuleState[] discretizeStates(SwerveModuleState[] states, double chassisAngSpeed) {
+        SwerveModuleState[] discretizedStates = new SwerveModuleState[states.length];
+        for (int i = 0; i < states.length; i++) {
+            discretizedStates[i] = new SwerveModuleState(states[i].speedMetersPerSecond,states[i].angle.minus(Rotation2d.fromRadians(Units.rotationsPerMinuteToRadiansPerSecond(chassisAngSpeed)/2)));
+        }
+        return discretizedStates;
     }
 
     public void moveByChassisSpeeds(ChassisSpeeds fieldRelativeSpeeds, Rotation2d currentAng) {
