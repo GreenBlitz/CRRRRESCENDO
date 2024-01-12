@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName;
 
+import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathfindHolonomic;
 import com.pathplanner.lib.path.GoalEndState;
 import com.pathplanner.lib.path.PathConstraints;
@@ -8,7 +9,9 @@ import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinder;
 import com.pathplanner.lib.pathfinding.Pathfinding;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
+import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.greenblitz.robotName.utils.LocalADStarAK;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -41,13 +44,15 @@ public class Robot extends LoggedRobot {
     public void robotInit() {
         Pathfinding.setPathfinder(new LocalADStar());
         initializeLogger();
+        CommandScheduler.getInstance().enable();
+
+        initializeAutoBuilder();
 
         SwerveChassis.init();
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
         SwerveChassis.getInstance().resetAllEncoders();
 
         OI.getInstance();
-        CommandScheduler.getInstance().enable();
     }
     @Override
     public void robotPeriodic() {
@@ -57,6 +62,17 @@ public class Robot extends LoggedRobot {
         SmartDashboard.putNumber("r", SwerveChassis.getInstance().getRobotPose().getRotation().getDegrees());
     }
 
+    private void initializeAutoBuilder (){
+        AutoBuilder.configureHolonomic(
+                SwerveChassis.getInstance()::getRobotPose,
+                SwerveChassis.getInstance()::resetChassisPose,
+                SwerveChassis.getInstance()::getRobotRelativeChassisSpeeds,
+                SwerveChassis.getInstance()::moveByRobotRelativeSpeeds,
+                ChassisConstants.PATH_FOLLOWER_CONFIG,
+                () -> FMSUtils.getAlliance() == DriverStation.Alliance.Red,
+                SwerveChassis.getInstance()
+        );
+    }
     private void initializeLogger(){
 
         NetworkTableInstance.getDefault()
