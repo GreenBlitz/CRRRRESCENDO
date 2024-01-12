@@ -12,7 +12,6 @@ import static edu.greenblitz.robotName.subsystems.Dashboard.motorType.TALON_SRX;
 
 public class RunMotors extends GBCommand {
 
-
 	@Override
 	public void execute() {
 		double power;
@@ -21,15 +20,10 @@ public class RunMotors extends GBCommand {
 			id = (int) TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.id + i).getValue();
 			if (id != DEFAULT_ID) {
 				power = TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.power + i).getValue();
-				motorType selectedMotorType = types.get(i).getSelected();
-				if (selectedMotorType.equals(SPARK_MAX)) {
-					Prototypes.getSparkMax(id).set(power);
-				}
-				else if (selectedMotorType.equals(TALON_SRX)) {
-					Prototypes.getTalonSRX(id).set(TalonSRXControlMode.PercentOutput, power);
-				}
-				else {
-					Prototypes.getTalonFX(id).set(power);
+				switch (types.get(i).getSelected()){
+					case SPARK_MAX ->  Prototypes.getSparkMax(id).set(power);
+					case TALON_SRX ->  Prototypes.getTalonSRX(id).set(TalonSRXControlMode.PercentOutput, power);
+					case TALON_FX -> Prototypes.getTalonFX(id).set(power);
 				}
 			}
 		}
@@ -37,20 +31,17 @@ public class RunMotors extends GBCommand {
 
 	@Override
 	public void end(boolean interrupted) {
+		int id;
 		for (int i = 0; i < NUMBER_OF_MOTORS; i++) {
-			int id = (int) TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.id + i).getValue();
+			id = (int) TunableNumberManager.getInstance().getTunableNumberForKey(Dashboard.id + i).getValue();
 			if (id != DEFAULT_ID) {
-				motorType selectedMotorType = types.get(i).getSelected();
-				if (selectedMotorType.equals(SPARK_MAX)) {
-					Prototypes.getSparkMax(id).set(0);
-				}
-				else if (selectedMotorType.equals(TALON_SRX)) {
-					Prototypes.getTalonSRX(id).set(TalonSRXControlMode.PercentOutput, 0);
-				}
-				else {
-					Prototypes.getTalonFX(id).set(0);
+				switch (types.get(i).getSelected()){
+					case SPARK_MAX ->  Prototypes.getSparkMax(id).set(0);
+					case TALON_SRX ->  Prototypes.getTalonSRX(id).set(TalonSRXControlMode.PercentOutput, 0);
+					case TALON_FX -> Prototypes.getTalonFX(id).set(0);
 				}
 			}
 		}
 	}
+
 }
