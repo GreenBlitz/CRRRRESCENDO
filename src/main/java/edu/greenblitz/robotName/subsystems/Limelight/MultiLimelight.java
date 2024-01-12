@@ -51,16 +51,18 @@ public class MultiLimelight extends GBSubsystem {
 		double avgX = 0;
 		double avgY = 0;
 		double avgRotation = 0;
+		int targetsFound = 0;
 		for(Limelight limelight : limelights) {
 			if(limelight.getUpdatedPoseEstimation().isPresent()) {
 				avgX += limelight.getUpdatedPoseEstimation().get().getFirst().getX();
 				avgY += limelight.getUpdatedPoseEstimation().get().getFirst().getY();
 				avgRotation += limelight.getUpdatedPoseEstimation().get().getFirst().getRotation().getRadians();
+				targetsFound++;
 			}
 		}
-		avgX /= limelights.size();
-		avgY /= limelights.size();
-		avgRotation /= limelights.size();
+		avgX /= targetsFound;
+		avgY /= targetsFound;
+		avgRotation /= targetsFound;
 //		System.out.println("amirrimon");
 //		System.out.println("(" + avgX + "," + avgY + ") - " + Math.toDegrees(avgRotation));
 		return new Pose2d(new Translation2d(avgX,avgY),new Rotation2d(avgRotation));
