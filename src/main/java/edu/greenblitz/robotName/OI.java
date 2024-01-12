@@ -1,7 +1,9 @@
 package edu.greenblitz.robotName;
 
 
+import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import edu.wpi.first.math.geometry.Rotation2d;
 
 public class OI {
     private static OI instance;
@@ -12,6 +14,7 @@ public class OI {
     private OI() {
         mainJoystick = new SmartJoystick(RobotConstants.Joystick.MAIN);
         secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
+        initButtons();
     }
 
     public static OI getInstance() {
@@ -27,5 +30,9 @@ public class OI {
 
     public SmartJoystick getSecondJoystick() {
         return secondJoystick;
+    }
+
+    public void initButtons(){
+        // put buttons here
     }
 }
