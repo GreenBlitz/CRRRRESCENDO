@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.subsystems.swerve.Modules.mk4iSwerveModule;
 
-import com.ctre.phoenix.sensors.CANCoder;
+import com.ctre.phoenix6.controls.VelocityVoltage;
+import com.ctre.phoenix6.hardware.CANcoder;
 
 import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.controls.MotionMagicExpoDutyCycle;
@@ -22,11 +23,11 @@ public class MK4ISwerveModule implements ISwerveModule {
 
     private final GBTalonFXPro angularMotor;
     private final GBTalonFXPro linearMotor;
-    private final CANCoder canCoder;
+    private final CANcoder canCoder;
     private final SimpleMotorFeedforward linearFeedForward;
     private final double encoderOffset;
-
-    VelocityTorqueCurrentFOC velocityTorqueCurrentFOC = new VelocityTorqueCurrentFOC(0);
+    
+    VelocityVoltage velocityVoltage = new VelocityVoltage(0);
     MotionMagicExpoDutyCycle motionMagicExpoDutyCycle = new MotionMagicExpoDutyCycle(0)
             .withEnableFOC(false)
             .withOverrideBrakeDurNeutral(true);
@@ -47,7 +48,7 @@ public class MK4ISwerveModule implements ISwerveModule {
         linearMotor.getConfigurator().apply(MK4iSwerveConstants.LINEAR_FALCON_CONFIG_OBJECT);
         linearMotor.setInverted(configObject.linInverted);
 
-        canCoder = new CANCoder(configObject.AbsoluteEncoderID);
+        canCoder = new CANcoder(configObject.AbsoluteEncoderID);
 
         FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();
         FEEDBACK_CONFIGS.FeedbackRemoteSensorID = canCoder.getDeviceID();
@@ -64,7 +65,7 @@ public class MK4ISwerveModule implements ISwerveModule {
 
     @Override
     public void setLinearVelocity(double speed) {
-        linearMotor.setControl(velocityTorqueCurrentFOC.withVelocity(speed));
+        linearMotor.setControl(velocityVoltage.withVelocity(speed));
     }
 
     @Override
@@ -118,11 +119,12 @@ public class MK4ISwerveModule implements ISwerveModule {
         inputs.linearMetersPassed = Conversions.MK4IConversions.convertTicksToMeters(linearMotor.getPosition().getValue());
         inputs.angularPositionRadians = Conversions.MK4IConversions.convertTicksToRadians(angularMotor.getPosition().getValue());
 
-        if (Double.isNaN(Units.degreesToRadians(canCoder.getAbsolutePosition()))) {
+        if (Double.isNaN(Units.degreesToRadians(canCoder.getAbsolutePosition().getValue()))) {
             inputs.absoluteEncoderPosition = 0;
         } else {
-            inputs.absoluteEncoderPosition = Units.degreesToRadians(canCoder.getAbsolutePosition()) - Units.rotationsToRadians(encoderOffset);
+            inputs.absoluteEncoderPosition = Units.degreesToRadians(canCoder.getAbsolutePosition().getValue()) - Units.rotationsToRadians(encoderOffset);
         }
-        inputs.isAbsoluteEncoderConnected = canCoder.getFirmwareVersion() != -1;
+        inputs.isAbsoluteEncoderConnected = canCoder.getVersion().getValue() != -1;
+        //TODO make sure version is -1 when disconnected
     }
 }

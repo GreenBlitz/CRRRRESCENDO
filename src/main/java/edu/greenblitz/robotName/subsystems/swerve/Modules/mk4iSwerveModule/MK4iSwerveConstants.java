@@ -64,11 +64,11 @@ public class MK4iSwerveConstants {
 	public static final TalonFXConfiguration LINEAR_FALCON_CONFIG_OBJECT = new TalonFXConfiguration();
 	static {
 		Slot0Configs PID_CONFIGS = new Slot0Configs();
-		PID_CONFIGS.kP = 0.0003;
+		PID_CONFIGS.kP = 15;
 		PID_CONFIGS.kI = 0;
 		PID_CONFIGS.kD = 0;
-		PID_CONFIGS.kS = 0.16411;
-		PID_CONFIGS.kV = 2.6824;
+		PID_CONFIGS.kS = 0;
+		PID_CONFIGS.kV = 0;
 
 		CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();
 		CURRENT_LIMITS_CONFIGS.StatorCurrentLimitEnable = true;
