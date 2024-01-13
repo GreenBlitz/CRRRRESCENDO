@@ -29,7 +29,7 @@ public class Robot extends LoggedRobot {
         initializeLogger();
 
         SwerveChassis.init();
-        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.SLOW));
+        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
         SwerveChassis.getInstance().resetAllEncoders();
 
         OI.getInstance();
