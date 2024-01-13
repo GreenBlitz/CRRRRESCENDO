@@ -5,8 +5,6 @@ import com.ctre.phoenix6.hardware.CANcoder;
 
 import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.controls.MotionMagicExpoDutyCycle;
-import com.ctre.phoenix6.controls.VelocityTorqueCurrentFOC;
-import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
@@ -116,8 +114,8 @@ public class MK4ISwerveModule implements ISwerveModule {
         inputs.linearCurrent = linearMotor.getSupplyCurrent().getValue();
         inputs.angularCurrent = angularMotor.getStatorCurrent().getValue();
 
-        inputs.linearMetersPassed = Conversions.MK4IConversions.convertTicksToMeters(linearMotor.getPosition().getValue());
-        inputs.angularPositionRadians = Conversions.MK4IConversions.convertTicksToRadians(angularMotor.getPosition().getValue());
+        inputs.linearMetersPassed = Conversions.MK4IConversions.convertRevolutionsToMeters(linearMotor.getPosition().getValue());
+        inputs.angularPositionRadians = Conversions.MK4IConversions.convertRevolutionsToRadians(angularMotor.getPosition().getValue());
 
         if (Double.isNaN(Units.degreesToRadians(canCoder.getAbsolutePosition().getValue()))) {
             inputs.absoluteEncoderPosition = 0;
