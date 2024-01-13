@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.swerve.Modules.mk4iSwerveModule;
 
+import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.CANcoder;
 
@@ -24,6 +25,7 @@ public class MK4ISwerveModule implements ISwerveModule {
     private final CANcoder canCoder;
     private final SimpleMotorFeedforward linearFeedForward;
     private final double encoderOffset;
+    
     
     VelocityVoltage velocityVoltage = new VelocityVoltage(0);
     MotionMagicExpoDutyCycle motionMagicExpoDutyCycle = new MotionMagicExpoDutyCycle(0)
