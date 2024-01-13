@@ -244,6 +244,11 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
                 fieldRelativeSpeeds,
                 currentAng
         );
+        double timeStep = TIME_STEP;
+        if (RobotConstants.ROBOT_TYPE.equals(Robot.RobotType.ROBOT_NAME)) {
+            timeStep = RoborioUtils.getCurrentRoborioCycle();
+        }
+        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds,timeStep * DISCRETION_CONSTANT);
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
         SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
         setModuleStates(desaturatedStates);
