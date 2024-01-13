@@ -43,8 +43,6 @@ public class OI {
     }
 
     private void buttons(){
-            mainJoystick.A.whileTrue(
-                    MoveToPose.getPathCommand(new Pose2d(2, 2, Rotation2d.fromDegrees(0)), ChassisConstants.CONSTRAINTS)
-            );
+
     }
 }
