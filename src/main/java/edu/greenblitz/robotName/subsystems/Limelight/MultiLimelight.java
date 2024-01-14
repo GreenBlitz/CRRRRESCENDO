@@ -4,6 +4,7 @@ import edu.greenblitz.robotName.VisionConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -16,6 +17,7 @@ public class MultiLimelight extends GBSubsystem {
 
 	private static MultiLimelight instance;
 	private List<Limelight> limelights;
+
 
 
 	private MultiLimelight(){
@@ -38,11 +40,20 @@ public class MultiLimelight extends GBSubsystem {
 		instance = new MultiLimelight();
 	}
 
-	public List<Optional<Pair<Pose2d, Double>>> getAllEstimates(){
+	public List<Optional<Pair<Pose2d, Double>>> getAll2DEstimates(){
 		ArrayList<Optional<Pair<Pose2d, Double>>> estimates = new ArrayList<>();
 		for (Limelight limelight : limelights){
-			limelight.getUpdatedPoseEstimation();
-			estimates.add(limelight.getUpdatedPoseEstimation());
+			limelight.getUpdatedPose2DEstimation(); //todo ask amir, is there any reason for this duplicate?
+			estimates.add(limelight.getUpdatedPose2DEstimation());
+		}
+		return estimates;
+	}
+
+
+	public List<Optional<Pair<Pose3d, Double>>> getAll3DEstimates(){
+		ArrayList<Optional<Pair<Pose3d, Double>>> estimates = new ArrayList<>();
+		for (Limelight limelight : limelights){
+			estimates.add(limelight.getUpdatedPose3DEstimation());
 		}
 		return estimates;
 	}
@@ -52,29 +63,32 @@ public class MultiLimelight extends GBSubsystem {
 		double avgY = 0;
 		double avgRotation = 0;
 		int targetsFound = 0;
-		for(Limelight limelight : limelights) {
-			if(limelight.getUpdatedPoseEstimation().isPresent()) {
-				avgX += limelight.getUpdatedPoseEstimation().get().getFirst().getX();
-				avgY += limelight.getUpdatedPoseEstimation().get().getFirst().getY();
-				avgRotation += limelight.getUpdatedPoseEstimation().get().getFirst().getRotation().getRadians();
+		for(Optional<Pair<Pose2d, Double>> pose : getAll2DEstimates()) {
+			if(pose.isPresent()) {
+				avgX += pose.get().getFirst().getX();
+				avgY += pose.get().getFirst().getY();
+				avgRotation += pose.get().getFirst().getTranslation().getAngle().getRadians();
 				targetsFound++;
 			}
 		}
 		avgX /= targetsFound;
 		avgY /= targetsFound;
 		avgRotation /= targetsFound;
-//		System.out.println("amirrimon");
-//		System.out.println("(" + avgX + "," + avgY + ") - " + Math.toDegrees(avgRotation));
 		return new Pose2d(new Translation2d(avgX,avgY),new Rotation2d(avgRotation));
 	}
+
 	
 	public boolean isConnected(int limelightId){
 		return limelights.get(limelightId).hasTarget();
 	}
 
 
+
+
+
+
 	public Optional<Pair<Pose2d, Double>> getFirstAvailableTarget(){
-		for(Optional<Pair<Pose2d, Double>> output : getAllEstimates()){
+		for(Optional<Pair<Pose2d, Double>> output : getAll2DEstimates()){
 			if (output.isPresent()){
 				return output;
 			}

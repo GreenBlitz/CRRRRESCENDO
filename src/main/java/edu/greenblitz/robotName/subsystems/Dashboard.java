@@ -1,18 +1,12 @@
 package edu.greenblitz.robotName.subsystems;
 import edu.greenblitz.robotName.utils.GBSubsystem;
-import edu.greenblitz.robotName.Field;
 import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
-import edu.wpi.first.wpilibj.smartdashboard.MechanismRoot2d;
 
 import java.util.Map;
 
@@ -72,6 +66,7 @@ public class Dashboard extends GBSubsystem {
         driversTab.add("Field", SwerveChassis.getInstance().getField()).withPosition(5, 2).withSize(3, 2);
         driversTab.addDouble("limelight sum x",()->MultiLimelight.getInstance().getAveragePos().getX());
         driversTab.addDouble("limelight sum y",()->MultiLimelight.getInstance().getAveragePos().getY());
+        driversTab.addBoolean("limelight arr", ()->MultiLimelight.getInstance().getAll2DEstimates().contains(0));
 
         //ready to place
         //todo check if at place and arm in pos
