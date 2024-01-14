@@ -39,10 +39,7 @@ public class OI {
     }
 
     private void initButtons(){
-        buttons();
-    }
-
-    private void buttons(){
 
     }
+
 }
