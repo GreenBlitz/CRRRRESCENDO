@@ -1,12 +1,9 @@
 package edu.greenblitz.robotName.subsystems.swerve.Modules.mk4iSwerveModule;
 
-import com.ctre.phoenix6.controls.PositionVoltage;
-import com.ctre.phoenix6.controls.VelocityTorqueCurrentFOC;
-import com.ctre.phoenix6.controls.VelocityVoltage;
+import com.ctre.phoenix6.controls.*;
 import com.ctre.phoenix6.hardware.CANcoder;
 
 import com.ctre.phoenix6.configs.FeedbackConfigs;
-import com.ctre.phoenix6.controls.MotionMagicExpoDutyCycle;
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
@@ -28,10 +25,8 @@ public class MK4ISwerveModule implements ISwerveModule {
     private final double encoderOffset;
 
 
-    VelocityTorqueCurrentFOC velocityVoltage = new VelocityTorqueCurrentFOC(0);
-    MotionMagicExpoDutyCycle motionMagicExpoDutyCycle = new MotionMagicExpoDutyCycle(0)
-            .withEnableFOC(false)
-            .withOverrideBrakeDurNeutral(true);
+    VelocityVoltage velocityVoltage = new VelocityVoltage(0);
+    MotionMagicDutyCycle motionMagicExpoDutyCycle = new MotionMagicDutyCycle(0);
     public MK4ISwerveModule(SwerveChassis.Module module) {
 
         SwerveModuleConfigObject configObject = switch (module) {
