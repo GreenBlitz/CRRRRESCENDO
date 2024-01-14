@@ -50,7 +50,13 @@ public class Robot extends LoggedRobot {
         switch (RobotConstants.ROBOT_TYPE) {
             // Running on a real robot, log to a USB stick
             case ROBOT_NAME:
-                Logger.addDataReceiver(new WPILOGWriter(RobotConstants.ROBORIO_LOG_PATH));
+                try {
+                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.ROBORIO_LOG_PATH));
+                    Logger.recordOutput("broder", "yonatan");
+                } catch (Exception e) {
+                    Logger.end();
+                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
+                }
                 Logger.addDataReceiver(new NT4Publisher());
                 break;
             // Replaying a log, set up replay source
