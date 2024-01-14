@@ -26,7 +26,7 @@ public class Robot extends LoggedRobot {
 
     @Override
     public void robotInit() {
-        initializeLogger();
+//        initializeLogger();
         CommandScheduler.getInstance().enable();
         Dashboard.init();
         OI.getInstance();
