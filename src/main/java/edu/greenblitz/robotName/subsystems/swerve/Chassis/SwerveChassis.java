@@ -103,10 +103,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
         field.setRobotPose(getRobotPose());
 
-
+        
         gyro.updateInputs(gyroInputs);
         updateInputs(ChassisInputs);
-
+        
         Logger.recordOutput("DriveTrain/RobotPose", getRobotPose());
         Logger.recordOutput("DriveTrain/ModuleStates", getSwerveModuleStates());
         Logger.processInputs("DriveTrain/Chassis", ChassisInputs);
@@ -204,7 +204,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     /**
      * returns chassis angle in radians
      */
-    private Rotation2d getGyroAngle() {
+    public Rotation2d getGyroAngle() {
         return Rotation2d.fromRadians(gyroInputs.yaw);
     }
 
@@ -223,20 +223,27 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     }
 
     public void moveByChassisSpeeds(double forwardSpeed, double leftwardSpeed, double angSpeed, Rotation2d currentAng) {
+        System.out.println("GYRO:" + currentAng.getRadians());
         ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
                 forwardSpeed,
                 leftwardSpeed,
                 angSpeed,
                 currentAng
         );
-        double timeStep = TIME_STEP;
-        if (RobotConstants.ROBOT_TYPE.equals(Robot.RobotType.ROBOT_NAME)) {
-            timeStep = RoborioUtils.getCurrentRoborioCycle();
-        }
-        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds,timeStep * DISCRETION_CONSTANT);
+//        double timeStep = TIME_STEP;
+//        if (RobotConstants.ROBOT_TYPE.equals(Robot.RobotType.ROBOT_NAME)) {
+//            timeStep = RoborioUtils.getCurrentRoborioCycle();
+//        }
+//        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds,timeStep * DISCRETION_CONSTANT);
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
         SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
+        printStates(desaturatedStates);
         setModuleStates(desaturatedStates);
+    }
+    public static void printStates(SwerveModuleState[] states) {
+        for (int i = 0; i < states.length; i++) {
+            System.out.println(states[i].angle + "," + states[i].speedMetersPerSecond);
+        }
     }
 
     public void moveByChassisSpeeds(ChassisSpeeds fieldRelativeSpeeds, Rotation2d currentAng) {
@@ -408,7 +415,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         moveByChassisSpeeds(chassisSpeeds.vxMetersPerSecond,
                 chassisSpeeds.vyMetersPerSecond,
                 chassisSpeeds.omegaRadiansPerSecond,
-                getChassisAngle()
+                getGyroAngle()
         );
     }
 
