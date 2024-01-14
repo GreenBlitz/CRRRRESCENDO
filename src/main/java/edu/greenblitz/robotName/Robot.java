@@ -38,7 +38,8 @@ public class Robot extends LoggedRobot {
     @Override
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
-        SmartDashboard.putNumber("linearVelocity", SwerveChassis.getInstance().getModule(SwerveChassis.Module.FRONT_LEFT).getCurrentVelocity());
+        SmartDashboard.putNumber("angular position (end)", SwerveChassis.getInstance().getModuleAngle(SwerveChassis.Module.FRONT_LEFT).getDegrees());
+        SmartDashboard.putNumber("gyro", SwerveChassis.getInstance().getChassisAngle().getDegrees());
     }
 
     private void initializeLogger(){

@@ -35,12 +35,8 @@ public class Conversions {
             return angInRevolutions * MK4iSwerveConstants.LINEAR_REVOLUTIONS_TO_METERS;
         }
 
-        public static double convertTicksPer100msToRPM(double ticksPer100ms){
-            return ticksPer100ms * RobotConstants.General.Motors.FALCON_VELOCITY_UNITS_PER_RPM;
-        }
-
         public static double convertSensorVelocityToRPM(double ticks){
-            return ticks * MK4iSwerveConstants.ANGLE_REVOLUTIONS_TO_WHEEL_TO_RPM;
+            return ticks * MK4iSwerveConstants.ANGLE_REVOLUTIONS_TO_WHEEL_TO_RPS;
         }
         public static double convertSensorTicksToRadPerSecond(double ticks){
             return convertRPMToRadiansPerSec(convertSensorVelocityToRPM(ticks));

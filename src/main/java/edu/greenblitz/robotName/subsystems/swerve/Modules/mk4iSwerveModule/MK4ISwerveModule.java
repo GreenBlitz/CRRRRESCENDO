@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.subsystems.swerve.Modules.mk4iSwerveModule;
 
 import com.ctre.phoenix6.controls.PositionVoltage;
+import com.ctre.phoenix6.controls.VelocityTorqueCurrentFOC;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.CANcoder;
 
@@ -25,9 +26,9 @@ public class MK4ISwerveModule implements ISwerveModule {
     private final CANcoder canCoder;
     private final SimpleMotorFeedforward linearFeedForward;
     private final double encoderOffset;
-    
-    
-    VelocityVoltage velocityVoltage = new VelocityVoltage(0);
+
+
+    VelocityTorqueCurrentFOC velocityVoltage = new VelocityTorqueCurrentFOC(0);
     MotionMagicExpoDutyCycle motionMagicExpoDutyCycle = new MotionMagicExpoDutyCycle(0)
             .withEnableFOC(false)
             .withOverrideBrakeDurNeutral(true);
@@ -70,7 +71,7 @@ public class MK4ISwerveModule implements ISwerveModule {
 
     @Override
     public void rotateToAngle(Rotation2d angle) {
-        angularMotor.setControl(motionMagicExpoDutyCycle.withPosition(angle.getRadians()));
+        angularMotor.setControl(motionMagicExpoDutyCycle.withPosition(angle.getRotations() * MK4iSwerveConstants.ANGULAR_GEAR_RATIO));
     }
 
     @Override
@@ -108,7 +109,7 @@ public class MK4ISwerveModule implements ISwerveModule {
     @Override
     public void updateInputs(SwerveModuleInputsAutoLogged inputs) {
         inputs.linearVelocity = linearMotor.getVelocity().getValue();
-        inputs.angularVelocity = Conversions.MK4IConversions.convertSensorVelocityToRPM(angularMotor.getVelocity().getValue());
+        inputs.angularVelocity = angularMotor.getVelocity().getValue() / MK4iSwerveConstants.ANGULAR_GEAR_RATIO;
 
         inputs.linearVoltage = linearMotor.getSupplyVoltage().getValue();
         inputs.angularVoltage = angularMotor.getSupplyVoltage().getValue();

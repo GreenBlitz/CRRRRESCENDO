@@ -199,8 +199,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
      * returns chassis angle in radians
      */
     private Rotation2d getGyroAngle() {
-        return Rotation2d.fromRadians(gyroInputs.yaw);
+//        return Rotation2d.fromRadians(gyroInputs.yaw);
+        return Rotation2d.fromDegrees(0);
     }
+
 
     public Rotation2d getChassisAngle() {
         return getRobotPose().getRotation();

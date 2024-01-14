@@ -13,7 +13,6 @@ public class MK4iSwerveConstants {
 	public static SwerveModuleConfigObject MK4I_MODULE_FRONT_RIGHT = new SwerveModuleConfigObject(3, 2, 2,Rotation2d.fromRotations(0.2939453125) ,true);
 	public static SwerveModuleConfigObject MK4I_MODULE_BACK_LEFT = new SwerveModuleConfigObject(5, 4, 3, Rotation2d.fromRotations(0.5524),false);
 	public static SwerveModuleConfigObject MK4I_MODULE_BAK_RIGHT = new SwerveModuleConfigObject(7, 6, 4, Rotation2d.fromRotations(0.8718),true);
-	
 	public static final double ANGULAR_GEAR_RATIO = (150.0 / 7);
 	public static final double LINEAR_GEAR_RATIO = 8.14;
 	
@@ -23,13 +22,13 @@ public class MK4iSwerveConstants {
 	
 	public static final double WHEEL_CIRCUMFERENCE = 0.0517 * 2 * Math.PI;
 	public static final double LINEAR_REVOLUTIONS_TO_METERS = RobotConstants.General.Motors.FALCON_REVOLUTIONS_PER_RADIAN * WHEEL_CIRCUMFERENCE / 2 / Math.PI / LINEAR_GEAR_RATIO;
-	public static final double ANGLE_REVOLUTIONS_TO_WHEEL_TO_RPM = RobotConstants.General.Motors.FALCON_VELOCITY_UNITS_PER_RPM / ANGULAR_GEAR_RATIO;
-	public static final double LINEAR_REVOLUTIONS_TO_METERS_PER_SECOND = RobotConstants.General.Motors.FALCON_VELOCITY_UNITS_PER_RPM / LINEAR_GEAR_RATIO * WHEEL_CIRCUMFERENCE / 60;
+	public static final double ANGLE_REVOLUTIONS_TO_WHEEL_TO_RPS = 1 / ANGULAR_GEAR_RATIO;
+	public static final double LINEAR_REVOLUTIONS_TO_METERS_PER_SECOND = 1 / LINEAR_GEAR_RATIO * WHEEL_CIRCUMFERENCE;
 	public static final double ANGLE_REVOLUTIONS_TO_RADIANS = RobotConstants.General.Motors.FALCON_REVOLUTIONS_PER_RADIAN / ANGULAR_GEAR_RATIO;
 	public static final TalonFXConfiguration ANGULAR_FALCON_CONFIG_OBJECT = new TalonFXConfiguration();
 	static {
 		Slot0Configs PID_CONFIGS = new Slot0Configs();
-		PID_CONFIGS.kP = 0;
+		PID_CONFIGS.kP = 3;
 		PID_CONFIGS.kI = 0;
 		PID_CONFIGS.kD = 0;
 		PID_CONFIGS.kS = 0;
@@ -62,9 +61,9 @@ public class MK4iSwerveConstants {
 	public static final TalonFXConfiguration LINEAR_FALCON_CONFIG_OBJECT = new TalonFXConfiguration();
 	static {
 		Slot0Configs PID_CONFIGS = new Slot0Configs();
-		PID_CONFIGS.kP = 0.4;
+		PID_CONFIGS.kP = 0.2;
 		PID_CONFIGS.kI = 0;
-		PID_CONFIGS.kD = 0;
+		PID_CONFIGS.kD = 0.000005;
 		PID_CONFIGS.kS = 0;
 		PID_CONFIGS.kV = 0;
 
