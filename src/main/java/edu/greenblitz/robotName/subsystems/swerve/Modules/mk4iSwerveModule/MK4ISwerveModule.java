@@ -15,18 +15,18 @@ import edu.greenblitz.robotName.utils.motors.GBTalonFXPro;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MK4ISwerveModule implements ISwerveModule {
 
     private final GBTalonFXPro angularMotor;
     private final GBTalonFXPro linearMotor;
     private final CANcoder canCoder;
-    private final SimpleMotorFeedforward linearFeedForward;
     private final double encoderOffset;
 
 
-    VelocityVoltage velocityVoltage = new VelocityVoltage(0);
-    MotionMagicDutyCycle motionMagicExpoDutyCycle = new MotionMagicDutyCycle(0);
+    VelocityVoltage velocityVoltage = new VelocityVoltage(0).withEnableFOC(true);
+    PositionVoltage motionMagicDutyCycle = new PositionVoltage(0).withEnableFOC(true);
     public MK4ISwerveModule(SwerveChassis.Module module) {
 
         SwerveModuleConfigObject configObject = switch (module) {
@@ -54,19 +54,17 @@ public class MK4ISwerveModule implements ISwerveModule {
         angularMotor.getConfigurator().refresh(FEEDBACK_CONFIGS);
 
         this.encoderOffset = configObject.encoderOffset.getRotations();
-
-        this.linearFeedForward = new SimpleMotorFeedforward(MK4iSwerveConstants.ks, MK4iSwerveConstants.kv, MK4iSwerveConstants.ka);
     }
 
 
     @Override
     public void setLinearVelocity(double speed) {
-        linearMotor.setControl(velocityVoltage.withVelocity(speed));
+        linearMotor.setControl(velocityVoltage.withVelocity(speed * MK4iSwerveConstants.LINEAR_GEAR_RATIO / MK4iSwerveConstants.WHEEL_CIRCUMFERENCE));
     }
 
     @Override
     public void rotateToAngle(Rotation2d angle) {
-        angularMotor.setControl(motionMagicExpoDutyCycle.withPosition(angle.getRotations() * MK4iSwerveConstants.ANGULAR_GEAR_RATIO));
+        angularMotor.setControl(motionMagicDutyCycle.withPosition(angle.getRotations() * MK4iSwerveConstants.ANGULAR_GEAR_RATIO));
     }
 
     @Override
@@ -103,6 +101,8 @@ public class MK4ISwerveModule implements ISwerveModule {
 
     @Override
     public void updateInputs(SwerveModuleInputsAutoLogged inputs) {
+        SmartDashboard.putNumber("cancoder",Math.IEEEremainder(Units.rotationsToDegrees(canCoder.getPosition().getValue()), 360));
+      
         inputs.linearVelocity = linearMotor.getVelocity().getValue();
         inputs.angularVelocity = angularMotor.getVelocity().getValue() / MK4iSwerveConstants.ANGULAR_GEAR_RATIO;
 
@@ -118,7 +118,7 @@ public class MK4ISwerveModule implements ISwerveModule {
         if (Double.isNaN(Units.degreesToRadians(canCoder.getAbsolutePosition().getValue()))) {
             inputs.absoluteEncoderPosition = 0;
         } else {
-            inputs.absoluteEncoderPosition = Units.degreesToRadians(canCoder.getAbsolutePosition().getValue()) - Units.rotationsToRadians(encoderOffset);
+            inputs.absoluteEncoderPosition = Units.rotationsToRadians(canCoder.getAbsolutePosition().getValue());
         }
         inputs.isAbsoluteEncoderConnected = canCoder.getVersion().getValue() != -1;
         //TODO make sure version is -1 when disconnected

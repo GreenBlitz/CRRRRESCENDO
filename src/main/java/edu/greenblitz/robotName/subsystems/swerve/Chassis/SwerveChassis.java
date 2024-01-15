@@ -122,18 +122,13 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
      * @return returns the swerve module based on its name
      */
     public SwerveModule getModule(Module module) {
-        switch (module) {
-            case BACK_LEFT:
-                return backLeft;
-            case BACK_RIGHT:
-                return backRight;
-            case FRONT_LEFT:
-                return frontLeft;
-            case FRONT_RIGHT:
-                return frontRight;
-        }
-        return null;
-    }
+		return switch (module) {
+			case BACK_LEFT -> backLeft;
+			case BACK_RIGHT -> backRight;
+			case FRONT_LEFT -> frontLeft;
+			case FRONT_RIGHT -> frontRight;
+		};
+	}
 
     /**
      * stops all the modules (power(0))
