@@ -13,9 +13,9 @@ public class BatteryLimiter extends GBCommand {
 
 
     public BatteryLimiter() {
+        battery = Battery.getInstance();
         require(battery);
         voltageFilter = LinearFilter.movingAverage(WINDOW_SIZE);
-        battery = Battery.getInstance();
     }
 
     @Override
