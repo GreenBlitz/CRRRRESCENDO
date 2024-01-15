@@ -3,6 +3,7 @@ package edu.greenblitz.robotName;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.Intake.Gripper;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
@@ -32,6 +33,7 @@ public class Robot extends LoggedRobot {
 
         Battery.getInstance().setDefaultCommand(new BatteryLimiter());
 
+        Gripper.init();
         SwerveChassis.init();
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
         SwerveChassis.getInstance().resetAllEncoders();
