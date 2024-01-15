@@ -52,7 +52,9 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     public static final double ROTATION_TOLERANCE = 2;
     private boolean doVision;
     public final double CURRENT_TOLERANCE = 0.5;
-    public static final double DISCRETION_CONSTANT = 8;
+    public static final double SIMULATION_DISCRETION_CONSTANT = 8;
+    public static final double REAL_DISCRETION_CONSTANT = 4;
+
 
     private SwerveChassisInputsAutoLogged ChassisInputs = new SwerveChassisInputsAutoLogged();
     private GyroInputsAutoLogged gyroInputs = new GyroInputsAutoLogged();
@@ -229,9 +231,9 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
                 angSpeed,
                 currentAng
         );
-        double timeStep = TIME_STEP*DISCRETION_CONSTANT;
+        double timeStep = TIME_STEP*SIMULATION_DISCRETION_CONSTANT;
         if (RobotConstants.ROBOT_TYPE.equals(Robot.RobotType.ROBOT_NAME)) {
-            timeStep = RoborioUtils.getCurrentRoborioCycle()*DISCRETION_CONSTANT;
+            timeStep = RoborioUtils.getCurrentRoborioCycle()*REAL_DISCRETION_CONSTANT;
         }
         System.out.println(timeStep);
         chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds,timeStep);
@@ -250,11 +252,11 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
                 fieldRelativeSpeeds,
                 currentAng
         );
-        double timeStep = TIME_STEP;
+        double timeStep = TIME_STEP*SIMULATION_DISCRETION_CONSTANT;
         if (RobotConstants.ROBOT_TYPE.equals(Robot.RobotType.ROBOT_NAME)) {
-            timeStep = RoborioUtils.getCurrentRoborioCycle();
+            timeStep = RoborioUtils.getCurrentRoborioCycle()*REAL_DISCRETION_CONSTANT;
         }
-        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds,timeStep * DISCRETION_CONSTANT);
+        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds,timeStep);
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
         SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
         setModuleStates(desaturatedStates);
