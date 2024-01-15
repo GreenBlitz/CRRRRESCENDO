@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.subsystems.shooter;
 
 public interface IShooter {
-
-    void updateInputs(ShooterInputsAutoLogged inputs);
+    void updateInputs(ShooterInputs inputs);
+    void setPower(double power);
+    void setVoltage(double voltage);
 }
