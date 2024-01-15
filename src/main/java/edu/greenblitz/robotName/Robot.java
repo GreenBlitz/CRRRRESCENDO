@@ -5,8 +5,6 @@ import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
@@ -51,11 +49,12 @@ public class Robot extends LoggedRobot {
             // Running on a real robot, log to a USB stick
             case ROBOT_NAME:
                 try {
-                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.ROBORIO_LOG_PATH));
-                    Logger.recordOutput("broder", "yonatan");
+                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.USB_LOG_PATH));
+                    System.out.println("initialized Logger");
                 } catch (Exception e) {
                     Logger.end();
                     Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
+                    System.out.println("initialized Logger");
                 }
                 Logger.addDataReceiver(new NT4Publisher());
                 break;
