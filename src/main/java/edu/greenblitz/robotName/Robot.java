@@ -31,7 +31,7 @@ public class Robot extends LoggedRobot {
     @Override
     public void robotInit() {
         Pathfinding.setPathfinder(new LocalADStar());
-        initializeLogger();
+//        initializeLogger();
         CommandScheduler.getInstance().enable();
 
         initializeAutoBuilder();
