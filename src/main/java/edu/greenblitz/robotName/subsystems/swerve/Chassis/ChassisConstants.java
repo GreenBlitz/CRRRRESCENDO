@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.swerve.Chassis;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -16,6 +17,10 @@ public class ChassisConstants {
             new Translation2d(-FRONT_LEFT_X_POSITION, -FRONT_LEFT_Y_POSITION)
     };
 
+    public static final PIDController ROTATION_PID_CONTROLLER = new PIDController(2,0,0);
+    static {
+        ROTATION_PID_CONTROLLER.enableContinuousInput(-Math.PI, Math.PI);
+    }
     public static final double MAX_VELOCITY = 4.1818320981472068;
     public static final double MAX_ACCELERATION = 14.37979171376739;
     public static final double MAX_ANGULAR_SPEED = 10.454580245368017;
@@ -27,6 +32,7 @@ public class ChassisConstants {
     public static final double DRIVER_LINEAR_SPEED_FACTOR_SLOW = 0.5;
 
     public static final boolean ANGULAR_JOYSTICK_INVERTED = true;
-    public static final boolean LINEAR_JOYSTICK_INVERTED = false;
+    public static final boolean FORWARD_VALUE_INVERTED = false;
+    public static final boolean LEFTWARD_VALUE_INVERTED = true;
 
 }
