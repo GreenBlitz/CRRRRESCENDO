@@ -170,7 +170,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
 
     public Rotation2d getModuleAngle(Module module) {
-        return getModule(module).getModuleAngle();
+        return getModule(module).getModuleAngle().times(-1);
     }
 
     public boolean isModuleAtAngle(Module module, Rotation2d angle, Rotation2d errorAngleTolerance) {
