@@ -12,13 +12,14 @@ import java.util.Optional;
 
 
 class Limelight {
-    private NetworkTableEntry robotPoseEntry, idEntry;
+    private NetworkTableEntry robotPoseEntry, idEntry, tagPoseEntry;
     private String name;
 
     Limelight(String limelightName) {
         this.name = limelightName;
         String robotPoseQuery = FMSUtils.getAlliance() == DriverStation.Alliance.Red ? "botpose_wpired" : "botpose_wpiblue";
         robotPoseEntry = NetworkTableInstance.getDefault().getTable(name).getEntry(robotPoseQuery);
+        tagPoseEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("targetpose_cameraspace");
         idEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("tid");
     }
     
@@ -62,6 +63,14 @@ class Limelight {
                 )
         );
         return Optional.of(new Pair<>(estimatedPose, timestamp));
+    }
+    public double getTagHeight(){
+        double[] poseArray = tagPoseEntry.getDoubleArray(new double[7]);
+        return poseArray[1];
+    }
+    public double getDistanceFromTag(){
+        double[] poseArray = tagPoseEntry.getDoubleArray(new double[7]);
+        return poseArray[2];
     }
     public boolean hasTarget() {
         return getUpdatedPose2DEstimation().isPresent();

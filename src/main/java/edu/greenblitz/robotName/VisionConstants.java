@@ -12,8 +12,8 @@ public class VisionConstants {
 	public static final int[] PORT_NUMBERS = {5800, 5801, 5802, 5803, 5804, 5805};
 	public static final Transform3d ROBOT_TO_CAMERA = new Transform3d(new Translation3d(), new Rotation3d());
 	public final static double MIN_DISTANCE_TO_FILTER_OUT = 5;//1.5
-	public final static double VISION_CONSTANT = 0.2;
-	public final static double APRIL_TAG_HEIGHT = 0.95;
+	public final static double VisionToStdDevs = 10;
+	public final static double APRIL_TAG_HEIGHT = 0.18;
 	public final static double APRIL_TAG_HEIGHT_TOLERANCE = 0.04;
 	
 	

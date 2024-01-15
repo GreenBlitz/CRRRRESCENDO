@@ -99,7 +99,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
 		field.setRobotPose(getRobotPose());
 
-
 		gyro.updateInputs(gyroInputs);
 		updateInputs(ChassisInputs);
 
@@ -312,39 +311,15 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		poseEstimator.update(getGyroAngle(), getSwerveModulePositions());
 		Photonvision.getInstance().getUpdatedPoseEstimator().ifPresent((EstimatedRobotPose pose) -> poseEstimator.addVisionMeasurement(pose.estimatedPose.toPose2d(), pose.timestampSeconds));
 	}
-
-	public List<Optional<Pair<Pose3d, Double>>> getHeightValidVisionMeasurements(List<Optional<Pair<Pose3d, Double>>> measurements){
-        List<Optional<Pair<Pose3d, Double>>> validMeasurements = new ArrayList<>();
-        for (Optional<Pair<Pose3d, Double>> measurement : measurements){
-            if(measurement.isPresent() && Math.abs(VisionConstants.APRIL_TAG_HEIGHT -measurement.get().getFirst().getY()) < VisionConstants.APRIL_TAG_HEIGHT_TOLERANCE){
-                validMeasurements.add(measurement);
-            }
-        }
-        return validMeasurements;
-    }
-
-    public List<Optional<Pair<Pose2d, Double>>> convertPose3DListToPose2DList(List<Optional<Pair<Pose3d, Double>>> measurements){
-        List<Optional<Pair<Pose2d, Double>>> pose2DMeasurements = new ArrayList<>();
-        for (Optional<Pair<Pose3d, Double>> measurement : measurements){
-            pose2DMeasurements.add(
-                    Optional.of(
-                            new Pair<>(
-                                    measurement.get().getFirst().toPose2d(),
-                                    measurement.get().getSecond()
-                            )
-                    )
-            );
-        }
-        return pose2DMeasurements;
-    }
+	
+	
 
 	public void updatePoseEstimationLimeLight() {
 		if (doVision) {
 			for (Optional<Pair<Pose2d, Double>> target :
-               convertPose3DListToPose2DList(
-                       getHeightValidVisionMeasurements(MultiLimelight.getInstance().getAll3DEstimates())
+               MultiLimelight.getInstance().getAll2DEstimates()
                )
-            ) {
+             {
 				target.ifPresent(this::addVisionMeasurement);
 			}
 		}
@@ -375,11 +350,12 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	public Pose2d getRobotPose() {
 		return poseEstimator.getEstimatedPosition();
 	}
+	
 
 	public void resetToVision() {
 		for (Optional<Pair<Pose2d, Double>> pose :
 				MultiLimelight.getInstance().getAll2DEstimates()) {
-			poseEstimator.setVisionMeasurementStdDevs(new MatBuilder<>(Nat.N3(), Nat.N1()).fill(0, 0, 0.6));
+			poseEstimator.setVisionMeasurementStdDevs(new MatBuilder<>(Nat.N3(), Nat.N1()).fill(MultiLimelight.getInstance().getDynamicStdDevs(), MultiLimelight.getInstance().getDynamicStdDevs(), 0.6));
 			pose.ifPresent((pose2dDoublePair) -> resetChassisPose(pose2dDoublePair.getFirst()));
 			poseEstimator.setVisionMeasurementStdDevs(new MatBuilder<>(Nat.N3(), Nat.N1()).fill(VisionConstants.STANDARD_DEVIATION_VISION2D, VisionConstants.STANDARD_DEVIATION_VISION2D, VisionConstants.STANDARD_DEVIATION_VISION_ANGLE));
 		}

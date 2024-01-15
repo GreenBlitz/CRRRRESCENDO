@@ -43,50 +43,33 @@ public class MultiLimelight extends GBSubsystem {
 	public List<Optional<Pair<Pose2d, Double>>> getAll2DEstimates(){
 		ArrayList<Optional<Pair<Pose2d, Double>>> estimates = new ArrayList<>();
 		for (Limelight limelight : limelights){
-			limelight.getUpdatedPose2DEstimation(); //todo ask amir, is there any reason for this duplicate?
-			estimates.add(limelight.getUpdatedPose2DEstimation());
-		}
-		return estimates;
-	}
-
-
-	public List<Optional<Pair<Pose3d, Double>>> getAll3DEstimates(){
-		ArrayList<Optional<Pair<Pose3d, Double>>> estimates = new ArrayList<>();
-		for (Limelight limelight : limelights){
-			estimates.add(limelight.getUpdatedPose3DEstimation());
-		}
-		return estimates;
-	}
-
-	public Pose2d getAveragePos() {
-		double avgX = 0;
-		double avgY = 0;
-		double avgRotation = 0;
-		int targetsFound = 0;
-		for(Optional<Pair<Pose2d, Double>> pose : getAll2DEstimates()) {
-			if(pose.isPresent()) {
-				avgX += pose.get().getFirst().getX();
-				avgY += pose.get().getFirst().getY();
-				avgRotation += pose.get().getFirst().getTranslation().getAngle().getRadians();
-				targetsFound++;
+			if (limelight.hasTarget() && Math.abs(VisionConstants.APRIL_TAG_HEIGHT - limelight.getTagHeight()) < VisionConstants.APRIL_TAG_HEIGHT_TOLERANCE) {
+				estimates.add(limelight.getUpdatedPose2DEstimation());
 			}
 		}
-		avgX /= targetsFound;
-		avgY /= targetsFound;
-		avgRotation /= targetsFound;
-		return new Pose2d(new Translation2d(avgX,avgY),new Rotation2d(avgRotation));
+		return estimates;
 	}
+	
+	public double getDynamicStdDevs(){
+		int counter = 0;
+		double stdDevsSum = 0;
+		for(Limelight limelight : limelights){
+			stdDevsSum+=limelight.getDistanceFromTag() / VisionConstants.VisionToStdDevs;
+			counter++;
+		}
+		return stdDevsSum/counter;
+	}
+	
+
+	
+	
 
 	
 	public boolean isConnected(int limelightId){
 		return limelights.get(limelightId).hasTarget();
 	}
-
-
-
-
-
-
+	
+	
 	public Optional<Pair<Pose2d, Double>> getFirstAvailableTarget(){
 		for(Optional<Pair<Pose2d, Double>> output : getAll2DEstimates()){
 			if (output.isPresent()){
