@@ -15,7 +15,6 @@ import edu.wpi.first.math.Nat;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.*;
@@ -25,8 +24,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.littletonrobotics.junction.Logger;
 import org.photonvision.EstimatedRobotPose;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
@@ -48,7 +45,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     private Field2d field = new Field2d();
     public static final double TRANSLATION_TOLERANCE = 0.05;
     public static final double ROTATION_TOLERANCE = 2;
-    private boolean doVision = true;
+    private boolean doVision;
     public final double CURRENT_TOLERANCE = 0.5;
 
     private SwerveChassisInputsAutoLogged ChassisInputs = new SwerveChassisInputsAutoLogged();
@@ -111,7 +108,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
 
         updatePoseEstimationLimeLight();
-//        updateOdometry();
+        updateOdometry();
 
 
         SmartDashboard.putData(getField());
@@ -309,29 +306,15 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         Photonvision.getInstance().getUpdatedPoseEstimator().ifPresent((EstimatedRobotPose pose) -> poseEstimator.addVisionMeasurement(pose.estimatedPose.toPose2d(), pose.timestampSeconds));
     }
 
-    public boolean isVisionMeasurementHeightInTolerance (Pose3d visionMeasurement){
-       return Math.abs(visionMeasurement.getZ() - VisionConstants.APRIL_TAG_HEIGHT ) < VisionConstants.APRIL_TAG_HEIGHT_TOLERANCE;
-    }
-    public List<Pair<Pose2d, Double>> getValidVisionMeasurementPosesByEstimatedHeight (List<Optional<Pair<Pose3d, Double>>> measurements){
-        ArrayList<Pair<Pose2d, Double>> validMeasurements = new ArrayList<>();
-        for (Optional<Pair<Pose3d, Double>> measurement : measurements){
-            if(measurement.isPresent() && isVisionMeasurementHeightInTolerance(measurement.get().getFirst())){
-                validMeasurements.add(new Pair<>(measurement.get().getFirst().toPose2d(),measurement.get().getSecond()));
-            }
-        }
-        return validMeasurements;
-    }
-
     public void updatePoseEstimationLimeLight() {
         boolean poseDifference = odometry.getPoseMeters().getTranslation().getDistance(getRobotPose().getTranslation()) < OdometryConstants.MAX_DISTANCE_TO_FILTER_OUT;
-        boolean shouldUpdateByOdometry = poseDifference /*&& isRobotOnGround()*/;
+        boolean shouldUpdateByOdometry = poseDifference && isRobotOnGround();
         if (shouldUpdateByOdometry) {
             poseEstimator.update(getGyroAngle(), getSwerveModulePositions());
         }
-        if (doVision || true) {
-            List<Pair<Pose2d,Double>> validEstimates = getValidVisionMeasurementPosesByEstimatedHeight(MultiLimelight.getInstance().getAll3dEstimates());
-            for (Pair<Pose2d, Double> target : validEstimates) {
-                add2dVisionMeasurement(target);
+        if (doVision) {
+            for (Optional<Pair<Pose2d, Double>> target : MultiLimelight.getInstance().getAllEstimates()) {
+                target.ifPresent(this::addVisionMeasurement);
             }
         }
     }
@@ -354,12 +337,13 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         odometry.update(getGyroAngle(), getSwerveModulePositions());
     }
 
-    private void add2dVisionMeasurement(Pair<Pose2d, Double> poseTimestampPair) {
+    private void addVisionMeasurement(Pair<Pose2d, Double> poseTimestampPair) {
         Pose2d visionPose = poseTimestampPair.getFirst();
         if (!(visionPose.getTranslation().getDistance(SwerveChassis.getInstance().getRobotPose().getTranslation()) > VisionConstants.MIN_DISTANCE_TO_FILTER_OUT)) {
             resetToVision();
         }
     }
+
     public Pose2d getRobotPose() {
         return poseEstimator.getEstimatedPosition();
     }
@@ -462,7 +446,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     @Override
     public void updateInputs(SwerveChassisInputsAutoLogged inputs) {
         inputs.isVisionEnabled = doVision;
-        inputs.numberOfDetectedAprilTag = MultiLimelight.getInstance().getAll2dEstimates().size();
+        inputs.numberOfDetectedAprilTag = MultiLimelight.getInstance().getAllEstimates().size();
         inputs.omegaRadiansPerSecond = getChassisSpeeds().omegaRadiansPerSecond;
         inputs.xAxisSpeed = getChassisSpeeds().vxMetersPerSecond;
         inputs.yAxisSpeed = getChassisSpeeds().vyMetersPerSecond;

@@ -4,7 +4,6 @@ import edu.greenblitz.robotName.VisionConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.ArrayList;
@@ -42,19 +41,10 @@ public class MultiLimelight extends GBSubsystem {
 		instance = new MultiLimelight();
 	}
 
-	public List<Optional<Pair<Pose2d, Double>>> getAll2dEstimates(){
+	public List<Optional<Pair<Pose2d, Double>>> getAllEstimates(){
 		ArrayList<Optional<Pair<Pose2d, Double>>> estimates = new ArrayList<>();
 		for (Limelight limelight : limelights){
-			estimates.add(limelight.getUpdated2dPoseEstimation());
-		}
-		return estimates;
-	}
-
-	public ArrayList<Optional<Pair<Pose3d, Double>>> getAll3dEstimates (){
-
-		ArrayList<Optional<Pair<Pose3d, Double>>> estimates = new ArrayList<>();
-		for (Limelight limelight : limelights){
-				estimates.add(limelight.getUpdatedPose3dEstimation());
+			estimates.add(limelight.getUpdatedPoseEstimation());
 		}
 		return estimates;
 	}
@@ -64,7 +54,7 @@ public class MultiLimelight extends GBSubsystem {
 	}
 
 	public Optional<Pair<Pose2d, Double>> getFirstAvailableTarget(){
-		for(Optional<Pair<Pose2d, Double>> output : getAll2dEstimates()){
+		for(Optional<Pair<Pose2d, Double>> output : getAllEstimates()){
 			if (output.isPresent()){
 				return output;
 			}

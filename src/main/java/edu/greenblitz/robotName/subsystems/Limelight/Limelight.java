@@ -1,14 +1,13 @@
 package edu.greenblitz.robotName.subsystems.Limelight;
 
-import edu.greenblitz.robotName.VisionConstants;
 import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.wpi.first.math.Pair;
-import edu.wpi.first.math.geometry.*;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.Optional;
 
@@ -31,7 +30,7 @@ class Limelight {
 
 
 
-    public Optional<Pair<Pose2d, Double>> getUpdated2dPoseEstimation() {
+    public Optional<Pair<Pose2d, Double>> getUpdatedPoseEstimation() {
         //the botpose array is comprised of {0:x, 1:y, 2:z, 3:Roll, 4:Pitch, 5:Yaw, 6:total latency from capture to send}
         double[] poseArray = robotPoseEntry.getDoubleArray(new double[7]);
         double processingLatency = poseArray[6]/1000;
@@ -46,32 +45,8 @@ class Limelight {
 
     }
 
-    public Optional<Pair<Pose3d, Double>> getUpdatedPose3dEstimation (){
-        double[] poseArray = robotPoseEntry.getDoubleArray(new double[7]);
-        double processingLatency = poseArray[6]/1000;
-        double timestamp = Timer.getFPGATimestamp() -  processingLatency;
-
-        int id = (int) idEntry.getInteger(-1);
-        if (id == -1){
-            return Optional.empty();
-        }
-
-        Pose3d estimatedPose = new Pose3d(
-                new Translation3d(
-                        poseArray[0],
-                        poseArray[1],
-                        poseArray[2]
-                ),
-                new Rotation3d(
-                        poseArray[3],
-                        poseArray[4],
-                        poseArray[5]
-                )
-        );
-        return Optional.of(new Pair<>(estimatedPose, timestamp));
-    }
     public boolean hasTarget() {
-        return getUpdated2dPoseEstimation().isPresent();
+        return getUpdatedPoseEstimation().isPresent();
     }
 
 
