@@ -15,7 +15,7 @@ class Limelight {
     private NetworkTableEntry robotPoseEntry, idEntry, tagPoseEntry;
     private String name;
 
-    Limelight(String limelightName) {
+    public Limelight(String limelightName) {
         this.name = limelightName;
         String robotPoseQuery = FMSUtils.getAlliance() == DriverStation.Alliance.Red ? "botpose_wpired" : "botpose_wpiblue";
         robotPoseEntry = NetworkTableInstance.getDefault().getTable(name).getEntry(robotPoseQuery);
@@ -39,30 +39,6 @@ class Limelight {
         }
         Pose2d robotPose = new Pose2d(poseArray[0], poseArray[1], Rotation2d.fromDegrees(poseArray[5]));
         return Optional.of(new Pair<>(robotPose, timestamp));
-    }
-    public Optional<Pair<Pose3d, Double>> getUpdatedPose3DEstimation (){
-        double[] poseArray = robotPoseEntry.getDoubleArray(new double[7]);
-        double processingLatency = poseArray[6]/1000;
-        double timestamp = Timer.getFPGATimestamp() -  processingLatency;
-
-        int id = (int) idEntry.getInteger(-1);
-        if (id == -1){
-            return Optional.empty();
-        }
-
-        Pose3d estimatedPose = new Pose3d(
-                new Translation3d(
-                        poseArray[0],
-                        poseArray[1],
-                        poseArray[2]
-                ),
-                new Rotation3d(
-                        poseArray[3],
-                        poseArray[4],
-                        poseArray[5]
-                )
-        );
-        return Optional.of(new Pair<>(estimatedPose, timestamp));
     }
     public double getTagHeight(){
         double[] poseArray = tagPoseEntry.getDoubleArray(new double[7]);

@@ -31,7 +31,6 @@ public class MultiLimelight extends GBSubsystem {
 	public static MultiLimelight getInstance() {
 		if (instance == null) {
 			init();
-			SmartDashboard.putBoolean("limelight initialized via getinstance", true);
 		}
 		return instance;
 	}
@@ -50,14 +49,9 @@ public class MultiLimelight extends GBSubsystem {
 		return estimates;
 	}
 	
-	public double getDynamicStdDevs(){
-		int counter = 0;
-		double stdDevsSum = 0;
-		for(Limelight limelight : limelights){
-			stdDevsSum+=limelight.getDistanceFromTag() / VisionConstants.VisionToStdDevs;
-			counter++;
-		}
-		return stdDevsSum/counter;
+	public double getDynamicStdDevs(int limelightId){
+		double stdDevsSum = limelights.get(limelightId).getDistanceFromTag() / VisionConstants.VisionToStdDevs;
+		return stdDevsSum;
 	}
 	
 

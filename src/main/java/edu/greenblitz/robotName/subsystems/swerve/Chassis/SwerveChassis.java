@@ -353,11 +353,12 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	
 
 	public void resetToVision() {
+		int counter = 0;
 		for (Optional<Pair<Pose2d, Double>> pose :
 				MultiLimelight.getInstance().getAll2DEstimates()) {
-			poseEstimator.setVisionMeasurementStdDevs(new MatBuilder<>(Nat.N3(), Nat.N1()).fill(MultiLimelight.getInstance().getDynamicStdDevs(), MultiLimelight.getInstance().getDynamicStdDevs(), 0.6));
+			poseEstimator.setVisionMeasurementStdDevs(new MatBuilder<>(Nat.N3(), Nat.N1()).fill(MultiLimelight.getInstance().getDynamicStdDevs(counter), MultiLimelight.getInstance().getDynamicStdDevs(counter), VisionConstants.STANDARD_DEVIATION_VISION_ANGLE));
 			pose.ifPresent((pose2dDoublePair) -> resetChassisPose(pose2dDoublePair.getFirst()));
-			poseEstimator.setVisionMeasurementStdDevs(new MatBuilder<>(Nat.N3(), Nat.N1()).fill(VisionConstants.STANDARD_DEVIATION_VISION2D, VisionConstants.STANDARD_DEVIATION_VISION2D, VisionConstants.STANDARD_DEVIATION_VISION_ANGLE));
+			counter++;
 		}
 	}
 
