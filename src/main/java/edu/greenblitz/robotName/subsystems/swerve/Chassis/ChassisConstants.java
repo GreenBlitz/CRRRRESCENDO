@@ -17,7 +17,7 @@ public class ChassisConstants {
             new Translation2d(-FRONT_LEFT_X_POSITION, -FRONT_LEFT_Y_POSITION)
     };
 
-    public static final PIDController ROTATION_PID_CONTROLLER = new PIDController(2,0,0);
+    public static final PIDController ROTATION_PID_CONTROLLER = new PIDController(3,0,0.2);
     static {
         ROTATION_PID_CONTROLLER.enableContinuousInput(-Math.PI, Math.PI);
     }
@@ -32,6 +32,7 @@ public class ChassisConstants {
     public static final double DRIVER_LINEAR_SPEED_FACTOR_SLOW = 0.5;
 
     public static final boolean ANGULAR_JOYSTICK_INVERTED = true;
-    public static final boolean LINEAR_JOYSTICK_INVERTED = false;
+    public static final boolean FORWARD_VALUE_INVERTED = false;
+    public static final boolean LEFTWARD_VALUE_INVERTED = true;
 
 }
