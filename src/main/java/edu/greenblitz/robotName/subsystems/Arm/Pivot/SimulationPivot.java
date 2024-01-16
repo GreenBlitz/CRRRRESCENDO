@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName.subsystems.Arm.Pivot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
@@ -13,13 +12,13 @@ import static edu.greenblitz.robotName.subsystems.Arm.Pivot.PivotConstants.Simul
 import static edu.greenblitz.robotName.subsystems.Arm.Pivot.PivotConstants.Simulation.STARTING_ANGLE;
 
 public class SimulationPivot implements IPivot {
-    SingleJointedArmSim pivotSim;
+    SingleJointedArmSim pivotSimulation;
     private double appliedVoltage;
 
     private PIDController controller = SIM_PID;
 
     public SimulationPivot() {
-        pivotSim = new SingleJointedArmSim(
+        pivotSimulation = new SingleJointedArmSim(
                 DCMotor.getFalcon500(PivotConstants.Simulation.NUMBER_OF_MOTORS),
                 PivotConstants.Simulation.GEAR_RATIO,
                 SingleJointedArmSim.estimateMOI(
@@ -50,7 +49,7 @@ public class SimulationPivot implements IPivot {
     @Override
     public void setVoltage(double voltage) {
         appliedVoltage = MathUtil.clamp(voltage, -RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE, RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE);
-        pivotSim.setInputVoltage(appliedVoltage);
+        pivotSimulation.setInputVoltage(appliedVoltage);
     }
 
 
@@ -67,16 +66,14 @@ public class SimulationPivot implements IPivot {
 
     @Override
     public void updateInputs(PivotInputsAutoLogged inputs) {
-
-        pivotSim.update(RobotConstants.SimulationConstants.TIME_STEP);
+        pivotSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
 
         inputs.appliedOutput = appliedVoltage;
-        inputs.outputCurrent = pivotSim.getCurrentDrawAmps();
-        inputs.position = pivotSim.getAngleRads();
-        inputs.velocity = pivotSim.getVelocityRadPerSec();
-        inputs.absoluteEncoderPosition = pivotSim.getAngleRads();
-
-        inputs.hasHitForwardLimit = pivotSim.hasHitLowerLimit();
-        inputs.hasHitBackwardsLimit = pivotSim.hasHitLowerLimit();
+        inputs.outputCurrent = pivotSimulation.getCurrentDrawAmps();
+        inputs.position = pivotSimulation.getAngleRads();
+        inputs.velocity = pivotSimulation.getVelocityRadPerSec();
+        inputs.absoluteEncoderPosition = pivotSimulation.getAngleRads();
+        inputs.hasHitForwardLimit = pivotSimulation.hasHitLowerLimit();
+        inputs.hasHitBackwardsLimit = pivotSimulation.hasHitLowerLimit();
     }
 }
