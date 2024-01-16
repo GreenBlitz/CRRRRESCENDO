@@ -4,16 +4,17 @@ import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 
 public class Shooter extends GBSubsystem {
-    private Shooter instance;
+    private static Shooter instance;
     private final IFlyWheel shooter;
     private final ShooterInputsAutoLogged shooterInputs = new ShooterInputsAutoLogged();
+    private boolean isPreparedToShoot;
 
     public Shooter(){
         shooter = FlyWheelFactory.create();
         shooter.updateInputs(shooterInputs);
     }
 
-    public Shooter getInstance(){
+    public static Shooter getInstance(){
         if(instance == null) {
             instance = new Shooter();
         }
@@ -24,6 +25,20 @@ public class Shooter extends GBSubsystem {
         shooter.setPower(power);
     }
 
+    public void setVelocity (double velocity){
+        shooter.setVelocity(velocity);
+    }
+    public void stop(){
+        shooter.setPower(0);
+    }
+
+    public void setPreparedToShoot (boolean isPreparedToShoot){
+        this.isPreparedToShoot = isPreparedToShoot;
+    }
+
+    public double getVelocity () {
+        return shooterInputs.velocity;
+    }
     @Override
     public void periodic() {
         shooter.updateInputs(shooterInputs);
