@@ -35,6 +35,8 @@ public class ElbowConstants {
 
     public static class Falcon {
 
+        public static final int MOTOR_ID = 1;
+
         public static final SimpleMotorFeedforward SIMPLE_MOTOR_FF = new SimpleMotorFeedforward(kS, kV, kA);
 
         public static final MotionMagicConfigs MOTION_MAGIC_CONFIGS = new MotionMagicConfigs();

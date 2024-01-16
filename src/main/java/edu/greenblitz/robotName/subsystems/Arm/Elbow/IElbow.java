@@ -13,8 +13,8 @@ public interface IElbow {
 
     void setVoltage(double voltage);
 
-    void updateInputs(ElbowInputsAutoLogged inputs);
-
     void setIdleMode(NeutralModeValue idleMode);
+
+    void updateInputs(ElbowInputsAutoLogged inputs);
 
 }

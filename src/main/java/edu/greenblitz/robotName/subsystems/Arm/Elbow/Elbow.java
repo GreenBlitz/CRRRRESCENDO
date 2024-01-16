@@ -14,19 +14,25 @@ public class Elbow extends GBSubsystem {
     public double goalAngle;
 
     public static Elbow getInstance() {
-        if (instance == null)
-            instance = new Elbow();
+        init();
         return instance;
     }
+
+    public static void init(){
+        if (instance == null)
+            instance = new Elbow();
+    }
+
     private Elbow() {
         elbowInputs = new ElbowInputsAutoLogged();
         elbow = ElbowFactory.create();
         elbow.updateInputs(elbowInputs);
-        goalAngle = getAngle();
+        goalAngle = getAngleInRadians();
     }
 
     @Override
     public void periodic() {
+        super.periodic();
         if (isAtAngle(goalAngle))
             standInPlace();
         elbow.updateInputs(elbowInputs);
@@ -73,14 +79,14 @@ public class Elbow extends GBSubsystem {
     public double getVoltage() {
         return elbowInputs.appliedOutput * Battery.getInstance().getCurrentVoltage();
     }
-    public double getAngle() {
+    public double getAngleInRadians() {
         return elbowInputs.position;
     }
     public double getVelocity() {
         return elbowInputs.velocity;
     }
     public boolean isAtAngle(double targetHeight) {
-        return Math.abs(targetHeight - getAngle()) <= ElbowConstants.TOLERANCE;
+        return Math.abs(targetHeight - getAngleInRadians()) <= ElbowConstants.TOLERANCE;
     }
 
 }

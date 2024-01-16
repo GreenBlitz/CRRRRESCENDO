@@ -1,10 +1,8 @@
 package edu.greenblitz.robotName.subsystems.Arm.Elbow;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.greenblitz.robotName.utils.motors.GBFalcon;
 
 import static edu.greenblitz.robotName.subsystems.Arm.Elbow.ElbowConstants.Falcon.*;
 import static edu.greenblitz.robotName.subsystems.Arm.Elbow.ElbowConstants.*;
@@ -14,7 +12,7 @@ public class FalconElbow implements IElbow {
     TalonFX motor;
 
     public FalconElbow() {
-        motor = new TalonFX(1);
+        motor = new TalonFX(MOTOR_ID);
         motor.getConfigurator().apply(SWITCH_CONFIGS);
         motor.getConfigurator().apply(CURRENT_LIMITS_CONFIGS);
         motor.getConfigurator().apply(MOTION_MAGIC_CONFIGS);
