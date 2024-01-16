@@ -243,7 +243,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         }
         return timeStep;
     }
-    public static void printStates(SwerveModuleState[] states) {
+    public void printStates(SwerveModuleState[] states) {
         for (int i = 0; i < states.length; i++) {
             System.out.println(states[i].angle + ", " + states[i].speedMetersPerSecond);
         }
