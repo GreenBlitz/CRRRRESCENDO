@@ -266,7 +266,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
      * @param states original velocity states computed from the kinematics
      * @return states that create the same ratio between speeds but scaled down
      */
-    private SwerveModuleState[] desaturateSwerveModuleStates(SwerveModuleState[] states) {
+    private static SwerveModuleState[] desaturateSwerveModuleStates(SwerveModuleState[] states) {
         double desaturationFactor = 1;
         for (SwerveModuleState state : states) {
             desaturationFactor = Math.max(desaturationFactor, state.speedMetersPerSecond / ChassisConstants.MAX_VELOCITY);
