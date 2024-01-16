@@ -415,7 +415,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         moveByChassisSpeeds(chassisSpeeds.vxMetersPerSecond,
                 chassisSpeeds.vyMetersPerSecond,
                 chassisSpeeds.omegaRadiansPerSecond,
-                getGyroAngle()
+                getGyroAngle().unaryMinus()
         );
     }
 
