@@ -32,6 +32,7 @@ public class ChassisConstants {
     public static final double DRIVER_LINEAR_SPEED_FACTOR_SLOW = 0.5;
 
     public static final boolean ANGULAR_JOYSTICK_INVERTED = true;
-    public static final boolean LINEAR_JOYSTICK_INVERTED = false;
+    public static final boolean FORWARD_VALUE_INVERTED = false;
+    public static final boolean LEFTWARD_VALUE_INVERTED = true;
 
 }
