@@ -4,10 +4,6 @@ import edu.greenblitz.robotName.VisionConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Pose3d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +46,7 @@ public class MultiLimelight extends GBSubsystem {
 	}
 	
 	public double getDynamicStdDevs(int limelightId){
-		double stdDevsSum = limelights.get(limelightId).getDistanceFromTag() / VisionConstants.VisionToStdDevs;
+		double stdDevsSum = limelights.get(limelightId).getDistanceFromTag() / VisionConstants.VISION_TO_STANDARD_DEVIATION;
 		return stdDevsSum;
 	}
 	
@@ -59,7 +55,7 @@ public class MultiLimelight extends GBSubsystem {
 	
 
 	
-	public boolean isConnected(int limelightId){
+	public boolean hasTarget(int limelightId){
 		return limelights.get(limelightId).hasTarget();
 	}
 	

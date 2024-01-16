@@ -13,8 +13,8 @@ import java.util.Map;
 public class Dashboard extends GBSubsystem {
 
     private static Dashboard instance;
+    private boolean driverDashboardInitiated = false;
 
-    public MechanismLigament2d armWidget;
 
     public static Dashboard getInstance() {
         init();
@@ -31,7 +31,6 @@ public class Dashboard extends GBSubsystem {
         openDriversDashboard();
     }
 
-    private boolean driverDashboardInitiated = false;
     /**
      *  activate on robot-init
      * */
@@ -65,8 +64,6 @@ public class Dashboard extends GBSubsystem {
         //field
         driversTab.add("Field", SwerveChassis.getInstance().getField()).withPosition(5, 2).withSize(3, 2);
         driversTab.addDouble("std devs",()->MultiLimelight.getInstance().getDynamicStdDevs(0));
-        //ready to place
-        //todo check if at place and arm in pos
     }
 
 

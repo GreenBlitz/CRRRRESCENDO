@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.Limelight;
 
+import edu.greenblitz.robotName.VisionConstants;
 import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.*;
@@ -29,7 +30,7 @@ class Limelight {
 
     public Optional<Pair<Pose2d, Double>> getUpdatedPose2DEstimation() {
         //the botpose array is comprised of {0:x, 1:y, 2:z, 3:Roll, 4:Pitch, 5:Yaw, 6:total latency from capture to send}
-        double[] poseArray = robotPoseEntry.getDoubleArray(new double[7]);
+        double[] poseArray = robotPoseEntry.getDoubleArray(new double[VisionConstants.LIMELIGHT_ENTRY_ARRAY_LENGTH]);
         double processingLatency = poseArray[6]/1000;
         double timestamp = Timer.getFPGATimestamp() -  processingLatency;
         int id = (int) idEntry.getInteger(-1);
@@ -41,11 +42,11 @@ class Limelight {
         return Optional.of(new Pair<>(robotPose, timestamp));
     }
     public double getTagHeight(){
-        double[] poseArray = tagPoseEntry.getDoubleArray(new double[7]);
+        double[] poseArray = tagPoseEntry.getDoubleArray(new double[VisionConstants.LIMELIGHT_ENTRY_ARRAY_LENGTH]);
         return poseArray[1];
     }
     public double getDistanceFromTag(){
-        double[] poseArray = tagPoseEntry.getDoubleArray(new double[7]);
+        double[] poseArray = tagPoseEntry.getDoubleArray(new double[VisionConstants.LIMELIGHT_ENTRY_ARRAY_LENGTH]);
         return poseArray[2];
     }
     public boolean hasTarget() {

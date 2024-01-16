@@ -26,7 +26,7 @@ public class Robot extends LoggedRobot {
 
     @Override
     public void robotInit() {
-//        initializeLogger();
+        initializeLogger();
 
         SwerveChassis.init();
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));

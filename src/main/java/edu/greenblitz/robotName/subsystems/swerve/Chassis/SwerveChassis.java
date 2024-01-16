@@ -14,7 +14,6 @@ import edu.wpi.first.math.Nat;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -26,8 +25,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.littletonrobotics.junction.Logger;
 import org.photonvision.EstimatedRobotPose;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
@@ -72,7 +69,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				getGyroAngle(),
 				getSwerveModulePositions(),
 				visionPoseStartMatch(),
-				new MatBuilder<>(Nat.N3(), Nat.N1()).fill(VisionConstants.STANDARD_DEVIATION_ODOMETRY, VisionConstants.STANDARD_DEVIATION_ODOMETRY, VisionConstants.STANDARD_DEVIATION_ODOMETRY),
+				new MatBuilder<>(Nat.N3(), Nat.N1()).fill(VisionConstants.STANDARD_DEVIATION_ODOMETRY, VisionConstants.STANDARD_DEVIATION_ODOMETRY, VisionConstants.STANDARD_DEVIATION_ODOMETRY_ANGLE),
 				new MatBuilder<>(Nat.N3(), Nat.N1()).fill(VisionConstants.STANDARD_DEVIATION_VISION2D, VisionConstants.STANDARD_DEVIATION_VISION2D, VisionConstants.STANDARD_DEVIATION_VISION_ANGLE));
 		SmartDashboard.putData("field", getField());
 	}
@@ -183,14 +180,14 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 
 	public Pose2d visionPoseStartMatch(){
-		if(MultiLimelight.getInstance().isConnected(0)){return MultiLimelight.getInstance().getFirstAvailableTarget().get().getFirst();}
+		if(MultiLimelight.getInstance().hasTarget(0)){return MultiLimelight.getInstance().getFirstAvailableTarget().get().getFirst();}
 		else{
 			return new Pose2d();
 		}
 	}
 
 	public void resetPoseByVision() {
-		if (MultiLimelight.getInstance().isConnected(0)) {
+		if (MultiLimelight.getInstance().hasTarget(0)) {
 			if (MultiLimelight.getInstance().getFirstAvailableTarget().isPresent()) {
 				Pose2d visionPose = MultiLimelight.getInstance().getFirstAvailableTarget().get().getFirst();
 				getGyro().updateYaw(Rotation2d.fromRadians(0));
