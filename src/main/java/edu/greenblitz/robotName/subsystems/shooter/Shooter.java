@@ -5,11 +5,11 @@ import org.littletonrobotics.junction.Logger;
 
 public class Shooter extends GBSubsystem {
     private Shooter instance;
-    private final IShooter shooter;
+    private final IFlyWheel shooter;
     private final ShooterInputsAutoLogged shooterInputs = new ShooterInputsAutoLogged();
 
     public Shooter(){
-        shooter = ShooterFactory.create();
+        shooter = FlyWheelFactory.create();
         shooter.updateInputs(shooterInputs);
     }
 

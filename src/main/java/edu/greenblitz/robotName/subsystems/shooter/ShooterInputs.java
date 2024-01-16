@@ -5,5 +5,6 @@ import org.littletonrobotics.junction.AutoLog;
 @AutoLog
 public class ShooterInputs {
     public double appliedOutput;
-    protected double velocity;
+    public double outputCurrent;
+    public double velocity;
 }

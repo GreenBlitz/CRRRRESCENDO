@@ -1,7 +1,9 @@
 package edu.greenblitz.robotName.subsystems.shooter;
 
-public interface IShooter {
-    void updateInputs(ShooterInputs inputs);
+public interface IFlyWheel {
     void setPower(double power);
     void setVoltage(double voltage);
+    void setVelocity (double velocity);
+
+    void updateInputs(ShooterInputsAutoLogged inputs);
 }
