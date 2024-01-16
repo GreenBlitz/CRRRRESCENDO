@@ -8,9 +8,7 @@ public class PivotInputs {
     public double outputCurrent;
     public double position;
     public double velocity;
-
     public double absoluteEncoderPosition;
-
     public boolean hasHitForwardLimit;
     public boolean hasHitBackwardsLimit;
 }

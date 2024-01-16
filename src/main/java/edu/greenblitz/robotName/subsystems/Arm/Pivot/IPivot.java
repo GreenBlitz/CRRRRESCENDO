@@ -14,6 +14,5 @@ public interface IPivot {
 
     void setIdleMode(NeutralModeValue idleMode);
 
-
     void updateInputs(PivotInputsAutoLogged inputs);
 }

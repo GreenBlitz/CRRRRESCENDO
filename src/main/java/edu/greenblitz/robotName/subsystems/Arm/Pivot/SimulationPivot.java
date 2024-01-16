@@ -10,8 +10,9 @@ import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.subsystems.Arm.Pivot.PivotConstants.Simulation.SIM_PID;
+import static edu.greenblitz.robotName.subsystems.Arm.Pivot.PivotConstants.Simulation.STARTING_ANGLE;
 
-public class SimulationPivot implements IPivot{
+public class SimulationPivot implements IPivot {
     SingleJointedArmSim pivotSim;
     private double appliedVoltage;
 
@@ -25,13 +26,13 @@ public class SimulationPivot implements IPivot{
                         PivotConstants.LENGTH_OF_SHOOTER,
                         PivotConstants.SHOOTER_MASS_KG
                 ),
-                PivotConstants.LENGTH_OF_SHOOTER,,
+                PivotConstants.LENGTH_OF_SHOOTER,
                 PivotConstants.BACKWARD_ANGLE_LIMIT,
                 PivotConstants.FORWARD_ANGLE_LIMIT,
-                false
+                false,
+                STARTING_ANGLE
         );
     }
-
 
 
     @Override
@@ -53,8 +54,6 @@ public class SimulationPivot implements IPivot{
     }
 
 
-
-
     @Override
     public void setIdleMode(NeutralModeValue idleMode) {
         Logger.getInstance().recordOutput("Arm/Pivot", "tried setting the idleMode to " + idleMode.name());
@@ -65,6 +64,7 @@ public class SimulationPivot implements IPivot{
     public void resetPosition(double position) {
         Logger.getInstance().recordOutput("Arm/Pivot", "tried to reset the position to " + position);
     }
+
     @Override
     public void updateInputs(PivotInputsAutoLogged inputs) {
 
@@ -73,7 +73,7 @@ public class SimulationPivot implements IPivot{
         inputs.appliedOutput = appliedVoltage;
         inputs.outputCurrent = pivotSim.getCurrentDrawAmps();
         inputs.position = pivotSim.getAngleRads();
-        inputs. velocity = pivotSim.getVelocityRadPerSec();
+        inputs.velocity = pivotSim.getVelocityRadPerSec();
         inputs.absoluteEncoderPosition = pivotSim.getAngleRads();
 
         inputs.hasHitForwardLimit = pivotSim.hasHitLowerLimit();

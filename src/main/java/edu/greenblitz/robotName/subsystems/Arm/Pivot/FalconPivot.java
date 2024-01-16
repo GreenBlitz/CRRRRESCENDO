@@ -11,14 +11,15 @@ import static edu.greenblitz.robotName.subsystems.Arm.Pivot.PivotConstants.*;
 import static edu.greenblitz.robotName.subsystems.Arm.Pivot.PivotConstants.FalconConfigs.*;
 
 public class FalconPivot implements IPivot{
+
     private TalonFX motor;
     public FalconPivot() {
         motor = new TalonFX(MOTOR_ID);
         motor.getConfigurator().apply(MOTION_MAGIC_CONFIGS);
         motor.getConfigurator().apply(CURRENT_LIMITS_CONFIGS);
         motor.getConfigurator().apply(CLOSED_LOOP_RAMPS_CONFIGS);
-        motor.setNeutralMode(NEUTRAL_MODE_VALUE);
         motor.getConfigurator().apply(SWITCH_CONFIGS);
+        motor.setNeutralMode(NEUTRAL_MODE_VALUE);
         motor.optimizeBusUtilization();
     }
 
@@ -35,7 +36,7 @@ public class FalconPivot implements IPivot{
     @Override
     public void moveToAngle(double goalAngle) {
         motor.setControl(new MotionMagicDutyCycle(
-                goalAngle,
+                goalAngle/RELATIVE_POSITION_CONVERSION_FACTOR,
                 true,
                 SIMPLE_MOTOR_FF.calculate(0),
                 0,
@@ -63,7 +64,7 @@ public class FalconPivot implements IPivot{
         inputs.position = motor.getPosition().getValue() * RELATIVE_POSITION_CONVERSION_FACTOR;
         inputs.velocity = motor.getVelocity().getValue() * RELATIVE_VELOCITY_CONVERSION_FACTOR;
         inputs.absoluteEncoderPosition = motor.getDutyCycle().getValue() * ABSOLUTE_POSITION_CONVERSION_FACTOR;
-        inputs.hasHitForwardLimit = false;
-        inputs.hasHitBackwardsLimit = false;
+        inputs.hasHitForwardLimit = motor.getFault_ForwardSoftLimit();
+        inputs.hasHitBackwardsLimit = motor.getFault_ReverseSoftLimit();
     }
 }

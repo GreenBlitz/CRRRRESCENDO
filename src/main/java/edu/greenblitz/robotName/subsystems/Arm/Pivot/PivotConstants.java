@@ -13,6 +13,7 @@ public class PivotConstants {
     public static final double kV = 1;
     public static final double kG = 1;
     public static final double kA = 1;
+    public static final double TOLERANCE = 0.5;
     public static final double LENGTH_OF_SHOOTER = 'Y' + 'O' + 'N' + 'I' + ' ' + 'G' + 'E' + 'V' + 'E' + 'R';//😍😍
     public static final double SHOOTER_MASS_KG = 10;
     public static final double RELATIVE_POSITION_CONVERSION_FACTOR = 0.0328; //you know of calibrating pid but have you heard of calibrating the gear ratio
@@ -23,6 +24,7 @@ public class PivotConstants {
     public static final int MOTOR_ID = 1;
 
     public static class Simulation {
+        public static final double STARTING_ANGLE = 90;//in radians
         public static final PIDController SIM_PID = new PIDController(1,0,0);
         public static final int NUMBER_OF_MOTORS = 1;
         public static final double GEAR_RATIO = 1 / RELATIVE_POSITION_CONVERSION_FACTOR;
