@@ -19,6 +19,8 @@ public class ChassisConstants {
     public static final double MAX_VELOCITY = 4.1818320981472068;
     public static final double MAX_ACCELERATION = 14.37979171376739;
     public static final double MAX_ANGULAR_SPEED = 10.454580245368017;
+    public static final double SIMULATION_DISCRETION_CONSTANT = 8;
+    public static final double REAL_DISCRETION_CONSTANT = 4;
 
     public static final double DRIVER_ANGULAR_SPEED_FACTOR = MAX_ANGULAR_SPEED / 2;
     public static final double DRIVER_LINEAR_SPEED_FACTOR = MAX_VELOCITY;

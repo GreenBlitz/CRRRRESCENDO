@@ -30,6 +30,8 @@ import org.photonvision.EstimatedRobotPose;
 import java.util.Optional;
 
 import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.TIME_STEP;
+import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.REAL_DISCRETION_CONSTANT;
+import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.SIMULATION_DISCRETION_CONSTANT;
 
 public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
@@ -52,8 +54,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     public static final double ROTATION_TOLERANCE = 2;
     private boolean doVision;
     public final double CURRENT_TOLERANCE = 0.5;
-    public static final double SIMULATION_DISCRETION_CONSTANT = 8;
-    public static final double REAL_DISCRETION_CONSTANT = 4;
 
 
     private SwerveChassisInputsAutoLogged ChassisInputs = new SwerveChassisInputsAutoLogged();
@@ -110,7 +110,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         updateInputs(ChassisInputs);
         
         Logger.recordOutput("DriveTrain/RobotPose", getRobotPose());
-//        Logger.recordOutput("DriveTrain/ModuleStates", getSwerveModuleStates());
+        Logger.recordOutput("DriveTrain/ModuleStates", getSwerveModuleStates());
         Logger.processInputs("DriveTrain/Chassis", ChassisInputs);
         Logger.processInputs("DriveTrain/Gyro", gyroInputs);
 
@@ -235,7 +235,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         if (RobotConstants.ROBOT_TYPE.equals(Robot.RobotType.ROBOT_NAME)) {
             timeStep = RoborioUtils.getCurrentRoborioCycle()*REAL_DISCRETION_CONSTANT;
         }
-        System.out.println(timeStep);
         chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds,timeStep);
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
         SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
