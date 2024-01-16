@@ -33,7 +33,6 @@ public class OI {
     }
 
     public void initButtons(){
-        mainJoystick.A.whileTrue(new RotateToAngle(Rotation2d.fromDegrees(90)));
-        mainJoystick.B.whileTrue(new RotateToAngle(Rotation2d.fromDegrees(180)));
+        // put buttons here
     }
 }
