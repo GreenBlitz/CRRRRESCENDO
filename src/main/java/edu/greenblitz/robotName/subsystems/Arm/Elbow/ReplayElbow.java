@@ -1,11 +1,11 @@
 package edu.greenblitz.robotName.subsystems.Arm.Elbow;
 
-import com.revrobotics.CANSparkMax;
-import edu.greenblitz.robotName.subsystems.Arm.ElbowInputsAutoLogged;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
-public class ReplayElbow implements IElbow{
+public class ReplayElbow implements IElbow {
     @Override
-    public void setPosition(double position) {
+    public void resetPosition(double position) {
 
     }
 
@@ -15,7 +15,7 @@ public class ReplayElbow implements IElbow{
     }
 
     @Override
-    public void setAngleRadiansByPID(double goalAngle, double feedForward) {
+    public void moveToAngle(double goalAngle) {
 
     }
 
@@ -25,18 +25,12 @@ public class ReplayElbow implements IElbow{
     }
 
     @Override
-    public void setIdleMode(CANSparkMax.IdleMode idleMode) {
-
-    }
-
-    @Override
-    public void setSoftLimit(CANSparkMax.SoftLimitDirection direction, double limit) {
-
-    }
-
-    @Override
     public void updateInputs(ElbowInputsAutoLogged inputs) {
 
     }
 
+    @Override
+    public void setIdleMode(NeutralModeValue idleMode) {
+
+    }
 }

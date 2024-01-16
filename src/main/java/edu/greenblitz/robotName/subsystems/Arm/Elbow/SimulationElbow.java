@@ -1,8 +1,8 @@
 package edu.greenblitz.robotName.subsystems.Arm.Elbow;
 
-import com.revrobotics.CANSparkMax;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.Arm.ElbowInputsAutoLogged;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
@@ -16,7 +16,7 @@ public class SimulationElbow implements IElbow {
 
     public SimulationElbow() {
         elbowSimulation = new SingleJointedArmSim(
-                DCMotor.getNEO(ElbowConstants.Simulation.NUMBER_OF_MOTORS),
+                DCMotor.getFalcon500(ElbowConstants.Simulation.NUMBER_OF_MOTORS),
                 ElbowConstants.Simulation.GEAR_RATIO,
                 SingleJointedArmSim.estimateMOI(
                         ElbowConstants.ARM_LENGTH,
@@ -30,14 +30,10 @@ public class SimulationElbow implements IElbow {
         );
     }
 
-
-
     @Override
     public void setPower(double power) {
         setVoltage(power * RobotConstants.SimulationConstants.BATTERY_VOLTAGE);
     }
-
-
 
     @Override
     public void setVoltage(double voltage) {
@@ -45,11 +41,23 @@ public class SimulationElbow implements IElbow {
         elbowSimulation.setInputVoltage(appliedVoltage);
     }
 
+    @Override
+    public void setIdleMode(NeutralModeValue idleMode) {
+        Logger.getInstance().recordOutput("Arm/Elbow", "tried setting the idleMode to " + idleMode.name());
+    }
 
+    @Override
+    public void moveToAngle(double goalAngle) {
+        Logger.getInstance().recordOutput("Arm/Elbow", "tried setting the goal angle to " + goalAngle);
+    }
+
+    @Override
+    public void resetPosition(double position) {
+        Logger.getInstance().recordOutput("Arm/Elbow", "tried to set the position to " + position);
+    }
 
     @Override
     public void updateInputs(ElbowInputsAutoLogged inputs) {
-
         elbowSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
 
         inputs.appliedOutput = appliedVoltage;
@@ -57,37 +65,7 @@ public class SimulationElbow implements IElbow {
         inputs.position = elbowSimulation.getAngleRads();
         inputs.velocity = elbowSimulation.getVelocityRadPerSec();
         inputs.absoluteEncoderPosition = elbowSimulation.getAngleRads();
-        inputs.absoluteEncoderVelocity = elbowSimulation.getVelocityRadPerSec();
-
         inputs.hasHitForwardLimit = elbowSimulation.hasHitLowerLimit();
         inputs.hasHitBackwardsLimit = elbowSimulation.hasHitLowerLimit();
-
-        inputs.kP = SIM_PID.getKp();
-        inputs.kI = SIM_PID.getKi();
-        inputs.kD = SIM_PID.getKd();
-    }
-    @Override
-    public void setIdleMode(CANSparkMax.IdleMode idleMode) {
-        Logger.getInstance().recordOutput("Arm/Elbow", "tried setting the idleMode to " + idleMode.name());
-    }
-
-    @Override
-    public void setSoftLimit(CANSparkMax.SoftLimitDirection direction, double limit) {
-        Logger.getInstance().recordOutput("Arm/Elbow", "tried to set soft limit for direction " + direction.name() + " to " + limit);
-    }
-
-    @Override
-    public void updateInputs(edu.greenblitz.robotName.subsystems.Arm.Elbow.ElbowInputsAutoLogged inputs) {
-
-    }
-
-    @Override
-    public void setAngleRadiansByPID(double goalAngle, double feedForward) {
-        Logger.getInstance().recordOutput("Arm/Elbow", "tried setting the goal angle to " + goalAngle + " with feed  forward of " + feedForward);
-    }
-
-    @Override
-    public void setPosition(double position) {
-        Logger.getInstance().recordOutput("Arm/Elbow", "tried to set the position to " + position);
     }
 }

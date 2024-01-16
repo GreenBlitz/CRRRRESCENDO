@@ -8,14 +8,7 @@ public class ElbowInputs {
     public double outputCurrent;
     public double position;
     public double velocity;
-
     public double absoluteEncoderPosition;
-    public double absoluteEncoderVelocity;
-
-    public double kP;
-    public double kI;
-    public double kD;
-
     public boolean hasHitForwardLimit;
     public boolean hasHitBackwardsLimit;
 }
