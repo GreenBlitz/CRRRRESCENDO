@@ -50,11 +50,11 @@ public class Robot extends LoggedRobot {
             case ROBOT_NAME:
                 try {
                     Logger.addDataReceiver(new WPILOGWriter(RobotConstants.USB_LOG_PATH));
-                    System.out.println("initialized Logger");
+                    System.out.println("initialized Logger, USB");
                 } catch (Exception e) {
                     Logger.end();
                     Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
-                    System.out.println("initialized Logger");
+                    System.out.println("initialized Logger, roborio");
                 }
                 Logger.addDataReceiver(new NT4Publisher());
                 break;
