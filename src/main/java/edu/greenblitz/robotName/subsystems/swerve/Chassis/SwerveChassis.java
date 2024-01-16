@@ -231,18 +231,21 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
                 angSpeed,
                 currentAng
         );
-        double timeStep = TIME_STEP*SIMULATION_DISCRETION_CONSTANT;
-        if (RobotConstants.ROBOT_TYPE.equals(Robot.RobotType.ROBOT_NAME)) {
-            timeStep = RoborioUtils.getCurrentRoborioCycle()*REAL_DISCRETION_CONSTANT;
-        }
-        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds,timeStep);
+        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds,getTimeStepForDiscretization());
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
         SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
         setModuleStates(desaturatedStates);
     }
+    private double getTimeStepForDiscretization() {
+        double timeStep = TIME_STEP*SIMULATION_DISCRETION_CONSTANT;
+        if (RobotConstants.ROBOT_TYPE.equals(Robot.RobotType.ROBOT_NAME)) {
+            timeStep = RoborioUtils.getCurrentRoborioCycle()*REAL_DISCRETION_CONSTANT;
+        }
+        return timeStep;
+    }
     public static void printStates(SwerveModuleState[] states) {
         for (int i = 0; i < states.length; i++) {
-            System.out.println(states[i].angle + "," + states[i].speedMetersPerSecond);
+            System.out.println(states[i].angle + ", " + states[i].speedMetersPerSecond);
         }
     }
 
@@ -251,11 +254,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
                 fieldRelativeSpeeds,
                 currentAng
         );
-        double timeStep = TIME_STEP*SIMULATION_DISCRETION_CONSTANT;
-        if (RobotConstants.ROBOT_TYPE.equals(Robot.RobotType.ROBOT_NAME)) {
-            timeStep = RoborioUtils.getCurrentRoborioCycle()*REAL_DISCRETION_CONSTANT;
-        }
-        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds,timeStep);
+        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds,getTimeStepForDiscretization());
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
         SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
         setModuleStates(desaturatedStates);
@@ -267,7 +266,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
      * @param states original velocity states computed from the kinematics
      * @return states that create the same ratio between speeds but scaled down
      */
-    private static SwerveModuleState[] desaturateSwerveModuleStates(SwerveModuleState[] states) {
+    private SwerveModuleState[] desaturateSwerveModuleStates(SwerveModuleState[] states) {
         double desaturationFactor = 1;
         for (SwerveModuleState state : states) {
             desaturationFactor = Math.max(desaturationFactor, state.speedMetersPerSecond / ChassisConstants.MAX_VELOCITY);
