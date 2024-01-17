@@ -6,8 +6,9 @@ import edu.wpi.first.wpilibj.PowerDistribution;
 public class RobotConstants {
 
     public static final Robot.RobotType ROBOT_TYPE = Robot.RobotType.ROBOT_NAME;
-    public static final String SIMULATION_LOG_PATH = System.getProperty("user.home") + "\\Desktop\\SimulationLogs";
-    public static final String ROBORIO_LOG_PATH = "/media/sda1/";
+	public static final String SIMULATION_LOG_PATH = System.getProperty("user.home") + "\\Desktop\\SimulationLogs";
+	public static final String USB_LOG_PATH = "/media/usb/";
+	public static final String SAFE_ROBORIO_LOG_PATH = "/logs/";
 
     public static class Pneumatics {
         public static final int PCM_ID = 20;

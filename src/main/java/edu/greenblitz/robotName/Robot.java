@@ -8,8 +8,6 @@ import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
@@ -59,7 +57,14 @@ public class Robot extends LoggedRobot {
         switch (RobotConstants.ROBOT_TYPE) {
             // Running on a real robot, log to a USB stick
             case ROBOT_NAME:
-                Logger.addDataReceiver(new WPILOGWriter(RobotConstants.ROBORIO_LOG_PATH));
+                try {
+                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.USB_LOG_PATH));
+                    System.out.println("initialized Logger, USB");
+                } catch (Exception e) {
+                    Logger.end();
+                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
+                    System.out.println("initialized Logger, roborio");
+                }
                 Logger.addDataReceiver(new NT4Publisher());
                 break;
             // Replaying a log, set up replay source
