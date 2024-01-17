@@ -15,7 +15,6 @@ public class MultiLimelight extends GBSubsystem {
 	private List<Limelight> limelights;
 
 
-
 	private MultiLimelight(){
 		limelights = new ArrayList<>();
 		for(String limelightName : VisionConstants.LIMELIGHT_NAMES){
@@ -51,10 +50,6 @@ public class MultiLimelight extends GBSubsystem {
 	}
 	
 
-	
-	
-
-	
 	public boolean hasTarget(int limelightId){
 		return limelights.get(limelightId).hasTarget();
 	}
