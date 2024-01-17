@@ -2,6 +2,7 @@ package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
+import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -35,6 +36,10 @@ public class Robot extends LoggedRobot {
         SwerveChassis.getInstance().resetAllEncoders();
 
         OI.getInstance();
+    }
+    @Override
+    public void teleopInit() {
+        Dashboard.getInstance().activateDriversDashboard();
     }
     @Override
     public void robotPeriodic() {
