@@ -11,7 +11,7 @@ public class Elbow extends GBSubsystem {
     private static Elbow instance;
     private IElbow elbow;
     private final ElbowInputsAutoLogged elbowInputs;
-    public double goalAngle;
+    private double goalAngle;
 
     public static Elbow getInstance() {
         init();
@@ -32,7 +32,6 @@ public class Elbow extends GBSubsystem {
 
     @Override
     public void periodic() {
-        super.periodic();
         if (isAtAngle(goalAngle))
             standInPlace();
         elbow.updateInputs(elbowInputs);
@@ -84,6 +83,9 @@ public class Elbow extends GBSubsystem {
     }
     public double getVelocity() {
         return elbowInputs.velocity;
+    }
+    public double getGoalAngleRadians() {
+        return goalAngle;
     }
     public boolean isAtAngle(double targetHeight) {
         return Math.abs(targetHeight - getAngleInRadians()) <= ElbowConstants.TOLERANCE;

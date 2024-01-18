@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName.subsystems.Arm.Pivot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.greenblitz.robotName.subsystems.Arm.Elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.util.Units;
@@ -29,6 +28,7 @@ public class Pivot extends GBSubsystem {
 
     private Pivot() {
         pivot = PivotFactory.create();
+        pivotInputs = new PivotInputsAutoLogged();
         pivot.updateInputs(pivotInputs);
         goalAngle = 0;
         startingValueOfEncoder = pivotInputs.absoluteEncoderPosition;
@@ -77,7 +77,9 @@ public class Pivot extends GBSubsystem {
     public void setIdleMode(NeutralModeValue idleMode) {
         pivot.setIdleMode(idleMode);
     }
-
+    public double getGoalAngleRadians(){
+        return goalAngle;
+    }
     public double getVoltage() {
         return pivotInputs.appliedOutput * Battery.getInstance().getCurrentVoltage();
     }
