@@ -28,7 +28,7 @@ public class MK4iSwerveConstants {
 	public static final TalonFXConfiguration ANGULAR_FALCON_CONFIG_OBJECT = new TalonFXConfiguration();
 	static {
 		Slot0Configs PID_CONFIGS = new Slot0Configs();
-		PID_CONFIGS.kP = 2;
+		PID_CONFIGS.kP = 1;
 		PID_CONFIGS.kI = 0;
 		PID_CONFIGS.kD = 0;
 		PID_CONFIGS.kS = 0;

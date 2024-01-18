@@ -101,8 +101,7 @@ public class MK4ISwerveModule implements ISwerveModule {
 
     @Override
     public void updateInputs(SwerveModuleInputsAutoLogged inputs) {
-        SmartDashboard.putNumber("cancoder",Math.IEEEremainder(Units.rotationsToDegrees(canCoder.getPosition().getValue()), 360));
-      
+        
         inputs.linearVelocity = linearMotor.getVelocity().getValue();
         inputs.angularVelocity = angularMotor.getVelocity().getValue() / MK4iSwerveConstants.ANGULAR_GEAR_RATIO;
 
@@ -114,8 +113,8 @@ public class MK4ISwerveModule implements ISwerveModule {
 
         inputs.linearMetersPassed = Conversions.MK4IConversions.convertRevolutionsToMeters(linearMotor.getPosition().getValue());
         inputs.angularPositionRadians = Conversions.MK4IConversions.convertRevolutionsToRadians(angularMotor.getPosition().getValue());
-
-        if (Double.isNaN(Units.degreesToRadians(canCoder.getAbsolutePosition().getValue()))) {
+        
+        if (Double.isNaN(canCoder.getAbsolutePosition().getValue())) {
             inputs.absoluteEncoderPosition = 0;
         } else {
             inputs.absoluteEncoderPosition = Units.rotationsToRadians(canCoder.getAbsolutePosition().getValue());
