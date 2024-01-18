@@ -164,7 +164,7 @@ public class PIDObject {
         return this;
     }
 
-    public PIDObject withKd(double kd) {
+    public PIDObject withKd() {
         this.setKd(kd);
         return this;
     }
