@@ -1,17 +1,17 @@
 package edu.greenblitz.robotName.subsystems.shooter.simulationFlyWheel;
+
 import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.shooter.IFlyWheel;
-import edu.greenblitz.robotName.subsystems.shooter.ShooterInputs;
+import edu.greenblitz.robotName.subsystems.shooter.IShooter;
 import edu.greenblitz.robotName.subsystems.shooter.ShooterInputsAutoLogged;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 
-public class SimulationFlyWheel implements IFlyWheel {
+public class SimulationFlyWheel implements IShooter {
     FlywheelSim shooterSim;
     private double appliedVoltage;
 
-    public SimulationFlyWheel(){
+    public SimulationFlyWheel() {
         shooterSim = new FlywheelSim(
                 DCMotor.getNEO(SimulationFlyWheelConstants.NUMBER_OF_MOTORS),
                 SimulationFlyWheelConstants.GEARING,
@@ -26,7 +26,11 @@ public class SimulationFlyWheel implements IFlyWheel {
 
     @Override
     public void setVoltage(double voltage) {
-        appliedVoltage = MathUtil.clamp(voltage, -RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE, RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE);
+        appliedVoltage = MathUtil.clamp(
+                voltage,
+                RobotConstants.SimulationConstants.MIN_MOTOR_VOLTAGE,
+                RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE
+        );
         shooterSim.setInputVoltage(appliedVoltage);
     }
 
@@ -41,7 +45,4 @@ public class SimulationFlyWheel implements IFlyWheel {
         inputs.appliedOutput = appliedVoltage;
         inputs.velocity = shooterSim.getAngularVelocityRPM();
     }
-
-
-
 }

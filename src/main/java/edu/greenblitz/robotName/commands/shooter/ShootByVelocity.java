@@ -1,41 +1,38 @@
 package edu.greenblitz.robotName.commands.shooter;
 
-public class ShootByVelocity extends ShooterCommand{
+import edu.greenblitz.robotName.subsystems.shooter.ShooterConstants;
 
-	private double EPSILON = 50;
-	private double SHOOTING_SPEED_TIME = 1;
+public class ShootByVelocity extends ShooterCommand {
 
-	private double inShootingSpeed;
-	private double velocity;
+    private int isAtShootingSpeed;
+    private double velocity;
 
-	public ShootByVelocity(double velocity){
-		this.velocity = velocity;
-	}
-	public boolean isFlywheelInVelocity (){
-		return Math.abs(shooter.getVelocity() - velocity) < EPSILON;
-	}
+    public ShootByVelocity(double velocity) {
+        this.velocity = velocity;
+    }
 
-	@Override
-	public void initialize() {
-		inShootingSpeed = 0;
-	}
+    public boolean isFlywheelAtVelocity() {
+        return Math.abs(shooter.getVelocity() - velocity) < ShooterConstants.EPSILON_RPM;
+    }
 
-	@Override
-	public void execute() {
-		shooter.setVelocity(velocity);
+    @Override
+    public void initialize() {
+        isAtShootingSpeed = 0;
+    }
 
-		if(isFlywheelInVelocity()){
-			inShootingSpeed++;
-		}else{
-			inShootingSpeed = 0;
-		}
+    @Override
+    public void execute() {
+        shooter.setVelocity(velocity);
+        if (isFlywheelAtVelocity()) {
+            isAtShootingSpeed++;
+        } else {
+            isAtShootingSpeed = 0;
+        }
+        shooter.setPreparedToShoot(isAtShootingSpeed > ShooterConstants.SHOOTING_SPEED_TIME);
+    }
 
-
-		shooter.setPreparedToShoot(inShootingSpeed > SHOOTING_SPEED_TIME);
-	}
-
-	@Override
-	public void end(boolean interrupted) {
-		shooter.stop();
-	}
+    @Override
+    public void end(boolean interrupted) {
+        shooter.stop();
+    }
 }

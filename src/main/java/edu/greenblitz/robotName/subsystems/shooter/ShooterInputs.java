@@ -7,4 +7,5 @@ public class ShooterInputs {
     public double appliedOutput;
     public double outputCurrent;
     public double velocity;
+    public boolean reverseLimitSwitchPressed;
 }
