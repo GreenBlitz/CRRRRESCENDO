@@ -8,6 +8,7 @@ public class ShooterFactory {
     public static IShooter create() {
         return switch (RobotConstants.ROBOT_TYPE) {
             case ROBOT_NAME -> new NeoFlyWheel();
+            case REPLAY -> new ReplayShooter();
             default -> new SimulationFlyWheel();
         };
     }

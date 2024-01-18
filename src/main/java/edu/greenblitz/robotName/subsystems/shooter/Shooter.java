@@ -10,7 +10,7 @@ public class Shooter extends GBSubsystem {
     private final ShooterInputsAutoLogged shooterInputs;
     private boolean isPreparedToShoot;
 
-    public Shooter() {
+    private Shooter() {
         shooter = ShooterFactory.create();
         shooterInputs = new ShooterInputsAutoLogged();
         shooter.updateInputs(shooterInputs);
