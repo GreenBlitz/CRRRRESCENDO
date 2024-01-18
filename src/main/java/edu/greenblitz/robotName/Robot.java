@@ -9,8 +9,6 @@ import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
@@ -39,6 +37,7 @@ public class Robot extends LoggedRobot {
         SwerveChassis.getInstance().resetAllEncoders();
         MultiLimelight.getInstance();
         ArmSimulation.init();
+        //Try.init();
         OI.getInstance();
     }
     @Override

@@ -10,19 +10,38 @@
       "/LiveWindow/Ungrouped/PIDController[5]": "PIDController",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
       "/SmartDashboard/Field": "Field2d",
+      "/SmartDashboard/Mech2D": "Mechanism2d",
+      "/SmartDashboard/Mech2d": "Mechanism2d",
       "/SmartDashboard/field": "Field2d"
-    },
-    "windows": {
-      "/SmartDashboard/Field": {
-        "window": {
-          "visible": true
-        }
-      }
     }
   },
   "NetworkTables": {
     "transitory": {
       "AdvantageKit": {
+        "RealOutputs": {
+          "Arm": {
+            "Pose3d##v_/AdvantageKit/RealOutputs/Arm/SimPose3D": {
+              "Rotation3d##v_rotation": {
+                "open": true
+              },
+              "Translation3d##v_translation": {
+                "open": true
+              },
+              "open": true
+            },
+            "Pose3d##v_/AdvantageKit/RealOutputs/Arm/TargetPose3D": {
+              "Rotation3d##v_rotation": {
+                "open": true
+              },
+              "Translation3d##v_translation": {
+                "open": true
+              },
+              "open": true
+            },
+            "open": true
+          },
+          "open": true
+        },
         "open": true
       },
       "SmartDashboard": {
