@@ -2,7 +2,7 @@ package edu.greenblitz.robotName.subsystems.ChassisIntake;
 
 import edu.greenblitz.robotName.RobotConstants;
 
-public class ChassisIntakeFactory{
+public class ChassisIntakeFactory {
 	public static IChassisIntake create() {
 		switch (RobotConstants.ROBOT_TYPE) {
 			case ROBOT_NAME:

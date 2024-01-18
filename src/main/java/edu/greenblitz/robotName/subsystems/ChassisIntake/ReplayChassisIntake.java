@@ -1,6 +1,6 @@
 package edu.greenblitz.robotName.subsystems.ChassisIntake;
 
-public class ReplayChassisIntake implements IChassisIntake{
+public class ReplayChassisIntake implements IChassisIntake {
 	@Override
 	public void setPower(double power) {
 	

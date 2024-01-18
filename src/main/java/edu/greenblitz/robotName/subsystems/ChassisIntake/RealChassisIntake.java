@@ -3,12 +3,13 @@ package edu.greenblitz.robotName.subsystems.ChassisIntake;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 
-public class RealChassisIntake implements IChassisIntake{
+public class RealChassisIntake implements IChassisIntake {
 	private CANSparkMax motor;
 	
-	public RealChassisIntake(){
+	public RealChassisIntake() {
 		motor = new CANSparkMax(ChassisIntakeConstants.INTAKE_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
 	}
+	
 	@Override
 	public void setPower(double power) {
 		motor.set(power);

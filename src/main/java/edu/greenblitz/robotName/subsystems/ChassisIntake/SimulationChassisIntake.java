@@ -5,17 +5,18 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 
-public class SimulationChassisIntake implements IChassisIntake{
+public class SimulationChassisIntake implements IChassisIntake {
 	private DCMotorSim motorSimulation;
 	private double appliedOutput;
 	
-	public SimulationChassisIntake(){
+	public SimulationChassisIntake() {
 		motorSimulation = new DCMotorSim(
 				DCMotor.getNEO(ChassisIntakeConstants.SimulationConstants.NUMBER_OF_MOTORS),
 				ChassisIntakeConstants.SimulationConstants.GEAR_RATIO,
 				ChassisIntakeConstants.SimulationConstants.MOMENT_OF_INERTIA
 		);
 	}
+	
 	@Override
 	public void setPower(double power) {
 		setVoltage(power * RobotConstants.SimulationConstants.BATTERY_VOLTAGE);
