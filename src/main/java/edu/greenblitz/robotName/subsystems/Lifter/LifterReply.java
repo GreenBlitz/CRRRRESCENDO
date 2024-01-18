@@ -8,6 +8,11 @@ public class LifterReply implements ILifter{
 
     }
 
+    @Override
+    public void moveByCalculatedDistance(double distance) {
+
+    }
+
     public void setVoltage(double voltage){
 
     }

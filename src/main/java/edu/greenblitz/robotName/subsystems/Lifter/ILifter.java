@@ -6,6 +6,8 @@ public interface ILifter {
 
     public void setPower(double power);
 
+    public void moveByCalculatedDistance(double distance);
+
     public void setVoltage(double voltage);
 
     public void setPosition(double position);

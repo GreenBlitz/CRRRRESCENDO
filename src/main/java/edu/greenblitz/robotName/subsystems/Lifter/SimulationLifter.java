@@ -12,6 +12,11 @@ public class SimulationLifter implements ILifter{
     }
 
     @Override
+    public void moveByCalculatedDistance(double distance) {
+
+    }
+
+    @Override
     public void setVoltage(double voltage) {
         lastInputs.voltage = voltage;
     }
@@ -28,6 +33,7 @@ public class SimulationLifter implements ILifter{
 
     @Override
     public void updateInputs(LifterInputs lastInputs) {
+
 
     }
 
