@@ -64,7 +64,7 @@ public class FalconPivot implements IPivot{
         inputs.position = motor.getPosition().getValue() * RELATIVE_POSITION_CONVERSION_FACTOR;
         inputs.velocity = motor.getVelocity().getValue() * RELATIVE_VELOCITY_CONVERSION_FACTOR;
         inputs.absoluteEncoderPosition = motor.getDutyCycle().getValue() * ABSOLUTE_POSITION_CONVERSION_FACTOR;
-        inputs.hasHitForwardLimit = motor.getFault_ForwardSoftLimit();
-        inputs.hasHitBackwardsLimit = motor.getFault_ReverseSoftLimit();
+        inputs.hasHitForwardLimit = motor.getFault_ForwardSoftLimit().getValue();
+        inputs.hasHitBackwardsLimit = motor.getFault_ReverseSoftLimit().getValue();
     }
 }

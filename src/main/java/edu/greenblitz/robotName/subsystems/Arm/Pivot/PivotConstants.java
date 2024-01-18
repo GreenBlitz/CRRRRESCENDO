@@ -14,7 +14,7 @@ public class PivotConstants {
     public static final double kG = 1;
     public static final double kA = 1;
     public static final double TOLERANCE = 0.5;
-    public static final double LENGTH_OF_SHOOTER = 'Y' + 'O' + 'N' + 'I' + ' ' + 'G' + 'E' + 'V' + 'E' + 'R';//😍😍
+    public static final double LENGTH_OF_SHOOTER = 'Y' + 'O' + 'N' + 'I' + ' ' + 'G' + 'E' + 'V' + 'E' + 'R';
     public static final double SHOOTER_MASS_KG = 10;
     public static final double RELATIVE_POSITION_CONVERSION_FACTOR = 0.0328; //you know of calibrating pid but have you heard of calibrating the gear ratio
     public static final double RELATIVE_VELOCITY_CONVERSION_FACTOR = 0.0030332432;
