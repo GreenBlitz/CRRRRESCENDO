@@ -1,2 +1,7 @@
-package edu.greenblitz.robotName.subsystems.Lifter;public class LifterFactory {
+package edu.greenblitz.robotName.subsystems.Lifter;
+
+import edu.greenblitz.robotName.Robot;
+
+public class LifterFactory {
+
 }
