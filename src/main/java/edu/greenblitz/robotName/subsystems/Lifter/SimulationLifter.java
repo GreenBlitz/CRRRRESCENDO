@@ -1,5 +1,7 @@
 package edu.greenblitz.robotName.subsystems.Lifter;
 
+import com.revrobotics.CANSparkMax;
+
 public class SimulationLifter implements ILifter{
 
     private LifterInputs lastInputs = new LifterInputs();
@@ -28,4 +30,15 @@ public class SimulationLifter implements ILifter{
     public void updateInputs(LifterInputs lastInputs) {
 
     }
+
+    @Override
+    public void stopMotor() {
+        lastInputs.power = 0;
+    }
+
+    @Override
+    public void setIdleMode(CANSparkMax.IdleMode mode) {
+        lastInputs.idleMode = mode;
+    }
+
 }

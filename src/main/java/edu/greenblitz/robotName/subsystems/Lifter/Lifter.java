@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.Lifter;
 
+import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 
 public class Lifter extends GBSubsystem {
@@ -32,6 +33,13 @@ public class Lifter extends GBSubsystem {
     }
     public void updateInputs(LifterInputs lastInputs) {
 
+    }
+    public void stopMotor() {
+        lifter.stopMotor();
+    }
+
+    public void setIdleMode(CANSparkMax.IdleMode mode) {
+        lifter.setIdleMode(mode);
     }
 
 

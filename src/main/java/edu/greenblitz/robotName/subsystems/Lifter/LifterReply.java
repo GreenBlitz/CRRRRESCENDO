@@ -1,5 +1,7 @@
 package edu.greenblitz.robotName.subsystems.Lifter;
 
+import com.revrobotics.CANSparkMax;
+
 public class LifterReply implements ILifter{
 
     public void setPower(double power){
@@ -20,6 +22,12 @@ public class LifterReply implements ILifter{
 
     public void updateInputs(LifterInputs lastInputs){
 
+    }
+    @Override
+    public void stopMotor() {
+    }
+    @Override
+    public void setIdleMode(CANSparkMax.IdleMode mode) {
     }
 
 
