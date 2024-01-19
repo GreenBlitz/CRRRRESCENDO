@@ -4,6 +4,7 @@ import edu.greenblitz.robotName.OdometryConstants;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.VisionConstants;
+import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.subsystems.Gyros.GyroFactory;
 import edu.greenblitz.robotName.subsystems.Gyros.GyroInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.Gyros.IAngleMeasurementGyro;
@@ -30,8 +31,7 @@ import org.photonvision.EstimatedRobotPose;
 import java.util.Optional;
 
 import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.TIME_STEP;
-import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.REAL_DISCRETION_CONSTANT;
-import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.SIMULATION_DISCRETION_CONSTANT;
+import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.*;
 
 public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
@@ -238,12 +238,19 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     }
 
     private double getDiscretizedTimeStep() {
-        double timeStep = TIME_STEP * SIMULATION_DISCRETION_CONSTANT;
-        if (RobotConstants.ROBOT_TYPE.equals(Robot.RobotType.ROBOT_NAME)) {
-            timeStep = RoborioUtils.getCurrentRoborioCycle() * REAL_DISCRETION_CONSTANT;
+        double timeStep = getActualTimeStep();
+        double discretizedTimeStep = timeStep * FAST_DISCRETION_CONSTANT;
+        if (CURRENT_DRIVE_MODE.equals(MoveByJoysticks.DriveMode.SLOW)) {
+            discretizedTimeStep = timeStep * SLOW_DISCRETION_CONSTANT;
         }
-        return timeStep;
+        return discretizedTimeStep;
     }
+    private double getActualTimeStep() {
+        if (RobotConstants.ROBOT_TYPE.equals(Robot.RobotType.ROBOT_NAME))
+            return RoborioUtils.getCurrentRoborioCycle();
+        return TIME_STEP;
+    }
+
 
 
     public void moveByChassisSpeeds(ChassisSpeeds fieldRelativeSpeeds, Rotation2d currentAng) {

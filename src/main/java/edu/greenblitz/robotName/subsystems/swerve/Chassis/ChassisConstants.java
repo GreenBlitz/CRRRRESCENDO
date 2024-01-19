@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.swerve.Chassis;
 
+import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -19,8 +20,8 @@ public class ChassisConstants {
     public static final double MAX_VELOCITY = 4.1818320981472068;
     public static final double MAX_ACCELERATION = 14.37979171376739;
     public static final double MAX_ANGULAR_SPEED = 10.454580245368017;
-    public static final double SIMULATION_DISCRETION_CONSTANT = 8;
-    public static final double REAL_DISCRETION_CONSTANT = 4;
+    public static final double FAST_DISCRETION_CONSTANT = 8;
+    public static final double SLOW_DISCRETION_CONSTANT = FAST_DISCRETION_CONSTANT / 2;
 
     public static final double DRIVER_ANGULAR_SPEED_FACTOR = MAX_ANGULAR_SPEED / 2;
     public static final double DRIVER_LINEAR_SPEED_FACTOR = MAX_VELOCITY;
@@ -30,5 +31,6 @@ public class ChassisConstants {
 
     public static final boolean ANGULAR_JOYSTICK_INVERTED = true;
     public static final boolean LINEAR_JOYSTICK_INVERTED = false;
+    public static final MoveByJoysticks.DriveMode CURRENT_DRIVE_MODE = MoveByJoysticks.DriveMode.NORMAL;
 
 }
