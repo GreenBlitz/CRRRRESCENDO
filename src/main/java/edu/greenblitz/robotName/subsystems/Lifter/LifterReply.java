@@ -4,7 +4,7 @@ import com.revrobotics.CANSparkMax;
 
 public class LifterReply implements ILifter{
 
-    public void setPower(double power){
+    public void setPowerForMotor1(double power){
 
     }
 
@@ -13,15 +13,15 @@ public class LifterReply implements ILifter{
 
     }
 
-    public void setVoltage(double voltage){
+    public void setVoltageForMotor1(double voltage){
 
     }
 
-    public void setPosition(double position){
+    public void setPositionForMotor1(double position){
 
     }
 
-    public boolean isMotorInPosition(double position){
+    public boolean isMotor1InPosition(double position){
         return false;
     }
 
@@ -29,10 +29,10 @@ public class LifterReply implements ILifter{
 
     }
     @Override
-    public void stopMotor() {
+    public void stopMotor1() {
     }
     @Override
-    public void setIdleMode(CANSparkMax.IdleMode mode) {
+    public void setIdleModeForMotor1(CANSparkMax.IdleMode mode) {
     }
 
 

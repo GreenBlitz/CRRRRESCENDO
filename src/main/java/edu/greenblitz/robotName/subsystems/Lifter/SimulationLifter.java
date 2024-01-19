@@ -7,7 +7,7 @@ public class SimulationLifter implements ILifter{
     private LifterInputs lastInputs = new LifterInputs();
 
     @Override
-    public void setPower(double power) {
+    public void setPowerForMotor1(double power) {
         lastInputs.power = power;
     }
 
@@ -17,17 +17,17 @@ public class SimulationLifter implements ILifter{
     }
 
     @Override
-    public void setVoltage(double voltage) {
+    public void setVoltageForMotor1(double voltage) {
         lastInputs.voltage = voltage;
     }
 
     @Override
-    public void setPosition(double position) {
+    public void setPositionForMotor1(double position) {
         lastInputs.position = position;
     }
 
     @Override
-    public boolean isMotorInPosition(double position) {
+    public boolean isMotor1InPosition(double position) {
         return lastInputs.position == position;
     }
 
@@ -38,12 +38,12 @@ public class SimulationLifter implements ILifter{
     }
 
     @Override
-    public void stopMotor() {
+    public void stopMotor1() {
         lastInputs.power = 0;
     }
 
     @Override
-    public void setIdleMode(CANSparkMax.IdleMode mode) {
+    public void setIdleModeForMotor1(CANSparkMax.IdleMode mode) {
         lastInputs.idleMode = mode;
     }
 
