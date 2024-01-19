@@ -13,6 +13,13 @@
       "/SmartDashboard/Mech2D": "Mechanism2d",
       "/SmartDashboard/Mech2d": "Mechanism2d",
       "/SmartDashboard/field": "Field2d"
+    },
+    "windows": {
+      "/SmartDashboard/Mech2D": {
+        "window": {
+          "visible": true
+        }
+      }
     }
   },
   "NetworkTables": {

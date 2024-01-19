@@ -3,7 +3,10 @@ package edu.greenblitz.robotName.subsystems.Arm.Elbow;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.RobotConstants;
+import edu.greenblitz.robotName.subsystems.Arm.Pivot.Pivot;
+import edu.greenblitz.robotName.subsystems.Arm.Pivot.PivotConstants;
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import org.littletonrobotics.junction.Logger;
@@ -13,6 +16,7 @@ import static edu.greenblitz.robotName.subsystems.Arm.Elbow.ElbowConstants.Simul
 public class SimulationElbow implements IElbow {
     SingleJointedArmSim elbowSimulation;
     private double appliedVoltage;
+    private PIDController controller = ElbowConstants.Simulation.SIM_PID.getPIDController();
 
     public SimulationElbow() {
         elbowSimulation = new SingleJointedArmSim(
@@ -48,7 +52,8 @@ public class SimulationElbow implements IElbow {
 
     @Override
     public void moveToAngle(double goalAngle) {
-        Logger.getInstance().recordOutput("Arm/Elbow", "tried setting the goal angle to " + goalAngle);
+        controller.setSetpoint(goalAngle);
+        setVoltage(controller.calculate(elbowSimulation.getAngleRads()));
     }
 
     @Override

@@ -16,10 +16,9 @@ import edu.wpi.first.wpilibj.util.Color8Bit;
 import org.littletonrobotics.junction.Logger;
 
 public class ArmSimulation extends GBSubsystem {
-    //TODO run move by joystick then rum move by joystick on each motor and look then do auto command and then pid
     //TODO do the limits calculations, check calculations here
 
-    static  Mechanism2d ARM_MECHANISM;
+    static Mechanism2d ARM_MECHANISM;
     MechanismRoot2d root;
 
     private MechanismLigament2d m_elbow;
@@ -39,11 +38,13 @@ public class ArmSimulation extends GBSubsystem {
 
     @Override
     public void periodic() {
-//        m_elbow.setAngle(Units.radiansToDegrees(Elbow.getInstance().getAngleInRadians()));
-//        m_pivot.setAngle(Units.radiansToDegrees(Pivot.getInstance().getAngleInRadians()));
-//
-//        Logger.getInstance().recordOutput("Arm/SimPose3D", getArmPosition(Pivot.getInstance().getAngleInRadians(), Elbow.getInstance().getAngleInRadians()));
-//        Logger.getInstance().recordOutput("Arm/TargetPose3D", getArmPosition(Pivot.getInstance().getGoalAngleRadians(), Elbow.getInstance().getGoalAngleRadians()));
+        double pivotAngle = Pivot.getInstance().getAngleInRadians();
+        double elbowAngle = Elbow.getInstance().getAngleInRadians();
+        m_elbow.setAngle(Units.radiansToDegrees(elbowAngle));
+        m_pivot.setAngle(Units.radiansToDegrees(pivotAngle));
+
+        Logger.getInstance().recordOutput("Arm/SimPose3D", getArmPosition(pivotAngle, elbowAngle));
+        Logger.getInstance().recordOutput("Arm/TargetPose3D", getArmPosition(pivotAngle,elbowAngle));
     }
     public static Pose3d getArmPosition(double pivotAngle, double elbowAngle) {
         double cons = Math.PI;

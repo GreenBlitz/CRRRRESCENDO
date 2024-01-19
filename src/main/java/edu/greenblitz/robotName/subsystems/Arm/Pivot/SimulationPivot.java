@@ -15,7 +15,7 @@ public class SimulationPivot implements IPivot {
     SingleJointedArmSim pivotSimulation;
     private double appliedVoltage;
 
-    private PIDController controller = SIM_PID;
+    private PIDController controller = SIM_PID.getPIDController();
 
     public SimulationPivot() {
         pivotSimulation = new SingleJointedArmSim(

@@ -32,6 +32,7 @@ public class Elbow extends GBSubsystem {
 
     @Override
     public void periodic() {
+        super.periodic();
         if (isAtAngle(goalAngle))
             standInPlace();
         elbow.updateInputs(elbowInputs);
@@ -57,6 +58,7 @@ public class Elbow extends GBSubsystem {
         goalAngle = position;
     }
     public void moveToAngle(double targetPos){
+        goalAngle = targetPos;
         elbow.moveToAngle(targetPos);
     }
 

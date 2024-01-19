@@ -5,15 +5,17 @@ import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.greenblitz.robotName.utils.PIDObject;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+import edu.wpi.first.math.util.Units;
 
 public class PivotConstants {
     public static final double kS = 1;
     public static final double kV = 1;
     public static final double kG = 1;
     public static final double kA = 1;
-    public static final double TOLERANCE = 0.5;
+    public static final double TOLERANCE = Units.degreesToRadians(2);
     public static final double LENGTH_OF_SHOOTER = 0.2;
     public static final double SHOOTER_MASS_KG = 10;
     public static final double RELATIVE_POSITION_CONVERSION_FACTOR = 0.0328; //you know of calibrating pid but have you heard of calibrating the gear ratio
@@ -24,8 +26,8 @@ public class PivotConstants {
     public static final int MOTOR_ID = 1;
 
     public static class Simulation {
-        public static final double STARTING_ANGLE = 90;//in radians
-        public static final PIDController SIM_PID = new PIDController(1,0,0);
+        public static final double STARTING_ANGLE = 1;//in radians
+        public static final PIDObject SIM_PID = new PIDObject().withKp(0.8).withKd(0.3).withMaxPower(1);
         public static final int NUMBER_OF_MOTORS = 1;
         public static final double GEAR_RATIO = 1 / RELATIVE_POSITION_CONVERSION_FACTOR;
     }

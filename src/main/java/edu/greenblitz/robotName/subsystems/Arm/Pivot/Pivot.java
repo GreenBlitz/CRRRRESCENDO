@@ -63,7 +63,7 @@ public class Pivot extends GBSubsystem {
 
     public void moveToAngle(double goalAngle) {
         this.goalAngle = goalAngle;
-        pivot.moveToAngle(Units.radiansToRotations(goalAngle));
+        pivot.moveToAngle(goalAngle);
     }
 
     public void setPower(double power) {
