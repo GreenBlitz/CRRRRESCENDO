@@ -21,7 +21,7 @@ public class ReplayElbow implements IElbow {
     }
 
     @Override
-    public void resetPosition(double position) {
+    public void resetAngle(double position) {
 
     }
 

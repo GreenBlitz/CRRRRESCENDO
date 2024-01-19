@@ -41,7 +41,6 @@ public class Robot extends LoggedRobot {
         Pivot.init();
         Elbow.init();
         ArmSimulation.init();
-//        Try.init();
         OI.getInstance();
     }
     @Override

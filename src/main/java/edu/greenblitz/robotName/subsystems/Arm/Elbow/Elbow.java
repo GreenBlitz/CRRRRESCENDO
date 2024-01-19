@@ -39,8 +39,13 @@ public class Elbow extends GBSubsystem {
     @Override
     public void periodic() {
         super.periodic();
-        if (isAtAngle(goalAngle))
+        if (isAtAngle(goalAngle)) {
             standInPlace();
+        }
+        else {
+            moveToAngle();
+
+        }
         elbow.updateInputs(elbowInputs);
         Logger.processInputs("Elbow", elbowInputs);
     }
@@ -65,16 +70,17 @@ public class Elbow extends GBSubsystem {
 
 
 
-    public void resetLength(double position) {
-        elbow.resetPosition(position);
+    public void resetAngle(double position) {
+        elbow.resetAngle(position);
         goalAngle = position;
     }
-    public void moveToAngle(double targetPos){
-        goalAngle = targetPos;
-        elbow.moveToAngle(targetPos);
+
+    private void moveToAngle(){
+        System.out.println(goalAngle);
+        elbow.moveToAngle(goalAngle);
     }
 
-    public void standInPlace() {
+    private void standInPlace() {
         elbow.setPower(getStaticFF());
     }
 
@@ -107,5 +113,11 @@ public class Elbow extends GBSubsystem {
     public boolean isAtAngle(double targetHeight) {
         return Math.abs(targetHeight - getAngleInRadians()) <= ElbowConstants.TOLERANCE;
     }
+
+    public boolean isAtGoalAngle() {
+        return isAtAngle(goalAngle);
+    }
+
+
 
 }

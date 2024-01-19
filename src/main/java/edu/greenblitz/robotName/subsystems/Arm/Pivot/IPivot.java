@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName.subsystems.Arm.Pivot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import com.revrobotics.CANSparkMax;
 
 public interface IPivot {
 
@@ -11,7 +10,7 @@ public interface IPivot {
 
     void setIdleMode(NeutralModeValue idleMode);
 
-    void resetPosition(double position);
+    void resetAngle(double position);
 
     void moveToAngle(double goalAngle);
 

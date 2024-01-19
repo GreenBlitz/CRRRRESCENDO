@@ -41,7 +41,7 @@ public class FalconPivot implements IPivot{
     }
 
     @Override
-    public void resetPosition(double position) {
+    public void resetAngle(double position) {
         motor.setPosition(position);
     }
 

@@ -55,7 +55,7 @@ public class SimulationPivot implements IPivot {
     }
 
     @Override
-    public void resetPosition(double position) {
+    public void resetAngle(double position) {
         Logger.recordOutput("Arm/Pivot", "tried to reset the position to " + position);
     }
 

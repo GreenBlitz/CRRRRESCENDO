@@ -1,6 +1,5 @@
 package edu.greenblitz.robotName.subsystems.Arm.Elbow;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 public interface IElbow {
@@ -11,7 +10,7 @@ public interface IElbow {
 
     void setIdleMode(NeutralModeValue idleMode);
 
-    void resetPosition(double position);
+    void resetAngle(double position);
 
     void moveToAngle(double goalAngle);
 

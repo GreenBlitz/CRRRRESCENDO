@@ -16,23 +16,26 @@ import edu.wpi.first.wpilibj.util.Color8Bit;
 import org.littletonrobotics.junction.Logger;
 
 public class ArmSimulation extends GBSubsystem {
-    //TODO do the limits calculations, check calculations here
 
     static Mechanism2d ARM_MECHANISM;
+
     MechanismRoot2d root;
 
-    private MechanismLigament2d m_elbow;
-    private MechanismLigament2d m_pivot;
+    private final MechanismLigament2d elbow;
+
+    private final MechanismLigament2d pivot;
+
     private static ArmSimulation instance;
 
     public static void init() {
         instance = new ArmSimulation();
     }
+
     public ArmSimulation(){
         ARM_MECHANISM = new Mechanism2d(2,2);
         root = ARM_MECHANISM.getRoot("arm_root", 1, 1);
-        m_elbow = root.append(new MechanismLigament2d("elbow", ElbowConstants.ARM_LENGTH, 45));
-        m_pivot = m_elbow.append(new MechanismLigament2d("pivot", PivotConstants.LENGTH_OF_SHOOTER, 300,6, new Color8Bit(Color.kPurple)));
+        elbow = root.append(new MechanismLigament2d("elbow", ElbowConstants.ARM_LENGTH, 45));
+        pivot = elbow.append(new MechanismLigament2d("pivot", PivotConstants.LENGTH_OF_SHOOTER, 300,6, new Color8Bit(Color.kPurple)));
         SmartDashboard.putData("Mech2D", ARM_MECHANISM);
     }
 
@@ -40,17 +43,17 @@ public class ArmSimulation extends GBSubsystem {
     public void periodic() {
         double pivotAngle = Pivot.getInstance().getAngleInRadians();
         double elbowAngle = Elbow.getInstance().getAngleInRadians();
-        m_elbow.setAngle(Units.radiansToDegrees(elbowAngle));
-        m_pivot.setAngle(Units.radiansToDegrees(pivotAngle));
+        elbow.setAngle(Units.radiansToDegrees(elbowAngle));
+        pivot.setAngle(Units.radiansToDegrees(pivotAngle));
 
-        Logger.getInstance().recordOutput("Arm/SimPose3D", getArmPosition(pivotAngle, elbowAngle));
-        Logger.getInstance().recordOutput("Arm/TargetPose3D", getArmPosition(pivotAngle,elbowAngle));
+        Logger.recordOutput("Arm/SimPose3D", getArmPosition(pivotAngle, elbowAngle));
+        Logger.recordOutput("Arm/TargetPose3D", getArmPosition(pivotAngle,elbowAngle));
     }
     public static Pose3d getArmPosition(double pivotAngle, double elbowAngle) {
-        double cons = Math.PI;
-        double yCosBeta = PivotConstants.LENGTH_OF_SHOOTER * Math.cos(pivotAngle + elbowAngle - cons);
-        double ySinBeta = PivotConstants.LENGTH_OF_SHOOTER * Math.sin(pivotAngle + elbowAngle - cons);
-        if (cons-pivotAngle>cons-elbowAngle){
+        double PI = Math.PI;
+        double yCosBeta = PivotConstants.LENGTH_OF_SHOOTER * Math.cos(pivotAngle + elbowAngle - PI);
+        double ySinBeta = PivotConstants.LENGTH_OF_SHOOTER * Math.sin(pivotAngle + elbowAngle - PI);
+        if (PI-pivotAngle>PI-elbowAngle){
             return new Pose3d(ElbowConstants.ARM_LENGTH * Math.cos(elbowAngle) + yCosBeta,
                     0,
                     ElbowConstants.ARM_LENGTH * Math.sin(elbowAngle) + ySinBeta,

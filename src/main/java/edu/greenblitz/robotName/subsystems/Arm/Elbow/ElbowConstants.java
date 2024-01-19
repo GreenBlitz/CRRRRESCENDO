@@ -15,9 +15,9 @@ public class ElbowConstants {
 
 	public static final double ARM_MASS_KG = 1;
 
-	public static final double BACKWARD_ANGLE_LIMIT = Units.degreesToRadians(135);
+	public static final double BACKWARD_ANGLE_LIMIT = Units.degreesToRadians(-60);
 
-	public static final double FORWARD_ANGLE_LIMIT = Units.degreesToRadians(300);
+	public static final double FORWARD_ANGLE_LIMIT = Units.degreesToRadians(250);
 
 	public static final double RELATIVE_POSITION_CONVERSION_FACTOR = 0.0328;
 

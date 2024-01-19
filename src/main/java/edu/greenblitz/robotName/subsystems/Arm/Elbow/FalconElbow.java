@@ -38,7 +38,7 @@ public class FalconElbow implements IElbow {
     }
 
     @Override
-    public void resetPosition(double position) {
+    public void resetAngle(double position) {
         motor.setPosition(position);
     }
 

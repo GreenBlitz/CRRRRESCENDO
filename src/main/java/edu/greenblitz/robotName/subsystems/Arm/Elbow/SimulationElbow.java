@@ -55,7 +55,7 @@ public class SimulationElbow implements IElbow {
     }
 
     @Override
-    public void resetPosition(double position) {
+    public void resetAngle(double position) {
         Logger.recordOutput("Arm/Elbow", "tried to set the position to " + position);
     }
 

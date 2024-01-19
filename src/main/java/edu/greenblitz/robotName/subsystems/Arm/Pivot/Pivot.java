@@ -3,7 +3,6 @@ package edu.greenblitz.robotName.subsystems.Arm.Pivot;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.utils.GBSubsystem;
-import edu.wpi.first.math.util.Units;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.subsystems.Arm.Pivot.PivotConstants.FalconConfigs.*;
@@ -43,6 +42,8 @@ public class Pivot extends GBSubsystem {
         super.periodic();
         if (isAtAngle(goalAngle))
             standInPlace();
+        else
+            moveToAngle();
         pivot.updateInputs(pivotInputs);
         Logger.processInputs("Pivot", pivotInputs);
     }
@@ -67,17 +68,16 @@ public class Pivot extends GBSubsystem {
 
 
 
-    public void resetPosition(double position) {
-        pivot.resetPosition(position);
+    public void resetAngle(double position) {
+        pivot.resetAngle(position);
         goalAngle = position;
     }
 
-    public void moveToAngle(double targetAngle) {
-        this.goalAngle = targetAngle;
+    private void moveToAngle() {
         pivot.moveToAngle(goalAngle);
     }
 
-    public void standInPlace() {
+    private void standInPlace() {
         pivot.setPower(getStaticFF());
     }
 
@@ -109,6 +109,10 @@ public class Pivot extends GBSubsystem {
 
     public boolean isAtAngle(double angle) {
         return Math.abs(angle-getAngleInRadians()) <= TOLERANCE;
+    }
+
+    public boolean isAtGoalAngle() {
+        return isAtAngle(goalAngle);
     }
 
 }

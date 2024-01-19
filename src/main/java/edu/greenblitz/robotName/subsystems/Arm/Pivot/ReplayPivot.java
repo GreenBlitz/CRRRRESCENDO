@@ -21,7 +21,7 @@ public class ReplayPivot implements IPivot{
     }
 
     @Override
-    public void resetPosition(double position) {
+    public void resetAngle(double position) {
 
     }
 
