@@ -1,20 +1,17 @@
-package edu.greenblitz.robotName.subsystems.Arm.Pivot;
+package edu.greenblitz.robotName.subsystems.Arm.ElbowUtils;
 
 import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import com.revrobotics.CANSparkMax;
-import edu.greenblitz.robotName.utils.motors.GBSparkMax;
-import edu.wpi.first.math.util.Units;
 
-import static edu.greenblitz.robotName.subsystems.Arm.Pivot.PivotConstants.*;
-import static edu.greenblitz.robotName.subsystems.Arm.Pivot.PivotConstants.FalconConfigs.*;
+import static edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowConstants.Falcon.*;
+import static edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowConstants.*;
 
-public class FalconPivot implements IPivot{
+public class FalconElbow implements IElbow {
 
     private TalonFX motor;
 
-    public FalconPivot() {
+    public FalconElbow() {
         motor = new TalonFX(MOTOR_ID);
         motor.getConfigurator().apply(MOTION_MAGIC_CONFIGS);
         motor.getConfigurator().apply(CURRENT_LIMITS_CONFIGS);
@@ -24,7 +21,6 @@ public class FalconPivot implements IPivot{
         motor.optimizeBusUtilization();
     }
 
-
     @Override
     public void setPower(double power) {
         motor.set(power);
@@ -33,6 +29,7 @@ public class FalconPivot implements IPivot{
     @Override
     public void setVoltage(double voltage) {
         motor.setVoltage(voltage);
+
     }
 
     @Override
@@ -48,7 +45,7 @@ public class FalconPivot implements IPivot{
     @Override
     public void moveToAngle(double goalAngle) {
         motor.setControl(new MotionMagicDutyCycle(
-                goalAngle/RELATIVE_POSITION_CONVERSION_FACTOR,
+                goalAngle / RELATIVE_POSITION_CONVERSION_FACTOR,
                 true,
                 SIMPLE_MOTOR_FF.calculate(0),
                 0,
@@ -59,7 +56,7 @@ public class FalconPivot implements IPivot{
     }
 
     @Override
-    public void updateInputs(PivotInputsAutoLogged inputs) {
+    public void updateInputs(ElbowInputsAutoLogged inputs) {
         inputs.outputCurrent = motor.getSupplyCurrent().getValue();
         inputs.appliedOutput = motor.getMotorVoltage().getValue();
         inputs.position = motor.getPosition().getValue() * RELATIVE_POSITION_CONVERSION_FACTOR;

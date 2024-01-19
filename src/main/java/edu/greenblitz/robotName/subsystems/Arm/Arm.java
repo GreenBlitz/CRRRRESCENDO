@@ -1,11 +1,9 @@
 package edu.greenblitz.robotName.subsystems.Arm;
 
-import edu.greenblitz.robotName.subsystems.Arm.Elbow.Elbow;
-import edu.greenblitz.robotName.subsystems.Arm.Pivot.Pivot;
 import edu.greenblitz.robotName.utils.GBMath;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 
-import static edu.greenblitz.robotName.subsystems.Arm.Elbow.ElbowConstants.*;
+import static edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowConstants.*;
 
 public class Arm extends GBSubsystem {
 

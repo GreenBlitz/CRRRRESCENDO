@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Arm.Pivot;
+package edu.greenblitz.robotName.subsystems.Arm.PivotUtils;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.RobotConstants;
@@ -9,8 +9,6 @@ import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.BATTERY_VOLTAGE;
-import static edu.greenblitz.robotName.subsystems.Arm.Pivot.PivotConstants.*;
-import static edu.greenblitz.robotName.subsystems.Arm.Pivot.PivotConstants.Simulation.*;
 
 public class SimulationPivot implements IPivot {
 
@@ -18,22 +16,22 @@ public class SimulationPivot implements IPivot {
 
     private double appliedVoltage;
 
-    private PIDController controller = SIM_PID.getPIDController();
+    private PIDController controller = PivotConstants.Simulation.SIM_PID.getPIDController();
 
 
     public SimulationPivot() {
         pivotSimulation = new SingleJointedArmSim(
-                DCMotor.getFalcon500(NUMBER_OF_MOTORS),
+                DCMotor.getFalcon500(PivotConstants.Simulation.NUMBER_OF_MOTORS),
                 PivotConstants.Simulation.GEAR_RATIO,
                 SingleJointedArmSim.estimateMOI(
-                        LENGTH_OF_SHOOTER,
-                        SHOOTER_MASS_KG
+                        PivotConstants.LENGTH_OF_SHOOTER,
+                        PivotConstants.SHOOTER_MASS_KG
                 ),
-                LENGTH_OF_SHOOTER,
-                BACKWARD_ANGLE_LIMIT,
-                FORWARD_ANGLE_LIMIT,
+                PivotConstants.LENGTH_OF_SHOOTER,
+                PivotConstants.BACKWARD_ANGLE_LIMIT,
+                PivotConstants.FORWARD_ANGLE_LIMIT,
                 false,
-                STARTING_ANGLE
+                PivotConstants.STARTING_ANGLE
         );
     }
 
@@ -62,7 +60,7 @@ public class SimulationPivot implements IPivot {
     @Override
     public void moveToAngle(double goalAngle) {
         controller.setSetpoint(goalAngle);
-        setVoltage(controller.calculate(Pivot.getInstance().getAngleInRadians()));
+        setVoltage(controller.calculate(pivotSimulation.getAngleRads()));
     }
 
     @Override

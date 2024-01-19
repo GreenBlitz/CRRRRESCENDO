@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Arm.Elbow;
+package edu.greenblitz.robotName.subsystems.Arm.ElbowUtils;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.RobotConstants;
@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.*;
-import static edu.greenblitz.robotName.subsystems.Arm.Elbow.ElbowConstants.*;
-import static edu.greenblitz.robotName.subsystems.Arm.Elbow.ElbowConstants.Simulation.*;
+import static edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowConstants.*;
+import static edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowConstants.Simulation.*;
 
 public class SimulationElbow implements IElbow {
 

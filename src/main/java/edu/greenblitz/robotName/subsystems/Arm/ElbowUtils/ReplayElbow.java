@@ -1,9 +1,8 @@
-package edu.greenblitz.robotName.subsystems.Arm.Pivot;
+package edu.greenblitz.robotName.subsystems.Arm.ElbowUtils;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import com.revrobotics.CANSparkMax;
 
-public class ReplayPivot implements IPivot{
+public class ReplayElbow implements IElbow {
 
     @Override
     public void setPower(double power) {
@@ -31,7 +30,7 @@ public class ReplayPivot implements IPivot{
     }
 
     @Override
-    public void updateInputs(PivotInputsAutoLogged inputs) {
+    public void updateInputs(ElbowInputsAutoLogged inputs) {
 
     }
 }

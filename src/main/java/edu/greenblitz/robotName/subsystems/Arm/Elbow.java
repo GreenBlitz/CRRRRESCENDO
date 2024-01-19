@@ -1,11 +1,15 @@
-package edu.greenblitz.robotName.subsystems.Arm.Elbow;
+package edu.greenblitz.robotName.subsystems.Arm;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowConstants;
+import edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowFactory;
+import edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.IElbow;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.Arm.Elbow.ElbowConstants.Falcon.SIMPLE_MOTOR_FF;
+import static edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowConstants.Falcon.SIMPLE_MOTOR_FF;
 
 public class Elbow extends GBSubsystem {
 
@@ -19,12 +23,12 @@ public class Elbow extends GBSubsystem {
 
 
 
-    public static void init(){
+    protected static void init(){
         if (instance == null)
             instance = new Elbow();
     }
 
-    public static Elbow getInstance() {
+    protected static Elbow getInstance() {
         init();
         return instance;
     }
@@ -85,11 +89,11 @@ public class Elbow extends GBSubsystem {
 
 
 
-    public static double getStaticFF(){
+    public double getStaticFF(){
         return SIMPLE_MOTOR_FF.calculate(0);
     }
 
-    public static double getDynamicFF(double velocity){
+    public double getDynamicFF(double velocity){
         return SIMPLE_MOTOR_FF.calculate(velocity);
     }
 

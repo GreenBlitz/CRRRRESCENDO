@@ -1,12 +1,15 @@
-package edu.greenblitz.robotName.subsystems.Arm.Pivot;
+package edu.greenblitz.robotName.subsystems.Arm;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.greenblitz.robotName.subsystems.Arm.PivotUtils.IPivot;
+import edu.greenblitz.robotName.subsystems.Arm.PivotUtils.PivotFactory;
+import edu.greenblitz.robotName.subsystems.Arm.PivotUtils.PivotInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.Arm.Pivot.PivotConstants.FalconConfigs.*;
-import static edu.greenblitz.robotName.subsystems.Arm.Pivot.PivotConstants.TOLERANCE;
+import static edu.greenblitz.robotName.subsystems.Arm.PivotUtils.PivotConstants.FalconConfigs.*;
+import static edu.greenblitz.robotName.subsystems.Arm.PivotUtils.PivotConstants.TOLERANCE;
 
 public class Pivot extends GBSubsystem {
 
@@ -20,12 +23,12 @@ public class Pivot extends GBSubsystem {
 
 
 
-    public static void init() {
+    protected static void init() {
         if (instance == null)
             instance = new Pivot();
     }
 
-    public static Pivot getInstance() {
+    protected static Pivot getInstance() {
         init();
         return instance;
     }
@@ -83,11 +86,11 @@ public class Pivot extends GBSubsystem {
 
 
 
-    public static double getStaticFF() {
+    public double getStaticFF() {
         return SIMPLE_MOTOR_FF.calculate(0);
     }
 
-    public static double getDynamicFF(double velocity) {
+    public double getDynamicFF(double velocity) {
         return SIMPLE_MOTOR_FF.calculate(velocity);
     }
 

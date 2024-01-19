@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Arm.Pivot;
+package edu.greenblitz.robotName.subsystems.Arm.PivotUtils;
 
 import edu.greenblitz.robotName.RobotConstants;
 
