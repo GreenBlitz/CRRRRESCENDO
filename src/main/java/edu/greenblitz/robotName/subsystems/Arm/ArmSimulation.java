@@ -25,10 +25,8 @@ public class ArmSimulation extends GBSubsystem {
 
     private final MechanismLigament2d pivot;
 
-    private static ArmSimulation instance;
-
     public static void init() {
-        instance = new ArmSimulation();
+        new ArmSimulation();
     }
 
     public ArmSimulation(){

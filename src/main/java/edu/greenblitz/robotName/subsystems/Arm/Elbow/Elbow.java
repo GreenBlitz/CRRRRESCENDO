@@ -76,7 +76,6 @@ public class Elbow extends GBSubsystem {
     }
 
     private void moveToAngle(){
-        System.out.println(goalAngle);
         elbow.moveToAngle(goalAngle);
     }
 

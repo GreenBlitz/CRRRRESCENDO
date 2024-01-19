@@ -4,12 +4,13 @@ import edu.wpi.first.math.geometry.Rotation2d;
 
 public class moveArmToPositionByAngles extends ArmCommand {
 
-    private Rotation2d elbowAngle;
-    private Rotation2d pivotAngle;
+    private double elbowAngle;
+    private double pivotAngle;
+
     public moveArmToPositionByAngles(double elbowGoalAngle, double pivotGoalAngle) {
         super();
-        elbowAngle = new Rotation2d(elbowGoalAngle);
-        pivotAngle = new Rotation2d(pivotGoalAngle);
+        elbowAngle = elbowGoalAngle;
+        pivotAngle = pivotGoalAngle;
     }
 
     @Override
