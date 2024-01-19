@@ -1,8 +1,12 @@
 package edu.greenblitz.robotName;
 
 
+import com.revrobotics.CANSparkMaxLowLevel;
+import edu.greenblitz.robotName.commands.shooter.ShootByPower;
 import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
+import edu.greenblitz.robotName.utils.GBCommand;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public class OI {
@@ -32,7 +36,35 @@ public class OI {
         return secondJoystick;
     }
 
+    static GBSparkMax motor = new GBSparkMax(1, CANSparkMaxLowLevel.MotorType.kBrushless);
     public void initButtons(){
-        // put buttons here
+        mainJoystick.A.whileTrue(new ShootByPower(0.9));
+        mainJoystick.X.whileTrue(new ShootByPower(0.5));
+        mainJoystick.B.whileTrue(
+                new GBCommand() {
+                    @Override
+                    public void execute() {
+                        motor.set(0.2);
+                    }
+
+                    @Override
+                    public void end(boolean interrupted) {
+                        motor.set(0);
+                    }
+                }
+        );
+        mainJoystick.Y.whileTrue(
+                new GBCommand() {
+                    @Override
+                    public void execute() {
+                        motor.set(-0.2);
+                    }
+
+                    @Override
+                    public void end(boolean interrupted) {
+                        motor.set(0);
+                    }
+                }
+        );
     }
 }

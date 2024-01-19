@@ -42,6 +42,12 @@ public class Shooter extends GBSubsystem {
     public double getVelocity() {
         return shooterInputs.velocity;
     }
+    public double getCurrent (){
+        return shooterInputs.outputCurrent;
+    }
+    public double getVoltage(){
+        return shooterInputs.appliedOutput;
+    }
 
     @Override
     public void periodic() {
