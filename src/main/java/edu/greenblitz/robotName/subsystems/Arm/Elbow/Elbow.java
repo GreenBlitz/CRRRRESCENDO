@@ -8,24 +8,30 @@ import org.littletonrobotics.junction.Logger;
 import static edu.greenblitz.robotName.subsystems.Arm.Elbow.ElbowConstants.Falcon.SIMPLE_MOTOR_FF;
 
 public class Elbow extends GBSubsystem {
+
     private static Elbow instance;
+
     private IElbow elbow;
+
     private final ElbowInputsAutoLogged elbowInputs;
+
     private double goalAngle;
 
-    public static Elbow getInstance() {
-        init();
-        return instance;
-    }
+
 
     public static void init(){
         if (instance == null)
             instance = new Elbow();
     }
 
+    public static Elbow getInstance() {
+        init();
+        return instance;
+    }
+
     private Elbow() {
-        elbowInputs = new ElbowInputsAutoLogged();
         elbow = ElbowFactory.create();
+        elbowInputs = new ElbowInputsAutoLogged();
         elbow.updateInputs(elbowInputs);
         goalAngle = getAngleInRadians();
     }
@@ -44,11 +50,17 @@ public class Elbow extends GBSubsystem {
     public void setPower(double power) {
         elbow.setPower(power);
     }
+
     public void setMotorVoltage(double voltage) {
         elbow.setVoltage(voltage);
     }
+
     public void setIdleMode(NeutralModeValue idleMode) {
         elbow.setIdleMode(idleMode);
+    }
+
+    public void setGoalAngle(double angle) {
+        goalAngle = angle;
     }
 
 
@@ -65,30 +77,33 @@ public class Elbow extends GBSubsystem {
     public void standInPlace() {
         elbow.setPower(getStaticFF());
     }
-    public void stop() {
-        elbow.setPower(0);
-    }
 
 
 
     public static double getStaticFF(){
         return SIMPLE_MOTOR_FF.calculate(0);
     }
+
     public static double getDynamicFF(double velocity){
         return SIMPLE_MOTOR_FF.calculate(velocity);
     }
+
     public double getVoltage() {
         return elbowInputs.appliedOutput * Battery.getInstance().getCurrentVoltage();
     }
-    public double getAngleInRadians() {
-        return elbowInputs.position;
-    }
+
     public double getVelocity() {
         return elbowInputs.velocity;
     }
+
+    public double getAngleInRadians() {
+        return elbowInputs.position;
+    }
+
     public double getGoalAngleRadians() {
         return goalAngle;
     }
+
     public boolean isAtAngle(double targetHeight) {
         return Math.abs(targetHeight - getAngleInRadians()) <= ElbowConstants.TOLERANCE;
     }

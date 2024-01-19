@@ -10,11 +10,16 @@ import static edu.greenblitz.robotName.subsystems.Arm.Pivot.PivotConstants.Falco
 import static edu.greenblitz.robotName.subsystems.Arm.Pivot.PivotConstants.TOLERANCE;
 
 public class Pivot extends GBSubsystem {
+
     private static Pivot instance;
+
     private PivotInputsAutoLogged pivotInputs;
+
     private IPivot pivot;
+
     private double goalAngle;
-    public double startingValueOfEncoder;
+
+
 
     public static void init() {
         if (instance == null)
@@ -30,8 +35,7 @@ public class Pivot extends GBSubsystem {
         pivot = PivotFactory.create();
         pivotInputs = new PivotInputsAutoLogged();
         pivot.updateInputs(pivotInputs);
-        goalAngle = 0;
-        startingValueOfEncoder = pivotInputs.absoluteEncoderPosition;
+        goalAngle = getAngleInRadians();
     }
 
     @Override
@@ -42,29 +46,8 @@ public class Pivot extends GBSubsystem {
         pivot.updateInputs(pivotInputs);
         Logger.processInputs("Pivot", pivotInputs);
     }
-    public boolean isAtAngle(double angle) {
-        return Math.abs(angle-getAngleInRadians()) <= TOLERANCE;
-    }
-    public void standInPlace() {
-        pivot.setPower(getStaticFF());
-    }
 
-    public double getAngleInRadians() {
-        return pivotInputs.position;
-    }
 
-    public static double getStaticFF() {
-        return SIMPLE_MOTOR_FF.calculate(0);
-    }
-
-    public static double getDynamicFF(double velocity) {
-        return SIMPLE_MOTOR_FF.calculate(velocity);
-    }
-
-    public void moveToAngle(double goalAngle) {
-        this.goalAngle = goalAngle;
-        pivot.moveToAngle(goalAngle);
-    }
 
     public void setPower(double power) {
         pivot.setPower(power);
@@ -77,9 +60,37 @@ public class Pivot extends GBSubsystem {
     public void setIdleMode(NeutralModeValue idleMode) {
         pivot.setIdleMode(idleMode);
     }
-    public double getGoalAngleRadians(){
-        return goalAngle;
+
+    public void setGoalAngle(double angle) {
+        goalAngle = angle;
     }
+
+
+
+    public void resetPosition(double position) {
+        pivot.resetPosition(position);
+        goalAngle = position;
+    }
+
+    public void moveToAngle(double targetAngle) {
+        this.goalAngle = targetAngle;
+        pivot.moveToAngle(goalAngle);
+    }
+
+    public void standInPlace() {
+        pivot.setPower(getStaticFF());
+    }
+
+
+
+    public static double getStaticFF() {
+        return SIMPLE_MOTOR_FF.calculate(0);
+    }
+
+    public static double getDynamicFF(double velocity) {
+        return SIMPLE_MOTOR_FF.calculate(velocity);
+    }
+
     public double getVoltage() {
         return pivotInputs.appliedOutput * Battery.getInstance().getCurrentVoltage();
     }
@@ -88,14 +99,16 @@ public class Pivot extends GBSubsystem {
         return pivotInputs.velocity;
     }
 
-    public void resetPosition(double position) {
-        pivot.resetPosition(position);
-        goalAngle = position;
+    public double getAngleInRadians() {
+        return pivotInputs.position;
     }
 
-    public void setGoalAngle(double angle) {
-        goalAngle = angle;
+    public double getGoalAngleRadians(){
+        return goalAngle;
     }
 
+    public boolean isAtAngle(double angle) {
+        return Math.abs(angle-getAngleInRadians()) <= TOLERANCE;
+    }
 
 }

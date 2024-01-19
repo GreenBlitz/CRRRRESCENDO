@@ -13,6 +13,7 @@ import static edu.greenblitz.robotName.subsystems.Arm.Pivot.PivotConstants.Falco
 public class FalconPivot implements IPivot{
 
     private TalonFX motor;
+
     public FalconPivot() {
         motor = new TalonFX(MOTOR_ID);
         motor.getConfigurator().apply(MOTION_MAGIC_CONFIGS);
@@ -23,14 +24,25 @@ public class FalconPivot implements IPivot{
         motor.optimizeBusUtilization();
     }
 
-    @Override
-    public void resetPosition(double position) {
-        motor.setPosition(position);
-    }
 
     @Override
     public void setPower(double power) {
         motor.set(power);
+    }
+
+    @Override
+    public void setVoltage(double voltage) {
+        motor.setVoltage(voltage);
+    }
+
+    @Override
+    public void setIdleMode(NeutralModeValue idleMode) {
+        motor.setNeutralMode(idleMode);
+    }
+
+    @Override
+    public void resetPosition(double position) {
+        motor.setPosition(position);
     }
 
     @Override
@@ -45,17 +57,6 @@ public class FalconPivot implements IPivot{
                 true
         ));
     }
-
-    @Override
-    public void setVoltage(double voltage) {
-        motor.setVoltage(voltage);
-    }
-
-    @Override
-    public void setIdleMode(NeutralModeValue idleMode) {
-        motor.setNeutralMode(idleMode);
-    }
-
 
     @Override
     public void updateInputs(PivotInputsAutoLogged inputs) {

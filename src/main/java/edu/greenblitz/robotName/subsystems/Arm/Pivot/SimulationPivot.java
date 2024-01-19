@@ -8,26 +8,30 @@ import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.Arm.Pivot.PivotConstants.Simulation.SIM_PID;
-import static edu.greenblitz.robotName.subsystems.Arm.Pivot.PivotConstants.Simulation.STARTING_ANGLE;
+import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.BATTERY_VOLTAGE;
+import static edu.greenblitz.robotName.subsystems.Arm.Pivot.PivotConstants.*;
+import static edu.greenblitz.robotName.subsystems.Arm.Pivot.PivotConstants.Simulation.*;
 
 public class SimulationPivot implements IPivot {
+
     SingleJointedArmSim pivotSimulation;
+
     private double appliedVoltage;
 
     private PIDController controller = SIM_PID.getPIDController();
 
+
     public SimulationPivot() {
         pivotSimulation = new SingleJointedArmSim(
-                DCMotor.getFalcon500(PivotConstants.Simulation.NUMBER_OF_MOTORS),
+                DCMotor.getFalcon500(NUMBER_OF_MOTORS),
                 PivotConstants.Simulation.GEAR_RATIO,
                 SingleJointedArmSim.estimateMOI(
-                        PivotConstants.LENGTH_OF_SHOOTER,
-                        PivotConstants.SHOOTER_MASS_KG
+                        LENGTH_OF_SHOOTER,
+                        SHOOTER_MASS_KG
                 ),
-                PivotConstants.LENGTH_OF_SHOOTER,
-                PivotConstants.BACKWARD_ANGLE_LIMIT,
-                PivotConstants.FORWARD_ANGLE_LIMIT,
+                LENGTH_OF_SHOOTER,
+                BACKWARD_ANGLE_LIMIT,
+                FORWARD_ANGLE_LIMIT,
                 false,
                 STARTING_ANGLE
         );
@@ -36,15 +40,8 @@ public class SimulationPivot implements IPivot {
 
     @Override
     public void setPower(double power) {
-        setVoltage(power * RobotConstants.SimulationConstants.BATTERY_VOLTAGE);
+        setVoltage(power * BATTERY_VOLTAGE);
     }
-
-    @Override
-    public void moveToAngle(double goalAngle) {
-        controller.setSetpoint(goalAngle);
-        setVoltage(controller.calculate(Pivot.getInstance().getAngleInRadians()));
-    }
-
 
     @Override
     public void setVoltage(double voltage) {
@@ -52,16 +49,20 @@ public class SimulationPivot implements IPivot {
         pivotSimulation.setInputVoltage(appliedVoltage);
     }
 
-
     @Override
     public void setIdleMode(NeutralModeValue idleMode) {
-        Logger.getInstance().recordOutput("Arm/Pivot", "tried setting the idleMode to " + idleMode.name());
+        Logger.recordOutput("Arm/Pivot", "tried setting the idleMode to " + idleMode.name());
     }
-
 
     @Override
     public void resetPosition(double position) {
-        Logger.getInstance().recordOutput("Arm/Pivot", "tried to reset the position to " + position);
+        Logger.recordOutput("Arm/Pivot", "tried to reset the position to " + position);
+    }
+
+    @Override
+    public void moveToAngle(double goalAngle) {
+        controller.setSetpoint(goalAngle);
+        setVoltage(controller.calculate(Pivot.getInstance().getAngleInRadians()));
     }
 
     @Override

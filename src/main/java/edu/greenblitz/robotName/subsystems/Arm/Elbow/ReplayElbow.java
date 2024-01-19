@@ -4,18 +4,9 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 public class ReplayElbow implements IElbow {
-    @Override
-    public void resetPosition(double position) {
-
-    }
 
     @Override
     public void setPower(double power) {
-
-    }
-
-    @Override
-    public void moveToAngle(double goalAngle) {
 
     }
 
@@ -25,12 +16,22 @@ public class ReplayElbow implements IElbow {
     }
 
     @Override
-    public void updateInputs(ElbowInputsAutoLogged inputs) {
+    public void setIdleMode(NeutralModeValue idleMode) {
 
     }
 
     @Override
-    public void setIdleMode(NeutralModeValue idleMode) {
+    public void resetPosition(double position) {
+
+    }
+
+    @Override
+    public void moveToAngle(double goalAngle) {
+
+    }
+
+    @Override
+    public void updateInputs(ElbowInputsAutoLogged inputs) {
 
     }
 }
