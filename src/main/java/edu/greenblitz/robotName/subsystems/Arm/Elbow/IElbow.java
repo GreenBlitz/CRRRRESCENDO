@@ -4,7 +4,6 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 public interface IElbow {
-
     void resetPosition(double position);
 
     void setPower(double power);

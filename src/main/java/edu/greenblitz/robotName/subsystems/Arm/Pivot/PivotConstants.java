@@ -18,7 +18,7 @@ public class PivotConstants {
     public static final double TOLERANCE = Units.degreesToRadians(2);
     public static final double LENGTH_OF_SHOOTER = 0.2;
     public static final double SHOOTER_MASS_KG = 10;
-    public static final double RELATIVE_POSITION_CONVERSION_FACTOR = 0.0328; //you know of calibrating pid but have you heard of calibrating the gear ratio
+    public static final double RELATIVE_POSITION_CONVERSION_FACTOR = 0.0328;
     public static final double RELATIVE_VELOCITY_CONVERSION_FACTOR = 0.0030332432;
     public static final double ABSOLUTE_POSITION_CONVERSION_FACTOR = 0.00302;
     public static final double BACKWARD_ANGLE_LIMIT = Double.MIN_VALUE;
