@@ -16,4 +16,10 @@ public class ElbowCommand extends GBCommand {
 	public boolean isFinished() {
 		return elbow.isAtGoalAngle();
 	}
+
+	@Override
+	public void end(boolean interrupted) {
+		if (interrupted)
+			elbow.setGoalAngle(elbow.getAngleInRadians());
+	}
 }

@@ -3,6 +3,7 @@ package edu.greenblitz.robotName.subsystems;
 import edu.greenblitz.robotName.subsystems.Elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.Elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.Pivot.Pivot;
+import edu.greenblitz.robotName.subsystems.Pivot.PivotConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
@@ -31,9 +32,9 @@ public class ArmsMechanism extends GBSubsystem {
 
     public ArmsMechanism(){
         ARMS_MECHANISM = new Mechanism2d(2,2);
-        rootPivot = ARMS_MECHANISM.getRoot("arm_root", 1.5, 1);
-        pivot = rootPivot.append(new MechanismLigament2d("pivot", 2, 230,6, new Color8Bit(Color.kPurple)));
-        rootElbow = ARMS_MECHANISM.getRoot("pivot_root", 0.5, 1.5);
+        rootPivot = ARMS_MECHANISM.getRoot("arm_root", 1.5, 0.5);
+        pivot = rootPivot.append(new MechanismLigament2d("pivot", PivotConstants.LENGTH_OF_SHOOTER, 230,6, new Color8Bit(Color.kPurple)));
+        rootElbow = ARMS_MECHANISM.getRoot("pivot_root", 1, 0.5);
         elbow = rootElbow.append(new MechanismLigament2d("elbow", ElbowConstants.ARM_LENGTH, 45));
         SmartDashboard.putData("Mech2D", ARMS_MECHANISM);
     }

@@ -1,15 +1,13 @@
 package edu.greenblitz.robotName.subsystems.Elbow;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.greenblitz.robotName.subsystems.Elbow.ElbowInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.Pivot.Pivot;
-import edu.greenblitz.robotName.utils.GBMath;
+import edu.greenblitz.robotName.subsystems.Pivot.PivotConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.Elbow.ElbowConstants.BACKWARD_ANGLE_LIMIT;
-import static edu.greenblitz.robotName.subsystems.Elbow.ElbowConstants.FORWARD_ANGLE_LIMIT;
+import static edu.greenblitz.robotName.subsystems.Elbow.ElbowConstants.*;
 import static edu.greenblitz.robotName.subsystems.Elbow.ElbowConstants.Falcon.SIMPLE_MOTOR_FF;
 
 public class Elbow extends GBSubsystem {
@@ -49,7 +47,6 @@ public class Elbow extends GBSubsystem {
         }
         else {
             moveToAngle();
-
         }
         elbow.updateInputs(elbowInputs);
         Logger.processInputs("Elbow", elbowInputs);
@@ -71,9 +68,9 @@ public class Elbow extends GBSubsystem {
 
     public void setGoalAngle(double angle) {
         goalAngle = angle;
+        if ((BRODER > goalAngle && BRODER < getAngleInRadians())  || (BRODER < goalAngle && BRODER > getAngleInRadians()))
+            Pivot.getInstance().setGoalAngle(PivotConstants.BRODER);
     }
-
-
 
     public void resetAngle(double position) {
         elbow.resetAngle(position);
@@ -81,6 +78,7 @@ public class Elbow extends GBSubsystem {
     }
 
     private void moveToAngle(){
+    if (Pivot.getInstance().isAtSafeAngle())
         elbow.moveToAngle(goalAngle);
     }
 
@@ -121,7 +119,9 @@ public class Elbow extends GBSubsystem {
     public boolean isAtGoalAngle() {
         return isAtAngle(goalAngle);
     }
-
+    public boolean isAtBroderAngle() {
+        return Math.abs(BRODER - getAngleInRadians()) <= BRODER_TOLERANCE;
+    }
 
 
 }

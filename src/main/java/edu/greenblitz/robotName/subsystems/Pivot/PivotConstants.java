@@ -5,15 +5,15 @@ import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.greenblitz.robotName.utils.GBMath;
 import edu.greenblitz.robotName.utils.PIDObject;
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.util.Units;
 
 public class PivotConstants {
 
-    public static final double LENGTH_OF_SHOOTER = 0.2;
+    public static final double SAFE_ANGLE = Units.degreesToRadians(200);
+    public static final double BRODER = Units.degreesToRadians(225);
+    public static final double LENGTH_OF_SHOOTER = 0.3;
 
     public static final double SHOOTER_MASS_KG = 10;
 

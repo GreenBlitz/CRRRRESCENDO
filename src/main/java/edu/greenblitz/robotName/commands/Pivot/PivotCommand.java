@@ -16,4 +16,10 @@ public class PivotCommand extends GBCommand {
 	public boolean isFinished() {
 		return pivot.isAtGoalAngle();
 	}
+	@Override
+	public void end(boolean interrupted) {
+		if (interrupted)
+			pivot.setGoalAngle(pivot.getAngleInRadians());
+	}
+
 }
