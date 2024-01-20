@@ -1,13 +1,9 @@
 package edu.greenblitz.robotName;
 
-import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
-import edu.greenblitz.robotName.subsystems.shooter.Shooter;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.littletonrobotics.junction.LogFileUtil;
@@ -39,9 +35,9 @@ public class Robot extends LoggedRobot {
     @Override
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
-        SmartDashboard.putNumber("velocity", Shooter.getInstance().getVelocity());
-        SmartDashboard.putNumber("current", Shooter.getInstance().getCurrent());
-        SmartDashboard.putNumber("voltage", Shooter.getInstance().getVoltage());
+        SmartDashboard.putNumber("velocity", FlyWheel.getInstance().getVelocity());
+        SmartDashboard.putNumber("current", FlyWheel.getInstance().getCurrent());
+        SmartDashboard.putNumber("voltage", FlyWheel.getInstance().getVoltage());
     }
 
     private void initializeLogger(){

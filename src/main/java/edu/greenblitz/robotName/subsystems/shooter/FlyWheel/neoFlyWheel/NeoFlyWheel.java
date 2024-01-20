@@ -1,14 +1,14 @@
-package edu.greenblitz.robotName.subsystems.shooter.neoFlyWheel;
+package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.neoFlyWheel;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
-import edu.greenblitz.robotName.subsystems.shooter.IShooter;
-import edu.greenblitz.robotName.subsystems.shooter.ShooterInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheelInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.IFlyWheel;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 
 
-public class NeoFlyWheel implements IShooter {
+public class NeoFlyWheel implements IFlyWheel {
     private GBSparkMax motor;
     private SimpleMotorFeedforward feedforward;
 
@@ -37,7 +37,7 @@ public class NeoFlyWheel implements IShooter {
     }
 
     @Override
-    public void updateInputs(ShooterInputsAutoLogged inputs) {
+    public void updateInputs(FlyWheelInputsAutoLogged inputs) {
         inputs.appliedOutput = motor.getAppliedOutput();
         inputs.outputCurrent = motor.getOutputCurrent();
         inputs.velocity = motor.getEncoder().getVelocity();

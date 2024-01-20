@@ -1,9 +1,9 @@
-package edu.greenblitz.robotName.subsystems.shooter;
+package edu.greenblitz.robotName.subsystems.shooter.FlyWheel;
 
 import org.littletonrobotics.junction.AutoLog;
 
 @AutoLog
-public class ShooterInputs {
+public class FlyWheelInputs {
     public double appliedOutput;
     public double outputCurrent;
     public double velocity;
