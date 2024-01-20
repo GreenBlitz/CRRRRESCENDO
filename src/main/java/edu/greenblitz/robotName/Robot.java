@@ -2,11 +2,13 @@ package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
-import edu.greenblitz.robotName.subsystems.Arm.ArmSimulation;
+import edu.greenblitz.robotName.subsystems.Elbow.ElbowMechanism;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.Elbow.Elbow;
+import edu.greenblitz.robotName.subsystems.Elbow.ElbowMechanism;
 import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.Pivot.Pivot;
+import edu.greenblitz.robotName.subsystems.Pivot.PivotMechanism;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
@@ -40,7 +42,8 @@ public class Robot extends LoggedRobot {
         MultiLimelight.getInstance();
         Elbow.init();
         Pivot.init();
-        ArmSimulation.init();
+        //ElbowMechanism.init();
+        PivotMechanism.init();
         OI.getInstance();
     }
     @Override

@@ -11,11 +11,17 @@
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
       "/SmartDashboard/Field": "Field2d",
       "/SmartDashboard/Mech2D": "Mechanism2d",
+      "/SmartDashboard/Mech2DDDDD": "Mechanism2d",
       "/SmartDashboard/Mech2d": "Mechanism2d",
       "/SmartDashboard/field": "Field2d"
     },
     "windows": {
       "/SmartDashboard/Mech2D": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/SmartDashboard/Mech2DDDDD": {
         "window": {
           "visible": true
         }
