@@ -1,7 +1,8 @@
-package edu.greenblitz.robotName.subsystems.Pivot;
+package edu.greenblitz.robotName.subsystems;
 
 import edu.greenblitz.robotName.subsystems.Elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.Elbow.ElbowConstants;
+import edu.greenblitz.robotName.subsystems.Pivot.Pivot;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
@@ -12,7 +13,7 @@ import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.util.Color8Bit;
 import org.littletonrobotics.junction.Logger;
 
-public class PivotMechanism extends GBSubsystem {
+public class ArmsMechanism extends GBSubsystem {
 
     static Mechanism2d ARMS_MECHANISM;
     MechanismRoot2d rootPivot;
@@ -25,10 +26,10 @@ public class PivotMechanism extends GBSubsystem {
 
 
     public static void init() {
-        new PivotMechanism();
+        new ArmsMechanism();
     }
 
-    public PivotMechanism(){
+    public ArmsMechanism(){
         ARMS_MECHANISM = new Mechanism2d(2,2);
         rootPivot = ARMS_MECHANISM.getRoot("arm_root", 1.5, 1);
         pivot = rootPivot.append(new MechanismLigament2d("pivot", 2, 230,6, new Color8Bit(Color.kPurple)));
