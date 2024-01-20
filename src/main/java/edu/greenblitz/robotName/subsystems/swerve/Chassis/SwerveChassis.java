@@ -221,23 +221,23 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	/**
 	 * setting module states to all 4 modules
 	 */
-  public void setModuleStates(SwerveModuleState[] states) {
+  	public void setModuleStates(SwerveModuleState[] states) {
 		for (Module module : Module.values()) {
 			setModuleStateForModule(module, states[module.ordinal()]);
 		}
 	}
-  private double getDiscretizedTimeStep() {
-    double timeStep = getActualTimeStep();
-    double discretizedTimeStep = timeStep * FAST_DISCRETION_CONSTANT;
-    if (CURRENT_DRIVE_MODE.equals(MoveByJoysticks.DriveMode.SLOW)) {
-      discretizedTimeStep = timeStep * SLOW_DISCRETION_CONSTANT;
-    }
-    return discretizedTimeStep;
-  }
-   private double getActualTimeStep() {
-    if (RobotConstants.ROBOT_TYPE.equals(Robot.RobotType.ROBOT_NAME))
-      return RoborioUtils.getCurrentRoborioCycle();
-    return TIME_STEP;
+  	private double getDiscretizedTimeStep() {
+    	double timeStep = getActualTimeStep();
+    	double discretizedTimeStep = timeStep * FAST_DISCRETION_CONSTANT;
+    	if (CURRENT_DRIVE_MODE.equals(MoveByJoysticks.DriveMode.SLOW)) {
+      		discretizedTimeStep = timeStep * SLOW_DISCRETION_CONSTANT;
+    	}
+    	return discretizedTimeStep;
+  	}
+  	private double getActualTimeStep() {
+    	if (RobotConstants.ROBOT_TYPE.equals(Robot.RobotType.ROBOT_NAME))
+      		return RoborioUtils.getCurrentRoborioCycle();
+		return TIME_STEP;
     }
 
 
