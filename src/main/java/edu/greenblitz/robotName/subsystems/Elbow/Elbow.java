@@ -21,8 +21,7 @@ public class Elbow extends GBSubsystem {
     private double goalAngle;
 
 
-
-    public static void init(){
+    public static void init() {
         if (instance == null)
             instance = new Elbow();
     }
@@ -44,14 +43,12 @@ public class Elbow extends GBSubsystem {
         super.periodic();
         if (isAtAngle(goalAngle)) {
             standInPlace();
-        }
-        else {
+        } else {
             moveToAngle();
         }
         elbow.updateInputs(elbowInputs);
         Logger.processInputs("Elbow", elbowInputs);
     }
-
 
 
     public void setPower(double power) {
@@ -68,8 +65,6 @@ public class Elbow extends GBSubsystem {
 
     public void setGoalAngle(double angle) {
         goalAngle = angle;
-        if ((BRODER > goalAngle && BRODER < getAngleInRadians())  || (BRODER < goalAngle && BRODER > getAngleInRadians()))
-            Pivot.getInstance().setGoalAngle(PivotConstants.BRODER);
     }
 
     public void resetAngle(double position) {
@@ -77,8 +72,7 @@ public class Elbow extends GBSubsystem {
         goalAngle = position;
     }
 
-    private void moveToAngle(){
-    if (Pivot.getInstance().isAtSafeAngle())
+    private void moveToAngle() {
         elbow.moveToAngle(goalAngle);
     }
 
@@ -87,12 +81,11 @@ public class Elbow extends GBSubsystem {
     }
 
 
-
-    public double getStaticFF(){
+    public double getStaticFF() {
         return SIMPLE_MOTOR_FF.calculate(0);
     }
 
-    public double getDynamicFF(double velocity){
+    public double getDynamicFF(double velocity) {
         return SIMPLE_MOTOR_FF.calculate(velocity);
     }
 
@@ -119,8 +112,12 @@ public class Elbow extends GBSubsystem {
     public boolean isAtGoalAngle() {
         return isAtAngle(goalAngle);
     }
-    public boolean isAtBroderAngle() {
-        return Math.abs(BRODER - getAngleInRadians()) <= BRODER_TOLERANCE;
+
+    public boolean isPassBroder(double targetAngle) {
+        if (targetAngle>=getAngleInRadians())
+            return getAngleInRadians()<BRODER && BRODER<targetAngle;
+        else
+            return targetAngle<BRODER && BRODER<getAngleInRadians();
     }
 
 

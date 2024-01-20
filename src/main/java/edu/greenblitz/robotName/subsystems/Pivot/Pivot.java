@@ -67,8 +67,6 @@ public class Pivot extends GBSubsystem {
 
     public void setGoalAngle(double angle) {
         goalAngle = angle;
-        if ((BRODER > goalAngle && BRODER < getAngleInRadians())  || (BRODER < goalAngle && BRODER > getAngleInRadians()))
-            Elbow.getInstance().setGoalAngle(ElbowConstants.BACKWARD_ANGLE_LIMIT);
     }
 
     public void resetAngle(double position) {
@@ -77,8 +75,7 @@ public class Pivot extends GBSubsystem {
     }
 
     private void moveToAngle() {
-        if (!(Elbow.getInstance().isAtBroderAngle()))
-            pivot.moveToAngle(goalAngle);
+        pivot.moveToAngle(goalAngle);
     }
 
     private void standInPlace() {

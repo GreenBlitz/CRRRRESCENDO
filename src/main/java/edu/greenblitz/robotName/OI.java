@@ -3,6 +3,10 @@ package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.Elbow.moveElbowToPosition;
 import edu.greenblitz.robotName.commands.Pivot.movePivotToPosition;
+import edu.greenblitz.robotName.commands.smartElbow;
+import edu.greenblitz.robotName.commands.smartPivot;
+import edu.greenblitz.robotName.subsystems.Elbow.ElbowConstants;
+import edu.greenblitz.robotName.subsystems.Pivot.PivotConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.wpi.first.math.util.Units;
 
@@ -34,10 +38,10 @@ public class OI {
     }
 
     public void initButtons(){
-        secondJoystick.A.whileTrue(new moveElbowToPosition(Units.degreesToRadians(90)));
-        secondJoystick.B.whileTrue(new moveElbowToPosition(Units.degreesToRadians(315)));
-        secondJoystick.POV_DOWN.whileTrue(new moveElbowToPosition(Units.degreesToRadians(250)));
-        secondJoystick.Y.whileTrue(new movePivotToPosition(Units.degreesToRadians(200)));
-        secondJoystick.X.whileTrue(new movePivotToPosition(Units.degreesToRadians(250)));
+        secondJoystick.A.onTrue(new smartElbow(ElbowConstants.BACKWARD_ANGLE_LIMIT));
+        secondJoystick.B.onTrue(new smartElbow(ElbowConstants.FORWARD_ANGLE_LIMIT));
+        secondJoystick.POV_DOWN.onTrue(new smartElbow(ElbowConstants.BRODER));
+        secondJoystick.Y.onTrue(new smartPivot(PivotConstants.BACKWARD_ANGLE_LIMIT));
+        secondJoystick.X.onTrue(new smartPivot(PivotConstants.FORWARD_ANGLE_LIMIT));
     }
 }
