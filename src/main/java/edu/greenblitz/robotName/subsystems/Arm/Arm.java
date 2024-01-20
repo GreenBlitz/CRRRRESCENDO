@@ -39,8 +39,8 @@ public class Arm extends GBSubsystem {
 	}
 
 
-
-	public double optimizeRoute(double currentAngle, double targetAngle, double edge1, double edge2) {
+	//Todo - maybe move to util class cause working in all circle cases when have invalid range
+	public double possibleRoute(double currentAngle, double targetAngle, double edge1, double edge2) {
 		boolean isCrossingNoNoZone = GBMath.isRangeContainsAnotherRange(
 				currentAngle,
 				targetAngle,
@@ -53,7 +53,7 @@ public class Arm extends GBSubsystem {
 
 
 	public void moveArmBy2Angles(double elbowAngleTarget, double pivotAngleTarget){
-		double elbowBestRoute = optimizeRoute(
+		double elbowBestRoute = possibleRoute(
 				elbow.getAngleInRadians(),
 				elbowAngleTarget,
 				GBMath.reverseAngle(BACKWARD_ANGLE_LIMIT),
