@@ -1,15 +1,13 @@
-package edu.greenblitz.robotName.subsystems.Arm;
+package edu.greenblitz.robotName.subsystems.Pivot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.greenblitz.robotName.subsystems.Arm.PivotUtils.IPivot;
-import edu.greenblitz.robotName.subsystems.Arm.PivotUtils.PivotFactory;
-import edu.greenblitz.robotName.subsystems.Arm.PivotUtils.PivotInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.Pivot.PivotInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.Arm.PivotUtils.PivotConstants.FalconConfigs.*;
-import static edu.greenblitz.robotName.subsystems.Arm.PivotUtils.PivotConstants.TOLERANCE;
+import static edu.greenblitz.robotName.subsystems.Pivot.PivotConstants.FalconConfigs.*;
+import static edu.greenblitz.robotName.subsystems.Pivot.PivotConstants.TOLERANCE;
 
 public class Pivot extends GBSubsystem {
 
@@ -23,12 +21,12 @@ public class Pivot extends GBSubsystem {
 
 
 
-    protected static void init() {
+    public static void init() {
         if (instance == null)
             instance = new Pivot();
     }
 
-    protected static Pivot getInstance() {
+    public static Pivot getInstance() {
         init();
         return instance;
     }

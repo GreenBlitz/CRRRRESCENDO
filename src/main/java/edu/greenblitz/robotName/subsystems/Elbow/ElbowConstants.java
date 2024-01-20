@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Arm.ElbowUtils;
+package edu.greenblitz.robotName.subsystems.Elbow;
 
 import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;

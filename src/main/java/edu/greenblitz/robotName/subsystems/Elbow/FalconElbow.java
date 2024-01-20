@@ -1,23 +1,20 @@
-package edu.greenblitz.robotName.subsystems.Arm.ElbowUtils;
+package edu.greenblitz.robotName.subsystems.Elbow;
 
 import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-
-import static edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowConstants.Falcon.*;
-import static edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowConstants.*;
 
 public class FalconElbow implements IElbow {
 
     private TalonFX motor;
 
     public FalconElbow() {
-        motor = new TalonFX(MOTOR_ID);
-        motor.getConfigurator().apply(MOTION_MAGIC_CONFIGS);
-        motor.getConfigurator().apply(CURRENT_LIMITS_CONFIGS);
-        motor.getConfigurator().apply(CLOSED_LOOP_RAMPS_CONFIGS);
-        motor.getConfigurator().apply(SWITCH_CONFIGS);
-        motor.setNeutralMode(NEUTRAL_MODE_VALUE);
+        motor = new TalonFX(ElbowConstants.Falcon.MOTOR_ID);
+        motor.getConfigurator().apply(ElbowConstants.Falcon.MOTION_MAGIC_CONFIGS);
+        motor.getConfigurator().apply(ElbowConstants.Falcon.CURRENT_LIMITS_CONFIGS);
+        motor.getConfigurator().apply(ElbowConstants.Falcon.CLOSED_LOOP_RAMPS_CONFIGS);
+        motor.getConfigurator().apply(ElbowConstants.Falcon.SWITCH_CONFIGS);
+        motor.setNeutralMode(ElbowConstants.Falcon.NEUTRAL_MODE_VALUE);
         motor.optimizeBusUtilization();
     }
 
@@ -45,9 +42,9 @@ public class FalconElbow implements IElbow {
     @Override
     public void moveToAngle(double goalAngle) {
         motor.setControl(new MotionMagicDutyCycle(
-                goalAngle / RELATIVE_POSITION_CONVERSION_FACTOR,
+                goalAngle / ElbowConstants.RELATIVE_POSITION_CONVERSION_FACTOR,
                 true,
-                SIMPLE_MOTOR_FF.calculate(0),
+                ElbowConstants.Falcon.SIMPLE_MOTOR_FF.calculate(0),
                 0,
                 true,
                 true,
@@ -59,9 +56,9 @@ public class FalconElbow implements IElbow {
     public void updateInputs(ElbowInputsAutoLogged inputs) {
         inputs.outputCurrent = motor.getSupplyCurrent().getValue();
         inputs.appliedOutput = motor.getMotorVoltage().getValue();
-        inputs.position = motor.getPosition().getValue() * RELATIVE_POSITION_CONVERSION_FACTOR;
-        inputs.velocity = motor.getVelocity().getValue() * RELATIVE_VELOCITY_CONVERSION_FACTOR;
-        inputs.absoluteEncoderPosition = motor.getDutyCycle().getValue() * ABSOLUTE_POSITION_CONVERSION_FACTOR;
+        inputs.position = motor.getPosition().getValue() * ElbowConstants.RELATIVE_POSITION_CONVERSION_FACTOR;
+        inputs.velocity = motor.getVelocity().getValue() * ElbowConstants.RELATIVE_VELOCITY_CONVERSION_FACTOR;
+        inputs.absoluteEncoderPosition = motor.getDutyCycle().getValue() * ElbowConstants.ABSOLUTE_POSITION_CONVERSION_FACTOR;
         inputs.hasHitForwardLimit = motor.getFault_ForwardSoftLimit().getValue();
         inputs.hasHitBackwardsLimit = motor.getFault_ReverseSoftLimit().getValue();
     }

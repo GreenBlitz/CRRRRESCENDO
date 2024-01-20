@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Arm.PivotUtils;
+package edu.greenblitz.robotName.subsystems.Pivot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.RobotConstants;

@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Arm.ElbowUtils;
+package edu.greenblitz.robotName.subsystems.Elbow;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.RobotConstants;
@@ -9,8 +9,6 @@ import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.*;
-import static edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowConstants.*;
-import static edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowConstants.Simulation.*;
 
 public class SimulationElbow implements IElbow {
 
@@ -18,22 +16,22 @@ public class SimulationElbow implements IElbow {
 
     private double appliedVoltage;
 
-    private final PIDController controller = SIM_PID.getPIDController();
+    private final PIDController controller = ElbowConstants.Simulation.SIM_PID.getPIDController();
 
 
     public SimulationElbow() {
         elbowSimulation = new SingleJointedArmSim(
-                DCMotor.getFalcon500(NUMBER_OF_MOTORS),
+                DCMotor.getFalcon500(ElbowConstants.Simulation.NUMBER_OF_MOTORS),
                 ElbowConstants.Simulation.GEAR_RATIO,
                 SingleJointedArmSim.estimateMOI(
-                        ARM_LENGTH,
-                        ARM_MASS_KG
+                        ElbowConstants.ARM_LENGTH,
+                        ElbowConstants.ARM_MASS_KG
                 ),
-                ARM_LENGTH,
-                BACKWARD_ANGLE_LIMIT,
-                FORWARD_ANGLE_LIMIT,
+                ElbowConstants.ARM_LENGTH,
+                ElbowConstants.BACKWARD_ANGLE_LIMIT,
+                ElbowConstants.FORWARD_ANGLE_LIMIT,
                 false,
-                STARTING_ANGLE
+                ElbowConstants.STARTING_ANGLE
         );
     }
 

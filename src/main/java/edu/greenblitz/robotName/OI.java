@@ -1,7 +1,8 @@
 package edu.greenblitz.robotName;
 
 
-import edu.greenblitz.robotName.commands.Arm.moveArmToPositionByAngles;
+import edu.greenblitz.robotName.commands.Elbow.moveElbowToPosition;
+import edu.greenblitz.robotName.commands.Pivot.movePivotToPosition;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.wpi.first.math.util.Units;
 
@@ -33,8 +34,9 @@ public class OI {
     }
 
     public void initButtons(){
-        secondJoystick.A.whileTrue(new moveArmToPositionByAngles(Units.degreesToRadians(310),Units.degreesToRadians(130)));
-        secondJoystick.B.whileTrue(new moveArmToPositionByAngles(Units.degreesToRadians(135),Units.degreesToRadians(240)));
-        secondJoystick.Y.whileTrue(new moveArmToPositionByAngles(Units.degreesToRadians(0),Units.degreesToRadians(0)));
+        secondJoystick.A.whileTrue(new moveElbowToPosition(Units.degreesToRadians(310)));
+        secondJoystick.B.whileTrue(new moveElbowToPosition(Units.degreesToRadians(135)));
+        secondJoystick.Y.whileTrue(new movePivotToPosition(Units.degreesToRadians(0)));
+        secondJoystick.X.whileTrue(new movePivotToPosition(Units.degreesToRadians(181)));
     }
 }

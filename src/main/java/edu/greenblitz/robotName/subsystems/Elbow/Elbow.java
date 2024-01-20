@@ -1,15 +1,15 @@
-package edu.greenblitz.robotName.subsystems.Arm;
+package edu.greenblitz.robotName.subsystems.Elbow;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowConstants;
-import edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowFactory;
-import edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowInputsAutoLogged;
-import edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.IElbow;
+import edu.greenblitz.robotName.subsystems.Elbow.ElbowInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.utils.GBMath;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowConstants.Falcon.SIMPLE_MOTOR_FF;
+import static edu.greenblitz.robotName.subsystems.Elbow.ElbowConstants.BACKWARD_ANGLE_LIMIT;
+import static edu.greenblitz.robotName.subsystems.Elbow.ElbowConstants.FORWARD_ANGLE_LIMIT;
+import static edu.greenblitz.robotName.subsystems.Elbow.ElbowConstants.Falcon.SIMPLE_MOTOR_FF;
 
 public class Elbow extends GBSubsystem {
 
@@ -23,12 +23,12 @@ public class Elbow extends GBSubsystem {
 
 
 
-    protected static void init(){
+    public static void init(){
         if (instance == null)
             instance = new Elbow();
     }
 
-    protected static Elbow getInstance() {
+    public static Elbow getInstance() {
         init();
         return instance;
     }
@@ -67,9 +67,25 @@ public class Elbow extends GBSubsystem {
     public void setIdleMode(NeutralModeValue idleMode) {
         elbow.setIdleMode(idleMode);
     }
+    public double possibleRoute(double currentAngle, double targetAngle, double edge1, double edge2) {
+        boolean isCrossingNoNoZone = GBMath.isRangeContainsAnotherRange(
+                currentAngle,
+                targetAngle,
+                edge1,
+                edge2
+        );
+
+        return isCrossingNoNoZone ? GBMath.reverseAngle(targetAngle) : targetAngle;
+    }
 
     public void setGoalAngle(double angle) {
-        goalAngle = angle;
+        double elbowBestRoute = possibleRoute(
+                getAngleInRadians(),
+                angle,
+                GBMath.reverseAngle(BACKWARD_ANGLE_LIMIT),
+                FORWARD_ANGLE_LIMIT
+        );
+        goalAngle = elbowBestRoute;
     }
 
 
