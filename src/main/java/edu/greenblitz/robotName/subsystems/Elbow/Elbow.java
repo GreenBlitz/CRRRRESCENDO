@@ -3,6 +3,7 @@ package edu.greenblitz.robotName.subsystems.Elbow;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.subsystems.Elbow.ElbowInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.Pivot.Pivot;
 import edu.greenblitz.robotName.utils.GBMath;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
@@ -67,25 +68,9 @@ public class Elbow extends GBSubsystem {
     public void setIdleMode(NeutralModeValue idleMode) {
         elbow.setIdleMode(idleMode);
     }
-    public double possibleRoute(double currentAngle, double targetAngle, double edge1, double edge2) {
-        boolean isCrossingNoNoZone = GBMath.isRangeContainsAnotherRange(
-                currentAngle,
-                targetAngle,
-                edge1,
-                edge2
-        );
-
-        return isCrossingNoNoZone ? GBMath.reverseAngle(targetAngle) : targetAngle;
-    }
 
     public void setGoalAngle(double angle) {
-        double elbowBestRoute = possibleRoute(
-                getAngleInRadians(),
-                angle,
-                GBMath.reverseAngle(BACKWARD_ANGLE_LIMIT),
-                FORWARD_ANGLE_LIMIT
-        );
-        goalAngle = elbowBestRoute;
+        goalAngle = angle;
     }
 
 

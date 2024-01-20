@@ -3,11 +3,12 @@ package edu.greenblitz.robotName.subsystems.Pivot;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.subsystems.Pivot.PivotInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.utils.GBMath;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.subsystems.Pivot.PivotConstants.FalconConfigs.*;
-import static edu.greenblitz.robotName.subsystems.Pivot.PivotConstants.TOLERANCE;
+import static edu.greenblitz.robotName.subsystems.Pivot.PivotConstants.*;
 
 public class Pivot extends GBSubsystem {
 

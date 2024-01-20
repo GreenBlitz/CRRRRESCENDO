@@ -34,9 +34,9 @@ public class OI {
     }
 
     public void initButtons(){
-        secondJoystick.A.whileTrue(new moveElbowToPosition(Units.degreesToRadians(310)));
-        secondJoystick.B.whileTrue(new moveElbowToPosition(Units.degreesToRadians(135)));
-        secondJoystick.Y.whileTrue(new movePivotToPosition(Units.degreesToRadians(0)));
-        secondJoystick.X.whileTrue(new movePivotToPosition(Units.degreesToRadians(181)));
+        secondJoystick.A.whileTrue(new moveElbowToPosition(Units.degreesToRadians(90)));
+        secondJoystick.B.whileTrue(new moveElbowToPosition(Units.degreesToRadians(270)));
+        secondJoystick.Y.whileTrue(new movePivotToPosition(Units.degreesToRadians(200)));
+        secondJoystick.X.whileTrue(new movePivotToPosition(Units.degreesToRadians(250)));
     }
 }

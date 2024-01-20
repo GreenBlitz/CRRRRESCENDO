@@ -5,6 +5,7 @@ import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.greenblitz.robotName.utils.GBMath;
 import edu.greenblitz.robotName.utils.PIDObject;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -16,9 +17,9 @@ public class PivotConstants {
 
     public static final double SHOOTER_MASS_KG = 10;
 
-    public static final double BACKWARD_ANGLE_LIMIT = Double.MIN_VALUE
-            ;
-    public static final double FORWARD_ANGLE_LIMIT = Double.MAX_VALUE;
+    public static final double BACKWARD_ANGLE_LIMIT = Units.degreesToRadians(190);
+
+    public static final double FORWARD_ANGLE_LIMIT = Units.degreesToRadians(260);
 
     public static final double RELATIVE_POSITION_CONVERSION_FACTOR = 0.0328;
 
