@@ -37,7 +37,7 @@ public class ChassisConstants {
     public static final boolean ANGULAR_JOYSTICK_INVERTED = true;
 
     public static final boolean LINEAR_JOYSTICK_INVERTED = false;
-    public static final MoveByJoysticks.DriveMode CURRENT_DRIVE_MODE = MoveByJoysticks.DriveMode.NORMAL;
+    public static final MoveByJoysticks.DriveMode DRIVE_MODE = MoveByJoysticks.DriveMode.NORMAL;
   
     public static final boolean FORWARD_VALUE_INVERTED = false;
     public static final boolean LEFTWARD_VALUE_INVERTED = true;

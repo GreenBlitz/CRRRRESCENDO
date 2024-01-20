@@ -17,7 +17,7 @@ import org.littletonrobotics.junction.networktables.NT4Publisher;
 import org.littletonrobotics.junction.wpilog.WPILOGReader;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 
-import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.CURRENT_DRIVE_MODE;
+import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
 
 public class Robot extends LoggedRobot {
 
@@ -35,7 +35,7 @@ public class Robot extends LoggedRobot {
         Battery.getInstance().setDefaultCommand(new BatteryLimiter());
 
         SwerveChassis.init();
-        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(CURRENT_DRIVE_MODE));
+        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
         SwerveChassis.getInstance().resetAllEncoders();
 
         OI.getInstance();

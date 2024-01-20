@@ -1,6 +1,5 @@
 package edu.greenblitz.robotName.subsystems.swerve.Chassis;
 
-import edu.greenblitz.robotName.OdometryConstants;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.VisionConstants;
@@ -33,7 +32,10 @@ import org.photonvision.EstimatedRobotPose;
 import java.util.Optional;
 
 import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.TIME_STEP;
-import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.*;
+import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
+import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.FAST_DISCRETION_CONSTANT;
+import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.SLOW_DISCRETION_CONSTANT;
+
 
 public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
@@ -226,18 +228,18 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 			setModuleStateForModule(module, states[module.ordinal()]);
 		}
 	}
-  	private double getDiscretizedTimeStep() {
-    	double timeStep = getActualTimeStep();
-    	double discretizedTimeStep = timeStep * FAST_DISCRETION_CONSTANT;
-    	if (CURRENT_DRIVE_MODE.equals(MoveByJoysticks.DriveMode.SLOW)) {
-      		discretizedTimeStep = timeStep * SLOW_DISCRETION_CONSTANT;
-    	}
-    	return discretizedTimeStep;
+	private double getDiscretizedTimeStep() {
+		  double timeStep = getActualTimeStep();
+		  double discretizedTimeStep = timeStep * FAST_DISCRETION_CONSTANT;
+		  if (DRIVE_MODE.equals(MoveByJoysticks.DriveMode.SLOW)) {
+			  discretizedTimeStep = timeStep * SLOW_DISCRETION_CONSTANT;
+		  }
+		  return discretizedTimeStep;
   	}
   	private double getActualTimeStep() {
-    	if (RobotConstants.ROBOT_TYPE.equals(Robot.RobotType.ROBOT_NAME))
-      		return RoborioUtils.getCurrentRoborioCycle();
-		return TIME_STEP;
+		  if (RobotConstants.ROBOT_TYPE.equals(Robot.RobotType.ROBOT_NAME))
+			  return RoborioUtils.getCurrentRoborioCycle();
+		  return TIME_STEP;
     }
 
 
@@ -249,7 +251,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				angSpeed,
 				currentAng
 		);
-    chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
+    	chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
 		SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
 		SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
 		setModuleStates(desaturatedStates);
@@ -260,7 +262,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				fieldRelativeSpeeds,
 				currentAng
 		);
-    chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
+    	chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
 		SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
 		SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
 		setModuleStates(desaturatedStates);
