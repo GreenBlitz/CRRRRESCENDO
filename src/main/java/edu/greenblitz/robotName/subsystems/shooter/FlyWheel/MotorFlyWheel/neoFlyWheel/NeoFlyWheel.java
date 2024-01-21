@@ -1,7 +1,8 @@
-package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.neoFlyWheel;
+package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.MotorFlyWheel.neoFlyWheel;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.MotorFlyWheel.MotorFlyWheelConstants;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheelInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.IFlyWheel;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
@@ -10,10 +11,9 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 
 public class NeoFlyWheel implements IFlyWheel {
     private GBSparkMax motor;
-    private SimpleMotorFeedforward feedforward;
 
     public NeoFlyWheel() {
-        motor = new GBSparkMax(NeoFlyWheelConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        motor = new GBSparkMax(MotorFlyWheelConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
     }
 
     @Override
@@ -31,8 +31,8 @@ public class NeoFlyWheel implements IFlyWheel {
         motor.getPIDController().setReference(
                 velocity,
                 CANSparkMax.ControlType.kVelocity,
-                NeoFlyWheelConstants.PID_SLOT,
-                NeoFlyWheelConstants.FEEDFORWARD.calculate(velocity)
+                MotorFlyWheelConstants.PID_SLOT,
+                MotorFlyWheelConstants.FEEDFORWARD.calculate(velocity)
         );
     }
 

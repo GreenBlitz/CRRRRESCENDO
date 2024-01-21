@@ -1,7 +1,7 @@
 package edu.greenblitz.robotName.subsystems.shooter.FlyWheel;
 
 import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.neoFlyWheel.NeoFlyWheel;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.MotorFlyWheel.neoFlyWheel.NeoFlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.simulationFlyWheel.SimulationFlyWheel;
 
 public class FlyWheelFactory {
