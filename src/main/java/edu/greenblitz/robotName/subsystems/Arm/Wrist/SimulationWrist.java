@@ -6,6 +6,8 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.BATTERY_VOLTAGE;
@@ -19,6 +21,7 @@ public class SimulationWrist implements IWrist {
 
     private PIDController controller = SIM_PID.getPIDController();
 
+    private SendableChooser<Boolean> isObjectIn;
 
     public SimulationWrist() {
         wristSimulation = new SingleJointedArmSim(
@@ -34,6 +37,10 @@ public class SimulationWrist implements IWrist {
                 false,
                 WristConstants.STARTING_ANGLE
         );
+        isObjectIn = new SendableChooser<>();
+        isObjectIn.setDefaultOption("False", false);
+        isObjectIn.addOption("True", true);
+        SmartDashboard.putData(isObjectIn);
     }
 
 
@@ -75,6 +82,7 @@ public class SimulationWrist implements IWrist {
         inputs.absoluteEncoderPosition = wristSimulation.getAngleRads();
         inputs.hasHitForwardLimit = wristSimulation.hasHitLowerLimit();
         inputs.hasHitBackwardsLimit = wristSimulation.hasHitLowerLimit();
+        inputs.isObjectInside = isObjectIn.getSelected();
         inputs.kP = SIM_PID.getKp();
         inputs.kI = SIM_PID.getKi();
         inputs.kD = SIM_PID.getKd();

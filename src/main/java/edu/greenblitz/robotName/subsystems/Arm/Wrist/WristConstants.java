@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.subsystems.Arm.Wrist;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkMaxLimitSwitch;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.utils.PIDObject;
@@ -58,6 +59,8 @@ public class WristConstants {
     public static class NeoConfigs {
 
         public static final int MOTOR_ID = 1;
+        public static final double DEBOUNCE_TIME_FOR_LIMIT_SWITCH = 0.5;
+        public static final SparkMaxLimitSwitch.Type SWITCH_TYPE = SparkMaxLimitSwitch.Type.kNormallyClosed;
 
         private static final PIDObject PID = new PIDObject().withKp(0.8).withKd(0.3).withKi(0).withMaxPower(1);
       
