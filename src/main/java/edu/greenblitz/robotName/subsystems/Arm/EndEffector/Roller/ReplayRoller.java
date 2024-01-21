@@ -7,7 +7,7 @@ public class ReplayRoller implements IRoller{
 	}
 	
 	@Override
-	public void updateInputs(RollerInputsAutoLogged rollerInputsAutoLogged) {
+	public void updateInputs(RollerInputsAutoLogged rollerInputs) {
 	
 	}
 }

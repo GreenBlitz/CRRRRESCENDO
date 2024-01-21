@@ -15,8 +15,8 @@ public class BagRoller implements IRoller{
 	}
 
 	@Override
-	public void updateInputs(RollerInputsAutoLogged rollerInputsAutoLogged) {
-		rollerInputsAutoLogged.outputCurrent = motor.getOutputCurrent();
-		rollerInputsAutoLogged.appliedOutput = motor.getMotorOutputVoltage();
+	public void updateInputs(RollerInputsAutoLogged rollerInputs) {
+		rollerInputs.outputCurrent = motor.getOutputCurrent();
+		rollerInputs.appliedOutput = motor.getMotorOutputVoltage();
 	}
 }

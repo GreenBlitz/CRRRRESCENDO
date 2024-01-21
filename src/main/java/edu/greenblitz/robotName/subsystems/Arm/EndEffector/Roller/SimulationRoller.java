@@ -26,9 +26,9 @@ public class SimulationRoller implements IRoller{
 	}
 	
 	@Override
-	public void updateInputs(RollerInputsAutoLogged rollerInputsAutoLogged) {
-		rollerInputsAutoLogged.appliedOutput = appliedOutput;
-		rollerInputsAutoLogged.outputCurrent = motorSimulation.getCurrentDrawAmps();
-		rollerInputsAutoLogged.velocity = motorSimulation.getAngularVelocityRPM();
+	public void updateInputs(RollerInputsAutoLogged rollerInputs) {
+		rollerInputs.appliedOutput = appliedOutput;
+		rollerInputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
+		rollerInputs.velocity = motorSimulation.getAngularVelocityRPM();
 	}
 }

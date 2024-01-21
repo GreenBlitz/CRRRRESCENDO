@@ -4,5 +4,5 @@ public interface IRoller {
 	
 	void setPower(double power);
 	
-	void updateInputs(RollerInputsAutoLogged rollerInputsAutoLogged);
+	void updateInputs(RollerInputsAutoLogged rollerInputs);
 }
