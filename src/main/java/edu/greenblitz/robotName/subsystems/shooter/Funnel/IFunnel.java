@@ -8,5 +8,5 @@ public interface IFunnel {
 	
 	void setVoltage(double voltage);
 	
-	void updateInputs(FunnelInputsAutoLogged chassisIntakeInputs);
+	void updateInputs(FunnelInputsAutoLogged funnelInputs);
 }
