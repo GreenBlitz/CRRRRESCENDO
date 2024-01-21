@@ -13,7 +13,7 @@ public class ReplayFunnel implements IFunnel{
 	}
 	
 	@Override
-	public void updateInputs(FunnelInputsAutoLogged chassisIntakeInputs) {
+	public void updateInputs(FunnelInputsAutoLogged funnelInputs) {
 	
 	}
 
