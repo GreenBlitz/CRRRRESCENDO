@@ -5,6 +5,7 @@ import edu.greenblitz.robotName.subsystems.Elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.Pivot.PivotConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
@@ -14,29 +15,31 @@ import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.util.Color8Bit;
 import org.littletonrobotics.junction.Logger;
 
-public class ArmsMechanism extends GBSubsystem {
+public class JointsMechanism extends GBSubsystem {
 
-    static Mechanism2d ARMS_MECHANISM;
-    MechanismRoot2d rootPivot;
+    private static final Translation2d SIZE_OF_MECHANISM = new Translation2d(2.0 ,2.0);
+    private static final int LINE_WIDTH = 6;
+    private static Mechanism2d jointsMechanism;
+    private MechanismRoot2d rootPivot;
 
     private final MechanismLigament2d pivot;
 
-    MechanismRoot2d rootElbow;
+    private MechanismRoot2d rootElbow;
 
     private final MechanismLigament2d elbow;
 
 
     public static void init() {
-        new ArmsMechanism();
+        new JointsMechanism();
     }
 
-    public ArmsMechanism(){
-        ARMS_MECHANISM = new Mechanism2d(2,2);
-        rootPivot = ARMS_MECHANISM.getRoot("arm_root", 1.5, 0.5);
-        pivot = rootPivot.append(new MechanismLigament2d("pivot", PivotConstants.LENGTH_OF_SHOOTER, 230,6, new Color8Bit(Color.kPurple)));
-        rootElbow = ARMS_MECHANISM.getRoot("pivot_root", 1, 0.5);
-        elbow = rootElbow.append(new MechanismLigament2d("elbow", ElbowConstants.ARM_LENGTH, 45));
-        SmartDashboard.putData("Mech2D", ARMS_MECHANISM);
+    public JointsMechanism(){
+        jointsMechanism = new Mechanism2d(SIZE_OF_MECHANISM.getX(),SIZE_OF_MECHANISM.getY());
+        rootPivot = jointsMechanism.getRoot("arm_root", PivotConstants.Simulation.X_POSITION, PivotConstants.Simulation.Y_POSITION);
+        pivot = rootPivot.append(new MechanismLigament2d("pivot", PivotConstants.LENGTH_OF_SHOOTER, Units.radiansToDegrees(PivotConstants.STARTING_ANGLE),LINE_WIDTH, new Color8Bit(Color.kPurple)));
+        rootElbow = jointsMechanism.getRoot("pivot_root", ElbowConstants.Simulation.X_POSITION, ElbowConstants.Simulation.Y_POSITION);
+        elbow = rootElbow.append(new MechanismLigament2d("elbow", ElbowConstants.ARM_LENGTH, Units.radiansToDegrees(ElbowConstants.STARTING_ANGLE)));
+        SmartDashboard.putData("Mech2D", jointsMechanism);
     }
 
     @Override

@@ -22,9 +22,6 @@ public class Pivot extends GBSubsystem {
     private double goalAngle;
 
 
-    public static boolean movingCondition() {
-        return Elbow.getInstance().isAtAngle(ElbowConstants.BRODER);
-    }
 
     public static void init() {
         if (instance == null)
@@ -120,5 +117,10 @@ public class Pivot extends GBSubsystem {
     public boolean isAtSafeAngle() {
         return isAtAngle(BRODER);
     }
+    public static boolean movingCondition() {
+        return Elbow.getInstance().isAtAngle(ElbowConstants.BRODER);
+    }
+
+
 
 }
