@@ -5,25 +5,18 @@ import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.SparkMaxPIDController;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 public class NeoLifter implements ILifter {
 
     private GBSparkMax motor1;
     private GBSparkMax motor2;
-    private PIDController pid1;
-    private PIDController pid2;
 
     public NeoLifter() {
 
         motor1 = new GBSparkMax(LifterConstants.MOTOR_PORT_ID1, CANSparkMaxLowLevel.MotorType.kBrushless);
         motor2 = new GBSparkMax(LifterConstants.MOTOR_PORT_ID2, CANSparkMaxLowLevel.MotorType.kBrushless);
-
-        pid1 = new PIDController(LifterConstants.PID_KP,LifterConstants.PID_KI,LifterConstants.PID_KD);
-        pid1.setTolerance(LifterConstants.PID_TOLERANCE);
-
-        pid2 = new PIDController(LifterConstants.PID_KP,LifterConstants.PID_KI,LifterConstants.PID_KD);
-        pid2.setTolerance(LifterConstants.PID_TOLERANCE);
-
+        motor2.getPIDController().setReference(0.2, CANSparkMax.ControlType.kPosition);
     }
     @Override
     public void setPowerForMotor1(double power) {
@@ -82,12 +75,17 @@ public class NeoLifter implements ILifter {
     }
 
     @Override
-    public SparkMaxPIDController getMotor1PID() {
-        return motor1.getPIDController();
+    public double getPositionForMotor1() {
+        return motor1.getEncoder().getPosition();
     }
 
     @Override
-    public SparkMaxPIDController getMotor2PID() {
-        return motor2.getPIDController();
+    public double getPositionForMotor2() {
+        return motor2.getEncoder().getPosition();
+    }
+
+    @Override
+    public boolean isSwitchPressed() {
+
     }
 }

@@ -10,4 +10,7 @@ public class LifterConstants {
     public static final double PID_KD = 0;
     public static final double PID_TOLERANCE = 0.04;
 
+    public static double MAX_VELOCITY = 5;
+    public static double MAX_ACCELERATION = 10;
+
 }

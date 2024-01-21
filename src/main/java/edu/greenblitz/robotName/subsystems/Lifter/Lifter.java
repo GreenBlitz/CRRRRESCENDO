@@ -4,25 +4,20 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxPIDController;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
 
 public class Lifter extends GBSubsystem {
 
     private static Lifter instance;
     private ILifter lifter;
-    private SparkMaxPIDController pid1;
-    private SparkMaxPIDController pid2;
+    private ProfiledPIDController pid1;
+    private ProfiledPIDController pid2;
 
     private Lifter() {
         lifter = LifterFactory.create();
-        pid1 = lifter.getMotor1PID();
-        pid2 = lifter.getMotor2PID();
-        pid1.setP(LifterConstants.PID_KP);
-        pid1.setI(LifterConstants.PID_KI);
-        pid1.setD(LifterConstants.PID_KD);
-
-        pid2.setP(LifterConstants.PID_KP);
-        pid2.setI(LifterConstants.PID_KI);
-        pid2.setD(LifterConstants.PID_KD);
+        pid1 = new ProfiledPIDController(LifterConstants.PID_KP,LifterConstants.PID_KI,LifterConstants.PID_KD,new TrapezoidProfile.Constraints(LifterConstants.MAX_VELOCITY, LifterConstants.MAX_ACCELERATION));
+        pid2 = new ProfiledPIDController(LifterConstants.PID_KP,LifterConstants.PID_KI,LifterConstants.PID_KD,new TrapezoidProfile.Constraints(LifterConstants.MAX_VELOCITY, LifterConstants.MAX_ACCELERATION));
     }
     public static Lifter getInstance() {
         if(instance == null) {
@@ -31,7 +26,8 @@ public class Lifter extends GBSubsystem {
         return instance;
     }
     public void getToPoseByPID(double pos) {
-//        lifter.setPowerForMotor1(pid1.);
+        lifter.setPowerForMotor1(pid1.calculate(lifter.getPositionForMotor1(),pos));
+        lifter.setPowerForMotor2(pid2.calculate(lifter.getPositionForMotor2(),pos));
     }
     public void setPower(double power) {
         lifter.setPowerForMotor1(power);
@@ -56,11 +52,8 @@ public class Lifter extends GBSubsystem {
         lifter.stopMotor1();
         lifter.stopMotor2();
     }
-
     public void setIdleMode(CANSparkMax.IdleMode mode) {
         lifter.setIdleModeForMotor1(mode);
         lifter.setIdleModeForMotor2(mode);
     }
-
-
 }

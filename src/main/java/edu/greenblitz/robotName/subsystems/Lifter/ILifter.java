@@ -29,8 +29,10 @@ public interface ILifter {
 
     public void setIdleModeForMotor1(CANSparkMax.IdleMode mode);
     public void setIdleModeForMotor2(CANSparkMax.IdleMode mode);
-    public SparkMaxPIDController getMotor1PID();
-    public SparkMaxPIDController getMotor2PID();
+
+    public double getPositionForMotor1();
+    public double getPositionForMotor2();
+    public boolean isSwitchPressed();
 
 
 }
