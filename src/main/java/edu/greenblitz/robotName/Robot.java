@@ -1,15 +1,17 @@
 package edu.greenblitz.robotName;
 
+import com.pathplanner.lib.auto.AutoBuilder;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.AutonomousSelector;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
@@ -36,6 +38,7 @@ public class Robot extends LoggedRobot {
         SwerveChassis.init();
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
         SwerveChassis.getInstance().resetAllEncoders();
+        configureAutonomousBuilder();
         AutonomousSelector.getInstance();
 
         OI.getInstance();
@@ -85,11 +88,22 @@ public class Robot extends LoggedRobot {
         }
         Logger.start();
     }
+
+    public void configureAutonomousBuilder(){
+        AutoBuilder.configureHolonomic(
+                SwerveChassis.getInstance() :: getRobotPose,
+                SwerveChassis.getInstance() :: resetChassisPose,
+                SwerveChassis.getInstance() :: getRobotRelativeChassisSpeeds,
+                SwerveChassis.getInstance() :: moveByRobotRelativeSpeeds,
+                ChassisConstants.Autonomous.HOLONOMIC_PATH_FOLLOWER_CONFIG,
+                () -> DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == DriverStation.Alliance.Red,
+                SwerveChassis.getInstance()
+        );
+    }
     
     @Override
     public void autonomousInit(){
-        Command autonomousCommand = AutonomousSelector.getInstance().getChosenValue();
-        autonomousCommand.schedule();
+        AutonomousSelector.getInstance().getChosenValue().schedule();
     }
 
 }

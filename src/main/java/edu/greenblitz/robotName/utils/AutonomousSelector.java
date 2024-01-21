@@ -15,20 +15,10 @@ public class AutonomousSelector {
 	private SendableChooser<Command> chooser;
 	
 	private AutonomousSelector(){
-		AutoBuilder.configureHolonomic(
-				SwerveChassis.getInstance() :: getRobotPose,
-				SwerveChassis.getInstance() :: resetChassisPose,
-				SwerveChassis.getInstance() :: getRobotRelativeChassisSpeeds,
-				SwerveChassis.getInstance() :: moveByRobotRelativeSpeeds,
-				ChassisConstants.Autonomous.HOLONOMIC_PATH_FOLLOWER_CONFIG,
-				() -> DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == DriverStation.Alliance.Red,
-				SwerveChassis.getInstance()
-		);
-
-//      m_chooser.addOption("auto name", new PathPlannerAuto("auto name");
+//      chooser.addOption("auto name", new PathPlannerAuto("auto name");
 		chooser = AutoBuilder.buildAutoChooser();
 		ShuffleboardTab tab = Shuffleboard.getTab("auto");
-		tab.add("autonomous chooser", chooser);
+		tab.add("autonomous chooser", AutoBuilder.buildAutoChooser());
 	}
 
 	public Command getChosenValue (){
@@ -45,18 +35,4 @@ public class AutonomousSelector {
 		return instance;
 	}
 
-	public enum AutonomousPaths{
-
-		NONE(new InstantCommand());
-
-
-		public Command autonomousCommand;
-		private AutonomousPaths (Command autonomousCommands){
-			autonomousCommand = autonomousCommands;
-		}
-	}
-
-//	private static Command getPathTCommand (String path){
-//		return PathFollowerBuilder.getInstance().followPath(path);
-//	}
 }
