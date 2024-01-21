@@ -1,7 +1,7 @@
 package edu.greenblitz.robotName.subsystems;
 
-import edu.greenblitz.robotName.subsystems.Elbow.Elbow;
-import edu.greenblitz.robotName.subsystems.Elbow.ElbowConstants;
+import edu.greenblitz.robotName.subsystems.Arm.Elbow.Elbow;
+import edu.greenblitz.robotName.subsystems.Arm.Elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.Pivot.PivotConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;

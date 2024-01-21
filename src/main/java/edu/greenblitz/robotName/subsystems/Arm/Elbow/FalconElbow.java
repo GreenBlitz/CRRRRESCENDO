@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Elbow;
+package edu.greenblitz.robotName.subsystems.Arm.Elbow;
 
 import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;

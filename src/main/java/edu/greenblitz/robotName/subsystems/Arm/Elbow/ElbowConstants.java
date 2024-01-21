@@ -1,14 +1,12 @@
-package edu.greenblitz.robotName.subsystems.Elbow;
+package edu.greenblitz.robotName.subsystems.Arm.Elbow;
 
 import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.greenblitz.robotName.utils.GBMath;
 import edu.greenblitz.robotName.utils.PIDObject;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
 
 public class ElbowConstants {

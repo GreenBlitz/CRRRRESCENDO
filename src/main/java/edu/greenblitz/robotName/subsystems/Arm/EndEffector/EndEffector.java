@@ -1,9 +1,8 @@
-package edu.greenblitz.robotName.subsystems.Pivot;
+package edu.greenblitz.robotName.subsystems.Arm.EndEffector;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.subsystems.Battery;
-import edu.greenblitz.robotName.subsystems.Arm.Elbow.Elbow;
-import edu.greenblitz.robotName.subsystems.Arm.Elbow.ElbowConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 
@@ -11,32 +10,31 @@ import static edu.greenblitz.robotName.subsystems.Pivot.PivotConstants.BRODER;
 import static edu.greenblitz.robotName.subsystems.Pivot.PivotConstants.FalconConfigs.SIMPLE_MOTOR_FF;
 import static edu.greenblitz.robotName.subsystems.Pivot.PivotConstants.TOLERANCE;
 
-public class Pivot extends GBSubsystem {
+public class EndEffector extends GBSubsystem {
 
-    private static Pivot instance;
+    private static EndEffector instance;
 
-    private PivotInputsAutoLogged pivotInputs;
+    private EndEffectorInputsAutoLogged endEffectorInputs;
 
-    private IPivot pivot;
+    private IEndEffector endEffector;
 
     private double goalAngle;
 
 
-
     public static void init() {
         if (instance == null)
-            instance = new Pivot();
+            instance = new EndEffector();
     }
 
-    public static Pivot getInstance() {
+    public static EndEffector getInstance() {
         init();
         return instance;
     }
 
-    private Pivot() {
-        pivot = PivotFactory.create();
-        pivotInputs = new PivotInputsAutoLogged();
-        pivot.updateInputs(pivotInputs);
+    private EndEffector() {
+        endEffector = EndEffectorFactory.create();
+        endEffectorInputs = new EndEffectorInputsAutoLogged();
+        endEffector.updateInputs(endEffectorInputs);
         goalAngle = getAngleInRadians();
     }
 
@@ -47,21 +45,21 @@ public class Pivot extends GBSubsystem {
             standInPlace();
         else
             moveToAngle();
-        pivot.updateInputs(pivotInputs);
-        Logger.processInputs("Pivot", pivotInputs);
+        endEffector.updateInputs(endEffectorInputs);
+        Logger.processInputs("Pivot", endEffectorInputs);
     }
 
 
     public void setPower(double power) {
-        pivot.setPower(power);
+        endEffector.setPower(power);
     }
 
     public void setMotorVoltage(double voltage) {
-        pivot.setVoltage(voltage);
+        endEffector.setVoltage(voltage);
     }
 
-    public void setIdleMode(NeutralModeValue idleMode) {
-        pivot.setIdleMode(idleMode);
+    public void setIdleMode(CANSparkMax.IdleMode idleMode) {
+        endEffector.setIdleMode(idleMode);
     }
 
     public void setGoalAngle(double targetAngle) {
@@ -69,16 +67,16 @@ public class Pivot extends GBSubsystem {
     }
 
     public void resetAngle(double position) {
-        pivot.resetAngle(position);
+        endEffector.resetAngle(position);
         goalAngle = position;
     }
 
     private void moveToAngle() {
-        pivot.moveToAngle(goalAngle);
+        endEffector.moveToAngle(goalAngle);
     }
 
     private void standInPlace() {
-        pivot.setPower(getStaticFF());
+        endEffector.setPower(getStaticFF());
     }
 
 
@@ -91,15 +89,15 @@ public class Pivot extends GBSubsystem {
     }
 
     public double getVoltage() {
-        return pivotInputs.appliedOutput * Battery.getInstance().getCurrentVoltage();
+        return endEffectorInputs.appliedOutput * Battery.getInstance().getCurrentVoltage();
     }
 
     public double getVelocity() {
-        return pivotInputs.velocity;
+        return endEffectorInputs.velocity;
     }
 
     public double getAngleInRadians() {
-        return pivotInputs.position;
+        return endEffectorInputs.position;
     }
 
     public double getGoalAngleRadians() {

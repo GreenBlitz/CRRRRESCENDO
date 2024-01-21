@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Elbow;
+package edu.greenblitz.robotName.subsystems.Arm.Elbow;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.RobotConstants;
