@@ -1,14 +1,11 @@
 package edu.greenblitz.robotName;
 
 
-import edu.greenblitz.robotName.commands.Elbow.moveElbowToPosition;
-import edu.greenblitz.robotName.commands.Pivot.movePivotToPosition;
-import edu.greenblitz.robotName.commands.smartElbow;
-import edu.greenblitz.robotName.commands.smartPivot;
+import edu.greenblitz.robotName.commands.Elbow.UnCollidingMoveElbow;
+import edu.greenblitz.robotName.commands.Pivot.UnCollidingMovePivot;
 import edu.greenblitz.robotName.subsystems.Elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.Pivot.PivotConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
-import edu.wpi.first.math.util.Units;
 
 public class OI {
     private static OI instance;
@@ -38,10 +35,10 @@ public class OI {
     }
 
     public void initButtons(){
-        secondJoystick.A.onTrue(new smartElbow(ElbowConstants.BACKWARD_ANGLE_LIMIT));
-        secondJoystick.B.onTrue(new smartElbow(ElbowConstants.FORWARD_ANGLE_LIMIT));
-        secondJoystick.POV_DOWN.onTrue(new smartElbow(ElbowConstants.BRODER));
-        secondJoystick.Y.onTrue(new smartPivot(PivotConstants.BACKWARD_ANGLE_LIMIT));
-        secondJoystick.X.onTrue(new smartPivot(PivotConstants.FORWARD_ANGLE_LIMIT));
+        secondJoystick.A.onTrue(new UnCollidingMoveElbow(ElbowConstants.BACKWARD_ANGLE_LIMIT));
+        secondJoystick.B.onTrue(new UnCollidingMoveElbow(ElbowConstants.FORWARD_ANGLE_LIMIT));
+        secondJoystick.POV_DOWN.onTrue(new UnCollidingMoveElbow(ElbowConstants.BRODER));
+        secondJoystick.Y.onTrue(new UnCollidingMovePivot(PivotConstants.BACKWARD_ANGLE_LIMIT));
+        secondJoystick.X.onTrue(new UnCollidingMovePivot(PivotConstants.FORWARD_ANGLE_LIMIT));
     }
 }

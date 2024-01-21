@@ -40,7 +40,6 @@ public class Robot extends LoggedRobot {
         MultiLimelight.getInstance();
         Elbow.init();
         Pivot.init();
-        //ElbowMechanism.init();
         ArmsMechanism.init();
         OI.getInstance();
     }

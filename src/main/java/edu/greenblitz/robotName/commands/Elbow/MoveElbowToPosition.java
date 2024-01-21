@@ -1,9 +1,9 @@
 package edu.greenblitz.robotName.commands.Elbow;
 
-public class moveElbowToPosition extends ElbowCommand {
+public class MoveElbowToPosition extends ElbowCommand {
 
     private final double elbowAngle;
-    public moveElbowToPosition(double goalAngle) {
+    public MoveElbowToPosition(double goalAngle) {
         super();
         elbowAngle = goalAngle;
     }

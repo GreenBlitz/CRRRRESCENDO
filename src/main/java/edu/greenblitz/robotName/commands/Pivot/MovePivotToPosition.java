@@ -1,9 +1,9 @@
 package edu.greenblitz.robotName.commands.Pivot;
 
-public class movePivotToPosition extends PivotCommand {
+public class MovePivotToPosition extends PivotCommand {
 
     private final double pivotAngle;
-    public movePivotToPosition(double goalAngle) {
+    public MovePivotToPosition(double goalAngle) {
         super();
         pivotAngle = goalAngle;
     }

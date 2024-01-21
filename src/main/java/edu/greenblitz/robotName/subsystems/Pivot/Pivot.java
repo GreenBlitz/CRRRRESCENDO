@@ -67,8 +67,8 @@ public class Pivot extends GBSubsystem {
         pivot.setIdleMode(idleMode);
     }
 
-    public void setGoalAngle(double angle) {
-        goalAngle = angle;
+    public void setGoalAngle(double targetAngle) {
+        goalAngle = targetAngle;
     }
 
     public void resetAngle(double position) {
