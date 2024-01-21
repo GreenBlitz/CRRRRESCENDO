@@ -116,7 +116,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
 
 		updatePoseEstimationLimeLight();
-
+		poseEstimator.update(
+				getGyroAngle(),
+				getSwerveModulePositions()
+		);
 
 		SmartDashboard.putData(getField());
 	}
