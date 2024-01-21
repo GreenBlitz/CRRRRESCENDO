@@ -13,7 +13,7 @@ public class LifterFactory {
                 return new SimulationLifter();
             }
         }
-        return new LifterReply();
+        return new LifterReplay();
     }
 
 }

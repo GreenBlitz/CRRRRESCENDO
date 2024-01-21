@@ -10,7 +10,6 @@ public class LifterInputs {
 
     public double voltage;
     public double position;
-
     public CANSparkMax.IdleMode idleMode;
 
 }
