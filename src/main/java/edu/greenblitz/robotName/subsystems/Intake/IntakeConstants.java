@@ -1,8 +1,8 @@
-package edu.greenblitz.robotName.subsystems.ChassisIntake;
+package edu.greenblitz.robotName.subsystems.Intake;
 
 import edu.wpi.first.math.controller.PIDController;
 
-public class ChassisIntakeConstants {
+public class IntakeConstants {
 	public static final PIDController MOTOR_PID_P = new PIDController(0, 0, 0);
 	public static final int INTAKE_ID = 0;
 	

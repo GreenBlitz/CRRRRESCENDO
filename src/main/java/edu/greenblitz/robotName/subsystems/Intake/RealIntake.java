@@ -1,13 +1,13 @@
-package edu.greenblitz.robotName.subsystems.ChassisIntake;
+package edu.greenblitz.robotName.subsystems.Intake;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 
-public class RealChassisIntake implements IChassisIntake {
+public class RealIntake implements IIntake {
 	private CANSparkMax motor;
 	
-	public RealChassisIntake() {
-		motor = new CANSparkMax(ChassisIntakeConstants.INTAKE_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+	public RealIntake() {
+		motor = new CANSparkMax(IntakeConstants.INTAKE_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
 	}
 	
 	@Override
@@ -21,7 +21,7 @@ public class RealChassisIntake implements IChassisIntake {
 	}
 	
 	@Override
-	public void updateInputs(ChassisIntakeInputsAutoLogged chassisIntakeInputs) {
+	public void updateInputs(IntakeInputsAutoLogged chassisIntakeInputs) {
 		chassisIntakeInputs.outputCurrent = motor.getOutputCurrent();
 		chassisIntakeInputs.appliedOutput = motor.getAppliedOutput();
 		chassisIntakeInputs.velocity = motor.getEncoder().getVelocity();
