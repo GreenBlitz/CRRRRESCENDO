@@ -20,6 +20,10 @@ public class Elbow extends GBSubsystem {
 
     private double goalAngle;
 
+    public static boolean movingCondition(double goalAngle) {
+        return Elbow.getInstance().isPassBroder(goalAngle);
+    }
+
 
     public static void init() {
         if (instance == null)

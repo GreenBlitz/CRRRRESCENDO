@@ -12,7 +12,7 @@ public class smartElbow extends ConditionalCommand {
         super(
                 new movePivotToPosition(PivotConstants.SAFE_ANGLE).andThen(new moveElbowToPosition(goalAngle)),
                 new moveElbowToPosition(goalAngle),
-                () -> Elbow.getInstance().isPassBroder(goalAngle)
+                () -> Elbow.movingCondition(goalAngle)
         );
     }
 }
