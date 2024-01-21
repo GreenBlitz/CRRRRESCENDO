@@ -13,10 +13,14 @@ public class Intake extends GBSubsystem {
 		intakeInputs = new IntakeInputsAutoLogged();
 		intake.updateInputs(intakeInputs);
 	}
-	
-	public Intake getInstance() {
+
+	public static void init(){
 		if (instance == null)
 			instance = new Intake();
+	}
+	
+	public static Intake getInstance() {
+		init();
 		return instance;
 	}
 	
@@ -34,7 +38,7 @@ public class Intake extends GBSubsystem {
 	}
 	
 	public static double getVoltage() {
-		return IntakeInputs.appliedOutput;
+		return intakeInputs.appliedOutput;
 	}
 	
 	public static double getVelocity() {

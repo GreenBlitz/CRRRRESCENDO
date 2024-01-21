@@ -3,10 +3,10 @@ package edu.greenblitz.robotName.subsystems.Intake;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 
-public class RealIntake implements IIntake {
+public class NeoIntake implements IIntake {
 	private CANSparkMax motor;
 	
-	public RealIntake() {
+	public NeoIntake() {
 		motor = new CANSparkMax(IntakeConstants.INTAKE_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
 	}
 	

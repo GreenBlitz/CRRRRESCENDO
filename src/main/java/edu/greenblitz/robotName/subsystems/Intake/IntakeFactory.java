@@ -6,7 +6,7 @@ public class IntakeFactory {
 	public static IIntake create() {
 		switch (RobotConstants.ROBOT_TYPE) {
 			case ROBOT_NAME:
-				return new RealIntake();
+				return new NeoIntake();
 			case REPLAY:
 				return new ReplayIntake();
 			case SIMULATION:
