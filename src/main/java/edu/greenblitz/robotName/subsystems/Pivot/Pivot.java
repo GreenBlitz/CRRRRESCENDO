@@ -114,9 +114,6 @@ public class Pivot extends GBSubsystem {
         return isAtAngle(goalAngle);
     }
 
-    public boolean isAtSafeAngle() {
-        return isAtAngle(BRODER);
-    }
 
 
 }

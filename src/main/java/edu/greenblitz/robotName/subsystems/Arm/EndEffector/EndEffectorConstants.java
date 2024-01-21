@@ -15,8 +15,6 @@ import edu.wpi.first.math.util.Units;
 
 public class EndEffectorConstants {
 
-    public static final double SAFE_ANGLE = Units.degreesToRadians(200);
-    public static final double BRODER = Units.degreesToRadians(225);
     public static final double LENGTH_OF_SHOOTER = 0.3;
 
     public static final double SHOOTER_MASS_KG = 10;
@@ -30,6 +28,7 @@ public class EndEffectorConstants {
     public static final double RELATIVE_VELOCITY_CONVERSION_FACTOR = 0.0030332432;
 
     public static final double ABSOLUTE_POSITION_CONVERSION_FACTOR = 0.00302;
+
     public static final double ABSOLUTE_VELOCITY_CONVERSION_FACTOR = 0.00302;
 
     public static final double STARTING_ANGLE = 1;
@@ -65,7 +64,9 @@ public class EndEffectorConstants {
     public static class NeoConfigs {
 
         public static final int MOTOR_ID = 1;
+
         private static final PIDObject PID = new PIDObject().withKp(0.8).withKd(0.3).withKi(0).withMaxPower(1);
+
         public static final GBSparkMax.SparkMaxConfObject ELBOW_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
                 .withPID(RobotConstants.ROBOT_TYPE != Robot.RobotType.SIMULATION ? PID : Simulation.SIM_PID)
                 .withIdleMode(CANSparkMax.IdleMode.kBrake)

@@ -1,6 +1,5 @@
 package edu.greenblitz.robotName.subsystems.Arm.EndEffector;
 
-import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.wpi.first.math.MathUtil;
@@ -10,6 +9,7 @@ import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.BATTERY_VOLTAGE;
+import static edu.greenblitz.robotName.subsystems.Arm.EndEffector.EndEffectorConstants.Simulation.SIM_PID;
 
 public class SimulationEndEffector implements IEndEffector {
 
@@ -17,7 +17,7 @@ public class SimulationEndEffector implements IEndEffector {
 
     private double appliedVoltage;
 
-    private PIDController controller = EndEffectorConstants.Simulation.SIM_PID.getPIDController();
+    private PIDController controller = SIM_PID.getPIDController();
 
 
     public SimulationEndEffector() {
@@ -50,12 +50,12 @@ public class SimulationEndEffector implements IEndEffector {
 
     @Override
     public void setIdleMode(CANSparkMax.IdleMode idleMode) {
-        Logger.recordOutput("Arm/Pivot", "tried setting the idleMode to " + idleMode.name());
+        Logger.recordOutput("Arm/EndEffector", "tried setting the idleMode to " + idleMode.name());
     }
 
     @Override
     public void resetAngle(double position) {
-        Logger.recordOutput("Arm/Pivot", "tried to reset the position to " + position);
+        Logger.recordOutput("Arm/EndEffector", "tried to reset the position to " + position);
     }
 
     @Override
@@ -75,5 +75,9 @@ public class SimulationEndEffector implements IEndEffector {
         inputs.absoluteEncoderPosition = pivotSimulation.getAngleRads();
         inputs.hasHitForwardLimit = pivotSimulation.hasHitLowerLimit();
         inputs.hasHitBackwardsLimit = pivotSimulation.hasHitLowerLimit();
+
+        inputs.kP = SIM_PID.getKp();
+        inputs.kI = SIM_PID.getKi();
+        inputs.kD = SIM_PID.getKd();
     }
 }

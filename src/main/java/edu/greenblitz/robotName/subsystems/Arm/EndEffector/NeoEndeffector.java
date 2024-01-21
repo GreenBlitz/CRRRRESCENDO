@@ -23,7 +23,7 @@ public class NeoEndeffector implements IEndEffector {
         motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).setPositionConversionFactor(EndEffectorConstants.ABSOLUTE_POSITION_CONVERSION_FACTOR);
         motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).setVelocityConversionFactor(EndEffectorConstants.ABSOLUTE_VELOCITY_CONVERSION_FACTOR);
 
-        motor.getEncoder().setPositionConversionFactor(RELATIVE_POSITION_CONVERSION_FACTOR);//not the actual gear ratio, weird estimation
+        motor.getEncoder().setPositionConversionFactor(RELATIVE_POSITION_CONVERSION_FACTOR);
         motor.getEncoder().setVelocityConversionFactor(RELATIVE_VELOCITY_CONVERSION_FACTOR);
 
         motor.getPIDController().setFeedbackDevice(motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle));
@@ -67,9 +67,11 @@ public class NeoEndeffector implements IEndEffector {
         inputs.position = motor.getEncoder().getPosition();
         inputs.velocity = motor.getEncoder().getVelocity();
         inputs.absoluteEncoderPosition = motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition();
-
         inputs.hasHitBackwardsLimit = inputs.position == EndEffectorConstants.BACKWARD_ANGLE_LIMIT;
         inputs.hasHitForwardLimit = inputs.position == EndEffectorConstants.FORWARD_ANGLE_LIMIT;
+        inputs.kP = motor.getPIDController().getP();
+        inputs.kI = motor.getPIDController().getI();
+        inputs.kD = motor.getPIDController().getD();
     }
 
 }

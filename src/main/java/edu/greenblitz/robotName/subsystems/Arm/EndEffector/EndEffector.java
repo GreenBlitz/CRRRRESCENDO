@@ -1,14 +1,13 @@
 package edu.greenblitz.robotName.subsystems.Arm.EndEffector;
 
-import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.utils.GBSubsystem;
+import edu.wpi.first.math.controller.PIDController;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.Pivot.PivotConstants.BRODER;
-import static edu.greenblitz.robotName.subsystems.Pivot.PivotConstants.FalconConfigs.SIMPLE_MOTOR_FF;
-import static edu.greenblitz.robotName.subsystems.Pivot.PivotConstants.TOLERANCE;
+import static edu.greenblitz.robotName.subsystems.Arm.EndEffector.EndEffectorConstants.TOLERANCE;
+
 
 public class EndEffector extends GBSubsystem {
 
@@ -17,6 +16,8 @@ public class EndEffector extends GBSubsystem {
     private EndEffectorInputsAutoLogged endEffectorInputs;
 
     private IEndEffector endEffector;
+
+    private PIDController controller;
 
     private double goalAngle;
 
@@ -36,6 +37,7 @@ public class EndEffector extends GBSubsystem {
         endEffectorInputs = new EndEffectorInputsAutoLogged();
         endEffector.updateInputs(endEffectorInputs);
         goalAngle = getAngleInRadians();
+        controller = new PIDController(endEffectorInputs.kP,endEffectorInputs.kI,endEffectorInputs.kD);
     }
 
     @Override
@@ -81,11 +83,11 @@ public class EndEffector extends GBSubsystem {
 
 
     public double getStaticFF() {
-        return SIMPLE_MOTOR_FF.calculate(0);
+        return controller.calculate(0);
     }
 
     public double getDynamicFF(double velocity) {
-        return SIMPLE_MOTOR_FF.calculate(velocity);
+        return controller.calculate(velocity);
     }
 
     public double getVoltage() {
@@ -112,9 +114,6 @@ public class EndEffector extends GBSubsystem {
         return isAtAngle(goalAngle);
     }
 
-    public boolean isAtSafeAngle() {
-        return isAtAngle(BRODER);
-    }
 
 
 }

@@ -19,4 +19,8 @@ public class EndEffectorInputs {
 
     public boolean hasHitBackwardsLimit;
 
+    public double kP;
+    public double kI;
+    public double kD;
+
 }
