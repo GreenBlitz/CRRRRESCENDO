@@ -1,9 +1,9 @@
-package edu.greenblitz.robotName.subsystems.Elbow;
+package edu.greenblitz.robotName.subsystems.Arm.EndEffector;
 
 import org.littletonrobotics.junction.AutoLog;
 
 @AutoLog
-public class ElbowInputs {
+public class EndEffectorInputs {
 
     public double appliedOutput;
 

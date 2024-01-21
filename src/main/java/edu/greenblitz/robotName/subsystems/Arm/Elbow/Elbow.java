@@ -1,14 +1,12 @@
-package edu.greenblitz.robotName.subsystems.Elbow;
+package edu.greenblitz.robotName.subsystems.Arm.Elbow;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.subsystems.Battery;
-import edu.greenblitz.robotName.subsystems.Pivot.Pivot;
-import edu.greenblitz.robotName.subsystems.Pivot.PivotConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.Elbow.ElbowConstants.*;
-import static edu.greenblitz.robotName.subsystems.Elbow.ElbowConstants.Falcon.SIMPLE_MOTOR_FF;
+import static edu.greenblitz.robotName.subsystems.Arm.Elbow.ElbowConstants.*;
+import static edu.greenblitz.robotName.subsystems.Arm.Elbow.ElbowConstants.Falcon.SIMPLE_MOTOR_FF;
 
 public class Elbow extends GBSubsystem {
 

@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Elbow;
+package edu.greenblitz.robotName.subsystems.Arm.Elbow;
 
 import edu.greenblitz.robotName.RobotConstants;
 
