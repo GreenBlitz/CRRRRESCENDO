@@ -1,9 +1,9 @@
-package edu.greenblitz.robotName.subsystems.Arm.EndEffector;
+package edu.greenblitz.robotName.subsystems.Arm.Wrist;
 
 import org.littletonrobotics.junction.AutoLog;
 
 @AutoLog
-public class EndEffectorInputs {
+public class WristInputs {
 
     public double appliedOutput;
 

@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Arm.EndEffector;
+package edu.greenblitz.robotName.subsystems.Arm.Wrist;
 
 
 import com.revrobotics.CANSparkMax;
@@ -7,15 +7,15 @@ import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.controller.PIDController;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.Arm.EndEffector.EndEffectorConstants.TOLERANCE;
+import static edu.greenblitz.robotName.subsystems.Arm.Wrist.WristConstants.TOLERANCE;
 
-public class EndEffector extends GBSubsystem {
+public class Wrist extends GBSubsystem {
 
-    private static EndEffector instance;
+    private static Wrist instance;
 
-    private EndEffectorInputsAutoLogged endEffectorInputs;
+    private WristInputsAutoLogged wristInputs;
 
-    private IEndEffector endEffector;
+    private IWrist wrist;
 
     private PIDController controller;
   
@@ -24,20 +24,20 @@ public class EndEffector extends GBSubsystem {
 
     public static void init() {
         if (instance == null)
-            instance = new EndEffector();
+            instance = new Wrist();
     }
 
-    public static EndEffector getInstance() {
+    public static Wrist getInstance() {
         init();
         return instance;
     }
 
-    private EndEffector() {
-        endEffector = EndEffectorFactory.create();
-        endEffectorInputs = new EndEffectorInputsAutoLogged();
-        endEffector.updateInputs(endEffectorInputs);
+    private Wrist() {
+        wrist = WristFactory.create();
+        wristInputs = new WristInputsAutoLogged();
+        wrist.updateInputs(wristInputs);
         goalAngle = getAngleInRadians();
-        controller = new PIDController(endEffectorInputs.kP,endEffectorInputs.kI,endEffectorInputs.kD);
+        controller = new PIDController(wristInputs.kP,wristInputs.kI,wristInputs.kD);
     }
 
     @Override
@@ -47,21 +47,21 @@ public class EndEffector extends GBSubsystem {
             standInPlace();
         else
             moveToAngle();
-        endEffector.updateInputs(endEffectorInputs);
-        Logger.processInputs("Pivot", endEffectorInputs);
+        wrist.updateInputs(wristInputs);
+        Logger.processInputs("Pivot", wristInputs);
     }
 
 
     public void setPower(double power) {
-        endEffector.setPower(power);
+        wrist.setPower(power);
     }
 
     public void setMotorVoltage(double voltage) {
-        endEffector.setVoltage(voltage);
+        wrist.setVoltage(voltage);
     }
 
     public void setIdleMode(CANSparkMax.IdleMode idleMode) {
-        endEffector.setIdleMode(idleMode);
+        wrist.setIdleMode(idleMode);
     }
 
     public void setGoalAngle(double targetAngle) {
@@ -69,16 +69,16 @@ public class EndEffector extends GBSubsystem {
     }
 
     public void resetAngle(double position) {
-        endEffector.resetAngle(position);
+        wrist.resetAngle(position);
         goalAngle = position;
     }
 
     private void moveToAngle() {
-        endEffector.moveToAngle(goalAngle);
+        wrist.moveToAngle(goalAngle);
     }
 
     private void standInPlace() {
-        endEffector.setPower(getStaticFF());
+        wrist.setPower(getStaticFF());
     }
 
 
@@ -89,19 +89,17 @@ public class EndEffector extends GBSubsystem {
     public double getDynamicFF(double velocity) {
         return controller.calculate(velocity);
     }
-  
-    }
 
     public double getVoltage() {
-        return endEffectorInputs.appliedOutput * Battery.getInstance().getCurrentVoltage();
+        return wristInputs.appliedOutput * Battery.getInstance().getCurrentVoltage();
     }
 
     public double getVelocity() {
-        return endEffectorInputs.velocity;
+        return wristInputs.velocity;
     }
 
     public double getAngleInRadians() {
-        return endEffectorInputs.position;
+        return wristInputs.position;
     }
 
     public double getGoalAngleRadians() {

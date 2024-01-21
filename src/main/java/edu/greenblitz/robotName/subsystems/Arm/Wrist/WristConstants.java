@@ -1,21 +1,15 @@
-package edu.greenblitz.robotName.subsystems.Arm.EndEffector;
+package edu.greenblitz.robotName.subsystems.Arm.Wrist;
 
-import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
-import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
-import com.ctre.phoenix6.configs.MotionMagicConfigs;
-import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
-import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.utils.PIDObject;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.util.Units;
 
-public class EndEffectorConstants {
+public class WristConstants {
 
-    public static final double LENGTH_OF_SHOOTER = 0.3;
+    public static final double LENGTH_OF_ENDEFFECTOR = 0.3;
 
     public static final double SHOOTER_MASS_KG = 10;
 
@@ -67,7 +61,7 @@ public class EndEffectorConstants {
 
         private static final PIDObject PID = new PIDObject().withKp(0.8).withKd(0.3).withKi(0).withMaxPower(1);
       
-        public static final GBSparkMax.SparkMaxConfObject ELBOW_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
+        public static final GBSparkMax.SparkMaxConfObject WRIST_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
                 .withPID(RobotConstants.ROBOT_TYPE != Robot.RobotType.SIMULATION ? PID : Simulation.SIM_PID)
                 .withIdleMode(CANSparkMax.IdleMode.kBrake)
                 .withRampRate(RobotConstants.General.RAMP_RATE_VAL)

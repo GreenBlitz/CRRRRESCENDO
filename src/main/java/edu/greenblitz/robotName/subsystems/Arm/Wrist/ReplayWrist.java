@@ -1,9 +1,8 @@
-package edu.greenblitz.robotName.subsystems.Arm.EndEffector;
+package edu.greenblitz.robotName.subsystems.Arm.Wrist;
 
-import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.revrobotics.CANSparkMax;
 
-public class ReplayEndEffector implements IEndEffector {
+public class ReplayWrist implements IWrist {
 
     @Override
     public void setPower(double power) {
@@ -31,7 +30,7 @@ public class ReplayEndEffector implements IEndEffector {
     }
 
     @Override
-    public void updateInputs(EndEffectorInputsAutoLogged inputs) {
+    public void updateInputs(WristInputsAutoLogged inputs) {
 
     }
 }

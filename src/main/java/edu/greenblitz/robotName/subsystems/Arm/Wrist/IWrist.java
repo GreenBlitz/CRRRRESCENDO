@@ -1,9 +1,8 @@
-package edu.greenblitz.robotName.subsystems.Arm.EndEffector;
+package edu.greenblitz.robotName.subsystems.Arm.Wrist;
 
-import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.revrobotics.CANSparkMax;
 
-public interface IEndEffector {
+public interface IWrist {
 
     void setPower(double power);
 
@@ -15,5 +14,5 @@ public interface IEndEffector {
 
     void moveToAngle(double goalAngle);
 
-    void updateInputs(EndEffectorInputsAutoLogged inputs);
+    void updateInputs(WristInputsAutoLogged inputs);
 }
