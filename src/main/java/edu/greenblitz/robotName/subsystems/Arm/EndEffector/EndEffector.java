@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.Arm.EndEffector;
 
+
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.utils.GBSubsystem;
@@ -7,7 +8,6 @@ import edu.wpi.first.math.controller.PIDController;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.subsystems.Arm.EndEffector.EndEffectorConstants.TOLERANCE;
-
 
 public class EndEffector extends GBSubsystem {
 
@@ -18,7 +18,7 @@ public class EndEffector extends GBSubsystem {
     private IEndEffector endEffector;
 
     private PIDController controller;
-
+  
     private double goalAngle;
 
 
@@ -88,6 +88,8 @@ public class EndEffector extends GBSubsystem {
 
     public double getDynamicFF(double velocity) {
         return controller.calculate(velocity);
+    }
+  
     }
 
     public double getVoltage() {

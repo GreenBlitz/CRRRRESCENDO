@@ -22,5 +22,4 @@ public class EndEffectorInputs {
     public double kP;
     public double kI;
     public double kD;
-
 }

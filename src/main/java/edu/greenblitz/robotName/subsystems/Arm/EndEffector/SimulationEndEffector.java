@@ -75,7 +75,6 @@ public class SimulationEndEffector implements IEndEffector {
         inputs.absoluteEncoderPosition = pivotSimulation.getAngleRads();
         inputs.hasHitForwardLimit = pivotSimulation.hasHitLowerLimit();
         inputs.hasHitBackwardsLimit = pivotSimulation.hasHitLowerLimit();
-
         inputs.kP = SIM_PID.getKp();
         inputs.kI = SIM_PID.getKi();
         inputs.kD = SIM_PID.getKd();
