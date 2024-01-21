@@ -4,16 +4,16 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.math.filter.Debouncer;
 
-import static edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants.SWITCH_TYPE;
+import static edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants.SparkMaxConfigs.SWITCH_TYPE;
 
 public class NeoFunnel implements IFunnel{
 	
 	private CANSparkMax motor;
 	private Debouncer debouncer;
 	public NeoFunnel() {
-		motor = new CANSparkMax(FunnelConstants.FUNNEL_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+		motor = new CANSparkMax(FunnelConstants.SparkMaxConfigs.FUNNEL_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
 		motor.getReverseLimitSwitch(SWITCH_TYPE).enableLimitSwitch(true);
-		debouncer = new Debouncer(FunnelConstants.DEBOUNCE_TIME_FOR_LIMIT_SWITCH);
+		debouncer = new Debouncer(FunnelConstants.SparkMaxConfigs.DEBOUNCE_TIME_FOR_LIMIT_SWITCH);
 	}
 	
 	@Override
