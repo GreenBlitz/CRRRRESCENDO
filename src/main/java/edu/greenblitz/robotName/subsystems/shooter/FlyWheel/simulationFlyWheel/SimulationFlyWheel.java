@@ -42,7 +42,9 @@ public class SimulationFlyWheel implements IFlyWheel {
     @Override
     public void updateInputs(FlyWheelInputsAutoLogged inputs) {
         flyWheelSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
+
         inputs.appliedOutput = appliedVoltage;
         inputs.velocity = flyWheelSimulation.getAngularVelocityRPM();
+        inputs.temperature = 0;
     }
 }
