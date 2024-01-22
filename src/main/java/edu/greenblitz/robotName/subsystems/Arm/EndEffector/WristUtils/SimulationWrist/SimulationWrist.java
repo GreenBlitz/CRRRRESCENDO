@@ -4,7 +4,6 @@ import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.Arm.EndEffector.WristUtils.IWrist;
 import edu.greenblitz.robotName.subsystems.Arm.EndEffector.WristUtils.WristConstants;
-import edu.greenblitz.robotName.subsystems.Arm.EndEffector.WristUtils.WristInputsAutoLogged;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.system.plant.DCMotor;
@@ -23,7 +22,7 @@ public class SimulationWrist implements IWrist {
 
     private PIDController controller;
 
-    private SendableChooser<Boolean> isObjectIn;
+    private SendableChooser<Boolean> isObjectInArm;
 
     public SimulationWrist() {
         wristSimulation = new SingleJointedArmSim(
@@ -42,10 +41,10 @@ public class SimulationWrist implements IWrist {
 
         controller = SimulationWristConstants.SIM_PID.getPIDController();
 
-        isObjectIn = new SendableChooser<>();
-        isObjectIn.setDefaultOption("False", false);
-        isObjectIn.addOption("True", true);
-        SmartDashboard.putData("Is Object In Arm?",isObjectIn);
+        isObjectInArm = new SendableChooser<>();
+        isObjectInArm.setDefaultOption("False", false);
+        isObjectInArm.addOption("True", true);
+        SmartDashboard.putData("Is Object In Arm?", isObjectInArm);
     }
 
 
@@ -88,6 +87,6 @@ public class SimulationWrist implements IWrist {
         inputs.temperature = 0;
         inputs.hasHitForwardLimit = wristSimulation.hasHitLowerLimit();
         inputs.hasHitBackwardsLimit = wristSimulation.hasHitLowerLimit();
-        inputs.isObjectInside = isObjectIn.getSelected();
+        inputs.isObjectInside = isObjectInArm.getSelected();
     }
 }

@@ -21,5 +21,5 @@ public class WristInputs {
 
     public boolean hasHitBackwardsLimit;
 
-    public boolean isObjectInside;
+    public boolean isObjectInArm;
 }

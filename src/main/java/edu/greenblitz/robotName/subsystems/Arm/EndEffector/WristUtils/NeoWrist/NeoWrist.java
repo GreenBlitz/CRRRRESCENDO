@@ -5,7 +5,6 @@ import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.SparkMaxAbsoluteEncoder;
 import edu.greenblitz.robotName.subsystems.Arm.EndEffector.WristUtils.IWrist;
 import edu.greenblitz.robotName.subsystems.Arm.EndEffector.WristUtils.WristConstants;
-import edu.greenblitz.robotName.subsystems.Arm.EndEffector.WristUtils.WristInputsAutoLogged;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.filter.Debouncer;
 
