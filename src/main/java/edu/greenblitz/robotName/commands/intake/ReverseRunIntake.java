@@ -5,7 +5,7 @@ import edu.greenblitz.robotName.subsystems.Intake.IntakeConstants;
 public class ReverseRunIntake extends IntakeCommand{
     @Override
     public void execute(){
-        intake.setPower(-IntakeConstants.POWER_TO_RUN);
+        intake.setPower(IntakeConstants.POWER_TO_EJECT);
     }
 
     @Override
