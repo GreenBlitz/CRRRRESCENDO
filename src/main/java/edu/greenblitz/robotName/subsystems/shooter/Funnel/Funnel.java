@@ -3,6 +3,8 @@ package edu.greenblitz.robotName.subsystems.shooter.Funnel;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 
+import static edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants.ROLL_POWER;
+
 public class Funnel extends GBSubsystem {
 	private static Funnel instance;
 	private static FunnelInputsAutoLogged funnelInputs;
@@ -28,6 +30,7 @@ public class Funnel extends GBSubsystem {
 		funnel.updateInputs(funnelInputs);
 		Logger.processInputs("funnel", funnelInputs);
 	}
+
 	
 	public static void setPower(double power) {
 		funnel.setPower(power);
@@ -36,6 +39,17 @@ public class Funnel extends GBSubsystem {
 	public static void setVoltage(double voltage) {
 		funnel.setVoltage(voltage);
 	}
+
+
+	public static void rollIn(){
+		setPower(ROLL_POWER);
+	}
+
+	public static void rollOut(){
+		setPower(-ROLL_POWER);
+	}
+
+
 	
 	public static double getVoltage() {
 		return funnelInputs.appliedOutput;
