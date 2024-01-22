@@ -27,7 +27,7 @@ public class LifterReplay implements ILifter{
 
 
     @Override
-    public void updateInputs(LifterInputsAutoLogged lastInputs) {
+    public void updateInputs(LifterInputs lastInputs) {
 
     }
 
@@ -40,11 +40,6 @@ public class LifterReplay implements ILifter{
     @Override
     public void setIdleMode(CANSparkMax.IdleMode mode) {
 
-    }
-
-    @Override
-    public double getPosition() {
-        return 0;
     }
 
     @Override

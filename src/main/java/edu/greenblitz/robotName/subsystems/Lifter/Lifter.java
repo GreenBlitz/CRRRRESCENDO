@@ -8,12 +8,12 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 public class Lifter extends GBSubsystem {
     private static Lifter instance;
     private ILifter lifter;
-    private LifterInputsAutoLogged lifterInputs;
+    private LifterInputs lifterInputs;
     private ProfiledPIDController pid;
 
     private Lifter() {
         lifter = LifterFactory.create();
-        lifterInputs = new LifterInputsAutoLogged();
+        lifterInputs = new LifterInputs();
         pid = new ProfiledPIDController(LifterConstants.PID_KP,LifterConstants.PID_KI,LifterConstants.PID_KD,new TrapezoidProfile.Constraints(LifterConstants.MAX_VELOCITY, LifterConstants.MAX_ACCELERATION));
     }
     public static Lifter getInstance() {

@@ -7,45 +7,49 @@ import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 
 public class NeoLifter implements ILifter {
     private GBSparkMax motor;
-    private LifterInputsAutoLogged lastInputs;
+    private LifterInputs inputs;
     public NeoLifter() {
-        lastInputs = new LifterInputsAutoLogged();
+        inputs = new LifterInputs();
         motor = new GBSparkMax(LifterConstants.MOTOR_PORT_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
     }
     @Override
     public void setPower(double power) {
         motor.set(power);
-        lastInputs.power = power;
     }
     @Override
     public void setVoltage(double voltage) {
         motor.setVoltage(voltage);
-        lastInputs.voltage = voltage;
     }
     @Override
     public void resetEncoderTo(double position) {
         motor.getEncoder().setPosition(position);
-        lastInputs.position = position;
+        inputs.position = position;
     }
 
     @Override
     public boolean isMotorInPosition(double position) {
-        return motor.getEncoder().getPosition() <= position + LifterConstants.PID_TOLERANCE || motor.getEncoder().getPosition() >= position - LifterConstants.PID_TOLERANCE;
+        return motor.getEncoder().getPosition() <= position + LifterConstants.PID_TOLERANCE && motor.getEncoder().getPosition() >= position - LifterConstants.PID_TOLERANCE;
     }
 
     @Override
-    public void updateInputs(LifterInputsAutoLogged lastInputs) {
+    public void updateInputs(LifterInputs inputs) {
+        inputs.appliedOutput = motor.getAppliedOutput();
+        inputs.outputCurrent = motor.getOutputCurrent();
+        inputs.position = motor.getEncoder().getPosition();
+        inputs.velocity = motor.getEncoder().getVelocity();
+        inputs.kP = motor.getPIDController().getP();
+        inputs.kI = motor.getPIDController().getI();
+        inputs.kD = motor.getPIDController().getD();
+        inputs.isSwitchPressed = //Gil fill;
 
     }
     @Override
     public void stopMotor() {
         this.setPower(0);
-        lastInputs.power = 0;
     }
     @Override
     public void setIdleMode(CANSparkMax.IdleMode mode) {
         motor.setIdleMode(mode);
-        lastInputs.idleMode = mode;
     }
 
     @Override

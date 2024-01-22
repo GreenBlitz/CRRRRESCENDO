@@ -6,10 +6,14 @@ import org.littletonrobotics.junction.AutoLog;
 @AutoLog
 public class LifterInputs {
 
-    public double power;
-
-    public double voltage;
+    public double appliedOutput;
+    public double outputCurrent;
     public double position;
-    public CANSparkMax.IdleMode idleMode;
+    public double velocity;
+    public boolean isSwitchPressed;
+
+    public double kP;
+    public double kI;
+    public double kD;
 
 }
