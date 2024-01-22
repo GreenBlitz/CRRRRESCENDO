@@ -35,7 +35,10 @@ public class SimulationLifter implements ILifter{
     }
 
     @Override
-    public void updateInputs(LifterInputs lastInputs) {
+    public void updateInputs(LifterInputsAutoLogged lastInputs) {
+        lastInputs.power = this.lastInputs.power;
+        lastInputs.position = this.lastInputs.position;
+        lastInputs.voltage = this.lastInputs.voltage;
     }
     @Override
     public void stopMotor() {

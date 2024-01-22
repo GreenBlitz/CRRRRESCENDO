@@ -27,7 +27,7 @@ public class LifterReplay implements ILifter{
 
 
     @Override
-    public void updateInputs(LifterInputs lastInputs) {
+    public void updateInputs(LifterInputsAutoLogged lastInputs) {
 
     }
 
