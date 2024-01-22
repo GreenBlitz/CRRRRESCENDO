@@ -16,25 +16,29 @@ public class Lifter extends GBSubsystem {
         lifter = LifterFactory.create();
         lifterInputs = new LifterInputs();
         lifter.updateInputs(lifterInputs);
-        pid = new ProfiledPIDController(LifterConstants.PID_KP,LifterConstants.PID_KI,LifterConstants.PID_KD,new TrapezoidProfile.Constraints(LifterConstants.MAX_VELOCITY, LifterConstants.MAX_ACCELERATION));
+        pid = new ProfiledPIDController(LifterConstants.PID_KP, LifterConstants.PID_KI, LifterConstants.PID_KD, new TrapezoidProfile.Constraints(LifterConstants.MAX_VELOCITY, LifterConstants.MAX_ACCELERATION));
     }
+
     public static Lifter getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new Lifter();
         }
         return instance;
     }
+
     @Override
     public void periodic() {
-        if(lifter.isSwitchPressed()) {
+        if (lifter.isSwitchPressed()) {
             resetEncoderTo(0);
         }
         lifter.updateInputs(lifterInputs);
         SmartDashboard.putBoolean("isSwitchPresed", lifterInputs.isSwitchPressed);
     }
+
     public void getToPoseByPID(double pos) {
-        lifter.setPower(pid.calculate(lifterInputs.position,pos));
+        lifter.setPower(pid.calculate(lifterInputs.position, pos));
     }
+
     public void setPower(double power) {
         lifter.setPower(power);
     }
@@ -42,15 +46,19 @@ public class Lifter extends GBSubsystem {
     public void setVoltage(double voltage) {
         lifter.setVoltage(voltage);
     }
+
     public void resetEncoderTo(double position) {
         lifter.resetEncoderTo(position);
     }
+
     public boolean isMotorInPosition(double position) {
         return lifter.isMotorInPosition(position);
     }
+
     public void stopMotor() {
         lifter.stopMotor();
     }
+
     public void setIdleMode(CANSparkMax.IdleMode mode) {
         lifter.setIdleMode(mode);
     }

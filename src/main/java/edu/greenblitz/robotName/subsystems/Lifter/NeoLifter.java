@@ -8,18 +8,22 @@ import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 public class NeoLifter implements ILifter {
     private GBSparkMax motor;
     private LifterInputs inputs;
+
     public NeoLifter() {
         inputs = new LifterInputs();
         motor = new GBSparkMax(LifterConstants.MOTOR_PORT_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
     }
+
     @Override
     public void setPower(double power) {
         motor.set(power);
     }
+
     @Override
     public void setVoltage(double voltage) {
         motor.setVoltage(voltage);
     }
+
     @Override
     public void resetEncoderTo(double position) {
         motor.getEncoder().setPosition(position);
@@ -43,10 +47,12 @@ public class NeoLifter implements ILifter {
         inputs.isSwitchPressed = DigitalInputMap.getInstance().getValue(LifterConstants.SWITCH_ID);
 
     }
+
     @Override
     public void stopMotor() {
         this.setPower(0);
     }
+
     @Override
     public void setIdleMode(CANSparkMax.IdleMode mode) {
         motor.setIdleMode(mode);

@@ -8,14 +8,14 @@ import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import org.littletonrobotics.junction.Logger;
 
-public class SimulationLifter implements ILifter{
+public class SimulationLifter implements ILifter {
 
     private LifterInputs inputs = new LifterInputs();
     private DCMotorSim motorSimulation;
     private double appliedOutput;
 
 
-    public SimulationLifter(){
+    public SimulationLifter() {
         motorSimulation = new DCMotorSim(
                 DCMotor.getNEO(LifterConstants.SimulationConstants.NUMBER_OF_MOTORS),
                 LifterConstants.SimulationConstants.GEAR_RATIO,
@@ -38,19 +38,19 @@ public class SimulationLifter implements ILifter{
 
     @Override
     public void resetEncoderTo(double position) {
-        Logger.recordOutput("Lifter", "tried setting the position to " +position);
+        Logger.recordOutput("Lifter", "tried setting the position to " + position);
     }
 
     @Override
     public boolean isMotorInPosition(double position) {
-        return inputs.position<=position+LifterConstants.PID_TOLERANCE && inputs.position>=position-LifterConstants.PID_TOLERANCE;
+        return inputs.position <= position + LifterConstants.PID_TOLERANCE && inputs.position >= position - LifterConstants.PID_TOLERANCE;
     }
 
     @Override
     public void updateInputs(LifterInputs inputs) {
         motorSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
 
-        inputs.appliedOutput =appliedOutput;
+        inputs.appliedOutput = appliedOutput;
         inputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
         inputs.position = motorSimulation.getAngularPositionRotations();
         inputs.velocity = motorSimulation.getAngularVelocityRPM();
@@ -60,8 +60,8 @@ public class SimulationLifter implements ILifter{
         inputs.kD = LifterConstants.PID_KD;
 
 
-
     }
+
     @Override
     public void stopMotor() {
         this.setPower(0);
@@ -70,7 +70,7 @@ public class SimulationLifter implements ILifter{
 
     @Override
     public void setIdleMode(CANSparkMax.IdleMode mode) {
-        Logger.getInstance().recordOutput("Lifter", "tried setting the idleMode to "+mode.name());
+        Logger.getInstance().recordOutput("Lifter", "tried setting the idleMode to " + mode.name());
     }
 
     @Override

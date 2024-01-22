@@ -2,7 +2,7 @@ package edu.greenblitz.robotName.subsystems.Lifter;
 
 import com.revrobotics.CANSparkMax;
 
-public class LifterReplay implements ILifter{
+public class LifterReplay implements ILifter {
 
 
     @Override
