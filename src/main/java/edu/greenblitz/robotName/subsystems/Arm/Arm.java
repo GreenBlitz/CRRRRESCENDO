@@ -33,7 +33,7 @@ public class Arm extends GBSubsystem {
         return wrist;
     }
 
-    public void move2AngleBy2Angles(double elbowTargetAngle, double wristTargetAngle){
+    public void moveToAngles(double elbowTargetAngle, double wristTargetAngle){
         elbow.setGoalAngle(elbowTargetAngle);
         wrist.setGoalAngle(wristTargetAngle);
     }

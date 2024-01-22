@@ -34,7 +34,5 @@ public class OI {
     }
 
     public void initButtons(){
-        secondJoystick.A.whileTrue(new MoveArmByAngles(Units.degreesToRadians(45),Units.degreesToRadians(315)));
-        secondJoystick.B.whileTrue(new MoveArmByAngles(Units.degreesToRadians(315),Units.degreesToRadians(45)));
     }
 }

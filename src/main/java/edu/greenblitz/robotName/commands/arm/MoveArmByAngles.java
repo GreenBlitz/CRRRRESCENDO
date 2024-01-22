@@ -9,6 +9,6 @@ public class MoveArmByAngles extends ArmCommand {
 
     @Override
     public void initialize() {
-        arm.move2AngleBy2Angles(elbowAngle, wristAngle);
+        arm.moveToAngles(elbowAngle, wristAngle);
     }
 }

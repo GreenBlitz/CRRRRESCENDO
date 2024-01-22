@@ -1,14 +1,16 @@
-package edu.greenblitz.robotName.subsystems.Arm.EndEffector.RollerUtils;
+package edu.greenblitz.robotName.subsystems.Arm.EndEffector.RollerUtils.BagRoller;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import edu.greenblitz.robotName.subsystems.Arm.EndEffector.RollerUtils.IRoller;
+import edu.greenblitz.robotName.subsystems.Arm.EndEffector.RollerUtils.RollerInputsAutoLogged;
 
-public class BagRoller implements IRoller{
+public class BagRoller implements IRoller {
 	
 	private TalonSRX motor;
 
 	public BagRoller(){
-		motor = new TalonSRX(RollerConstants.MotorConfigs.ROLLER_ID);
+		motor = new TalonSRX(BagRollerConstants.ROLLER_ID);
 	}
 
 	@Override

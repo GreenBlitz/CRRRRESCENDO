@@ -2,16 +2,13 @@ package edu.greenblitz.robotName.subsystems.Arm;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.FalconElbow.FalconElbowConstants;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 import edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowFactory;
 import edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.IElbow;
 import edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowConstants;
-
-
-import static edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowConstants.FalconConfigs.SIMPLE_MOTOR_FF;
-
 public class Elbow extends GBSubsystem {
 
     private static Elbow instance;
@@ -88,11 +85,11 @@ public class Elbow extends GBSubsystem {
 
 
     public double getStaticFF() {
-        return SIMPLE_MOTOR_FF.calculate(0);
+        return FalconElbowConstants.SIMPLE_MOTOR_FF.calculate(0);
     }
 
     public double getDynamicFF(double velocity) {
-        return SIMPLE_MOTOR_FF.calculate(velocity);
+        return FalconElbowConstants.SIMPLE_MOTOR_FF.calculate(velocity);
     }
 
     public double getVoltage() {

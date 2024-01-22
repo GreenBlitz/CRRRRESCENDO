@@ -42,7 +42,7 @@ public class SimulationWrist implements IWrist {
         isObjectIn = new SendableChooser<>();
         isObjectIn.setDefaultOption("False", false);
         isObjectIn.addOption("True", true);
-        SmartDashboard.putData(isObjectIn);
+        SmartDashboard.putData("Is Object In Arm?",isObjectIn);
     }
 
 

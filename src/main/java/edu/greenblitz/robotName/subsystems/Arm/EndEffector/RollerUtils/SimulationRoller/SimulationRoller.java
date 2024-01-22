@@ -1,11 +1,13 @@
-package edu.greenblitz.robotName.subsystems.Arm.EndEffector.RollerUtils;
+package edu.greenblitz.robotName.subsystems.Arm.EndEffector.RollerUtils.SimulationRoller;
 
 import edu.greenblitz.robotName.RobotConstants;
+import edu.greenblitz.robotName.subsystems.Arm.EndEffector.RollerUtils.IRoller;
+import edu.greenblitz.robotName.subsystems.Arm.EndEffector.RollerUtils.RollerInputsAutoLogged;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 
-public class SimulationRoller implements IRoller{
+public class SimulationRoller implements IRoller {
 	
 	private DCMotorSim rollerSimulation;
 
@@ -13,9 +15,9 @@ public class SimulationRoller implements IRoller{
 	
 	public SimulationRoller() {
 		rollerSimulation = new DCMotorSim(
-				DCMotor.getBag(RollerConstants.SimulationConstants.NUMBER_OF_MOTORS),
-				RollerConstants.SimulationConstants.GEAR_RATIO,
-				RollerConstants.SimulationConstants.MOMENT_OF_INERTIA
+				DCMotor.getBag(SimulationRollerConstants.NUMBER_OF_MOTORS),
+				SimulationRollerConstants.GEAR_RATIO,
+				SimulationRollerConstants.MOMENT_OF_INERTIA
 		);
 	}
 	

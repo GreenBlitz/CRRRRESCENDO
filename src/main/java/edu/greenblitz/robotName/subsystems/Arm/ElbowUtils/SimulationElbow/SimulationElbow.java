@@ -1,7 +1,10 @@
-package edu.greenblitz.robotName.subsystems.Arm.ElbowUtils;
+package edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.SimulationElbow;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.RobotConstants;
+import edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowConstants;
+import edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.IElbow;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.system.plant.DCMotor;
@@ -16,13 +19,13 @@ public class SimulationElbow implements IElbow {
 
     private double appliedVoltage;
 
-    private final PIDController controller = ElbowConstants.Simulation.SIM_PID.getPIDController();
+    private final PIDController controller = SimulationElbowConstants.SIM_PID.getPIDController();
 
 
     public SimulationElbow() {
         elbowSimulation = new SingleJointedArmSim(
-                DCMotor.getFalcon500(ElbowConstants.Simulation.NUMBER_OF_MOTORS),
-                ElbowConstants.Simulation.GEAR_RATIO,
+                DCMotor.getFalcon500(SimulationElbowConstants.NUMBER_OF_MOTORS),
+                SimulationElbowConstants.GEAR_RATIO,
                 SingleJointedArmSim.estimateMOI(
                         ElbowConstants.ARM_LENGTH,
                         ElbowConstants.ARM_MASS_KG

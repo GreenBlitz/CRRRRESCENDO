@@ -109,6 +109,10 @@ public class Wrist extends GBSubsystem {
         return goalAngle;
     }
 
+    public boolean isObjectInside() {
+        return wristInputs.isObjectInside;
+    }
+
     public boolean isAtAngle(double angle) {
         return Math.abs(angle - getAngleInRadians()) <= TOLERANCE;
     }

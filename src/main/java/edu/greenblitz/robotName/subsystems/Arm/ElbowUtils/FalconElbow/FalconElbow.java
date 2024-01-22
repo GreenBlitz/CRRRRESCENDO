@@ -1,20 +1,23 @@
-package edu.greenblitz.robotName.subsystems.Arm.ElbowUtils;
+package edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.FalconElbow;
 
 import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowConstants;
+import edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.IElbow;
 
 public class FalconElbow implements IElbow {
 
     private TalonFX motor;
 
     public FalconElbow() {
-        motor = new TalonFX(ElbowConstants.FalconConfigs.MOTOR_ID);
-        motor.getConfigurator().apply(ElbowConstants.FalconConfigs.MOTION_MAGIC_CONFIGS);
-        motor.getConfigurator().apply(ElbowConstants.FalconConfigs.CURRENT_LIMITS_CONFIGS);
-        motor.getConfigurator().apply(ElbowConstants.FalconConfigs.CLOSED_LOOP_RAMPS_CONFIGS);
-        motor.getConfigurator().apply(ElbowConstants.FalconConfigs.SWITCH_CONFIGS);
-        motor.setNeutralMode(ElbowConstants.FalconConfigs.NEUTRAL_MODE_VALUE);
+        motor = new TalonFX(FalconElbowConstants.MOTOR_ID);
+        motor.getConfigurator().apply(FalconElbowConstants.MOTION_MAGIC_CONFIGS);
+        motor.getConfigurator().apply(FalconElbowConstants.CURRENT_LIMITS_CONFIGS);
+        motor.getConfigurator().apply(FalconElbowConstants.CLOSED_LOOP_RAMPS_CONFIGS);
+        motor.getConfigurator().apply(FalconElbowConstants.SWITCH_CONFIGS);
+        motor.setNeutralMode(FalconElbowConstants.NEUTRAL_MODE_VALUE);
         motor.optimizeBusUtilization();
     }
 
@@ -44,7 +47,7 @@ public class FalconElbow implements IElbow {
         motor.setControl(new MotionMagicDutyCycle(
                 goalAngle / ElbowConstants.RELATIVE_POSITION_CONVERSION_FACTOR,
                 true,
-                ElbowConstants.FalconConfigs.SIMPLE_MOTOR_FF.calculate(0),
+                FalconElbowConstants.SIMPLE_MOTOR_FF.calculate(0),
                 0,
                 true,
                 true,
