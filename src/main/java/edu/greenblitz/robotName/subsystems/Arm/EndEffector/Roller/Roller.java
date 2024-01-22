@@ -3,7 +3,8 @@ package edu.greenblitz.robotName.subsystems.Arm.EndEffector.Roller;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.Arm.EndEffector.Roller.RollerConstants.ROLL_POWER;
+import static edu.greenblitz.robotName.subsystems.Arm.EndEffector.Roller.RollerConstants.ROLL_BACKWARD_POWER;
+import static edu.greenblitz.robotName.subsystems.Arm.EndEffector.Roller.RollerConstants.ROLL_FORWARD_POWER;
 
 public class Roller extends GBSubsystem {
 	
@@ -37,11 +38,11 @@ public class Roller extends GBSubsystem {
 	}
 
 	public static void rollForward(){
-		setPower(ROLL_POWER);
+		setPower(ROLL_FORWARD_POWER);
 	}
 
 	public static void rollBackward(){
-		setPower(-ROLL_POWER);
+		setPower(ROLL_BACKWARD_POWER);
 	}
 	
 	public static void stop() {

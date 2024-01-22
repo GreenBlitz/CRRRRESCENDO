@@ -8,7 +8,7 @@ public class BagRoller implements IRoller{
 	private TalonSRX motor;
 
 	public BagRoller(){
-		motor = new TalonSRX(RollerConstants.motorConfigs.ROLLER_ID);
+		motor = new TalonSRX(RollerConstants.MotorConfigs.ROLLER_ID);
 	}
 
 	@Override
