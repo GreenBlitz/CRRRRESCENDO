@@ -11,9 +11,6 @@
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
       "/Shuffleboard/Drivers/Field": "Field2d",
       "/SmartDashboard/Field": "Field2d",
-      "/SmartDashboard/Mech2D": "Mechanism2d",
-      "/SmartDashboard/Mech2DDDDD": "Mechanism2d",
-      "/SmartDashboard/Mech2d": "Mechanism2d",
       "/SmartDashboard/ShooterMech2D": "Mechanism2d",
       "/SmartDashboard/field": "Field2d"
     },
