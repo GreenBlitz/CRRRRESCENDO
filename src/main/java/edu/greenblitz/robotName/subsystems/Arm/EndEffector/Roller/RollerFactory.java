@@ -6,8 +6,8 @@ public class RollerFactory {
 	public static IRoller create() {
 		return switch (RobotConstants.ROBOT_TYPE) {
 			case ROBOT_NAME -> new BagRoller();
-			case SIMULATION -> new SimulationRoller();
-			default -> new ReplayRoller();
+			case REPLAY -> new ReplayRoller();
+			default -> new SimulationRoller();
 		};
 	}
 }
