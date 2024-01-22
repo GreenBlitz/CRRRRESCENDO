@@ -1,9 +1,11 @@
 package edu.greenblitz.robotName.subsystems.Intake;
 
 import edu.greenblitz.robotName.utils.GBSubsystem;
+import edu.wpi.first.wpilibj.DigitalInput;
 import org.littletonrobotics.junction.Logger;
 
 public class Intake extends GBSubsystem {
+	
 	private static Intake instance;
 	private static IntakeInputsAutoLogged intakeInputs;
 	private static IIntake intake;
@@ -49,6 +51,9 @@ public class Intake extends GBSubsystem {
 		setPower(0);
 	}
 	
+	public boolean getBeamBreakerValue(){
+		return intakeInputs.beamBreakerValue;
+	}
 
 	
 	

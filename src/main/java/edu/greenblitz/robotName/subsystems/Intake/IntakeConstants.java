@@ -4,7 +4,7 @@ import edu.wpi.first.math.controller.PIDController;
 
 public class IntakeConstants {
 	public static final int INTAKE_ID = 0;
-	
+	public static final int BREAM_BREAKER_CHANNEL = 0;
 	public static class SimulationConstants {
 		public static final int NUMBER_OF_MOTORS = 0;
 		public static final double GEAR_RATIO = 0;
