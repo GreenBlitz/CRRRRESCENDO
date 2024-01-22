@@ -6,9 +6,11 @@ import org.littletonrobotics.junction.AutoLog;
 public class FunnelInputs {
 	
 	public static double appliedOutput;
+
 	public static double outputCurrent;
+
 	public static double velocity;
-	
+
 	public static boolean isObjectIn;
 	
 }

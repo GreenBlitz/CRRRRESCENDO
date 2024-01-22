@@ -16,7 +16,7 @@ public class FunnelConstants {
 		
 		public static int CURRENT_LIMIT = 1;
 		
-		public static final GBSparkMax.SparkMaxConfObject ELBOW_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
+		public static final GBSparkMax.SparkMaxConfObject FUNNEL_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
 				.withIdleMode(CANSparkMax.IdleMode.kBrake)
 				.withRampRate(RobotConstants.General.RAMP_RATE_VAL)
 				.withCurrentLimit(CURRENT_LIMIT);
