@@ -4,7 +4,7 @@ import edu.greenblitz.robotName.commands.arm.Elbow.ElbowCommand;
 
 public class MotorMoveElbowToAngle extends ElbowCommand {
 
-    double goalAngle;
+    private double goalAngle;
 
     public MotorMoveElbowToAngle(double goalAngle){
         super();

@@ -39,6 +39,6 @@ public class OI {
     }
 
     public void initButtons(){
-        //do buttons here
+        //put buttons here
     }
 }

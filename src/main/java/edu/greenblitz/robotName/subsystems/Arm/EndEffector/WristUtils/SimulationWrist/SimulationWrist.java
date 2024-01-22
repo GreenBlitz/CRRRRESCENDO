@@ -21,7 +21,7 @@ public class SimulationWrist implements IWrist {
 
     private double appliedVoltage;
 
-    private PIDController controller = SimulationWristConstants.SIM_PID.getPIDController();
+    private PIDController controller;
 
     private SendableChooser<Boolean> isObjectIn;
 
@@ -39,6 +39,9 @@ public class SimulationWrist implements IWrist {
                 false,
                 WristConstants.STARTING_ANGLE
         );
+
+        controller = SimulationWristConstants.SIM_PID.getPIDController();
+
         isObjectIn = new SendableChooser<>();
         isObjectIn.setDefaultOption("False", false);
         isObjectIn.addOption("True", true);
