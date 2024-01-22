@@ -1,8 +1,6 @@
 package edu.greenblitz.robotName;
 
 
-import edu.greenblitz.robotName.subsystems.Arm.Elbow.ElbowConstants;
-import edu.greenblitz.robotName.subsystems.Pivot.PivotConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 
 public class OI {
