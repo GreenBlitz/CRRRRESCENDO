@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.subsystems.Arm.ArmMechanism;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.util.Color8Bit;
+import edu.wpi.first.wpilibj.util.Color;
 
 public class ArmMechanismConstants {
 
@@ -13,7 +14,7 @@ public class ArmMechanismConstants {
 
         public static final int LINE_WIDTH = 8;
 
-        public static final Color8Bit COLOR_OF_WRIST = new Color8Bit(edu.wpi.first.wpilibj.util.Color.kPurple);
+        public static final Color8Bit COLOR_OF_WRIST = new Color8Bit(Color.kPurple);
     }
 
 
