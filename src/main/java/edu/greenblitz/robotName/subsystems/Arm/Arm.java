@@ -17,6 +17,11 @@ public class Arm extends GBSubsystem {
         if (instance == null)
             instance = new Arm();
     }
+
+    public static Arm getInstance() {
+        return instance;
+    }
+
     private Arm() {
         elbow = Elbow.getInstance();
         wrist = Wrist.getInstance();

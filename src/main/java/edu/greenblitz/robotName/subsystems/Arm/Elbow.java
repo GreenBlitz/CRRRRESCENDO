@@ -29,7 +29,7 @@ public class Elbow extends GBSubsystem {
             instance = new Elbow();
     }
 
-    protected static Elbow getInstance() {
+    public static Elbow getInstance() {
         init();
         return instance;
     }
