@@ -9,12 +9,12 @@ public class FalconElbow implements IElbow {
     private TalonFX motor;
 
     public FalconElbow() {
-        motor = new TalonFX(ElbowConstants.Falcon.MOTOR_ID);
-        motor.getConfigurator().apply(ElbowConstants.Falcon.MOTION_MAGIC_CONFIGS);
-        motor.getConfigurator().apply(ElbowConstants.Falcon.CURRENT_LIMITS_CONFIGS);
-        motor.getConfigurator().apply(ElbowConstants.Falcon.CLOSED_LOOP_RAMPS_CONFIGS);
-        motor.getConfigurator().apply(ElbowConstants.Falcon.SWITCH_CONFIGS);
-        motor.setNeutralMode(ElbowConstants.Falcon.NEUTRAL_MODE_VALUE);
+        motor = new TalonFX(ElbowConstants.FalconConfigs.MOTOR_ID);
+        motor.getConfigurator().apply(ElbowConstants.FalconConfigs.MOTION_MAGIC_CONFIGS);
+        motor.getConfigurator().apply(ElbowConstants.FalconConfigs.CURRENT_LIMITS_CONFIGS);
+        motor.getConfigurator().apply(ElbowConstants.FalconConfigs.CLOSED_LOOP_RAMPS_CONFIGS);
+        motor.getConfigurator().apply(ElbowConstants.FalconConfigs.SWITCH_CONFIGS);
+        motor.setNeutralMode(ElbowConstants.FalconConfigs.NEUTRAL_MODE_VALUE);
         motor.optimizeBusUtilization();
     }
 
@@ -44,7 +44,7 @@ public class FalconElbow implements IElbow {
         motor.setControl(new MotionMagicDutyCycle(
                 goalAngle / ElbowConstants.RELATIVE_POSITION_CONVERSION_FACTOR,
                 true,
-                ElbowConstants.Falcon.SIMPLE_MOTOR_FF.calculate(0),
+                ElbowConstants.FalconConfigs.SIMPLE_MOTOR_FF.calculate(0),
                 0,
                 true,
                 true,
@@ -59,6 +59,7 @@ public class FalconElbow implements IElbow {
         inputs.position = motor.getPosition().getValue() * ElbowConstants.RELATIVE_POSITION_CONVERSION_FACTOR;
         inputs.velocity = motor.getVelocity().getValue() * ElbowConstants.RELATIVE_VELOCITY_CONVERSION_FACTOR;
         inputs.absoluteEncoderPosition = motor.getDutyCycle().getValue() * ElbowConstants.ABSOLUTE_POSITION_CONVERSION_FACTOR;
+        inputs.temperature = motor.getDeviceTemp().getValue();
         inputs.hasHitForwardLimit = motor.getFault_ForwardSoftLimit().getValue();
         inputs.hasHitBackwardsLimit = motor.getFault_ReverseSoftLimit().getValue();
     }
