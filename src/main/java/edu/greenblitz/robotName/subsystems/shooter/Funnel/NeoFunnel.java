@@ -1,6 +1,5 @@
 package edu.greenblitz.robotName.subsystems.shooter.Funnel;
 
-import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.filter.Debouncer;
@@ -11,7 +10,9 @@ import static edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants
 public class NeoFunnel implements IFunnel{
 	
 	private GBSparkMax motor;
+
 	private Debouncer debouncer;
+
 	public NeoFunnel() {
 		motor = new GBSparkMax(FunnelConstants.SparkMaxConfigs.FUNNEL_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
 		motor.config(FUNNEL_CONFIG_OBJECT);
@@ -34,6 +35,7 @@ public class NeoFunnel implements IFunnel{
 		funnelInputs.outputCurrent = motor.getOutputCurrent();
 		funnelInputs.appliedOutput = motor.getAppliedOutput();
 		funnelInputs.velocity = motor.getEncoder().getVelocity();
+		funnelInputs.temperature = motor.getMotorTemperature();
 		funnelInputs.isObjectIn = debouncer.calculate(motor.getReverseLimitSwitch(SWITCH_TYPE).isPressed());
 	}
 }

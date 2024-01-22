@@ -1,10 +1,8 @@
 package edu.greenblitz.robotName.subsystems.shooter.Funnel;
 
 import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.utils.tuneableNumber.TunableNumber;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.system.plant.DCMotor;
-import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -12,7 +10,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SimulationFunnel implements IFunnel{
 	
 	private FlywheelSim motorSimulation;
+
 	private double appliedOutput;
+
 	private SendableChooser<Boolean> isObjectIn;
 	
 	public SimulationFunnel() {
@@ -43,6 +43,7 @@ public class SimulationFunnel implements IFunnel{
 		funnelInputs.appliedOutput = appliedOutput;
 		funnelInputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
 		funnelInputs.velocity = motorSimulation.getAngularVelocityRPM();
+		funnelInputs.temperature = 0;
 		funnelInputs.isObjectIn = isObjectIn.getSelected();
 	}
 }
