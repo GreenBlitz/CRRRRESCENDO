@@ -1,9 +1,7 @@
 package edu.greenblitz.robotName.commands.lifter;
 
 import com.revrobotics.CANSparkMax;
-import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.Lifter.LifterConstants;
-import edu.greenblitz.robotName.utils.GBCommand;
 
 public class LiftUp extends LifterCommand {
 
@@ -16,7 +14,7 @@ public class LiftUp extends LifterCommand {
     @Override
     public void execute() {
 
-        lifter.getToPoseByPID(LifterConstants.MOTOR_FINAL_POSITION_WHEN_LIFTING_UP);
+        lifter.goToPosByPID(LifterConstants.MOTOR_FINAL_POSITION_WHEN_LIFTING_UP);
 
     }
 

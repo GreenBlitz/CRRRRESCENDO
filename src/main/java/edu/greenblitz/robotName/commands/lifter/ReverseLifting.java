@@ -12,7 +12,7 @@ public class ReverseLifting extends LifterCommand{
 
     @Override
     public void execute() {
-        lifter.getToPoseByPID(LifterConstants.MOTOR_FINAL_POSITION_WHEN_REVERSE_LIFTING);
+        lifter.goToPosByPID(LifterConstants.MOTOR_FINAL_POSITION_WHEN_REVERSE_LIFTING);
     }
 
     @Override

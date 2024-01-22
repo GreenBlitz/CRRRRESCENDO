@@ -20,10 +20,14 @@ public class Lifter extends GBSubsystem {
     }
 
     public static Lifter getInstance() {
+        init();
+        return instance;
+    }
+
+    public static void init(){
         if (instance == null) {
             instance = new Lifter();
         }
-        return instance;
     }
 
     @Override
@@ -35,7 +39,7 @@ public class Lifter extends GBSubsystem {
         SmartDashboard.putBoolean("isSwitchPresed", lifterInputs.isSwitchPressed);
     }
 
-    public void getToPoseByPID(double pos) {
+    public void goToPosByPID(double pos) {
         lifter.setPower(pid.calculate(lifterInputs.position, pos));
     }
 
