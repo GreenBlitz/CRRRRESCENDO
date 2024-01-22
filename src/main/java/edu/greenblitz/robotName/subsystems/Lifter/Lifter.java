@@ -4,6 +4,7 @@ import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Lifter extends GBSubsystem {
     private static Lifter instance;
@@ -14,6 +15,7 @@ public class Lifter extends GBSubsystem {
     private Lifter() {
         lifter = LifterFactory.create();
         lifterInputs = new LifterInputs();
+        lifter.updateInputs(lifterInputs);
         pid = new ProfiledPIDController(LifterConstants.PID_KP,LifterConstants.PID_KI,LifterConstants.PID_KD,new TrapezoidProfile.Constraints(LifterConstants.MAX_VELOCITY, LifterConstants.MAX_ACCELERATION));
     }
     public static Lifter getInstance() {
@@ -28,6 +30,7 @@ public class Lifter extends GBSubsystem {
             resetEncoderTo(0);
         }
         lifter.updateInputs(lifterInputs);
+        SmartDashboard.putBoolean("isSwitchPresed", lifterInputs.isSwitchPressed);
     }
     public void getToPoseByPID(double pos) {
         lifter.setPower(pid.calculate(lifterInputs.position,pos));
