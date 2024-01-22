@@ -16,6 +16,8 @@ public class LiftUp extends LifterCommand {
     @Override
     public void execute() {
 
+        lifter.getToPoseByPID(LifterConstants.MOTOR_FINAL_POSITION_WHEN_LIFTING_UP);
+
     }
 
     @Override

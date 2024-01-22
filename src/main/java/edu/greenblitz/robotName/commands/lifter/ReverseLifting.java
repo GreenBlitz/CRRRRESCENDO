@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.commands.lifter;
 
 import com.revrobotics.CANSparkMax;
+import edu.greenblitz.robotName.subsystems.Lifter.LifterConstants;
 
 public class ReverseLifting extends LifterCommand{
     @Override
@@ -11,7 +12,7 @@ public class ReverseLifting extends LifterCommand{
 
     @Override
     public void execute() {
-
+        lifter.getToPoseByPID(LifterConstants.MOTOR_FINAL_POSITION_WHEN_REVERSE_LIFTING);
     }
 
     @Override
