@@ -15,7 +15,7 @@ public class ReplayWrist implements IWrist {
     }
 
     @Override
-    public void setIdleMode(NeutralModeValue idleMode) {
+    public void setIdleMode(CANSparkMax.IdleMode idleMode) {
 
     }
 

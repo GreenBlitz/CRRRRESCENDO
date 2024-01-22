@@ -13,10 +13,16 @@
       "/SmartDashboard/ArmMech2D": "Mechanism2d",
       "/SmartDashboard/Field": "Field2d",
       "/SmartDashboard/SendableChooser[0]": "String Chooser",
+      "/SmartDashboard/ShooterMech2D": "Mechanism2d",
       "/SmartDashboard/field": "Field2d"
     },
     "windows": {
       "/SmartDashboard/ArmMech2D": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/SmartDashboard/ShooterMech2D": {
         "window": {
           "visible": true
         }
