@@ -7,7 +7,8 @@ import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.Arm.Elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
-import edu.greenblitz.robotName.subsystems.Pivot.Pivot;
+import edu.greenblitz.robotName.subsystems.Shooter.Mechanism.ShooterMechanism;
+import edu.greenblitz.robotName.subsystems.Shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -45,6 +46,7 @@ public class Robot extends LoggedRobot {
         Elbow.init();
         Pivot.init();
         ArmMechanism.init();
+        ShooterMechanism.init();
         OI.getInstance();
     }
     @Override

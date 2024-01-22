@@ -72,6 +72,7 @@ public class SimulationElbow implements IElbow {
         inputs.position = elbowSimulation.getAngleRads();
         inputs.velocity = elbowSimulation.getVelocityRadPerSec();
         inputs.absoluteEncoderPosition = elbowSimulation.getAngleRads();
+        inputs.temperature = 0;
         inputs.hasHitForwardLimit = elbowSimulation.hasHitLowerLimit();
         inputs.hasHitBackwardsLimit = elbowSimulation.hasHitLowerLimit();
     }
