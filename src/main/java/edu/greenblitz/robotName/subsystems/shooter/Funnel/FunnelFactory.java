@@ -9,7 +9,7 @@ public class FunnelFactory {
 		return switch (RobotConstants.ROBOT_TYPE) {
 			case ROBOT_NAME -> new NeoFunnel();
 			case REPLAY -> new ReplayFunnel();
-			default -> new SimulationFunnel();
+			case SIMULATION -> new SimulationFunnel();
 		};
 	}
 }

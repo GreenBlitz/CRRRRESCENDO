@@ -3,6 +3,7 @@ package edu.greenblitz.robotName.subsystems.shooter.Funnel;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 
+import static edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants.EJECT_POWER;
 import static edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants.ROLL_POWER;
 
 public class Funnel extends GBSubsystem {
@@ -46,7 +47,7 @@ public class Funnel extends GBSubsystem {
 	}
 
 	public static void rollOut(){
-		setPower(-ROLL_POWER);
+		setPower(EJECT_POWER);
 	}
 
 	public static void stop() {
