@@ -1,7 +1,6 @@
 {
   "NTProvider": {
     "types": {
-      "/AdvantageKit/RealOutputs/Arm/ArmMechanism": "Mechanism2d",
       "/FMSInfo": "FMSInfo",
       "/LiveWindow/Ungrouped/PIDController[1]": "PIDController",
       "/LiveWindow/Ungrouped/PIDController[2]": "PIDController",
@@ -10,18 +9,12 @@
       "/LiveWindow/Ungrouped/PIDController[5]": "PIDController",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
       "/Shuffleboard/Drivers/Field": "Field2d",
-      "/SmartDashboard/ArmMech2D": "Mechanism2d",
       "/SmartDashboard/Field": "Field2d",
       "/SmartDashboard/SendableChooser[0]": "String Chooser",
       "/SmartDashboard/ShooterMech2D": "Mechanism2d",
       "/SmartDashboard/field": "Field2d"
     },
     "windows": {
-      "/SmartDashboard/ArmMech2D": {
-        "window": {
-          "visible": true
-        }
-      },
       "/SmartDashboard/ShooterMech2D": {
         "window": {
           "visible": true
