@@ -8,8 +8,6 @@ public class Arm extends GBSubsystem {
 
     private Elbow elbow;
 
-    private Roller roller;
-
     private Wrist wrist;
 
 
@@ -25,12 +23,22 @@ public class Arm extends GBSubsystem {
     private Arm() {
         elbow = Elbow.getInstance();
         wrist = Wrist.getInstance();
-        roller = Roller.getInstance();
     }
 
+    public Elbow getElbow(){
+        return elbow;
+    }
+
+    public Wrist getWrist(){
+        return wrist;
+    }
 
     public void move2AngleBy2Angles(double elbowTargetAngle, double wristTargetAngle){
         elbow.setGoalAngle(elbowTargetAngle);
         wrist.setGoalAngle(wristTargetAngle);
+    }
+
+    public boolean isAtGoalAngles(){
+        return elbow.isAtGoalAngle() && wrist.isAtGoalAngle();
     }
 }

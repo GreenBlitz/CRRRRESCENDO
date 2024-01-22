@@ -21,12 +21,12 @@ public class Roller extends GBSubsystem {
 		roller.updateInputs(rollerInputs);
 	}
 
-	protected static void init() {
+	public static void init() {
 		if (instance == null)
 			instance = new Roller();
 	}
 
-	protected static Roller getInstance() {
+	public static Roller getInstance() {
 		init();
 		return instance;
 	}
@@ -35,22 +35,22 @@ public class Roller extends GBSubsystem {
 		super.periodic();
 
 		roller.updateInputs(rollerInputs);
-		Logger.processInputs("roller", rollerInputs);
+		Logger.processInputs("Roller", rollerInputs);
 	}
 
-	protected static void setPower(double power) {
+	public static void setPower(double power) {
 		roller.setPower(power);
 	}
 
-	protected static void rollForward(){
+	public static void rollForward(){
 		setPower(ROLL_FORWARD_POWER);
 	}
 
-	protected static void rollBackward(){
+	public static void rollBackward(){
 		setPower(ROLL_BACKWARD_POWER);
 	}
 
-	protected static void stop() {
+	public static void stop() {
 		setPower(0);
 	}
 }

@@ -27,12 +27,17 @@ public class ArmMechanism extends GBSubsystem {
 
     private final MechanismLigament2d elbow;
 
+    private final Arm arm;
+
+
 
     public static void init() {
         new ArmMechanism();
     }
 
     private ArmMechanism(){
+        arm = Arm.getInstance();
+
         armMechanism = new Mechanism2d(SIZE_OF_MECHANISM.getX(),SIZE_OF_MECHANISM.getY());
         root = armMechanism.getRoot("arm_root",POSITION_OF_MECHANISM.getX(),POSITION_OF_MECHANISM.getY());
 
@@ -46,12 +51,12 @@ public class ArmMechanism extends GBSubsystem {
     public void periodic() {
         super.periodic();
 
-        double elbowAngle = Elbow.getInstance().getAngleInRadians();
-        double wristAngle = Wrist.getInstance().getAngleInRadians();
+        double elbowAngle = arm.getElbow().getAngleInRadians();
+        double wristAngle = arm.getWrist().getAngleInRadians();
 
         elbow.setAngle(Units.radiansToDegrees(elbowAngle));
         wrist.setAngle(Units.radiansToDegrees(wristAngle));
 
-        Logger.recordOutput("Wrist/SimPose3D", Wrist.getInstance().getAngleInRadians());
+        Logger.recordOutput("Wrist/SimPose3D", arm.getWrist().getAngleInRadians());
     }
 }
