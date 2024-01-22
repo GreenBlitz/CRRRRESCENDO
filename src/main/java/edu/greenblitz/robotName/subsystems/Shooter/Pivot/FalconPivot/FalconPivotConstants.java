@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Pivot.FalconPivot;
+package edu.greenblitz.robotName.subsystems.Shooter.Pivot.FalconPivot;
 
 import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
@@ -7,7 +7,8 @@ import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 
-import static edu.greenblitz.robotName.subsystems.Pivot.PivotConstants.*;
+import static edu.greenblitz.robotName.subsystems.Shooter.Pivot.PivotConstants.*;
+
 
 public class FalconPivotConstants {
 

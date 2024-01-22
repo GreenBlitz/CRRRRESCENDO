@@ -1,12 +1,14 @@
-package edu.greenblitz.robotName.subsystems.Pivot;
+package edu.greenblitz.robotName.subsystems.Shooter.Pivot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.subsystems.Battery;
+
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.Pivot.FalconPivot.FalconPivotConstants.SIMPLE_MOTOR_FF;
-import static edu.greenblitz.robotName.subsystems.Pivot.PivotConstants.TOLERANCE;
+import static edu.greenblitz.robotName.subsystems.Shooter.Pivot.FalconPivot.FalconPivotConstants.SIMPLE_MOTOR_FF;
+import static edu.greenblitz.robotName.subsystems.Shooter.Pivot.PivotConstants.TOLERANCE;
+
 
 public class Pivot extends GBSubsystem {
 
@@ -40,10 +42,12 @@ public class Pivot extends GBSubsystem {
     @Override
     public void periodic() {
         super.periodic();
-        if (isAtAngle(goalAngle))
+        if (isAtAngle(goalAngle)) {
             standInPlace();
-        else
+        }
+        else {
             moveToAngle();
+        }
         pivot.updateInputs(pivotInputs);
         Logger.processInputs("Pivot", pivotInputs);
     }

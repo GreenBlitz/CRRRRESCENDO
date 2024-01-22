@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Pivot;
+package edu.greenblitz.robotName.subsystems.Shooter.Pivot;
 
 import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
@@ -15,9 +15,9 @@ public class PivotConstants {
 
     public static final double SHOOTER_MASS_KG = 10;
 
-    public static final double BACKWARD_ANGLE_LIMIT = Units.degreesToRadians(190);
+    public static final double BACKWARD_ANGLE_LIMIT = Units.degreesToRadians(20);
 
-    public static final double FORWARD_ANGLE_LIMIT = Units.degreesToRadians(260);
+    public static final double FORWARD_ANGLE_LIMIT = Units.degreesToRadians(340);
 
     public static final double RELATIVE_POSITION_CONVERSION_FACTOR = 0.0328;
 
@@ -25,7 +25,7 @@ public class PivotConstants {
 
     public static final double ABSOLUTE_POSITION_CONVERSION_FACTOR = 0.00302;
 
-    public static final double STARTING_ANGLE = 1;
+    public static final double STARTING_ANGLE = Units.degreesToRadians(180);
 
     public static final double kS = 1;
 

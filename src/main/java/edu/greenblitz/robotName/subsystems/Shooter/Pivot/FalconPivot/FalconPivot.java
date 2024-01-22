@@ -1,13 +1,14 @@
-package edu.greenblitz.robotName.subsystems.Pivot.FalconPivot;
+package edu.greenblitz.robotName.subsystems.Shooter.Pivot.FalconPivot;
 
 import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.greenblitz.robotName.subsystems.Pivot.IPivot;
-import edu.greenblitz.robotName.subsystems.Pivot.PivotConstants;
-import edu.greenblitz.robotName.subsystems.Pivot.PivotInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.Shooter.Pivot.IPivot;
+import edu.greenblitz.robotName.subsystems.Shooter.Pivot.PivotConstants;
+import edu.greenblitz.robotName.subsystems.Shooter.Pivot.PivotInputsAutoLogged;
 
-import static edu.greenblitz.robotName.subsystems.Pivot.FalconPivot.FalconPivotConstants.*;
+import static edu.greenblitz.robotName.subsystems.Shooter.Pivot.FalconPivot.FalconPivotConstants.*;
+
 
 public class FalconPivot implements IPivot {
 
