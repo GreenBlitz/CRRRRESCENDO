@@ -40,6 +40,7 @@ public class NeoFlyWheel implements IFlyWheel {
     public void updateInputs(FlyWheelInputsAutoLogged inputs) {
         inputs.appliedOutput = motor.getAppliedOutput();
         inputs.outputCurrent = motor.getOutputCurrent();
+        inputs.temperature = motor.getMotorTemperature();
         inputs.velocity = motor.getEncoder().getVelocity();
     }
 }

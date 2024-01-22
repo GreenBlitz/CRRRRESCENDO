@@ -40,6 +40,7 @@ public class FalconFlyWheel implements IFlyWheel {
 	public void updateInputs(FlyWheelInputsAutoLogged inputs) {
 		inputs.appliedOutput = motor.getMotorVoltage().getValue();
 		inputs.outputCurrent = motor.getSupplyCurrent().getValue();
+		inputs.temperature = motor.getDeviceTemp().getValue();
 		inputs.velocity = motor.getVelocity().getValue();
 	}
 }
