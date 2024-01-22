@@ -14,9 +14,9 @@ public class SimulationIntake implements IIntake {
 	private SendableChooser<Boolean> beamBreaker;
 	public SimulationIntake() {
 		motorSimulation = new DCMotorSim(
-				DCMotor.getNEO(IntakeConstants.SimulationConstants.NUMBER_OF_MOTORS),
-				IntakeConstants.SimulationConstants.GEAR_RATIO,
-				IntakeConstants.SimulationConstants.MOMENT_OF_INERTIA
+				DCMotor.getNEO(SimulationIntakeConstants.NUMBER_OF_MOTORS),
+				SimulationIntakeConstants.GEAR_RATIO,
+				SimulationIntakeConstants.MOMENT_OF_INERTIA
 		);
 		beamBreaker = new SendableChooser<>();
 		beamBreaker.setDefaultOption("True", true);
