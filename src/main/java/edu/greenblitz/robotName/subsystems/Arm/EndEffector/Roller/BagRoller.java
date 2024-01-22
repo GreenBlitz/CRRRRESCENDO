@@ -6,9 +6,11 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 public class BagRoller implements IRoller{
 	
 	private TalonSRX motor;
+
 	public BagRoller(){
 		motor = new TalonSRX(RollerConstants.motorConfigs.ROLLER_ID);
 	}
+
 	@Override
 	public void setPower(double power) {
 		motor.set(ControlMode.PercentOutput, power);
