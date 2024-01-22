@@ -40,6 +40,4 @@ public class WristConstants {
 
     public static final int CURRENT_LIMIT = 40;
 
-
-
 }

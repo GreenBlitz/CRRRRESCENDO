@@ -18,9 +18,7 @@ public class Wrist extends GBSubsystem {
 
     private IWrist wrist;
 
-  
     private double goalAngle;
-
 
     public static void init() {
         if (instance == null)
@@ -42,12 +40,14 @@ public class Wrist extends GBSubsystem {
     @Override
     public void periodic() {
         super.periodic();
+
         if (isAtAngle(goalAngle)) {
             standInPlace();
         }
         else {
             moveToAngle();
         }
+
         wrist.updateInputs(wristInputs);
         Logger.processInputs("Wrist", wristInputs);
     }
@@ -114,7 +114,5 @@ public class Wrist extends GBSubsystem {
     public boolean isAtGoalAngle() {
         return isAtAngle(goalAngle);
     }
-
-
 
 }

@@ -16,6 +16,7 @@ import static edu.greenblitz.robotName.subsystems.Arm.ArmMechanism.ArmMechanismC
 import static edu.greenblitz.robotName.subsystems.Arm.ArmMechanism.ArmMechanismConstants.WristMechanismConstants.*;
 
 public class ArmMechanism extends GBSubsystem {
+
     private static Mechanism2d armMechanism;
 
     private MechanismRoot2d rootWrist;
@@ -38,6 +39,7 @@ public class ArmMechanism extends GBSubsystem {
     public void periodic() {
         super.periodic();
         double wristAngle = Wrist.getInstance().getAngleInRadians();
+
         wrist.setAngle(Units.radiansToDegrees(wristAngle));
 
         Logger.recordOutput("Wrist/SimPose3D", Wrist.getInstance().getAngleInRadians());

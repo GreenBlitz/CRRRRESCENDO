@@ -11,8 +11,4 @@ public class SimulationWristConstants {
 
     public static final PIDObject SIM_PID = new PIDObject().withKp(0.8).withKd(0.3).withMaxPower(1);
 
-    public static final double X_POSITION = 1.5;
-
-    public static final double Y_POSITION = 0.5;
-
 }
