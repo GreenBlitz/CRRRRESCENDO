@@ -1,19 +1,23 @@
 package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.MotorFlyWheel.FalconFlyWheel;
 
-import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
-import com.ctre.phoenix6.controls.MotionMagicExpoDutyCycle;
-import com.ctre.phoenix6.controls.MotionMagicVelocityDutyCycle;
+
+import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
-import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.IFlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.MotorFlyWheel.MotorFlyWheelConstants;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheelInputsAutoLogged;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+
+import static edu.greenblitz.robotName.subsystems.shooter.FlyWheel.MotorFlyWheel.MotorFlyWheelConstants.FlywheelFalconConfigs.*;
+
 
 public class FalconFlyWheel implements IFlyWheel {
 	private TalonFX motor;
 	public FalconFlyWheel() {
 		motor = new TalonFX(MotorFlyWheelConstants.MOTOR_ID);
+		motor.getConfigurator().apply(CURRENT_LIMITS_CONFIGS);
+		motor.getConfigurator().apply(CLOSED_LOOP_RAMPS_CONFIGS);
+		motor.getConfigurator().apply(MOTION_MAGIC_CONFIGS);
+		motor.setNeutralMode(NEUTRAL_MODE_VALUE);
 	}
 	
 	@Override
@@ -28,9 +32,7 @@ public class FalconFlyWheel implements IFlyWheel {
 	
 	@Override
 	public void setVelocity(double velocity) {
-		motor.setControl(new MotionMagicVelocityDutyCycle(
-				velocity
-		));
+		motor.setControl(new VelocityVoltage(velocity));
 	}
 	
 	@Override
