@@ -40,7 +40,7 @@ public class NeoLifter implements ILifter {
         inputs.kP = motor.getPIDController().getP();
         inputs.kI = motor.getPIDController().getI();
         inputs.kD = motor.getPIDController().getD();
-        inputs.isSwitchPressed = //Gil fill;
+        inputs.isSwitchPressed = DigitalInputMap.getInstance().getValue(LifterConstants.SWITCH_ID);
 
     }
     @Override

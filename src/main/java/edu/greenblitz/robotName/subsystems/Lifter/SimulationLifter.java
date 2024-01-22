@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.subsystems.Lifter;
 
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.RobotConstants;
+import edu.greenblitz.robotName.utils.DigitalInputMap;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
@@ -53,10 +54,11 @@ public class SimulationLifter implements ILifter{
         inputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
         inputs.position = motorSimulation.getAngularPositionRotations();
         inputs.velocity = motorSimulation.getAngularVelocityRPM();
-        inputs.isSwitchPressed =;
+        inputs.isSwitchPressed = DigitalInputMap.getInstance().getValue(LifterConstants.SWITCH_ID);
         inputs.kP = LifterConstants.PID_KP;
         inputs.kI = LifterConstants.PID_KI;
         inputs.kD = LifterConstants.PID_KD;
+
 
 
     }
