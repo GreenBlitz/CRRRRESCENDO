@@ -42,6 +42,7 @@ public class Pivot extends GBSubsystem {
     @Override
     public void periodic() {
         super.periodic();
+
         if (isAtAngle(goalAngle)) {
             standInPlace();
         }

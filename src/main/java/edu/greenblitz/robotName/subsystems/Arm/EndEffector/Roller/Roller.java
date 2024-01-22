@@ -29,6 +29,8 @@ public class Roller extends GBSubsystem {
 	}
 	
 	public void periodic() {
+		super.periodic();
+
 		roller.updateInputs(rollerInputs);
 		Logger.processInputs("roller", rollerInputs);
 	}

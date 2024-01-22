@@ -37,6 +37,8 @@ public class ShooterMechanism extends GBSubsystem {
 
     @Override
     public void periodic() {
+        super.periodic();
+
         double pivotAngle = Pivot.getInstance().getAngleInRadians();
         pivot.setAngle(Units.radiansToDegrees(pivotAngle));
 
