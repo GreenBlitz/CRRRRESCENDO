@@ -10,12 +10,13 @@
       "/LiveWindow/Ungrouped/PIDController[5]": "PIDController",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
       "/Shuffleboard/Drivers/Field": "Field2d",
+      "/SmartDashboard/ArmMech2D": "Mechanism2d",
       "/SmartDashboard/Field": "Field2d",
-      "/SmartDashboard/ShooterMech2D": "Mechanism2d",
+      "/SmartDashboard/SendableChooser[0]": "String Chooser",
       "/SmartDashboard/field": "Field2d"
     },
     "windows": {
-      "/SmartDashboard/ShooterMech2D": {
+      "/SmartDashboard/ArmMech2D": {
         "window": {
           "visible": true
         }

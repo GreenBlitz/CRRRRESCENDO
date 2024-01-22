@@ -119,5 +119,9 @@ public class Pivot extends GBSubsystem {
         return isAtAngle(goalAngle);
     }
 
+<<<<<<< HEAD:src/main/java/edu/greenblitz/robotName/subsystems/Pivot/Pivot.java
+
+=======
+>>>>>>> dee99b51352662ae3c2fab8acda55e4f8433fded:src/main/java/edu/greenblitz/robotName/subsystems/Shooter/Pivot/Pivot.java
 
 }
