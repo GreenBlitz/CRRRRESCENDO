@@ -34,11 +34,8 @@ public class Robot extends LoggedRobot {
     public void robotInit() {
         CommandScheduler.getInstance().enable();
         initializeLogger();
-
         Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-
         SwerveChassis.init();
-        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
         SwerveChassis.getInstance().resetAllEncoders();
         MultiLimelight.init();
         Pivot.init();

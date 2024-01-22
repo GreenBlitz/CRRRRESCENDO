@@ -18,8 +18,6 @@ public class Pivot extends GBSubsystem {
 
     private IPivot pivot;
 
-    private double goalAngle;
-
 
 
     public static void init() {
@@ -36,19 +34,12 @@ public class Pivot extends GBSubsystem {
         pivot = PivotFactory.create();
         pivotInputs = new PivotInputsAutoLogged();
         pivot.updateInputs(pivotInputs);
-        goalAngle = getAngleInRadians();
     }
 
     @Override
     public void periodic() {
         super.periodic();
-
-        if (isAtAngle(goalAngle)) {
-            standInPlace();
-        }
-        else {
-            moveToAngle();
-        }
+        
         pivot.updateInputs(pivotInputs);
         Logger.processInputs("Pivot", pivotInputs);
     }
@@ -65,23 +56,17 @@ public class Pivot extends GBSubsystem {
     public void setIdleMode(NeutralModeValue idleMode) {
         pivot.setIdleMode(idleMode);
     }
-
-    public void setGoalAngle(double targetAngle) {
-        goalAngle = targetAngle;
-    }
-
-
+    
 
     public void resetAngle(double position) {
         pivot.resetAngle(position);
-        goalAngle = position;
     }
 
-    private void moveToAngle() {
+    public void moveToAngle(double goalAngle) {
         pivot.moveToAngle(goalAngle);
     }
 
-    private void standInPlace() {
+    public void standInPlace() {
         pivot.setPower(getStaticFF());
     }
 
@@ -106,17 +91,10 @@ public class Pivot extends GBSubsystem {
     public double getAngleInRadians() {
         return pivotInputs.position;
     }
-
-    public double getGoalAngleRadians() {
-        return goalAngle;
-    }
-
+    
     public boolean isAtAngle(double angle) {
         return Math.abs(angle - getAngleInRadians()) <= TOLERANCE;
     }
-
-    public boolean isAtGoalAngle() {
-        return isAtAngle(goalAngle);
-    }
+    
 
 }

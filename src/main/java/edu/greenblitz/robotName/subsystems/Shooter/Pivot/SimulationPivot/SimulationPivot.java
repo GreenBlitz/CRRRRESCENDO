@@ -21,7 +21,7 @@ public class SimulationPivot implements IPivot {
 
     private double appliedVoltage;
 
-    private PIDController controller = SIM_PID.getPIDController();
+    private PIDController controller;
 
 
     public SimulationPivot() {
@@ -38,6 +38,7 @@ public class SimulationPivot implements IPivot {
                 false,
                 PivotConstants.STARTING_ANGLE
         );
+        controller = SIM_PID.getPIDController();
     }
 
 
