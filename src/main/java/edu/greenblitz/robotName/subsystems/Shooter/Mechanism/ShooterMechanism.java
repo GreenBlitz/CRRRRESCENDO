@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.util.Color8Bit;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.subsystems.Shooter.Mechanism.ShooterMechanismConstants.*;
-import static edu.greenblitz.robotName.subsystems.Shooter.Mechanism.ShooterMechanismConstants.PivotMechanismConstants.PIVOT_CORDINATES;
+import static edu.greenblitz.robotName.subsystems.Shooter.Mechanism.ShooterMechanismConstants.PivotMechanismConstants.*;
 
 public class ShooterMechanism extends GBSubsystem {
 
@@ -30,8 +30,8 @@ public class ShooterMechanism extends GBSubsystem {
 
     public ShooterMechanism(){
         shooterMechanism = new Mechanism2d(SIZE_OF_MECHANISM.getX(),SIZE_OF_MECHANISM.getY());
-        rootPivot = shooterMechanism.getRoot("pivot_root", PIVOT_CORDINATES.getX(), PIVOT_CORDINATES.getY());
-        pivot = rootPivot.append(new MechanismLigament2d("pivot", PivotConstants.LENGTH_OF_SHOOTER, Units.radiansToDegrees(PivotConstants.STARTING_ANGLE),LINE_WIDTH, new Color8Bit(Color.kPurple)));
+        rootPivot = shooterMechanism.getRoot("pivot_root", PIVOT_COORDINATES.getX(), PIVOT_COORDINATES.getY());
+        pivot = rootPivot.append(new MechanismLigament2d("pivot", PivotConstants.LENGTH_OF_SHOOTER, Units.radiansToDegrees(PivotConstants.STARTING_ANGLE),LINE_WIDTH, PIVOT_COLOR));
         SmartDashboard.putData("ShooterMech2D", shooterMechanism);
     }
 

@@ -2,7 +2,6 @@ package edu.greenblitz.robotName;
 
 
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
-import edu.wpi.first.math.util.Units;
 
 public class OI {
     private static OI instance;
