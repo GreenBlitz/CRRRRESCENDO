@@ -1,6 +1,9 @@
 package edu.greenblitz.robotName.subsystems.swerve.Chassis;
 
+import edu.greenblitz.robotName.Robot;
+import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.VisionConstants;
+import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.subsystems.Gyros.GyroFactory;
 import edu.greenblitz.robotName.subsystems.Gyros.GyroInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.Gyros.IAngleMeasurementGyro;
@@ -9,6 +12,7 @@ import edu.greenblitz.robotName.subsystems.Photonvision;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModule;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.mk4iSwerveModule.MK4iSwerveConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
+import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.MatBuilder;
 import edu.wpi.first.math.Nat;
 import edu.wpi.first.math.Pair;
@@ -26,6 +30,12 @@ import org.littletonrobotics.junction.Logger;
 import org.photonvision.EstimatedRobotPose;
 
 import java.util.Optional;
+
+import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.TIME_STEP;
+import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
+import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.FAST_DISCRETION_CONSTANT;
+import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.SLOW_DISCRETION_CONSTANT;
+
 
 public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
@@ -201,7 +211,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	/**
 	 * returns chassis angle in radians
 	 */
-	private Rotation2d getGyroAngle() {
+	public Rotation2d getGyroAngle() {
 		return Rotation2d.fromRadians(gyroInputs.yaw);
 	}
 
@@ -213,11 +223,26 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	/**
 	 * setting module states to all 4 modules
 	 */
-	public void setModuleStates(SwerveModuleState[] states) {
+  	public void setModuleStates(SwerveModuleState[] states) {
 		for (Module module : Module.values()) {
 			setModuleStateForModule(module, states[module.ordinal()]);
 		}
 	}
+	private double getDiscretizedTimeStep() {
+		  double timeStep = getActualTimeStep();
+		  double discretizedTimeStep = timeStep * FAST_DISCRETION_CONSTANT;
+		  if (DRIVE_MODE.equals(MoveByJoysticks.DriveMode.SLOW)) {
+			  discretizedTimeStep = timeStep * SLOW_DISCRETION_CONSTANT;
+		  }
+		  return discretizedTimeStep;
+  	}
+  	private double getActualTimeStep() {
+		  if (RobotConstants.ROBOT_TYPE.equals(Robot.RobotType.ROBOT_NAME))
+			  return RoborioUtils.getCurrentRoborioCycle();
+		  return TIME_STEP;
+    }
+
+
 
 	public void moveByChassisSpeeds(double forwardSpeed, double leftwardSpeed, double angSpeed, Rotation2d currentAng) {
 		ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
@@ -226,6 +251,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				angSpeed,
 				currentAng
 		);
+    	chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
 		SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
 		SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
 		setModuleStates(desaturatedStates);
@@ -236,6 +262,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				fieldRelativeSpeeds,
 				currentAng
 		);
+    	chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
 		SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
 		SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
 		setModuleStates(desaturatedStates);
@@ -308,8 +335,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		poseEstimator.update(getGyroAngle(), getSwerveModulePositions());
 		Photonvision.getInstance().getUpdatedPoseEstimator().ifPresent((EstimatedRobotPose pose) -> poseEstimator.addVisionMeasurement(pose.estimatedPose.toPose2d(), pose.timestampSeconds));
 	}
-	
-	public void updatePoseEstimatorOdometry(){
+
+public void updatePoseEstimatorOdometry(){
 		poseEstimator.update(getGyroAngle(),getSwerveModulePositions());
 	}
 
@@ -349,7 +376,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	public Pose2d getRobotPose() {
 		return poseEstimator.getEstimatedPosition();
 	}
-	
+
 
 	public void resetToVision() {
 		int counter = 0;
