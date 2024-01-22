@@ -38,7 +38,7 @@ public class SimulationPivot implements IPivot {
                 false,
                 PivotConstants.STARTING_ANGLE
         );
-        controller = SIM_PID.getPIDController();
+        controller = SIMULATION_PID.getPIDController();
     }
 
 
