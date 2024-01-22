@@ -11,8 +11,6 @@ import edu.wpi.first.math.util.Units;
 
 public class ElbowConstants {
 
-	public static final double BRODER = Units.degreesToRadians(250);
-	public static final double BRODER_TOLERANCE = Units.degreesToRadians(8);
 	public static final double ARM_LENGTH = 0.6;
 
 	public static final double ARM_MASS_KG = 1;
@@ -54,7 +52,7 @@ public class ElbowConstants {
 
 	}
 
-	public static class Falcon {
+	public static class FalconConfigs {
 
 		public static final int MOTOR_ID = 1;
 

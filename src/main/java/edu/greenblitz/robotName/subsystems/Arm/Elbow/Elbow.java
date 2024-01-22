@@ -5,8 +5,7 @@ import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.Arm.Elbow.ElbowConstants.*;
-import static edu.greenblitz.robotName.subsystems.Arm.Elbow.ElbowConstants.Falcon.SIMPLE_MOTOR_FF;
+import static edu.greenblitz.robotName.subsystems.Arm.Elbow.ElbowConstants.FalconConfigs.SIMPLE_MOTOR_FF;
 
 public class Elbow extends GBSubsystem {
 
@@ -66,6 +65,8 @@ public class Elbow extends GBSubsystem {
         goalAngle = targetAngle;
     }
 
+
+
     public void resetAngle(double position) {
         elbow.resetAngle(position);
         goalAngle = position;
@@ -78,6 +79,7 @@ public class Elbow extends GBSubsystem {
     private void standInPlace() {
         elbow.setPower(getStaticFF());
     }
+
 
 
     public double getStaticFF() {
@@ -111,17 +113,5 @@ public class Elbow extends GBSubsystem {
     public boolean isAtGoalAngle() {
         return isAtAngle(goalAngle);
     }
-
-    public boolean isPassBroder(double targetAngle) {
-        if (targetAngle>=getAngleInRadians())
-            return getAngleInRadians()<BRODER && BRODER<targetAngle;
-        else
-            return targetAngle<BRODER && BRODER<getAngleInRadians();
-    }
-
-    public static boolean movingCondition(double goalAngle) {
-        return Elbow.getInstance().isPassBroder(goalAngle);
-    }
-
 
 }

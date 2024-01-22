@@ -6,8 +6,8 @@ public class ElbowFactory {
     public static IElbow create() {
         return switch (RobotConstants.ROBOT_TYPE) {
             case ROBOT_NAME -> new FalconElbow();
-            case SIMULATION -> new SimulationElbow();
-            default -> new ReplayElbow();
+            case REPLAY -> new ReplayElbow();
+            default -> new SimulationElbow();
         };
     }
 }
