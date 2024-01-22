@@ -49,8 +49,11 @@ public class Funnel extends GBSubsystem {
 		setPower(-ROLL_POWER);
 	}
 
+	public static void stop() {
+		setPower(0);
+	}
 
-	
+
 	public static double getVoltage() {
 		return funnelInputs.appliedOutput;
 	}
@@ -62,10 +65,7 @@ public class Funnel extends GBSubsystem {
 	public static boolean isObjectIn() {
 		return funnelInputs.isObjectIn;
 	}
-	
-	public static void stop() {
-		setPower(0);
-	}
+
 	
 	
 }
