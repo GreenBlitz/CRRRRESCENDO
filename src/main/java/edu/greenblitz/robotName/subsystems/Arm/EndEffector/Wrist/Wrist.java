@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.subsystems.Arm.EndEffector.Wrist;
 
 
 import com.revrobotics.CANSparkMax;
+import edu.greenblitz.robotName.subsystems.Arm.EndEffector.Wrist.NeoWrist.NeoWristConstants;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.controller.PIDController;
@@ -83,11 +84,11 @@ public class Wrist extends GBSubsystem {
 
 
     public double getStaticFF() {
-        return wristInputs.staticFeedForward;
+        return NeoWristConstants.WRIST_FEEDFORWARD.calculate(0);
     }
 
     public double getDynamicFF(double velocity) {
-        return wristInputs.dynamicFeedForward;
+        return NeoWristConstants.WRIST_FEEDFORWARD.calculate(velocity);
     }
 
     public double getVoltage() {

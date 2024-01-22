@@ -1,7 +1,10 @@
-package edu.greenblitz.robotName.subsystems.Arm.EndEffector.Wrist;
+package edu.greenblitz.robotName.subsystems.Arm.EndEffector.Wrist.SimulationWrist;
 
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.RobotConstants;
+import edu.greenblitz.robotName.subsystems.Arm.EndEffector.Wrist.IWrist;
+import edu.greenblitz.robotName.subsystems.Arm.EndEffector.Wrist.WristConstants;
+import edu.greenblitz.robotName.subsystems.Arm.EndEffector.Wrist.WristInputsAutoLogged;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.system.plant.DCMotor;
@@ -11,7 +14,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.BATTERY_VOLTAGE;
-import static edu.greenblitz.robotName.subsystems.Arm.EndEffector.Wrist.WristConstants.Simulation.SIM_PID;
 
 public class SimulationWrist implements IWrist {
 
@@ -19,14 +21,14 @@ public class SimulationWrist implements IWrist {
 
     private double appliedVoltage;
 
-    private PIDController controller = SIM_PID.getPIDController();
+    private PIDController controller = SimulationWristConstants.SIM_PID.getPIDController();
 
     private SendableChooser<Boolean> isObjectIn;
 
     public SimulationWrist() {
         wristSimulation = new SingleJointedArmSim(
-                DCMotor.getNEO(WristConstants.Simulation.NUMBER_OF_MOTORS),
-                WristConstants.Simulation.GEAR_RATIO,
+                DCMotor.getNEO(SimulationWristConstants.NUMBER_OF_MOTORS),
+                SimulationWristConstants.GEAR_RATIO,
                 SingleJointedArmSim.estimateMOI(
                         WristConstants.LENGTH_OF_ENDEFFECTOR,
                         WristConstants.SHOOTER_MASS_KG
@@ -84,7 +86,5 @@ public class SimulationWrist implements IWrist {
         inputs.hasHitForwardLimit = wristSimulation.hasHitLowerLimit();
         inputs.hasHitBackwardsLimit = wristSimulation.hasHitLowerLimit();
         inputs.isObjectInside = isObjectIn.getSelected();
-        inputs.staticFeedForward = SIM_PID.getPIDController().calculate(0);
-        inputs.dynamicFeedForward = SIM_PID.getPIDController().calculate(wristSimulation.getVelocityRadPerSec());
     }
 }

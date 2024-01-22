@@ -5,6 +5,7 @@ import com.revrobotics.SparkMaxLimitSwitch;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.utils.PIDObject;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.util.Units;
 
 public class WristConstants {
@@ -40,35 +41,5 @@ public class WristConstants {
     public static final int CURRENT_LIMIT = 40;
 
 
-    public static class Simulation {
 
-        public static final int NUMBER_OF_MOTORS = 1;
-
-        public static final double GEAR_RATIO = 1 / RELATIVE_POSITION_CONVERSION_FACTOR;
-
-        public static final PIDObject SIM_PID = new PIDObject().withKp(0.8).withKd(0.3).withMaxPower(1);
-
-        public static final double X_POSITION = 1.5;
-
-        public static final double Y_POSITION = 0.5;
-
-    }
-
-
-    public static class NeoConfigs {
-
-        public static final int MOTOR_ID = 1;
-        
-        public static final double DEBOUNCE_TIME_FOR_LIMIT_SWITCH = 0.5;
-        
-        public static final SparkMaxLimitSwitch.Type SWITCH_TYPE = SparkMaxLimitSwitch.Type.kNormallyClosed;
-
-        public static final PIDObject NEO_PID = new PIDObject().withKp(0.8).withKd(0.3).withKi(0).withMaxPower(1);
-      
-        public static final GBSparkMax.SparkMaxConfObject WRIST_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
-                .withPID(NEO_PID)
-                .withIdleMode(CANSparkMax.IdleMode.kBrake)
-                .withRampRate(RobotConstants.General.RAMP_RATE_VAL)
-                .withCurrentLimit(CURRENT_LIMIT);
-    }
 }

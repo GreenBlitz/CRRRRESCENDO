@@ -22,8 +22,4 @@ public class WristInputs {
     public boolean hasHitBackwardsLimit;
 
     public boolean isObjectInside;
-
-    public double staticFeedForward;
-
-    public double dynamicFeedForward;
 }
