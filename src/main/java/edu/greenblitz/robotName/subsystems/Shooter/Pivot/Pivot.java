@@ -1,15 +1,14 @@
-package edu.greenblitz.robotName.subsystems.Pivot;
+package edu.greenblitz.robotName.subsystems.Shooter.Pivot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.subsystems.Battery;
-import edu.greenblitz.robotName.subsystems.Arm.Elbow.Elbow;
-import edu.greenblitz.robotName.subsystems.Arm.Elbow.ElbowConstants;
+
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.Pivot.PivotConstants.BRODER;
-import static edu.greenblitz.robotName.subsystems.Pivot.PivotConstants.FalconConfigs.SIMPLE_MOTOR_FF;
-import static edu.greenblitz.robotName.subsystems.Pivot.PivotConstants.TOLERANCE;
+import static edu.greenblitz.robotName.subsystems.Shooter.Pivot.FalconPivot.FalconPivotConstants.SIMPLE_MOTOR_FF;
+import static edu.greenblitz.robotName.subsystems.Shooter.Pivot.PivotConstants.TOLERANCE;
+
 
 public class Pivot extends GBSubsystem {
 
@@ -43,10 +42,12 @@ public class Pivot extends GBSubsystem {
     @Override
     public void periodic() {
         super.periodic();
-        if (isAtAngle(goalAngle))
+        if (isAtAngle(goalAngle)) {
             standInPlace();
-        else
+        }
+        else {
             moveToAngle();
+        }
         pivot.updateInputs(pivotInputs);
         Logger.processInputs("Pivot", pivotInputs);
     }
@@ -68,6 +69,8 @@ public class Pivot extends GBSubsystem {
         goalAngle = targetAngle;
     }
 
+
+
     public void resetAngle(double position) {
         pivot.resetAngle(position);
         goalAngle = position;
@@ -80,6 +83,7 @@ public class Pivot extends GBSubsystem {
     private void standInPlace() {
         pivot.setPower(getStaticFF());
     }
+
 
 
     public double getStaticFF() {
@@ -112,10 +116,6 @@ public class Pivot extends GBSubsystem {
 
     public boolean isAtGoalAngle() {
         return isAtAngle(goalAngle);
-    }
-
-    public boolean isAtSafeAngle() {
-        return isAtAngle(BRODER);
     }
 
 

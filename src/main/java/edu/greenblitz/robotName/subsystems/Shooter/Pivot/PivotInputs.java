@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Pivot;
+package edu.greenblitz.robotName.subsystems.Shooter.Pivot;
 
 import org.littletonrobotics.junction.AutoLog;
 
@@ -14,6 +14,8 @@ public class PivotInputs {
     public double velocity;
 
     public double absoluteEncoderPosition;
+
+    public double temperature;
 
     public boolean hasHitForwardLimit;
 
