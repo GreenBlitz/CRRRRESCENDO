@@ -11,9 +11,9 @@ public class SimulationIntake implements IIntake {
 	
 	public SimulationIntake() {
 		motorSimulation = new DCMotorSim(
-				DCMotor.getNEO(IntakeConstants.SimulationConstants.NUMBER_OF_MOTORS),
-				IntakeConstants.SimulationConstants.GEAR_RATIO,
-				IntakeConstants.SimulationConstants.MOMENT_OF_INERTIA
+				DCMotor.getNEO(SimulationIntakeConstants.NUMBER_OF_MOTORS),
+				SimulationIntakeConstants.GEAR_RATIO,
+				SimulationIntakeConstants.MOMENT_OF_INERTIA
 		);
 	}
 	
@@ -29,9 +29,9 @@ public class SimulationIntake implements IIntake {
 	}
 	
 	@Override
-	public void updateInputs(IntakeInputsAutoLogged chassisIntakeInputs) {
-		chassisIntakeInputs.appliedOutput = appliedOutput;
-		chassisIntakeInputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
-		chassisIntakeInputs.velocity = motorSimulation.getAngularVelocityRPM();
+	public void updateInputs(IntakeInputsAutoLogged intakeInputs) {
+		intakeInputs.appliedOutput = appliedOutput;
+		intakeInputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
+		intakeInputs.velocity = motorSimulation.getAngularVelocityRPM();
 	}
 }
