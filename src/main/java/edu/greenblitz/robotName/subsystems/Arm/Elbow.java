@@ -17,7 +17,6 @@ public class Elbow extends GBSubsystem {
 
     private final ElbowInputsAutoLogged elbowInputs;
 
-    private double goalAngle;
 
 
 
@@ -26,7 +25,7 @@ public class Elbow extends GBSubsystem {
             instance = new Elbow();
     }
 
-    protected static Elbow getInstance() {
+    public static Elbow getInstance() {
         init();
         return instance;
     }
@@ -35,17 +34,12 @@ public class Elbow extends GBSubsystem {
         elbow = ElbowFactory.create();
         elbowInputs = new ElbowInputsAutoLogged();
         elbow.updateInputs(elbowInputs);
-        goalAngle = getAngleInRadians();
     }
 
     @Override
     public void periodic() {
         super.periodic();
-        if (isAtAngle(goalAngle)) {
-            standInPlace();
-        } else {
-            moveToAngle();
-        }
+
         elbow.updateInputs(elbowInputs);
         Logger.processInputs("Elbow", elbowInputs);
     }
@@ -63,22 +57,16 @@ public class Elbow extends GBSubsystem {
         elbow.setIdleMode(idleMode);
     }
 
-    public void setGoalAngle(double targetAngle) {
-        goalAngle = targetAngle;
-    }
-
-
 
     public void resetAngle(double position) {
         elbow.resetAngle(position);
-        goalAngle = position;
     }
 
-    private void moveToAngle() {
+    public void moveToAngle(double goalAngle) {
         elbow.moveToAngle(goalAngle);
     }
 
-    private void standInPlace() {
+    public void standInPlace() {
         elbow.setPower(getStaticFF());
     }
 
@@ -104,16 +92,9 @@ public class Elbow extends GBSubsystem {
         return elbowInputs.position;
     }
 
-    public double getGoalAngleRadians() {
-        return goalAngle;
-    }
-
     public boolean isAtAngle(double targetHeight) {
         return Math.abs(targetHeight - getAngleInRadians()) <= ElbowConstants.TOLERANCE;
     }
 
-    public boolean isAtGoalAngle() {
-        return isAtAngle(goalAngle);
-    }
 
 }

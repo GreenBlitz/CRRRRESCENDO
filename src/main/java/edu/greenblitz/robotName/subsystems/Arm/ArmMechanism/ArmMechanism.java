@@ -1,10 +1,9 @@
 package edu.greenblitz.robotName.subsystems.Arm.ArmMechanism;
 
-import edu.greenblitz.robotName.subsystems.Arm.Arm;
 import edu.greenblitz.robotName.subsystems.Arm.Elbow;
 import edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.ElbowConstants;
-import edu.greenblitz.robotName.subsystems.Arm.Wrist;
 import edu.greenblitz.robotName.subsystems.Arm.EndEffector.WristUtils.WristConstants;
+import edu.greenblitz.robotName.subsystems.Arm.Wrist;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
@@ -23,11 +22,13 @@ public class ArmMechanism extends GBSubsystem {
 
     private MechanismRoot2d root;
 
-    private final MechanismLigament2d wrist;
+    private final MechanismLigament2d wristJoint;
 
-    private final MechanismLigament2d elbow;
+    private final MechanismLigament2d elbowJoint;
 
-    private final Arm arm;
+    private final Elbow elbow;
+    private final Wrist wrist;
+
 
 
 
@@ -36,13 +37,14 @@ public class ArmMechanism extends GBSubsystem {
     }
 
     private ArmMechanism(){
-        arm = Arm.getInstance();
+        elbow = Elbow.getInstance();
+        wrist = Wrist.getInstance();
 
         armMechanism = new Mechanism2d(SIZE_OF_MECHANISM.getX(),SIZE_OF_MECHANISM.getY());
         root = armMechanism.getRoot("arm_root",POSITION_OF_MECHANISM.getX(),POSITION_OF_MECHANISM.getY());
 
-        elbow = root.append(new MechanismLigament2d("elbow", ElbowConstants.ARM_LENGTH,Units.radiansToDegrees(ElbowConstants.STARTING_ANGLE),ELBOW_LINE_WIDTH,COLOR_OF_ELBOW));
-        wrist = elbow.append(new MechanismLigament2d("wrist", WristConstants.LENGTH_OF_ENDEFFECTOR, Units.radiansToDegrees(WristConstants.STARTING_ANGLE), WRIST_LINE_WIDTH, COLOR_OF_WRIST));
+        elbowJoint = root.append(new MechanismLigament2d("elbow", ElbowConstants.ARM_LENGTH,Units.radiansToDegrees(ElbowConstants.STARTING_ANGLE),ELBOW_LINE_WIDTH,COLOR_OF_ELBOW));
+        wristJoint = elbowJoint.append(new MechanismLigament2d("wrist", WristConstants.LENGTH_OF_ENDEFFECTOR, Units.radiansToDegrees(WristConstants.STARTING_ANGLE), WRIST_LINE_WIDTH, COLOR_OF_WRIST));
 
         SmartDashboard.putData("ArmMech2D", armMechanism);
     }
@@ -51,12 +53,13 @@ public class ArmMechanism extends GBSubsystem {
     public void periodic() {
         super.periodic();
 
-        double elbowAngle = arm.getElbow().getAngleInRadians();
-        double wristAngle = arm.getWrist().getAngleInRadians();
+        double elbowAngle = elbow.getAngleInRadians();
+        double wristAngle = wrist.getAngleInRadians();
 
-        elbow.setAngle(Units.radiansToDegrees(elbowAngle));
-        wrist.setAngle(Units.radiansToDegrees(wristAngle));
+        elbowJoint.setAngle(Units.radiansToDegrees(elbowAngle));
+        wristJoint.setAngle(Units.radiansToDegrees(wristAngle));
 
-        Logger.recordOutput("Wrist/SimPose3D", arm.getWrist().getAngleInRadians());
+        Logger.recordOutput("Elbow/SimPose3D", elbow.getAngleInRadians());
+        Logger.recordOutput("Wrist/SimPose3D", wrist.getAngleInRadians());
     }
 }

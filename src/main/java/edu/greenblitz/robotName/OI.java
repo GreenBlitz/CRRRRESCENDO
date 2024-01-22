@@ -1,7 +1,12 @@
 package edu.greenblitz.robotName;
 
 
-import edu.greenblitz.robotName.commands.arm.MoveArmByAngles;
+import edu.greenblitz.robotName.commands.arm.Elbow.ElbowDefaultCommand;
+import edu.greenblitz.robotName.commands.arm.Elbow.MoveElbowToAngle.MoveElbowToAngle;
+import edu.greenblitz.robotName.commands.arm.Wrist.MoveWristToAngle.MoveWristToAngle;
+import edu.greenblitz.robotName.commands.arm.Wrist.WristDefaultCommand;
+import edu.greenblitz.robotName.subsystems.Arm.Elbow;
+import edu.greenblitz.robotName.subsystems.Arm.Wrist;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.wpi.first.math.util.Units;
 
@@ -34,5 +39,6 @@ public class OI {
     }
 
     public void initButtons(){
+        //do buttons here
     }
 }

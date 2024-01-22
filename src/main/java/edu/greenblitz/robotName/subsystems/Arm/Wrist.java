@@ -20,14 +20,13 @@ public class Wrist extends GBSubsystem {
 
     private IWrist wrist;
 
-    private double goalAngle;
 
-    protected static void init() {
+    public static void init() {
         if (instance == null)
             instance = new Wrist();
     }
 
-    protected static Wrist getInstance() {
+    public static Wrist getInstance() {
         init();
         return instance;
     }
@@ -36,19 +35,11 @@ public class Wrist extends GBSubsystem {
         wrist = WristFactory.create();
         wristInputs = new WristInputsAutoLogged();
         wrist.updateInputs(wristInputs);
-        goalAngle = getAngleInRadians();
     }
 
     @Override
     public void periodic() {
         super.periodic();
-
-        if (isAtAngle(goalAngle)) {
-            standInPlace();
-        }
-        else {
-            moveToAngle();
-        }
 
         wrist.updateInputs(wristInputs);
         Logger.processInputs("Wrist", wristInputs);
@@ -67,20 +58,16 @@ public class Wrist extends GBSubsystem {
         wrist.setIdleMode(idleMode);
     }
 
-    public void setGoalAngle(double targetAngle) {
-        goalAngle = targetAngle;
-    }
 
     public void resetAngle(double position) {
         wrist.resetAngle(position);
-        goalAngle = position;
     }
 
-    private void moveToAngle() {
+    public void moveToAngle(double goalAngle) {
         wrist.moveToAngle(goalAngle);
     }
 
-    private void standInPlace() {
+    public void standInPlace() {
         wrist.setPower(getStaticFF());
     }
 
@@ -105,10 +92,6 @@ public class Wrist extends GBSubsystem {
         return wristInputs.position;
     }
 
-    public double getGoalAngleRadians() {
-        return goalAngle;
-    }
-
     public boolean isObjectInside() {
         return wristInputs.isObjectInside;
     }
@@ -117,8 +100,5 @@ public class Wrist extends GBSubsystem {
         return Math.abs(angle - getAngleInRadians()) <= TOLERANCE;
     }
 
-    public boolean isAtGoalAngle() {
-        return isAtAngle(goalAngle);
-    }
 
 }
