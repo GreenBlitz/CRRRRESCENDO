@@ -17,9 +17,9 @@ public class SimulationLifter implements ILifter {
 
     public SimulationLifter() {
         motorSimulation = new DCMotorSim(
-                DCMotor.getNEO(LifterConstants.SimulationConstants.NUMBER_OF_MOTORS),
-                LifterConstants.SimulationConstants.GEAR_RATIO,
-                LifterConstants.SimulationConstants.MOMENT_OF_INERTIA);
+                DCMotor.getNEO(SimulationConstants.NUMBER_OF_MOTORS),
+                SimulationConstants.GEAR_RATIO,
+                SimulationConstants.MOMENT_OF_INERTIA);
     }
 
     @Override

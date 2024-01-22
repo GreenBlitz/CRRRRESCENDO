@@ -39,7 +39,7 @@ public class Lifter extends GBSubsystem {
         SmartDashboard.putBoolean("isSwitchPresed", lifterInputs.isSwitchPressed);
     }
 
-    public void goToPosByPID(double pos) {
+    public void goToPositionByPID(double pos) {
         lifter.setPower(pid.calculate(lifterInputs.position, pos));
     }
 
@@ -55,7 +55,7 @@ public class Lifter extends GBSubsystem {
         lifter.resetEncoderTo(position);
     }
 
-    public boolean isMotorInPosition(double position) {
+    public boolean isMotorAtPosition(double position) {
         return lifter.isMotorInPosition(position);
     }
 

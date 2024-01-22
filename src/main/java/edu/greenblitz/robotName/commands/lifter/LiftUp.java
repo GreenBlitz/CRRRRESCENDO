@@ -14,13 +14,13 @@ public class LiftUp extends LifterCommand {
     @Override
     public void execute() {
 
-        lifter.goToPosByPID(LifterConstants.MOTOR_FINAL_POSITION_WHEN_LIFTING_UP);
+        lifter.goToPositionByPID(LifterConstants.MOTOR_FINAL_POSITION_WHEN_LIFTING_UP);
 
     }
 
     @Override
     public boolean isFinished() {
-        return lifter.isMotorInPosition(LifterConstants.MOTOR_FINAL_POSITION_WHEN_LIFTING_UP);
+        return lifter.isMotorAtPosition(LifterConstants.MOTOR_FINAL_POSITION_WHEN_LIFTING_UP);
     }
 
     @Override

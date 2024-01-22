@@ -12,16 +12,16 @@ public class ReverseLifting extends LifterCommand{
 
     @Override
     public void execute() {
-        lifter.goToPosByPID(LifterConstants.MOTOR_FINAL_POSITION_WHEN_REVERSE_LIFTING);
+        lifter.goToPositionByPID(LifterConstants.MOTOR_FINAL_POSITION_WHEN_REVERSE_LIFTING);
     }
 
     @Override
     public boolean isFinished() {
-        return lifter.isMotorInPosition(0);
+        return lifter.isMotorAtPosition(0);
     }
 
     @Override
     public void end(boolean interrupted) {
-        lifter.setIdleMode(CANSparkMax.IdleMode.kBrake);
+        lifter.stopMotor();
     }
 }
