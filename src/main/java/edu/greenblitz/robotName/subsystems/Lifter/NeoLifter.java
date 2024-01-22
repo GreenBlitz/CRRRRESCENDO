@@ -27,25 +27,11 @@ public class NeoLifter implements ILifter {
     @Override
     public void resetEncoderTo(double position) {
         motor.getEncoder().setPosition(position);
-        inputs.position = position;
     }
 
     @Override
     public boolean isMotorInPosition(double position) {
         return motor.getEncoder().getPosition() <= position + LifterConstants.PID_TOLERANCE && motor.getEncoder().getPosition() >= position - LifterConstants.PID_TOLERANCE;
-    }
-
-    @Override
-    public void updateInputs(LifterInputs inputs) {
-        inputs.appliedOutput = motor.getAppliedOutput();
-        inputs.outputCurrent = motor.getOutputCurrent();
-        inputs.position = motor.getEncoder().getPosition();
-        inputs.velocity = motor.getEncoder().getVelocity();
-        inputs.kP = motor.getPIDController().getP();
-        inputs.kI = motor.getPIDController().getI();
-        inputs.kD = motor.getPIDController().getD();
-        inputs.isSwitchPressed = DigitalInputMap.getInstance().getValue(LifterConstants.SWITCH_ID);
-
     }
 
     @Override
@@ -62,4 +48,18 @@ public class NeoLifter implements ILifter {
     public boolean isSwitchPressed() {
         return DigitalInputMap.getInstance().getValue(LifterConstants.SWITCH_ID);
     }
+
+    @Override
+    public void updateInputs(LifterInputs inputs) {
+        inputs.appliedOutput = motor.getAppliedOutput();
+        inputs.outputCurrent = motor.getOutputCurrent();
+        inputs.position = motor.getEncoder().getPosition();
+        inputs.velocity = motor.getEncoder().getVelocity();
+        inputs.kP = motor.getPIDController().getP();
+        inputs.kI = motor.getPIDController().getI();
+        inputs.kD = motor.getPIDController().getD();
+        inputs.isSwitchPressed = DigitalInputMap.getInstance().getValue(LifterConstants.SWITCH_ID);
+    }
+
+
 }

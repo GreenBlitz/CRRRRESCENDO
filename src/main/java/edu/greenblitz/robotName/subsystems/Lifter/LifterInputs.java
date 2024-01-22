@@ -10,9 +10,7 @@ public class LifterInputs {
     public double position;
     public double velocity;
     public boolean isSwitchPressed;
-
     public double kP;
     public double kI;
     public double kD;
-
 }

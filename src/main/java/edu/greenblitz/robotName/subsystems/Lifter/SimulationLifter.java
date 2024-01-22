@@ -19,9 +19,7 @@ public class SimulationLifter implements ILifter {
         motorSimulation = new DCMotorSim(
                 DCMotor.getNEO(LifterConstants.SimulationConstants.NUMBER_OF_MOTORS),
                 LifterConstants.SimulationConstants.GEAR_RATIO,
-                LifterConstants.SimulationConstants.MOMENT_OF_INERTIA
-        );
-
+                LifterConstants.SimulationConstants.MOMENT_OF_INERTIA);
     }
 
     @Override
@@ -47,22 +45,6 @@ public class SimulationLifter implements ILifter {
     }
 
     @Override
-    public void updateInputs(LifterInputs inputs) {
-        motorSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
-
-        inputs.appliedOutput = appliedOutput;
-        inputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
-        inputs.position = motorSimulation.getAngularPositionRotations();
-        inputs.velocity = motorSimulation.getAngularVelocityRPM();
-        inputs.isSwitchPressed = DigitalInputMap.getInstance().getValue(LifterConstants.SWITCH_ID);
-        inputs.kP = LifterConstants.PID_KP;
-        inputs.kI = LifterConstants.PID_KI;
-        inputs.kD = LifterConstants.PID_KD;
-
-
-    }
-
-    @Override
     public void stopMotor() {
         this.setPower(0);
 
@@ -76,6 +58,20 @@ public class SimulationLifter implements ILifter {
     @Override
     public boolean isSwitchPressed() {
         return inputs.isSwitchPressed;
+    }
+
+    @Override
+    public void updateInputs(LifterInputs inputs) {
+        motorSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
+
+        inputs.appliedOutput = appliedOutput;
+        inputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
+        inputs.position = motorSimulation.getAngularPositionRotations();
+        inputs.velocity = motorSimulation.getAngularVelocityRPM();
+        inputs.isSwitchPressed = DigitalInputMap.getInstance().getValue(LifterConstants.SWITCH_ID);
+        inputs.kP = LifterConstants.PID_KP;
+        inputs.kI = LifterConstants.PID_KI;
+        inputs.kD = LifterConstants.PID_KD;
     }
 
 }
