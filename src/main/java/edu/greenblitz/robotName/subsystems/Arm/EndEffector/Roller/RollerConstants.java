@@ -4,7 +4,7 @@ public class RollerConstants {
 
 	public static final double ROLL_POWER = 1;
 	
-	public static class motorConfigs {
+	public static class MotorConfigs {
 		public static final int ROLLER_ID = 0;
 
 	}
