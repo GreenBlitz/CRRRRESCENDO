@@ -84,8 +84,7 @@ public class SimulationWrist implements IWrist {
         inputs.hasHitForwardLimit = wristSimulation.hasHitLowerLimit();
         inputs.hasHitBackwardsLimit = wristSimulation.hasHitLowerLimit();
         inputs.isObjectInside = isObjectIn.getSelected();
-        inputs.kP = SIM_PID.getKp();
-        inputs.kI = SIM_PID.getKi();
-        inputs.kD = SIM_PID.getKd();
+        inputs.staticFeedForward = SIM_PID.getPIDController().calculate(0);
+        inputs.dynamicFeedForward = SIM_PID.getPIDController().calculate(wristSimulation.getVelocityRadPerSec());
     }
 }

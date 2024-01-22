@@ -17,7 +17,6 @@ public class Wrist extends GBSubsystem {
 
     private IWrist wrist;
 
-    private PIDController controller;
   
     private double goalAngle;
 
@@ -37,7 +36,6 @@ public class Wrist extends GBSubsystem {
         wristInputs = new WristInputsAutoLogged();
         wrist.updateInputs(wristInputs);
         goalAngle = getAngleInRadians();
-        controller = new PIDController(wristInputs.kP,wristInputs.kI,wristInputs.kD);
     }
 
     @Override
@@ -85,11 +83,11 @@ public class Wrist extends GBSubsystem {
 
 
     public double getStaticFF() {
-        return controller.calculate(0);
+        return wristInputs.staticFeedForward;
     }
 
     public double getDynamicFF(double velocity) {
-        return controller.calculate(velocity);
+        return wristInputs.dynamicFeedForward;
     }
 
     public double getVoltage() {

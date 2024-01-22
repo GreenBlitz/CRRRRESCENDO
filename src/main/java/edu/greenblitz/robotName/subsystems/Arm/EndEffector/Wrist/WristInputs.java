@@ -23,7 +23,7 @@ public class WristInputs {
 
     public boolean isObjectInside;
 
-    public double kP;
-    public double kI;
-    public double kD;
+    public double staticFeedForward;
+
+    public double dynamicFeedForward;
 }

@@ -6,6 +6,7 @@ import com.revrobotics.SparkMaxAbsoluteEncoder;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.filter.Debouncer;
 
+import static edu.greenblitz.robotName.subsystems.Arm.EndEffector.Wrist.WristConstants.NeoConfigs.NEO_PID;
 import static edu.greenblitz.robotName.subsystems.Arm.EndEffector.Wrist.WristConstants.NeoConfigs.SWITCH_TYPE;
 import static edu.greenblitz.robotName.subsystems.Arm.EndEffector.Wrist.WristConstants.RELATIVE_POSITION_CONVERSION_FACTOR;
 import static edu.greenblitz.robotName.subsystems.Arm.EndEffector.Wrist.WristConstants.RELATIVE_VELOCITY_CONVERSION_FACTOR;
@@ -72,9 +73,8 @@ public class NeoWrist implements IWrist {
         inputs.hasHitBackwardsLimit = inputs.position == WristConstants.BACKWARD_ANGLE_LIMIT;
         inputs.hasHitForwardLimit = inputs.position == WristConstants.FORWARD_ANGLE_LIMIT;
         inputs.isObjectInside = debouncer.calculate(motor.getReverseLimitSwitch(SWITCH_TYPE).isPressed());
-        inputs.kP = motor.getPIDController().getP();
-        inputs.kI = motor.getPIDController().getI();
-        inputs.kD = motor.getPIDController().getD();
+        inputs.staticFeedForward = NEO_PID.getPIDController().calculate(0);
+        inputs.dynamicFeedForward = NEO_PID.getPIDController().calculate(motor.getEncoder().getVelocity());
     }
 
 }

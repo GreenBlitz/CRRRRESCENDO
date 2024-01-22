@@ -2,7 +2,6 @@ package edu.greenblitz.robotName.subsystems.Arm.EndEffector.Wrist;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxLimitSwitch;
-import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.utils.PIDObject;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
@@ -64,10 +63,10 @@ public class WristConstants {
         
         public static final SparkMaxLimitSwitch.Type SWITCH_TYPE = SparkMaxLimitSwitch.Type.kNormallyClosed;
 
-        private static final PIDObject PID = new PIDObject().withKp(0.8).withKd(0.3).withKi(0).withMaxPower(1);
+        public static final PIDObject NEO_PID = new PIDObject().withKp(0.8).withKd(0.3).withKi(0).withMaxPower(1);
       
         public static final GBSparkMax.SparkMaxConfObject WRIST_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
-                .withPID(PID)
+                .withPID(NEO_PID)
                 .withIdleMode(CANSparkMax.IdleMode.kBrake)
                 .withRampRate(RobotConstants.General.RAMP_RATE_VAL)
                 .withCurrentLimit(CURRENT_LIMIT);
