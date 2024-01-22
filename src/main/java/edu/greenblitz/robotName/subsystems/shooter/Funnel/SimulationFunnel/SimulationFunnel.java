@@ -1,13 +1,18 @@
-package edu.greenblitz.robotName.subsystems.shooter.Funnel;
+package edu.greenblitz.robotName.subsystems.shooter.Funnel.SimulationFunnel;
 
 import edu.greenblitz.robotName.RobotConstants;
+import edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants;
+import edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.shooter.Funnel.IFunnel;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class SimulationFunnel implements IFunnel{
+import static edu.greenblitz.robotName.subsystems.shooter.Funnel.SimulationFunnel.SimulationFunnelConstants.*;
+
+public class SimulationFunnel implements IFunnel {
 	
 	private FlywheelSim motorSimulation;
 
@@ -17,9 +22,9 @@ public class SimulationFunnel implements IFunnel{
 	
 	public SimulationFunnel() {
 		motorSimulation = new FlywheelSim(
-				DCMotor.getNEO(FunnelConstants.SimulationConstants.NUMBER_OF_MOTORS),
-				FunnelConstants.SimulationConstants.GEAR_RATIO,
-				FunnelConstants.SimulationConstants.MOMENT_OF_INERTIA
+				DCMotor.getNEO(NUMBER_OF_MOTORS),
+				GEAR_RATIO,
+				MOMENT_OF_INERTIA
 		);
 		isObjectIn = new SendableChooser<>();
 		isObjectIn.setDefaultOption("False", false);

@@ -1,23 +1,24 @@
-package edu.greenblitz.robotName.subsystems.shooter.Funnel;
+package edu.greenblitz.robotName.subsystems.shooter.Funnel.NeoFunnel;
 
 import com.revrobotics.CANSparkMaxLowLevel;
+import edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.shooter.Funnel.IFunnel;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.filter.Debouncer;
 
-import static edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants.SparkMaxConfigs.FUNNEL_CONFIG_OBJECT;
-import static edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants.SparkMaxConfigs.SWITCH_TYPE;
+import static edu.greenblitz.robotName.subsystems.shooter.Funnel.NeoFunnel.NeoFunnelConstants.*;
 
-public class NeoFunnel implements IFunnel{
+public class NeoFunnel implements IFunnel {
 	
 	private GBSparkMax motor;
 
 	private Debouncer debouncer;
 
 	public NeoFunnel() {
-		motor = new GBSparkMax(FunnelConstants.SparkMaxConfigs.FUNNEL_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+		motor = new GBSparkMax(FUNNEL_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
 		motor.config(FUNNEL_CONFIG_OBJECT);
-		motor.getReverseLimitSwitch(SWITCH_TYPE).enableLimitSwitch(true);
-		debouncer = new Debouncer(FunnelConstants.SparkMaxConfigs.DEBOUNCE_TIME_FOR_LIMIT_SWITCH);
+		motor.getReverseLimitSwitch(SWITCH_TYPE).enableLimitSwitch(IS_SENSOR_EXIST);
+		debouncer = new Debouncer(DEBOUNCE_TIME_FOR_LIMIT_SWITCH);
 	}
 	
 	@Override
