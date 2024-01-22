@@ -1,7 +1,10 @@
-package edu.greenblitz.robotName.subsystems.Pivot;
+package edu.greenblitz.robotName.subsystems.Pivot.SimulationPivot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.RobotConstants;
+import edu.greenblitz.robotName.subsystems.Pivot.IPivot;
+import edu.greenblitz.robotName.subsystems.Pivot.PivotConstants;
+import edu.greenblitz.robotName.subsystems.Pivot.PivotInputsAutoLogged;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.system.plant.DCMotor;
@@ -9,6 +12,7 @@ import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.BATTERY_VOLTAGE;
+import static edu.greenblitz.robotName.subsystems.Pivot.SimulationPivot.SimulationPivotConstants.*;
 
 public class SimulationPivot implements IPivot {
 
@@ -16,13 +20,13 @@ public class SimulationPivot implements IPivot {
 
     private double appliedVoltage;
 
-    private PIDController controller = PivotConstants.Simulation.SIM_PID.getPIDController();
+    private PIDController controller = SIM_PID.getPIDController();
 
 
     public SimulationPivot() {
         pivotSimulation = new SingleJointedArmSim(
-                DCMotor.getFalcon500(PivotConstants.Simulation.NUMBER_OF_MOTORS),
-                PivotConstants.Simulation.GEAR_RATIO,
+                DCMotor.getFalcon500(NUMBER_OF_MOTORS),
+                GEAR_RATIO,
                 SingleJointedArmSim.estimateMOI(
                         PivotConstants.LENGTH_OF_SHOOTER,
                         PivotConstants.SHOOTER_MASS_KG
@@ -72,6 +76,7 @@ public class SimulationPivot implements IPivot {
         inputs.position = pivotSimulation.getAngleRads();
         inputs.velocity = pivotSimulation.getVelocityRadPerSec();
         inputs.absoluteEncoderPosition = pivotSimulation.getAngleRads();
+        inputs.temperature = 0;
         inputs.hasHitForwardLimit = pivotSimulation.hasHitLowerLimit();
         inputs.hasHitBackwardsLimit = pivotSimulation.hasHitLowerLimit();
     }

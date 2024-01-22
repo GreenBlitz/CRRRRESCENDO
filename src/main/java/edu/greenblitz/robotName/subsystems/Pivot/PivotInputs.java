@@ -15,6 +15,8 @@ public class PivotInputs {
 
     public double absoluteEncoderPosition;
 
+    public double temperature;
+
     public boolean hasHitForwardLimit;
 
     public boolean hasHitBackwardsLimit;
