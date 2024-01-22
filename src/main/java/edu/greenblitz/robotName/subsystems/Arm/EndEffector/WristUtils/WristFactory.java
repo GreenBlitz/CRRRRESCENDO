@@ -9,7 +9,7 @@ public class WristFactory {
         return switch (RobotConstants.ROBOT_TYPE) {
             case ROBOT_NAME -> new NeoWrist();
             case REPLAY -> new ReplayWrist();
-            default -> new SimulationWrist();
+            case SIMULATION -> new SimulationWrist();
         };
     }
 }

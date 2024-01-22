@@ -19,9 +19,4 @@ public class GBMath {
 		return ((x % y) + y) % y;
 	}
 
-	public static double reverseAngle(double angleInRadians){
-		return angleInRadians == 0 ? 0 : angleInRadians > 0 ? -Math.PI * 2 + angleInRadians : angleInRadians + Math.PI * 2;
-	}
-
-
 }

@@ -39,7 +39,7 @@ public class SimulationWrist implements IWrist {
                 WristConstants.STARTING_ANGLE
         );
 
-        controller = SimulationWristConstants.SIM_PID.getPIDController();
+        controller = SimulationWristConstants.SIMULATION_PID.getPIDController();
 
         isObjectInArm = new SendableChooser<>();
         isObjectInArm.setDefaultOption("False", false);

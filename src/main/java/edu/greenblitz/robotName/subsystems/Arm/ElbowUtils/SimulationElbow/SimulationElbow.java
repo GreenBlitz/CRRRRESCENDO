@@ -19,7 +19,7 @@ public class SimulationElbow implements IElbow {
 
     private double appliedVoltage;
 
-    private final PIDController controller = SimulationElbowConstants.SIM_PID.getPIDController();
+    private final PIDController controller = SimulationElbowConstants.SIMULATION_PID.getPIDController();
 
 
     public SimulationElbow() {
