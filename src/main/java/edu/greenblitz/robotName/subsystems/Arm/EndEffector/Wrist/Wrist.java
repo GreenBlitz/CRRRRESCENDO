@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Arm.Wrist;
+package edu.greenblitz.robotName.subsystems.Arm.EndEffector.Wrist;
 
 
 import com.revrobotics.CANSparkMax;
@@ -7,7 +7,7 @@ import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.controller.PIDController;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.Arm.Wrist.WristConstants.TOLERANCE;
+import static edu.greenblitz.robotName.subsystems.Arm.EndEffector.Wrist.WristConstants.TOLERANCE;
 
 public class Wrist extends GBSubsystem {
 
@@ -43,12 +43,14 @@ public class Wrist extends GBSubsystem {
     @Override
     public void periodic() {
         super.periodic();
-        if (isAtAngle(goalAngle))
+        if (isAtAngle(goalAngle)) {
             standInPlace();
-        else
+        }
+        else {
             moveToAngle();
+        }
         wrist.updateInputs(wristInputs);
-        Logger.processInputs("Pivot", wristInputs);
+        Logger.processInputs("Wrist", wristInputs);
     }
 
 

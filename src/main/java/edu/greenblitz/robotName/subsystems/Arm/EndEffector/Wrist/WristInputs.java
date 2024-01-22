@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Arm.Wrist;
+package edu.greenblitz.robotName.subsystems.Arm.EndEffector.Wrist;
 
 import org.littletonrobotics.junction.AutoLog;
 
@@ -14,6 +14,8 @@ public class WristInputs {
     public double velocity;
 
     public double absoluteEncoderPosition;
+
+    public double temperature;
 
     public boolean hasHitForwardLimit;
 

@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Arm.Wrist;
+package edu.greenblitz.robotName.subsystems.Arm.EndEffector.Wrist;
 
 import com.revrobotics.CANSparkMax;
 

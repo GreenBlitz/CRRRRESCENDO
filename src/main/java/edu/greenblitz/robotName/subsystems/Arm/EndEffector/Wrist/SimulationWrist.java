@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Arm.Wrist;
+package edu.greenblitz.robotName.subsystems.Arm.EndEffector.Wrist;
 
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.RobotConstants;
@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.BATTERY_VOLTAGE;
-import static edu.greenblitz.robotName.subsystems.Arm.Wrist.WristConstants.Simulation.SIM_PID;
+import static edu.greenblitz.robotName.subsystems.Arm.EndEffector.Wrist.WristConstants.Simulation.SIM_PID;
 
 public class SimulationWrist implements IWrist {
 
@@ -80,6 +80,7 @@ public class SimulationWrist implements IWrist {
         inputs.position = wristSimulation.getAngleRads();
         inputs.velocity = wristSimulation.getVelocityRadPerSec();
         inputs.absoluteEncoderPosition = wristSimulation.getAngleRads();
+        inputs.temperature = 0;
         inputs.hasHitForwardLimit = wristSimulation.hasHitLowerLimit();
         inputs.hasHitBackwardsLimit = wristSimulation.hasHitLowerLimit();
         inputs.isObjectInside = isObjectIn.getSelected();
