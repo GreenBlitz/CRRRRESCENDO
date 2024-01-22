@@ -13,13 +13,20 @@ public class RotateToAngleSupplier implements DoubleSupplier {
 
 
     public Supplier<Rotation2d> angleSupplier;
+    public DoubleSupplier feedForwardSupplier;
     public PIDController pidController;
 
 
     public RotateToAngleSupplier (Supplier<Rotation2d> targetAngle){
+        this(targetAngle,() -> 0);
+    }
+    public RotateToAngleSupplier (Supplier<Rotation2d> targetAngle,DoubleSupplier feedForwardSupplier){
         this.angleSupplier = targetAngle;
-        pidController = new PIDController(0.6,0,0);
+        this.feedForwardSupplier = feedForwardSupplier;
+        pidController = new PIDController(0.4,0,0.1);
+        pidController.setTolerance(Units.degreesToRadians(10));
         pidController.enableContinuousInput(0,2 * Math.PI);
+
     }
     @Override
     public double getAsDouble() {
@@ -31,10 +38,14 @@ public class RotateToAngleSupplier implements DoubleSupplier {
                 SwerveChassis.getInstance().getChassisAngle().getRadians()
         );
 
-        return isAtSetpoint() ? 0 : pidOutput;
+        SmartDashboard.putNumber("setpoint", angleSupplier.get().getDegrees());
+        SmartDashboard.putBoolean("is at setpoint" , isAtSetpoint());
+        SmartDashboard.putBoolean("is at setset" , pidController.atSetpoint());
+
+        return isAtSetpoint() || pidController.atSetpoint() ? 0 : pidOutput + feedForwardSupplier.getAsDouble();
     }
 
     public boolean isAtSetpoint(){
-        return Math.abs(SwerveChassis.getInstance().getChassisAngle().getRadians() + angleSupplier.get().getRadians()) < Units.degreesToRadians(5);
+        return Math.abs(Math.IEEEremainder(angleSupplier.get().unaryMinus().getRadians() - SwerveChassis.getInstance().getChassisAngle().getRadians(), 2 * Math.PI)) < Units.degreesToRadians(10);
     }
 }

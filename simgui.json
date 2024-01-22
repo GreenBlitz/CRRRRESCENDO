@@ -8,15 +8,29 @@
       "/LiveWindow/Ungrouped/PIDController[4]": "PIDController",
       "/LiveWindow/Ungrouped/PIDController[5]": "PIDController",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/Shuffleboard/Drivers/Field": "Field2d",
       "/SmartDashboard/Field": "Field2d",
       "/SmartDashboard/field": "Field2d"
     },
     "windows": {
+      "/Shuffleboard/Drivers/Field": {
+        "window": {
+          "visible": true
+        }
+      },
       "/SmartDashboard/Field": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/SmartDashboard/field": {
         "window": {
           "visible": true
         }
       }
     }
+  },
+  "NetworkTables Info": {
+    "visible": true
   }
 }
