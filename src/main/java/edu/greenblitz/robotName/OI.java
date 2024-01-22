@@ -1,7 +1,10 @@
 package edu.greenblitz.robotName;
 
 
+import edu.greenblitz.robotName.commands.swerve.adadad;
+import edu.greenblitz.robotName.commands.swerve.susstysre;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import edu.wpi.first.math.util.Units;
 
 
 public class OI {
@@ -32,5 +35,9 @@ public class OI {
     }
 
     public void initButtons(){
+        secondJoystick.A.whileTrue(new adadad(Units.degreesToRadians(310)));
+        secondJoystick.B.whileTrue(new adadad(Units.degreesToRadians(140)));
+        secondJoystick.X.whileTrue(new susstysre(Units.degreesToRadians(304)));
+        secondJoystick.Y.whileTrue(new susstysre(Units.degreesToRadians(50)));
     }
 }

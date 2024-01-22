@@ -3,13 +3,11 @@ package edu.greenblitz.robotName;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.subsystems.Arm.ArmMechanism.ArmMechanism;
-import edu.greenblitz.robotName.subsystems.Arm.EndEffector.Wrist.Wrist;
+import edu.greenblitz.robotName.subsystems.Arm.Wrist;
 import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.Battery;
-import edu.greenblitz.robotName.subsystems.Arm.Elbow.Elbow;
+import edu.greenblitz.robotName.subsystems.Arm.Elbow;
 import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
-import edu.greenblitz.robotName.subsystems.Shooter.Mechanism.ShooterMechanism;
-import edu.greenblitz.robotName.subsystems.Shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -45,10 +43,8 @@ public class Robot extends LoggedRobot {
         SwerveChassis.getInstance().resetAllEncoders();
         MultiLimelight.init();
         Elbow.init();
-        Pivot.init();
         Wrist.init();
         ArmMechanism.init();
-        ShooterMechanism.init();
         OI.getInstance();
     }
     @Override
