@@ -3,9 +3,10 @@ package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.MotorFlyWheel.Falco
 
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.IFlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.MotorFlyWheel.MotorFlyWheelConstants;
-import edu.greenblitz.robotName.subsystems.shooter.FlyWheelInputsAutoLogged;
+
 
 import static edu.greenblitz.robotName.subsystems.shooter.FlyWheel.MotorFlyWheel.MotorFlyWheelConstants.FlywheelFalconConfigs.*;
 

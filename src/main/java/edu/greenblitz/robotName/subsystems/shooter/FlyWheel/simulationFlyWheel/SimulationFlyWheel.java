@@ -1,7 +1,7 @@
 package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.simulationFlyWheel;
 
 import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.shooter.FlyWheelInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.IFlyWheel;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.system.plant.DCMotor;

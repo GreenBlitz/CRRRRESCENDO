@@ -1,6 +1,5 @@
 package edu.greenblitz.robotName.subsystems.shooter.FlyWheel;
 
-import edu.greenblitz.robotName.subsystems.shooter.FlyWheelInputsAutoLogged;
 
 public class ReplayFlyWheel implements IFlyWheel {
     @Override
