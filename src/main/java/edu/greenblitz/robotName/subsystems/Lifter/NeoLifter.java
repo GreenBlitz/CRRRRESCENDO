@@ -25,7 +25,7 @@ public class NeoLifter implements ILifter {
     @Override
     public void resetEncoderTo(double position) {
         motor.getEncoder().setPosition(position);
-        lastInputs.position = 0;
+        lastInputs.position = position;
     }
 
     @Override
@@ -40,15 +40,12 @@ public class NeoLifter implements ILifter {
     @Override
     public void stopMotor() {
         this.setPower(0);
+        lastInputs.power = 0;
     }
     @Override
     public void setIdleMode(CANSparkMax.IdleMode mode) {
         motor.setIdleMode(mode);
-    }
-
-    @Override
-    public double getPosition() {
-        return motor.getEncoder().getPosition();
+        lastInputs.idleMode = mode;
     }
 
     @Override

@@ -30,7 +30,7 @@ public class Lifter extends GBSubsystem {
         lifter.updateInputs(lifterInputs);
     }
     public void getToPoseByPID(double pos) {
-        lifter.setPower(pid.calculate(lifter.getPosition(),pos));
+        lifter.setPower(pid.calculate(lifterInputs.position,pos));
     }
     public void setPower(double power) {
         lifter.setPower(power);
@@ -44,9 +44,6 @@ public class Lifter extends GBSubsystem {
     }
     public boolean isMotorInPosition(double position) {
         return lifter.isMotorInPosition(position);
-    }
-    public void updateInputs(LifterInputs lastInputs) {
-
     }
     public void stopMotor() {
         lifter.stopMotor();

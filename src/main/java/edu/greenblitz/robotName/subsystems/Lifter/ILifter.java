@@ -10,7 +10,6 @@ public interface ILifter {
     public void updateInputs(LifterInputsAutoLogged lastInputs);
     public void stopMotor();
     public void setIdleMode(CANSparkMax.IdleMode mode);
-    public double getPosition();
     public boolean isSwitchPressed();
 }
 
