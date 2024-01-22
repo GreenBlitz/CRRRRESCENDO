@@ -37,10 +37,10 @@ public class SimulationIntake implements IIntake {
 	}
 	
 	@Override
-	public void updateInputs(IntakeInputsAutoLogged chassisIntakeInputs) {
-		chassisIntakeInputs.appliedOutput = appliedOutput;
-		chassisIntakeInputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
-		chassisIntakeInputs.velocity = motorSimulation.getAngularVelocityRPM();
-		chassisIntakeInputs.beamBreakerValue = beamBreaker.getSelected();
+	public void updateInputs(IntakeInputsAutoLogged intakeInputs) {
+		intakeInputs.appliedOutput = appliedOutput;
+		intakeInputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
+		intakeInputs.velocity = motorSimulation.getAngularVelocityRPM();
+		intakeInputs.beamBreakerValue = beamBreaker.getSelected();
 	}
 }
