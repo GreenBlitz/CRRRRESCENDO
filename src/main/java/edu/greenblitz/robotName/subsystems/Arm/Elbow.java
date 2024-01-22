@@ -24,12 +24,12 @@ public class Elbow extends GBSubsystem {
 
 
 
-    public static void init() {
+    protected static void init() {
         if (instance == null)
             instance = new Elbow();
     }
 
-    public static Elbow getInstance() {
+    protected static Elbow getInstance() {
         init();
         return instance;
     }
@@ -54,25 +54,25 @@ public class Elbow extends GBSubsystem {
     }
 
 
-    public void setPower(double power) {
+    protected void setPower(double power) {
         elbow.setPower(power);
     }
 
-    public void setMotorVoltage(double voltage) {
+    protected void setMotorVoltage(double voltage) {
         elbow.setVoltage(voltage);
     }
 
-    public void setIdleMode(NeutralModeValue idleMode) {
+    protected void setIdleMode(NeutralModeValue idleMode) {
         elbow.setIdleMode(idleMode);
     }
 
-    public void setGoalAngle(double targetAngle) {
+    protected void setGoalAngle(double targetAngle) {
         goalAngle = targetAngle;
     }
 
 
 
-    public void resetAngle(double position) {
+    protected void resetAngle(double position) {
         elbow.resetAngle(position);
         goalAngle = position;
     }

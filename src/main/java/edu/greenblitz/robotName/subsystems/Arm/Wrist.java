@@ -22,12 +22,12 @@ public class Wrist extends GBSubsystem {
 
     private double goalAngle;
 
-    public static void init() {
+    protected static void init() {
         if (instance == null)
             instance = new Wrist();
     }
 
-    public static Wrist getInstance() {
+    protected static Wrist getInstance() {
         init();
         return instance;
     }
@@ -55,23 +55,23 @@ public class Wrist extends GBSubsystem {
     }
 
 
-    public void setPower(double power) {
+    protected void setPower(double power) {
         wrist.setPower(power);
     }
 
-    public void setMotorVoltage(double voltage) {
+    protected void setMotorVoltage(double voltage) {
         wrist.setVoltage(voltage);
     }
 
-    public void setIdleMode(CANSparkMax.IdleMode idleMode) {
+    protected void setIdleMode(CANSparkMax.IdleMode idleMode) {
         wrist.setIdleMode(idleMode);
     }
 
-    public void setGoalAngle(double targetAngle) {
+    protected void setGoalAngle(double targetAngle) {
         goalAngle = targetAngle;
     }
 
-    public void resetAngle(double position) {
+    protected void resetAngle(double position) {
         wrist.resetAngle(position);
         goalAngle = position;
     }

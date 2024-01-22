@@ -6,17 +6,26 @@ public class Arm extends GBSubsystem {
 
     private static Arm instance;
 
+    private Elbow elbow;
+
+    private Roller roller;
+
+    private Wrist wrist;
+
+
     public static void init() {
         if (instance == null)
             instance = new Arm();
     }
     private Arm() {
-
+        elbow = Elbow.getInstance();
+        wrist = Wrist.getInstance();
+        roller = Roller.getInstance();
     }
 
-    @Override
-    public void periodic() {
-        super.periodic();
 
+    public void move2AngleBy2Angles(double elbowTargetAngle, double wristTargetAngle){
+        elbow.setGoalAngle(elbowTargetAngle);
+        wrist.setGoalAngle(wristTargetAngle);
     }
 }
