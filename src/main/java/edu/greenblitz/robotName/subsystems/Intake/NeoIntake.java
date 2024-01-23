@@ -21,9 +21,9 @@ public class NeoIntake implements IIntake {
 	}
 	
 	@Override
-	public void updateInputs(IntakeInputsAutoLogged chassisIntakeInputs) {
-		chassisIntakeInputs.outputCurrent = motor.getOutputCurrent();
-		chassisIntakeInputs.appliedOutput = motor.getAppliedOutput();
-		chassisIntakeInputs.velocity = motor.getEncoder().getVelocity();
+	public void updateInputs(IntakeInputsAutoLogged intakeInputs) {
+		intakeInputs.outputCurrent = motor.getOutputCurrent();
+		intakeInputs.appliedOutput = motor.getAppliedOutput();
+		intakeInputs.velocity = motor.getEncoder().getVelocity();
 	}
 }

@@ -21,51 +21,5 @@
         }
       }
     }
-  },
-  "NetworkTables": {
-    "transitory": {
-      "AdvantageKit": {
-        "RealOutputs": {
-          "Arm": {
-            "Pose3d##v_/AdvantageKit/RealOutputs/Arm/SimPose3D": {
-              "Rotation3d##v_rotation": {
-                "open": true
-              },
-              "Translation3d##v_translation": {
-                "open": true
-              },
-              "open": true
-            },
-            "Pose3d##v_/AdvantageKit/RealOutputs/Arm/TargetPose3D": {
-              "Rotation3d##v_rotation": {
-                "open": true
-              },
-              "Translation3d##v_translation": {
-                "open": true
-              },
-              "open": true
-            },
-            "open": true
-          },
-          "open": true
-        },
-        "open": true
-      },
-      "SmartDashboard": {
-        "Field": {
-          "open": true
-        },
-        "field": {
-          "open": true
-        },
-        "open": true
-      }
-    }
-  },
-  "NetworkTables Info": {
-    "visible": true
-  },
-  "NetworkTables View": {
-    "visible": false
   }
 }

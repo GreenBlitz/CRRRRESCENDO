@@ -11,7 +11,6 @@ public class PivotFactory {
             case ROBOT_NAME -> new FalconPivot();
             case SIMULATION -> new SimulationPivot();
             case REPLAY -> new ReplayPivot();
-            default -> new ReplayPivot();
         };
     }
 }
