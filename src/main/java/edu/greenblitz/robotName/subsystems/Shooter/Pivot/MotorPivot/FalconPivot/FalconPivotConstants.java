@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Shooter.Pivot.FalconPivot;
+package edu.greenblitz.robotName.subsystems.Shooter.Pivot.MotorPivot.FalconPivot;
 
 import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
@@ -12,7 +12,6 @@ import static edu.greenblitz.robotName.subsystems.Shooter.Pivot.PivotConstants.*
 
 public class FalconPivotConstants {
 
-    public static final int MOTOR_ID = 1;
 
     public static final SimpleMotorFeedforward SIMPLE_MOTOR_FF = new SimpleMotorFeedforward(kS, kV, kA);
 
@@ -45,12 +44,4 @@ public class FalconPivotConstants {
         CURRENT_LIMITS_CONFIGS.SupplyTimeThreshold = 4;
     }
 
-    public static final SoftwareLimitSwitchConfigs SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();
-
-    static {
-        SWITCH_CONFIGS.ForwardSoftLimitEnable = true;
-        SWITCH_CONFIGS.ForwardSoftLimitThreshold = FORWARD_ANGLE_LIMIT;
-        SWITCH_CONFIGS.ReverseSoftLimitEnable = true;
-        SWITCH_CONFIGS.ReverseSoftLimitThreshold = BACKWARD_ANGLE_LIMIT;
-    }
 }

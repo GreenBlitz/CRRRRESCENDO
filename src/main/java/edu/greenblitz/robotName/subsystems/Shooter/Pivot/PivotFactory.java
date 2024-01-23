@@ -1,7 +1,7 @@
 package edu.greenblitz.robotName.subsystems.Shooter.Pivot;
 
 import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.Shooter.Pivot.FalconPivot.FalconPivot;
+import edu.greenblitz.robotName.subsystems.Shooter.Pivot.MotorPivot.FalconPivot.FalconPivot;
 import edu.greenblitz.robotName.subsystems.Shooter.Pivot.SimulationPivot.SimulationPivot;
 
 
