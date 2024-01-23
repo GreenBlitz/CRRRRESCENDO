@@ -32,21 +32,5 @@ public class NeoIntake implements IIntake {
 		intakeInputs.velocity = motor.getEncoder().getVelocity();
 		intakeInputs.entranceBeamBreakerValue = entranceBeamBreaker.calculate(motor.getReverseLimitSwitch(IntakeConstants.EXIT_BEAM_BREAKER_TYPE).isPressed());
 		intakeInputs.exitBeamBreakerValue = exitBeamBreaker.calculate(motor.getReverseLimitSwitch(IntakeConstants.ENTRANCE_BEAM_BREAKER_TYPE).isPressed());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	}
-	
 }
