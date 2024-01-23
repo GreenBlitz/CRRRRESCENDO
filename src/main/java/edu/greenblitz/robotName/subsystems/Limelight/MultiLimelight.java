@@ -4,7 +4,6 @@ import edu.greenblitz.robotName.VisionConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,17 +21,11 @@ public class MultiLimelight extends GBSubsystem {
 			limelights.add(new Limelight(limelightName));
 		}
 	}
-	
-	public void updateRobotPoseAlliance(){
-		for(Limelight limelight : limelights){
-			limelight.updateRobotPoseEntry();
-		}
-	}
+
 
 	public static MultiLimelight getInstance() {
 		if (instance == null) {
 			init();
-			SmartDashboard.putBoolean("limelight initialized via getinstance", true);
 		}
 		return instance;
 	}
@@ -41,20 +34,29 @@ public class MultiLimelight extends GBSubsystem {
 		instance = new MultiLimelight();
 	}
 
-	public List<Optional<Pair<Pose2d, Double>>> getAllEstimates(){
+	public List<Optional<Pair<Pose2d, Double>>> getAll2DEstimates(){
 		ArrayList<Optional<Pair<Pose2d, Double>>> estimates = new ArrayList<>();
 		for (Limelight limelight : limelights){
-			estimates.add(limelight.getUpdatedPoseEstimation());
+			if (limelight.hasTarget() && Math.abs(VisionConstants.APRIL_TAG_HEIGHT - limelight.getTagHeight()) < VisionConstants.APRIL_TAG_HEIGHT_TOLERANCE) {
+				estimates.add(limelight.getUpdatedPose2DEstimation());
+			}
 		}
 		return estimates;
 	}
 	
-	public boolean isConnected(){
-		return limelights.get(0).hasTarget();
+	public double getDynamicStdDevs(int limelightId){
+		double stdDevsSum = limelights.get(limelightId).getDistanceFromTag() / VisionConstants.VISION_TO_STANDARD_DEVIATION;
+		return stdDevsSum;
 	}
+	
 
+	public boolean hasTarget(int limelightId){
+		return limelights.get(limelightId).hasTarget();
+	}
+	
+	
 	public Optional<Pair<Pose2d, Double>> getFirstAvailableTarget(){
-		for(Optional<Pair<Pose2d, Double>> output : getAllEstimates()){
+		for(Optional<Pair<Pose2d, Double>> output : getAll2DEstimates()){
 			if (output.isPresent()){
 				return output;
 			}

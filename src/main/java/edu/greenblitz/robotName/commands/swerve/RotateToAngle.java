@@ -27,4 +27,8 @@ public class RotateToAngle extends SwerveCommand{
                 SwerveChassis.getInstance().getChassisAngle());
     }
 
+    @Override
+    public boolean isFinished() {
+        return SwerveChassis.getInstance().getChassisAngle().getRadians() == angleSetPoint.getRadians();
+    }
 }
