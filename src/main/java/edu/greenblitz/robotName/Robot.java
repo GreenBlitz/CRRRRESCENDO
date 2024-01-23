@@ -7,7 +7,6 @@ import com.pathplanner.lib.pathfinding.Pathfinding;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
 import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.subsystems.Dashboard;
@@ -47,6 +46,8 @@ public class Robot extends LoggedRobot {
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
         SwerveChassis.getInstance().resetAllEncoders();
 
+        initializeAutonomousBuilder();
+
         OI.getInstance();
     }
     @Override
@@ -56,13 +57,10 @@ public class Robot extends LoggedRobot {
     @Override
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
-        SmartDashboard.putNumber("x", SwerveChassis.getInstance().getRobotPose().getX());
-        SmartDashboard.putNumber("y", SwerveChassis.getInstance().getRobotPose().getY());
-        SmartDashboard.putNumber("r", SwerveChassis.getInstance().getRobotPose().getRotation().getDegrees());
         RoborioUtils.updateCurrentCycleTime();
     }
 
-    private void initializeAutoBuilder (){
+    private void initializeAutonomousBuilder(){
         AutoBuilder.configureHolonomic(
                 SwerveChassis.getInstance()::getRobotPose,
                 SwerveChassis.getInstance()::resetChassisPose,
