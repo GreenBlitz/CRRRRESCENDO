@@ -6,6 +6,7 @@ import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.Shooter.Mechanism.ShooterMechanism;
+import edu.greenblitz.robotName.subsystems.Shooter.Pivot.MotorPivot.SystemIdenficationPivot.SystemIdenficationPivot;
 import edu.greenblitz.robotName.subsystems.Shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.RoborioUtils;
@@ -34,17 +35,18 @@ public class Robot extends LoggedRobot {
     public void robotInit() {
         CommandScheduler.getInstance().enable();
         initializeLogger();
-        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-        SwerveChassis.init();
-        SwerveChassis.getInstance().resetAllEncoders();
-        MultiLimelight.init();
-        Pivot.init();
-        ShooterMechanism.init();
+//        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+//        SwerveChassis.init();
+//        SwerveChassis.getInstance().resetAllEncoders();
+//        MultiLimelight.init();
+//        Pivot.init();
+        SystemIdenficationPivot.init();
+//        ShooterMechanism.init();
         OI.getInstance();
     }
     @Override
     public void teleopInit() {
-        Dashboard.getInstance().activateDriversDashboard();
+//        Dashboard.getInstance().activateDriversDashboard();
     }
     @Override
     public void robotPeriodic() {

@@ -7,13 +7,13 @@ import static edu.greenblitz.robotName.subsystems.Shooter.Pivot.PivotConstants.F
 
 public class MotorConstants {
 	
-	public static final int MOTOR_ID = 1;
+	public static final int MOTOR_ID = 33;
 	
 	public static final SoftwareLimitSwitchConfigs SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();
 	static {
-		SWITCH_CONFIGS.ForwardSoftLimitEnable = true;
+		SWITCH_CONFIGS.ForwardSoftLimitEnable = false;
 		SWITCH_CONFIGS.ForwardSoftLimitThreshold = FORWARD_ANGLE_LIMIT;
-		SWITCH_CONFIGS.ReverseSoftLimitEnable = true;
+		SWITCH_CONFIGS.ReverseSoftLimitEnable = false;
 		SWITCH_CONFIGS.ReverseSoftLimitThreshold = BACKWARD_ANGLE_LIMIT;
 	}
 }
