@@ -10,10 +10,6 @@ import edu.wpi.first.math.interpolation.InverseInterpolator;
 
 public class FalconFlyWheelConstants {
 
-    public static final InterpolatingTreeMap<Double, Double> VELOCITY_BY_DISTANCE_MAP = new InterpolatingTreeMap<>(
-            InverseInterpolator.forDouble(), Interpolator.forDouble()
-    );
-
     public static final NeutralModeValue NEUTRAL_MODE_VALUE = NeutralModeValue.Brake;
 
     public static final MotionMagicConfigs MOTION_MAGIC_CONFIGS = new MotionMagicConfigs();
