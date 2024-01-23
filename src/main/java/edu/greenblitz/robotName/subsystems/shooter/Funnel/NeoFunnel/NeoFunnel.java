@@ -17,7 +17,7 @@ public class NeoFunnel implements IFunnel {
 	public NeoFunnel() {
 		motor = new GBSparkMax(FUNNEL_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
 		motor.config(FUNNEL_CONFIG_OBJECT);
-		motor.getReverseLimitSwitch(SWITCH_TYPE).enableLimitSwitch(IS_SENSOR_EXIST);
+		motor.getReverseLimitSwitch(SWITCH_TYPE).enableLimitSwitch(false);
 		debouncer = new Debouncer(DEBOUNCE_TIME_FOR_LIMIT_SWITCH);
 	}
 	
@@ -35,7 +35,6 @@ public class NeoFunnel implements IFunnel {
 	public void updateInputs(FunnelInputsAutoLogged funnelInputs) {
 		funnelInputs.outputCurrent = motor.getOutputCurrent();
 		funnelInputs.appliedOutput = motor.getAppliedOutput();
-		funnelInputs.velocity = motor.getEncoder().getVelocity();
 		funnelInputs.temperature = motor.getMotorTemperature();
 		funnelInputs.isObjectIn = debouncer.calculate(motor.getReverseLimitSwitch(SWITCH_TYPE).isPressed());
 	}

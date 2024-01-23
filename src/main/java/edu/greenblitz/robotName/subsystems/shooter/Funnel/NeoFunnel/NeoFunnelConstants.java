@@ -8,11 +8,9 @@ import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 public class NeoFunnelConstants {
     public static final int FUNNEL_ID = 0;
 
-    public static final boolean IS_SENSOR_EXIST = true;
-
     public static final SparkMaxLimitSwitch.Type SWITCH_TYPE = SparkMaxLimitSwitch.Type.kNormallyClosed;
 
-    public static double DEBOUNCE_TIME_FOR_LIMIT_SWITCH = 0.5;
+    public static double DEBOUNCE_TIME_FOR_LIMIT_SWITCH = 0.05;
 
     public static int CURRENT_LIMIT = 1;
 

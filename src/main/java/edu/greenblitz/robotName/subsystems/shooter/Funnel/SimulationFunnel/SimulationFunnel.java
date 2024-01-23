@@ -6,6 +6,7 @@ import edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelInputsAutoLogged
 import edu.greenblitz.robotName.subsystems.shooter.Funnel.IFunnel;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.system.plant.DCMotor;
+import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -14,14 +15,14 @@ import static edu.greenblitz.robotName.subsystems.shooter.Funnel.SimulationFunne
 
 public class SimulationFunnel implements IFunnel {
 	
-	private FlywheelSim motorSimulation;
+	private DCMotorSim motorSimulation;
 
 	private double appliedOutput;
 
 	private SendableChooser<Boolean> isObjectIn;
 	
 	public SimulationFunnel() {
-		motorSimulation = new FlywheelSim(
+		motorSimulation = new DCMotorSim(
 				DCMotor.getNEO(NUMBER_OF_MOTORS),
 				GEAR_RATIO,
 				MOMENT_OF_INERTIA
@@ -47,7 +48,6 @@ public class SimulationFunnel implements IFunnel {
 	public void updateInputs(FunnelInputsAutoLogged funnelInputs) {
 		funnelInputs.appliedOutput = appliedOutput;
 		funnelInputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
-		funnelInputs.velocity = motorSimulation.getAngularVelocityRPM();
 		funnelInputs.temperature = 0;
 		funnelInputs.isObjectIn = isObjectIn.getSelected();
 	}

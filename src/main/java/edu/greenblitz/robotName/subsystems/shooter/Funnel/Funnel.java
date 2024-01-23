@@ -59,10 +59,6 @@ public class Funnel extends GBSubsystem {
 		return funnelInputs.appliedOutput;
 	}
 	
-	public static double getVelocity() {
-		return funnelInputs.velocity;
-	}
-	
 	public static boolean isObjectIn() {
 		return funnelInputs.isObjectIn;
 	}

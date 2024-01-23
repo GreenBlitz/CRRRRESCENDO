@@ -9,8 +9,6 @@ public class FunnelInputs {
 
 	public static double outputCurrent;
 
-	public static double velocity;
-
 	public static double temperature;
 
 	public static boolean isObjectIn;
