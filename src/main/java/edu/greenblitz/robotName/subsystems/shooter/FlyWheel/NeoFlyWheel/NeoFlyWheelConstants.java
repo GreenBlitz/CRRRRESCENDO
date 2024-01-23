@@ -6,7 +6,7 @@ import edu.wpi.first.math.interpolation.Interpolator;
 import edu.wpi.first.math.interpolation.InverseInterpolator;
 
 public class NeoFlyWheelConstants {
-	public static final int MOTOR_ID = 2;
+	public static final int MOTOR_ID = 7;
 	public static final SimpleMotorFeedforward FEEDFORWARD = new SimpleMotorFeedforward(1, 0, 0);
 	public static final int PID_SLOT = 0;
 	public static final InterpolatingTreeMap<Double, Double> VELOCITY_BY_DISTANCE_MAP = new InterpolatingTreeMap<>(

@@ -31,7 +31,7 @@ public class SimulationFlyWheel implements IFlyWheel {
     public void setVoltage(double voltage) {
         appliedVoltage = MathUtil.clamp(
                 voltage,
-                RobotConstants.SimulationConstants.MIN_MOTOR_VOLTAGE,
+                -RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE,
                 RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE
         );
         flyWheelSimulation.setInputVoltage(appliedVoltage);

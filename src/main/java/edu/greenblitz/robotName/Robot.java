@@ -32,7 +32,7 @@ public class Robot extends LoggedRobot {
     @Override
     public void robotInit() {
         CommandScheduler.getInstance().enable();
-        initializeLogger();
+//        initializeLogger();
 
         Battery.getInstance().setDefaultCommand(new BatteryLimiter());
 
@@ -53,7 +53,6 @@ public class Robot extends LoggedRobot {
     }
 
     private void initializeLogger(){
-
         NetworkTableInstance.getDefault()
                 .getStructTopic("RobotPose", Pose2d.struct).publish();
 
