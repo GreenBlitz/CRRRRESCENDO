@@ -116,7 +116,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
 
 		updatePoseEstimationLimeLight();
-
+		updatePoseEstimatorOdometry();
 
 		SmartDashboard.putData(getField());
 	}
@@ -336,7 +336,9 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		Photonvision.getInstance().getUpdatedPoseEstimator().ifPresent((EstimatedRobotPose pose) -> poseEstimator.addVisionMeasurement(pose.estimatedPose.toPose2d(), pose.timestampSeconds));
 	}
 
-
+public void updatePoseEstimatorOdometry(){
+		poseEstimator.update(getGyroAngle(),getSwerveModulePositions());
+	}
 
 	public void updatePoseEstimationLimeLight() {
 		if (doVision) {
