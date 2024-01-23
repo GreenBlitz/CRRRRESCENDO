@@ -48,7 +48,7 @@ public class GBMath {
             return Math.pow(centerPosition.getX() - position.getX(), 2) + Math.pow(centerPosition.getY() - position.getY(), 2) <= radius * radius;
         }
 
-        public Translation2d findClosestPositionOnBorder(Translation2d position) {
+        public Translation2d getClosestPositionOnBorder(Translation2d position) {
             if (position.getX() == centerPosition.getX()) {
                 return position.plus(new Translation2d(EPSILON, 0));
             }
