@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.utils;
 
 import edu.wpi.first.math.geometry.Translation2d;
 
+
 public class GBMath {
     /**
      * modulo (2,6) -> 0
@@ -56,7 +57,6 @@ public class GBMath {
             double angle = Math.atan(slope);
             double x = radius * Math.cos(angle) + centerPosition.getX();
             double y = radius * Math.sin(angle) + centerPosition.getY();
-
             return new Translation2d(x, y);
         }
     }

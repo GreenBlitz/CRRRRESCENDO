@@ -3,10 +3,7 @@ package edu.greenblitz.robotName;
 import edu.greenblitz.robotName.utils.GBMath;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Translation2d;
-import org.ejml.equation.IntegerSequence;
-import org.w3c.dom.ranges.Range;
 
-import java.util.Collection;
 import java.util.List;
 
 public class ShootingZone extends GBMath.GBCircle {
