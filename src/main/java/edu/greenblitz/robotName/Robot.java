@@ -1,17 +1,22 @@
 package edu.greenblitz.robotName;
 
+
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
-import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.FMSUtils;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
+import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
+import edu.greenblitz.robotName.subsystems.Dashboard;
+import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
@@ -19,6 +24,8 @@ import org.littletonrobotics.junction.Logger;
 import org.littletonrobotics.junction.networktables.NT4Publisher;
 import org.littletonrobotics.junction.wpilog.WPILOGReader;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
+
+import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
 
 public class Robot extends LoggedRobot {
 
@@ -31,16 +38,20 @@ public class Robot extends LoggedRobot {
     @Override
     public void robotInit() {
         Pathfinding.setPathfinder(new LocalADStar());
-//        initializeLogger();
         CommandScheduler.getInstance().enable();
+        initializeLogger();
 
-        initializeAutoBuilder();
+        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
 
         SwerveChassis.init();
-        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
+        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
         SwerveChassis.getInstance().resetAllEncoders();
 
         OI.getInstance();
+    }
+    @Override
+    public void teleopInit() {
+        Dashboard.getInstance().activateDriversDashboard();
     }
     @Override
     public void robotPeriodic() {
@@ -48,6 +59,7 @@ public class Robot extends LoggedRobot {
         SmartDashboard.putNumber("x", SwerveChassis.getInstance().getRobotPose().getX());
         SmartDashboard.putNumber("y", SwerveChassis.getInstance().getRobotPose().getY());
         SmartDashboard.putNumber("r", SwerveChassis.getInstance().getRobotPose().getRotation().getDegrees());
+        RoborioUtils.updateCurrentCycleTime();
     }
 
     private void initializeAutoBuilder (){
@@ -72,7 +84,14 @@ public class Robot extends LoggedRobot {
         switch (RobotConstants.ROBOT_TYPE) {
             // Running on a real robot, log to a USB stick
             case ROBOT_NAME:
-                Logger.addDataReceiver(new WPILOGWriter(RobotConstants.ROBORIO_LOG_PATH));
+                try {
+                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.USB_LOG_PATH));
+                    System.out.println("initialized Logger, USB");
+                } catch (Exception e) {
+                    Logger.end();
+                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
+                    System.out.println("initialized Logger, roborio");
+                }
                 Logger.addDataReceiver(new NT4Publisher());
                 break;
             // Replaying a log, set up replay source

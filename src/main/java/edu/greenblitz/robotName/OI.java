@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName;
 
 
+
 import com.pathplanner.lib.path.PathConstraints;
 import edu.greenblitz.robotName.commands.auto.MoveToPose;
 import edu.greenblitz.robotName.commands.swerve.SwerveCommand;
@@ -9,6 +10,8 @@ import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
+
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public class OI {
@@ -38,8 +41,9 @@ public class OI {
         return secondJoystick;
     }
 
-    private void initButtons(){
-        mainJoystick.A.whileTrue(MoveToPose.getPathCommand(new Pose2d(0, 0, Rotation2d.fromDegrees(0)), ChassisConstants.CONSTRAINTS));
+
+    public void initButtons(){
+        // put buttons here
     }
 
 }

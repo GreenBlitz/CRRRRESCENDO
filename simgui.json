@@ -1,14 +1,14 @@
 {
-  "HALProvider": {
-    "Other Devices": {
-      "window": {
-        "visible": false
-      }
-    }
-  },
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
+      "/LiveWindow/Ungrouped/PIDController[1]": "PIDController",
+      "/LiveWindow/Ungrouped/PIDController[2]": "PIDController",
+      "/LiveWindow/Ungrouped/PIDController[3]": "PIDController",
+      "/LiveWindow/Ungrouped/PIDController[4]": "PIDController",
+      "/LiveWindow/Ungrouped/PIDController[5]": "PIDController",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+
       "/SmartDashboard/Field": "Field2d",
       "/SmartDashboard/field": "Field2d"
     },
@@ -17,21 +17,12 @@
         "window": {
           "visible": true
         }
-      },
-      "/SmartDashboard/field": {
-        "height": 8.013679504394531,
-        "width": 16.541748046875
+
       }
     }
   },
-  "NetworkTables": {
-    "transitory": {
-      "Shuffleboard": {
-        "open": true
-      },
-      "SmartDashboard": {
-        "open": true
-      }
-    }
+  "NetworkTables Info": {
+    "visible": true
+
   }
 }

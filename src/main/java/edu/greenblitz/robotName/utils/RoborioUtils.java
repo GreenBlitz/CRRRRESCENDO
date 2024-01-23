@@ -12,6 +12,6 @@ public class RoborioUtils {
     }
 
     public static double getCurrentRoborioCycle (){
-        return lastTime - currentTime;
+        return currentTime - lastTime;
     }
 }
