@@ -12,7 +12,7 @@ public class ReplayIntake implements IIntake {
 	}
 	
 	@Override
-	public void updateInputs(IntakeInputsAutoLogged chassisIntakeInputs) {
+	public void updateInputs(IntakeInputsAutoLogged intakeInputs) {
 	
 	}
 }
