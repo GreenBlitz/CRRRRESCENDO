@@ -10,12 +10,6 @@ import static edu.greenblitz.robotName.shootingPosition.ShootingPositionConstant
 
 public class ShootingPosition {
 
-    public boolean isInRange(Pose2d pose) {
-        return CURVE.contains(pose.getX(), pose.getY());
-    }
 
-    public Pose2d getClosestToCurvePose(Pose2d pose) {
-
-    }
 
 }
