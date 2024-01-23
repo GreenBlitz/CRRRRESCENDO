@@ -11,6 +11,8 @@ public class NeoFunnelConstants {
     public static final SparkMaxLimitSwitch.Type SWITCH_TYPE = SparkMaxLimitSwitch.Type.kNormallyClosed;
 
     public static double DEBOUNCE_TIME_FOR_LIMIT_SWITCH = 0.05;
+    
+    public static int BEAM_BREAKER_CHANNEL = 0;
 
     public static int CURRENT_LIMIT = 1;
 
