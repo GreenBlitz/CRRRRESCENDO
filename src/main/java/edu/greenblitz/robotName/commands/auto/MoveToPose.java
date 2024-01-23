@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 public class MoveToPose {
     public static Command getPathCommand(Pose2d endPoint, PathConstraints constraints) {
-        SmartDashboard.putBoolean("working", true);
         return AutoBuilder.pathfindToPose(
                 endPoint,
                 constraints
