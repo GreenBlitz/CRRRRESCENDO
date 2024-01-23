@@ -15,10 +15,14 @@ public class FlyWheel extends GBSubsystem {
         flyWheel.updateInputs(flyWheelInputs);
     }
 
-    public static FlyWheel getInstance() {
-        if (instance == null) {
+    public static void init() {
+        if(instance == null) {
             instance = new FlyWheel();
         }
+    }
+
+    public static FlyWheel getInstance() {
+        init();
         return instance;
     }
 

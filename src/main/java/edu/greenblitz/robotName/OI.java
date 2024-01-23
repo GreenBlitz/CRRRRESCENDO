@@ -38,33 +38,6 @@ public class OI {
 
     static GBSparkMax motor = new GBSparkMax(1, CANSparkMaxLowLevel.MotorType.kBrushless);
     public void initButtons(){
-        mainJoystick.A.whileTrue(new ShootByPower(0.9));
-        mainJoystick.X.whileTrue(new ShootByPower(0.5));
-        mainJoystick.B.whileTrue(
-                new GBCommand() {
-                    @Override
-                    public void execute() {
-                        motor.set(0.2);
-                    }
 
-                    @Override
-                    public void end(boolean interrupted) {
-                        motor.set(0);
-                    }
-                }
-        );
-        mainJoystick.Y.whileTrue(
-                new GBCommand() {
-                    @Override
-                    public void execute() {
-                        motor.set(-0.2);
-                    }
-
-                    @Override
-                    public void end(boolean interrupted) {
-                        motor.set(0);
-                    }
-                }
-        );
     }
 }

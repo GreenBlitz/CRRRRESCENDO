@@ -1,6 +1,8 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
+import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -23,11 +25,11 @@ public class Robot extends LoggedRobot {
 
     @Override
     public void robotInit() {
-//        initializeLogger();
+        initializeLogger();
 
-//        SwerveChassis.init();
-//        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
-//        SwerveChassis.getInstance().resetAllEncoders();
+        SwerveChassis.init();
+        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
+        SwerveChassis.getInstance().resetAllEncoders();
 
         OI.getInstance();
         CommandScheduler.getInstance().enable();
@@ -35,9 +37,6 @@ public class Robot extends LoggedRobot {
     @Override
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
-        SmartDashboard.putNumber("velocity", FlyWheel.getInstance().getVelocity());
-        SmartDashboard.putNumber("current", FlyWheel.getInstance().getCurrent());
-        SmartDashboard.putNumber("voltage", FlyWheel.getInstance().getVoltage());
     }
 
     private void initializeLogger(){

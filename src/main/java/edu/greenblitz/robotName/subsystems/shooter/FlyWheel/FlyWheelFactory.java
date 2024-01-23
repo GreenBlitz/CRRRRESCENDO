@@ -1,7 +1,7 @@
 package edu.greenblitz.robotName.subsystems.shooter.FlyWheel;
 
 import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.MotorFlyWheel.neoFlyWheel.NeoFlyWheel;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.MotorFlyWheel.NeoFlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.simulationFlyWheel.SimulationFlyWheel;
 
 public class FlyWheelFactory {
@@ -9,7 +9,7 @@ public class FlyWheelFactory {
         return switch (RobotConstants.ROBOT_TYPE) {
             case ROBOT_NAME -> new NeoFlyWheel();
             case REPLAY -> new ReplayFlyWheel();
-            default -> new SimulationFlyWheel();
+            case SIMULATION -> new SimulationFlyWheel();
         };
     }
 }

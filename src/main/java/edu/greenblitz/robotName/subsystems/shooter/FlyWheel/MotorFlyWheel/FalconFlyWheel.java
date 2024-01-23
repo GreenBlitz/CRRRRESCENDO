@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.MotorFlyWheel.FalconFlyWheel;
+package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.MotorFlyWheel;
 
 
 import com.ctre.phoenix6.controls.VelocityVoltage;
