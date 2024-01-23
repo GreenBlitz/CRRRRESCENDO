@@ -4,12 +4,14 @@ import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.IFlyWheel;
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 
 public class SimulationFlyWheel implements IFlyWheel {
     FlywheelSim flyWheelSimulation;
     private double appliedVoltage;
+    PIDController pidController;
 
     public SimulationFlyWheel() {
         flyWheelSimulation = new FlywheelSim(
@@ -17,6 +19,7 @@ public class SimulationFlyWheel implements IFlyWheel {
                 SimulationFlyWheelConstants.GEARING,
                 SimulationFlyWheelConstants.J_KG_METERS_SQUARED
         );
+        pidController = SimulationFlyWheelConstants.SIMULATION_PID;
     }
 
     @Override
@@ -36,7 +39,8 @@ public class SimulationFlyWheel implements IFlyWheel {
 
     @Override
     public void setVelocity(double velocity) {
-        //todo add
+        double power = velocity / SimulationFlyWheelConstants.POWER_TO_VELOCITY_FACTOR;
+        setPower(power);
     }
 
     @Override

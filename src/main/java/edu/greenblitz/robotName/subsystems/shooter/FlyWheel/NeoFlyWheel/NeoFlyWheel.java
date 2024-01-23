@@ -1,7 +1,8 @@
-package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.MotorFlyWheel;
+package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.NeoFlyWheel;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
+import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.IFlyWheel;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
@@ -11,7 +12,7 @@ public class NeoFlyWheel implements IFlyWheel {
     private GBSparkMax motor;
 
     public NeoFlyWheel() {
-        motor = new GBSparkMax(MotorFlyWheelConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        motor = new GBSparkMax(NeoFlyWheelConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
     }
 
     @Override
@@ -29,14 +30,14 @@ public class NeoFlyWheel implements IFlyWheel {
         motor.getPIDController().setReference(
                 velocity,
                 CANSparkMax.ControlType.kVelocity,
-                MotorFlyWheelConstants.PID_SLOT,
-                MotorFlyWheelConstants.FEEDFORWARD.calculate(velocity)
+                NeoFlyWheelConstants.PID_SLOT,
+                NeoFlyWheelConstants.FEEDFORWARD.calculate(velocity)
         );
     }
 
     @Override
     public void updateInputs(FlyWheelInputsAutoLogged inputs) {
-        inputs.appliedOutput = motor.getAppliedOutput();
+        inputs.appliedOutput = motor.getAppliedOutput() * Battery.getInstance().getCurrentVoltage();
         inputs.outputCurrent = motor.getOutputCurrent();
         inputs.temperature = motor.getMotorTemperature();
         inputs.velocity = motor.getEncoder().getVelocity();
