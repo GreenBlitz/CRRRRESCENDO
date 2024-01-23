@@ -1,7 +1,8 @@
 package edu.greenblitz.robotName.utils;
 
+import edu.greenblitz.robotName.FieldConstants;
 import edu.wpi.first.math.geometry.Translation2d;
-
+import edu.wpi.first.math.geometry.Translation3d;
 
 public class GBMath {
     /**
@@ -14,6 +15,35 @@ public class GBMath {
      */
     public static double absoluteModulo(double x, double y) {
         return ((x % y) + y) % y;
+    }
+
+    public static double distance(double x1, double y1, double x2, double y2) {
+        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+    }
+
+    public static double distance(Translation2d p1, Translation2d p2) {
+        return distance(p1.getX(), p1.getY(), p2.getX(), p2.getY());
+    }
+
+    public static double distance(double x1, double y1, double z1, double x2, double y2, double z2) {
+        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2) + Math.pow(z1 - z2, 2));
+    }
+
+    public static double distance(Translation3d p1, Translation3d p2) {
+        return distance(p1.getX(), p1.getY(), p1.getZ(), p2.getX(), p2.getY(), p2.getZ());
+    }
+
+    public static double getShooterAngleBasedOnPosition(Translation3d position) {
+        Translation2d relativeSpeakerPosition = getRelativePositionOfMiddleOfSpeaker(position);
+        double angle = Math.atan(relativeSpeakerPosition.getY() / relativeSpeakerPosition.getX());
+        return angle;
+    }
+
+    public static Translation2d getRelativePositionOfMiddleOfSpeaker(Translation3d position) {
+        Translation3d Speaker = FieldConstants.MID_SPEAKER_POSITION;
+        double x = distance(position, new Translation3d(Speaker.getX(), Speaker.getY(), 0));
+        double y = Speaker.getZ() - position.getZ();
+        return new Translation2d(x, y);
     }
 
     public static class GBCircle {
