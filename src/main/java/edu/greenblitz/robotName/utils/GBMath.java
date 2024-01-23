@@ -55,8 +55,8 @@ public class GBMath {
             }
             double slope = ((centerPosition.getY() - position.getY()) / centerPosition.getX() - position.getX());
             double angle = Math.atan(slope);
-            double x = radius * Math.cos(angle) + centerPosition.getX();
-            double y = radius * Math.sin(angle) + centerPosition.getY();
+            double x = radius * Math.cos(angle) * Math.signum(position.getX() - centerPosition.getX()) + centerPosition.getX();
+            double y = radius * Math.sin(angle) * Math.signum(position.getX() - centerPosition.getX()) + centerPosition.getY();
             return new Translation2d(x, y);
         }
     }
