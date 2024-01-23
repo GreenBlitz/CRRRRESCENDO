@@ -16,6 +16,8 @@ public class ChassisConstants {
 
     public static final double ROBOT_WIDTH_IN_METERS = 0.79;
     public static final double BUMPER_WIDTH = 0.13;
+    public static final double ROBOT_WIDTH_WITH_BUMPER = ROBOT_WIDTH_IN_METERS + BUMPER_WIDTH;
+    public static final double ROBOT_RADIUS = Math.sqrt(Math.pow(ROBOT_WIDTH_WITH_BUMPER,2) * 2);
     static final Pose2d INITIAL_ROBOT_POSITION = new Pose2d(0, 0, new Rotation2d(0));
     public static final double FRONT_LEFT_X_POSITION = 0.3020647;
     public static final double FRONT_LEFT_Y_POSITION = 0.25265;
@@ -54,9 +56,7 @@ public class ChassisConstants {
             TRANSLATION_PID,
             ROTATION_PID,
             MAX_VELOCITY,
-            Math.sqrt(
-                    Math.pow((ROBOT_WIDTH_IN_METERS+BUMPER_WIDTH),2) * 2
-            ),
+            ROBOT_RADIUS,
             new ReplanningConfig(
                     true,
                     true,
