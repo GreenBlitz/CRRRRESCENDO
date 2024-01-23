@@ -100,9 +100,9 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
         gyro.updateInputs(gyroInputs);
         updateInputs(ChassisInputs);
-
+        SmartDashboard.putNumber("yaw", gyroInputs.yaw);
         Logger.recordOutput("DriveTrain/RobotPose", getRobotPose());
-        Logger.recordOutput("DriveTrain/ModuleStates", getSwerveModuleStates());
+//        Logger.recordOutput("DriveTrain/ModuleStates", getSwerveModuleStates());
         Logger.processInputs("DriveTrain/Chassis", ChassisInputs);
         Logger.processInputs("DriveTrain/Gyro", gyroInputs);
 
@@ -194,8 +194,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
      * returns chassis angle in radians
      */
     private Rotation2d getGyroAngle() {
-//        return Rotation2d.fromRadians(gyroInputs.yaw);
-        return Rotation2d.fromDegrees(0);
+        return Rotation2d.fromRadians(gyroInputs.yaw);
     }
 
 

@@ -119,7 +119,6 @@ public class MK4ISwerveModule implements ISwerveModule {
         } else {
             inputs.absoluteEncoderPosition = Units.rotationsToRadians(canCoder.getAbsolutePosition().getValue());
         }
-        inputs.isAbsoluteEncoderConnected = canCoder.getVersion().getValue() != -1;
-        //TODO make sure version is -1 when disconnected
+        inputs.isAbsoluteEncoderConnected = canCoder.getVersion().getValue() != 0;
     }
 }

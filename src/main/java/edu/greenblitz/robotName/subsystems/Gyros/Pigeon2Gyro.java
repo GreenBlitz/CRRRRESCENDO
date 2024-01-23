@@ -1,7 +1,9 @@
 package edu.greenblitz.robotName.subsystems.Gyros;
 
 import com.ctre.phoenix6.hardware.Pigeon2;
+import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Pigeon2Gyro implements IAngleMeasurementGyro{
 	private Pigeon2 pigeon2;
@@ -9,7 +11,7 @@ public class Pigeon2Gyro implements IAngleMeasurementGyro{
 	Rotation2d pitchOffset;
 	Rotation2d rollOffset;
 	private GyroInputsAutoLogged lastInputs = new GyroInputsAutoLogged();
-	public void Pigeon2Gyro(int deviceID){
+	public Pigeon2Gyro(int deviceID){
 		pigeon2 = new Pigeon2(deviceID);
 		
 		this.pitchOffset = new Rotation2d();
@@ -33,7 +35,7 @@ public class Pigeon2Gyro implements IAngleMeasurementGyro{
 	
 	@Override
 	public void updateInputs(GyroInputsAutoLogged inputs) {
-		inputs.yaw = -(Math.toRadians(pigeon2.getYaw().getValue()) - yawOffset.getRadians()) % (2 * Math.PI);
+		inputs.yaw = (Math.toRadians(pigeon2.getYaw().getValue()) - yawOffset.getRadians()) % (2 * Math.PI);
 		inputs.pitch = (Math.toRadians(pigeon2.getPitch().getValue()) - pitchOffset.getRadians()) % (2 * Math.PI);
 		inputs.roll = (Math.toRadians(pigeon2.getRoll().getValue()) - rollOffset.getRadians()) % (2 * Math.PI);
 		

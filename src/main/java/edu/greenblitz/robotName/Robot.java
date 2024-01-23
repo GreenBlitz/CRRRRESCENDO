@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
+import edu.greenblitz.robotName.subsystems.Gyros.Pigeon2Gyro;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
@@ -26,9 +27,8 @@ public class Robot extends LoggedRobot {
 
     @Override
     public void robotInit() {
-//        initializeLogger();
+        initializeLogger();
         CommandScheduler.getInstance().enable();
-        
         SwerveChassis.init();
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
 //        SwerveChassis.getInstance().resetAllEncoders();
@@ -54,7 +54,7 @@ public class Robot extends LoggedRobot {
         switch (RobotConstants.ROBOT_TYPE) {
             // Running on a real robot, log to a USB stick
             case ROBOT_NAME:
-                Logger.addDataReceiver(new WPILOGWriter(RobotConstants.ROBORIO_LOG_PATH));
+//                Logger.addDataReceiver(new WPILOGWriter(RobotConstants.ROBORIO_LOG_PATH));
                 Logger.addDataReceiver(new NT4Publisher());
                 break;
             // Replaying a log, set up replay source
