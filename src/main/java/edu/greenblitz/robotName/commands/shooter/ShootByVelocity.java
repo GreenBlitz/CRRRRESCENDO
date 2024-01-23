@@ -11,8 +11,8 @@ public class ShootByVelocity extends FlyWheelCommand {
         this.velocity = velocity;
     }
 
-    public boolean isFlywheelAtVelocity() {
-        return Math.abs(flyWheelCommand.getVelocity() - velocity) < FlyWheelConstants.EPSILON_RPM;
+    private boolean isFlywheelAtVelocity() {
+        return Math.abs(flyWheel.getVelocity() - velocity) < FlyWheelConstants.EPSILON_RPM;
     }
 
     @Override
@@ -22,17 +22,17 @@ public class ShootByVelocity extends FlyWheelCommand {
 
     @Override
     public void execute() {
-        flyWheelCommand.setVelocity(velocity);
+        flyWheel.setVelocity(velocity);
         if (isFlywheelAtVelocity()) {
             timeInShootingSpeed++;
         } else {
             timeInShootingSpeed = 0;
         }
-        flyWheelCommand.setPreparedToShoot(timeInShootingSpeed > FlyWheelConstants.SHOOTING_SPEED_TIME);
+        flyWheel.setPreparedToShoot(timeInShootingSpeed > FlyWheelConstants.SHOOTING_SPEED_TIME);
     }
 
     @Override
     public void end(boolean interrupted) {
-        flyWheelCommand.stop();
+        flyWheel.stop();
     }
 }

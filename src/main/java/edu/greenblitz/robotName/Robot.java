@@ -32,7 +32,7 @@ public class Robot extends LoggedRobot {
     @Override
     public void robotInit() {
         CommandScheduler.getInstance().enable();
-//        initializeLogger();
+        initializeLogger();
 
         Battery.getInstance().setDefaultCommand(new BatteryLimiter());
 

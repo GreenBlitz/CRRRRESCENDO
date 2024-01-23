@@ -16,7 +16,7 @@ public class FlyWheel extends GBSubsystem {
     }
 
     public static void init() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new FlyWheel();
         }
     }
@@ -45,10 +45,12 @@ public class FlyWheel extends GBSubsystem {
     public double getVelocity() {
         return flyWheelInputs.velocity;
     }
-    public double getCurrent (){
+
+    public double getCurrent() {
         return flyWheelInputs.outputCurrent;
     }
-    public double getVoltage(){
+
+    public double getVoltage() {
         return flyWheelInputs.appliedOutput;
     }
 
