@@ -6,8 +6,8 @@ import java.util.function.BooleanSupplier;
 
 public class MoveWristToAngle extends ConditionalCommand {
 
-    public MoveWristToAngle(double goalAngle, boolean isReal) {
-        super(new MotorMoveWristToAngle(goalAngle), new SimulationMoveWristToAngle(goalAngle), () -> isReal);
+    public MoveWristToAngle(double goalAngle, boolean isSimulation) {
+        super(new SimulationMoveWristToAngle(goalAngle), new MotorMoveWristToAngle(goalAngle), () -> isSimulation);
     }
 
 }
