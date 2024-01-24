@@ -1,7 +1,9 @@
 package edu.greenblitz.robotName.subsystems.swerve.Chassis;
 
-import edu.greenblitz.robotName.OdometryConstants;
+import edu.greenblitz.robotName.Robot;
+import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.VisionConstants;
+import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.subsystems.Gyros.GyroFactory;
 import edu.greenblitz.robotName.subsystems.Gyros.GyroInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.Gyros.IAngleMeasurementGyro;
@@ -10,14 +12,17 @@ import edu.greenblitz.robotName.subsystems.Photonvision;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModule;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.mk4iSwerveModule.MK4iSwerveConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
+import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.MatBuilder;
 import edu.wpi.first.math.Nat;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.kinematics.*;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,6 +31,12 @@ import org.photonvision.EstimatedRobotPose;
 import org.w3c.dom.ls.LSOutput;
 
 import java.util.Optional;
+
+import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.TIME_STEP;
+import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
+import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.FAST_DISCRETION_CONSTANT;
+import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.SLOW_DISCRETION_CONSTANT;
+
 
 public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
@@ -42,7 +53,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     private IAngleMeasurementGyro gyro;
     private SwerveDriveKinematics kinematics;
     private SwerveDrivePoseEstimator poseEstimator;
-    private SwerveDriveOdometry odometry;
     private Field2d field = new Field2d();
     public static final double TRANSLATION_TOLERANCE = 0.05;
     public static final double ROTATION_TOLERANCE = 2;
@@ -69,11 +79,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         this.poseEstimator = new SwerveDrivePoseEstimator(this.kinematics,
                 getGyroAngle(),
                 getSwerveModulePositions(),
-                new Pose2d(new Translation2d(), new Rotation2d()),
-                new MatBuilder<>(Nat.N3(), Nat.N1()).fill(VisionConstants.STANDARD_DEVIATION_ODOMETRY, VisionConstants.STANDARD_DEVIATION_ODOMETRY, VisionConstants.STANDARD_DEVIATION_ODOMETRY),
+                visionPoseStartMatch(),
+                new MatBuilder<>(Nat.N3(), Nat.N1()).fill(VisionConstants.STANDARD_DEVIATION_ODOMETRY, VisionConstants.STANDARD_DEVIATION_ODOMETRY, VisionConstants.STANDARD_DEVIATION_ODOMETRY_ANGLE),
                 new MatBuilder<>(Nat.N3(), Nat.N1()).fill(VisionConstants.STANDARD_DEVIATION_VISION2D, VisionConstants.STANDARD_DEVIATION_VISION2D, VisionConstants.STANDARD_DEVIATION_VISION_ANGLE));
         SmartDashboard.putData("field", getField());
-        this.odometry = new SwerveDriveOdometry(this.kinematics, getGyroAngle(), getSwerveModulePositions());
     }
 
 
@@ -98,7 +107,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
         field.setRobotPose(getRobotPose());
 
-
         gyro.updateInputs(gyroInputs);
         updateInputs(ChassisInputs);
         SmartDashboard.putNumber("yaw", gyroInputs.yaw);
@@ -109,8 +117,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
 
         updatePoseEstimationLimeLight();
-        updateOdometry();
-
+        updatePoseEstimatorOdometry();
 
         SmartDashboard.putData(getField());
     }
@@ -178,13 +185,20 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), new Pose2d());
     }
 
+    public Pose2d visionPoseStartMatch() {
+        if (MultiLimelight.getInstance().hasTarget(0)) {
+            return MultiLimelight.getInstance().getFirstAvailableTarget().get().getFirst();
+        } else {
+            return new Pose2d();
+        }
+    }
+
     public void resetPoseByVision() {
-        if (MultiLimelight.getInstance().isConnected()) {
+        if (MultiLimelight.getInstance().hasTarget(0)) {
             if (MultiLimelight.getInstance().getFirstAvailableTarget().isPresent()) {
                 Pose2d visionPose = MultiLimelight.getInstance().getFirstAvailableTarget().get().getFirst();
                 getGyro().updateYaw(Rotation2d.fromRadians(0));
                 poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), visionPose);
-                odometry.resetPosition(getGyroAngle(), getSwerveModulePositions(), visionPose);
             }
         } else {
             resetChassisPose();
@@ -213,6 +227,22 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         }
     }
 
+    private double getDiscretizedTimeStep() {
+        double timeStep = getActualTimeStep();
+        double discretizedTimeStep = timeStep * FAST_DISCRETION_CONSTANT;
+        if (DRIVE_MODE.equals(MoveByJoysticks.DriveMode.SLOW)) {
+            discretizedTimeStep = timeStep * SLOW_DISCRETION_CONSTANT;
+        }
+        return discretizedTimeStep;
+    }
+
+    private double getActualTimeStep() {
+        if (RobotConstants.ROBOT_TYPE.equals(Robot.RobotType.ROBOT_NAME))
+            return RoborioUtils.getCurrentRoborioCycle();
+        return TIME_STEP;
+    }
+
+
     public void moveByChassisSpeeds(double forwardSpeed, double leftwardSpeed, double angSpeed, Rotation2d currentAng) {
         ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
                 forwardSpeed,
@@ -220,6 +250,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
                 angSpeed,
                 currentAng
         );
+        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
         SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
         setModuleStates(desaturatedStates);
@@ -230,6 +261,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
                 fieldRelativeSpeeds,
                 currentAng
         );
+        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
         SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
         setModuleStates(desaturatedStates);
@@ -256,6 +288,13 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     public ChassisSpeeds getChassisSpeeds() {
         return kinematics.toChassisSpeeds(
                 getSwerveModuleStates()
+        );
+    }
+
+    public ChassisSpeeds getRobotRelativeChassisSpeeds() {
+        return ChassisSpeeds.fromFieldRelativeSpeeds(
+                getChassisSpeeds(),
+                Rotation2d.fromRadians(gyroInputs.yaw)
         );
     }
 
@@ -303,14 +342,15 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         Photonvision.getInstance().getUpdatedPoseEstimator().ifPresent((EstimatedRobotPose pose) -> poseEstimator.addVisionMeasurement(pose.estimatedPose.toPose2d(), pose.timestampSeconds));
     }
 
+    public void updatePoseEstimatorOdometry() {
+        poseEstimator.update(getGyroAngle(), getSwerveModulePositions());
+    }
+
     public void updatePoseEstimationLimeLight() {
-        boolean poseDifference = odometry.getPoseMeters().getTranslation().getDistance(getRobotPose().getTranslation()) < OdometryConstants.MAX_DISTANCE_TO_FILTER_OUT;
-        boolean shouldUpdateByOdometry = poseDifference && isRobotOnGround();
-        if (shouldUpdateByOdometry) {
-            poseEstimator.update(getGyroAngle(), getSwerveModulePositions());
-        }
         if (doVision) {
-            for (Optional<Pair<Pose2d, Double>> target : MultiLimelight.getInstance().getAllEstimates()) {
+            for (Optional<Pair<Pose2d, Double>> target :
+                    MultiLimelight.getInstance().getAll2DEstimates()
+            ) {
                 target.ifPresent(this::addVisionMeasurement);
             }
         }
@@ -330,9 +370,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         return !(((frontLeft && frontRight) || (backLeft && backRight) || (frontLeft && backLeft) || (backRight && frontRight) || (frontLeft && backRight) || (frontRight && backLeft)));
     }
 
-    public void updateOdometry() {
-        odometry.update(getGyroAngle(), getSwerveModulePositions());
-    }
 
     private void addVisionMeasurement(Pair<Pose2d, Double> poseTimestampPair) {
         Pose2d visionPose = poseTimestampPair.getFirst();
@@ -345,13 +382,14 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         return poseEstimator.getEstimatedPosition();
     }
 
+
     public void resetToVision() {
-        Optional<Pair<Pose2d, Double>> visionOutput = MultiLimelight.getInstance().getFirstAvailableTarget();
-        if (visionOutput.isPresent()) {
-            poseEstimator.setVisionMeasurementStdDevs(new MatBuilder<>(Nat.N3(), Nat.N1()).fill(0, 0, 0.6));
-            visionOutput.ifPresent((pose2dDoublePair) -> resetChassisPose(pose2dDoublePair.getFirst()));
-            poseEstimator.setVisionMeasurementStdDevs(new MatBuilder<>(Nat.N3(), Nat.N1()).fill(VisionConstants.STANDARD_DEVIATION_VISION2D, VisionConstants.STANDARD_DEVIATION_VISION2D, VisionConstants.STANDARD_DEVIATION_VISION_ANGLE));
-            odometry.resetPosition(getGyroAngle(), getSwerveModulePositions(), MultiLimelight.getInstance().getFirstAvailableTarget().get().getFirst());
+        int counter = 0;
+        for (Optional<Pair<Pose2d, Double>> pose :
+                MultiLimelight.getInstance().getAll2DEstimates()) {
+            poseEstimator.setVisionMeasurementStdDevs(new MatBuilder<>(Nat.N3(), Nat.N1()).fill(MultiLimelight.getInstance().getDynamicStdDevs(counter), MultiLimelight.getInstance().getDynamicStdDevs(counter), VisionConstants.STANDARD_DEVIATION_VISION_ANGLE));
+            pose.ifPresent((pose2dDoublePair) -> resetChassisPose(pose2dDoublePair.getFirst()));
+            counter++;
         }
     }
 
@@ -392,6 +430,13 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
                 getChassisAngle()
         );
     }
+
+    public void moveByRobotRelativeSpeeds(ChassisSpeeds ChassisSpeeds) {
+        moveByChassisSpeeds(
+                ChassisSpeeds.fromRobotRelativeSpeeds(ChassisSpeeds, Rotation2d.fromRadians(gyroInputs.yaw))
+        );
+    }
+
 
     /**
      * set the idle mode of the linear motor to brake
@@ -443,7 +488,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     @Override
     public void updateInputs(SwerveChassisInputsAutoLogged inputs) {
         inputs.isVisionEnabled = doVision;
-        inputs.numberOfDetectedAprilTag = MultiLimelight.getInstance().getAllEstimates().size();
+        inputs.numberOfDetectedAprilTag = MultiLimelight.getInstance().getAll2DEstimates().size();
         inputs.omegaRadiansPerSecond = getChassisSpeeds().omegaRadiansPerSecond;
         inputs.xAxisSpeed = getChassisSpeeds().vxMetersPerSecond;
         inputs.yAxisSpeed = getChassisSpeeds().vyMetersPerSecond;

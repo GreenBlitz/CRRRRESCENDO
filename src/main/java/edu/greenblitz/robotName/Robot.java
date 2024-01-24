@@ -1,8 +1,24 @@
 package edu.greenblitz.robotName;
 
+
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.pathfinding.LocalADStar;
+import com.pathplanner.lib.pathfinding.Pathfinding;
+import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
+import edu.greenblitz.robotName.utils.FMSUtils;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.subsystems.Gyros.Pigeon2Gyro;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
+import edu.greenblitz.robotName.subsystems.Dashboard;
+import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.Dashboard;
+import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
+import edu.greenblitz.robotName.subsystems.Shooter.Mechanism.ShooterMechanism;
+import edu.greenblitz.robotName.subsystems.Shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -27,19 +43,43 @@ public class Robot extends LoggedRobot {
 
     @Override
     public void robotInit() {
-        initializeLogger();
+        Pathfinding.setPathfinder(new LocalADStar());
         CommandScheduler.getInstance().enable();
+        initializeLogger();
         SwerveChassis.init();
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
+        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+        initializeAutonomousBuilder();
+        MultiLimelight.init();
+        Pivot.init();
+        ShooterMechanism.init();
         OI.getInstance();
     }
+
+    @Override
+    public void teleopInit() {
+        Dashboard.getInstance().activateDriversDashboard();
+    }
+
     @Override
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
-        }
+        RoborioUtils.updateCurrentCycleTime();
+    }
+
+    private void initializeAutonomousBuilder() {
+        AutoBuilder.configureHolonomic(
+                SwerveChassis.getInstance()::getRobotPose,
+                SwerveChassis.getInstance()::resetChassisPose,
+                SwerveChassis.getInstance()::getRobotRelativeChassisSpeeds,
+                SwerveChassis.getInstance()::moveByRobotRelativeSpeeds,
+                ChassisConstants.PATH_FOLLOWER_CONFIG,
+                () -> FMSUtils.getAlliance() == DriverStation.Alliance.Red,
+                SwerveChassis.getInstance()
+        );
+    }
 
     private void initializeLogger(){
-
         NetworkTableInstance.getDefault()
                 .getStructTopic("RobotPose", Pose2d.struct).publish();
 
@@ -49,7 +89,14 @@ public class Robot extends LoggedRobot {
         switch (RobotConstants.ROBOT_TYPE) {
             // Running on a real robot, log to a USB stick
             case ROBOT_NAME:
-                Logger.addDataReceiver(new WPILOGWriter(RobotConstants.ROBORIO_LOG_PATH));
+                try {
+                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.USB_LOG_PATH));
+                    System.out.println("initialized Logger, USB");
+                } catch (Exception e) {
+                    Logger.end();
+                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
+                    System.out.println("initialized Logger, roborio");
+                }
                 Logger.addDataReceiver(new NT4Publisher());
                 break;
             // Replaying a log, set up replay source
@@ -67,7 +114,6 @@ public class Robot extends LoggedRobot {
         }
         Logger.start();
     }
-    
 
 
 }

@@ -1,19 +1,20 @@
 package edu.greenblitz.robotName;
 
 import edu.wpi.first.math.geometry.Translation3d;
+import edu.wpi.first.wpilibj.PowerDistribution;
 
 public class RobotConstants {
-	
-	public static final Robot.RobotType ROBOT_TYPE = Robot.RobotType.ROBOT_NAME;
+
+  public static final Robot.RobotType ROBOT_TYPE = Robot.RobotType.ROBOT_NAME;
+
 	public static final String SIMULATION_LOG_PATH = System.getProperty("user.home") + "\\Desktop\\SimulationLogs";
-	public static final String ROBORIO_LOG_PATH = "/media/sda1/";
-	
-	public static class Pneumatics{
-		public static final int PCM_ID = 20;
-	}
-	
+  public static final String USB_LOG_PATH = "/media/usb/";
+	public static final String SAFE_ROBORIO_LOG_PATH = "/logs/";
+  
 	public static class General {
-		public final static double RAMP_RATE_VAL = 0.4;
+	      public static final int POWER_DISTRIBUTION_CAN_ID = 20;
+        public static final PowerDistribution.ModuleType POWER_DISTRIBUTION_TYPE = PowerDistribution.ModuleType.kRev;
+        public final static double RAMP_RATE_VAL = 0.4;
 		
 		public static class Motors {
 			
@@ -41,4 +42,7 @@ public class RobotConstants {
 		public static final int SECOND = 1;
 
 	}
+    public static class Pneumatics {
+        public static final int PCM_ID = 20;
+    }
 }
