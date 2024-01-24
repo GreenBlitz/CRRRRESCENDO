@@ -18,5 +18,5 @@ public class GBMath {
 	public static double absoluteModulo(double x, double y) {
 		return ((x % y) + y) % y;
 	}
-
+	
 }
