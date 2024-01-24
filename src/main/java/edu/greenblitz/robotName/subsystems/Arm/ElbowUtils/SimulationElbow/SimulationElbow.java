@@ -15,7 +15,7 @@ import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.*;
 
 public class SimulationElbow implements IElbow {
 
-    SingleJointedArmSim elbowSimulation;
+    private SingleJointedArmSim elbowSimulation;
 
     private double appliedVoltage;
 

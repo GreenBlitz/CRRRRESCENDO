@@ -9,7 +9,7 @@ import edu.greenblitz.robotName.subsystems.Arm.ElbowUtils.IElbow;
 
 public class FalconElbow implements IElbow {
 
-    private TalonFX motor;
+    private final TalonFX motor;
 
     public FalconElbow() {
         motor = new TalonFX(FalconElbowConstants.MOTOR_ID);

@@ -16,11 +16,11 @@ import static edu.greenblitz.robotName.subsystems.Arm.EndEffector.WristUtils.Wri
 
 public class NeoWrist implements IWrist {
 
-    GBSparkMax motor;
+    private final GBSparkMax motor;
 
-    private Debouncer debouncer;
+    private final Debouncer debouncer;
 
-    private DigitalInput beamBreaker;
+    private final DigitalInput beamBreaker;
 
     public NeoWrist() {
         motor = new GBSparkMax(NeoWristConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);

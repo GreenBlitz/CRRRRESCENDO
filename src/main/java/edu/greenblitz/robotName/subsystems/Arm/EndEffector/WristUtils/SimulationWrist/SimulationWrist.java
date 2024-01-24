@@ -17,7 +17,7 @@ import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.BATTER
 
 public class SimulationWrist implements IWrist {
 
-    SingleJointedArmSim wristSimulation;
+    private SingleJointedArmSim wristSimulation;
 
     private double appliedVoltage;
 

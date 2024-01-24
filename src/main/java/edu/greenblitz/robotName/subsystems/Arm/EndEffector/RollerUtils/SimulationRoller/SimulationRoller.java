@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 
 public class SimulationRoller implements IRoller {
 	
-	private DCMotorSim rollerSimulation;
+	private final DCMotorSim rollerSimulation;
 
 	private double appliedOutput;
 	

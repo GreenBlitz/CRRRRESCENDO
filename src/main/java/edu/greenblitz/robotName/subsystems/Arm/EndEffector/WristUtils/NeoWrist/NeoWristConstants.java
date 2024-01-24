@@ -14,8 +14,6 @@ public class NeoWristConstants {
 
     public static final double DEBOUNCE_TIME_FOR_LIMIT_SWITCH = 0.5;
 
-    public static final SparkMaxLimitSwitch.Type SWITCH_TYPE = SparkMaxLimitSwitch.Type.kNormallyClosed;
-
     public static final PIDObject NEO_PID = new PIDObject().withKp(0.8).withKd(0.3).withKi(0).withMaxPower(1);
 
     public static final SimpleMotorFeedforward WRIST_FEEDFORWARD = new SimpleMotorFeedforward(kS,kV,kA);

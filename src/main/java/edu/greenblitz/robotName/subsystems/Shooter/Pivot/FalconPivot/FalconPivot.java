@@ -13,7 +13,7 @@ import static edu.greenblitz.robotName.subsystems.Shooter.Pivot.FalconPivot.Falc
 
 public class FalconPivot implements IPivot {
 
-    private TalonFX motor;
+    private final TalonFX motor;
 
     public FalconPivot() {
         motor = new TalonFX(MOTOR_ID);

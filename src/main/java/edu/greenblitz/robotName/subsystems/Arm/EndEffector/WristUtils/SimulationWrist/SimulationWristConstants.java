@@ -4,6 +4,7 @@ import edu.greenblitz.robotName.subsystems.Arm.EndEffector.WristUtils.WristConst
 import edu.greenblitz.robotName.utils.PIDObject;
 
 public class SimulationWristConstants {
+
     public static final int NUMBER_OF_MOTORS = 1;
 
     public static final double GEAR_RATIO = 1 / WristConstants.RELATIVE_POSITION_CONVERSION_FACTOR;

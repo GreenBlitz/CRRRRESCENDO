@@ -7,7 +7,7 @@ import edu.greenblitz.robotName.subsystems.Arm.EndEffector.RollerUtils.RollerInp
 
 public class BagRoller implements IRoller {
 	
-	private TalonSRX motor;
+	private final TalonSRX motor;
 
 	public BagRoller(){
 		motor = new TalonSRX(BagRollerConstants.ROLLER_ID);
