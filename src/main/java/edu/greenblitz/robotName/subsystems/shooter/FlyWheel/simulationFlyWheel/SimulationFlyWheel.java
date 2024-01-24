@@ -9,46 +9,66 @@ import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 
 public class SimulationFlyWheel implements IFlyWheel {
-    private FlywheelSim flyWheelSimulation;
-    private double appliedVoltage;
-    private PIDController pidController;
+    private FlywheelSim rightMotorFlywheel;
+    private FlywheelSim leftMotorFlywheel;
+    private double rightMotorApplied, leftMotorApplied;
+    private PIDController rightMotorPIDController;
+    private PIDController leftMotorPIDController;
 
     public SimulationFlyWheel() {
-        flyWheelSimulation = new FlywheelSim(
-                DCMotor.getNEO(SimulationFlyWheelConstants.NUMBER_OF_MOTORS),
-                SimulationFlyWheelConstants.GEARING,
-                SimulationFlyWheelConstants.J_KG_METERS_SQUARED
+        rightMotorFlywheel = new FlywheelSim(
+                DCMotor.getNEO(SimulationFlyWheelConstants.RightMotor.NUMBER_OF_MOTORS),
+                SimulationFlyWheelConstants.RightMotor.GEARING,
+                SimulationFlyWheelConstants.RightMotor.J_KG_METERS_SQUARED
         );
-        pidController = SimulationFlyWheelConstants.SIMULATION_PID;
+        rightMotorPIDController = SimulationFlyWheelConstants.RightMotor.SIMULATION_PID;
+
+        leftMotorFlywheel = new FlywheelSim(
+                DCMotor.getNEO(SimulationFlyWheelConstants.LeftMotor.NUMBER_OF_MOTORS),
+                SimulationFlyWheelConstants.LeftMotor.GEARING,
+                SimulationFlyWheelConstants.LeftMotor.J_KG_METERS_SQUARED
+        );
+        leftMotorPIDController = SimulationFlyWheelConstants.LeftMotor.SIMULATION_PID;
     }
 
     @Override
-    public void setPower(double power) {
-        setVoltage(power * RobotConstants.SimulationConstants.BATTERY_VOLTAGE);
+    public void setPower(double rightPower, double leftPower) {
+        setVoltage(
+                rightPower * RobotConstants.SimulationConstants.BATTERY_VOLTAGE,
+                leftPower  * RobotConstants.SimulationConstants.BATTERY_VOLTAGE
+        );
+
     }
 
     @Override
-    public void setVoltage(double voltage) {
-        appliedVoltage = MathUtil.clamp(
-                voltage,
+    public void setVoltage(double rightVoltage, double leftVoltage) {
+        rightMotorApplied = MathUtil.clamp(
+                rightVoltage,
                 -RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE,
                 RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE
         );
-        flyWheelSimulation.setInputVoltage(appliedVoltage);
+        leftMotorApplied = MathUtil.clamp(
+                leftVoltage,
+                -RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE,
+                RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE
+        );
     }
 
     @Override
-    public void setVelocity(double velocity) {
-        double power = velocity / SimulationFlyWheelConstants.POWER_TO_VELOCITY_FACTOR;
-        setPower(power);
+    public void setVelocity(double rightVelocity, double leftVelocity) {
+        rightMotorPIDController.setSetpoint(rightVelocity);
+        leftMotorPIDController.setSetpoint(leftVelocity);
+
+        setVoltage(
+                rightMotorPIDController.calculate(rightMotorFlywheel.getAngularVelocityRPM()),
+                leftMotorPIDController.calculate(leftMotorFlywheel.getAngularVelocityRPM())
+        );
+
     }
 
     @Override
     public void updateInputs(FlyWheelInputsAutoLogged inputs) {
-        flyWheelSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
-
-        inputs.appliedOutput = appliedVoltage;
-        inputs.velocity = flyWheelSimulation.getAngularVelocityRPM();
-        inputs.temperature = 0;
+        rightMotorFlywheel.update(RobotConstants.SimulationConstants.TIME_STEP);
+        leftMotorFlywheel.update(RobotConstants.SimulationConstants.TIME_STEP);
     }
 }

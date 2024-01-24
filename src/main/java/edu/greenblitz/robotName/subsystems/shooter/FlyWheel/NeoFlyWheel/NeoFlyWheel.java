@@ -9,37 +9,41 @@ import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 
 
 public class NeoFlyWheel implements IFlyWheel {
-    private GBSparkMax motor;
+    private GBSparkMax rightMotor, leftMotor;
 
     public NeoFlyWheel() {
-        motor = new GBSparkMax(NeoFlyWheelConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        rightMotor = new GBSparkMax(NeoFlyWheelConstants.RightMotor.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        leftMotor = new GBSparkMax(NeoFlyWheelConstants.LeftMotor.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
     }
 
     @Override
-    public void setPower(double power) {
-        motor.set(power);
+    public void setPower(double rightPower, double leftPower) {
+
     }
 
     @Override
-    public void setVoltage(double voltage) {
-        motor.setVoltage(voltage);
+    public void setVoltage(double rightVoltage, double leftVoltage) {
+        rightMotor.setVoltage(rightVoltage);
+        leftMotor.setVoltage(leftVoltage);
     }
 
     @Override
-    public void setVelocity(double velocity) {
-        motor.getPIDController().setReference(
-                velocity,
+    public void setVelocity(double rightVelocity, double leftVelocity) {
+        rightMotor.getPIDController().setReference(
+                rightVelocity,
                 CANSparkMax.ControlType.kVelocity,
-                NeoFlyWheelConstants.PID_SLOT,
-                NeoFlyWheelConstants.FEEDFORWARD.calculate(velocity)
+                NeoFlyWheelConstants.RightMotor.PID_SLOT,
+                NeoFlyWheelConstants.RightMotor.FEEDFORWARD.calculate(rightVelocity)
+        );
+        leftMotor.getPIDController().setReference(
+                leftVelocity,
+                CANSparkMax.ControlType.kVelocity,
+                NeoFlyWheelConstants.LeftMotor.PID_SLOT,
+                NeoFlyWheelConstants.LeftMotor.FEEDFORWARD.calculate(leftVelocity)
         );
     }
 
     @Override
     public void updateInputs(FlyWheelInputsAutoLogged inputs) {
-        inputs.appliedOutput = motor.getAppliedOutput() * Battery.getInstance().getCurrentVoltage();
-        inputs.outputCurrent = motor.getOutputCurrent();
-        inputs.temperature = motor.getMotorTemperature();
-        inputs.velocity = motor.getEncoder().getVelocity();
     }
 }

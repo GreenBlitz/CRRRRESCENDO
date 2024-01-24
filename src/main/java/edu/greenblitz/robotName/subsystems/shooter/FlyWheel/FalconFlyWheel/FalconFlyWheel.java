@@ -12,36 +12,47 @@ import static edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FalconFlyWhee
 
 
 public class FalconFlyWheel implements IFlyWheel {
-    private TalonFX motor;
+    private TalonFX rightMotor;
+    private TalonFX leftMotor;
+
+
+    VelocityVoltage rightMotorVelocityVoltage = new VelocityVoltage(0).withEnableFOC(true),
+            leftMotorVelocityVoltage = new VelocityVoltage(0).withEnableFOC(true);
 
     public FalconFlyWheel() {
-        motor = new TalonFX(NeoFlyWheelConstants.MOTOR_ID);
-        motor.getConfigurator().apply(CURRENT_LIMITS_CONFIGS);
-        motor.getConfigurator().apply(CLOSED_LOOP_RAMPS_CONFIGS);
-        motor.getConfigurator().apply(MOTION_MAGIC_CONFIGS);
-        motor.setNeutralMode(NEUTRAL_MODE_VALUE);
+        rightMotor = new TalonFX(rightMotorConstants.ID);
+        rightMotor.getConfigurator().apply(rightMotorConstants.CURRENT_LIMITS_CONFIGS);
+        rightMotor.getConfigurator().apply(rightMotorConstants.CLOSED_LOOP_RAMPS_CONFIGS);
+        rightMotor.getConfigurator().apply(rightMotorConstants.MOTION_MAGIC_CONFIGS);
+        rightMotor.setNeutralMode(rightMotorConstants.NEUTRAL_MODE_VALUE);
+
+        rightMotor = new TalonFX(leftMotorConstants.ID);
+        rightMotor.getConfigurator().apply(leftMotorConstants.CURRENT_LIMITS_CONFIGS);
+        rightMotor.getConfigurator().apply(leftMotorConstants.CLOSED_LOOP_RAMPS_CONFIGS);
+        rightMotor.getConfigurator().apply(leftMotorConstants.MOTION_MAGIC_CONFIGS);
+        rightMotor.setNeutralMode(leftMotorConstants.NEUTRAL_MODE_VALUE);
     }
 
     @Override
-    public void setPower(double power) {
-        motor.set(power);
+    public void setPower(double rightPower, double leftPower) {
+        rightMotor.set(rightPower);
+        leftMotor.set(leftPower);
     }
 
     @Override
-    public void setVoltage(double voltage) {
-        motor.setVoltage(voltage);
+    public void setVoltage(double rightVoltage, double leftVoltage) {
+        rightMotor.setVoltage(rightVoltage);
+        leftMotor.setVoltage(leftVoltage);
     }
 
     @Override
-    public void setVelocity(double velocity) {
-        motor.setControl(new VelocityVoltage(velocity));
+    public void setVelocity(double rightVelocity, double leftVelocity) {
+        rightMotor.setControl(rightMotorVelocityVoltage.withVelocity(rightVelocity));
+        leftMotor.setControl(leftMotorVelocityVoltage.withVelocity(leftVelocity));
     }
 
     @Override
     public void updateInputs(FlyWheelInputsAutoLogged inputs) {
-        inputs.appliedOutput = motor.getMotorVoltage().getValue();
-        inputs.outputCurrent = motor.getSupplyCurrent().getValue();
-        inputs.temperature = motor.getDeviceTemp().getValue();
-        inputs.velocity = motor.getVelocity().getValue();
+
     }
 }
