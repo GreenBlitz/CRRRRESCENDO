@@ -13,8 +13,6 @@ public interface ILifter {
 
     public void setIdleMode(CANSparkMax.IdleMode idleMode);
 
-    public void setDestination(double destination);
-
     public void updateInputs(LifterInputsAutoLogged inputs);
 }
 

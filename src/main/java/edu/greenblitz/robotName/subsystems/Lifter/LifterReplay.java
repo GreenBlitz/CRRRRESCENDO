@@ -33,11 +33,6 @@ public class LifterReplay implements ILifter {
     }
 
     @Override
-    public void setDestination(double destination) {
-
-    }
-
-    @Override
     public void updateInputs(LifterInputsAutoLogged lastInputs) {
 
     }

@@ -3,8 +3,6 @@ package edu.greenblitz.robotName.subsystems.Lifter;
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Lifter extends GBSubsystem {
     private static Lifter instance;
@@ -16,7 +14,8 @@ public class Lifter extends GBSubsystem {
         lifter = LifterFactory.create();
         lifterInputs = new LifterInputsAutoLogged();
         lifter.updateInputs(lifterInputs);
-        pid = new ProfiledPIDController(LifterConstants.PID_KP, LifterConstants.PID_KI, LifterConstants.PID_KD, new TrapezoidProfile.Constraints(LifterConstants.MAX_VELOCITY, LifterConstants.MAX_ACCELERATION));
+        setIdleMode(CANSparkMax.IdleMode.kBrake);
+        pid = LifterConstants.PID;
     }
 
     public static Lifter getInstance() {
@@ -33,11 +32,10 @@ public class Lifter extends GBSubsystem {
     @Override
     public void periodic() {
         lifter.updateInputs(lifterInputs);
-        SmartDashboard.putBoolean("isSwitchPresed", lifterInputs.isSwitchPressed);
     }
 
-    public void goToPositionByPID(double pos) {
-        lifter.setPower(pid.calculate(lifterInputs.position, pos));
+    public void goToDestinationByPID() {
+        lifter.setPower(pid.calculate(lifterInputs.position, lifterInputs.destination));
     }
 
     public void setPower(double power) {
@@ -52,10 +50,17 @@ public class Lifter extends GBSubsystem {
         lifter.resetEncoder(position);
     }
 
-    public boolean isMotorAtPosition(double position) {
-        lifter.setDestination(position);
+    public void resetEncoder() {
+        lifter.resetEncoder(0);
+    }
+
+    public boolean isMotorAtDestination() {
         lifter.updateInputs(lifterInputs);
         return lifterInputs.isMotorAtPosition;
+    }
+
+    public void setDestination(double destination) {
+        lifterInputs.destination = destination;
     }
 
     public boolean isSwitchPressed() {

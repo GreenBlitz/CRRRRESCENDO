@@ -38,9 +38,4 @@ public class DigitalInputMap extends GBSubsystem {
         return digitalInputs[port].get();
     }
 
-    @Override
-    public void periodic() {
-
-    }
-
 }

@@ -9,14 +9,10 @@ import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import org.littletonrobotics.junction.Logger;
 
 public class SimulationLifter implements ILifter {
-
-    private LifterInputsAutoLogged inputs;
     private DCMotorSim motorSimulation;
     private double appliedOutput;
 
-
     public SimulationLifter() {
-        inputs = new LifterInputsAutoLogged();
         motorSimulation = new DCMotorSim(DCMotor.getNEO(SimulationConstants.NUMBER_OF_MOTORS), SimulationConstants.GEAR_RATIO, SimulationConstants.MOMENT_OF_INERTIA);
     }
 
@@ -40,7 +36,6 @@ public class SimulationLifter implements ILifter {
     @Override
     public void stopMotor() {
         this.setPower(0);
-
     }
 
     @Override
@@ -49,23 +44,13 @@ public class SimulationLifter implements ILifter {
     }
 
     @Override
-    public void setDestination(double destination) {
-        inputs.destination = destination;
-    }
-
-    @Override
     public void updateInputs(LifterInputsAutoLogged inputs) {
         motorSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
-
         inputs.appliedOutput = appliedOutput;
         inputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
         inputs.position = motorSimulation.getAngularPositionRotations();
         inputs.velocity = motorSimulation.getAngularVelocityRPM();
-        this.inputs.isSwitchPressed = DigitalInputMap.getInstance().getValue(LifterConstants.SWITCH_ID);
-        inputs.isSwitchPressed = this.inputs.isSwitchPressed;
-        inputs.destination = this.inputs.destination;
-        this.inputs.isMotorAtPosition = Math.abs(motorSimulation.getAngularPositionRotations() - this.inputs.destination) <= LifterConstants.TOLERANCE;
-        inputs.isMotorAtPosition = this.inputs.isMotorAtPosition;
+        inputs.isSwitchPressed = DigitalInputMap.getInstance().getValue(LifterConstants.SWITCH_ID);
+        inputs.isMotorAtPosition = Math.abs(motorSimulation.getAngularPositionRotations() - inputs.destination) <= LifterConstants.TOLERANCE;
     }
-
 }
