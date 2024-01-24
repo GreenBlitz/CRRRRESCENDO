@@ -31,17 +31,12 @@ public class Robot extends LoggedRobot {
         CommandScheduler.getInstance().enable();
         SwerveChassis.init();
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
-//        SwerveChassis.getInstance().resetAllEncoders();
-        
         OI.getInstance();
     }
     @Override
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
-        SmartDashboard.putNumber("vertical velocity (end)", SwerveChassis.getInstance().getModule(SwerveChassis.Module.FRONT_LEFT).getCurrentVelocity());
-        SmartDashboard.putNumber("gyro", SwerveChassis.getInstance().getModuleAngle(SwerveChassis.Module.FRONT_LEFT).getDegrees());
-        SmartDashboard.putNumber("angular position (end)", SwerveChassis.getInstance().getModuleAngle(SwerveChassis.Module.FRONT_LEFT).getDegrees());
-    }
+        }
 
     private void initializeLogger(){
 

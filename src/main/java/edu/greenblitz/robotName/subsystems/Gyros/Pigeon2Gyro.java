@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Pigeon2Gyro implements IAngleMeasurementGyro{
 	private Pigeon2 pigeon2;
-	Rotation2d yawOffset;
-	Rotation2d pitchOffset;
-	Rotation2d rollOffset;
+	private Rotation2d yawOffset;
+	private Rotation2d pitchOffset;
+	private Rotation2d rollOffset;
 	private GyroInputsAutoLogged lastInputs = new GyroInputsAutoLogged();
 	public Pigeon2Gyro(int deviceID){
 		pigeon2 = new Pigeon2(deviceID);
