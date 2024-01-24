@@ -54,6 +54,11 @@ public class FlyWheel extends GBSubsystem {
         return flyWheelInputs.appliedOutput;
     }
 
+
+    public boolean isAtVelocity(double velocity) {
+        return Math.abs(getVelocity() - velocity) < FlyWheelConstants.EPSILON_RPM;
+    }
+
     @Override
     public void periodic() {
         flyWheel.updateInputs(flyWheelInputs);

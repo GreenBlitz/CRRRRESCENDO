@@ -11,10 +11,6 @@ public class ShootByVelocity extends FlyWheelCommand {
         this.velocity = velocity;
     }
 
-    private boolean isFlywheelAtVelocity() {
-        return Math.abs(flyWheel.getVelocity() - velocity) < FlyWheelConstants.EPSILON_RPM;
-    }
-
     @Override
     public void initialize() {
         timeInShootingSpeed = 0;
@@ -23,7 +19,7 @@ public class ShootByVelocity extends FlyWheelCommand {
     @Override
     public void execute() {
         flyWheel.setVelocity(velocity);
-        if (isFlywheelAtVelocity()) {
+        if (flyWheel.isAtVelocity(velocity)) {
             timeInShootingSpeed++;
         } else {
             timeInShootingSpeed = 0;
