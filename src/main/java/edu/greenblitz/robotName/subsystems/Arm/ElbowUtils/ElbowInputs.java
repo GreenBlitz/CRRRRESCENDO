@@ -17,8 +17,8 @@ public class ElbowInputs {
 
     public double temperature;
 
-    public boolean hasHitForwardLimit;
+    public boolean hasReachedForwardLimit;
 
-    public boolean hasHitBackwardsLimit;
+    public boolean hasReachedBackwardLimit;
 
 }

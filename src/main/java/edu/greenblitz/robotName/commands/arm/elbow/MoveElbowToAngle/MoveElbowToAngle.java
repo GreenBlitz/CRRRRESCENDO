@@ -4,8 +4,8 @@ import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 
 public class MoveElbowToAngle extends ConditionalCommand {
 
-    public MoveElbowToAngle(double goalAngle, boolean isSimulation) {
-        super(new SimulationMoveElbowToAngle(goalAngle), new MotorMoveElbowToAngle(goalAngle), () -> isSimulation);
+    public MoveElbowToAngle(double targetAngle, boolean isSimulation) {
+        super(new SimulationMoveElbowToAngle(targetAngle), new MotorMoveElbowToAngle(targetAngle), () -> isSimulation);
     }
 
 }

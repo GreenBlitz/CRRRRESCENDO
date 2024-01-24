@@ -4,20 +4,20 @@ import edu.greenblitz.robotName.commands.shooter.pivot.PivotCommand;
 
 public class SimulationMovePivotToAngle extends PivotCommand {
 	
-	private double goalAngle;
+	private double targetAngle;
 	
-	public SimulationMovePivotToAngle(double goalAngle){
+	public SimulationMovePivotToAngle(double targetAngle){
 		super();
-		this.goalAngle = goalAngle;
+		this.targetAngle = targetAngle;
 	}
 	
 	@Override
 	public void execute() {
-		pivot.moveToAngle(goalAngle);
+		pivot.moveToAngle(targetAngle);
 	}
 	
 	@Override
 	public boolean isFinished() {
-		return pivot.isAtAngle(goalAngle);
+		return pivot.isAtAngle(targetAngle);
 	}
 }

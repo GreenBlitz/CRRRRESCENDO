@@ -86,8 +86,8 @@ public class SimulationWrist implements IWrist {
         inputs.velocity = wristSimulation.getVelocityRadPerSec();
         inputs.absoluteEncoderPosition = wristSimulation.getAngleRads();
         inputs.temperature = 0;
-        inputs.hasHitForwardLimit = wristSimulation.hasHitLowerLimit();
-        inputs.hasHitBackwardsLimit = wristSimulation.hasHitLowerLimit();
+        inputs.hasReachedForwardLimit = wristSimulation.hasHitLowerLimit();
+        inputs.hasReachedBackwardLimit = wristSimulation.hasHitLowerLimit();
         inputs.isObjectInArm = isObjectInArm.getSelected();
     }
 }

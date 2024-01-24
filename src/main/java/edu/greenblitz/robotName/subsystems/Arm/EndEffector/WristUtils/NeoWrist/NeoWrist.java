@@ -75,8 +75,8 @@ public class NeoWrist implements IWrist {
         inputs.velocity = motor.getEncoder().getVelocity();
         inputs.absoluteEncoderPosition = motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition();
         inputs.temperature = motor.getMotorTemperature();
-        inputs.hasHitBackwardsLimit = inputs.position == WristConstants.BACKWARD_ANGLE_LIMIT;
-        inputs.hasHitForwardLimit = inputs.position == WristConstants.FORWARD_ANGLE_LIMIT;
+        inputs.hasReachedBackwardLimit = inputs.position == WristConstants.BACKWARD_ANGLE_LIMIT;
+        inputs.hasReachedForwardLimit = inputs.position == WristConstants.FORWARD_ANGLE_LIMIT;
         inputs.isObjectInArm = debouncer.calculate(beamBreaker.get());
     }
 

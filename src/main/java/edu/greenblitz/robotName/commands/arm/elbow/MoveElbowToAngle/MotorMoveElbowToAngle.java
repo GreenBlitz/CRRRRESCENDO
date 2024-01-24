@@ -4,20 +4,20 @@ import edu.greenblitz.robotName.commands.arm.elbow.ElbowCommand;
 
 public class MotorMoveElbowToAngle extends ElbowCommand {
 
-    private double goalAngle;
+    private double targetAngle;
 
-    public MotorMoveElbowToAngle(double goalAngle){
+    public MotorMoveElbowToAngle(double targetAngle){
         super();
-        this.goalAngle = goalAngle;
+        this.targetAngle = targetAngle;
     }
 
     @Override
     public void initialize() {
-        elbow.moveToAngle(goalAngle);
+        elbow.moveToAngle(targetAngle);
     }
 
     @Override
     public boolean isFinished() {
-        return elbow.isAtAngle(goalAngle);
+        return elbow.isAtAngle(targetAngle);
     }
 }

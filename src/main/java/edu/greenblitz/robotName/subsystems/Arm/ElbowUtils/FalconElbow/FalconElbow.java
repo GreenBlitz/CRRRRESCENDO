@@ -63,7 +63,7 @@ public class FalconElbow implements IElbow {
         inputs.velocity = motor.getVelocity().getValue() * ElbowConstants.RELATIVE_VELOCITY_CONVERSION_FACTOR;
         inputs.absoluteEncoderPosition = motor.getDutyCycle().getValue() * ElbowConstants.ABSOLUTE_POSITION_CONVERSION_FACTOR;
         inputs.temperature = motor.getDeviceTemp().getValue();
-        inputs.hasHitForwardLimit = motor.getFault_ForwardSoftLimit().getValue();
-        inputs.hasHitBackwardsLimit = motor.getFault_ReverseSoftLimit().getValue();
+        inputs.hasReachedForwardLimit = motor.getFault_ForwardSoftLimit().getValue();
+        inputs.hasReachedBackwardLimit = motor.getFault_ReverseSoftLimit().getValue();
     }
 }

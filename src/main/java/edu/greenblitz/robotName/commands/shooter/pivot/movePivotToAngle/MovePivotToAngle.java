@@ -7,8 +7,8 @@ import java.util.function.BooleanSupplier;
 
 public class MovePivotToAngle extends ConditionalCommand {
 	
-	public MovePivotToAngle(double goalAngle, boolean isSimulation) {
-		super(new SimulationMovePivotToAngle(goalAngle), new MotorMovePivotToAngle(goalAngle), () -> isSimulation);
+	public MovePivotToAngle(double targetAngle, boolean isSimulation) {
+		super(new SimulationMovePivotToAngle(targetAngle), new MotorMovePivotToAngle(targetAngle), () -> isSimulation);
 	}
 	
 }

@@ -55,9 +55,5 @@ public class OI {
     }
     
     public void initButtons(){
-        secondJoystick.A.onTrue(new MovePivotToAngle(Units.degreesToRadians(45), true));
-        secondJoystick.B.onTrue(new MovePivotToAngle(Units.degreesToRadians(315), true));
-        secondJoystick.X.onTrue(new MoveWristToAngle(Units.degreesToRadians(45), true));
-        secondJoystick.Y.onTrue(new MoveWristToAngle(Units.degreesToRadians(315), true));
     }
 }

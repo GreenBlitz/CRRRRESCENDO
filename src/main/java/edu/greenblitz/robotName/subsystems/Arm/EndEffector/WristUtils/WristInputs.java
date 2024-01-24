@@ -17,9 +17,9 @@ public class WristInputs {
 
     public double temperature;
 
-    public boolean hasHitForwardLimit;
+    public boolean hasReachedForwardLimit;
 
-    public boolean hasHitBackwardsLimit;
+    public boolean hasReachedBackwardLimit;
 
     public boolean isObjectInArm;
 }

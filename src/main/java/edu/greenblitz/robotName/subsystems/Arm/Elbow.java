@@ -18,8 +18,6 @@ public class Elbow extends GBSubsystem {
     private final ElbowInputsAutoLogged elbowInputs;
 
 
-
-
     public static void init() {
         if (instance == null)
             instance = new Elbow();

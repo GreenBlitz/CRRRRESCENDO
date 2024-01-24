@@ -4,20 +4,20 @@ import edu.greenblitz.robotName.commands.arm.wrist.WristCommand;
 
 public class MotorMoveWristToAngle extends WristCommand {
 
-    double goalAngle;
+    private double targetAngle;
 
-    public MotorMoveWristToAngle(double goalAngle){
+    public MotorMoveWristToAngle(double targetAngle){
         super();
-        this.goalAngle = goalAngle;
+        this.targetAngle = targetAngle;
     }
 
     @Override
     public void initialize() {
-        wrist.moveToAngle(goalAngle);
+        wrist.moveToAngle(targetAngle);
     }
 
     @Override
     public boolean isFinished() {
-        return wrist.isAtAngle(goalAngle);
+        return wrist.isAtAngle(targetAngle);
     }
 }
