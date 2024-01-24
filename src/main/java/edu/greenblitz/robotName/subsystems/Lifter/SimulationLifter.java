@@ -64,7 +64,6 @@ public class SimulationLifter implements ILifter {
         this.inputs.isSwitchPressed = DigitalInputMap.getInstance().getValue(LifterConstants.SWITCH_ID);
         inputs.isSwitchPressed = this.inputs.isSwitchPressed;
         inputs.destination = this.inputs.destination;
-
         this.inputs.isMotorAtPosition = Math.abs(motorSimulation.getAngularPositionRotations() - this.inputs.destination) <= LifterConstants.TOLERANCE;
         inputs.isMotorAtPosition = this.inputs.isMotorAtPosition;
     }

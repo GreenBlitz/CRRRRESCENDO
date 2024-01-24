@@ -6,7 +6,7 @@ import edu.greenblitz.robotName.subsystems.Lifter.LifterConstants;
 public class ReverseLifting extends LifterCommand{
     @Override
     public void initialize() {
-        lifter.setIdleMode(CANSparkMax.IdleMode.kCoast);
+        lifter.setIdleMode(CANSparkMax.IdleMode.kBrake);
     }
 
     @Override
