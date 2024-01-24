@@ -1,6 +1,5 @@
 package edu.greenblitz.robotName;
 
-
 import com.revrobotics.CANSparkMaxLowLevel;
 import edu.greenblitz.robotName.commands.shooter.ShootByPower;
 import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
@@ -44,12 +43,13 @@ public class OI {
         return secondJoystick;
     }
 
+    public void initButtons() {
+        // put buttons here
+    }
+    
     public void DefaultCommands(){
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
         Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
     }
-    
-    public void initButtons(){
 
-    }
 }

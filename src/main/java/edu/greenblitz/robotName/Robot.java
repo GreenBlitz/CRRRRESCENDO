@@ -1,5 +1,12 @@
 package edu.greenblitz.robotName;
 
+
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.pathfinding.LocalADStar;
+import com.pathplanner.lib.pathfinding.Pathfinding;
+import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
+import edu.greenblitz.robotName.utils.FMSUtils;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
@@ -33,24 +40,41 @@ public class Robot extends LoggedRobot {
 
     @Override
     public void robotInit() {
+        Pathfinding.setPathfinder(new LocalADStar());
         CommandScheduler.getInstance().enable();
         initializeLogger();
         Battery.getInstance().setDefaultCommand(new BatteryLimiter());
         SwerveChassis.init();
         SwerveChassis.getInstance().resetAllEncoders();
+
+        initializeAutonomousBuilder();
         MultiLimelight.init();
         Pivot.init();
         ShooterMechanism.init();
         OI.getInstance();
     }
+
     @Override
     public void teleopInit() {
         Dashboard.getInstance().activateDriversDashboard();
     }
+
     @Override
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
         RoborioUtils.updateCurrentCycleTime();
+    }
+
+    private void initializeAutonomousBuilder() {
+        AutoBuilder.configureHolonomic(
+                SwerveChassis.getInstance()::getRobotPose,
+                SwerveChassis.getInstance()::resetChassisPose,
+                SwerveChassis.getInstance()::getRobotRelativeChassisSpeeds,
+                SwerveChassis.getInstance()::moveByRobotRelativeSpeeds,
+                ChassisConstants.PATH_FOLLOWER_CONFIG,
+                () -> FMSUtils.getAlliance() == DriverStation.Alliance.Red,
+                SwerveChassis.getInstance()
+        );
     }
 
     private void initializeLogger(){
@@ -88,7 +112,6 @@ public class Robot extends LoggedRobot {
         }
         Logger.start();
     }
-    
 
 
 }
