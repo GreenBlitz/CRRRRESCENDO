@@ -8,7 +8,7 @@ import edu.greenblitz.robotName.subsystems.Shooter.Pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.Shooter.Pivot.PivotInputsAutoLogged;
 
 import static edu.greenblitz.robotName.subsystems.Shooter.Pivot.FalconPivot.FalconPivotConstants.*;
-import static edu.greenblitz.robotName.subsystems.Shooter.Pivot.MotorConstants.SWITCH_CONFIGS;
+
 
 
 public class FalconPivot implements IPivot {
@@ -20,7 +20,7 @@ public class FalconPivot implements IPivot {
         motor.getConfigurator().apply(MOTION_MAGIC_CONFIGS);
         motor.getConfigurator().apply(CURRENT_LIMITS_CONFIGS);
         motor.getConfigurator().apply(CLOSED_LOOP_RAMPS_CONFIGS);
-        motor.getConfigurator().apply(SWITCH_CONFIGS);
+        motor.getConfigurator().apply(LIMIT_SWITCH_CONFIGS);
         motor.setNeutralMode(NEUTRAL_MODE_VALUE);
         motor.optimizeBusUtilization();
     }
