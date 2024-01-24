@@ -7,7 +7,7 @@ public class LifterFactory {
         return switch (Robot.RobotType.ROBOT_NAME) {
             case ROBOT_NAME -> new NeoLifter();
             case REPLAY -> new LifterReplay();
-            default -> new SimulationLifter();
+            case SIMULATION -> new SimulationLifter();
         };
     }
 }

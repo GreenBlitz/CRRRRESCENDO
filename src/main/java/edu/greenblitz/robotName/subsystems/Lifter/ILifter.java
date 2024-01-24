@@ -14,5 +14,6 @@ public interface ILifter {
     public void setIdleMode(CANSparkMax.IdleMode idleMode);
 
     public void updateInputs(LifterInputsAutoLogged inputs);
+    public void goToPositionByPID(double pos);
 }
 

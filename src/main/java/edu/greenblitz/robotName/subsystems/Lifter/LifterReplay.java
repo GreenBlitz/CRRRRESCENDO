@@ -36,4 +36,9 @@ public class LifterReplay implements ILifter {
     public void updateInputs(LifterInputsAutoLogged lastInputs) {
 
     }
+
+    @Override
+    public void goToPositionByPID(double pos) {
+
+    }
 }
