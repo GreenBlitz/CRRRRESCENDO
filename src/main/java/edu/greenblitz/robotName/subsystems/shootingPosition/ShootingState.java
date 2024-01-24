@@ -2,7 +2,6 @@ package edu.greenblitz.robotName.subsystems.shootingPosition;
 
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
-import edu.greenblitz.robotName.utils.GBMath;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.greenblitz.robotName.utils.shootingCalculations.ShooterAngle;
 import edu.greenblitz.robotName.utils.shootingCalculations.ShootingZone;
@@ -13,7 +12,7 @@ import edu.wpi.first.math.geometry.Translation3d;
 
 public class ShootingState extends GBSubsystem {
     private ShootingZone zone;
-    private ShootingState instance;
+    private static ShootingState instance;
     private Pose2d robotPose;
 
     private ShootingState() {
@@ -24,13 +23,13 @@ public class ShootingState extends GBSubsystem {
         robotPose = SwerveChassis.getInstance().getRobotPose();
     }
 
-    public void init() {
+    public static void init() {
         if (instance == null) {
             instance = new ShootingState();
         }
     }
 
-    public ShootingState getInstance() {
+    public static ShootingState getInstance() {
         init();
         return instance;
     }
@@ -50,5 +49,9 @@ public class ShootingState extends GBSubsystem {
                         RobotConstants.General.SHOOTER_HEIGHT_RELATIVE_TO_GROUND
                 )
         );
+    }
+
+    public boolean isRobotPositionFine() {
+        return zone.isInCircle(robotPose.getTranslation());
     }
 }

@@ -6,8 +6,6 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
 
-import static edu.greenblitz.robotName.utils.GBMath.distance;
-
 public class ShooterAngle {
 
     /**
