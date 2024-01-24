@@ -12,5 +12,5 @@ public class LifterConstants {
 
     public static final double LIFTER_EXTENDED_POSITION = 5;
 
-    public static final double MOTOR_FINAL_POSITION_WHEN_REVERSE_LIFTING = -5;
+    public static final double LIFTER_RETRACTED_POSITION = 0;
 }
