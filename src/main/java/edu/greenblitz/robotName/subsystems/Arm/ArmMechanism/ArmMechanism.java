@@ -30,20 +30,18 @@ public class ArmMechanism extends GBSubsystem {
     private final Wrist wrist;
 
 
-
-
     public static void init() {
         new ArmMechanism();
     }
 
-    private ArmMechanism(){
+    private ArmMechanism() {
         elbow = Elbow.getInstance();
         wrist = Wrist.getInstance();
 
-        armMechanism = new Mechanism2d(SIZE_OF_MECHANISM.getX(),SIZE_OF_MECHANISM.getY());
-        root = armMechanism.getRoot("arm_root",POSITION_OF_MECHANISM.getX(),POSITION_OF_MECHANISM.getY());
+        armMechanism = new Mechanism2d(SIZE_OF_MECHANISM.getX(), SIZE_OF_MECHANISM.getY());
+        root = armMechanism.getRoot("arm_root", POSITION_OF_MECHANISM.getX(), POSITION_OF_MECHANISM.getY());
 
-        elbowJoint = root.append(new MechanismLigament2d("elbow", ElbowConstants.ARM_LENGTH,Units.radiansToDegrees(ElbowConstants.STARTING_ANGLE),ELBOW_LINE_WIDTH,COLOR_OF_ELBOW));
+        elbowJoint = root.append(new MechanismLigament2d("elbow", ElbowConstants.ARM_LENGTH, Units.radiansToDegrees(ElbowConstants.STARTING_ANGLE), ELBOW_LINE_WIDTH, COLOR_OF_ELBOW));
         wristJoint = elbowJoint.append(new MechanismLigament2d("wrist", WristConstants.LENGTH_OF_ENDEFFECTOR, Units.radiansToDegrees(WristConstants.STARTING_ANGLE), WRIST_LINE_WIDTH, COLOR_OF_WRIST));
 
         SmartDashboard.putData("ArmMech2D", armMechanism);

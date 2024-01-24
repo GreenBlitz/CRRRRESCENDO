@@ -1,8 +1,6 @@
-package edu.greenblitz.robotName.commands.arm.Elbow.MoveElbowToAngle;
+package edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
 
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
-
-import java.util.function.BooleanSupplier;
 
 public class MoveElbowToAngle extends ConditionalCommand {
 

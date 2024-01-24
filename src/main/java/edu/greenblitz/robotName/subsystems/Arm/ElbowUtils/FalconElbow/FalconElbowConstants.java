@@ -18,6 +18,7 @@ public class FalconElbowConstants {
     public static final NeutralModeValue NEUTRAL_MODE_VALUE = NeutralModeValue.Brake;
 
     public static final MotionMagicConfigs MOTION_MAGIC_CONFIGS = new MotionMagicConfigs();
+
     static {
         MOTION_MAGIC_CONFIGS.MotionMagicAcceleration = 1;
         MOTION_MAGIC_CONFIGS.MotionMagicCruiseVelocity = 2;
@@ -25,6 +26,7 @@ public class FalconElbowConstants {
     }
 
     public static final ClosedLoopRampsConfigs CLOSED_LOOP_RAMPS_CONFIGS = new ClosedLoopRampsConfigs();
+
     static {
         CLOSED_LOOP_RAMPS_CONFIGS.DutyCycleClosedLoopRampPeriod = 1;
         CLOSED_LOOP_RAMPS_CONFIGS.TorqueClosedLoopRampPeriod = 2;
@@ -32,6 +34,7 @@ public class FalconElbowConstants {
     }
 
     public static final CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();
+
     static {
         CURRENT_LIMITS_CONFIGS.StatorCurrentLimit = 1;
         CURRENT_LIMITS_CONFIGS.StatorCurrentLimitEnable = true;
@@ -42,6 +45,7 @@ public class FalconElbowConstants {
     }
 
     public static final SoftwareLimitSwitchConfigs SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();
+
     static {
         SWITCH_CONFIGS.ForwardSoftLimitEnable = true;
         SWITCH_CONFIGS.ForwardSoftLimitThreshold = FORWARD_ANGLE_LIMIT;

@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.commands.arm.Elbow;
+package edu.greenblitz.robotName.commands.arm.elbow;
 
 public class ElbowDefaultCommand extends ElbowCommand{
 

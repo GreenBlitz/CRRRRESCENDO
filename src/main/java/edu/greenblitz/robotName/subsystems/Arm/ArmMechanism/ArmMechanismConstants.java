@@ -6,11 +6,11 @@ import edu.wpi.first.wpilibj.util.Color;
 
 public class ArmMechanismConstants {
 
-    public static final Translation2d SIZE_OF_MECHANISM = new Translation2d(2,2);
+    public static final Translation2d SIZE_OF_MECHANISM = new Translation2d(2, 2);
 
     public static final Translation2d POSITION_OF_MECHANISM = SIZE_OF_MECHANISM.div(2);
 
-    public class WristMechanismConstants{
+    public class WristMechanismConstants {
 
         public static final int WRIST_LINE_WIDTH = 8;
 
@@ -18,7 +18,7 @@ public class ArmMechanismConstants {
 
     }
 
-    public class ElbowMechanismConstants{
+    public class ElbowMechanismConstants {
 
         public static final int ELBOW_LINE_WIDTH = 8;
 

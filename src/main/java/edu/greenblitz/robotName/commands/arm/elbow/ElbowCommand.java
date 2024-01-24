@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.commands.arm.Elbow;
+package edu.greenblitz.robotName.commands.arm.elbow;
 
 import edu.greenblitz.robotName.subsystems.Arm.Elbow;
 import edu.greenblitz.robotName.utils.GBCommand;

@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.commands.arm.Wrist;
+package edu.greenblitz.robotName.commands.arm.wrist;
 
 public class WristDefaultCommand extends WristCommand{
 

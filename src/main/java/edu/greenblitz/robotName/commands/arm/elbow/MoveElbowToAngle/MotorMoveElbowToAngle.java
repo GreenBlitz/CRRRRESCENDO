@@ -1,6 +1,6 @@
-package edu.greenblitz.robotName.commands.arm.Elbow.MoveElbowToAngle;
+package edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
 
-import edu.greenblitz.robotName.commands.arm.Elbow.ElbowCommand;
+import edu.greenblitz.robotName.commands.arm.elbow.ElbowCommand;
 
 public class MotorMoveElbowToAngle extends ElbowCommand {
 

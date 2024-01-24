@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.commands.arm.Wrist;
+package edu.greenblitz.robotName.commands.arm.wrist;
 
 import edu.greenblitz.robotName.subsystems.Arm.Wrist;
 import edu.greenblitz.robotName.utils.GBCommand;

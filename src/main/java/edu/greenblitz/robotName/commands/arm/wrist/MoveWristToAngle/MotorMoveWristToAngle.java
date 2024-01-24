@@ -1,6 +1,6 @@
-package edu.greenblitz.robotName.commands.arm.Wrist.MoveWristToAngle;
+package edu.greenblitz.robotName.commands.arm.wrist.MoveWristToAngle;
 
-import edu.greenblitz.robotName.commands.arm.Wrist.WristCommand;
+import edu.greenblitz.robotName.commands.arm.wrist.WristCommand;
 
 public class MotorMoveWristToAngle extends WristCommand {
 
