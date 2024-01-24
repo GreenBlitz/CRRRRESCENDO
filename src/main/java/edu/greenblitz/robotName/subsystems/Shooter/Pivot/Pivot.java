@@ -6,7 +6,7 @@ import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.Shooter.Pivot.MotorPivot.FalconPivot.FalconPivotConstants.SIMPLE_MOTOR_FF;
+import static edu.greenblitz.robotName.subsystems.Shooter.Pivot.FalconPivot.FalconPivotConstants.SIMPLE_MOTOR_FF;
 import static edu.greenblitz.robotName.subsystems.Shooter.Pivot.PivotConstants.TOLERANCE;
 
 

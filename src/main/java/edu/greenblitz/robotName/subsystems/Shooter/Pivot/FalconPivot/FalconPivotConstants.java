@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Shooter.Pivot.MotorPivot.FalconPivot;
+package edu.greenblitz.robotName.subsystems.Shooter.Pivot.FalconPivot;
 
 import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
@@ -16,6 +16,8 @@ public class FalconPivotConstants {
     public static final SimpleMotorFeedforward SIMPLE_MOTOR_FF = new SimpleMotorFeedforward(kS, kV, kA);
 
     public static final NeutralModeValue NEUTRAL_MODE_VALUE = NeutralModeValue.Brake;
+
+    public static final int MOTOR_ID = 33;
 
     public static final MotionMagicConfigs MOTION_MAGIC_CONFIGS = new MotionMagicConfigs();
 

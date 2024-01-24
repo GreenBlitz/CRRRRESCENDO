@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Shooter.Pivot.MotorPivot;
+package edu.greenblitz.robotName.subsystems.Shooter.Pivot;
 
 import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 

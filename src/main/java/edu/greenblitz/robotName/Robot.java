@@ -1,12 +1,10 @@
 package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
-import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
-import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.Shooter.Mechanism.ShooterMechanism;
-import edu.greenblitz.robotName.subsystems.Shooter.Pivot.MotorPivot.SystemIdenficationPivot.SystemIdenficationPivot;
 import edu.greenblitz.robotName.subsystems.Shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.RoborioUtils;
@@ -21,8 +19,6 @@ import org.littletonrobotics.junction.networktables.NT4Publisher;
 import org.littletonrobotics.junction.wpilog.WPILOGReader;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 
-import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
-
 public class Robot extends LoggedRobot {
 
     public enum RobotType {
@@ -35,18 +31,17 @@ public class Robot extends LoggedRobot {
     public void robotInit() {
         CommandScheduler.getInstance().enable();
         initializeLogger();
-//        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-//        SwerveChassis.init();
-//        SwerveChassis.getInstance().resetAllEncoders();
-//        MultiLimelight.init();
-//        Pivot.init();
-        SystemIdenficationPivot.init();
-//        ShooterMechanism.init();
+        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+        SwerveChassis.init();
+        SwerveChassis.getInstance().resetAllEncoders();
+        MultiLimelight.init();
+        Pivot.init();
+        ShooterMechanism.init();
         OI.getInstance();
     }
     @Override
     public void teleopInit() {
-//        Dashboard.getInstance().activateDriversDashboard();
+        Dashboard.getInstance().activateDriversDashboard();
     }
     @Override
     public void robotPeriodic() {
