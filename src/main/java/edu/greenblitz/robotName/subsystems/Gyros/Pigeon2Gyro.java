@@ -10,9 +10,10 @@ public class Pigeon2Gyro implements IAngleMeasurementGyro{
 	private Rotation2d yawOffset;
 	private Rotation2d pitchOffset;
 	private Rotation2d rollOffset;
-	private GyroInputsAutoLogged lastInputs = new GyroInputsAutoLogged();
+	private GyroInputsAutoLogged lastInputs;
 	public Pigeon2Gyro(int deviceID){
 		pigeon2 = new Pigeon2(deviceID);
+		lastInputs = new GyroInputsAutoLogged();
 		
 		this.pitchOffset = new Rotation2d();
 		this.rollOffset = new Rotation2d();

@@ -12,10 +12,8 @@ import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModuleInputsAuto
 import edu.greenblitz.robotName.subsystems.swerve.SwerveModuleConfigObject;
 import edu.greenblitz.robotName.utils.Conversions;
 import edu.greenblitz.robotName.utils.motors.GBTalonFXPro;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MK4ISwerveModule implements ISwerveModule {
 
@@ -25,15 +23,15 @@ public class MK4ISwerveModule implements ISwerveModule {
     private final double encoderOffset;
 
 
-    VelocityVoltage velocityVoltage = new VelocityVoltage(0).withEnableFOC(true);
-    PositionVoltage motionMagicDutyCycle = new PositionVoltage(0).withEnableFOC(true);
+    public VelocityVoltage velocityVoltage = new VelocityVoltage(0).withEnableFOC(true);
+    public PositionVoltage motionMagicDutyCycle = new PositionVoltage(0).withEnableFOC(true);
     public MK4ISwerveModule(SwerveChassis.Module module) {
 
         SwerveModuleConfigObject configObject = switch (module) {
             case FRONT_LEFT -> MK4iSwerveConstants.MK4I_MODULE_FRONT_LEFT;
             case FRONT_RIGHT -> MK4iSwerveConstants.MK4I_MODULE_FRONT_RIGHT;
             case BACK_LEFT -> MK4iSwerveConstants.MK4I_MODULE_BACK_LEFT;
-            case BACK_RIGHT -> MK4iSwerveConstants.MK4I_MODULE_BAK_RIGHT;
+            case BACK_RIGHT -> MK4iSwerveConstants.MK4I_MODULE_BACK_RIGHT;
             default -> throw new IllegalArgumentException("Invalid swerve module");
         };
 
