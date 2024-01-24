@@ -9,12 +9,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Lifter extends GBSubsystem {
     private static Lifter instance;
     private ILifter lifter;
-    private LifterInputs lifterInputs;
+    private LifterInputsAutoLogged lifterInputs;
     private ProfiledPIDController pid;
 
     private Lifter() {
         lifter = LifterFactory.create();
-        lifterInputs = new LifterInputs();
+        lifterInputs = new LifterInputsAutoLogged();
         lifter.updateInputs(lifterInputs);
         pid = new ProfiledPIDController(LifterConstants.PID_KP, LifterConstants.PID_KI, LifterConstants.PID_KD, new TrapezoidProfile.Constraints(LifterConstants.MAX_VELOCITY, LifterConstants.MAX_ACCELERATION));
     }
@@ -33,9 +33,6 @@ public class Lifter extends GBSubsystem {
     @Override
     public void periodic() {
         lifter.updateInputs(lifterInputs);
-        if (lifterInputs.isSwitchPressed) {
-            resetEncoder(0);
-        }
         SmartDashboard.putBoolean("isSwitchPresed", lifterInputs.isSwitchPressed);
     }
 
@@ -59,6 +56,10 @@ public class Lifter extends GBSubsystem {
         lifter.setDestination(position);
         lifter.updateInputs(lifterInputs);
         return lifterInputs.isMotorAtPosition;
+    }
+
+    public boolean isSwitchPressed() {
+        return lifterInputs.isSwitchPressed;
     }
 
     public void stopMotor() {

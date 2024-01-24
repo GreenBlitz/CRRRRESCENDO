@@ -7,7 +7,7 @@ public class LiftUp extends LifterCommand {
 
     @Override
     public void initialize() {
-        lifter.setIdleMode(CANSparkMax.IdleMode.kCoast);
+        lifter.setIdleMode(CANSparkMax.IdleMode.kBrake);
     }
 
     @Override
@@ -24,6 +24,6 @@ public class LiftUp extends LifterCommand {
 
     @Override
     public void end(boolean interrupted) {
-        lifter.setIdleMode(CANSparkMax.IdleMode.kBrake);
+
     }
 }

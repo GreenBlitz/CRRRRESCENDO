@@ -9,12 +9,12 @@ public interface ILifter {
 
     public void resetEncoder(double position);
 
-    public void updateInputs(LifterInputs inputs);
-
     public void stopMotor();
 
     public void setIdleMode(CANSparkMax.IdleMode idleMode);
 
     public void setDestination(double destination);
+
+    public void updateInputs(LifterInputsAutoLogged inputs);
 }
 

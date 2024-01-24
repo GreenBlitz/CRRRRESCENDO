@@ -10,13 +10,13 @@ import org.littletonrobotics.junction.Logger;
 
 public class SimulationLifter implements ILifter {
 
-    private LifterInputs inputs;
+    private LifterInputsAutoLogged inputs;
     private DCMotorSim motorSimulation;
     private double appliedOutput;
 
 
     public SimulationLifter() {
-        inputs = new LifterInputs();
+        inputs = new LifterInputsAutoLogged();
         motorSimulation = new DCMotorSim(DCMotor.getNEO(SimulationConstants.NUMBER_OF_MOTORS), SimulationConstants.GEAR_RATIO, SimulationConstants.MOMENT_OF_INERTIA);
     }
 
@@ -54,7 +54,7 @@ public class SimulationLifter implements ILifter {
     }
 
     @Override
-    public void updateInputs(LifterInputs inputs) {
+    public void updateInputs(LifterInputsAutoLogged inputs) {
         motorSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
 
         inputs.appliedOutput = appliedOutput;

@@ -2,14 +2,13 @@ package edu.greenblitz.robotName.utils;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 
-public class DigitalInputMap extends GBSubsystem{
+public class DigitalInputMap extends GBSubsystem {
     private static final int NUMBER_OF_PORTS = 10;
 
     private static DigitalInputMap instance;
     private final DigitalInput[] digitalInputs;
 
     private DigitalInputMap() {
-
 
 
         digitalInputs = new DigitalInput[NUMBER_OF_PORTS];
@@ -20,11 +19,15 @@ public class DigitalInputMap extends GBSubsystem{
     }
 
     public static DigitalInputMap getInstance() {
+        init();
+        return instance;
+    }
+
+    public static void init() {
         if (instance == null) {
             instance = new DigitalInputMap();
             instance.register();
         }
-        return instance;
     }
 
     public DigitalInput getDigitalInput(int port) {
