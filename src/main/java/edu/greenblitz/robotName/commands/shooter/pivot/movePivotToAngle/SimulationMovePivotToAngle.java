@@ -6,7 +6,7 @@ public class SimulationMovePivotToAngle extends PivotCommand {
 	
 	private double goalAngle;
 	
-	public SimulationMovePivotToAngle(double goalAngle){
+	protected SimulationMovePivotToAngle(double goalAngle){
 		super();
 		this.goalAngle = goalAngle;
 	}

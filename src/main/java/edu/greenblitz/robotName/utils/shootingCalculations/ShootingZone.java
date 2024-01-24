@@ -17,6 +17,10 @@ public class ShootingZone extends GBMath.GBCircle {
         restrictedBounds.add(bound);
     }
 
+    public void setRestrictedBounds(List<Pair<Translation2d, Translation2d>> restrictedBounds) {
+        this.restrictedBounds = restrictedBounds;
+    }
+
     @Override
     public Translation2d getClosestPositionOnBorder(Translation2d position) {
         Translation2d targetPosition = super.getClosestPositionOnBorder(position);

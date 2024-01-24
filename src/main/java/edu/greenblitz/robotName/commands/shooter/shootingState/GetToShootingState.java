@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.commands.shootingPosition;
+package edu.greenblitz.robotName.commands.shooter.shootingState;
 
 import edu.greenblitz.robotName.utils.GBCommand;
 

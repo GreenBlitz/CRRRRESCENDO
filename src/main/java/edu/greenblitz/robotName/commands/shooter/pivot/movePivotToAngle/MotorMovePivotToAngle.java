@@ -6,7 +6,7 @@ public class MotorMovePivotToAngle extends PivotCommand {
 	
 	private double goalAngle;
 	
-	public MotorMovePivotToAngle(double goalAngle){
+	protected MotorMovePivotToAngle(double goalAngle){
 		super();
 		this.goalAngle = goalAngle;
 	}

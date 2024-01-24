@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.shootingPosition;
+package edu.greenblitz.robotName.shootingStateService;
 
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
