@@ -12,8 +12,6 @@ public class Battery extends GBSubsystem {
 	private static final double MIN_VOLTAGE_BATTERY = 11.97;
 	private static Battery instance;
 	private static PowerDistribution powerDistribution = new PowerDistribution(RobotConstants.General.POWER_DISTRIBUTION_CAN_ID,RobotConstants.General.POWER_DISTRIBUTION_TYPE);
-	private static PneumaticHub pneumaticsControlModule = new PneumaticHub(RobotConstants.Pneumatics.PCM_ID);
-
 	private Battery() {
 	}
 	
