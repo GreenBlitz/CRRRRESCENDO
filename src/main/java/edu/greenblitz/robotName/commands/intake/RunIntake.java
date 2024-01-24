@@ -1,15 +1,35 @@
+
 package edu.greenblitz.robotName.commands.intake;
 
 import edu.greenblitz.robotName.subsystems.Intake.IntakeConstants;
 
-public class RunIntake extends IntakeCommand{
-    @Override
-    public void execute(){
-        intake.setPower(IntakeConstants.POWER_TO_FORWARD_RUN);
-    }
 
-    @Override
-    public void end(boolean interrupted){
-        intake.stop();
-    }
+public class RunIntake extends IntakeCommand{
+   public Funnel funnel;
+   public Wrist wrist;
+   public RunIntake(){
+       super();
+       funnel = Funnel.getInstance();
+       wrist = Wrist.getInstance();
+   }
+
+   @Override
+   public void execute(){
+       intake.setPower(IntakeConstants.POWER_TO_RUN);
+   }
+
+   @Override
+   public boolean isFinished(){
+       return intake.getEntranceBeamBreakerValue() ||
+               intake.getExitBeamBreakerValue() ||
+               funnel.isObjectIn() ||
+               wrist.isObjectInside();
+   }
+
+   @Override
+   public void end(boolean interrupted){
+       intake.stop();
+   }
+  
 }
+
