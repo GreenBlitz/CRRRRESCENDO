@@ -10,16 +10,14 @@ import org.littletonrobotics.junction.Logger;
 
 public class SimulationLifter implements ILifter {
 
-    private LifterInputs inputs = new LifterInputs();
+    private LifterInputs inputs;
     private DCMotorSim motorSimulation;
     private double appliedOutput;
 
 
     public SimulationLifter() {
-        motorSimulation = new DCMotorSim(
-                DCMotor.getNEO(SimulationConstants.NUMBER_OF_MOTORS),
-                SimulationConstants.GEAR_RATIO,
-                SimulationConstants.MOMENT_OF_INERTIA);
+        inputs = new LifterInputs();
+        motorSimulation = new DCMotorSim(DCMotor.getNEO(SimulationConstants.NUMBER_OF_MOTORS), SimulationConstants.GEAR_RATIO, SimulationConstants.MOMENT_OF_INERTIA);
     }
 
     @Override
@@ -30,18 +28,13 @@ public class SimulationLifter implements ILifter {
 
     @Override
     public void setVoltage(double voltage) {
-        appliedOutput = MathUtil.clamp(voltage, -RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE, RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE);
+        appliedOutput = MathUtil.clamp(voltage, RobotConstants.SimulationConstants.MIN_MOTOR_VOLTAGE, RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE);
         motorSimulation.setInputVoltage(appliedOutput);
     }
 
     @Override
-    public void resetEncoderTo(double position) {
+    public void resetEncoder(double position) {
         Logger.recordOutput("Lifter", "tried setting the position to " + position);
-    }
-
-    @Override
-    public boolean isMotorInPosition(double position) {
-        return inputs.position <= position + LifterConstants.PID_TOLERANCE && inputs.position >= position - LifterConstants.PID_TOLERANCE;
     }
 
     @Override
@@ -51,13 +44,13 @@ public class SimulationLifter implements ILifter {
     }
 
     @Override
-    public void setIdleMode(CANSparkMax.IdleMode mode) {
-        Logger.getInstance().recordOutput("Lifter", "tried setting the idleMode to " + mode.name());
+    public void setIdleMode(CANSparkMax.IdleMode idleMode) {
+        Logger.getInstance().recordOutput("Lifter", "tried setting the idleMode to " + idleMode.name());
     }
 
     @Override
-    public boolean isSwitchPressed() {
-        return inputs.isSwitchPressed;
+    public void setDestination(double destination) {
+        inputs.destination = destination;
     }
 
     @Override
@@ -68,10 +61,12 @@ public class SimulationLifter implements ILifter {
         inputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
         inputs.position = motorSimulation.getAngularPositionRotations();
         inputs.velocity = motorSimulation.getAngularVelocityRPM();
-        inputs.isSwitchPressed = DigitalInputMap.getInstance().getValue(LifterConstants.SWITCH_ID);
-        inputs.kP = LifterConstants.PID_KP;
-        inputs.kI = LifterConstants.PID_KI;
-        inputs.kD = LifterConstants.PID_KD;
+        this.inputs.isSwitchPressed = DigitalInputMap.getInstance().getValue(LifterConstants.SWITCH_ID);
+        inputs.isSwitchPressed = this.inputs.isSwitchPressed;
+        inputs.destination = this.inputs.destination;
+
+        this.inputs.isMotorAtPosition = Math.abs(motorSimulation.getAngularPositionRotations() - this.inputs.destination) <= LifterConstants.TOLERANCE;
+        inputs.isMotorAtPosition = this.inputs.isMotorAtPosition;
     }
 
 }

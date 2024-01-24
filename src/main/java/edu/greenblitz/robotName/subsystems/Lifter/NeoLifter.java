@@ -11,7 +11,7 @@ public class NeoLifter implements ILifter {
 
     public NeoLifter() {
         inputs = new LifterInputs();
-        motor = new GBSparkMax(LifterConstants.MOTOR_PORT_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        motor = new GBSparkMax(LifterConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
     }
 
     @Override
@@ -25,13 +25,8 @@ public class NeoLifter implements ILifter {
     }
 
     @Override
-    public void resetEncoderTo(double position) {
+    public void resetEncoder(double position) {
         motor.getEncoder().setPosition(position);
-    }
-
-    @Override
-    public boolean isMotorInPosition(double position) {
-        return motor.getEncoder().getPosition() <= position + LifterConstants.PID_TOLERANCE && motor.getEncoder().getPosition() >= position - LifterConstants.PID_TOLERANCE;
     }
 
     @Override
@@ -40,13 +35,13 @@ public class NeoLifter implements ILifter {
     }
 
     @Override
-    public void setIdleMode(CANSparkMax.IdleMode mode) {
-        motor.setIdleMode(mode);
+    public void setIdleMode(CANSparkMax.IdleMode idleMode) {
+        motor.setIdleMode(idleMode);
     }
 
     @Override
-    public boolean isSwitchPressed() {
-        return DigitalInputMap.getInstance().getValue(LifterConstants.SWITCH_ID);
+    public void setDestination(double destination) {
+        inputs.destination = destination;
     }
 
     @Override
@@ -55,11 +50,11 @@ public class NeoLifter implements ILifter {
         inputs.outputCurrent = motor.getOutputCurrent();
         inputs.position = motor.getEncoder().getPosition();
         inputs.velocity = motor.getEncoder().getVelocity();
-        inputs.kP = motor.getPIDController().getP();
-        inputs.kI = motor.getPIDController().getI();
-        inputs.kD = motor.getPIDController().getD();
-        inputs.isSwitchPressed = DigitalInputMap.getInstance().getValue(LifterConstants.SWITCH_ID);
+        this.inputs.isSwitchPressed = DigitalInputMap.getInstance().getValue(LifterConstants.SWITCH_ID);
+        inputs.isSwitchPressed = this.inputs.isSwitchPressed;
+        inputs.destination = this.inputs.destination;
+
+        this.inputs.isMotorAtPosition = Math.abs(motor.getEncoder().getPosition() - this.inputs.destination) <= LifterConstants.TOLERANCE;
+        inputs.isMotorAtPosition = this.inputs.isMotorAtPosition;
     }
-
-
 }

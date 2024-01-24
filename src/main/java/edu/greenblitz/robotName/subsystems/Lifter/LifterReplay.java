@@ -16,13 +16,8 @@ public class LifterReplay implements ILifter {
     }
 
     @Override
-    public void resetEncoderTo(double position) {
+    public void resetEncoder(double position) {
 
-    }
-
-    @Override
-    public boolean isMotorInPosition(double position) {
-        return false;
     }
 
 
@@ -38,12 +33,12 @@ public class LifterReplay implements ILifter {
 
 
     @Override
-    public void setIdleMode(CANSparkMax.IdleMode mode) {
+    public void setIdleMode(CANSparkMax.IdleMode idleMode) {
 
     }
 
     @Override
-    public boolean isSwitchPressed() {
-        return false;
+    public void setDestination(double destination) {
+
     }
 }

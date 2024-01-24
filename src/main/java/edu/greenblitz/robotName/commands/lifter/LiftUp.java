@@ -7,7 +7,6 @@ public class LiftUp extends LifterCommand {
 
     @Override
     public void initialize() {
-        lifter.resetEncoderTo(0);
         lifter.setIdleMode(CANSparkMax.IdleMode.kCoast);
     }
 

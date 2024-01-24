@@ -8,7 +8,7 @@ public class LifterFactory {
             case ROBOT_NAME -> {
                 return new NeoLifter();
             }
-            case REPLAY-> {
+            case REPLAY -> {
                 return new LifterReplay();
             }
         }

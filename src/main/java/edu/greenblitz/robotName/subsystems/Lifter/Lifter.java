@@ -24,7 +24,7 @@ public class Lifter extends GBSubsystem {
         return instance;
     }
 
-    public static void init(){
+    public static void init() {
         if (instance == null) {
             instance = new Lifter();
         }
@@ -32,10 +32,10 @@ public class Lifter extends GBSubsystem {
 
     @Override
     public void periodic() {
-        if (lifter.isSwitchPressed()) {
-            resetEncoderTo(0);
-        }
         lifter.updateInputs(lifterInputs);
+        if (lifterInputs.isSwitchPressed) {
+            resetEncoder(0);
+        }
         SmartDashboard.putBoolean("isSwitchPresed", lifterInputs.isSwitchPressed);
     }
 
@@ -51,12 +51,14 @@ public class Lifter extends GBSubsystem {
         lifter.setVoltage(voltage);
     }
 
-    public void resetEncoderTo(double position) {
-        lifter.resetEncoderTo(position);
+    public void resetEncoder(double position) {
+        lifter.resetEncoder(position);
     }
 
     public boolean isMotorAtPosition(double position) {
-        return lifter.isMotorInPosition(position);
+        lifter.setDestination(position);
+        lifter.updateInputs(lifterInputs);
+        return lifterInputs.isMotorAtPosition;
     }
 
     public void stopMotor() {
