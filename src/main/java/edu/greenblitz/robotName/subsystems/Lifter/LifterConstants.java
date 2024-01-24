@@ -10,7 +10,7 @@ public class LifterConstants {
     public static final double MAX_ACCELERATION = 10;
     public static final int SWITCH_ID = 1;
 
-    public static final double MOTOR_FINAL_POSITION_WHEN_LIFTING_UP = 5;
+    public static final double LIFTER_EXTENDED_POSITION = 5;
 
     public static final double MOTOR_FINAL_POSITION_WHEN_REVERSE_LIFTING = -5;
 }
