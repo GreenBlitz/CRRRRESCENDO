@@ -8,7 +8,6 @@
       "/LiveWindow/Ungrouped/PIDController[4]": "PIDController",
       "/LiveWindow/Ungrouped/PIDController[5]": "PIDController",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
-
       "/SmartDashboard/Field": "Field2d",
       "/SmartDashboard/field": "Field2d"
     },
@@ -17,12 +16,10 @@
         "window": {
           "visible": true
         }
-
       }
     }
   },
   "NetworkTables Info": {
     "visible": true
-
   }
 }

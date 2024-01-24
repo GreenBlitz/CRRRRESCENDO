@@ -50,17 +50,19 @@ public class Robot extends LoggedRobot {
 
         OI.getInstance();
     }
+
     @Override
     public void teleopInit() {
         Dashboard.getInstance().activateDriversDashboard();
     }
+
     @Override
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
         RoborioUtils.updateCurrentCycleTime();
     }
 
-    private void initializeAutonomousBuilder(){
+    private void initializeAutonomousBuilder() {
         AutoBuilder.configureHolonomic(
                 SwerveChassis.getInstance()::getRobotPose,
                 SwerveChassis.getInstance()::resetChassisPose,
@@ -71,7 +73,8 @@ public class Robot extends LoggedRobot {
                 SwerveChassis.getInstance()
         );
     }
-    private void initializeLogger(){
+
+    private void initializeLogger() {
 
         NetworkTableInstance.getDefault()
                 .getStructTopic("RobotPose", Pose2d.struct).publish();
@@ -107,7 +110,6 @@ public class Robot extends LoggedRobot {
         }
         Logger.start();
     }
-    
 
 
 }

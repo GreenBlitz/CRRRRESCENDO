@@ -1,18 +1,6 @@
 package edu.greenblitz.robotName;
 
-
-
-import com.pathplanner.lib.path.PathConstraints;
-import edu.greenblitz.robotName.commands.auto.MoveToPose;
-import edu.greenblitz.robotName.commands.swerve.SwerveCommand;
-import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
-
-import edu.wpi.first.math.geometry.Rotation2d;
 
 public class OI {
     private static OI instance;
@@ -42,7 +30,7 @@ public class OI {
     }
 
 
-    public void initButtons(){
+    public void initButtons() {
         // put buttons here
     }
 
