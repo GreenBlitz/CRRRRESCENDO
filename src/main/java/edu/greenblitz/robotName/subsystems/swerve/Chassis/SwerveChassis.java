@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.littletonrobotics.junction.Logger;
 import org.photonvision.EstimatedRobotPose;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.Optional;
 
@@ -102,7 +103,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         updateInputs(ChassisInputs);
         SmartDashboard.putNumber("yaw", gyroInputs.yaw);
         Logger.recordOutput("DriveTrain/RobotPose", getRobotPose());
-//        Logger.recordOutput("DriveTrain/ModuleStates", getSwerveModuleStates());
+        Logger.recordOutput("DriveTrain/ModuleStates", getSwerveModuleStates());
         Logger.processInputs("DriveTrain/Chassis", ChassisInputs);
         Logger.processInputs("DriveTrain/Gyro", gyroInputs);
 
