@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.simulationFlyWheel;
+package edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.simulationFlyWheel;
 
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 import edu.wpi.first.math.controller.PIDController;

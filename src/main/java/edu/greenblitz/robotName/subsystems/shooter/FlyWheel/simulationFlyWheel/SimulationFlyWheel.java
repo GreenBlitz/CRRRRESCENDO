@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.simulationFlyWheel;
+package edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.simulationFlyWheel;
 
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelInputsAutoLogged;
