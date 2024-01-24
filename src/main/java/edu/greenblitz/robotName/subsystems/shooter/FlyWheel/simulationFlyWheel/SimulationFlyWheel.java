@@ -9,9 +9,9 @@ import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 
 public class SimulationFlyWheel implements IFlyWheel {
-    FlywheelSim flyWheelSimulation;
+    private FlywheelSim flyWheelSimulation;
     private double appliedVoltage;
-    PIDController pidController;
+    private PIDController pidController;
 
     public SimulationFlyWheel() {
         flyWheelSimulation = new FlywheelSim(
