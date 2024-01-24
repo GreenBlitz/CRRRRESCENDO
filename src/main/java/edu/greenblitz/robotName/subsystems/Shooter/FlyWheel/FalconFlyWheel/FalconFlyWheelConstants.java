@@ -1,13 +1,9 @@
-package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FalconFlyWheel;
+package edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.FalconFlyWheel;
 
 import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
-import com.ctre.phoenix6.configs.TalonFXConfigurator;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.wpi.first.math.interpolation.InterpolatingTreeMap;
-import edu.wpi.first.math.interpolation.Interpolator;
-import edu.wpi.first.math.interpolation.InverseInterpolator;
 
 public class FalconFlyWheelConstants {
 

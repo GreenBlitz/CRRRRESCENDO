@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.shooter.FlyWheel;
+package edu.greenblitz.robotName.subsystems.Shooter.FlyWheel;
 
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
@@ -26,16 +26,16 @@ public class FlyWheel extends GBSubsystem {
         return instance;
     }
 
-    public void setPower(double power) {
-        flyWheel.setPower(power);
+    public void setPower(double rightPower, double leftPower) {
+        flyWheel.setPower(rightPower, leftPower);
     }
 
-    public void setVelocity(double velocity) {
-        flyWheel.setVelocity(velocity);
+    public void setVelocity(double rightVelocity,double leftVelocity) {
+        flyWheel.setVelocity(rightVelocity, leftVelocity);
     }
 
     public void stop() {
-        flyWheel.setPower(0);
+        flyWheel.setPower(0,0);
     }
 
     public void setPreparedToShoot(boolean isPreparedToShoot) {
@@ -62,6 +62,6 @@ public class FlyWheel extends GBSubsystem {
     @Override
     public void periodic() {
         flyWheel.updateInputs(flyWheelInputs);
-        Logger.getInstance().processInputs("FlyWheel", flyWheelInputs);
+        Logger.processInputs("FlyWheel", flyWheelInputs);
     }
 }
