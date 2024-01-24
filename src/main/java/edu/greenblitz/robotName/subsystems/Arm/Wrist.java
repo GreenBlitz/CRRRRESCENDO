@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.subsystems.Arm.EndEffector.WristUtils.IWrist;
 import edu.greenblitz.robotName.subsystems.Arm.EndEffector.WristUtils.NeoWrist.NeoWristConstants;
 import edu.greenblitz.robotName.subsystems.Arm.EndEffector.WristUtils.WristFactory;
+import edu.greenblitz.robotName.subsystems.Arm.EndEffector.WristUtils.WristInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
@@ -92,7 +93,7 @@ public class Wrist extends GBSubsystem {
     }
 
     public boolean isObjectInside() {
-        return wristInputs.isObjectInside;
+        return wristInputs.isObjectInArm;
     }
 
     public boolean isAtAngle(double angle) {

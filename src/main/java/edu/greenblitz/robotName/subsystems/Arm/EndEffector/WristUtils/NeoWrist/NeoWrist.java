@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.SparkMaxAbsoluteEncoder;
 import edu.greenblitz.robotName.subsystems.Arm.EndEffector.WristUtils.IWrist;
 import edu.greenblitz.robotName.subsystems.Arm.EndEffector.WristUtils.WristConstants;
+import edu.greenblitz.robotName.subsystems.Arm.EndEffector.WristUtils.WristInputsAutoLogged;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.filter.Debouncer;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -76,7 +77,7 @@ public class NeoWrist implements IWrist {
         inputs.temperature = motor.getMotorTemperature();
         inputs.hasHitBackwardsLimit = inputs.position == WristConstants.BACKWARD_ANGLE_LIMIT;
         inputs.hasHitForwardLimit = inputs.position == WristConstants.FORWARD_ANGLE_LIMIT;
-        inputs.isObjectInside = debouncer.calculate(beamBreaker.get());
+        inputs.isObjectInArm = debouncer.calculate(beamBreaker.get());
     }
 
 }

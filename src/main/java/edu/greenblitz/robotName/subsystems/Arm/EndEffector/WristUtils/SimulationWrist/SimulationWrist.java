@@ -4,6 +4,7 @@ import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.Arm.EndEffector.WristUtils.IWrist;
 import edu.greenblitz.robotName.subsystems.Arm.EndEffector.WristUtils.WristConstants;
+import edu.greenblitz.robotName.subsystems.Arm.EndEffector.WristUtils.WristInputsAutoLogged;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.system.plant.DCMotor;
@@ -87,6 +88,6 @@ public class SimulationWrist implements IWrist {
         inputs.temperature = 0;
         inputs.hasHitForwardLimit = wristSimulation.hasHitLowerLimit();
         inputs.hasHitBackwardsLimit = wristSimulation.hasHitLowerLimit();
-        inputs.isObjectInside = isObjectInArm.getSelected();
+        inputs.isObjectInArm = isObjectInArm.getSelected();
     }
 }
