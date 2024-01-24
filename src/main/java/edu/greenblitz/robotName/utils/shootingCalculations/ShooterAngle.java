@@ -9,6 +9,7 @@ import edu.wpi.first.math.geometry.Translation3d;
 import static edu.greenblitz.robotName.utils.GBMath.distance;
 
 public class ShooterAngle {
+
     /**
      * Gets the position of the shooter and returns the angle it needs to be in order
      * to shoot into the middle of the speaker.
@@ -21,6 +22,7 @@ public class ShooterAngle {
         double angle = Math.atan(relativeSpeakerPosition.getY() / relativeSpeakerPosition.getX());
         return new Rotation2d(angle);
     }
+
     /**
      * Gets the 3D position of the shooter, uses the position of the middle of the speaker,
      * and returns the 2D position of it where (0,0) is the shooter's position.
