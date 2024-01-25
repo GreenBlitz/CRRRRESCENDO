@@ -4,6 +4,7 @@ package edu.greenblitz.robotName;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
+import edu.greenblitz.robotName.commands.shooter.ShootByPower;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
 import edu.greenblitz.robotName.subsystems.arm.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.Wrist;
@@ -47,6 +48,7 @@ public class OI {
 
     public void initButtons() {
 
+        getMainJoystick().A.onTrue(new ShootByPower().andThen())
     }
     
     public void initializeDefaultCommands(){

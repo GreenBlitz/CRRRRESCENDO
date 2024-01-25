@@ -8,7 +8,7 @@ import static edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants
 
 public class Funnel extends GBSubsystem {
 	private static Funnel instance;
-	private FunnelInputsAutoLogged funnelInputs;
+	private static FunnelInputsAutoLogged funnelInputs;
 	private static IFunnel funnel;
 
 	private Funnel() {
@@ -33,24 +33,24 @@ public class Funnel extends GBSubsystem {
 	}
 
 
-	public static void setPower(double power) {
+	public void setPower(double power) {
 		funnel.setPower(power);
 	}
 
-	public static void setVoltage(double voltage) {
+	public void setVoltage(double voltage) {
 		funnel.setVoltage(voltage);
 	}
 
 
-	public static void rollIn(){
+	public void rollIn(){
 		setPower(ROLL_POWER);
 	}
 
-	public static void rollOut(){
+	public void rollOut(){
 		setPower(EJECT_POWER);
 	}
 
-	public static void stop() {
+	public void stop() {
 		setPower(0);
 	}
 

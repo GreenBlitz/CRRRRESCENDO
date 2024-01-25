@@ -16,7 +16,8 @@ public class GoToShootingState extends GBCommand {
     public void initialize() {
         new ParallelCommandGroup(
                 new GoToRobotTargetPosition(),
-                new GoToShooterAngle()
+                new GoToShooterAngle(),
+                new ShootByPower(FlyWheelConstants.SHOOTING_POWER)
         );
     }
 

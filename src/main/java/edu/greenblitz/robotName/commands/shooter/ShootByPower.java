@@ -1,11 +1,15 @@
 package edu.greenblitz.robotName.commands.shooter;
 
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class ShootByPower extends FlyWheelCommand {
 
     private double power;
-    public ShootByPower (double power){
+
+    public ShootByPower(double power) {
         this.power = power;
     }
 
@@ -16,11 +20,14 @@ public class ShootByPower extends FlyWheelCommand {
 
     @Override
     public boolean isFinished() {
-        Funnel.getInstance().is
+        return !Funnel.getInstance().isObjectIn();
     }
 
     @Override
     public void end(boolean interrupted) {
-        flyWheel.setPower(0);
+        new SequentialCommandGroup(
+                new WaitCommand(FlyWheelConstants.DELAY_SECONDS_TILL_EXIT),
+                new StopShooter()
+        ).schedule();
     }
 }
