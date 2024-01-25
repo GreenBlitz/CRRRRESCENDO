@@ -6,6 +6,10 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.FlyWheelInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.IFlyWheel;
 import edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.NeoFlyWheel.NeoFlyWheelConstants;
+import edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.NeoFlyWheel.NeoFlyWheelConstants;
+import edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.FlyWheelInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.IFlyWheel;
+
 
 
 import static edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.FalconFlyWheel.FalconFlyWheelConstants.*;
