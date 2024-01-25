@@ -12,7 +12,7 @@ public class FalconElbow implements IElbow {
 
     private TalonFX motor;
 
-    public MotionMagicDutyCycle motionMagicDutyCycle;
+    private MotionMagicDutyCycle motionMagicDutyCycle;
 
     public FalconElbow() {
         motor = new TalonFX(FalconElbowConstants.MOTOR_ID);

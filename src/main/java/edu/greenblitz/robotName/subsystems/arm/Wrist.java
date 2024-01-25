@@ -70,16 +70,16 @@ public class Wrist extends GBSubsystem {
     }
 
     public void standInPlace() {
-        wrist.setPower(getStaticFF());
+        wrist.setPower(getStaticFeedForward());
     }
 
 
-    public double getStaticFF() {
-        return NeoWristConstants.WRIST_FEEDFORWARD.calculate(0);
+    public double getStaticFeedForward() {
+        return NeoWristConstants.WRIST_FEED_FORWARD.calculate(0);
     }
 
-    public double getDynamicFF(double velocity) {
-        return NeoWristConstants.WRIST_FEEDFORWARD.calculate(velocity);
+    public double getDynamicFeedForward(double velocity) {
+        return NeoWristConstants.WRIST_FEED_FORWARD.calculate(velocity);
     }
 
     public double getVoltage() {
