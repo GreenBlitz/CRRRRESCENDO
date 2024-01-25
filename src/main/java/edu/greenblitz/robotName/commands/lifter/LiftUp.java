@@ -6,12 +6,12 @@ public class LiftUp extends LifterCommand {
 
     @Override
     public void initialize() {
-        lifter.setDestination(LifterConstants.LIFTER_EXTENDED_POSITION);
+        lifter.setPosition(LifterConstants.LIFTER_EXTENDED_POSITION);
     }
 
     @Override
     public void execute() {
-        lifter.goToDestinationByPID();
+        lifter.goToPosition();
     }
 
     @Override

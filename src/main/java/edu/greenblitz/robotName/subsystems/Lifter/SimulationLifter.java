@@ -2,11 +2,11 @@ package edu.greenblitz.robotName.subsystems.Lifter;
 
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.utils.DigitalInputMap;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.filter.Debouncer;
 import edu.wpi.first.math.system.plant.DCMotor;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import org.littletonrobotics.junction.Logger;
 
@@ -15,8 +15,10 @@ public class SimulationLifter implements ILifter {
     private double appliedOutput;
     private ProfiledPIDController pidController;
     private Debouncer debouncer;
+    private DigitalInput digitalInput;
 
     public SimulationLifter() {
+        digitalInput = new DigitalInput(LifterConstants.SWITCH_ID);
         debouncer = new Debouncer(SimulationConstants.DEBOUNCE_TIME_FOR_SWITCH);
         motorSimulation = new DCMotorSim(DCMotor.getNEO(SimulationConstants.NUMBER_OF_MOTORS), SimulationConstants.GEAR_RATIO, SimulationConstants.MOMENT_OF_INERTIA);
         pidController = SimulationConstants.SIMULATION_PID;
@@ -51,8 +53,9 @@ public class SimulationLifter implements ILifter {
 
     @Override
     public void goToPosition(double pos) {
-        setPower(pidController.calculate(motorSimulation.getAngularPositionRotations(),pos));
+        setPower(pidController.calculate(motorSimulation.getAngularPositionRotations(), pos));
     }
+
     @Override
     public void updateInputs(LifterInputsAutoLogged inputs) {
         motorSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
@@ -60,7 +63,7 @@ public class SimulationLifter implements ILifter {
         inputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
         inputs.position = motorSimulation.getAngularPositionRotations();
         inputs.velocity = motorSimulation.getAngularVelocityRPM();
-        inputs.isSwitchPressed = debouncer.calculate(DigitalInputMap.getInstance().getValue(LifterConstants.SWITCH_ID));
+        inputs.isSwitchPressed = debouncer.calculate(digitalInput.get());
         inputs.isMotorAtPosition = Math.abs(motorSimulation.getAngularPositionRotations() - inputs.destination) <= LifterConstants.TOLERANCE;
     }
 }

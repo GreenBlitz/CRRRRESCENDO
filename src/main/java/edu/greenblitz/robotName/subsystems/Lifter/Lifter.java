@@ -31,7 +31,7 @@ public class Lifter extends GBSubsystem {
         lifter.updateInputs(lifterInputs);
     }
 
-    public void goToDestinationByPID() {
+    public void goToPosition() {
         lifter.goToPosition(lifterInputs.destination);
     }
 
@@ -48,15 +48,15 @@ public class Lifter extends GBSubsystem {
     }
 
     public void resetEncoder() {
-        lifter.resetEncoder(0);
+        lifter.resetEncoder(LifterConstants.ENCODER_POSE_WHEN_RESET);
     }
 
     public boolean isMotorAtPosition() {
         return lifterInputs.isMotorAtPosition;
     }
 
-    public void setDestination(double destination) {
-        lifterInputs.destination = destination;
+    public void setPosition(double position) {
+        lifterInputs.destination = position;
     }
 
     public boolean isSwitchPressed() {

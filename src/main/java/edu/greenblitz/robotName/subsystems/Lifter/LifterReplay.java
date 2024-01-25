@@ -3,8 +3,6 @@ package edu.greenblitz.robotName.subsystems.Lifter;
 import com.revrobotics.CANSparkMax;
 
 public class LifterReplay implements ILifter {
-
-
     @Override
     public void setPower(double power) {
 
@@ -20,12 +18,10 @@ public class LifterReplay implements ILifter {
 
     }
 
-
     @Override
     public void stopMotor() {
 
     }
-
 
     @Override
     public void setIdleMode(CANSparkMax.IdleMode idleMode) {
@@ -36,6 +32,7 @@ public class LifterReplay implements ILifter {
     public void goToPosition(double pos) {
 
     }
+
     @Override
     public void updateInputs(LifterInputsAutoLogged lastInputs) {
 

@@ -5,12 +5,12 @@ import edu.greenblitz.robotName.subsystems.Lifter.LifterConstants;
 public class ReverseLifting extends LifterCommand {
     @Override
     public void initialize() {
-        lifter.setDestination(LifterConstants.LIFTER_RETRACTED_POSITION);
+        lifter.setPosition(LifterConstants.LIFTER_RETRACTED_POSITION);
     }
 
     @Override
     public void execute() {
-        lifter.goToDestinationByPID();
+        lifter.goToPosition();
     }
 
     @Override

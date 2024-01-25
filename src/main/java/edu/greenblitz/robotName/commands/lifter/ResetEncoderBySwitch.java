@@ -6,7 +6,7 @@ import edu.greenblitz.robotName.subsystems.Lifter.LifterConstants;
 public class ResetEncoderBySwitch extends LifterCommand {
     @Override
     public void initialize() {
-        lifter.setDestination(LifterConstants.LIFTER_RETRACTED_POSITION);
+        lifter.setPosition(LifterConstants.LIFTER_RETRACTED_POSITION);
         lifter.setIdleMode(CANSparkMax.IdleMode.kCoast);
     }
 
