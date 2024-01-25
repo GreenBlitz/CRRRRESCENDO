@@ -16,11 +16,11 @@ public class ShooterMechanism {
 
     private static ShooterMechanism instance;
 
-    private static Mechanism2d shooterMechanism;
+    private Mechanism2d shooterMechanism;
 
     private MechanismRoot2d rootPivot;
 
-    private final MechanismLigament2d pivot;
+    private MechanismLigament2d pivot;
 
 
     public static void init() {

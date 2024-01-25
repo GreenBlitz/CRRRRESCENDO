@@ -1,15 +1,13 @@
 package edu.greenblitz.robotName.commands.arm.elbow;
 
+import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowCommand;
 
 public class MoveElbowToAngle extends ElbowCommand {
 
     private double targetAngle;
 
-    private boolean isSimulation;
-
     public MoveElbowToAngle(double targetAngle, boolean isSimulation) {
-        this.isSimulation = isSimulation;
         this.targetAngle = targetAngle;
     }
 
@@ -20,7 +18,7 @@ public class MoveElbowToAngle extends ElbowCommand {
 
     @Override
     public void execute() {
-        if (isSimulation)
+        if (Robot.isSimulation())
             elbow.moveToAngle(targetAngle);
     }
 

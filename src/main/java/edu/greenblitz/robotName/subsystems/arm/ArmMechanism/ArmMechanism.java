@@ -20,13 +20,13 @@ public class ArmMechanism {
 
     private static ArmMechanism instance;
 
-    private static Mechanism2d armMechanism;
+    private Mechanism2d armMechanism;
 
     private MechanismRoot2d root;
 
-    private final MechanismLigament2d wristJoint;
+    private MechanismLigament2d wristJoint;
 
-    private final MechanismLigament2d elbowJoint;
+    private MechanismLigament2d elbowJoint;
 
     private final Elbow elbow;
     private final Wrist wrist;
