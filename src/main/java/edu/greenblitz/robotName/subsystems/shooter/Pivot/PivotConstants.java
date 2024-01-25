@@ -22,7 +22,7 @@ public class PivotConstants {
 
     public static final double STARTING_ANGLE = Units.degreesToRadians(180);
 
-    public static final double PICK_UP_ANGLE = Units.degreesToRadians(180);
+    public static final double PICK_UP_ANGLE = Units.degreesToRadians(270);
 
     public static final double kS = 1;
 
