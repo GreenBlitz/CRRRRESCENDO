@@ -11,4 +11,5 @@ public class FlyWheelInputs {
     public double temperature;
 
     public double velocity;
+    public double position;
 }

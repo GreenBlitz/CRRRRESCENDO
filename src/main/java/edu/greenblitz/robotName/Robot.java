@@ -11,6 +11,7 @@ import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
@@ -31,12 +32,6 @@ public class Robot extends LoggedRobot {
     public void robotInit() {
         CommandScheduler.getInstance().enable();
         initializeLogger();
-        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-        SwerveChassis.init();
-        SwerveChassis.getInstance().resetAllEncoders();
-        MultiLimelight.init();
-        Pivot.init();
-        ShooterMechanism.init();
         OI.getInstance();
     }
     @Override
@@ -47,6 +42,7 @@ public class Robot extends LoggedRobot {
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
         RoborioUtils.updateCurrentCycleTime();
+
     }
 
     private void initializeLogger(){

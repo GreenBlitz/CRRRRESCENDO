@@ -1,9 +1,13 @@
 package edu.greenblitz.robotName;
 
 
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix6.SignalLogger;
 import com.revrobotics.CANSparkMaxLowLevel;
+import edu.greenblitz.robotName.commands.intake.RunIntake;
 import edu.greenblitz.robotName.commands.shooter.ShootByPower;
+import edu.greenblitz.robotName.commands.shooter.ShootByVelocity;
 import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
 import edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.utils.GBCommand;
@@ -21,6 +25,7 @@ import edu.wpi.first.units.Voltage;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
+import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
 import static edu.greenblitz.robotName.utils.SysId.FalconSysId.SysIdFalconConstants.DYNAMIC_VOLTAGE;
@@ -56,27 +61,33 @@ public class OI {
 
     public void DefaultCommands(){
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
-        Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
+//        Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
     }
-    
+
+    static TalonSRX fm = new TalonSRX(5);
+
     public void initButtons(){
-
-
-        SysIdRoutine.Config config = new SysIdRoutine.Config(
-                null,
-                Volts.of(DYNAMIC_VOLTAGE),
-                null,
-                (state) -> SignalLogger.writeString("state", state.toString())
-        );
-        SysIdRoutine.Mechanism mechanism = new SysIdRoutine.Mechanism(
-                (Measure<Voltage> volts) -> FlyWheel.getInstance().setVoltage(volts.in(Volts), 0),
-                null,
-                FlyWheel.getInstance()
-        );
-        SysIdRoutine routine = new SysIdRoutine(config, mechanism);
-
-        buttons(mainJoystick,routine);
-
+//
+//
+//        SysIdRoutine.Config config = new SysIdRoutine.Config(
+//                null,
+//                Volts.of(DYNAMIC_VOLTAGE),
+//                null,
+//                (state) -> Logger.recordOutput("state", state.toString())
+//        );
+//        SysIdRoutine.Mechanism mechanism = new SysIdRoutine.Mechanism(
+//                (Measure<Voltage> volts) -> FlyWheel.getInstance().setVoltage(volts.in(Volts), 0),
+//                null,
+//                FlyWheel.getInstance()
+//        );
+//        SysIdRoutine routine = new SysIdRoutine(config, mechanism);
+//
+//
+//
+//
+//        buttons(mainJoystick,routine);
+        secondJoystick.A.whileTrue(new ShootByVelocity(1000));
+        secondJoystick.B.whileTrue(new ShootByPower(0.5));
     }
 
     private Command sysIdDynamic(SysIdRoutine.Direction direction, SysIdRoutine routine) {

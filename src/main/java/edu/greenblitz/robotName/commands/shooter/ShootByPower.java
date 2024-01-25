@@ -9,7 +9,7 @@ public class ShootByPower extends FlyWheelCommand {
 
     @Override
     public void execute() {
-        flyWheel.setPower(power,power);
+        flyWheel.setPower(power,power * 0.8);
     }
 
     @Override

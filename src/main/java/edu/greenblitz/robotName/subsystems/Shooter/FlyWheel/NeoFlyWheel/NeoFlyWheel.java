@@ -2,9 +2,11 @@ package edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.NeoFlyWheel;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
+import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.FlyWheelInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.IFlyWheel;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class NeoFlyWheel implements IFlyWheel {
@@ -12,12 +14,18 @@ public class NeoFlyWheel implements IFlyWheel {
 
     public NeoFlyWheel() {
         rightMotor = new GBSparkMax(NeoFlyWheelConstants.RightMotor.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        rightMotor.config(NeoFlyWheelConstants.RightMotor.CONFIG);
         leftMotor = new GBSparkMax(NeoFlyWheelConstants.LeftMotor.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        leftMotor.config(NeoFlyWheelConstants.LeftMotor.CONFIG);
+
+        rightMotor.getEncoder().setVelocityConversionFactor(1);
+        leftMotor.getEncoder().setVelocityConversionFactor(1);
     }
 
     @Override
     public void setPower(double rightPower, double leftPower) {
-
+        rightMotor.set(rightPower);
+        leftMotor.set(leftPower);
     }
 
     @Override
@@ -44,5 +52,19 @@ public class NeoFlyWheel implements IFlyWheel {
 
     @Override
     public void updateInputs(FlyWheelInputsAutoLogged inputs) {
+
+        inputs.appliedOutput = rightMotor.getAppliedOutput();
+        inputs.velocity = rightMotor.getEncoder().getVelocity();
+        inputs.position = rightMotor.getEncoder().getPosition();
+
+
+
+        SmartDashboard.putNumber("left-velocity", leftMotor.getEncoder().getVelocity());
+        SmartDashboard.putNumber("left-current", leftMotor.getOutputCurrent());
+        SmartDashboard.putNumber("left-voltage", leftMotor.getAppliedOutput()  * Battery.getInstance().getCurrentVoltage());
+
+        SmartDashboard.putNumber("right-velocity", rightMotor.getEncoder().getVelocity());
+        SmartDashboard.putNumber("right-current", rightMotor.getOutputCurrent());
+        SmartDashboard.putNumber("right-voltage", rightMotor.getAppliedOutput() * Battery.getInstance().getCurrentVoltage());
     }
 }
