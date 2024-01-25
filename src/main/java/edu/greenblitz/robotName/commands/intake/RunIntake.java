@@ -3,7 +3,7 @@ package edu.greenblitz.robotName.commands.intake;
 
 import edu.greenblitz.robotName.subsystems.arm.Wrist;
 import edu.greenblitz.robotName.subsystems.Intake.IntakeConstants;
-import edu.greenblitz.robotName.subsystems.Shooter.Funnel.Funnel;
+import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
 
 
 public class RunIntake extends IntakeCommand{
