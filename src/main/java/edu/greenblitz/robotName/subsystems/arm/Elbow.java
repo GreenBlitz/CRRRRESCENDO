@@ -38,7 +38,6 @@ public class Elbow extends GBSubsystem {
     @Override
     public void periodic() {
         super.periodic();
-        ArmMechanism.getInstance().periodic();
 
         elbow.updateInputs(elbowInputs);
         Logger.processInputs("Elbow", elbowInputs);

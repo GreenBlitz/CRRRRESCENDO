@@ -41,7 +41,6 @@ public class Pivot extends GBSubsystem {
     @Override
     public void periodic() {
         super.periodic();
-        ShooterMechanism.getInstance().periodic();
 
         pivot.updateInputs(pivotInputs);
         Logger.processInputs("Pivot", pivotInputs);

@@ -4,6 +4,8 @@ package edu.greenblitz.robotName;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
+import edu.greenblitz.robotName.subsystems.arm.ArmMechanism.ArmMechanism;
+import edu.greenblitz.robotName.subsystems.shooter.Mechanism.ShooterMechanism;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
 import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -39,7 +41,6 @@ public class Robot extends LoggedRobot {
         initializeLogger();
         SwerveChassis.init();
         SwerveChassis.getInstance().resetAllEncoders();
-
         initializeAutonomousBuilder();
         MultiLimelight.init();
         Shooter.init();
@@ -56,6 +57,8 @@ public class Robot extends LoggedRobot {
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
         RoborioUtils.updateCurrentCycleTime();
+        ShooterMechanism.getInstance().periodic();
+        ArmMechanism.getInstance().periodic();
     }
 
     private void initializeAutonomousBuilder() {
