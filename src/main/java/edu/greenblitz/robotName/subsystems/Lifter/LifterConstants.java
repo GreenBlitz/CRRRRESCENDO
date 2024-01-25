@@ -16,6 +16,7 @@ public class LifterConstants {
     public static final int SWITCH_ID = 1;
     public static final double LIFTER_EXTENDED_POSITION = 5;
     public static final double LIFTER_RETRACTED_POSITION = 0;
+    public static final double DEBOUNCE_TIME_FOR_SWITCH = 0.1;
     public static final CANSparkMaxLowLevel.MotorType MOTOR_TYPE = CANSparkMaxLowLevel.MotorType.kBrushless;
     public static final ProfiledPIDController PID = new ProfiledPIDController(LifterConstants.PID_KP, LifterConstants.PID_KI, LifterConstants.PID_KD, new TrapezoidProfile.Constraints(LifterConstants.MAX_VELOCITY, LifterConstants.MAX_ACCELERATION));
 }

@@ -10,7 +10,7 @@ public class ReverseLifting extends LifterCommand {
 
     @Override
     public void execute() {
-        lifter.goToDestinationByPID(LifterConstants.LIFTER_RETRACTED_POSITION);
+        lifter.goToDestinationByPID();
     }
 
     @Override

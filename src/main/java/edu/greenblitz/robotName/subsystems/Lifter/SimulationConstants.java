@@ -12,6 +12,6 @@ public class SimulationConstants {
     public static final double PID_KD = 1;
     public static final double MAX_VELOCITY = 5;
     public static final double MAX_ACCELERATION = 10;
-
+    public static final double DEBOUNCE_TIME_FOR_SWITCH = 0.1;
     public static final ProfiledPIDController SIMULATION_PID = new ProfiledPIDController(SimulationConstants.PID_KP, SimulationConstants.PID_KI, SimulationConstants.PID_KD, new TrapezoidProfile.Constraints(SimulationConstants.MAX_VELOCITY, SimulationConstants.MAX_ACCELERATION));
 }

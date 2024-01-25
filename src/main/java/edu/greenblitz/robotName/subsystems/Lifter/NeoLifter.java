@@ -4,12 +4,15 @@ import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.utils.DigitalInputMap;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.filter.Debouncer;
 
 public class NeoLifter implements ILifter {
     private GBSparkMax motor;
     private ProfiledPIDController pidController;
+    private Debouncer debouncer;
 
     public NeoLifter() {
+        debouncer = new Debouncer(LifterConstants.DEBOUNCE_TIME_FOR_SWITCH);
         motor = new GBSparkMax(LifterConstants.MOTOR_ID, LifterConstants.MOTOR_TYPE);
         pidController = LifterConstants.PID;
     }
@@ -49,7 +52,7 @@ public class NeoLifter implements ILifter {
         inputs.outputCurrent = motor.getOutputCurrent();
         inputs.position = motor.getEncoder().getPosition();
         inputs.velocity = motor.getEncoder().getVelocity();
-        inputs.isSwitchPressed = DigitalInputMap.getInstance().getValue(LifterConstants.SWITCH_ID);
+        inputs.isSwitchPressed = debouncer.calculate(DigitalInputMap.getInstance().getValue(LifterConstants.SWITCH_ID));
         inputs.isMotorAtPosition = Math.abs(motor.getEncoder().getPosition() - inputs.destination) <= LifterConstants.TOLERANCE;
     }
 }

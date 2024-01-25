@@ -32,8 +32,8 @@ public class Lifter extends GBSubsystem {
         lifter.updateInputs(lifterInputs);
     }
 
-    public void goToDestinationByPID(double pos) {
-        lifter.goToPositionByPID(pos);
+    public void goToDestinationByPID() {
+        lifter.goToPositionByPID(lifterInputs.destination);
     }
 
     public void setPower(double power) {
