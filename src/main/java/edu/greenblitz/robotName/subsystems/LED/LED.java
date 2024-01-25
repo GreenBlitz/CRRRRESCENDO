@@ -10,6 +10,7 @@ public class LED extends GBSubsystem {
     private AddressableLED addressableLED;
     private AddressableLEDBuffer addressableLEDBuffer;
 
+
     private LED() {
         this.addressableLED = new AddressableLED(LEDConstants.LED_PORT);
         this.addressableLEDBuffer = new AddressableLEDBuffer(LEDConstants.LED_LENGTH);
