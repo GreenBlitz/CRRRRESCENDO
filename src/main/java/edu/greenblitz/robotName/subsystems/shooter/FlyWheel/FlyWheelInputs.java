@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Shooter.FlyWheel;
+package edu.greenblitz.robotName.subsystems.shooter.FlyWheel;
 
 import org.littletonrobotics.junction.AutoLog;
 

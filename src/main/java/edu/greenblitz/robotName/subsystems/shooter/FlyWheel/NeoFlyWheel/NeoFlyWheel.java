@@ -1,10 +1,10 @@
-package edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.NeoFlyWheel;
+package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.NeoFlyWheel;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import edu.greenblitz.robotName.subsystems.Battery;
-import edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.FlyWheelInputsAutoLogged;
-import edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.IFlyWheel;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.IFlyWheel;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 
 

@@ -1,6 +1,6 @@
-package edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.simulationFlyWheel;
+package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.simulationFlyWheel;
 
-import edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.FlyWheelConstants;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 import edu.wpi.first.math.controller.PIDController;
 
 public class SimulationFlyWheelConstants extends FlyWheelConstants {

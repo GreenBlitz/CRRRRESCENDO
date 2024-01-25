@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.FalconFlyWheel;
+package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FalconFlyWheel;
 
 import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
