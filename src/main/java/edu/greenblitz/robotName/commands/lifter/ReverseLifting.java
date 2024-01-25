@@ -15,7 +15,7 @@ public class ReverseLifting extends LifterCommand {
 
     @Override
     public boolean isFinished() {
-        return lifter.isMotorAtDestination();
+        return lifter.isMotorAtPosition();
     }
 
     @Override

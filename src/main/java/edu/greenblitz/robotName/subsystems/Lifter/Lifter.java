@@ -2,7 +2,6 @@ package edu.greenblitz.robotName.subsystems.Lifter;
 
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.utils.GBSubsystem;
-import edu.wpi.first.math.controller.ProfiledPIDController;
 
 public class Lifter extends GBSubsystem {
     private static Lifter instance;
@@ -52,7 +51,7 @@ public class Lifter extends GBSubsystem {
         lifter.resetEncoder(0);
     }
 
-    public boolean isMotorAtDestination() {
+    public boolean isMotorAtPosition() {
         return lifterInputs.isMotorAtPosition;
     }
 
