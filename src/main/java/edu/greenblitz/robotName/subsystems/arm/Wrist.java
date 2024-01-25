@@ -22,8 +22,9 @@ public class Wrist extends GBSubsystem {
 
 
     public static void init() {
-        if (instance == null)
+        if (instance == null) {
             instance = new Wrist();
+        }
     }
 
     public static Wrist getInstance() {

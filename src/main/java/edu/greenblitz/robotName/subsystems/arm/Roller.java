@@ -12,8 +12,8 @@ import static edu.greenblitz.robotName.subsystems.arm.EndEffector.RollerUtils.Ro
 public class Roller extends GBSubsystem {
 	
 	private static Roller instance;
-	private static RollerInputsAutoLogged rollerInputs;
-	private static IRoller roller;
+	private RollerInputsAutoLogged rollerInputs;
+	private IRoller roller;
 	
 	private Roller() {
 		roller = RollerFactory.create();
@@ -22,8 +22,9 @@ public class Roller extends GBSubsystem {
 	}
 
 	public static void init() {
-		if (instance == null)
+		if (instance == null) {
 			instance = new Roller();
+		}
 	}
 
 	public static Roller getInstance() {
@@ -38,19 +39,19 @@ public class Roller extends GBSubsystem {
 		Logger.processInputs("Roller", rollerInputs);
 	}
 
-	public static void setPower(double power) {
+	public void setPower(double power) {
 		roller.setPower(power);
 	}
 
-	public static void rollForward(){
+	public void rollForward(){
 		setPower(ROLL_FORWARD_POWER);
 	}
 
-	public static void rollBackward(){
+	public void rollBackward(){
 		setPower(ROLL_BACKWARD_POWER);
 	}
 
-	public static void stop() {
+	public void stop() {
 		setPower(0);
 	}
 }

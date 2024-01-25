@@ -1,9 +1,6 @@
 package edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot;
 
-import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
-import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
-import com.ctre.phoenix6.configs.MotionMagicConfigs;
-import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
+import com.ctre.phoenix6.configs.*;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 
@@ -43,12 +40,20 @@ public class FalconPivotConstants {
         CURRENT_LIMITS_CONFIGS.SupplyTimeThreshold = 4;
     }
 
-    public static final SoftwareLimitSwitchConfigs LIMIT_SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();
+    public static final SoftwareLimitSwitchConfigs SOFTWARE_LIMIT_SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();
     static {
-        LIMIT_SWITCH_CONFIGS.ForwardSoftLimitEnable = true;
-        LIMIT_SWITCH_CONFIGS.ForwardSoftLimitThreshold = 1;
-        LIMIT_SWITCH_CONFIGS.ReverseSoftLimitEnable = true;
-        LIMIT_SWITCH_CONFIGS.ReverseSoftLimitThreshold = 0;
+        SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitEnable = true;
+        SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitThreshold = 1;
+        SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitEnable = true;
+        SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitThreshold = 0;
     }
 
+    public static final TalonFXConfiguration TALON_FX_CONFIGURATION = new TalonFXConfiguration();
+
+    static{
+        TALON_FX_CONFIGURATION.MotionMagic = MOTION_MAGIC_CONFIGS;
+        TALON_FX_CONFIGURATION.ClosedLoopRamps = CLOSED_LOOP_RAMPS_CONFIGS;
+        TALON_FX_CONFIGURATION.CurrentLimits = CURRENT_LIMITS_CONFIGS;
+        TALON_FX_CONFIGURATION.SoftwareLimitSwitch = SOFTWARE_LIMIT_SWITCH_CONFIGS;
+    }
 }

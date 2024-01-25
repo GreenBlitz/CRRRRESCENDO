@@ -17,10 +17,7 @@ public class FalconPivot implements IPivot {
 
     public FalconPivot() {
         motor = new TalonFX(MOTOR_ID);
-        motor.getConfigurator().apply(MOTION_MAGIC_CONFIGS);
-        motor.getConfigurator().apply(CURRENT_LIMITS_CONFIGS);
-        motor.getConfigurator().apply(CLOSED_LOOP_RAMPS_CONFIGS);
-        motor.getConfigurator().apply(LIMIT_SWITCH_CONFIGS);
+        motor.getConfigurator().apply(TALON_FX_CONFIGURATION);
         motor.setNeutralMode(NEUTRAL_MODE_VALUE);
         motor.optimizeBusUtilization();
     }

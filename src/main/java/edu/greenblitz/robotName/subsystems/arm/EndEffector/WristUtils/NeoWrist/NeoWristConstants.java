@@ -9,7 +9,10 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import static edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants.*;
 
 public class NeoWristConstants {
+
     public static final int MOTOR_ID = 1;
+
+    public static final int PID_SLOT = 0;
 
     public static final double DEBOUNCE_TIME_FOR_LIMIT_SWITCH = 0.5;
 

@@ -19,7 +19,7 @@ public class SimulationElbow implements IElbow {
 
     private double appliedVoltage;
 
-    private final PIDController controller = SimulationElbowConstants.SIMULATION_PID.getPIDController();
+    private PIDController controller;
 
 
     public SimulationElbow() {
@@ -36,6 +36,7 @@ public class SimulationElbow implements IElbow {
                 false,
                 ElbowConstants.STARTING_ANGLE
         );
+        controller = SimulationElbowConstants.SIMULATION_PID.getPIDController();
     }
 
 

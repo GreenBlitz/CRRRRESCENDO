@@ -5,11 +5,13 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
 import edu.greenblitz.robotName.subsystems.arm.ArmMechanism.ArmMechanism;
+import edu.greenblitz.robotName.subsystems.arm.Elbow;
+import edu.greenblitz.robotName.subsystems.arm.Roller;
+import edu.greenblitz.robotName.subsystems.arm.Wrist;
 import edu.greenblitz.robotName.subsystems.shooter.Mechanism.ShooterMechanism;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
 import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.greenblitz.robotName.subsystems.arm.Arm;
 import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.shooter.Shooter;
@@ -39,13 +41,20 @@ public class Robot extends LoggedRobot {
         Pathfinding.setPathfinder(new LocalADStar());
         CommandScheduler.getInstance().enable();
         initializeLogger();
-        SwerveChassis.init();
+        initializeSubsystems();
         SwerveChassis.getInstance().resetAllEncoders();
         initializeAutonomousBuilder();
-        MultiLimelight.init();
-        Shooter.init();
-        Arm.init();
         OI.getInstance();
+    }
+
+    public void initializeSubsystems() {
+        MultiLimelight.init();
+        SwerveChassis.init();
+        Shooter.init();
+        Elbow.init();
+        Wrist.init();
+        Roller.init();
+        ArmMechanism.init();
     }
 
     @Override

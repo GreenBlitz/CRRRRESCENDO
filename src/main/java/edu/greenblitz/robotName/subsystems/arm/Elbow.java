@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName.subsystems.arm;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.greenblitz.robotName.subsystems.arm.ArmMechanism.ArmMechanism;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.FalconElbow.FalconElbowConstants;
 import edu.greenblitz.robotName.subsystems.Battery;
@@ -16,12 +15,13 @@ public class Elbow extends GBSubsystem {
 
     private IElbow elbow;
 
-    private final ElbowInputsAutoLogged elbowInputs;
+    private ElbowInputsAutoLogged elbowInputs;
 
 
     public static void init() {
-        if (instance == null)
+        if (instance == null) {
             instance = new Elbow();
+        }
     }
 
     public static Elbow getInstance() {
@@ -66,21 +66,21 @@ public class Elbow extends GBSubsystem {
     }
 
     public void standInPlace() {
-        elbow.setPower(getStaticFF());
+        elbow.setPower(getStaticFeedForward());
     }
 
 
 
-    public double getStaticFF() {
-        return FalconElbowConstants.SIMPLE_MOTOR_FF.calculate(0);
+    public double getStaticFeedForward() {
+        return FalconElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(0);
     }
 
-    public double getDynamicFF(double velocity) {
-        return FalconElbowConstants.SIMPLE_MOTOR_FF.calculate(velocity);
+    public double getDynamicFeedForward(double velocity) {
+        return FalconElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(velocity);
     }
 
     public double getVoltage() {
-        return elbowInputs.appliedOutput * Battery.getInstance().getCurrentVoltage();
+        return elbowInputs.appliedOutput;
     }
 
     public double getVelocity() {

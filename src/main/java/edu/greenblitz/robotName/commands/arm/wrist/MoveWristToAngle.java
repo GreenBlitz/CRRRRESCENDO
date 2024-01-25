@@ -1,14 +1,12 @@
 package edu.greenblitz.robotName.commands.arm.wrist;
 
 import edu.greenblitz.robotName.Robot;
-import edu.greenblitz.robotName.commands.arm.wrist.WristCommand;
-import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 
 public class MoveWristToAngle extends WristCommand {
 
     private double targetAngle;
 
-    public MoveWristToAngle(double targetAngle, boolean isSimulation) {
+    public MoveWristToAngle(double targetAngle) {
         this.targetAngle = targetAngle;
     }
 
@@ -19,8 +17,9 @@ public class MoveWristToAngle extends WristCommand {
 
     @Override
     public void execute() {
-        if (Robot.isSimulation())
+        if (Robot.isSimulation()) {
             wrist.moveToAngle(targetAngle);
+        }
     }
 
     public boolean isFinished() {

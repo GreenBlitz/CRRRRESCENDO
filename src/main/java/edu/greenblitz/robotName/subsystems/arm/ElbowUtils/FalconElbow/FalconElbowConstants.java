@@ -1,10 +1,9 @@
 package edu.greenblitz.robotName.subsystems.arm.ElbowUtils.FalconElbow;
 
-import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
-import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
-import com.ctre.phoenix6.configs.MotionMagicConfigs;
-import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
+import com.ctre.phoenix6.configs.*;
+import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 
 import static edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants.*;
@@ -13,7 +12,7 @@ public class FalconElbowConstants {
 
     public static final int MOTOR_ID = 1;
 
-    public static final SimpleMotorFeedforward SIMPLE_MOTOR_FF = new SimpleMotorFeedforward(kS, kV, kA);
+    public static final SimpleMotorFeedforward SIMPLE_MOTOR_FEED_FORWARD = new SimpleMotorFeedforward(kS, kV, kA);
 
     public static final NeutralModeValue NEUTRAL_MODE_VALUE = NeutralModeValue.Brake;
 
@@ -44,13 +43,23 @@ public class FalconElbowConstants {
         CURRENT_LIMITS_CONFIGS.SupplyTimeThreshold = 4;
     }
 
-    public static final SoftwareLimitSwitchConfigs SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();
+    public static final SoftwareLimitSwitchConfigs SOFTWARE_LIMIT_SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();
 
     static {
-        SWITCH_CONFIGS.ForwardSoftLimitEnable = true;
-        SWITCH_CONFIGS.ForwardSoftLimitThreshold = FORWARD_ANGLE_LIMIT;
-        SWITCH_CONFIGS.ReverseSoftLimitEnable = true;
-        SWITCH_CONFIGS.ReverseSoftLimitThreshold = BACKWARD_ANGLE_LIMIT;
+        SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitEnable = true;
+        SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitThreshold = FORWARD_ANGLE_LIMIT;
+        SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitEnable = true;
+        SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitThreshold = BACKWARD_ANGLE_LIMIT;
     }
 
+    public static final TalonFXConfiguration TALON_FX_CONFIGURATION = new TalonFXConfiguration();
+
+    static{
+        TALON_FX_CONFIGURATION.MotionMagic = MOTION_MAGIC_CONFIGS;
+        TALON_FX_CONFIGURATION.ClosedLoopRamps = CLOSED_LOOP_RAMPS_CONFIGS;
+        TALON_FX_CONFIGURATION.CurrentLimits = CURRENT_LIMITS_CONFIGS;
+        TALON_FX_CONFIGURATION.SoftwareLimitSwitch = SOFTWARE_LIMIT_SWITCH_CONFIGS;
+    }
+
+    public static final MotionMagicDutyCycle MOTION_MAGIC_DUTY_CYCLE = new MotionMagicDutyCycle(0, true,FalconElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(0), 0, true, true, true);
 }

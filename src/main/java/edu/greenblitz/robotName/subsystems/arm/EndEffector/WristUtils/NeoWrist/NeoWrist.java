@@ -11,19 +11,20 @@ import edu.wpi.first.math.filter.Debouncer;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 import static edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.NeoWrist.NeoWristConstants.BEAM_BREAKER_CHANNEL;
+import static edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.NeoWrist.NeoWristConstants.PID_SLOT;
 import static edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants.RELATIVE_POSITION_CONVERSION_FACTOR;
 import static edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants.RELATIVE_VELOCITY_CONVERSION_FACTOR;
 
 public class NeoWrist implements IWrist {
 
-    private final GBSparkMax motor;
+    private GBSparkMax motor;
 
-    private final Debouncer debouncer;
+    private Debouncer debouncer;
 
-    private final DigitalInput beamBreaker;
+    private DigitalInput beamBreaker;
 
     public NeoWrist() {
-        motor = new GBSparkMax(NeoWristConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        motor = new GBSparkMax(NeoWristConstants.PID_SLOT, CANSparkMaxLowLevel.MotorType.kBrushless);
         motor.config(NeoWristConstants.WRIST_CONFIG_OBJECT);
 
         motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).setPositionConversionFactor(WristConstants.ABSOLUTE_POSITION_CONVERSION_FACTOR);
@@ -64,7 +65,7 @@ public class NeoWrist implements IWrist {
 
     @Override
     public void moveToAngle(double goalAngle) {
-        motor.getPIDController().setReference(goalAngle, CANSparkMax.ControlType.kPosition, 0, motor.getPIDController().getFF());
+        motor.getPIDController().setReference(goalAngle, CANSparkMax.ControlType.kPosition, PID_SLOT, motor.getPIDController().getFF());
     }
 
     @Override

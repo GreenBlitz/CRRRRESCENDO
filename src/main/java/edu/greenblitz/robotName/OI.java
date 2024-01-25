@@ -25,7 +25,7 @@ public class OI {
         mainJoystick = new SmartJoystick(RobotConstants.Joystick.MAIN);
         secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
         initButtons();
-        DefaultCommands();
+        initializeDefaultCommands();
     }
 
     public static OI getInstance() {
@@ -47,7 +47,7 @@ public class OI {
         // put buttons here
     }
     
-    public void DefaultCommands(){
+    public void initializeDefaultCommands(){
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
         Battery.getInstance().setDefaultCommand(new BatteryLimiter());
         Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
