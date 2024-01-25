@@ -1,8 +1,8 @@
-package edu.greenblitz.robotName.subsystems.Shooter.Pivot;
+package edu.greenblitz.robotName.subsystems.shooter.Pivot;
 
 import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.Shooter.Pivot.FalconPivot.FalconPivot;
-import edu.greenblitz.robotName.subsystems.Shooter.Pivot.SimulationPivot.SimulationPivot;
+import edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot.FalconPivot;
+import edu.greenblitz.robotName.subsystems.shooter.Pivot.SimulationPivot.SimulationPivot;
 
 
 public class PivotFactory {

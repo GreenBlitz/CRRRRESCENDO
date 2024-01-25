@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.NeoFlyWheel;
+package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.NeoFlyWheel;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;

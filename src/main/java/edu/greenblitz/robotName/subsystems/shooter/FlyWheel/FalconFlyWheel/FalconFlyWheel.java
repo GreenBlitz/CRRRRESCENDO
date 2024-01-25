@@ -1,9 +1,9 @@
-package edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.FalconFlyWheel;
+package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FalconFlyWheel;
 
 
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
-import edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.NeoFlyWheel.NeoFlyWheelConstants;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.NeoFlyWheel.NeoFlyWheelConstants;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.IFlyWheel;
 

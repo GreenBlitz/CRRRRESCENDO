@@ -1,9 +1,5 @@
-package edu.greenblitz.robotName.subsystems.Shooter.FlyWheel;
+package edu.greenblitz.robotName.subsystems.shooter.FlyWheel;
 
-import edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.FlyWheelFactory;
-import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
-import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelInputsAutoLogged;
-import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.IFlyWheel;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 
