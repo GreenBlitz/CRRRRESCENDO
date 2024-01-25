@@ -33,7 +33,7 @@ public class LED extends GBSubsystem {
     }
     public void setColor (Color color,int startIndex,int endIndex){
         for (int i = startIndex; i < endIndex; i++) {
-            setColor(color,new Section(startIndex, endIndex));
+            setColor(color,i);
         }
     }
     public void setColor(Color color, int index) {

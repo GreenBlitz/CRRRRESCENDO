@@ -40,5 +40,9 @@ public class OI {
         secondJoystick.A.whileTrue(new InstantCommand(
                     ()-> LED.getInstance().setColor(Color.kDarkGreen,0, LEDConstants.LED_LENGTH)
         ));
+        secondJoystick.X.whileTrue(new InstantCommand(
+                ()-> LED.getInstance().turnOff(0, LEDConstants.LED_LENGTH)
+        ));
     }
+    
 }
