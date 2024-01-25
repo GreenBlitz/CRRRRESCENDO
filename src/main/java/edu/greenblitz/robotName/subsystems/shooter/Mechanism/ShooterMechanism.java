@@ -26,7 +26,7 @@ public class ShooterMechanism {
 
     public static void init() {
         if (instance == null)
-            new ShooterMechanism();
+            instance = new ShooterMechanism();
     }
 
     public static ShooterMechanism getInstance() {

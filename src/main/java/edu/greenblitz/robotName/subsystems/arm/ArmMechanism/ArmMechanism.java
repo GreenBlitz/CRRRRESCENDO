@@ -34,7 +34,7 @@ public class ArmMechanism {
 
     public static void init() {
         if (instance == null)
-            new ArmMechanism();
+            instance = new ArmMechanism();
     }
 
     public static ArmMechanism getInstance() {
