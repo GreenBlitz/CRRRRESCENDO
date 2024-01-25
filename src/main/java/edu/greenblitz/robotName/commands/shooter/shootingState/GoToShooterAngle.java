@@ -8,6 +8,6 @@ public class GoToShooterAngle extends PivotCommand {
 
     @Override
     public void execute() {
-        new MovePivotToAngle(ShootingState.getShooterTargetAngle().getDegrees());
+        new MovePivotToAngle(ShootingState.getTargetShooterAngle().getDegrees());
     }
 }

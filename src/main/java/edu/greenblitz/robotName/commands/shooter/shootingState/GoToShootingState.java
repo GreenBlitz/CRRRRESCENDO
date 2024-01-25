@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.commands.shooter.shootingState;
 
 import edu.greenblitz.robotName.commands.shooter.ShootByPower;
 import edu.greenblitz.robotName.shootingStateService.ShootingState;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.GBCommand;
@@ -21,9 +22,8 @@ public class GoToShootingState extends GBCommand {
 
     @Override
     public void end(boolean interrupted) {
-        if (Objects.equals(SwerveChassis.getInstance().getRobotPose(), ShootingState.getTargetRobotPosition())
-        && Pivot.getInstance().isAtAngle(ShootingState.getShooterTargetAngle().getRadians())) {
-            new ShootByPower()
+        if (ShootingState.isReadyToShoot()) {
+            new ShootByPower(FlyWheelConstants.SHOOTING_POWER);
         }
     }
 }

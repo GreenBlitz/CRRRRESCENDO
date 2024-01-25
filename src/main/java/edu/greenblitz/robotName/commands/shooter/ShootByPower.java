@@ -1,5 +1,7 @@
 package edu.greenblitz.robotName.commands.shooter;
 
+import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
+
 public class ShootByPower extends FlyWheelCommand {
 
     private double power;
@@ -10,6 +12,11 @@ public class ShootByPower extends FlyWheelCommand {
     @Override
     public void execute() {
         flyWheel.setPower(power);
+    }
+
+    @Override
+    public boolean isFinished() {
+        Funnel.getInstance().is
     }
 
     @Override

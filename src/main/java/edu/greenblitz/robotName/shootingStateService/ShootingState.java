@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.shootingStateService;
 
 import edu.greenblitz.robotName.RobotConstants;
+import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.shootingCalculations.ShooterAngle;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -29,8 +30,8 @@ public class ShootingState {
         return LEGAL_SHOOTING_ZONE.getTargetRobotAngle(SwerveChassis.getInstance().getRobotPose().getTranslation());
     }
 
-    public static Rotation2d getShooterTargetAngle() {
-        Pose2d robotPose = SwerveChassis.getInstance().getRobotPose();
+    public static Rotation2d getTargetShooterAngle() {
+        Pose2d robotPose = isRobotPositionFine() ? SwerveChassis.getInstance().getRobotPose() : getTargetRobotPosition();
         return ShooterAngle.getShooterAngleBasedOnPosition(
                 new Translation3d(
                         robotPose.getX(),
@@ -45,5 +46,17 @@ public class ShootingState {
                 getRobotTargetTranslation(),
                 getRobotTargetAngle()
         );
+    }
+
+    public static boolean isPositionCorrect() {
+        return SwerveChassis.getInstance().isAtPose(getTargetRobotPosition());
+    }
+
+    public static boolean isAngleCorrect() {
+        return Pivot.getInstance().isAtAngle(getTargetShooterAngle().getRadians());
+    }
+
+    public static boolean isReadyToShoot() {
+        return isAngleCorrect() && isPositionCorrect();
     }
 }
