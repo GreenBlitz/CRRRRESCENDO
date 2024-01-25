@@ -9,7 +9,7 @@ import edu.wpi.first.math.geometry.Translation3d;
 public class ShooterAngle {
 
     /**
-     * Gets the position of the shooter and returns the angle it needs to be in order
+     * Receives the position of the shooter and returns the correct angle in order
      * to shoot into the middle of the speaker.
      *
      * @param position The position of the shooter relative to the field.
@@ -22,8 +22,8 @@ public class ShooterAngle {
     }
 
     /**
-     * Gets the 3D position of the shooter, uses the position of the middle of the speaker,
-     * and returns the 2D position of it where (0,0) is the shooter's position.
+     * Receives the 3D position of the shooter, uses the middle of the speaker's position,
+     * and returns the 2D position where (0,0) is the shooter's position.
      *
      * @param position The position of the shooter relative to the field.
      * @return The 2D position relative to the shooter.

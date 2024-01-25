@@ -1,8 +1,5 @@
 package edu.greenblitz.robotName.utils;
 
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.util.Units;
-
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
 
@@ -20,7 +17,7 @@ public class GBMath {
     }
 
     /**
-     * Gets two points and returns the distance between them.
+     * Receives two points and returns the distance between them.
      *
      * @param x1 The x of the first point.
      * @param y1 The y of the first point.
@@ -33,7 +30,7 @@ public class GBMath {
     }
 
     /**
-     * Gets two points and returns the distance between them.
+     * Receives two points and returns the distance between them.
      *
      * @param p1 The first point.
      * @param p2 The second point.
@@ -44,7 +41,7 @@ public class GBMath {
     }
 
     /**
-     * Gets two points and returns the distance between them.
+     * Receives two points and returns the distance between them.
      *
      * @param x1 The x of the first point.
      * @param y1 The y of the first point.
@@ -59,7 +56,7 @@ public class GBMath {
     }
 
     /**
-     * Gets two points and returns the distance between them.
+     * Receives two points and returns the distance between them.
      *
      * @param p1 The first point.
      * @param p2 The second point.
@@ -71,7 +68,7 @@ public class GBMath {
 
     /**
      * A circle.
-     * A radius and center position, EPSILON for
+     * A radius and center position, EPSILON for when the given point is right below the center (Cx == Px)
      */
     public static class GBCircle {
         private Translation2d centerPosition;
@@ -108,15 +105,6 @@ public class GBMath {
         }
 
         /**
-         * Getter for the circle radius.
-         *
-         * @return The radius of the circle.
-         */
-        public double getRadius() {
-            return radius;
-        }
-
-        /**
          * Getter for the circle center.
          *
          * @return The center of the circle.
@@ -126,7 +114,16 @@ public class GBMath {
         }
 
         /**
-         * Gets a point and returns true if the position is inside (included) or on the circle.
+         * Getter for the circle radius.
+         *
+         * @return The radius of the circle.
+         */
+        public double getRadius() {
+            return radius;
+        }
+
+        /**
+         * Receives a point and returns true if the position is inside (included) or on the circle.
          *
          * @param position The position of the point.
          * @return True if the point is inside (included) or on the circle, false if the point is outside.
@@ -136,10 +133,13 @@ public class GBMath {
         }
 
         /**
-         * Gets a point and returns the point on the rim of the circle which is closest to the point.
-         * calculates the slope between the center of the circle and a given point,
-         * using trigo calculates the closest position on the rim of the circle.
+         * Receives a point, returns the point on the rim of the circle which is closest to the given point.
          *
+         * Calculates the slope between the center of the circle and a given point,
+         * and using trigonometry calculates the points on the circle that intersect with the linear slope graph.
+         * If the Y value of the point is below the center, returns the negative x and y value and vice versa.
+         *
+         * * If the point and the circle center have the same X value, adds epsilon to the given position (so the calculation doesn't fuck up)
          * @param position The position of the point.
          * @return The position of the closest point.
          */
