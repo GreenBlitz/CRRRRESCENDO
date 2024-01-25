@@ -2,8 +2,12 @@ package edu.greenblitz.robotName;
 
 
 import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
+import edu.greenblitz.robotName.subsystems.LED.LED;
+import edu.greenblitz.robotName.subsystems.LED.LEDConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.util.Color;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 public class OI {
     private static OI instance;
@@ -33,6 +37,8 @@ public class OI {
     }
 
     public void initButtons(){
-        // put buttons here
+        secondJoystick.A.whileTrue(new InstantCommand(
+                    ()-> LED.getInstance().setColor(Color.kDarkGreen,0, LEDConstants.LED_LENGTH)
+        ));
     }
 }
