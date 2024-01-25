@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.commands.shooter.pivot;
+package edu.greenblitz.robotName.commands.shooter.pivot.movePivotToAngle;
 
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotCommand;
 import edu.wpi.first.wpilibj2.command.Command;
