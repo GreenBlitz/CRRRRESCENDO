@@ -16,7 +16,9 @@ import static edu.greenblitz.robotName.subsystems.arm.ArmMechanism.ArmMechanismC
 import static edu.greenblitz.robotName.subsystems.arm.ArmMechanism.ArmMechanismConstants.WristMechanismConstants.*;
 import static edu.greenblitz.robotName.subsystems.arm.ArmMechanism.ArmMechanismConstants.ElbowMechanismConstants.*;
 
-public class ArmMechanism extends GBSubsystem {
+public class ArmMechanism {
+
+    private static ArmMechanism instance;
 
     private static Mechanism2d armMechanism;
 
@@ -31,7 +33,13 @@ public class ArmMechanism extends GBSubsystem {
 
 
     public static void init() {
-        new ArmMechanism();
+        if (instance == null)
+            new ArmMechanism();
+    }
+
+    public static ArmMechanism getInstance() {
+        init();
+        return instance;
     }
 
     private ArmMechanism() {
@@ -47,9 +55,8 @@ public class ArmMechanism extends GBSubsystem {
         SmartDashboard.putData("ArmMech2D", armMechanism);
     }
 
-    @Override
+
     public void periodic() {
-        super.periodic();
 
         double elbowAngle = elbow.getAngleInRadians();
         double wristAngle = wrist.getAngleInRadians();

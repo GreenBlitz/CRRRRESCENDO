@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.subsystems.arm;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.greenblitz.robotName.subsystems.arm.ArmMechanism.ArmMechanism;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.FalconElbow.FalconElbowConstants;
 import edu.greenblitz.robotName.subsystems.Battery;
@@ -37,6 +38,7 @@ public class Elbow extends GBSubsystem {
     @Override
     public void periodic() {
         super.periodic();
+        ArmMechanism.getInstance().periodic();
 
         elbow.updateInputs(elbowInputs);
         Logger.processInputs("Elbow", elbowInputs);

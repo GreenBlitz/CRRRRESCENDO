@@ -13,7 +13,9 @@ import org.littletonrobotics.junction.Logger;
 import static edu.greenblitz.robotName.subsystems.shooter.Mechanism.ShooterMechanismConstants.*;
 import static edu.greenblitz.robotName.subsystems.shooter.Mechanism.ShooterMechanismConstants.PivotMechanismConstants.*;
 
-public class ShooterMechanism extends GBSubsystem {
+public class ShooterMechanism {
+
+    private static ShooterMechanism instance;
 
     private static Mechanism2d shooterMechanism;
 
@@ -23,7 +25,13 @@ public class ShooterMechanism extends GBSubsystem {
 
 
     public static void init() {
-        new ShooterMechanism();
+        if (instance == null)
+            new ShooterMechanism();
+    }
+
+    public static ShooterMechanism getInstance() {
+        init();
+        return instance;
     }
 
     public ShooterMechanism(){
@@ -33,9 +41,8 @@ public class ShooterMechanism extends GBSubsystem {
         SmartDashboard.putData("ShooterMech2D", shooterMechanism);
     }
 
-    @Override
+
     public void periodic() {
-        super.periodic();
 
         double pivotAngle = Pivot.getInstance().getAngleInRadians();
         pivot.setAngle(Units.radiansToDegrees(pivotAngle));
