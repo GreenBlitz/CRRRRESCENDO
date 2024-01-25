@@ -43,7 +43,7 @@ public class NeoLifter implements ILifter {
     }
 
     @Override
-    public void goToPositionByPID(double pos) {
+    public void goToPosition(double pos) {
         setPower(pidController.calculate(motor.getEncoder().getPosition(), pos));
     }
     @Override

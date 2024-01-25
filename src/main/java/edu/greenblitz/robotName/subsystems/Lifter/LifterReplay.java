@@ -33,7 +33,7 @@ public class LifterReplay implements ILifter {
     }
 
     @Override
-    public void goToPositionByPID(double pos) {
+    public void goToPosition(double pos) {
 
     }
     @Override

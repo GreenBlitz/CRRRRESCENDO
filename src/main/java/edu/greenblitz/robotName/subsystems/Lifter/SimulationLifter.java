@@ -50,7 +50,7 @@ public class SimulationLifter implements ILifter {
     }
 
     @Override
-    public void goToPositionByPID(double pos) {
+    public void goToPosition(double pos) {
         setPower(pidController.calculate(motorSimulation.getAngularPositionRotations(),pos));
     }
     @Override
