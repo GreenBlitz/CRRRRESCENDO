@@ -1,5 +1,7 @@
 package edu.greenblitz.robotName.commands.shooter.pivot;
 
+import edu.greenblitz.robotName.Robot;
+import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotCommand;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
@@ -10,10 +12,7 @@ public class MovePivotToAngle extends PivotCommand {
 
 	private double targetAngle;
 
-	private boolean isSimulation;
-
-	public MovePivotToAngle(double targetAngle, boolean isSimulation) {
-		this.isSimulation = isSimulation;
+	public MovePivotToAngle(double targetAngle) {
 		this.targetAngle = targetAngle;
 	}
 
@@ -24,7 +23,7 @@ public class MovePivotToAngle extends PivotCommand {
 
 	@Override
 	public void execute() {
-		if (isSimulation)
+		if (RobotConstants.ROBOT_TYPE == Robot.RobotType.SIMULATION)
 			pivot.moveToAngle(targetAngle);
 	}
 
