@@ -1,7 +1,9 @@
 package edu.greenblitz.robotName.utils.shootingCalculations;
 
+import edu.greenblitz.robotName.shootingStateService.ShootingState;
 import edu.greenblitz.robotName.utils.GBMath;
 import edu.wpi.first.math.Pair;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 
 import java.util.List;
@@ -34,5 +36,10 @@ public class ShootingZone extends GBMath.GBCircle {
             }
         }
         return targetPosition;
+    }
+
+    public Rotation2d getTargetRobotAngle(Translation2d position) {
+        Translation2d relativePosition = ShootingState.getRobotTargetTranslation().minus(position);
+        return new Rotation2d(Math.atan2(relativePosition.getY(), relativePosition.getX()));
     }
 }

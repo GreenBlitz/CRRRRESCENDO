@@ -12,12 +12,21 @@ import static edu.greenblitz.robotName.shootingStateService.ShootingPositionCons
 
 public class ShootingState {
 
-    public static Translation2d getRobotTargetPosition() {
+    public static boolean isRobotPositionFine() {
+        Pose2d robotPose = SwerveChassis.getInstance().getRobotPose();
+        return LEGAL_SHOOTING_ZONE.isInCircle(robotPose.getTranslation());
+    }
+
+    public static Translation2d getRobotTargetTranslation() {
         Pose2d robotPose = SwerveChassis.getInstance().getRobotPose();
         if (LEGAL_SHOOTING_ZONE.isInCircle(robotPose.getTranslation())) {
             return robotPose.getTranslation();
         }
         return LEGAL_SHOOTING_ZONE.getClosestPositionOnBorder(robotPose.getTranslation());
+    }
+
+    public static Rotation2d getRobotTargetAngle() {
+        return LEGAL_SHOOTING_ZONE.getTargetRobotAngle(SwerveChassis.getInstance().getRobotPose().getTranslation());
     }
 
     public static Rotation2d getShooterTargetAngle() {
@@ -31,8 +40,10 @@ public class ShootingState {
         );
     }
 
-    public static boolean isRobotPositionFine() {
-        Pose2d robotPose = SwerveChassis.getInstance().getRobotPose();
-        return LEGAL_SHOOTING_ZONE.isInCircle(robotPose.getTranslation());
+    public static Pose2d getTargetRobotPosition() {
+        return new Pose2d(
+                getRobotTargetTranslation(),
+                getRobotTargetAngle()
+        );
     }
 }

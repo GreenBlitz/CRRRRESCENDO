@@ -10,8 +10,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 public class GoToShootingPosition extends GBCommand {
     @Override
     public void execute() {
-        new MoveToPose(new Pose2d(ShootingState.getRobotTargetPosition(), ));
-        Translation2d relativePosition = ShootingState.getRobotTargetPosition().minus(SwerveChassis.getInstance().getRobotPose().getTranslation());
-        Math.atan2(relativePosition.getY(),relativePosition.getX());
+        new MoveToPose(ShootingState.);
+
     }
 }
