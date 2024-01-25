@@ -5,6 +5,7 @@ import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.FalconElbow.FalconElbowConstants;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.utils.GBSubsystem;
+import edu.wpi.first.math.geometry.Rotation2d;
 import org.littletonrobotics.junction.Logger;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowFactory;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.IElbow;
@@ -57,12 +58,12 @@ public class Elbow extends GBSubsystem {
     }
 
 
-    public void resetAngle(double position) {
+    public void resetAngle(Rotation2d position) {
         elbow.resetAngle(position);
     }
 
-    public void moveToAngle(double goalAngle) {
-        elbow.moveToAngle(goalAngle);
+    public void moveToAngle(Rotation2d targetAngle) {
+        elbow.moveToAngle(targetAngle);
     }
 
     public void standInPlace() {
@@ -91,8 +92,8 @@ public class Elbow extends GBSubsystem {
         return elbowInputs.position;
     }
 
-    public boolean isAtAngle(double targetHeight) {
-        return Math.abs(targetHeight - getAngleInRadians()) <= ElbowConstants.TOLERANCE;
+    public boolean isAtAngle(Rotation2d targetHeight) {
+        return Math.abs(targetHeight.getRadians() - getAngleInRadians()) <= ElbowConstants.TOLERANCE;
     }
 
 

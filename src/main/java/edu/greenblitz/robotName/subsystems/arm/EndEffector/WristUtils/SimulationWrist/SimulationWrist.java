@@ -7,6 +7,7 @@ import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConst
 import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristInputsAutoLogged;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -34,8 +35,8 @@ public class SimulationWrist implements IWrist {
                         WristConstants.SHOOTER_MASS_KG
                 ),
                 WristConstants.LENGTH_OF_ENDEFFECTOR,
-                WristConstants.BACKWARD_ANGLE_LIMIT,
-                WristConstants.FORWARD_ANGLE_LIMIT,
+                WristConstants.BACKWARD_ANGLE_LIMIT.getRadians(),
+                WristConstants.FORWARD_ANGLE_LIMIT.getRadians(),
                 false,
                 WristConstants.STARTING_ANGLE
         );
@@ -66,13 +67,13 @@ public class SimulationWrist implements IWrist {
     }
 
     @Override
-    public void resetAngle(double position) {
+    public void resetAngle(Rotation2d position) {
         Logger.recordOutput("Arm/Wrist", "tried to reset the position to " + position);
     }
 
     @Override
-    public void moveToAngle(double goalAngle) {
-        controller.setSetpoint(goalAngle);
+    public void moveToAngle(Rotation2d targetAngle) {
+        controller.setSetpoint(targetAngle.getRadians());
         setVoltage(controller.calculate(wristSimulation.getAngleRads()));
     }
 

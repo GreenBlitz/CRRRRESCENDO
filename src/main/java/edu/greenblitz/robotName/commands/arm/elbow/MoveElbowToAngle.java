@@ -1,12 +1,13 @@
 package edu.greenblitz.robotName.commands.arm.elbow;
 
 import edu.greenblitz.robotName.Robot;
+import edu.wpi.first.math.geometry.Rotation2d;
 
 public class MoveElbowToAngle extends ElbowCommand {
 
-    private double targetAngle;
+    private Rotation2d targetAngle;
 
-    public MoveElbowToAngle(double targetAngle) {
+    public MoveElbowToAngle(Rotation2d targetAngle) {
         this.targetAngle = targetAngle;
     }
 

@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils;
 
 import com.revrobotics.CANSparkMax;
+import edu.wpi.first.math.geometry.Rotation2d;
 
 public class ReplayWrist implements IWrist {
 
@@ -20,12 +21,12 @@ public class ReplayWrist implements IWrist {
     }
 
     @Override
-    public void resetAngle(double position) {
+    public void resetAngle(Rotation2d position) {
 
     }
 
     @Override
-    public void moveToAngle(double goalAngle) {
+    public void moveToAngle(Rotation2d targetAngle) {
 
     }
 

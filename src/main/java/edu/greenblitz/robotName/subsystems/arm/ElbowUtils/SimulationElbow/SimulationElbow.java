@@ -7,6 +7,7 @@ import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.IElbow;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import org.littletonrobotics.junction.Logger;
@@ -31,8 +32,8 @@ public class SimulationElbow implements IElbow {
                         ElbowConstants.ARM_MASS_KG
                 ),
                 ElbowConstants.ARM_LENGTH,
-                ElbowConstants.BACKWARD_ANGLE_LIMIT,
-                ElbowConstants.FORWARD_ANGLE_LIMIT,
+                ElbowConstants.BACKWARD_ANGLE_LIMIT.getRadians(),
+                ElbowConstants.FORWARD_ANGLE_LIMIT.getRadians(),
                 false,
                 ElbowConstants.STARTING_ANGLE
         );
@@ -57,13 +58,13 @@ public class SimulationElbow implements IElbow {
     }
 
     @Override
-    public void resetAngle(double position) {
+    public void resetAngle(Rotation2d position) {
         Logger.recordOutput("Arm/Elbow", "tried to set the position to " + position);
     }
 
     @Override
-    public void moveToAngle(double goalAngle) {
-        controller.setSetpoint(goalAngle);
+    public void moveToAngle(Rotation2d targetAngle) {
+        controller.setSetpoint(targetAngle.getRadians());
         setVoltage(controller.calculate(elbowSimulation.getAngleRads()));
     }
 

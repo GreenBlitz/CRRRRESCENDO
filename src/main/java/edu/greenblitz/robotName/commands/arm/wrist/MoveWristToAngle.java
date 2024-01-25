@@ -1,12 +1,13 @@
 package edu.greenblitz.robotName.commands.arm.wrist;
 
 import edu.greenblitz.robotName.Robot;
+import edu.wpi.first.math.geometry.Rotation2d;
 
 public class MoveWristToAngle extends WristCommand {
 
-    private double targetAngle;
+    private Rotation2d targetAngle;
 
-    public MoveWristToAngle(double targetAngle) {
+    public MoveWristToAngle(Rotation2d targetAngle) {
         this.targetAngle = targetAngle;
     }
 

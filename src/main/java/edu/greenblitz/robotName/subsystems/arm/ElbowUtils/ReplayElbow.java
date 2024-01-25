@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.subsystems.arm.ElbowUtils;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.wpi.first.math.geometry.Rotation2d;
 
 public class ReplayElbow implements IElbow {
 
@@ -20,12 +21,12 @@ public class ReplayElbow implements IElbow {
     }
 
     @Override
-    public void resetAngle(double position) {
+    public void resetAngle(Rotation2d position) {
 
     }
 
     @Override
-    public void moveToAngle(double goalAngle) {
+    public void moveToAngle(Rotation2d targetAngle) {
 
     }
 

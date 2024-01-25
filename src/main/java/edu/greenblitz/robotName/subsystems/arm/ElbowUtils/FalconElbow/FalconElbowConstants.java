@@ -47,9 +47,9 @@ public class FalconElbowConstants {
 
     static {
         SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitEnable = true;
-        SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitThreshold = FORWARD_ANGLE_LIMIT;
+        SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitThreshold = FORWARD_ANGLE_LIMIT.getRadians();
         SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitEnable = true;
-        SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitThreshold = BACKWARD_ANGLE_LIMIT;
+        SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitThreshold = BACKWARD_ANGLE_LIMIT.getRadians();
     }
 
     public static final TalonFXConfiguration TALON_FX_CONFIGURATION = new TalonFXConfiguration();
@@ -61,5 +61,4 @@ public class FalconElbowConstants {
         TALON_FX_CONFIGURATION.SoftwareLimitSwitch = SOFTWARE_LIMIT_SWITCH_CONFIGS;
     }
 
-    public static final MotionMagicDutyCycle MOTION_MAGIC_DUTY_CYCLE = new MotionMagicDutyCycle(0, true,FalconElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(0), 0, true, true, true);
 }

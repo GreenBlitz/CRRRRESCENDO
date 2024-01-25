@@ -28,8 +28,8 @@ public class ArmMechanism {
 
     private MechanismLigament2d elbowJoint;
 
-    private final Elbow elbow;
-    private final Wrist wrist;
+    private Elbow elbow;
+    private Wrist wrist;
 
 
     public static void init() {

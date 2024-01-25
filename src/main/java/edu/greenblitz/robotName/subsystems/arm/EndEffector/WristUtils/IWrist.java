@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils;
 
 import com.revrobotics.CANSparkMax;
+import edu.wpi.first.math.geometry.Rotation2d;
 
 public interface IWrist {
 
@@ -10,9 +11,9 @@ public interface IWrist {
 
     void setIdleMode(CANSparkMax.IdleMode idleMode);
 
-    void resetAngle(double position);
+    void resetAngle(Rotation2d position);
 
-    void moveToAngle(double goalAngle);
+    void moveToAngle(Rotation2d targetAngle);
 
     void updateInputs(WristInputsAutoLogged inputs);
 }
