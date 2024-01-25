@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Shooter.Pivot;
+package edu.greenblitz.robotName.subsystems.shooter.Pivot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 

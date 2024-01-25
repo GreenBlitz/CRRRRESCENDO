@@ -1,17 +1,10 @@
 package edu.greenblitz.robotName;
 
-import com.revrobotics.CANSparkMaxLowLevel;
-import edu.greenblitz.robotName.commands.shooter.ShootByPower;
-import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
-import edu.greenblitz.robotName.utils.GBCommand;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
-import edu.greenblitz.robotName.utils.motors.GBSparkMax;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
-import edu.greenblitz.robotName.subsystems.Shooter.Pivot.Pivot;
+import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
-import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 
 import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
 

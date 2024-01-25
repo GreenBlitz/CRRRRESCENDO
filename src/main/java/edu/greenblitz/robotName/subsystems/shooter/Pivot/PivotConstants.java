@@ -1,12 +1,5 @@
-package edu.greenblitz.robotName.subsystems.Shooter.Pivot;
+package edu.greenblitz.robotName.subsystems.shooter.Pivot;
 
-import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
-import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
-import com.ctre.phoenix6.configs.MotionMagicConfigs;
-import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
-import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.greenblitz.robotName.utils.PIDObject;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.util.Units;
 
 public class PivotConstants {
