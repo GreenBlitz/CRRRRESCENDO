@@ -61,8 +61,6 @@ public class OI {
         Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
         Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
     }
-    
-    public void initButtons(){
-    }
+
   
 }
