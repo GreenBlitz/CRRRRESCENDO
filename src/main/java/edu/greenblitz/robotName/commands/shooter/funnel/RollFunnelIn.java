@@ -11,4 +11,9 @@ public class RollFunnelIn extends FunnelCommand{
     public boolean isFinished() {
         return funnel.isObjectIn();
     }
+
+    @Override
+    public void end(boolean interrupted) {
+        funnel.stop();
+    }
 }

@@ -42,4 +42,10 @@ public class FunnelToRoller extends GBCommand {
         }
         return funnel.isObjectIn() && !Wrist.getInstance().isObjectInside();
     }
+
+    @Override
+    public void end(boolean interrupted) {
+        funnel.stop();
+        roller.stop();
+    }
 }

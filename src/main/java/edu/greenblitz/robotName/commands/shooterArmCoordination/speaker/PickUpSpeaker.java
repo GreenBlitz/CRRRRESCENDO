@@ -27,4 +27,5 @@ public class PickUpSpeaker extends PivotCommand {
     public boolean isFinished() {
         return pivot.isAtAngle(PivotConstants.PICK_UP_ANGLE);
     }
+
 }

@@ -13,4 +13,9 @@ public class RollFunnelOut extends FunnelCommand {
     public boolean isFinished() {
         return !funnel.isObjectIn() && Wrist.getInstance().isObjectInside();
     }
+
+    @Override
+    public void end(boolean interrupted) {
+        funnel.stop();
+    }
 }
