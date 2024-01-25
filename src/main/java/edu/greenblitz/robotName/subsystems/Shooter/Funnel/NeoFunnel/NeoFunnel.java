@@ -1,13 +1,13 @@
-package edu.greenblitz.robotName.subsystems.shooter.Funnel.NeoFunnel;
+package edu.greenblitz.robotName.subsystems.Shooter.Funnel.NeoFunnel;
 
 import com.revrobotics.CANSparkMaxLowLevel;
-import edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelInputsAutoLogged;
-import edu.greenblitz.robotName.subsystems.shooter.Funnel.IFunnel;
+import edu.greenblitz.robotName.subsystems.Shooter.Funnel.FunnelInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.Shooter.Funnel.IFunnel;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.filter.Debouncer;
 import edu.wpi.first.wpilibj.DigitalInput;
 
-import static edu.greenblitz.robotName.subsystems.shooter.Funnel.NeoFunnel.NeoFunnelConstants.*;
+import static edu.greenblitz.robotName.subsystems.Shooter.Funnel.NeoFunnel.NeoFunnelConstants.*;
 
 public class NeoFunnel implements IFunnel {
 	

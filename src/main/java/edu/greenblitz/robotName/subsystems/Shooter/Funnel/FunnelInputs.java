@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.shooter.Funnel;
+package edu.greenblitz.robotName.subsystems.Shooter.Funnel;
 
 import org.littletonrobotics.junction.AutoLog;
 

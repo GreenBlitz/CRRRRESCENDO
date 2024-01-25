@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.shooter.Funnel;
+package edu.greenblitz.robotName.subsystems.Shooter.Funnel;
 
 public class ReplayFunnel implements IFunnel{
 	

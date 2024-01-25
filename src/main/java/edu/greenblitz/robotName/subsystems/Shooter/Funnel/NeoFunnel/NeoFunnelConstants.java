@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.shooter.Funnel.NeoFunnel;
+package edu.greenblitz.robotName.subsystems.Shooter.Funnel.NeoFunnel;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxLimitSwitch;

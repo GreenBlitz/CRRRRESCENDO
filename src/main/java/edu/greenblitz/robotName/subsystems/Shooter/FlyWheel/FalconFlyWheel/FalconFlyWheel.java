@@ -1,15 +1,15 @@
-package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FalconFlyWheel;
+package edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.FalconFlyWheel;
 
 
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
-import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.NeoFlyWheel.NeoFlyWheelConstants;
-import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelInputsAutoLogged;
-import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.IFlyWheel;
+import edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.NeoFlyWheel.NeoFlyWheelConstants;
+import edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.FlyWheelInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.IFlyWheel;
 
 
 
-import static edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FalconFlyWheel.FalconFlyWheelConstants.*;
+import static edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.FalconFlyWheel.FalconFlyWheelConstants.*;
 
 
 public class FalconFlyWheel implements IFlyWheel {

@@ -1,8 +1,8 @@
-package edu.greenblitz.robotName.subsystems.shooter;
+package edu.greenblitz.robotName.subsystems.Shooter;
 
-import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
-import edu.greenblitz.robotName.subsystems.shooter.Mechanism.ShooterMechanism;
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
+import edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.FlyWheel;
+import edu.greenblitz.robotName.subsystems.Shooter.Mechanism.ShooterMechanism;
+import edu.greenblitz.robotName.subsystems.Shooter.Pivot.Pivot;
 
 public class Shooter {
 

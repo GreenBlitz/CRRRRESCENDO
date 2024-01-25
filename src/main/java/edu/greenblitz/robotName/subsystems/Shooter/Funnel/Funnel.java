@@ -1,10 +1,10 @@
-package edu.greenblitz.robotName.subsystems.shooter.Funnel;
+package edu.greenblitz.robotName.subsystems.Shooter.Funnel;
 
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants.EJECT_POWER;
-import static edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants.ROLL_POWER;
+import static edu.greenblitz.robotName.subsystems.Shooter.Funnel.FunnelConstants.EJECT_POWER;
+import static edu.greenblitz.robotName.subsystems.Shooter.Funnel.FunnelConstants.ROLL_POWER;
 
 public class Funnel extends GBSubsystem {
 	private static Funnel instance;

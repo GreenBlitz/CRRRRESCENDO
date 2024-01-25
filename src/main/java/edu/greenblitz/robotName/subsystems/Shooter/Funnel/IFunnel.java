@@ -1,6 +1,4 @@
-package edu.greenblitz.robotName.subsystems.shooter.Funnel;
-
-import org.littletonrobotics.junction.AutoLog;
+package edu.greenblitz.robotName.subsystems.Shooter.Funnel;
 
 public interface IFunnel {
 	

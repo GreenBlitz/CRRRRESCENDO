@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.NeoFlyWheel;
+package edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.NeoFlyWheel;
 
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 

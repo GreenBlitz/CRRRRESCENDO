@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.shooter.Funnel.SimulationFunnel;
+package edu.greenblitz.robotName.subsystems.Shooter.Funnel.SimulationFunnel;
 
 public class SimulationFunnelConstants {
 

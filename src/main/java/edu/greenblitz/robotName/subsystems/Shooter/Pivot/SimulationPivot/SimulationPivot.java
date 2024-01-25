@@ -1,10 +1,10 @@
-package edu.greenblitz.robotName.subsystems.shooter.Pivot.SimulationPivot;
+package edu.greenblitz.robotName.subsystems.Shooter.Pivot.SimulationPivot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.IPivot;
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.Shooter.Pivot.IPivot;
+import edu.greenblitz.robotName.subsystems.Shooter.Pivot.PivotConstants;
+import edu.greenblitz.robotName.subsystems.Shooter.Pivot.PivotInputsAutoLogged;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.system.plant.DCMotor;
@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.BATTERY_VOLTAGE;
-import static edu.greenblitz.robotName.subsystems.shooter.Pivot.SimulationPivot.SimulationPivotConstants.*;
+import static edu.greenblitz.robotName.subsystems.Shooter.Pivot.SimulationPivot.SimulationPivotConstants.*;
 
 
 public class SimulationPivot implements IPivot {

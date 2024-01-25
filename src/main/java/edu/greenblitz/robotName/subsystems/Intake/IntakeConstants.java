@@ -13,7 +13,4 @@ public class IntakeConstants {
 	public static final double EXIT_DEBOUNCE_TIME_FOR_LIMIT_SWITCH = 1.0;
 	public static final SparkMaxLimitSwitch.Type ENTRANCE_BEAM_BREAKER_TYPE = SparkMaxLimitSwitch.Type.kNormallyClosed ;
 	public static final SparkMaxLimitSwitch.Type EXIT_BEAM_BREAKER_TYPE = SparkMaxLimitSwitch.Type.kNormallyClosed ;
-
-	public static final double POWER_TO_FORWARD_RUN = 0.2;
-
 }

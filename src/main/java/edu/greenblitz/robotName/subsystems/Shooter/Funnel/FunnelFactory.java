@@ -1,8 +1,8 @@
-package edu.greenblitz.robotName.subsystems.shooter.Funnel;
+package edu.greenblitz.robotName.subsystems.Shooter.Funnel;
 
 import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.shooter.Funnel.NeoFunnel.NeoFunnel;
-import edu.greenblitz.robotName.subsystems.shooter.Funnel.SimulationFunnel.SimulationFunnel;
+import edu.greenblitz.robotName.subsystems.Shooter.Funnel.NeoFunnel.NeoFunnel;
+import edu.greenblitz.robotName.subsystems.Shooter.Funnel.SimulationFunnel.SimulationFunnel;
 
 public class FunnelFactory {
 	public static IFunnel create() {
