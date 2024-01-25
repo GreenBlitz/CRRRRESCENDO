@@ -40,6 +40,10 @@ public class NeoLifter implements ILifter {
     }
 
     @Override
+    public void goToPositionByPID(double pos) {
+        setPower(pidController.calculate(motor.getEncoder().getPosition(), pos));
+    }
+    @Override
     public void updateInputs(LifterInputsAutoLogged inputs) {
         inputs.appliedOutput = motor.getAppliedOutput();
         inputs.outputCurrent = motor.getOutputCurrent();
@@ -47,10 +51,5 @@ public class NeoLifter implements ILifter {
         inputs.velocity = motor.getEncoder().getVelocity();
         inputs.isSwitchPressed = DigitalInputMap.getInstance().getValue(LifterConstants.SWITCH_ID);
         inputs.isMotorAtPosition = Math.abs(motor.getEncoder().getPosition() - inputs.destination) <= LifterConstants.TOLERANCE;
-    }
-
-    @Override
-    public void goToPositionByPID(double pos) {
-        setPower(pidController.calculate(motor.getEncoder().getPosition(), pos));
     }
 }

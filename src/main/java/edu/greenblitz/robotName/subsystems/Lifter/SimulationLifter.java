@@ -17,7 +17,7 @@ public class SimulationLifter implements ILifter {
 
     public SimulationLifter() {
         motorSimulation = new DCMotorSim(DCMotor.getNEO(SimulationConstants.NUMBER_OF_MOTORS), SimulationConstants.GEAR_RATIO, SimulationConstants.MOMENT_OF_INERTIA);
-        pidController = SimulationConstants.PID;
+        pidController = SimulationConstants.SIMULATION_PID;
     }
 
     @Override
@@ -48,6 +48,10 @@ public class SimulationLifter implements ILifter {
     }
 
     @Override
+    public void goToPositionByPID(double pos) {
+        setPower(pidController.calculate(motorSimulation.getAngularPositionRotations(),pos));
+    }
+    @Override
     public void updateInputs(LifterInputsAutoLogged inputs) {
         motorSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
         inputs.appliedOutput = appliedOutput;
@@ -56,10 +60,5 @@ public class SimulationLifter implements ILifter {
         inputs.velocity = motorSimulation.getAngularVelocityRPM();
         inputs.isSwitchPressed = DigitalInputMap.getInstance().getValue(LifterConstants.SWITCH_ID);
         inputs.isMotorAtPosition = Math.abs(motorSimulation.getAngularPositionRotations() - inputs.destination) <= LifterConstants.TOLERANCE;
-    }
-
-    @Override
-    public void goToPositionByPID(double pos) {
-        setPower(pidController.calculate(motorSimulation.getAngularPositionRotations(),pos));
     }
 }

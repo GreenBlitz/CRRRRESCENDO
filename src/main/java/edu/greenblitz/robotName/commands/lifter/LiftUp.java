@@ -11,7 +11,7 @@ public class LiftUp extends LifterCommand {
 
     @Override
     public void execute() {
-        lifter.goToDestinationByPID();
+        lifter.goToDestinationByPID(LifterConstants.LIFTER_EXTENDED_POSITION);
     }
 
     @Override

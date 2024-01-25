@@ -4,7 +4,7 @@ import edu.greenblitz.robotName.subsystems.Lifter.Lifter;
 import edu.greenblitz.robotName.utils.GBCommand;
 
 public abstract class LifterCommand extends GBCommand {
-    protected Lifter lifter;
+    private Lifter lifter;
 
     public LifterCommand() {
         lifter = Lifter.getInstance();

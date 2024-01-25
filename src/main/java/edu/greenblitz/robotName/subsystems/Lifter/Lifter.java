@@ -8,14 +8,12 @@ public class Lifter extends GBSubsystem {
     private static Lifter instance;
     private ILifter lifter;
     private LifterInputsAutoLogged lifterInputs;
-    private ProfiledPIDController pid;
 
     private Lifter() {
         lifter = LifterFactory.create();
         lifterInputs = new LifterInputsAutoLogged();
         lifter.updateInputs(lifterInputs);
         setIdleMode(CANSparkMax.IdleMode.kBrake);
-        pid = LifterConstants.PID;
     }
 
     public static Lifter getInstance() {
@@ -34,8 +32,8 @@ public class Lifter extends GBSubsystem {
         lifter.updateInputs(lifterInputs);
     }
 
-    public void goToDestinationByPID() {
-        lifter.setPower(pid.calculate(lifterInputs.position, lifterInputs.destination));
+    public void goToDestinationByPID(double pos) {
+        lifter.goToPositionByPID(pos);
     }
 
     public void setPower(double power) {
@@ -55,7 +53,6 @@ public class Lifter extends GBSubsystem {
     }
 
     public boolean isMotorAtDestination() {
-        lifter.updateInputs(lifterInputs);
         return lifterInputs.isMotorAtPosition;
     }
 

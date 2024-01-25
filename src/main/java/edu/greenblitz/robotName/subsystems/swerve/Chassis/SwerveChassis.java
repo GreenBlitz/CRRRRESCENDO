@@ -100,7 +100,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		updateInputs(ChassisInputs);
 
 		Logger.recordOutput("DriveTrain/RobotPose", getRobotPose());
-//		Logger.recordOutput("DriveTrain/ModuleStates", getSwerveModuleStates());
 		Logger.processInputs("DriveTrain/Chassis", ChassisInputs);
 		Logger.processInputs("DriveTrain/Gyro", gyroInputs);
 
