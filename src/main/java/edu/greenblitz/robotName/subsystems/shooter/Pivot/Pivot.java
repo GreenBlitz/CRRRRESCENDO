@@ -6,7 +6,7 @@ import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot.FalconPivotConstants.SIMPLE_MOTOR_FF;
+import static edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot.FalconPivotConstants.FEED_FORWARD;
 import static edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants.TOLERANCE;
 
 
@@ -73,11 +73,11 @@ public class Pivot extends GBSubsystem {
 
 
     public double getStaticFF() {
-        return SIMPLE_MOTOR_FF.calculate(0);
+        return FEED_FORWARD.calculate(0);
     }
 
     public double getDynamicFF(double velocity) {
-        return SIMPLE_MOTOR_FF.calculate(velocity);
+        return FEED_FORWARD.calculate(velocity);
     }
 
     public double getVoltage() {

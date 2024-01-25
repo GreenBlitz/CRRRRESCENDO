@@ -13,7 +13,7 @@ import static edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants.*
 public class FalconPivotConstants {
 
 
-    public static final SimpleMotorFeedforward SIMPLE_MOTOR_FF = new SimpleMotorFeedforward(kS, kV, kA);
+    public static final SimpleMotorFeedforward FEED_FORWARD = new SimpleMotorFeedforward(kS, kV, kA);
 
     public static final NeutralModeValue NEUTRAL_MODE_VALUE = NeutralModeValue.Brake;
 
@@ -46,13 +46,13 @@ public class FalconPivotConstants {
         CURRENT_LIMITS_CONFIGS.SupplyTimeThreshold = 4;
     }
 
-    public static final SoftwareLimitSwitchConfigs SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();
+    public static final SoftwareLimitSwitchConfigs LIMIT_SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();
 
     static {
-        SWITCH_CONFIGS.ForwardSoftLimitEnable = true;
-        SWITCH_CONFIGS.ForwardSoftLimitThreshold = 1;
-        SWITCH_CONFIGS.ReverseSoftLimitEnable = true;
-        SWITCH_CONFIGS.ReverseSoftLimitThreshold = 0;
+        LIMIT_SWITCH_CONFIGS.ForwardSoftLimitEnable = true;
+        LIMIT_SWITCH_CONFIGS.ForwardSoftLimitThreshold = 1;
+        LIMIT_SWITCH_CONFIGS.ReverseSoftLimitEnable = true;
+        LIMIT_SWITCH_CONFIGS.ReverseSoftLimitThreshold = 0;
     }
 
 

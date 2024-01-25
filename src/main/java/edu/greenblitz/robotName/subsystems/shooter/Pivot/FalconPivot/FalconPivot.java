@@ -19,7 +19,7 @@ public class FalconPivot implements IPivot {
         motor.getConfigurator().apply(MOTION_MAGIC_CONFIGS);
         motor.getConfigurator().apply(CURRENT_LIMITS_CONFIGS);
         motor.getConfigurator().apply(CLOSED_LOOP_RAMPS_CONFIGS);
-        motor.getConfigurator().apply(SWITCH_CONFIGS);
+        motor.getConfigurator().apply(LIMIT_SWITCH_CONFIGS);
         motor.setNeutralMode(NEUTRAL_MODE_VALUE);
         motor.optimizeBusUtilization();
     }
@@ -50,7 +50,7 @@ public class FalconPivot implements IPivot {
         motor.setControl(new MotionMagicDutyCycle(
                 goalAngle/ PivotConstants.RELATIVE_POSITION_CONVERSION_FACTOR,
                 true,
-                SIMPLE_MOTOR_FF.calculate(0),
+                FEED_FORWARD.calculate(0),
                 0,
                 true,
                 true,
