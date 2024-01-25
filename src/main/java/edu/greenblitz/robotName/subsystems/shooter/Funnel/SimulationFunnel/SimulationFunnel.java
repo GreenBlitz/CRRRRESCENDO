@@ -1,11 +1,13 @@
 package edu.greenblitz.robotName.subsystems.shooter.Funnel.SimulationFunnel;
 
 import edu.greenblitz.robotName.RobotConstants;
+import edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants;
 import edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.shooter.Funnel.IFunnel;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
+import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 

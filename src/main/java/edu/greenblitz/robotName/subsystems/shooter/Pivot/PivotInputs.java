@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.shooter.Pivot;
+package edu.greenblitz.robotName.subsystems.Shooter.Pivot;
 
 import org.littletonrobotics.junction.AutoLog;
 

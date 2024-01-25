@@ -9,3 +9,6 @@ public class MovePivotToAngle extends ConditionalCommand {
 
 	public MovePivotToAngle(double goalAngle, boolean isSimulation) {
 		super(new SimulationMovePivotToAngle(goalAngle), new MotorMovePivotToAngle(goalAngle), () -> isSimulation);
+	}
+
+}

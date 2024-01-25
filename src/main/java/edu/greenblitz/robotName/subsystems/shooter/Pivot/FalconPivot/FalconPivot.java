@@ -1,26 +1,26 @@
-package edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot;
+package edu.greenblitz.robotName.subsystems.Shooter.Pivot.FalconPivot;
 
 import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.IPivot;
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.Shooter.Pivot.IPivot;
+import edu.greenblitz.robotName.subsystems.Shooter.Pivot.PivotConstants;
+import edu.greenblitz.robotName.subsystems.Shooter.Pivot.PivotInputsAutoLogged;
 
-import static edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot.FalconPivotConstants.*;
-
+import static edu.greenblitz.robotName.subsystems.Shooter.Pivot.FalconPivot.FalconPivotConstants.*;
+import static edu.greenblitz.robotName.subsystems.Shooter.Pivot.MotorConstants.SWITCH_CONFIGS;
 
 
 public class FalconPivot implements IPivot {
 
-    private final TalonFX motor;
+    private TalonFX motor;
 
     public FalconPivot() {
         motor = new TalonFX(MOTOR_ID);
         motor.getConfigurator().apply(MOTION_MAGIC_CONFIGS);
         motor.getConfigurator().apply(CURRENT_LIMITS_CONFIGS);
         motor.getConfigurator().apply(CLOSED_LOOP_RAMPS_CONFIGS);
-        motor.getConfigurator().apply(LIMIT_SWITCH_CONFIGS);
+        motor.getConfigurator().apply(SWITCH_CONFIGS);
         motor.setNeutralMode(NEUTRAL_MODE_VALUE);
         motor.optimizeBusUtilization();
     }

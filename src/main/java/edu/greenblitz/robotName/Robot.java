@@ -1,21 +1,25 @@
 package edu.greenblitz.robotName;
-
-
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
 import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.greenblitz.robotName.subsystems.arm.Arm;
+import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
+import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
+import edu.greenblitz.robotName.subsystems.Dashboard;
+import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
-import edu.greenblitz.robotName.subsystems.shooter.Shooter;
+import edu.greenblitz.robotName.subsystems.Shooter.Mechanism.ShooterMechanism;
+import edu.greenblitz.robotName.subsystems.Shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
@@ -23,27 +27,25 @@ import org.littletonrobotics.junction.Logger;
 import org.littletonrobotics.junction.networktables.NT4Publisher;
 import org.littletonrobotics.junction.wpilog.WPILOGReader;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
-
 public class Robot extends LoggedRobot {
-
     public enum RobotType {
         ROBOT_NAME,
         SIMULATION,
         REPLAY
     }
-
     @Override
     public void robotInit() {
         Pathfinding.setPathfinder(new LocalADStar());
         CommandScheduler.getInstance().enable();
         initializeLogger();
+        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
         SwerveChassis.init();
         SwerveChassis.getInstance().resetAllEncoders();
 
         initializeAutonomousBuilder();
         MultiLimelight.init();
-        Shooter.init();
-        Arm.init();
+        Pivot.init();
+        ShooterMechanism.init();
         OI.getInstance();
     }
 
