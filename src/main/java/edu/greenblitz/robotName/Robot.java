@@ -8,13 +8,15 @@ import edu.greenblitz.robotName.subsystems.arm.ArmMechanism.ArmMechanism;
 import edu.greenblitz.robotName.subsystems.arm.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.Roller;
 import edu.greenblitz.robotName.subsystems.arm.Wrist;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
+import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
 import edu.greenblitz.robotName.subsystems.shooter.Mechanism.ShooterMechanism;
+import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
 import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
-import edu.greenblitz.robotName.subsystems.shooter.Shooter;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -44,13 +46,18 @@ public class Robot extends LoggedRobot {
         initializeSubsystems();
         SwerveChassis.getInstance().resetAllEncoders();
         initializeAutonomousBuilder();
-        OI.getInstance();
+        OI.init();
     }
 
     public void initializeSubsystems() {
         MultiLimelight.init();
         SwerveChassis.init();
-        Shooter.init();
+
+        Funnel.init();
+        Pivot.init();
+        FlyWheel.init();
+        ShooterMechanism.init();
+
         Elbow.init();
         Wrist.init();
         Roller.init();
