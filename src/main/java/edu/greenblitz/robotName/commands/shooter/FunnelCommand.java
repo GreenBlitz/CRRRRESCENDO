@@ -14,6 +14,6 @@ public abstract class FunnelCommand extends GBCommand {
 
     @Override
     public boolean isFinished() {
-        return !Funnel.getInstance().isObjectIn();
+        return !funnel.isObjectIn();
     }
 }
