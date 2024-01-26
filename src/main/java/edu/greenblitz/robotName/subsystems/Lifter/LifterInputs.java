@@ -8,7 +8,6 @@ public class LifterInputs {
     public double outputCurrent;
     public double position;
     public double velocity;
-    public boolean isSwitchPressed;
-    public boolean isMotorAtPosition;
-    public double destination;
+    public boolean isForwardSwitchPressed;
+    public boolean isBackwardSwitchPressed;
 }

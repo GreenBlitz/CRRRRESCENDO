@@ -1,12 +1,12 @@
 package edu.greenblitz.robotName.commands.lifter;
 
 import com.revrobotics.CANSparkMax;
-import edu.greenblitz.robotName.subsystems.Lifter.LifterConstants;
+import edu.greenblitz.robotName.subsystems.Lifter.NeoLifter.NeoLifterConstants;
 
 public class ResetEncoderBySwitch extends LifterCommand {
     @Override
     public void initialize() {
-        lifter.setPosition(LifterConstants.LIFTER_RETRACTED_POSITION);
+        lifter.setPosition(NeoLifterConstants.LIFTER_RETRACTED_POSITION);
         lifter.setIdleMode(CANSparkMax.IdleMode.kCoast);
     }
 

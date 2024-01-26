@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Lifter;
+package edu.greenblitz.robotName.subsystems.Lifter.SimulationLifter;
 
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
