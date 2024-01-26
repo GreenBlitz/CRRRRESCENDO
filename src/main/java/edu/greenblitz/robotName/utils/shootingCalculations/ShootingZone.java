@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.utils.shootingCalculations;
 
 
+import edu.greenblitz.robotName.shootingStateService.ShootingState;
 import edu.greenblitz.robotName.utils.GBMath;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class ShootingZone extends GBMath.GBCircle {
 
-    private List<Pair<Translation2d, Translation2d>> restrictedBounds; //first min, second max
+    private List<Pair<Translation2d, Translation2d>> restrictedBounds; //first is the lower bound, second is the upper
 
     public ShootingZone(Translation2d position, double radius) {
         super(position, radius);
@@ -49,5 +50,4 @@ public class ShootingZone extends GBMath.GBCircle {
         Translation2d relativePosition = ShootingState.getRobotTargetTranslation().minus(position);
         return new Rotation2d(Math.atan2(relativePosition.getY(), relativePosition.getX()));
     }
-}{
 }
