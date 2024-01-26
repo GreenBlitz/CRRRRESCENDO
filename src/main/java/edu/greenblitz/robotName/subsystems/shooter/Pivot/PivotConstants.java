@@ -8,7 +8,7 @@ public class PivotConstants {
     public enum ImportantPlaces{
 
         STARTING(Rotation2d.fromDegrees(140)),
-        TRANSFER(Rotation2d.fromDegrees(120)),
+        TRANSFER(Rotation2d.fromDegrees(100)),
         PICK_UP(Rotation2d.fromDegrees(150));
 
         public Rotation2d angle;
@@ -22,7 +22,7 @@ public class PivotConstants {
 
     public static final double SHOOTER_MASS_KG = 10;
 
-    public static final double BACKWARD_ANGLE_LIMIT = Units.degreesToRadians(110);
+    public static final double BACKWARD_ANGLE_LIMIT = Units.degreesToRadians(90);
 
     public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(170);
 

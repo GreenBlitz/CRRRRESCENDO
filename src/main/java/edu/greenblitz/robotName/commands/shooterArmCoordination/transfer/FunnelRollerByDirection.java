@@ -5,7 +5,7 @@ import edu.greenblitz.robotName.subsystems.arm.Wrist;
 import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
 import edu.greenblitz.robotName.utils.GBCommand;
 
-public class FunnelToRoller extends GBCommand {
+public class FunnelRollerByDirection extends GBCommand {
 
     private Roller roller;
 
@@ -13,7 +13,7 @@ public class FunnelToRoller extends GBCommand {
 
     private boolean isFunnelToRoller;
 
-    protected FunnelToRoller(boolean isFunnelToRoller) {
+    protected FunnelRollerByDirection(boolean isFunnelToRoller) {
         this.isFunnelToRoller = isFunnelToRoller;
 
         roller = Roller.getInstance();

@@ -8,9 +8,9 @@ public class WristConstants {
 
     public enum ImportantPlaces{
 
-        STARTING(Rotation2d.fromDegrees(100)),
-        SCORE(Rotation2d.fromDegrees(30)),
-        TRANSFER(Rotation2d.fromDegrees(180));
+        STARTING(Rotation2d.fromDegrees(-100)),
+        SCORE(Rotation2d.fromDegrees(20)),
+        TRANSFER(Rotation2d.fromDegrees(-180));
 
         public Rotation2d angle;
         ImportantPlaces(Rotation2d angle){
@@ -23,9 +23,9 @@ public class WristConstants {
 
     public static final double SHOOTER_MASS_KG = 10;
 
-    public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(-10);
+    public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(-200);
 
-    public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(300);
+    public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(30);
 
     public static final double RELATIVE_POSITION_CONVERSION_FACTOR = 0.0328;
 
