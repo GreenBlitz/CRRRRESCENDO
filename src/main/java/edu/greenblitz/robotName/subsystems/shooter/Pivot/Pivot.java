@@ -3,7 +3,6 @@ package edu.greenblitz.robotName.subsystems.shooter.Pivot;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.subsystems.Battery;
 
-import edu.greenblitz.robotName.subsystems.shooter.Mechanism.ShooterMechanism;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 

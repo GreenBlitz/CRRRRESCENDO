@@ -6,15 +6,15 @@ import edu.wpi.first.math.util.Units;
 
 public class ElbowConstants {
 
-    public static final double ARM_LENGTH = 0.6;
+    public static final double ARM_LENGTH = 0.53;
 
     public static final double ARM_MASS_KG = 1;
 
-    public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(20);
+    public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(-160);
 
-    public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(320);
+    public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(30);
 
-    public static final Rotation2d TRANSFER_ANGLE = Rotation2d.fromDegrees(320);
+    public static final Rotation2d TRANSFER_ANGLE = Rotation2d.fromDegrees(10);
 
 
     public static final double RELATIVE_POSITION_CONVERSION_FACTOR = 0.0328;
@@ -23,7 +23,7 @@ public class ElbowConstants {
 
     public static final double ABSOLUTE_POSITION_CONVERSION_FACTOR = 1;
 
-    public static final double STARTING_ANGLE = 1;
+    public static final double STARTING_ANGLE = Units.degreesToRadians(-100);
 
     public static final double kS = 1;
 
