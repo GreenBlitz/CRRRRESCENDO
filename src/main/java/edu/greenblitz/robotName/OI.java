@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName;
 
 
+import edu.greenblitz.robotName.commands.arm.elbow.ElbowCommand;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
@@ -46,7 +47,32 @@ public class OI {
     }
 
     public void initButtons() {
+        mainJoystick.B.whileTrue(
+                new ElbowCommand(){
+                    @Override
+                    public void execute() {
+                        elbow.setPower(0.2);
+                    }
 
+                    @Override
+                    public void end(boolean interrupted) {
+                        elbow.setPower(0);
+                    }
+                }
+        );
+        mainJoystick.A.whileTrue(
+                new ElbowCommand(){
+                    @Override
+                    public void execute() {
+                        elbow.setPower(-0.2);
+                    }
+
+                    @Override
+                    public void end(boolean interrupted) {
+                        elbow.setPower(0);
+                    }
+                }
+        );
     }
     
     public void initializeDefaultCommands(){
