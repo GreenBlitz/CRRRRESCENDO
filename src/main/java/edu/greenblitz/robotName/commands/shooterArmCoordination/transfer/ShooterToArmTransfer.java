@@ -10,12 +10,11 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-public class ShooterToArmTransfer extends SequentialCommandGroup {
-    public ShooterToArmTransfer(boolean isShooterToArm) {
+public class ShooterToArmTransfer extends ParallelCommandGroup {
+    public ShooterToArmTransfer() {
         super(
                 new MoveArmBy2Angles(ElbowConstants.TRANSFER_ANGLE, WristConstants.TRANSFER_ANGLE),
-                new MovePivotToAngle(PivotConstants.TRANSFER_ANGLE)
-                //new FunnelToRoller(isShooterToArm)
+                new MovePivotToAngle(PivotConstants.ImportantPlaces.TRANSFER.angle)
         );
     }
 }

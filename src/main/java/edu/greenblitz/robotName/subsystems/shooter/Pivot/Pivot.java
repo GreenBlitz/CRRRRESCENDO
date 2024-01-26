@@ -4,6 +4,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.subsystems.Battery;
 
 import edu.greenblitz.robotName.utils.GBSubsystem;
+import edu.wpi.first.math.geometry.Rotation2d;
 import org.littletonrobotics.junction.Logger;
 
 
@@ -59,12 +60,12 @@ public class Pivot extends GBSubsystem {
     }
     
 
-    public void resetAngle(double position) {
-        pivot.resetAngle(position);
+    public void resetAngle(Rotation2d position) {
+        pivot.resetAngle(position.getRadians());
     }
 
-    public void moveToAngle(double goalAngle) {
-        pivot.moveToAngle(goalAngle);
+    public void moveToAngle(Rotation2d targetAngle) {
+        pivot.moveToAngle(targetAngle.getRadians());
     }
 
     public void standInPlace() {
@@ -93,8 +94,8 @@ public class Pivot extends GBSubsystem {
         return pivotInputs.position;
     }
     
-    public boolean isAtAngle(double angle) {
-        return Math.abs(angle - getAngleInRadians()) <= TOLERANCE;
+    public boolean isAtAngle(Rotation2d angle) {
+        return Math.abs(angle.getRadians() - getAngleInRadians()) <= TOLERANCE;
     }
     
 

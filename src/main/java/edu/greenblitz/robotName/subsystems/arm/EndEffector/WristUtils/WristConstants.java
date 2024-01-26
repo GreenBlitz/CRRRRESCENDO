@@ -15,6 +15,7 @@ public class WristConstants {
     public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(300);
 
     public static final Rotation2d TRANSFER_ANGLE = Rotation2d.fromDegrees(180);
+    public static final Rotation2d SCORE_ANGLE = Rotation2d.fromDegrees(30);
 
     public static final double RELATIVE_POSITION_CONVERSION_FACTOR = 0.0328;
 

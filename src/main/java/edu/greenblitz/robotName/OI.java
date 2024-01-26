@@ -55,17 +55,10 @@ public class OI {
     }
 
     public void initButtons() {
-//        secondJoystick.A.onTrue(new PickUpSpeaker());
-//        secondJoystick.B.onTrue(new ShooterToArmTransfer(true));
-//        secondJoystick.X.onTrue(new MovePivotToAngle(Units.degreesToRadians(165)));
-//        secondJoystick.Y.onTrue(new MoveArmBy2Angles(Rotation2d.fromDegrees(215), Rotation2d.fromDegrees(20)));
-        secondJoystick.A.onTrue(new MoveElbowToAngle(ElbowConstants.TRANSFER_ANGLE));
-        secondJoystick.B.onTrue(new MoveElbowToAngle(ElbowConstants.BACKWARD_ANGLE_LIMIT));
-        secondJoystick.X.onTrue(new MoveWristToAngle(WristConstants.TRANSFER_ANGLE));
-        secondJoystick.Y.onTrue(new MoveWristToAngle(Rotation2d.fromDegrees(0)));
-        secondJoystick.L1.onTrue(new MovePivotToAngle(PivotConstants.TRANSFER_ANGLE));
-        secondJoystick.L3.onTrue(new MovePivotToAngle(PivotConstants.PICK_UP_ANGLE));
-
+        secondJoystick.A.onTrue(new PickUpSpeaker());
+        secondJoystick.B.onTrue(new ShooterToArmTransfer());
+        secondJoystick.X.onTrue(new MovePivotToAngle(PivotConstants.FORWARD_ANGLE_LIMIT));
+        secondJoystick.Y.onTrue(new MoveArmBy2Angles(ElbowConstants.BACKWARD_ANGLE_LIMIT, WristConstants.SCORE_ANGLE));
     }
     
     public void initializeDefaultCommands(){

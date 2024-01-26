@@ -14,18 +14,18 @@ public class PickUpSpeaker extends PivotCommand {
     }
     @Override
     public void initialize() {
-        pivot.moveToAngle(PivotConstants.PICK_UP_ANGLE);
+        pivot.moveToAngle(PivotConstants.ImportantPlaces.PICK_UP.angle);
     }
 
     @Override
     public void execute() {
         if (Robot.isSimulation()) {
-            pivot.moveToAngle(PivotConstants.PICK_UP_ANGLE);
+            pivot.moveToAngle(PivotConstants.ImportantPlaces.PICK_UP.angle);
         }
     }
 
     public boolean isFinished() {
-        return pivot.isAtAngle(PivotConstants.PICK_UP_ANGLE);
+        return pivot.isAtAngle(PivotConstants.ImportantPlaces.PICK_UP.angle);
     }
 
 }
