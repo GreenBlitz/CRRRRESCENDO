@@ -72,6 +72,9 @@ public class ArmMechanism {
         double wristAngle = wrist.getAngleInRadians();
         double pivotAngle = Pivot.getInstance().getAngleInRadians();
 
+        System.out.println("elbowAngle: " + Units.radiansToDegrees(elbowAngle));
+        System.out.println("wristAngle: " + Units.radiansToDegrees(wristAngle));
+        System.out.println("pivotAngle: " + Units.radiansToDegrees(pivotAngle));
 
         elbowJoint.setAngle(Units.radiansToDegrees(elbowAngle));
         wristJoint.setAngle(Units.radiansToDegrees(wristAngle));
