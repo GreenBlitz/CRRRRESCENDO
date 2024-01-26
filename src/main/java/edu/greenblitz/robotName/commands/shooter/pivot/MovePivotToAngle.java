@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.commands.shooter.pivot;
 
 import edu.greenblitz.robotName.Robot;
+import edu.wpi.first.math.geometry.Rotation2d;
 
 public class MovePivotToAngle extends PivotCommand {
 
@@ -23,7 +24,7 @@ public class MovePivotToAngle extends PivotCommand {
 	}
 
 	public boolean isFinished() {
-		return pivot.isAtAngle(targetAngle);
+		return pivot.isAtAngle(Rotation2d.fromRadians(targetAngle));
 	}
 	
 }

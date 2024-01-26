@@ -2,11 +2,9 @@ package edu.greenblitz.robotName.subsystems.shooter.Pivot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.subsystems.Battery;
-
-import edu.greenblitz.robotName.subsystems.shooter.Mechanism.ShooterMechanism;
 import edu.greenblitz.robotName.utils.GBSubsystem;
+import edu.wpi.first.math.geometry.*;
 import org.littletonrobotics.junction.Logger;
-
 
 import static edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot.FalconPivotConstants.SIMPLE_MOTOR_FF;
 import static edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants.TOLERANCE;
@@ -21,6 +19,11 @@ public class Pivot extends GBSubsystem {
     private IPivot pivot;
 
 
+    private Pivot() {
+        pivot = PivotFactory.create();
+        pivotInputs = new PivotInputsAutoLogged();
+        pivot.updateInputs(pivotInputs);
+    }
 
     public static void init() {
         if (instance == null)
@@ -32,18 +35,13 @@ public class Pivot extends GBSubsystem {
         return instance;
     }
 
-    private Pivot() {
-        pivot = PivotFactory.create();
-        pivotInputs = new PivotInputsAutoLogged();
-        pivot.updateInputs(pivotInputs);
-    }
-
     @Override
     public void periodic() {
         super.periodic();
 
         pivot.updateInputs(pivotInputs);
-        Logger.processInputs("Pivot", pivotInputs);
+        Logger.processInputs("Shooter/Pivot", pivotInputs);
+        Logger.recordOutput("Shooter/Pivot", getPivotPose());
     }
 
 
@@ -58,7 +56,7 @@ public class Pivot extends GBSubsystem {
     public void setIdleMode(NeutralModeValue idleMode) {
         pivot.setIdleMode(idleMode);
     }
-    
+
 
     public void resetAngle(double position) {
         pivot.resetAngle(position);
@@ -71,7 +69,6 @@ public class Pivot extends GBSubsystem {
     public void standInPlace() {
         pivot.setPower(getStaticFF());
     }
-
 
 
     public double getStaticFF() {
@@ -90,13 +87,18 @@ public class Pivot extends GBSubsystem {
         return pivotInputs.velocity;
     }
 
-    public double getAngleInRadians() {
-        return pivotInputs.position;
+    public Rotation2d getAngle() {
+        return Rotation2d.fromRadians(pivotInputs.position);
     }
-    
-    public boolean isAtAngle(double angle) {
-        return Math.abs(angle - getAngleInRadians()) <= TOLERANCE;
-    }
-    
 
+    public boolean isAtAngle(Rotation2d angle) {
+        return Math.abs(angle.getRadians() - getAngle().getRadians()) <= TOLERANCE;
+    }
+
+    public Pose3d getPivotPose() {
+        return new Pose3d(
+                new Translation3d(),
+                new Rotation3d(getAngle().getRadians(), 0, 0)
+        );
+    }
 }

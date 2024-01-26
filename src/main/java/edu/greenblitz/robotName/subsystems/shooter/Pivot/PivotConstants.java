@@ -1,5 +1,8 @@
 package edu.greenblitz.robotName.subsystems.shooter.Pivot;
 
+import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
 
 public class PivotConstants {
@@ -24,11 +27,8 @@ public class PivotConstants {
 
     public static final double kV = 1;
 
-    public static final double kG = 1;
-
     public static final double kA = 1;
 
     public static final double TOLERANCE = Units.degreesToRadians(2);
-
 
 }

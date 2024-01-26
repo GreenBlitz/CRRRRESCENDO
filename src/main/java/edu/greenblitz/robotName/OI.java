@@ -4,6 +4,7 @@ package edu.greenblitz.robotName;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
+import edu.greenblitz.robotName.commands.shooter.pivot.PivotCommand;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
 import edu.greenblitz.robotName.subsystems.arm.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.Wrist;
@@ -27,7 +28,7 @@ public class OI {
         mainJoystick = new SmartJoystick(RobotConstants.Joystick.MAIN);
         secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
         initButtons();
-        initializeDefaultCommands();
+//        initializeDefaultCommands();
     }
 
     public static OI getInstance() {
@@ -46,7 +47,29 @@ public class OI {
     }
 
     public void initButtons() {
+        mainJoystick.B.whileTrue(new PivotCommand(){
+            @Override
+            public void execute() {
+                pivot.setPower(0.2);
+            }
 
+            @Override
+            public void end(boolean interrupted) {
+                pivot.setPower(0);
+            }
+        });
+
+        mainJoystick.A.whileTrue(new PivotCommand(){
+            @Override
+            public void execute() {
+                pivot.setPower(-0.2);
+            }
+
+            @Override
+            public void end(boolean interrupted) {
+                pivot.setPower(0);
+            }
+        });
     }
     
     public void initializeDefaultCommands(){
