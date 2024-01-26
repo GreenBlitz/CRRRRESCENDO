@@ -4,10 +4,9 @@ import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotCommand;
 import edu.greenblitz.robotName.shootingStateService.ShootingState;
 
-public class GoToShooterAngle extends PivotCommand {
+public class GoToShooterAngle extends MovePivotToAngle {
 
-    @Override
-    public void execute() {
-        new MovePivotToAngle(ShootingState.getTargetShooterAngle().getDegrees());
+    public GoToShooterAngle() {
+        super(ShootingState.getTargetShooterAngle().getDegrees());
     }
 }

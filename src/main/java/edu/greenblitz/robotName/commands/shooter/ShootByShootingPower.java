@@ -4,14 +4,19 @@ import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-public class ShootByPower extends FlyWheelCommand {
+public class ShootByShootingPower extends FlyWheelCommand {
 
-    public ShootByPower() {
+    public ShootByShootingPower() {
     }
 
     @Override
     public void execute() {
         flyWheel.setPower(FlyWheelConstants.SHOOTING_POWER);
+    }
+
+    @Override
+    public boolean isFinished() {
+        return flyWheel.isAtVelocity(FlyWheelConstants.SHOOTING_POWER);
     }
 
     @Override

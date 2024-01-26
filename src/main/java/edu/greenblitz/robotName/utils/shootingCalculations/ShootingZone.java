@@ -6,13 +6,20 @@ import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShootingZone extends GBMath.GBCircle {
+
     private List<Pair<Translation2d, Translation2d>> restrictedBounds; //first min, second max
 
-    public ShootingZone(Translation2d translation, double radius) {
-        super(translation, radius);
+    public ShootingZone(Translation2d position, double radius) {
+        super(position, radius);
+        restrictedBounds = new ArrayList<>();
+    }
+    public ShootingZone(Translation2d position, double radius, List<Pair<Translation2d, Translation2d>> restrictedBounds) {
+        super(position, radius);
+        this.restrictedBounds = restrictedBounds;
     }
 
     public void addBound(Pair<Translation2d, Translation2d> bound) {

@@ -7,9 +7,4 @@ public class RunFlyWheel extends FlyWheelCommand {
     public void execute() {
         flyWheel.setPower(FlyWheelConstants.SHOOTING_POWER);
     }
-
-    @Override
-    public void end(boolean interrupted) {
-        new StopFlyWheel();
-    }
 }

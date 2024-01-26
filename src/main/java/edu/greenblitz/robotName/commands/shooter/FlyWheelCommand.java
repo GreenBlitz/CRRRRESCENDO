@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName.commands.shooter;
 
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
-import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 import edu.greenblitz.robotName.utils.GBCommand;
 
 public abstract class FlyWheelCommand extends GBCommand {
@@ -14,7 +13,7 @@ public abstract class FlyWheelCommand extends GBCommand {
     }
 
     @Override
-    public boolean isFinished() {
-        return flyWheel.isAtVelocity(FlyWheelConstants.SHOOTING_POWER);
+    public void end(boolean interrupted) {
+        flyWheel.stop();
     }
 }

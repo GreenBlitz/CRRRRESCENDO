@@ -10,7 +10,7 @@ public class RunFunnel extends FunnelCommand {
     }
 
     @Override
-    public void end(boolean interrupted) {
-        funnel.stop();
+    public boolean isFinished() {
+        return !funnel.isObjectIn();
     }
 }

@@ -3,7 +3,7 @@ package edu.greenblitz.robotName.commands.shooter;
 public class StopFlyWheel extends FlyWheelCommand {
 
     @Override
-    public void execute() {
+    public void initialize() {
         flyWheel.stop();
     }
 }

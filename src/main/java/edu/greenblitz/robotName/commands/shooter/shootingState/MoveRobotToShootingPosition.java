@@ -5,7 +5,7 @@ import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
 import edu.greenblitz.robotName.shootingStateService.ShootingState;
 import edu.greenblitz.robotName.utils.GBCommand;
 
-public class GoToRobotTargetPosition extends GBCommand {
+public class MoveRobotToShootingPosition extends GBCommand {
     @Override
     public void initialize() {
         if (ShootingState.isRobotPositionFine()) {
