@@ -1,6 +1,5 @@
 package edu.greenblitz.robotName.commands.shooter;
 
-import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
 import edu.greenblitz.robotName.utils.GBCommand;
 

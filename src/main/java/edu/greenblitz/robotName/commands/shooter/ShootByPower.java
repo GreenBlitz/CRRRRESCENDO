@@ -1,8 +1,6 @@
 package edu.greenblitz.robotName.commands.shooter;
 
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
-import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
@@ -21,7 +19,7 @@ public class ShootByPower extends FlyWheelCommand {
         new SequentialCommandGroup(
                 new RunFunnel(),
                 new WaitCommand(FlyWheelConstants.DELAY_SECONDS_TILL_EXIT),
-                new StopShooter()
+                new StopFlyWheel()
         ).schedule();
     }
 }

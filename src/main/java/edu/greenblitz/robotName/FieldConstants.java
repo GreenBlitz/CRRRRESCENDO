@@ -18,8 +18,14 @@ public class FieldConstants {
 
     public static class ShootingZoneConstants {
         public static final List<Pair<Translation2d, Translation2d>> RESTRICTED_BOUNDS = new ArrayList<>();
-        public static final Pair<Translation2d, Translation2d> STAGE_ZONE = new Pair<>(new Translation2d(69, 69), new Translation2d(69, 69));
-        public static final Pair<Translation2d, Translation2d> ENEMY_FEEDER_ZONE = new Pair<>(new Translation2d(69, 69), new Translation2d(69, 69));
+        public static final Pair<Translation2d, Translation2d> STAGE_ZONE = new Pair<>(
+                new Translation2d(69, 69),
+                new Translation2d(69, 69)
+        );
+        public static final Pair<Translation2d, Translation2d> ENEMY_FEEDER_ZONE = new Pair<>(
+                new Translation2d(69, 69),
+                new Translation2d(69, 69)
+        );
 
         static {
             RESTRICTED_BOUNDS.add(STAGE_ZONE);

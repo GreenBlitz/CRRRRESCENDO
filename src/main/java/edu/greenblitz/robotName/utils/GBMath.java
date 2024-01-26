@@ -4,6 +4,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
 
 public class GBMath {
+
     /**
      * modulo (2,6) -> 0 * modulo (2,3) -> 1
      * modulo (-2,3) -> 1 * modulo (3,-2) -> -1 -> 1
@@ -134,12 +135,13 @@ public class GBMath {
 
         /**
          * Receives a point, returns the point on the rim of the circle which is closest to the given point.
-         *
+         * <p>
          * Calculates the slope between the center of the circle and a given point,
          * and using trigonometry calculates the points on the circle that intersect with the linear slope graph.
          * If the Y value of the point is below the center, returns the negative x and y value and vice versa.
-         *
+         * <p>
          * * If the point and the circle center have the same X value, adds epsilon to the given position (so the calculation doesn't fuck up)
+         *
          * @param position The position of the point.
          * @return The position of the closest point.
          */
