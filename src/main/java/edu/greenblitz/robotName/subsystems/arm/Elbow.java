@@ -102,9 +102,7 @@ public class Elbow extends GBSubsystem {
 
     public Pose3d getPose3D (){
         return new Pose3d(
-                new Translation3d(
-                        0,0.1,0.6
-                ),
+                ElbowConstants.ELBOW_POSITION_RELATIVE_TO_ROBOT,
                 new Rotation3d(-getAngleInRadians(),0, 0)
         );
     }

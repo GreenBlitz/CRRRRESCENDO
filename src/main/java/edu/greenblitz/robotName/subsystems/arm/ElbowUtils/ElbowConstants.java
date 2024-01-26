@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.subsystems.arm.ElbowUtils;
 
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
 
 public class ElbowConstants {
@@ -12,6 +13,8 @@ public class ElbowConstants {
     public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(20);
 
     public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(320);
+
+    public static final Translation3d ELBOW_POSITION_RELATIVE_TO_ROBOT = new Translation3d(0,0.1,0.6);
 
     public static final double RELATIVE_POSITION_CONVERSION_FACTOR = 0.0328;
 
