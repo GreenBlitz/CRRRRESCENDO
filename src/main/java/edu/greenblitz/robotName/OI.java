@@ -5,19 +5,19 @@ import edu.greenblitz.robotName.commands.arm.MoveArmBy2Angles;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
-import edu.greenblitz.robotName.commands.shooterArmCoordination.speaker.PickUpSpeaker;
-import edu.greenblitz.robotName.commands.shooterArmCoordination.transfer.MoveShooterArmToTransferPosition;
+import edu.greenblitz.robotName.commands.GetNoteToSystem.SpeakerPickUpPlace;
+import edu.greenblitz.robotName.commands.GetNoteToSystem.SwitchBetweenSystemsPlace;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
 import edu.greenblitz.robotName.subsystems.arm.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants;
 import edu.greenblitz.robotName.subsystems.arm.Wrist;
 import edu.greenblitz.robotName.subsystems.Battery;
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
+import edu.greenblitz.robotName.subsystems.Shooter.Pivot.PivotConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
+import edu.greenblitz.robotName.subsystems.Shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 
 import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
@@ -51,8 +51,8 @@ public class OI {
     }
 
     public void initButtons() {
-        secondJoystick.A.onTrue(new PickUpSpeaker());
-        secondJoystick.B.onTrue(new MoveShooterArmToTransferPosition());
+        secondJoystick.A.onTrue(new SpeakerPickUpPlace());
+        secondJoystick.B.onTrue(new SwitchBetweenSystemsPlace());
         secondJoystick.X.onTrue(new MovePivotToAngle(PivotConstants.FORWARD_ANGLE_LIMIT));
         secondJoystick.Y.onTrue(new MoveArmBy2Angles(ElbowConstants.BACKWARD_ANGLE_LIMIT, WristConstants.ImportantPlaces.SCORE.angle));
     }

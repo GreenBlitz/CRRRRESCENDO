@@ -1,15 +1,13 @@
-package edu.greenblitz.robotName.commands.shooterArmCoordination.speaker;
+package edu.greenblitz.robotName.commands.GetNoteToSystem;
 
 import edu.greenblitz.robotName.Robot;
-import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotCommand;
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
-import edu.greenblitz.robotName.utils.GBCommand;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.greenblitz.robotName.subsystems.Shooter.Pivot.PivotConstants;
 
-public class PickUpSpeaker extends PivotCommand {
+public class SpeakerPickUpPlace extends PivotCommand {
+    //TODO - ADD THINGS TO PREVENT COLLABORATION
 
-    public PickUpSpeaker() {
+    public SpeakerPickUpPlace() {
         super();
     }
     @Override

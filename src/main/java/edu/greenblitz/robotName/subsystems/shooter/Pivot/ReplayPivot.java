@@ -1,6 +1,7 @@
-package edu.greenblitz.robotName.subsystems.shooter.Pivot;
+package edu.greenblitz.robotName.subsystems.Shooter.Pivot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.wpi.first.math.geometry.Rotation2d;
 
 public class ReplayPivot implements IPivot{
 
@@ -20,12 +21,12 @@ public class ReplayPivot implements IPivot{
     }
 
     @Override
-    public void resetAngle(double position) {
+    public void resetAngle(Rotation2d position) {
 
     }
 
     @Override
-    public void moveToAngle(double goalAngle) {
+    public void moveToAngle(Rotation2d targetAngle) {
 
     }
 

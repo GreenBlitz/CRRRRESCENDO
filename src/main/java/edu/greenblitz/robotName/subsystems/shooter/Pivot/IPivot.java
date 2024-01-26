@@ -1,6 +1,7 @@
-package edu.greenblitz.robotName.subsystems.shooter.Pivot;
+package edu.greenblitz.robotName.subsystems.Shooter.Pivot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.wpi.first.math.geometry.Rotation2d;
 
 public interface IPivot {
 
@@ -10,9 +11,9 @@ public interface IPivot {
 
     void setIdleMode(NeutralModeValue idleMode);
 
-    void resetAngle(double position);
+    void resetAngle(Rotation2d position);
 
-    void moveToAngle(double goalAngle);
+    void moveToAngle(Rotation2d targetAngle);
 
     void updateInputs(PivotInputsAutoLogged inputs);
 }

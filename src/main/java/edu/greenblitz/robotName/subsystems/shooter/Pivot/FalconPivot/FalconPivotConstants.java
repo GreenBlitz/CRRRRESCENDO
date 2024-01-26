@@ -1,10 +1,10 @@
-package edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot;
+package edu.greenblitz.robotName.subsystems.Shooter.Pivot.FalconPivot;
 
 import com.ctre.phoenix6.configs.*;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 
-import static edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants.*;
+import static edu.greenblitz.robotName.subsystems.Shooter.Pivot.PivotConstants.*;
 
 
 public class FalconPivotConstants {

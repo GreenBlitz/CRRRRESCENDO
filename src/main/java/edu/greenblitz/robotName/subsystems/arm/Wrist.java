@@ -66,8 +66,8 @@ public class Wrist extends GBSubsystem {
         wrist.resetAngle(position);
     }
 
-    public void moveToAngle(Rotation2d goalAngle) {
-        wrist.moveToAngle(goalAngle);
+    public void moveToAngle(Rotation2d targetAngle) {
+        wrist.moveToAngle(targetAngle);
     }
 
     public void standInPlace() {

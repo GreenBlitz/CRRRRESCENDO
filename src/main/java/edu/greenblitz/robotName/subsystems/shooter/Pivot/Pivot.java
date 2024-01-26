@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.shooter.Pivot;
+package edu.greenblitz.robotName.subsystems.Shooter.Pivot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.subsystems.Battery;
@@ -8,8 +8,8 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import org.littletonrobotics.junction.Logger;
 
 
-import static edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot.FalconPivotConstants.SIMPLE_MOTOR_FF;
-import static edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants.TOLERANCE;
+import static edu.greenblitz.robotName.subsystems.Shooter.Pivot.FalconPivot.FalconPivotConstants.SIMPLE_MOTOR_FF;
+import static edu.greenblitz.robotName.subsystems.Shooter.Pivot.PivotConstants.TOLERANCE;
 
 
 public class Pivot extends GBSubsystem {
@@ -61,11 +61,11 @@ public class Pivot extends GBSubsystem {
     
 
     public void resetAngle(Rotation2d position) {
-        pivot.resetAngle(position.getRadians());
+        pivot.resetAngle(position);
     }
 
     public void moveToAngle(Rotation2d targetAngle) {
-        pivot.moveToAngle(targetAngle.getRadians());
+        pivot.moveToAngle(targetAngle);
     }
 
     public void standInPlace() {

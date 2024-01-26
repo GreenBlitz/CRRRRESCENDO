@@ -1,8 +1,8 @@
-package edu.greenblitz.robotName.subsystems.shooter.Pivot.SimulationPivot;
+package edu.greenblitz.robotName.subsystems.Shooter.Pivot.SimulationPivot;
 
 import edu.greenblitz.robotName.utils.PIDObject;
 
-import static edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants.RELATIVE_POSITION_CONVERSION_FACTOR;
+import static edu.greenblitz.robotName.subsystems.Shooter.Pivot.PivotConstants.RELATIVE_POSITION_CONVERSION_FACTOR;
 
 
 public class SimulationPivotConstants {
