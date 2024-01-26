@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 public class ShooterToArmTransfer extends ParallelCommandGroup {
     public ShooterToArmTransfer() {
         super(
-                new MoveArmBy2Angles(ElbowConstants.ImportantPlaces.TRANSFER.angle, WristConstants.TRANSFER_ANGLE),
+                new MoveArmBy2Angles(ElbowConstants.ImportantPlaces.TRANSFER.angle, WristConstants.ImportantPlaces.TRANSFER.angle),
                 new MovePivotToAngle(PivotConstants.ImportantPlaces.TRANSFER.angle)
         );
     }

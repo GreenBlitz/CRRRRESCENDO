@@ -58,7 +58,7 @@ public class OI {
         secondJoystick.A.onTrue(new PickUpSpeaker());
         secondJoystick.B.onTrue(new ShooterToArmTransfer());
         secondJoystick.X.onTrue(new MovePivotToAngle(PivotConstants.FORWARD_ANGLE_LIMIT));
-        secondJoystick.Y.onTrue(new MoveArmBy2Angles(ElbowConstants.BACKWARD_ANGLE_LIMIT, WristConstants.SCORE_ANGLE));
+        secondJoystick.Y.onTrue(new MoveArmBy2Angles(ElbowConstants.BACKWARD_ANGLE_LIMIT, WristConstants.ImportantPlaces.SCORE.angle));
     }
     
     public void initializeDefaultCommands(){
