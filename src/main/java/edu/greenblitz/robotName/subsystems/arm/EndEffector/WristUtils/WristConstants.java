@@ -34,7 +34,7 @@ public class WristConstants {
 
     public static final double kA = 1;
 
-    public static final double TOLERANCE = Units.degreesToRadians(2);
+    public static final double TOLERANCE = Units.degreesToRadians(0.5);
 
     public static final int CURRENT_LIMIT = 40;
 
