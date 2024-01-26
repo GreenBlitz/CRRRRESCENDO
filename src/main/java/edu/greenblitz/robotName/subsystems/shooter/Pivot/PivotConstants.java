@@ -1,5 +1,8 @@
 package edu.greenblitz.robotName.subsystems.shooter.Pivot;
 
+import edu.wpi.first.math.interpolation.InterpolatingTreeMap;
+import edu.wpi.first.math.interpolation.Interpolator;
+import edu.wpi.first.math.interpolation.InverseInterpolator;
 import edu.wpi.first.math.util.Units;
 
 public class PivotConstants {
@@ -29,6 +32,24 @@ public class PivotConstants {
     public static final double kA = 1;
 
     public static final double TOLERANCE = Units.degreesToRadians(2);
+
+    public static final InterpolatingTreeMap<Double, Double> DISTANCE_TO_ANGLE_MAP = new InterpolatingTreeMap<>(
+            InverseInterpolator.forDouble(), Interpolator.forDouble()
+    );
+
+    static { // First input is the distance, Second input is the angle
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
+    }
 
 
 }
