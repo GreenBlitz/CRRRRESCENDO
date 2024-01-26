@@ -4,7 +4,6 @@ import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.wpilibj.PowerDistribution;
 
 public class RobotConstants {
-
   public static final Robot.RobotType ROBOT_TYPE = Robot.RobotType.SIMULATION;
 
 	public static final String SIMULATION_LOG_PATH = System.getProperty("user.home") + "\\Desktop\\SimulationLogs";
@@ -41,6 +40,7 @@ public class RobotConstants {
         public static final double TIME_STEP = 0.02;
         public static final double BATTERY_VOLTAGE = 12;
         public static final double MAX_MOTOR_VOLTAGE = 12;
+        public static final double MIN_MOTOR_VOLTAGE = -12;
 
         public static final Translation3d ARM_TO_ROBOT = new Translation3d(0, 0, 1.2);
     }
