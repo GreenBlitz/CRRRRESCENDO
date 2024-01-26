@@ -2,13 +2,19 @@ package edu.greenblitz.robotName.subsystems.arm;
 
 
 import com.revrobotics.CANSparkMax;
+import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.IWrist;
 import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.NeoWrist.NeoWristConstants;
+import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants;
 import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristFactory;
 import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristInputsAutoLogged;
-import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.utils.GBMath;
 import edu.greenblitz.robotName.utils.GBSubsystem;
+import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Translation3d;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants.TOLERANCE;
@@ -22,6 +28,12 @@ public class Wrist extends GBSubsystem {
     private IWrist wrist;
 
 
+    private Wrist() {
+        wrist = WristFactory.create();
+        wristInputs = new WristInputsAutoLogged();
+        wrist.updateInputs(wristInputs);
+    }
+
     public static void init() {
         if (instance == null) {
             instance = new Wrist();
@@ -33,18 +45,13 @@ public class Wrist extends GBSubsystem {
         return instance;
     }
 
-    private Wrist() {
-        wrist = WristFactory.create();
-        wristInputs = new WristInputsAutoLogged();
-        wrist.updateInputs(wristInputs);
-    }
-
     @Override
     public void periodic() {
         super.periodic();
 
         wrist.updateInputs(wristInputs);
         Logger.processInputs("Wrist", wristInputs);
+        Logger.recordOutput("Wrist", getPose3D());
     }
 
 
@@ -102,5 +109,20 @@ public class Wrist extends GBSubsystem {
         return Math.abs(angle.getRadians() - getAngleInRadians()) <= TOLERANCE;
     }
 
+    public Pose3d getPose3D() {
 
+        Translation3d elbowTranslation = Elbow.getInstance().getPose3D().getTranslation();
+        double elbowLength = ElbowConstants.ARM_LENGTH;
+
+        double wristLength = WristConstants.LENGTH_OF_ENDEFFECTOR;
+
+        double relativeWristY = elbowLength * Math.sin(Elbow.getInstance().getAngleInRadians() - Math.PI / 2);
+        double relativeWristZ = elbowLength * Math.cos(Elbow.getInstance().getAngleInRadians() - Math.PI / 2);
+
+
+        return new Pose3d(
+                elbowTranslation.minus(new Translation3d(0, relativeWristY, relativeWristZ)),
+                new Rotation3d(wristInputs.position, 0, 0)
+        );
+    }
 }

@@ -5,7 +5,7 @@ import edu.wpi.first.math.util.Units;
 
 public class ElbowConstants {
 
-    public static final double ARM_LENGTH = 0.6;
+    public static final double ARM_LENGTH = 0.44;
 
     public static final double ARM_MASS_KG = 1;
 

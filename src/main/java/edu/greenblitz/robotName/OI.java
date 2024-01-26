@@ -4,6 +4,7 @@ package edu.greenblitz.robotName;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowCommand;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
+import edu.greenblitz.robotName.commands.arm.wrist.WristCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
 import edu.greenblitz.robotName.subsystems.arm.Elbow;
@@ -28,7 +29,7 @@ public class OI {
         mainJoystick = new SmartJoystick(RobotConstants.Joystick.MAIN);
         secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
         initButtons();
-        initializeDefaultCommands();
+//        initializeDefaultCommands();
     }
 
     public static OI getInstance() {
@@ -70,6 +71,32 @@ public class OI {
                     @Override
                     public void end(boolean interrupted) {
                         elbow.setPower(0);
+                    }
+                }
+        );
+        mainJoystick.Y.whileTrue(
+                new WristCommand(){
+                    @Override
+                    public void execute() {
+                        wrist.setPower(0.2);
+                    }
+
+                    @Override
+                    public void end(boolean interrupted) {
+                        wrist.setPower(0);
+                    }
+                }
+        );
+        mainJoystick.X.whileTrue(
+                new WristCommand(){
+                    @Override
+                    public void execute() {
+                        wrist.setPower(-0.2);
+                    }
+
+                    @Override
+                    public void end(boolean interrupted) {
+                        wrist.setPower(0);
                     }
                 }
         );
