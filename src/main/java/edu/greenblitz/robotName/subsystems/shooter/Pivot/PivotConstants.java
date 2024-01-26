@@ -7,11 +7,13 @@ import edu.wpi.first.math.util.Units;
 
 public class PivotConstants {
 
-    public static final double LENGTH_OF_SHOOTER = 0.3;
+    public static final double LENGTH_OF_SHOOTER = 0.41;
+
+    public static final double WIDTH_OF_SHOOTER = 0.22;
 
     public static final double SHOOTER_MASS_KG = 10;
 
-    public static final double BACKWARD_ANGLE_LIMIT = Units.degreesToRadians(20);
+    public static final double BACKWARD_ANGLE_LIMIT = Units.degreesToRadians(280);
 
     public static final double FORWARD_ANGLE_LIMIT = Units.degreesToRadians(340);
 

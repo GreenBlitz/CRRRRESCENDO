@@ -97,7 +97,7 @@ public class Pivot extends GBSubsystem {
 
     public Pose3d getPivotPose() {
         return new Pose3d(
-                new Translation3d(),
+                new Translation3d(0,0.1,0.15),
                 new Rotation3d(getAngle().getRadians(), 0, 0)
         );
     }

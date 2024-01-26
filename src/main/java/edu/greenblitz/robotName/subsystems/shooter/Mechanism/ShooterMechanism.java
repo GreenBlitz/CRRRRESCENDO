@@ -42,7 +42,7 @@ public class ShooterMechanism {
 
 
     public void periodic() {
-        pivot.setAngle(Units.radiansToDegrees( Pivot.getInstance().getAngle().getDegrees()));
+        pivot.setAngle(-Pivot.getInstance().getAngle().getDegrees());
 
         Logger.recordOutput("Pivot/SimPose3D", Pivot.getInstance().getAngle());
     }
