@@ -1,10 +1,22 @@
 package edu.greenblitz.robotName;
 
-import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
-import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
+
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.pathfinding.LocalADStar;
+import com.pathplanner.lib.pathfinding.Pathfinding;
+import edu.greenblitz.robotName.subsystems.arm.ArmMechanism.ArmMechanism;
+import edu.greenblitz.robotName.subsystems.arm.Elbow;
+import edu.greenblitz.robotName.subsystems.arm.Roller;
+import edu.greenblitz.robotName.subsystems.arm.Wrist;
+import edu.greenblitz.robotName.subsystems.shooter.Mechanism.ShooterMechanism;
+import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
+import edu.greenblitz.robotName.utils.FMSUtils;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.greenblitz.robotName.subsystems.Dashboard;
-import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
+import edu.greenblitz.robotName.subsystems.shooter.Shooter;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -26,28 +38,51 @@ public class Robot extends LoggedRobot {
 
     @Override
     public void robotInit() {
+        Pathfinding.setPathfinder(new LocalADStar());
         CommandScheduler.getInstance().enable();
         initializeLogger();
-
-        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-
-        SwerveChassis.init();
-        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
+        initializeSubsystems();
         SwerveChassis.getInstance().resetAllEncoders();
-
+        initializeAutonomousBuilder();
         OI.getInstance();
     }
+
+    public void initializeSubsystems() {
+        MultiLimelight.init();
+        SwerveChassis.init();
+        Shooter.init();
+        Elbow.init();
+        Wrist.init();
+        Roller.init();
+        ArmMechanism.init();
+    }
+
     @Override
     public void teleopInit() {
         Dashboard.getInstance().activateDriversDashboard();
     }
+
     @Override
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
+        RoborioUtils.updateCurrentCycleTime();
+        ShooterMechanism.getInstance().periodic();
+        ArmMechanism.getInstance().periodic();
+    }
+
+    private void initializeAutonomousBuilder() {
+        AutoBuilder.configureHolonomic(
+                SwerveChassis.getInstance()::getRobotPose,
+                SwerveChassis.getInstance()::resetChassisPose,
+                SwerveChassis.getInstance()::getRobotRelativeChassisSpeeds,
+                SwerveChassis.getInstance()::moveByRobotRelativeSpeeds,
+                ChassisConstants.PATH_FOLLOWER_CONFIG,
+                () -> FMSUtils.getAlliance() == DriverStation.Alliance.Red,
+                SwerveChassis.getInstance()
+        );
     }
 
     private void initializeLogger(){
-
         NetworkTableInstance.getDefault()
                 .getStructTopic("RobotPose", Pose2d.struct).publish();
 
@@ -82,7 +117,6 @@ public class Robot extends LoggedRobot {
         }
         Logger.start();
     }
-    
 
 
 }
