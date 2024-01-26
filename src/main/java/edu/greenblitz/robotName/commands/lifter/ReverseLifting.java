@@ -15,6 +15,7 @@ public class ReverseLifting extends LifterCommand {
 
     @Override
     public void end(boolean interrupted) {
+        lifter.resetEncoder();
         lifter.stopMotor();
     }
 }

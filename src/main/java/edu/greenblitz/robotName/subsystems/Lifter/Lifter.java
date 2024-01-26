@@ -62,7 +62,7 @@ public class Lifter extends GBSubsystem {
 	
 	
 	public boolean isSwitchPressed() {
-		return lifterInputs.isForwardSwitchPressed;
+		return lifterInputs.isBackwardSwitchPressed;
 	}
 	
 	public boolean isMotorAtPosition(double targetPosition) {
