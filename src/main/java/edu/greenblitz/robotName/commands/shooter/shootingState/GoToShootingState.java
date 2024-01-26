@@ -17,14 +17,14 @@ public class GoToShootingState extends GBCommand {
         new ParallelCommandGroup(
                 new GoToRobotTargetPosition(),
                 new GoToShooterAngle(),
-                new ShootByPower(FlyWheelConstants.SHOOTING_POWER)
+                new ShootByPower()
         );
     }
 
     @Override
     public void end(boolean interrupted) {
         if (ShootingState.isReadyToShoot()) {
-            new ShootByPower(FlyWheelConstants.SHOOTING_POWER);
+            new ShootByPower();
         }
     }
 }
