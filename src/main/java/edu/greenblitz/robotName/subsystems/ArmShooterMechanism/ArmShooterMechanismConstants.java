@@ -1,10 +1,10 @@
-package edu.greenblitz.robotName.subsystems.arm.ArmMechanism;
+package edu.greenblitz.robotName.subsystems.ArmShooterMechanism;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.util.Color8Bit;
 import edu.wpi.first.wpilibj.util.Color;
 
-public class ArmMechanismConstants {
+public class ArmShooterMechanismConstants {
 
     public static final Translation2d SIZE_OF_MECHANISM = new Translation2d(3, 2);
 

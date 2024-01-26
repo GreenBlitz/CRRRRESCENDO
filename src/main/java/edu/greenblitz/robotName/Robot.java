@@ -4,7 +4,7 @@ package edu.greenblitz.robotName;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
-import edu.greenblitz.robotName.subsystems.arm.ArmMechanism.ArmMechanism;
+import edu.greenblitz.robotName.subsystems.ArmShooterMechanism.ArmShooterMechanism;
 import edu.greenblitz.robotName.subsystems.arm.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.Roller;
 import edu.greenblitz.robotName.subsystems.arm.Wrist;
@@ -53,7 +53,7 @@ public class Robot extends LoggedRobot {
         Elbow.init();
         Wrist.init();
         Roller.init();
-        ArmMechanism.init();
+        ArmShooterMechanism.init();
     }
 
     @Override
@@ -65,7 +65,7 @@ public class Robot extends LoggedRobot {
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
         RoborioUtils.updateCurrentCycleTime();
-        ArmMechanism.getInstance().periodic();
+        ArmShooterMechanism.getInstance().periodic();
     }
 
     private void initializeAutonomousBuilder() {

@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.arm.ArmMechanism;
+package edu.greenblitz.robotName.subsystems.ArmShooterMechanism;
 
 import edu.greenblitz.robotName.subsystems.arm.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
@@ -6,7 +6,6 @@ import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConst
 import edu.greenblitz.robotName.subsystems.arm.Wrist;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
-import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
@@ -14,14 +13,14 @@ import edu.wpi.first.wpilibj.smartdashboard.MechanismRoot2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.arm.ArmMechanism.ArmMechanismConstants.*;
-import static edu.greenblitz.robotName.subsystems.arm.ArmMechanism.ArmMechanismConstants.PivotMechanismConstants.*;
-import static edu.greenblitz.robotName.subsystems.arm.ArmMechanism.ArmMechanismConstants.WristMechanismConstants.*;
-import static edu.greenblitz.robotName.subsystems.arm.ArmMechanism.ArmMechanismConstants.ElbowMechanismConstants.*;
+import static edu.greenblitz.robotName.subsystems.ArmShooterMechanism.ArmShooterMechanismConstants.*;
+import static edu.greenblitz.robotName.subsystems.ArmShooterMechanism.ArmShooterMechanismConstants.PivotMechanismConstants.*;
+import static edu.greenblitz.robotName.subsystems.ArmShooterMechanism.ArmShooterMechanismConstants.WristMechanismConstants.*;
+import static edu.greenblitz.robotName.subsystems.ArmShooterMechanism.ArmShooterMechanismConstants.ElbowMechanismConstants.*;
 
-public class ArmMechanism {
+public class ArmShooterMechanism {
 
-    private static ArmMechanism instance;
+    private static ArmShooterMechanism instance;
 
     private Mechanism2d armMechanism;
 
@@ -41,15 +40,15 @@ public class ArmMechanism {
 
     public static void init() {
         if (instance == null)
-            instance = new ArmMechanism();
+            instance = new ArmShooterMechanism();
     }
 
-    public static ArmMechanism getInstance() {
+    public static ArmShooterMechanism getInstance() {
         init();
         return instance;
     }
 
-    private ArmMechanism() {
+    private ArmShooterMechanism() {
         elbow = Elbow.getInstance();
         wrist = Wrist.getInstance();
 
@@ -57,7 +56,7 @@ public class ArmMechanism {
         armMechanism = new Mechanism2d(SIZE_OF_MECHANISM.getX(), SIZE_OF_MECHANISM.getY());
         root = armMechanism.getRoot("arm_root", POSITION_OF_MECHANISM.getX(), POSITION_OF_MECHANISM.getY());
 
-        elbowJoint = root.append(new MechanismLigament2d("elbow", ElbowConstants.ARM_LENGTH, Units.radiansToDegrees(ElbowConstants.STARTING_ANGLE), ELBOW_LINE_WIDTH, COLOR_OF_ELBOW));
+        elbowJoint = root.append(new MechanismLigament2d("elbow", ElbowConstants.ARM_LENGTH, Units.radiansToDegrees(ElbowConstants.ImportantPlaces.STARTING.angle.getRadians()), ELBOW_LINE_WIDTH, COLOR_OF_ELBOW));
         wristJoint = elbowJoint.append(new MechanismLigament2d("wrist", WristConstants.LENGTH_OF_ENDEFFECTOR, Units.radiansToDegrees(WristConstants.STARTING_ANGLE), WRIST_LINE_WIDTH, COLOR_OF_WRIST));
 
         rootPivot = armMechanism.getRoot("pivot_root", PIVOT_COORDINATES.getX(), PIVOT_COORDINATES.getY());
