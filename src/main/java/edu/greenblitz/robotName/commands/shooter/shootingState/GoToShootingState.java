@@ -1,7 +1,7 @@
 package edu.greenblitz.robotName.commands.shooter.shootingState;
 
 import edu.greenblitz.robotName.commands.shooter.RunFlyWheel;
-import edu.greenblitz.robotName.commands.shooter.ShootByShootingPower;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByShootingPower;
 import edu.greenblitz.robotName.shootingStateService.ShootingState;
 import edu.greenblitz.robotName.utils.GBCommand;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
@@ -17,7 +17,7 @@ public class GoToShootingState extends SequentialCommandGroup {
                         new GoToShooterAngle(),
                         new RunFlyWheel()
                 ),
-                new ConditionalCommand(new ShootByShootingPower(), new GBCommand() {}, ShootingState::isReadyToShoot)
+                new ConditionalCommand(new RunFlyWheelByShootingPower(), new GBCommand() {}, ShootingState::isReadyToShoot)
         );
     }
 }

@@ -12,9 +12,4 @@ public abstract class FlyWheelCommand extends GBCommand {
         flyWheel = FlyWheel.getInstance();
         require(flyWheel);
     }
-
-    @Override
-    public void end(boolean interrupted) {
-        flyWheel.stop();
-    }
 }
