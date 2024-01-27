@@ -5,7 +5,7 @@ import edu.wpi.first.math.util.Units;
 
 public class WristConstants {
 
-    public enum ImportantPlaces{
+    public enum PresetPositions {
 
         STARTING(Rotation2d.fromDegrees(180)),
         SCORE(Rotation2d.fromDegrees(220)),
@@ -13,7 +13,7 @@ public class WristConstants {
 
         public final Rotation2d ANGLE;
 
-        ImportantPlaces(Rotation2d angle){
+        PresetPositions(Rotation2d angle){
             this.ANGLE = angle;
         }
 
