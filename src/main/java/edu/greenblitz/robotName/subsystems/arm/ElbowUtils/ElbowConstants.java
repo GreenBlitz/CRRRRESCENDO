@@ -28,6 +28,8 @@ public class ElbowConstants {
 
     public static final Pair<Rotation2d,Rotation2d> DANGER_ZONE = new Pair<>(Rotation2d.fromDegrees(0),FORWARD_ANGLE_LIMIT);
 
+    public static final Translation3d ELBOW_POSITION_RELATIVE_TO_ROBOT = new Translation3d(0,0.1,0.6);
+
     public static final double RELATIVE_POSITION_CONVERSION_FACTOR = 0.0328;
 
     public static final double RELATIVE_VELOCITY_CONVERSION_FACTOR = 1;
