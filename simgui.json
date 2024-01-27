@@ -13,6 +13,7 @@
       "/SmartDashboard/Field": "Field2d",
       "/SmartDashboard/Is Object In Arm?": "String Chooser",
       "/SmartDashboard/SendableChooser[0]": "String Chooser",
+      "/SmartDashboard/SendableChooser[1]": "String Chooser",
       "/SmartDashboard/ShooterMech2D": "Mechanism2d",
       "/SmartDashboard/field": "Field2d"
     },
@@ -23,11 +24,6 @@
         }
       },
       "/SmartDashboard/ArmMech2D": {
-        "window": {
-          "visible": true
-        }
-      },
-      "/SmartDashboard/ShooterMech2D": {
         "window": {
           "visible": true
         }
