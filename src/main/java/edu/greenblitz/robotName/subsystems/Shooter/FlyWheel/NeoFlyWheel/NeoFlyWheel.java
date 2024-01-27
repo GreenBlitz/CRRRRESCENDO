@@ -6,6 +6,10 @@ import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.FlyWheelInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.IFlyWheel;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
+import edu.greenblitz.robotName.utils.tuneableNumber.AutoSetterTunableNumber;
+import edu.greenblitz.robotName.utils.tuneableNumber.TunableNumberManager;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
@@ -17,9 +21,7 @@ public class NeoFlyWheel implements IFlyWheel {
         rightMotor.config(NeoFlyWheelConstants.RightMotor.CONFIG);
         leftMotor = new GBSparkMax(NeoFlyWheelConstants.LeftMotor.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
         leftMotor.config(NeoFlyWheelConstants.LeftMotor.CONFIG);
-
-        rightMotor.getEncoder().setVelocityConversionFactor(1);
-        leftMotor.getEncoder().setVelocityConversionFactor(1);
+        
     }
 
     @Override
@@ -48,14 +50,16 @@ public class NeoFlyWheel implements IFlyWheel {
                 NeoFlyWheelConstants.LeftMotor.PID_SLOT,
                 NeoFlyWheelConstants.LeftMotor.FEEDFORWARD.calculate(leftVelocity)
         );
+        
+        
+        SmartDashboard.putNumber("f l v",  NeoFlyWheelConstants.LeftMotor.FEEDFORWARD.calculate(leftVelocity));
     }
 
     @Override
     public void updateInputs(FlyWheelInputsAutoLogged inputs) {
-
-        inputs.appliedOutput = rightMotor.getAppliedOutput();
-        inputs.velocity = rightMotor.getEncoder().getVelocity();
-        inputs.position = rightMotor.getEncoder().getPosition();
+        inputs.appliedOutput = leftMotor.getAppliedOutput();
+        inputs.velocity = leftMotor.getEncoder().getVelocity();
+        inputs.position = leftMotor.getEncoder().getPosition();
 
 
 

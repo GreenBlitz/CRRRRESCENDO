@@ -87,7 +87,9 @@ public class OI {
 //
 //        buttons(mainJoystick,routine);
         secondJoystick.A.whileTrue(new ShootByVelocity(1000));
-        secondJoystick.B.whileTrue(new ShootByPower(0.5));
+        secondJoystick.B.whileTrue(new ShootByVelocity(2000));
+        secondJoystick.Y.whileTrue(new ShootByVelocity(2500));
+        secondJoystick.X.whileTrue(new ShootByVelocity(2000));
     }
 
     private Command sysIdDynamic(SysIdRoutine.Direction direction, SysIdRoutine routine) {
