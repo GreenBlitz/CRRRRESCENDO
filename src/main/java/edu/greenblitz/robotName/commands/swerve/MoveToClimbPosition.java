@@ -6,6 +6,6 @@ import edu.greenblitz.robotName.commands.auto.MoveToPose;
 public class MoveToClimbPosition extends MoveToPose{
 
     public MoveToClimbPosition() {
-        super(Field.ScoringPositions.climbPosition);
+        super(Field.ScoringPositions.CLIMB_POSITION);
     }
 }

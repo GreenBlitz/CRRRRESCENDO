@@ -6,6 +6,6 @@ import edu.greenblitz.robotName.commands.auto.MoveToPose;
 public class MoveToSpeaker extends MoveToPose {
 
     public MoveToSpeaker() {
-        super(Field.ScoringPositions.speakerScorePosition);
+        super(Field.ScoringPositions.SPEAKER_SCORE_POSITION);
     }
 }

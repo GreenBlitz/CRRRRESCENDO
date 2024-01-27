@@ -6,6 +6,6 @@ import edu.greenblitz.robotName.commands.auto.MoveToPose;
 public class MoveToAmp extends MoveToPose{
 
     public MoveToAmp() {
-        super(Field.ScoringPositions.ampScorePosition);
+        super(Field.ScoringPositions.AMP_SCORE_POSITION);
     }
 }
