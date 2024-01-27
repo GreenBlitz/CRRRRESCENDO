@@ -1,6 +1,6 @@
 package edu.greenblitz.robotName.commands.GetNoteToSystem;
 
-import edu.greenblitz.robotName.commands.arm.MoveArmBy2Angles;
+import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.subsystems.arm.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
@@ -17,7 +17,7 @@ public class MoveShooterToAngle extends ConditionalCommand {
 	public MoveShooterToAngle(Rotation2d targetAngle) {
 		super(
 				new ParallelCommandGroup(
-						new MoveArmBy2Angles(
+						new MoveElbowAndWrist(
 								ElbowConstants.ImportantPlaces.SAFE.ANGLE,
 								WristConstants.ImportantPlaces.TRANSFER.ANGLE
 						),
