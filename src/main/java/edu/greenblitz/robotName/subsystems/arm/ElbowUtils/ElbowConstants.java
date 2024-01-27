@@ -6,13 +6,13 @@ import edu.wpi.first.math.util.Units;
 
 public class ElbowConstants {
 
-    public enum ImportantPlaces{
+    public enum PresetPositions {
         SAFE(Rotation2d.fromDegrees(-30)),
         STARTING(Rotation2d.fromDegrees(SAFE.ANGLE.getRadians())),
         TRANSFER(Rotation2d.fromDegrees(10));
 
         public final Rotation2d ANGLE;
-        ImportantPlaces(Rotation2d angle){
+        PresetPositions(Rotation2d angle){
             this.ANGLE = angle;
         }
     }
