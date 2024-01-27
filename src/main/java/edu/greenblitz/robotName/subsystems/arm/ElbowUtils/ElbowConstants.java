@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.subsystems.arm.ElbowUtils;
 
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
 
 public class ElbowConstants {
@@ -17,7 +18,7 @@ public class ElbowConstants {
         }
     }
 
-    public static final double ARM_LENGTH = 0.53;
+    public static final double ARM_LENGTH = 0.44;
 
     public static final double ARM_MASS_KG = 1;
 
@@ -32,6 +33,8 @@ public class ElbowConstants {
     public static final double RELATIVE_VELOCITY_CONVERSION_FACTOR = 1;
 
     public static final double ABSOLUTE_POSITION_CONVERSION_FACTOR = 1;
+
+    public static final double STARTING_ANGLE = 1;
 
     public static final double kS = 1;
 
