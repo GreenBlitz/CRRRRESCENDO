@@ -38,7 +38,7 @@ public class SimulationWrist implements IWrist {
                 WristConstants.BACKWARD_ANGLE_LIMIT.getRadians(),
                 WristConstants.FORWARD_ANGLE_LIMIT.getRadians(),
                 false,
-                WristConstants.STARTING_ANGLE
+                WristConstants.PresetPositions.STARTING.ANGLE.getRadians()
         );
 
         controller = SimulationWristConstants.SIMULATION_PID.getPIDController();
