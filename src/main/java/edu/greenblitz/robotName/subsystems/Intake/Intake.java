@@ -41,7 +41,7 @@ public class Intake extends GBSubsystem {
         return intakeInputs.velocity;
     }
 
-    public void stop() {
+    public static void stop() {
         setPower(0);
     }
 
