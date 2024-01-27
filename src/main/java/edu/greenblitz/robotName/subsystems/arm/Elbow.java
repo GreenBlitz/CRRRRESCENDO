@@ -95,9 +95,9 @@ public class Elbow extends GBSubsystem {
 		return Math.abs(targetHeight.getRadians() - getAngleInRadians()) <= ElbowConstants.TOLERANCE;
 	}
 
-	public boolean isInDangerousRange() {
-		return elbowInputs.position > ElbowConstants.DANGEROUS_ZONE.getFirst().getRadians() &&
-				elbowInputs.position < ElbowConstants.DANGEROUS_ZONE.getSecond().getRadians();
+	public boolean isInDangerZone() {
+		return elbowInputs.position > ElbowConstants.DANGER_ZONE.getFirst().getRadians() &&
+				elbowInputs.position < ElbowConstants.DANGER_ZONE.getSecond().getRadians();
 	}
 
 }

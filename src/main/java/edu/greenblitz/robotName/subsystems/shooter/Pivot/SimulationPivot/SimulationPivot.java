@@ -37,7 +37,7 @@ public class SimulationPivot implements IPivot {
                 PivotConstants.BACKWARD_ANGLE_LIMIT,
                 PivotConstants.FORWARD_ANGLE_LIMIT.getRadians(),
                 false,
-                PivotConstants.ImportantPlaces.STARTING.angle.getRadians()
+                PivotConstants.ImportantPlaces.STARTING.ANGLE.getRadians()
         );
         controller = SIMULATION_PID.getPIDController();
     }

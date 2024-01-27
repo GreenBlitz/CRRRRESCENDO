@@ -14,16 +14,15 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class MoveShooterToAngle extends ParallelCommandGroup {
-    //TODO - ADD THINGS TO PREVENT COLLABORATION
 
     public MoveShooterToAngle(Rotation2d goalAngle) {
         super(
                 new ConditionalCommand(new MoveArmBy2Angles(
-                        ElbowConstants.ImportantPlaces.SAFE.angle,
-                        WristConstants.ImportantPlaces.TRANSFER.angle
+                        ElbowConstants.ImportantPlaces.SAFE.ANGLE,
+                        WristConstants.ImportantPlaces.TRANSFER.ANGLE
                 )
                         ,new GBCommand() {},
-                        () -> Elbow.getInstance().isInDangerousRange()
+                        () -> Elbow.getInstance().isInDangerZone()
                 ),
                 new SequentialCommandGroup(
                         new WaitCommand(PivotConstants.NO_COLLISION_DELAY_SECONDS),

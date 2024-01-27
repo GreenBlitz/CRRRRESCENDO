@@ -11,9 +11,10 @@ public class PivotConstants {
         TRANSFER(Rotation2d.fromDegrees(100)),
         PICK_UP(Rotation2d.fromDegrees(150));
 
-        public Rotation2d angle;
+        public final Rotation2d ANGLE;
+
         ImportantPlaces(Rotation2d angle){
-            this.angle = angle;
+            this.ANGLE = angle;
         }
 
     }

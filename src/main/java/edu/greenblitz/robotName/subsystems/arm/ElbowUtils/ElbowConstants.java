@@ -7,27 +7,25 @@ import edu.wpi.first.math.util.Units;
 public class ElbowConstants {
 
     public enum ImportantPlaces{
+        SAFE(Rotation2d.fromDegrees(-30)),
+        STARTING(Rotation2d.fromDegrees(SAFE.ANGLE.getRadians())),
+        TRANSFER(Rotation2d.fromDegrees(10));
 
-        STARTING(Rotation2d.fromDegrees(250)),
-        SAFE(Rotation2d.fromDegrees(325)),
-        TRANSFER(Rotation2d.fromDegrees(370));
-
-        public Rotation2d angle;
+        public final Rotation2d ANGLE;
         ImportantPlaces(Rotation2d angle){
-            this.angle = angle;
+            this.ANGLE = angle;
         }
-
     }
 
     public static final double ARM_LENGTH = 0.53;
 
     public static final double ARM_MASS_KG = 1;
 
-    public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(200);
+    public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(-180);
 
-    public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(400);
+    public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(20);
 
-    public static final Pair<Rotation2d,Rotation2d> DANGEROUS_ZONE = new Pair<>(Rotation2d.fromDegrees(340),FORWARD_ANGLE_LIMIT);
+    public static final Pair<Rotation2d,Rotation2d> DANGER_ZONE = new Pair<>(Rotation2d.fromDegrees(0),FORWARD_ANGLE_LIMIT);
 
     public static final double RELATIVE_POSITION_CONVERSION_FACTOR = 0.0328;
 

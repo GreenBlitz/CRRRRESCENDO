@@ -1,6 +1,5 @@
 package edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils;
 
-import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
 
@@ -8,13 +7,14 @@ public class WristConstants {
 
     public enum ImportantPlaces{
 
-        STARTING(Rotation2d.fromDegrees(260)),
-        SCORE(Rotation2d.fromDegrees(380)),
+        STARTING(Rotation2d.fromDegrees(180)),
+        SCORE(Rotation2d.fromDegrees(220)),
         TRANSFER(Rotation2d.fromDegrees(180));
 
-        public Rotation2d angle;
+        public final Rotation2d ANGLE;
+
         ImportantPlaces(Rotation2d angle){
-            this.angle = angle;
+            this.ANGLE = angle;
         }
 
     }
@@ -23,9 +23,9 @@ public class WristConstants {
 
     public static final double SHOOTER_MASS_KG = 10;
 
-    public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(160);
+    public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(150);
 
-    public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(400);
+    public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(250);
 
     public static final double RELATIVE_POSITION_CONVERSION_FACTOR = 0.0328;
 
