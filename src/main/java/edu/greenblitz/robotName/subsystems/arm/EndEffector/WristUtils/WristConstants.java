@@ -5,7 +5,7 @@ import edu.wpi.first.math.util.Units;
 
 public class WristConstants {
 
-    public static final double LENGTH_OF_ENDEFFECTOR = 0.3;
+    public static final double LENGTH_OF_ENDEFFECTOR = 0.1;
 
     public static final double SHOOTER_MASS_KG = 10;
 

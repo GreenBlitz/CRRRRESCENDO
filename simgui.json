@@ -18,6 +18,11 @@
       "/SmartDashboard/field": "Field2d"
     },
     "windows": {
+      "/Shuffleboard/Drivers/Field": {
+        "window": {
+          "visible": true
+        }
+      },
       "/SmartDashboard/ArmMech2D": {
         "window": {
           "visible": true
