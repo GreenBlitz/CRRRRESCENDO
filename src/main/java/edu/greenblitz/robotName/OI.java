@@ -3,11 +3,16 @@ package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
+import edu.greenblitz.robotName.commands.arm.wrist.MoveWristToAngle;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
+import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
 import edu.greenblitz.robotName.subsystems.arm.Elbow;
+import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
+import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants;
 import edu.greenblitz.robotName.subsystems.arm.Wrist;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
@@ -46,7 +51,12 @@ public class OI {
     }
 
     public void initButtons() {
-
+        secondJoystick.A.onTrue(new MoveElbowToAngle(ElbowConstants.BACKWARD_ANGLE_LIMIT));
+        secondJoystick.B.onTrue(new MoveElbowToAngle(ElbowConstants.FORWARD_ANGLE_LIMIT));
+        secondJoystick.Y.onTrue(new MoveWristToAngle(WristConstants.BACKWARD_ANGLE_LIMIT));
+        secondJoystick.X.onTrue(new MoveWristToAngle(WristConstants.FORWARD_ANGLE_LIMIT));
+        secondJoystick.R1.onTrue(new MovePivotToAngle(PivotConstants.BACKWARD_ANGLE_LIMIT));
+        secondJoystick.L1.onTrue(new MovePivotToAngle(PivotConstants.FORWARD_ANGLE_LIMIT));
     }
     
     public void initializeDefaultCommands(){
