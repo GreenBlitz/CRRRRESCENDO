@@ -18,7 +18,6 @@ public class Pivot extends GBSubsystem {
 
     private IPivot pivot;
 
-
     private Pivot() {
         pivot = PivotFactory.create();
         pivotInputs = new PivotInputsAutoLogged();
@@ -44,7 +43,6 @@ public class Pivot extends GBSubsystem {
         Logger.recordOutput("Shooter/Pivot", getPivotPose());
     }
 
-
     public void setPower(double power) {
         pivot.setPower(power);
     }
@@ -57,7 +55,6 @@ public class Pivot extends GBSubsystem {
         pivot.setIdleMode(idleMode);
     }
 
-
     public void resetAngle(double position) {
         pivot.resetAngle(position);
     }
@@ -69,7 +66,6 @@ public class Pivot extends GBSubsystem {
     public void standInPlace() {
         pivot.setPower(getStaticFF());
     }
-
 
     public double getStaticFF() {
         return SIMPLE_MOTOR_FF.calculate(0);
