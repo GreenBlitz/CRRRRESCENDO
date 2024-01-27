@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.subsystems.Lifter;
 
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.utils.GBSubsystem;
+import edu.wpi.first.math.geometry.Pose3d;
 
 public class Lifter extends GBSubsystem {
     private static Lifter instance;
@@ -69,5 +70,9 @@ public class Lifter extends GBSubsystem {
 
     public void setIdleMode(CANSparkMax.IdleMode mode) {
         lifter.setIdleMode(mode);
+    }
+
+    public Pose3d getPose() {
+
     }
 }
