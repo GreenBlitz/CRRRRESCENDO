@@ -48,56 +48,7 @@ public class OI {
     }
 
     public void initButtons() {
-        mainJoystick.B.whileTrue(
-                new ElbowCommand(){
-                    @Override
-                    public void execute() {
-                        elbow.setPower(0.2);
-                    }
-                    @Override
-                    public void end(boolean interrupted) {
-                        elbow.setPower(0);
-                    }
-                }
-        );
-        mainJoystick.A.whileTrue(
-                new ElbowCommand(){
-                    @Override
-                    public void execute() {
-                        elbow.setPower(-0.2);
-                    }
-                    @Override
-                    public void end(boolean interrupted) {
-                        elbow.setPower(0);
-                    }
-                }
-        );
-        mainJoystick.Y.whileTrue(
-                new WristCommand(){
-                    @Override
-                    public void execute() {
-                        wrist.setPower(0.2);
-                    }
 
-                    @Override
-                    public void end(boolean interrupted) {
-                        wrist.setPower(0);
-                    }
-                }
-        );
-        mainJoystick.X.whileTrue(
-                new WristCommand(){
-                    @Override
-                    public void execute() {
-                        wrist.setPower(-0.2);
-                    }
-
-                    @Override
-                    public void end(boolean interrupted) {
-                        wrist.setPower(0);
-                    }
-                }
-        );
     }
     
     public void initializeDefaultCommands(){
