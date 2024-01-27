@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.subsystems.Lifter;
 
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.subsystems.Lifter.NeoLifter.NeoLifterConstants;
+import edu.greenblitz.robotName.subsystems.Lifter.SimulationLifter.SimulationLifterConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation3d;
@@ -81,8 +82,8 @@ public class Lifter extends GBSubsystem {
     }
     public Pose3d getLifterPose() {
         return new Pose3d(
-                LifterConstants.ROBOT_RELATIVE_LIFTER_POSITION,
-                new Rotation3d(0,lifterInputs.position,0).plus(LifterConstants.ROBOT_RELATIVE_LIFTER_ROTATION)
+                SimulationLifterConstants.ROBOT_RELATIVE_LIFTER_POSITION,
+                new Rotation3d(0,lifterInputs.position,0).plus(SimulationLifterConstants.ROBOT_RELATIVE_LIFTER_ROTATION)
         );
     }
 }
