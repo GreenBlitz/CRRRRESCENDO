@@ -5,7 +5,7 @@ import edu.wpi.first.math.util.Units;
 
 public class PivotConstants {
 
-    public enum PresetPositions {
+    public enum ImportantPlaces{
 
         STARTING(Rotation2d.fromDegrees(140)),
         TRANSFER(Rotation2d.fromDegrees(100)),
@@ -13,7 +13,7 @@ public class PivotConstants {
 
         public final Rotation2d ANGLE;
 
-        PresetPositions(Rotation2d angle){
+        ImportantPlaces(Rotation2d angle){
             this.ANGLE = angle;
         }
 
