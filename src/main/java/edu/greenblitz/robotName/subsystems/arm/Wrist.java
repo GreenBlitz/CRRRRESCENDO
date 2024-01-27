@@ -8,6 +8,7 @@ import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristFacto
 import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.utils.GBSubsystem;
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Rotation2d;
 import org.littletonrobotics.junction.Logger;
 
@@ -65,8 +66,8 @@ public class Wrist extends GBSubsystem {
         wrist.resetAngle(position);
     }
 
-    public void moveToAngle(Rotation2d goalAngle) {
-        wrist.moveToAngle(goalAngle);
+    public void moveToAngle(Rotation2d targetAngle) {
+        wrist.moveToAngle(targetAngle);
     }
 
     public void standInPlace() {
@@ -101,6 +102,5 @@ public class Wrist extends GBSubsystem {
     public boolean isAtAngle(Rotation2d angle) {
         return Math.abs(angle.getRadians() - getAngleInRadians()) <= TOLERANCE;
     }
-
 
 }
