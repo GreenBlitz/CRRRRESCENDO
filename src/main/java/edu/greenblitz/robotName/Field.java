@@ -23,14 +23,6 @@ public class Field {
                 pose.getRotation());
         return mirroredPose;
     }
-    public static Pose2d mirrorToHadarimPosition(Pose2d pose){
-        Pose2d mirroredPose = new Pose2d(
-                pose.getX() - FieldConstants.fieldLength,
-                pose.getY(),
-                pose.getRotation());
-        return mirroredPose;
-    }
-
 
     /**
      * gets pose[], returns it fitted to the other alliance ("mirrored") and rotated by 180 degrees.
@@ -43,13 +35,6 @@ public class Field {
         return mirroredPoses;
     }
 
-    public static Pose2d[] mirrorPositionsToHadarim(Pose2d[] poses){
-        Pose2d[] mirroredPoses = new Pose2d[poses.length];
-        for (int i = 0; i< poses.length; i++ ) {
-            mirroredPoses[i] = mirrorToHadarimPosition(poses[i]);
-        }
-        return mirroredPoses;
-    }
 
     public static class Apriltags{
         public static int selectedTagId = 1;
@@ -87,16 +72,10 @@ public class Field {
         };
 
         public static Pose2d[] getLocationsOnBlueSide(){
-            if(IS_AT_HADREAM_MIRRORD){
-                return mirrorPositionsToHadarim(locationsOnBlueSide);
-            }
             return locationsOnBlueSide;
         }
 
         public static Pose2d[] getLocationsOnRedSide(){
-            if(IS_AT_HADREAM_MIRRORD){
-                return mirrorPositionsToHadarim(mirrorPositionsToOtherSide(locationsOnBlueSide));
-            }
             return mirrorPositionsToOtherSide(locationsOnBlueSide);
         }
 
@@ -115,5 +94,11 @@ public class Field {
     public static class FieldConstants{
         public final static double fieldLength = 16.54175;
         public final static double fieldWidth = 8.0137;
+    }
+
+    public static class ScoringPositions{
+        public final static Pose2d speakerScorePosition = new Pose2d(new Translation2d(5,4),new Rotation2d());
+        public final static Pose2d ampScorePosition = new Pose2d(new Translation2d(3,1),new Rotation2d());
+        public final static Pose2d climbPosition = new Pose2d(new Translation2d(7,2),new Rotation2d());
     }
 }
