@@ -62,7 +62,7 @@ public class ArmShooterMechanism {
         wristJoint = elbowJoint.append(new MechanismLigament2d("wrist", WristConstants.LENGTH_OF_ENDEFFECTOR, WristConstants.ImportantPlaces.STARTING.ANGLE.getDegrees(), WRIST_LINE_WIDTH, COLOR_OF_WRIST));
 
         rootPivot = armMechanism.getRoot("pivot_root", PIVOT_COORDINATES.getX(), PIVOT_COORDINATES.getY());
-        pivotJoint = rootPivot.append(new MechanismLigament2d("pivot", PivotConstants.LENGTH_OF_SHOOTER, PivotConstants.ImportantPlaces.STARTING.ANGLE.getDegrees(),LINE_WIDTH, PIVOT_COLOR));
+        pivotJoint = rootPivot.append(new MechanismLigament2d("pivot", PivotConstants.LENGTH_OF_SHOOTER, PivotConstants.PresetPositions.STARTING.ANGLE.getDegrees(),LINE_WIDTH, PIVOT_COLOR));
 
         SmartDashboard.putData("ArmMech2D", armMechanism);
     }
