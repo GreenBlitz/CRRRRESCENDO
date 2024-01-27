@@ -3,12 +3,11 @@ package edu.greenblitz.robotName.shootingStateService;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
-import edu.greenblitz.robotName.utils.shootingCalculations.ShooterAngle;
+import edu.greenblitz.robotName.utils.shootingCalculations.ShootingAngle;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
-import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants.*;
 
 import static edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants.LEGAL_SHOOTING_ZONE;
 
@@ -33,7 +32,7 @@ public class ShootingState {
 
     public static Rotation2d getTargetShooterAngle() {
         Pose2d robotPose = isRobotPositionFine() ? SwerveChassis.getInstance().getRobotPose() : getTargetRobotPosition();
-        return ShooterAngle.getShooterAngleBasedOnPosition(
+        return ShootingAngle.getShootingAngleBasedOnPosition(
                 new Translation3d(
                         robotPose.getX(),
                         robotPose.getY(),

@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.utils.shootingCalculations;
 
 
 import edu.greenblitz.robotName.shootingStateService.ShootingState;
+import edu.greenblitz.robotName.utils.GBCircle;
 import edu.greenblitz.robotName.utils.GBMath;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -10,7 +11,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShootingZone extends GBMath.GBCircle {
+public class ShootingZone extends GBCircle {
 
     private List<Pair<Translation2d, Translation2d>> restrictedBounds; //first is the lower bound, second is the upper
 
@@ -29,6 +30,10 @@ public class ShootingZone extends GBMath.GBCircle {
 
     public void setRestrictedBounds(List<Pair<Translation2d, Translation2d>> restrictedBounds) {
         this.restrictedBounds = restrictedBounds;
+    }
+
+    public Translation2d getClosestLimitToPosition(Translation2d upperLimit, Translation2d lowerLimit, Translation2d position) {
+
     }
 
     @Override
