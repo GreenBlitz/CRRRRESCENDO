@@ -32,10 +32,11 @@ public class ArmShooterMechanism {
 
     private Elbow elbow;
     private Wrist wrist;
+    private Pivot pivot;
 
     private MechanismRoot2d rootPivot;
 
-    private MechanismLigament2d pivot;
+    private MechanismLigament2d pivotJoint;
 
 
     public static void init() {
@@ -51,6 +52,7 @@ public class ArmShooterMechanism {
     private ArmShooterMechanism() {
         elbow = Elbow.getInstance();
         wrist = Wrist.getInstance();
+        pivot = Pivot.getInstance();
 
 
         armMechanism = new Mechanism2d(SIZE_OF_MECHANISM.getX(), SIZE_OF_MECHANISM.getY());
@@ -60,7 +62,7 @@ public class ArmShooterMechanism {
         wristJoint = elbowJoint.append(new MechanismLigament2d("wrist", WristConstants.LENGTH_OF_ENDEFFECTOR, Units.radiansToDegrees(WristConstants.ImportantPlaces.STARTING.angle.getRadians()), WRIST_LINE_WIDTH, COLOR_OF_WRIST));
 
         rootPivot = armMechanism.getRoot("pivot_root", PIVOT_COORDINATES.getX(), PIVOT_COORDINATES.getY());
-        pivot = rootPivot.append(new MechanismLigament2d("pivot", PivotConstants.LENGTH_OF_SHOOTER, Units.radiansToDegrees(PivotConstants.ImportantPlaces.STARTING.angle.getRadians()),LINE_WIDTH, PIVOT_COLOR));
+        pivotJoint = rootPivot.append(new MechanismLigament2d("pivot", PivotConstants.LENGTH_OF_SHOOTER, Units.radiansToDegrees(PivotConstants.ImportantPlaces.STARTING.angle.getRadians()),LINE_WIDTH, PIVOT_COLOR));
 
         SmartDashboard.putData("ArmMech2D", armMechanism);
     }
@@ -69,7 +71,7 @@ public class ArmShooterMechanism {
     public void periodic() {
         double elbowAngle = elbow.getAngleInRadians();
         double wristAngle = wrist.getAngleInRadians();
-        double pivotAngle = Pivot.getInstance().getAngleInRadians();
+        double pivotAngle = pivot.getAngleInRadians();
 
         System.out.println("elbowAngle: " + Units.radiansToDegrees(elbowAngle));
         System.out.println("wristAngle: " + Units.radiansToDegrees(wristAngle));
@@ -77,7 +79,7 @@ public class ArmShooterMechanism {
 
         elbowJoint.setAngle(Units.radiansToDegrees(elbowAngle));
         wristJoint.setAngle(Units.radiansToDegrees(wristAngle));
-        pivot.setAngle(Units.radiansToDegrees(pivotAngle));
+        pivotJoint.setAngle(Units.radiansToDegrees(pivotAngle));
 
         Logger.recordOutput("Elbow/SimPose3D", elbow.getAngleInRadians());
         Logger.recordOutput("Wrist/SimPose3D", wrist.getAngleInRadians());
