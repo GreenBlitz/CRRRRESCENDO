@@ -111,11 +111,10 @@ public class Wrist extends GBSubsystem {
 
     public Pose3d getPose3D() {
         Translation3d elbowTranslation = Elbow.getInstance().getPose3D().getTranslation();
-        double elbowLength = ElbowConstants.ARM_LENGTH;
-        double trueElbowAngle = Elbow.getInstance().getAngleInRadians() - Math.PI / 2;
+        double trueElbowAngle = -Elbow.getInstance().getAngleInRadians() - Math.PI / 2;
 
-        double relativeWristY = elbowLength * Math.sin(trueElbowAngle);
-        double relativeWristZ = elbowLength * Math.cos(trueElbowAngle);
+        double relativeWristY = ElbowConstants.ARM_LENGTH * Math.sin(trueElbowAngle);
+        double relativeWristZ = ElbowConstants.ARM_LENGTH * Math.cos(trueElbowAngle);
 
         return new Pose3d(
                 elbowTranslation.minus(new Translation3d(0, relativeWristY, relativeWristZ)),

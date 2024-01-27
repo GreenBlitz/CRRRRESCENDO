@@ -10,9 +10,9 @@ public class ElbowConstants {
 
     public static final double ARM_MASS_KG = 1;
 
-    public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(20);
+    public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(220);
 
-    public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(320);
+    public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(400);
 
     public static final Translation3d ELBOW_POSITION_RELATIVE_TO_ROBOT = new Translation3d(0,0.1,0.6);
 
