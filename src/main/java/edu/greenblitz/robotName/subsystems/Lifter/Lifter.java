@@ -30,6 +30,7 @@ public class Lifter extends GBSubsystem {
 	@Override
 	public void periodic() {
 		lifter.updateInputs(lifterInputs);
+		System.out.println(lifterInputs.position+","+ lifterInputs.velocity+","+ lifterInputs.appliedOutput);
 	}
 	
 	public void goToPosition(double targetPosition) {

@@ -16,8 +16,8 @@ public class SimulationLifter implements ILifter {
     private ProfiledPIDController pidController;
 
     public SimulationLifter() {
-        motorSimulation = new DCMotorSim(DCMotor.getNEO(SimulationConstants.NUMBER_OF_MOTORS), SimulationConstants.GEAR_RATIO, SimulationConstants.MOMENT_OF_INERTIA);
-        pidController = SimulationConstants.SIMULATION_PID;
+        motorSimulation = new DCMotorSim(DCMotor.getNEO(SimulationLifterConstants.NUMBER_OF_MOTORS), SimulationLifterConstants.GEAR_RATIO, SimulationLifterConstants.MOMENT_OF_INERTIA);
+        pidController = SimulationLifterConstants.SIMULATION_PID;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class SimulationLifter implements ILifter {
 
     @Override
     public void goToPosition(double position) {
-        setPower(pidController.calculate(motorSimulation.getAngularPositionRotations(), position));
+        setVoltage(pidController.calculate(motorSimulation.getAngularPositionRotations(), position));
     }
 
     @Override
