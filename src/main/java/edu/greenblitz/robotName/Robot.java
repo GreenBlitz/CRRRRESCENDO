@@ -46,7 +46,7 @@ public class Robot extends LoggedRobot {
         initializeSubsystems();
         SwerveChassis.getInstance().resetAllEncoders();
         initializeAutonomousBuilder();
-        OI.init();
+        OI.getInstance();
     }
 
     public void initializeSubsystems() {

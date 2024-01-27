@@ -30,14 +30,10 @@ public class OI {
         initializeDefaultCommands();
     }
 
-    public static void init(){
+    public static OI getInstance() {
         if (instance == null){
             instance = new OI();
         }
-    }
-
-    public static OI getInstance() {
-        init();
         return instance;
     }
 
