@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.subsystems.arm;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowFactory;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowInputsAutoLogged;
@@ -67,7 +68,12 @@ public class Elbow extends GBSubsystem {
 	}
 
 	public void standInPlace() {
-		elbow.setPower(getStaticFeedForward());
+		if (Robot.isSimulation()){
+            elbow.setPower(0);
+        }
+        else{
+            elbow.setPower(getStaticFeedForward());
+        }
 	}
 
 
