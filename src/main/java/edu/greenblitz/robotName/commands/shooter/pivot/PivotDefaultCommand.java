@@ -6,11 +6,6 @@ public class PivotDefaultCommand extends PivotCommand{
 	
 	@Override
 	public void execute() {
-		if (!Robot.isSimulation()) {
-			pivot.standInPlace();
-		}
-		else {
-			pivot.setPower(0);
-		}
+		pivot.standInPlace();
 	}
 }

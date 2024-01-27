@@ -1,6 +1,8 @@
 package edu.greenblitz.robotName.subsystems.shooter.Pivot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.greenblitz.robotName.Robot;
+import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.Battery;
 
 import edu.greenblitz.robotName.utils.GBSubsystem;
@@ -69,16 +71,21 @@ public class Pivot extends GBSubsystem {
     }
 
     public void standInPlace() {
-        pivot.setPower(getStaticFF());
+        if (RobotConstants.ROBOT_TYPE == Robot.RobotType.SIMULATION) {
+            pivot.setPower(0);
+        }
+        else {
+            pivot.setPower(getStaticFeedForward());
+        }
     }
 
 
 
-    public double getStaticFF() {
+    public double getStaticFeedForward() {
         return SIMPLE_MOTOR_FF.calculate(0);
     }
 
-    public double getDynamicFF(double velocity) {
+    public double getDynamicFeedForward(double velocity) {
         return SIMPLE_MOTOR_FF.calculate(velocity);
     }
 
