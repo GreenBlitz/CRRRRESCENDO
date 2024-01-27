@@ -3,10 +3,9 @@ package edu.greenblitz.robotName.commands.swerve;
 import edu.greenblitz.robotName.Field;
 import edu.greenblitz.robotName.commands.auto.MoveToPose;
 
-public class MoveToClimbPosition extends SwerveCommand{
+public class MoveToClimbPosition extends MoveToPose{
 
-    @Override
-    public void initialize() {
-        MoveToPose.getPathCommand(Field.ScoringPositions.climbPosition).schedule();
+    public MoveToClimbPosition() {
+        super(Field.ScoringPositions.climbPosition);
     }
 }
