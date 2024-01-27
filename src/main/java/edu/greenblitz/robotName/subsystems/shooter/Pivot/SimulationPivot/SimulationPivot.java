@@ -7,6 +7,7 @@ import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotInputsAutoLogged;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import org.littletonrobotics.junction.Logger;
@@ -34,9 +35,9 @@ public class SimulationPivot implements IPivot {
                 ),
                 PivotConstants.LENGTH_OF_SHOOTER,
                 PivotConstants.BACKWARD_ANGLE_LIMIT,
-                PivotConstants.FORWARD_ANGLE_LIMIT,
+                PivotConstants.FORWARD_ANGLE_LIMIT.getRadians(),
                 false,
-                PivotConstants.STARTING_ANGLE
+                PivotConstants.PresetPositions.STARTING.ANGLE.getRadians()
         );
         controller = SIMULATION_PID.getPIDController();
     }
@@ -59,13 +60,13 @@ public class SimulationPivot implements IPivot {
     }
 
     @Override
-    public void resetAngle(double position) {
+    public void resetAngle(Rotation2d position) {
         Logger.recordOutput("Arm/Pivot", "tried to reset the position to " + position);
     }
 
     @Override
-    public void moveToAngle(double goalAngle) {
-        controller.setSetpoint(goalAngle);
+    public void moveToAngle(Rotation2d targetAngle) {
+        controller.setSetpoint(targetAngle.getRadians());
         setVoltage(controller.calculate(pivotSimulation.getAngleRads()));
     }
 

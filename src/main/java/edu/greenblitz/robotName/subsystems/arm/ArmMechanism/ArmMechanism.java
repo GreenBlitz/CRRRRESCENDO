@@ -50,7 +50,7 @@ public class ArmMechanism {
         root = armMechanism.getRoot("arm_root", POSITION_OF_MECHANISM.getX(), POSITION_OF_MECHANISM.getY());
 
         elbowJoint = root.append(new MechanismLigament2d("elbow", ElbowConstants.ARM_LENGTH, Units.radiansToDegrees(ElbowConstants.STARTING_ANGLE), ELBOW_LINE_WIDTH, COLOR_OF_ELBOW));
-        wristJoint = elbowJoint.append(new MechanismLigament2d("wrist", WristConstants.LENGTH_OF_ENDEFFECTOR, Units.radiansToDegrees(WristConstants.STARTING_ANGLE), WRIST_LINE_WIDTH, COLOR_OF_WRIST));
+        wristJoint = elbowJoint.append(new MechanismLigament2d("wrist", WristConstants.LENGTH_OF_ENDEFFECTOR, WristConstants.PresetPositions.STARTING.ANGLE.getDegrees(), WRIST_LINE_WIDTH, COLOR_OF_WRIST));
 
         SmartDashboard.putData("ArmMech2D", armMechanism);
     }

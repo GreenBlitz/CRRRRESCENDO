@@ -35,7 +35,7 @@ public class SimulationElbow implements IElbow {
                 ElbowConstants.BACKWARD_ANGLE_LIMIT.getRadians(),
                 ElbowConstants.FORWARD_ANGLE_LIMIT.getRadians(),
                 false,
-                ElbowConstants.STARTING_ANGLE
+                ElbowConstants.PresetPositions.STARTING.ANGLE.getRadians()
         );
         controller = SimulationElbowConstants.SIMULATION_PID.getPIDController();
     }
