@@ -42,5 +42,7 @@ public class PivotConstants {
 
     public static final double TOLERANCE = Units.degreesToRadians(0.5);
 
+    public static final double NO_COLLISION_DELAY_SECONDS = 0.7;
+
 
 }

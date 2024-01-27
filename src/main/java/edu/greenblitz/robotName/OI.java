@@ -5,7 +5,7 @@ import edu.greenblitz.robotName.commands.arm.MoveArmBy2Angles;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
-import edu.greenblitz.robotName.commands.GetNoteToSystem.SpeakerPickUpPlace;
+import edu.greenblitz.robotName.commands.GetNoteToSystem.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.GetNoteToSystem.SwitchBetweenSystemsPlace;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
 import edu.greenblitz.robotName.subsystems.arm.Elbow;
@@ -51,9 +51,9 @@ public class OI {
     }
 
     public void initButtons() {
-        secondJoystick.A.onTrue(new SpeakerPickUpPlace());
+        secondJoystick.A.onTrue(new MoveShooterToAngle(PivotConstants.ImportantPlaces.PICK_UP.angle));
         secondJoystick.B.onTrue(new SwitchBetweenSystemsPlace());
-        secondJoystick.X.onTrue(new MovePivotToAngle(PivotConstants.FORWARD_ANGLE_LIMIT));
+        secondJoystick.X.onTrue(new MoveShooterToAngle(PivotConstants.FORWARD_ANGLE_LIMIT));
         secondJoystick.Y.onTrue(new MoveArmBy2Angles(ElbowConstants.BACKWARD_ANGLE_LIMIT, WristConstants.ImportantPlaces.SCORE.angle));
     }
     
