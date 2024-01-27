@@ -14,6 +14,7 @@ import edu.greenblitz.robotName.utils.Conversions;
 import edu.greenblitz.robotName.utils.motors.GBTalonFXPro;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MK4ISwerveModule implements ISwerveModule {
 
@@ -108,8 +109,8 @@ public class MK4ISwerveModule implements ISwerveModule {
 
         inputs.linearCurrent = linearMotor.getSupplyCurrent().getValue();
         inputs.angularCurrent = angularMotor.getStatorCurrent().getValue();
-
-        inputs.linearMetersPassed = Conversions.MK4IConversions.convertRevolutionsToMeters(linearMotor.getPosition().getValue());
+        
+        inputs.linearMetersPassed = Units.rotationsToRadians(linearMotor.getPosition().getValue()) * MK4iSwerveConstants.WHEEL_RADIUS;
         inputs.angularPositionRadians = Conversions.MK4IConversions.convertRevolutionsToRadians(angularMotor.getPosition().getValue());
         
         if (Double.isNaN(canCoder.getAbsolutePosition().getValue())) {
@@ -118,5 +119,8 @@ public class MK4ISwerveModule implements ISwerveModule {
             inputs.absoluteEncoderPosition = Units.rotationsToRadians(canCoder.getAbsolutePosition().getValue());
         }
         inputs.isAbsoluteEncoderConnected = canCoder.getVersion().getValue() != 0;
+        
+        SmartDashboard.putNumber("velocity", linearMotor.getVelocity().getValue());
+        SmartDashboard.putNumber("dist", inputs.linearMetersPassed);
     }
 }

@@ -5,6 +5,7 @@ import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.SwerveModuleConfigObject;
+import edu.wpi.first.math.util.Units;
 
 public class MK4iSwerveConstants {
 	
@@ -19,7 +20,9 @@ public class MK4iSwerveConstants {
 	public static final double kv = 2.6824;
 	public static final double ka = 0.25968;
 	
-	public static final double WHEEL_CIRCUMFERENCE = 0.0517 * 2 * Math.PI;
+	
+	public static final double WHEEL_RADIUS = Units.inchesToMeters(2);
+	public static final double WHEEL_CIRCUMFERENCE = WHEEL_RADIUS * 2 * Math.PI;
 	public static final double LINEAR_REVOLUTIONS_TO_METERS = RobotConstants.General.Motors.FALCON_REVOLUTIONS_PER_RADIAN * WHEEL_CIRCUMFERENCE / 2 / Math.PI / LINEAR_GEAR_RATIO;
 	public static final double ANGLE_REVOLUTIONS_TO_WHEEL_TO_RPS = 1 / ANGULAR_GEAR_RATIO;
 	public static final double LINEAR_REVOLUTIONS_TO_METERS_PER_SECOND = 1 / LINEAR_GEAR_RATIO * WHEEL_CIRCUMFERENCE;
@@ -65,30 +68,35 @@ public class MK4iSwerveConstants {
 		PID_CONFIGS.kD = 0;
 		PID_CONFIGS.kS = 0;
 		PID_CONFIGS.kV = 0;
-
+		
 		CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();
 		CURRENT_LIMITS_CONFIGS.StatorCurrentLimitEnable = true;
 		CURRENT_LIMITS_CONFIGS.StatorCurrentLimit = 40;
 		CURRENT_LIMITS_CONFIGS.SupplyCurrentThreshold = 2;
-
+		
 		ClosedLoopRampsConfigs CLOSED_LOOP_RAMPS_CONFIGS = new ClosedLoopRampsConfigs();
 		CLOSED_LOOP_RAMPS_CONFIGS.VoltageClosedLoopRampPeriod = 0.1;
-
+		
 		TorqueCurrentConfigs TORQUE_CURRENT_CONFIGS = new TorqueCurrentConfigs();
 		TORQUE_CURRENT_CONFIGS.PeakForwardTorqueCurrent = 60;
 		TORQUE_CURRENT_CONFIGS.PeakReverseTorqueCurrent = -60;
-
+		
 		MotorOutputConfigs MOTOR_OUTPUT_CONFIGS = new MotorOutputConfigs();
 		MOTOR_OUTPUT_CONFIGS.NeutralMode = NeutralModeValue.Brake;
-
+		
+		FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();
+		FEEDBACK_CONFIGS.SensorToMechanismRatio = LINEAR_GEAR_RATIO;
+		FEEDBACK_CONFIGS.FeedbackRotorOffset = 0;
+		
 		LINEAR_FALCON_CONFIG_OBJECT.Slot0 = PID_CONFIGS;
 		LINEAR_FALCON_CONFIG_OBJECT.CurrentLimits = CURRENT_LIMITS_CONFIGS;
 		LINEAR_FALCON_CONFIG_OBJECT.ClosedLoopRamps = CLOSED_LOOP_RAMPS_CONFIGS;
 		LINEAR_FALCON_CONFIG_OBJECT.TorqueCurrent = TORQUE_CURRENT_CONFIGS;
 		LINEAR_FALCON_CONFIG_OBJECT.MotorOutput = MOTOR_OUTPUT_CONFIGS;
-
-
-
+		LINEAR_FALCON_CONFIG_OBJECT.Feedback = FEEDBACK_CONFIGS;
+		
+		
+		
 	}
 	public static final double LINEAR_MOTOR_FREE_CURRENT = 1.5;
 }
