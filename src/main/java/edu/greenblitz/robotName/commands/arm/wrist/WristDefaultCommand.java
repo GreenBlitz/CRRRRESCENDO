@@ -6,11 +6,11 @@ public class WristDefaultCommand extends WristCommand{
 
     @Override
     public void execute() {
-        if (!Robot.isSimulation()) {
-            wrist.standInPlace();
+        if (Robot.isSimulation()) {
+            wrist.setPower(0);
         }
         else{
-            wrist.setPower(0);
+            wrist.standInPlace();
         }
     }
 }
