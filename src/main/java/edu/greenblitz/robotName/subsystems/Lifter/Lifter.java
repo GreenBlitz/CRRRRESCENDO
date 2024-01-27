@@ -80,6 +80,7 @@ public class Lifter extends GBSubsystem {
     public double getPosition(){
         return lifterInputs.position;
     }
+
     public Pose3d getLifterPose() {
         return new Pose3d(
                 SimulationLifterConstants.ROBOT_RELATIVE_LIFTER_POSITION,
