@@ -3,6 +3,9 @@ package edu.greenblitz.robotName.subsystems.Lifter;
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Translation3d;
+import org.littletonrobotics.junction.Logger;
 
 public class Lifter extends GBSubsystem {
     private static Lifter instance;
@@ -29,7 +32,11 @@ public class Lifter extends GBSubsystem {
 
     @Override
     public void periodic() {
+        super.periodic();
         lifter.updateInputs(lifterInputs);
+
+        Logger.processInputs("Lifter/Lifter",lifterInputs);
+        Logger.recordOutput("Lifter/Lifter",getLifterPose());
     }
 
     public void goToPosition() {
@@ -72,7 +79,10 @@ public class Lifter extends GBSubsystem {
         lifter.setIdleMode(mode);
     }
 
-    public Pose3d getPose() {
-
+    public Pose3d getLifterPose() {
+        return new Pose3d(
+                LifterConstants.ROBOT_RELATIVE_LIFTER_POSITION,
+                new Rotation3d(0,lifterInputs.position,0).plus(LifterConstants.ROBOT_RELATIVE_LIFTER_ROTATION)
+        );
     }
 }
