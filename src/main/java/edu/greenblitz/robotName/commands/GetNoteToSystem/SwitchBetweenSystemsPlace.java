@@ -4,7 +4,7 @@ import edu.greenblitz.robotName.commands.arm.MoveArmBy2Angles;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants;
-import edu.greenblitz.robotName.subsystems.Shooter.Pivot.PivotConstants;
+import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 
 public class SwitchBetweenSystemsPlace extends ParallelCommandGroup {

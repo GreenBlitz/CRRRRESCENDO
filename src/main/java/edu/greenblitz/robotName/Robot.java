@@ -5,7 +5,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
 import edu.greenblitz.robotName.subsystems.ArmShooterMechanism.ArmShooterMechanism;
-import edu.greenblitz.robotName.subsystems.Shooter.Pivot.Pivot;
+import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.arm.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.Roller;
 import edu.greenblitz.robotName.subsystems.arm.Wrist;

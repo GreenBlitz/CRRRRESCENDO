@@ -2,7 +2,7 @@ package edu.greenblitz.robotName.commands.GetNoteToSystem;
 
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotCommand;
-import edu.greenblitz.robotName.subsystems.Shooter.Pivot.PivotConstants;
+import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
 
 public class SpeakerPickUpPlace extends PivotCommand {
     //TODO - ADD THINGS TO PREVENT COLLABORATION
