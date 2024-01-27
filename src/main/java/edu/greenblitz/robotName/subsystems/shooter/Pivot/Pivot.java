@@ -42,9 +42,9 @@ public class Pivot extends GBSubsystem {
     public void periodic() {
         super.periodic();
 
-		pivot.updateInputs(pivotInputs);
-		Logger.processInputs("Shooter/Pivot", pivotInputs);
-        Logger.recordOutput("Shooter/Pivot", getPivotPose());
+        pivot.updateInputs(pivotInputs);
+        Logger.processInputs("Shooter/Pivot", pivotInputs);
+        Logger.recordOutput("Shooter/Pivot", getPivotPose3d());
     }
 
 	public void setPower(double power) {
@@ -98,7 +98,7 @@ public class Pivot extends GBSubsystem {
         return Math.abs(angle.getRadians() - getAngle().getRadians()) <= TOLERANCE;
     }
 
-    public Pose3d getPivotPose() {
+    public Pose3d getPivotPose3d() {
         return new Pose3d(
                 PivotConstants.ROBOT_RELATIVE_PIVOT_POSITION,
                 new Rotation3d(getAngle().getRadians(), 0, 0)
