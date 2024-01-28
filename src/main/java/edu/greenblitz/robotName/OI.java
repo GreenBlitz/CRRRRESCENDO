@@ -46,6 +46,9 @@ public class OI {
     }
 
     public void initButtons() {
+        mainJoystick.A.whileTrue(new MoveToAmp());
+        mainJoystick.B.whileTrue(new MoveToSpeaker());
+        mainJoystick.Y.whileTrue(new MoveToClimbPosition());
     }
     
     public void initializeDefaultCommands(){
