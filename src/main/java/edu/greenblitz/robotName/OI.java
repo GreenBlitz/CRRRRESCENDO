@@ -51,12 +51,6 @@ public class OI {
     }
 
     public void initButtons() {
-        secondJoystick.A.onTrue(new MoveElbowToAngle(ElbowConstants.BACKWARD_ANGLE_LIMIT));
-        secondJoystick.B.onTrue(new MoveElbowToAngle(ElbowConstants.FORWARD_ANGLE_LIMIT));
-        secondJoystick.Y.onTrue(new MoveWristToAngle(WristConstants.BACKWARD_ANGLE_LIMIT));
-        secondJoystick.X.onTrue(new MoveWristToAngle(WristConstants.FORWARD_ANGLE_LIMIT));
-        secondJoystick.R1.onTrue(new MovePivotToAngle(PivotConstants.BACKWARD_ANGLE_LIMIT));
-        secondJoystick.L1.onTrue(new MovePivotToAngle(PivotConstants.FORWARD_ANGLE_LIMIT));
     }
     
     public void initializeDefaultCommands(){
