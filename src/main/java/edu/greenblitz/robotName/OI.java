@@ -51,9 +51,6 @@ public class OI {
     }
 
     public void initButtons() {
-        secondJoystick.B.onTrue(new NoteToIntake());
-        secondJoystick.A.onTrue(new NoteToShooter());
-        secondJoystick.Y.onTrue(new MoveNoteBetweenShooterArm(() -> false));
     }
     
     public void initializeDefaultCommands(){
