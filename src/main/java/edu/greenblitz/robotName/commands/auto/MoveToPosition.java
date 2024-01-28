@@ -7,15 +7,15 @@ import edu.greenblitz.robotName.utils.GBCommand;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class MoveToPose extends GBCommand {
+public class MoveToPosition extends GBCommand {
 
     private Command moveToFoundPose;
 
-    public MoveToPose(Pose2d endPoint) {
+    public MoveToPosition(Pose2d endPoint) {
         this(endPoint, ChassisConstants.CONSTRAINTS);
     }
 
-    public MoveToPose(Pose2d endPoint, PathConstraints constraints) {
+    public MoveToPosition(Pose2d endPoint, PathConstraints constraints) {
         moveToFoundPose = AutoBuilder.pathfindToPose(
                 endPoint,
                 constraints
