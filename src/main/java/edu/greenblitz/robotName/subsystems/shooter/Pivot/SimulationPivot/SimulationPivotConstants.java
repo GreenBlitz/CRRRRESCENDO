@@ -12,7 +12,7 @@ public class SimulationPivotConstants {
 
     public static final double GEAR_RATIO = 1 / RELATIVE_POSITION_CONVERSION_FACTOR;
 
-    public static final PIDObject SIMULATION_PID = new PIDObject().withKp(0.8).withKd(0.3).withMaxPower(1);
+    public static final PIDObject SIMULATION_PID = new PIDObject().withKp(0.3).withKd(0).withMaxPower(1);
 
 
 }
