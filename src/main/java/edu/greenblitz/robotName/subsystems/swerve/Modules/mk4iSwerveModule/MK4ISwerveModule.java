@@ -101,7 +101,7 @@ public class MK4ISwerveModule implements ISwerveModule {
     @Override
     public void updateInputs(SwerveModuleInputsAutoLogged inputs) {
         
-        inputs.linearVelocity = linearMotor.getVelocity().getValue();
+        inputs.linearVelocity = linearMotor.getVelocity().getValue()  * MK4iSwerveConstants.WHEEL_CIRCUMFERENCE;
         inputs.angularVelocity = angularMotor.getVelocity().getValue() / MK4iSwerveConstants.ANGULAR_GEAR_RATIO;
 
         inputs.linearVoltage = linearMotor.getSupplyVoltage().getValue();

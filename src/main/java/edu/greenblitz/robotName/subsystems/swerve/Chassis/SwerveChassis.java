@@ -9,7 +9,7 @@ import edu.greenblitz.robotName.subsystems.Gyros.GyroInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.Gyros.IAngleMeasurementGyro;
 import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.Photonvision;
-import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModule;
+import edu.greenblitz.robotName.subsystems.swerve.Modules.*;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.mk4iSwerveModule.MK4iSwerveConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.greenblitz.robotName.utils.RoborioUtils;
@@ -52,6 +52,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     private SwerveModule frontRight, frontLeft, backRight, backLeft;
     private IAngleMeasurementGyro gyro;
     private SwerveDriveKinematics kinematics;
+    private ISwerveModule swerveModule;
     private SwerveDrivePoseEstimator poseEstimator;
     private Field2d field = new Field2d();
     public static final double TRANSLATION_TOLERANCE = 0.05;
@@ -61,6 +62,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
     private SwerveChassisInputsAutoLogged ChassisInputs = new SwerveChassisInputsAutoLogged();
     private GyroInputsAutoLogged gyroInputs = new GyroInputsAutoLogged();
+    private SwerveModuleInputsAutoLogged swerveModuleInputs = new SwerveModuleInputsAutoLogged();
 
     public SwerveChassis() {
         this.frontLeft = new SwerveModule(Module.FRONT_LEFT);
@@ -69,6 +71,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         this.backRight = new SwerveModule(Module.BACK_RIGHT);
 
         this.gyro = GyroFactory.create();
+        this.swerveModule = SwerveModuleFactory.create(Module.FRONT_LEFT);
 
         doVision = true;
 
@@ -109,7 +112,9 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
         gyro.updateInputs(gyroInputs);
         updateInputs(ChassisInputs);
+        swerveModule.updateInputs(swerveModuleInputs);
         SmartDashboard.putNumber("yaw", gyroInputs.yaw);
+        SmartDashboard.putNumber("velocity", swerveModuleInputs.linearVelocity);
         Logger.recordOutput("DriveTrain/RobotPose", getRobotPose());
         Logger.recordOutput("DriveTrain/ModuleStates", getSwerveModuleStates());
         Logger.processInputs("DriveTrain/Chassis", ChassisInputs);
