@@ -1,24 +1,37 @@
 package edu.greenblitz.robotName.subsystems.shooter.Pivot;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
 
 public class PivotConstants {
 
-    public static final double LENGTH_OF_SHOOTER = 0.3;
+    public enum PresetPositions {
+
+        STARTING(Rotation2d.fromDegrees(140)),
+        TRANSFER(Rotation2d.fromDegrees(100)),
+        PICK_UP(Rotation2d.fromDegrees(150));
+
+        public final Rotation2d ANGLE;
+
+        PresetPositions(Rotation2d angle){
+            this.ANGLE = angle;
+        }
+
+    }
+
+    public static final double LENGTH_OF_SHOOTER = 0.418;
 
     public static final double SHOOTER_MASS_KG = 10;
 
-    public static final double BACKWARD_ANGLE_LIMIT = Units.degreesToRadians(20);
+    public static final double BACKWARD_ANGLE_LIMIT = Units.degreesToRadians(90);
 
-    public static final double FORWARD_ANGLE_LIMIT = Units.degreesToRadians(340);
+    public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(170);
 
     public static final double RELATIVE_POSITION_CONVERSION_FACTOR = 0.0328;
 
     public static final double RELATIVE_VELOCITY_CONVERSION_FACTOR = 0.0030332432;
 
     public static final double ABSOLUTE_POSITION_CONVERSION_FACTOR = 0.00302;
-
-    public static final double STARTING_ANGLE = Units.degreesToRadians(180);
 
     public static final double kS = 1;
 
@@ -28,7 +41,9 @@ public class PivotConstants {
 
     public static final double kA = 1;
 
-    public static final double TOLERANCE = Units.degreesToRadians(2);
+    public static final double TOLERANCE = Units.degreesToRadians(0.5);
+
+    public static final double DELAY_FOR_NO_COLLISION_SECONDS = 0.7;
 
 
 }

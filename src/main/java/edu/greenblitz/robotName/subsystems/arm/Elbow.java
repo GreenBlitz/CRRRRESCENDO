@@ -1,15 +1,19 @@
 package edu.greenblitz.robotName.subsystems.arm;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.greenblitz.robotName.Robot;
+import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
+import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowFactory;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.FalconElbow.FalconElbowConstants;
-import edu.greenblitz.robotName.subsystems.Battery;
-import edu.greenblitz.robotName.utils.GBSubsystem;
-import edu.wpi.first.math.geometry.Rotation2d;
-import org.littletonrobotics.junction.Logger;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowFactory;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.IElbow;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
+import edu.greenblitz.robotName.utils.GBSubsystem;
+import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Translation3d;
+import org.littletonrobotics.junction.Logger;
+
 public class Elbow extends GBSubsystem {
 
     private static Elbow instance;
@@ -42,6 +46,7 @@ public class Elbow extends GBSubsystem {
 
         elbow.updateInputs(elbowInputs);
         Logger.processInputs("Elbow", elbowInputs);
+        Logger.recordOutput("Elbow", getPose3D());
     }
 
 
@@ -66,10 +71,14 @@ public class Elbow extends GBSubsystem {
         elbow.moveToAngle(targetAngle);
     }
 
-    public void standInPlace() {
-        elbow.setPower(getStaticFeedForward());
-    }
-
+	public void standInPlace() {
+		if (Robot.isSimulation()){
+            elbow.setPower(0);
+        }
+        else{
+            elbow.setPower(getStaticFeedForward());
+        }
+	}
 
 
     public double getStaticFeedForward() {
@@ -94,6 +103,18 @@ public class Elbow extends GBSubsystem {
 
     public boolean isAtAngle(Rotation2d targetHeight) {
         return Math.abs(targetHeight.getRadians() - getAngleInRadians()) <= ElbowConstants.TOLERANCE;
+    }
+
+	public boolean isInDangerZone() {
+		return elbowInputs.position > ElbowConstants.DANGER_ZONE.getFirst().getRadians() &&
+				elbowInputs.position < ElbowConstants.DANGER_ZONE.getSecond().getRadians();
+	}
+
+    public Pose3d getPose3D (){
+        return new Pose3d(
+                ElbowConstants.ELBOW_POSITION_RELATIVE_TO_ROBOT,
+                new Rotation3d(elbowInputs.position,0, 0)
+        );
     }
 
 
