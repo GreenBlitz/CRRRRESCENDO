@@ -74,7 +74,7 @@ public class Wrist extends GBSubsystem {
     }
 
     public void moveToAngle(Rotation2d targetAngle) {
-        wrist.moveToAngle(targetAngle);
+        wrist.moveToAngle(Rotation2d.fromRadians(targetAngle.getRadians() % (2 * Math.PI)));
     }
 
     public void standInPlace() {
@@ -95,7 +95,7 @@ public class Wrist extends GBSubsystem {
     }
 
     public double getVoltage() {
-        return wristInputs.appliedOutput * Battery.getInstance().getCurrentVoltage();
+        return wristInputs.appliedOutput;
     }
 
     public double getVelocity() {
@@ -116,9 +116,9 @@ public class Wrist extends GBSubsystem {
 
     public Pose3d getPose3D() {
         Translation3d elbowTranslation = Elbow.getInstance().getPose3D().getTranslation();
-        double trueElbowAngle = -(Elbow.getInstance().getAngleInRadians() + Math.PI / 2 + SimulationElbowConstants.SIMULATION_NUDGE);
+        double trueElbowAngle = Elbow.getInstance().getAngleInRadians() + Math.PI / 2 + SimulationElbowConstants.SIMULATION_NUDGE;
 
-        double relativeWristY = ElbowConstants.ARM_LENGTH * Math.sin(trueElbowAngle);
+        double relativeWristY = ElbowConstants.ARM_LENGTH * Math.sin(-trueElbowAngle);
         double relativeWristZ = ElbowConstants.ARM_LENGTH * Math.cos(trueElbowAngle);
 
         return new Pose3d(

@@ -3,6 +3,7 @@ package edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.NeoWrist;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.SparkMaxAbsoluteEncoder;
+import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.IWrist;
 import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants;
 import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristInputsAutoLogged;
@@ -70,7 +71,7 @@ public class NeoWrist implements IWrist {
 
     @Override
     public void updateInputs(WristInputsAutoLogged inputs) {
-        inputs.appliedOutput = motor.getAppliedOutput();
+        inputs.appliedOutput = motor.getAppliedOutput() *  Battery.getInstance().getCurrentVoltage();
         inputs.outputCurrent = motor.getOutputCurrent();
         inputs.position = motor.getEncoder().getPosition();
         inputs.velocity = motor.getEncoder().getVelocity();
