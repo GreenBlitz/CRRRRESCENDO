@@ -73,18 +73,8 @@ public class ArmShooterMechanism {
         double wristAngle = wrist.getAngleInRadians();
         double pivotAngle = pivot.getAngle().getRadians();
 
-        System.out.println("elbowAngle: " + Units.radiansToDegrees(elbowAngle) +
-                "wristAngle: " + Units.radiansToDegrees(wristAngle) +
-                "pivotAngle: " + Units.radiansToDegrees(pivotAngle) +
-                "isInDangerZone" + Elbow.getInstance().isInDangerZone()
-        );
-
         elbowJoint.setAngle(Units.radiansToDegrees(elbowAngle));
         wristJoint.setAngle(Units.radiansToDegrees(wristAngle));
         pivotJoint.setAngle(Units.radiansToDegrees(pivotAngle));
-
-        Logger.recordOutput("Elbow/SimPose3D", elbow.getAngleInRadians());
-        Logger.recordOutput("Wrist/SimPose3D", wrist.getAngleInRadians());
-        Logger.recordOutput("Pivot/SimPose3D", Pivot.getInstance().getAngle().getRadians());
     }
 }

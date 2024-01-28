@@ -6,6 +6,7 @@ import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.SimulationElbow.SimulationElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.IWrist;
 import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.NeoWrist.NeoWristConstants;
 import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants;
@@ -17,6 +18,7 @@ import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation3d;
+import edu.wpi.first.math.util.Units;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants.TOLERANCE;
@@ -117,14 +119,14 @@ public class Wrist extends GBSubsystem {
 
     public Pose3d getPose3D() {
         Translation3d elbowTranslation = Elbow.getInstance().getPose3D().getTranslation();
-        double trueElbowAngle = -Elbow.getInstance().getAngleInRadians() - Math.PI / 2;
+        double trueElbowAngle = -(Elbow.getInstance().getAngleInRadians() + Math.PI / 2 + SimulationElbowConstants.SIMULATION_NUDGE);
 
         double relativeWristY = ElbowConstants.ARM_LENGTH * Math.sin(trueElbowAngle);
         double relativeWristZ = ElbowConstants.ARM_LENGTH * Math.cos(trueElbowAngle);
 
         return new Pose3d(
                 elbowTranslation.minus(new Translation3d(0, relativeWristY, relativeWristZ)),
-                new Rotation3d(wristInputs.position, 0, 0)
+                new Rotation3d(wristInputs.position+Elbow.getInstance().getAngleInRadians(), 0, 0)
         );
     }
 }

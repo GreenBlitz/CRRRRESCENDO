@@ -7,11 +7,13 @@ import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowFactory;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.FalconElbow.FalconElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.IElbow;
+import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.SimulationElbow.SimulationElbowConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation3d;
+import edu.wpi.first.math.util.Units;
 import org.littletonrobotics.junction.Logger;
 
 public class Elbow extends GBSubsystem {
@@ -113,7 +115,7 @@ public class Elbow extends GBSubsystem {
     public Pose3d getPose3D (){
         return new Pose3d(
                 ElbowConstants.ELBOW_POSITION_RELATIVE_TO_ROBOT,
-                new Rotation3d(elbowInputs.position,0, 0)
+                new Rotation3d(elbowInputs.position + SimulationElbowConstants.SIMULATION_NUDGE,0, 0)
         );
     }
 

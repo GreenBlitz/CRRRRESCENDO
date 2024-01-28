@@ -35,7 +35,7 @@ public class SimulationPivot implements IPivot {
                         PivotConstants.SHOOTER_MASS_KG
                 ),
                 PivotConstants.LENGTH_OF_SHOOTER,
-                PivotConstants.BACKWARD_ANGLE_LIMIT,
+                PivotConstants.BACKWARD_ANGLE_LIMIT.getRadians(),
                 PivotConstants.FORWARD_ANGLE_LIMIT.getRadians(),
                 false,
                 PivotConstants.PresetPositions.STARTING.ANGLE.getRadians()
