@@ -20,6 +20,7 @@ public class NoteShooterArm extends GBCommand {
         require(roller);
         funnel = Funnel.getInstance();
         require(funnel);
+
         this.isArmToShooter = isArmToShooter;
     }
 
