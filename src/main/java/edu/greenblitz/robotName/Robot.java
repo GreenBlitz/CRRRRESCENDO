@@ -30,13 +30,13 @@ public class Robot extends LoggedRobot {
     @Override
     public void robotInit() {
         CommandScheduler.getInstance().enable();
-        initializeLogger();
+//        initializeLogger();
 
-        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-
-        SwerveChassis.init();
-        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
-        SwerveChassis.getInstance().resetAllEncoders();
+//        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+//
+//        SwerveChassis.init();
+//        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
+//        SwerveChassis.getInstance().resetAllEncoders();
 
         OI.getInstance();
     }

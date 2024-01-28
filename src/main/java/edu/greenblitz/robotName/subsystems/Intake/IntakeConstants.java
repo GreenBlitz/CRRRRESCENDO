@@ -13,3 +13,4 @@ public class IntakeConstants {
 	public static final SparkMaxLimitSwitch.Type ENTRANCE_BEAM_BREAKER_TYPE = SparkMaxLimitSwitch.Type.kNormallyClosed ;
 	public static final SparkMaxLimitSwitch.Type EXIT_BEAM_BREAKER_TYPE = SparkMaxLimitSwitch.Type.kNormallyClosed ;
 }
+
