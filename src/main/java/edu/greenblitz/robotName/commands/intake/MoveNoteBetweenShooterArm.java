@@ -7,7 +7,7 @@ import edu.greenblitz.robotName.utils.GBCommand;
 
 import java.util.function.Supplier;
 
-public class NoteShooterArm extends GBCommand {
+public class MoveNoteBetweenShooterArm extends GBCommand {
 
     private Funnel funnel;
 
@@ -15,7 +15,7 @@ public class NoteShooterArm extends GBCommand {
 
     private Supplier<Boolean> isArmToShooter;
 
-    public NoteShooterArm(Supplier<Boolean> isArmToShooter){
+    public MoveNoteBetweenShooterArm(Supplier<Boolean> isArmToShooter){
         roller = Roller.getInstance();
         require(roller);
         funnel = Funnel.getInstance();
