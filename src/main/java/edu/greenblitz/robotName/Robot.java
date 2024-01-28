@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.shootingStateService.ShootingState;
 import edu.greenblitz.robotName.subsystems.Dashboard;
 
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -68,6 +69,9 @@ public class Robot extends LoggedRobot {
         RoborioUtils.updateCurrentCycleTime();
         ShooterMechanism.getInstance().periodic();
         ArmMechanism.getInstance().periodic();
+
+        Logger.recordOutput("shooter", ShootingState.getTargetShooterAngle());
+        Logger.recordOutput("position", ShootingState.getTargetRobotPosition());
     }
 
     private void initializeAutonomousBuilder() {
