@@ -18,16 +18,16 @@ public class MoveShooterToAngle extends ConditionalCommand {
 		super(
 				new ParallelCommandGroup(
 						new MoveElbowAndWrist(
-								ElbowConstants.ImportantPlaces.SAFE.ANGLE,
-								WristConstants.ImportantPlaces.TRANSFER.ANGLE
+								ElbowConstants.PresetPositions.SAFE.ANGLE,
+								WristConstants.PresetPositions.TRANSFER.ANGLE
 						),
 						new SequentialCommandGroup(
-								new WaitCommand(PivotConstants.NO_COLLISION_DELAY_SECONDS),
+								new WaitCommand(PivotConstants.DELAY_FOR_NO_COLLISION_SECONDS),
 								new MovePivotToAngle(targetAngle)
 						)
 				),
 				new MovePivotToAngle(targetAngle),
-				() -> Elbow.getInstance().isInDangerZone());
+				() -> Elbow.getInstance().isInShooterCollisionRange());
 	}
 
 }

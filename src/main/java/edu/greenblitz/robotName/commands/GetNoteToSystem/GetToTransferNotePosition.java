@@ -12,10 +12,10 @@ public class GetToTransferNotePosition extends ParallelCommandGroup {
     public GetToTransferNotePosition() {
         super(
                 new MoveElbowAndWrist(
-                        ElbowConstants.ImportantPlaces.TRANSFER.ANGLE,
-                        WristConstants.ImportantPlaces.TRANSFER.ANGLE
+                        ElbowConstants.PresetPositions.TRANSFER.ANGLE,
+                        WristConstants.PresetPositions.TRANSFER.ANGLE
                 ),
-                new MovePivotToAngle(PivotConstants.ImportantPlaces.TRANSFER.ANGLE)
+                new MovePivotToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE)
         );
     }
 }
