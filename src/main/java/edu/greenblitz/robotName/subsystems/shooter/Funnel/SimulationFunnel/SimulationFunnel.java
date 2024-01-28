@@ -28,7 +28,7 @@ public class SimulationFunnel implements IFunnel {
 		isObjectIn = new SendableChooser<>();
 		isObjectIn.setDefaultOption("False", false);
 		isObjectIn.addOption("True", true);
-		SmartDashboard.putData(isObjectIn);
+		SmartDashboard.putData("Funnel Object", isObjectIn);
 	}
 	
 	@Override

@@ -11,11 +11,14 @@
       "/Shuffleboard/Drivers/Field": "Field2d",
       "/SmartDashboard/ArmMech2D": "Mechanism2d",
       "/SmartDashboard/Field": "Field2d",
+      "/SmartDashboard/Funnel Object": "String Chooser",
       "/SmartDashboard/Is Object In Arm?": "String Chooser",
       "/SmartDashboard/SendableChooser[0]": "String Chooser",
       "/SmartDashboard/SendableChooser[1]": "String Chooser",
       "/SmartDashboard/ShooterMech2D": "Mechanism2d",
-      "/SmartDashboard/field": "Field2d"
+      "/SmartDashboard/field": "Field2d",
+      "/SmartDashboard/is object in intake entance": "String Chooser",
+      "/SmartDashboard/is object in intake exit": "String Chooser"
     },
     "windows": {
       "/Shuffleboard/Drivers/Field": {
