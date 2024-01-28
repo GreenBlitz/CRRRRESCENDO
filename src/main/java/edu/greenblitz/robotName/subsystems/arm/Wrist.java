@@ -123,7 +123,7 @@ public class Wrist extends GBSubsystem {
 
         return new Pose3d(
                 elbowTranslation.minus(new Translation3d(0, relativeWristY, relativeWristZ)),
-                new Rotation3d(wristInputs.position + Elbow.getInstance().getAngleInRadians(), 0, 0)
+                new Rotation3d(wristInputs.position + trueElbowAngle, 0, 0)
         );
     }
 }
