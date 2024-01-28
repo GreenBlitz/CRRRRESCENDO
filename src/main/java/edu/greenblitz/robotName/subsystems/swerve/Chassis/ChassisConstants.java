@@ -1,10 +1,13 @@
 package edu.greenblitz.robotName.subsystems.swerve.Chassis;
 
 
+import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.ReplanningConfig;
+import edu.greenblitz.robotName.commands.intake.RunIntake;
+import edu.greenblitz.robotName.commands.shooter.ShootByVelocity;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -53,6 +56,10 @@ public class ChassisConstants {
     public static final PIDConstants ROTATION_PID = new PIDConstants(3.6, 0, 0);
     public static final double TOTAL_ERROR_FOR_REPLANNING = 0.5;
     public static final double ERROR_SPIKE_FOR_REPLANNING = 1;
+    static {
+        NamedCommands.registerCommand("Shoot", new ShootByVelocity(3000));
+        NamedCommands.registerCommand("Grip", new RunIntake(() -> false));
+    }
     public static final HolonomicPathFollowerConfig PATH_FOLLOWER_CONFIG = new HolonomicPathFollowerConfig(
             TRANSLATION_PID,
             ROTATION_PID,
