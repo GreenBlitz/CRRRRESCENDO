@@ -4,17 +4,19 @@ package edu.greenblitz.robotName;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
-import edu.greenblitz.robotName.subsystems.arm.ArmMechanism.ArmMechanism;
+import edu.greenblitz.robotName.subsystems.Lifter.Lifter;
+import edu.greenblitz.robotName.subsystems.ArmShooterMechanism.ArmShooterMechanism;
+import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.arm.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.Roller;
 import edu.greenblitz.robotName.subsystems.arm.Wrist;
-import edu.greenblitz.robotName.subsystems.shooter.Mechanism.ShooterMechanism;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
+import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
 import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
-import edu.greenblitz.robotName.subsystems.shooter.Shooter;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -50,11 +52,17 @@ public class Robot extends LoggedRobot {
     public void initializeSubsystems() {
         MultiLimelight.init();
         SwerveChassis.init();
-        Shooter.init();
+
+        Pivot.init();
+        Funnel.init();
+        FlyWheel.init();
+
         Elbow.init();
         Wrist.init();
         Roller.init();
-        ArmMechanism.init();
+        ArmShooterMechanism.init();
+
+        Lifter.init();
     }
 
     @Override
@@ -66,8 +74,7 @@ public class Robot extends LoggedRobot {
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
         RoborioUtils.updateCurrentCycleTime();
-        ShooterMechanism.getInstance().periodic();
-        ArmMechanism.getInstance().periodic();
+        ArmShooterMechanism.getInstance().periodic();
     }
 
     private void initializeAutonomousBuilder() {

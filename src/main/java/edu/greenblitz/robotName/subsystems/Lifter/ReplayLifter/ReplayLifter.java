@@ -1,8 +1,10 @@
-package edu.greenblitz.robotName.subsystems.Lifter;
+package edu.greenblitz.robotName.subsystems.Lifter.ReplayLifter;
 
 import com.revrobotics.CANSparkMax;
+import edu.greenblitz.robotName.subsystems.Lifter.ILifter;
+import edu.greenblitz.robotName.subsystems.Lifter.LifterInputsAutoLogged;
 
-public class LifterReplay implements ILifter {
+public class ReplayLifter implements ILifter {
     @Override
     public void setPower(double power) {
 
@@ -29,7 +31,7 @@ public class LifterReplay implements ILifter {
     }
 
     @Override
-    public void goToPosition(double pos) {
+    public void goToPosition(double position) {
 
     }
 

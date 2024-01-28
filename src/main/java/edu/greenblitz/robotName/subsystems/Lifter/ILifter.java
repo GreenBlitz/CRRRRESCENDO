@@ -3,18 +3,12 @@ package edu.greenblitz.robotName.subsystems.Lifter;
 import com.revrobotics.CANSparkMax;
 
 public interface ILifter {
-    public void setPower(double power);
-
-    public void setVoltage(double voltage);
-
-    public void resetEncoder(double position);
-
-    public void stopMotor();
-
-    public void setIdleMode(CANSparkMax.IdleMode idleMode);
-
-    public void goToPosition(double pos);
-
-    public void updateInputs(LifterInputsAutoLogged inputs);
+	void setPower(double power);
+	void setVoltage(double voltage);
+	void resetEncoder(double position);
+	void stopMotor();
+	void setIdleMode(CANSparkMax.IdleMode idleMode);
+	void goToPosition(double position);
+	void updateInputs(LifterInputsAutoLogged inputs);
 }
 

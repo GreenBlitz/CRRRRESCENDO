@@ -6,6 +6,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.IPivot;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotInputsAutoLogged;
+import edu.wpi.first.math.geometry.Rotation2d;
 
 import static edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot.FalconPivotConstants.*;
 
@@ -39,14 +40,14 @@ public class FalconPivot implements IPivot {
     }
 
     @Override
-    public void resetAngle(double position) {
-        motor.setPosition(position);
+    public void resetAngle(Rotation2d position) {
+        motor.setPosition(position.getRadians());
     }
 
     @Override
-    public void moveToAngle(double goalAngle) {
+    public void moveToAngle(Rotation2d targetAngle) {
         motor.setControl(new MotionMagicDutyCycle(
-                goalAngle/ PivotConstants.RELATIVE_POSITION_CONVERSION_FACTOR,
+                targetAngle.getRadians() / PivotConstants.RELATIVE_POSITION_CONVERSION_FACTOR,
                 true,
                 SIMPLE_MOTOR_FF.calculate(0),
                 0,

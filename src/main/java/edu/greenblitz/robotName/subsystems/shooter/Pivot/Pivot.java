@@ -1,12 +1,13 @@
 package edu.greenblitz.robotName.subsystems.shooter.Pivot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.greenblitz.robotName.Robot;
+import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.Battery;
-
-import edu.greenblitz.robotName.subsystems.shooter.Mechanism.ShooterMechanism;
 import edu.greenblitz.robotName.utils.GBSubsystem;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.*;
 import org.littletonrobotics.junction.Logger;
-
 
 import static edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot.FalconPivotConstants.SIMPLE_MOTOR_FF;
 import static edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants.TOLERANCE;
@@ -14,23 +15,11 @@ import static edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants.T
 
 public class Pivot extends GBSubsystem {
 
-    private static Pivot instance;
+	private static Pivot instance;
 
-    private PivotInputsAutoLogged pivotInputs;
+	private PivotInputsAutoLogged pivotInputs;
 
-    private IPivot pivot;
-
-
-
-    public static void init() {
-        if (instance == null)
-            instance = new Pivot();
-    }
-
-    public static Pivot getInstance() {
-        init();
-        return instance;
-    }
+	private IPivot pivot;
 
     private Pivot() {
         pivot = PivotFactory.create();
@@ -38,65 +27,81 @@ public class Pivot extends GBSubsystem {
         pivot.updateInputs(pivotInputs);
     }
 
-    @Override
+    public static void init() {
+        if (instance == null){
+            instance = new Pivot();
+        }
+	}
+
+	public static Pivot getInstance() {
+		init();
+		return instance;
+	}
+
+	@Override
     public void periodic() {
         super.periodic();
 
         pivot.updateInputs(pivotInputs);
-        Logger.processInputs("Pivot", pivotInputs);
+        Logger.processInputs("Shooter/Pivot", pivotInputs);
+        Logger.recordOutput("Shooter/Pivot", getPivotPose3d());
     }
 
+	public void setPower(double power) {
+		pivot.setPower(power);
+	}
 
-    public void setPower(double power) {
-        pivot.setPower(power);
-    }
-
-    public void setMotorVoltage(double voltage) {
-        pivot.setVoltage(voltage);
-    }
+	public void setMotorVoltage(double voltage) {
+		pivot.setVoltage(voltage);
+	}
 
     public void setIdleMode(NeutralModeValue idleMode) {
         pivot.setIdleMode(idleMode);
     }
-    
 
-    public void resetAngle(double position) {
-        pivot.resetAngle(position);
+	public void resetAngle(Rotation2d position) {
+		pivot.resetAngle(position);
+	}
+
+	public void moveToAngle(Rotation2d targetAngle) {
+		pivot.moveToAngle(targetAngle);
+	}
+
+	public void standInPlace() {
+		if (Robot.isSimulation()) {
+			pivot.setPower(0);
+		} else {
+			pivot.setPower(getStaticFeedForward());
+		}
+	}
+    public double getStaticFeedForward() {
+		return SIMPLE_MOTOR_FF.calculate(0);
+	}
+
+	public double getDynamicFeedForward(double velocity) {
+		return SIMPLE_MOTOR_FF.calculate(velocity);
+	}
+
+	public double getVoltage() {
+		return pivotInputs.appliedOutput * Battery.getInstance().getCurrentVoltage();
+	}
+
+	public double getVelocity() {
+		return pivotInputs.velocity;
+	}
+
+    public Rotation2d getAngle() {
+        return Rotation2d.fromRadians(pivotInputs.position);
     }
 
-    public void moveToAngle(double goalAngle) {
-        pivot.moveToAngle(goalAngle);
+    public boolean isAtAngle(Rotation2d angle) {
+        return Math.abs(angle.getRadians() - getAngle().getRadians()) <= TOLERANCE;
     }
 
-    public void standInPlace() {
-        pivot.setPower(getStaticFF());
+    public Pose3d getPivotPose3d() {
+        return new Pose3d(
+                PivotConstants.ROBOT_RELATIVE_PIVOT_POSITION,
+                new Rotation3d(getAngle().getRadians(), 0, 0)
+        );
     }
-
-
-
-    public double getStaticFF() {
-        return SIMPLE_MOTOR_FF.calculate(0);
-    }
-
-    public double getDynamicFF(double velocity) {
-        return SIMPLE_MOTOR_FF.calculate(velocity);
-    }
-
-    public double getVoltage() {
-        return pivotInputs.appliedOutput * Battery.getInstance().getCurrentVoltage();
-    }
-
-    public double getVelocity() {
-        return pivotInputs.velocity;
-    }
-
-    public double getAngleInRadians() {
-        return pivotInputs.position;
-    }
-    
-    public boolean isAtAngle(double angle) {
-        return Math.abs(angle - getAngleInRadians()) <= TOLERANCE;
-    }
-    
-
 }
