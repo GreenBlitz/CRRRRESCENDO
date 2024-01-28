@@ -52,13 +52,16 @@ public class Robot extends LoggedRobot {
     public void initializeSubsystems() {
         MultiLimelight.init();
         SwerveChassis.init();
+
         Pivot.init();
         Funnel.init();
         FlyWheel.init();
+
         Elbow.init();
         Wrist.init();
         Roller.init();
         ArmShooterMechanism.init();
+
         Lifter.init();
     }
 

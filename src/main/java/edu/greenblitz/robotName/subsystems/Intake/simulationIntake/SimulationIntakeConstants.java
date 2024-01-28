@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Intake;
+package edu.greenblitz.robotName.subsystems.Intake.simulationIntake;
 
 public class SimulationIntakeConstants {
     public static final int NUMBER_OF_MOTORS = 1;

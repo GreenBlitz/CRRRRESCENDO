@@ -6,8 +6,8 @@ import org.littletonrobotics.junction.Logger;
 public class Intake extends GBSubsystem {
 
     private static Intake instance;
-    private static IntakeInputsAutoLogged intakeInputs;
-    private static IIntake intake;
+    private IntakeInputsAutoLogged intakeInputs;
+    private IIntake intake;
 
     private Intake() {
         intake = IntakeFactory.create();
@@ -25,23 +25,23 @@ public class Intake extends GBSubsystem {
         return instance;
     }
 
-    public static void setPower(double power) {
+    public void setPower(double power) {
         intake.setPower(power);
     }
 
-    public static double getVoltage() {
+    public double getVoltage() {
         return intakeInputs.appliedOutput;
     }
 
-    public static void setVoltage(double voltage) {
+    public void setVoltage(double voltage) {
         intake.setVoltage(voltage);
     }
 
-    public static double getVelocity() {
+    public double getVelocity() {
         return intakeInputs.velocity;
     }
 
-    public static void stop() {
+    public void stop() {
         setPower(0);
     }
 
