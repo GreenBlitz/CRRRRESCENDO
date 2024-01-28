@@ -64,7 +64,7 @@ public class SimulationElbow implements IElbow {
 
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
-        controller.setSetpoint(targetAngle.getRadians());
+        controller.setSetpoint(targetAngle.getRadians() - SimulationElbowConstants.SIMULATION_OFFSET);
         setVoltage(controller.calculate(elbowSimulation.getAngleRads()));
     }
 
@@ -74,7 +74,7 @@ public class SimulationElbow implements IElbow {
 
         inputs.appliedOutput = appliedVoltage;
         inputs.outputCurrent = elbowSimulation.getCurrentDrawAmps();
-        inputs.position = elbowSimulation.getAngleRads();
+        inputs.position = elbowSimulation.getAngleRads() +   SimulationElbowConstants.SIMULATION_OFFSET;
         inputs.velocity = elbowSimulation.getVelocityRadPerSec();
         inputs.absoluteEncoderPosition = elbowSimulation.getAngleRads();
         inputs.temperature = 0;

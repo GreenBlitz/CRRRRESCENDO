@@ -12,6 +12,6 @@ public class SimulationElbowConstants {
 
     public static final PIDObject SIMULATION_PID = new PIDObject().withKp(0.3).withKd(0).withMaxPower(1);
 
-    public static final double SIMULATION_NUDGE = - Units.degreesToRadians(90);
+    public static final double SIMULATION_OFFSET = - Units.degreesToRadians(90);
 
 }
