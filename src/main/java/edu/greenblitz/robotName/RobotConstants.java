@@ -42,6 +42,7 @@ public class RobotConstants {
         public static final double TIME_STEP = 0.02;
         public static final double BATTERY_VOLTAGE = 12;
         public static final double MAX_MOTOR_VOLTAGE = 12;
+        public static final double MIN_MOTOR_VOLTAGE = -12;
 
         public static final Translation3d ARM_TO_ROBOT = new Translation3d(0, 0, 1.2);
     }

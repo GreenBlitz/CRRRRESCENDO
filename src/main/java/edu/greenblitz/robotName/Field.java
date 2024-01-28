@@ -10,22 +10,23 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Field {
+
     /**
      * gets pose, returns it fitted to the other alliance ("mirrored") and rotated by 180 degrees.
      * */
-
     public static final boolean IS_AT_HADREAM_MIRRORD = false;
 
     public static Pose2d mirrorPositionToOtherSide(Pose2d pose){
         Pose2d mirroredPose = new Pose2d(
                 pose.getX(),
-                FieldConstants.fieldWidth - pose.getY(),
+                FieldConstants.FIELD_WIDTH - pose.getY(),
                 pose.getRotation());
         return mirroredPose;
     }
+
     public static Pose2d mirrorToHadarimPosition(Pose2d pose){
         Pose2d mirroredPose = new Pose2d(
-                pose.getX() - FieldConstants.fieldLength,
+                pose.getX() - FieldConstants.FIELD_LENGTH,
                 pose.getY(),
                 pose.getRotation());
         return mirroredPose;
@@ -111,9 +112,5 @@ public class Field {
         }
 
         public static final Pose2d OUT_PRE_BALANCE_BLUE = new Pose2d(5.40, 2.67, new Rotation2d(Math.PI));
-    }
-    public static class FieldConstants{
-        public final static double fieldLength = 16.54175;
-        public final static double fieldWidth = 8.0137;
     }
 }

@@ -9,7 +9,7 @@ import edu.greenblitz.robotName.utils.GBCommand;
 public class MoveRobotToShootingPosition extends SwerveCommand {
     @Override
     public void initialize() {
-        if (ShootingState.isRobotPositionFine()) {
+        if (ShootingState.isRobotInShootingPosition()) {
             new RotateToAngle(ShootingState.getRobotTargetAngle());
         } else {
             MoveToPose.getPathCommand(ShootingState.getTargetRobotPosition());
