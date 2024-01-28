@@ -53,7 +53,7 @@ public class ShootingState {
 	}
 
 	public static boolean isAngleCorrect() {
-		return Pivot.getInstance().isAtAngle(getTargetShooterAngle().getRadians());
+		return Pivot.getInstance().isAtAngle(getTargetShooterAngle());
 	}
 
 	public static boolean isReadyToShoot() {

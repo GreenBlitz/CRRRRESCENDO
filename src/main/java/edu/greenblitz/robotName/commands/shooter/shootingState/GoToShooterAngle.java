@@ -8,6 +8,6 @@ import edu.greenblitz.robotName.shootingStateService.ShootingState;
 public class GoToShooterAngle extends MovePivotToAngle {
 
     public GoToShooterAngle() {
-        super(ShootingState.getTargetShooterAngle().getRadians());
+        super(ShootingState.getTargetShooterAngle());
     }
 }

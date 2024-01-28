@@ -5,8 +5,8 @@ import org.littletonrobotics.junction.Logger;
 
 public class FlyWheel extends GBSubsystem {
     private static FlyWheel instance;
-    private final IFlyWheel flyWheel;
-    private final FlyWheelInputsAutoLogged flyWheelInputs;
+    private IFlyWheel flyWheel;
+    private FlyWheelInputsAutoLogged flyWheelInputs;
     private boolean isPreparedToShoot;
 
     private FlyWheel() {

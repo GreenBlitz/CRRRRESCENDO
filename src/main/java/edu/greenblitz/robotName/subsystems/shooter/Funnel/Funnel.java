@@ -18,8 +18,9 @@ public class Funnel extends GBSubsystem {
 	}
 
 	public static void init() {
-		if (instance == null)
+		if (instance == null) {
 			instance = new Funnel();
+		}
 	}
 
 	public static Funnel getInstance() {

@@ -56,6 +56,6 @@ public class ShootingZone extends GBCircle {
 
     public Rotation2d getTargetRobotAngle(Translation2d position) {
         Translation2d relativePosition = ShootingState.getRobotTargetTranslation().minus(position);
-        return new Rotation2d(Math.atan2(relativePosition.getY(), relativePosition.getX()) + Math.PI);
+        return new Rotation2d(Math.atan2(relativePosition.getY(), relativePosition.getX()));
     }
 }

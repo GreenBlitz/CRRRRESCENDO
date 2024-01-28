@@ -1,7 +1,13 @@
 package edu.greenblitz.robotName.subsystems.Lifter;
 
 import com.revrobotics.CANSparkMax;
+import edu.greenblitz.robotName.subsystems.Lifter.NeoLifter.NeoLifterConstants;
+import edu.greenblitz.robotName.subsystems.Lifter.SimulationLifter.SimulationLifterConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
+import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Translation3d;
+import org.littletonrobotics.junction.Logger;
 
 public class Lifter extends GBSubsystem {
     private static Lifter instance;
@@ -28,11 +34,15 @@ public class Lifter extends GBSubsystem {
 
     @Override
     public void periodic() {
+        super.periodic();
         lifter.updateInputs(lifterInputs);
+
+        Logger.processInputs("Lifter/Lifter",lifterInputs);
+        Logger.recordOutput("Lifter/Lifter",getLifterPose());
     }
 
-    public void goToPosition() {
-        lifter.goToPosition(lifterInputs.destination);
+    public void goToPosition(double targetPosition) {
+        lifter.goToPosition(targetPosition);
     }
 
     public void setPower(double power) {
@@ -48,19 +58,7 @@ public class Lifter extends GBSubsystem {
     }
 
     public void resetEncoder() {
-        lifter.resetEncoder(LifterConstants.ENCODER_POSE_WHEN_RESET);
-    }
-
-    public boolean isMotorAtPosition() {
-        return lifterInputs.isMotorAtPosition;
-    }
-
-    public void setPosition(double position) {
-        lifterInputs.destination = position;
-    }
-
-    public boolean isSwitchPressed() {
-        return lifterInputs.isSwitchPressed;
+        resetEncoder(NeoLifterConstants.ENCODER_POSE_WHEN_RESET);
     }
 
     public void stopMotor() {
@@ -69,5 +67,24 @@ public class Lifter extends GBSubsystem {
 
     public void setIdleMode(CANSparkMax.IdleMode mode) {
         lifter.setIdleMode(mode);
+    }
+
+    public boolean isSwitchPressed() {
+        return lifterInputs.isBackwardSwitchPressed;
+    }
+
+    public boolean isMotorAtPosition(double targetPosition) {
+        return Math.abs(targetPosition - lifterInputs.position) < NeoLifterConstants.TOLERANCE;
+    }
+
+    public double getPosition(){
+        return lifterInputs.position;
+    }
+
+    public Pose3d getLifterPose() {
+        return new Pose3d(
+                SimulationLifterConstants.ROBOT_RELATIVE_LIFTER_POSITION,
+                new Rotation3d(0,lifterInputs.position,0).plus(SimulationLifterConstants.ROBOT_RELATIVE_LIFTER_ROTATION)
+        );
     }
 }
