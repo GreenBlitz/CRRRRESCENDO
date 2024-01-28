@@ -6,7 +6,7 @@ import edu.greenblitz.robotName.utils.shootingCalculations.ShootingZone;
 import edu.wpi.first.math.geometry.Translation2d;
 
 public class ShootingPositionConstants {
-    public static final Translation2d CENTER_OF_SHOOTING_ZONE = new Translation2d(0, 0);
+    public static final Translation2d CENTER_OF_SHOOTING_ZONE = new Translation2d(7, 0);
     public static final double SHOOTING_ZONE_RADIUS_IN_METERS = 3;
     public static ShootingZone LEGAL_SHOOTING_ZONE = new ShootingZone(
             CENTER_OF_SHOOTING_ZONE,

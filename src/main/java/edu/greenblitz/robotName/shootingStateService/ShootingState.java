@@ -23,9 +23,6 @@ public class ShootingState {
 	}
 
 	public static Translation2d getRobotTargetTranslation() {
-		if (isRobotInShootingPosition()) {
-			return getRobotPose().getTranslation();
-		}
 		return LEGAL_SHOOTING_ZONE.getClosestPositionOnCircleBorder(getRobotPose().getTranslation());
 	}
 

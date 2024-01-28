@@ -84,7 +84,7 @@ public class GBCircle {
         if (position.getX() == centerPosition.getX()) {
             return position.plus(new Translation2d(EPSILON, 0));
         }
-        double slope = ((centerPosition.getY() - position.getY()) / centerPosition.getX() - position.getX());
+        double slope = ((centerPosition.getY() - position.getY()) / (centerPosition.getX() - position.getX()));
         double angle = Math.atan(slope);
         double x = radius * Math.cos(angle) * Math.signum(position.getX() - centerPosition.getX()) + centerPosition.getX();
         double y = radius * Math.sin(angle) * Math.signum(position.getX() - centerPosition.getX()) + centerPosition.getY();

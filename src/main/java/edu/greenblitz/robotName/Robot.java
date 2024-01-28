@@ -72,6 +72,7 @@ public class Robot extends LoggedRobot {
 
         Logger.recordOutput("shooter", ShootingState.getTargetShooterAngle());
         Logger.recordOutput("position", ShootingState.getTargetRobotPosition());
+        Logger.recordOutput("isAtPosition", ShootingState.isRobotInShootingPosition());
     }
 
     private void initializeAutonomousBuilder() {
