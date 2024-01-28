@@ -23,16 +23,16 @@ public class Conversions {
             return angle.getRadians() / MK4iSwerveConstants.ANGLE_REVOLUTIONS_TO_RADIANS;
         }
 
-        public static double convertRevolutionsToRadians(double angInTicks) {
-            return angInTicks * MK4iSwerveConstants.ANGLE_REVOLUTIONS_TO_RADIANS;
+        public static double convertRevolutionsToRadians(double revolutions) {
+            return revolutions * MK4iSwerveConstants.ANGLE_REVOLUTIONS_TO_RADIANS;
         }
 
         public static double convertMetersToTicks(double distanceInMeters) {
             return distanceInMeters / MK4iSwerveConstants.LINEAR_REVOLUTIONS_TO_METERS;
         }
 
-        public static double convertRevolutionsToMeters(double angInRevolutions){
-            return angInRevolutions * MK4iSwerveConstants.LINEAR_REVOLUTIONS_TO_METERS;
+        public static double convertRevolutionsToMeters(double angleInRevolutions){
+            return angleInRevolutions * MK4iSwerveConstants.LINEAR_REVOLUTIONS_TO_METERS;
         }
 
         public static double convertSensorVelocityToRPM(double ticks){

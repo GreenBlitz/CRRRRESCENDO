@@ -9,7 +9,6 @@ public class GyroFactory {
             case ROBOT_NAME -> new Pigeon2Gyro(GyroConstants.Pigeon2Gyro.ID);
             case REPLAY -> new ReplayGyro();
             case SIMULATION -> new SimulationGyro();
-            default -> new SimulationGyro();
         };
     }
 }

@@ -113,8 +113,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         gyro.updateInputs(gyroInputs);
         updateInputs(ChassisInputs);
         swerveModule.updateInputs(swerveModuleInputs);
-        SmartDashboard.putNumber("yaw", gyroInputs.yaw);
-        SmartDashboard.putNumber("velocity", swerveModuleInputs.linearVelocity);
         Logger.recordOutput("DriveTrain/RobotPose", getRobotPose());
         Logger.recordOutput("DriveTrain/ModuleStates", getSwerveModuleStates());
         Logger.processInputs("DriveTrain/Chassis", ChassisInputs);
@@ -136,8 +134,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
      */
     public SwerveModule getModule(Module module) {
 		return switch (module) {
-			case BACK_LEFT -> backLeft;
-			case BACK_RIGHT -> backRight;
+            case BACK_LEFT -> backLeft;
+            case BACK_RIGHT -> backRight;
 			case FRONT_LEFT -> frontLeft;
 			case FRONT_RIGHT -> frontRight;
 		};
