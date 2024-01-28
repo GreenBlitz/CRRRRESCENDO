@@ -7,8 +7,9 @@ public class ScoringModeSelector {
     private static ScoringMode currentMode;
 
     public static ScoringMode getScoringMode() {
-        if (currentMode == null)
+        if (currentMode == null) {
             currentMode = ScoringMode.SPEAKER;
+        }
         return currentMode;
     }
 
