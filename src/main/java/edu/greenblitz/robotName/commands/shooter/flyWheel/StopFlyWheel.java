@@ -1,6 +1,5 @@
-package edu.greenblitz.robotName.commands.shooter;
+package edu.greenblitz.robotName.commands.shooter.flyWheel;
 
-import edu.greenblitz.robotName.commands.shooter.flyWheel.FlyWheelCommand;
 
 public class StopFlyWheel extends FlyWheelCommand {
 

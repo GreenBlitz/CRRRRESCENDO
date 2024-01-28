@@ -38,17 +38,17 @@ public class PivotConstants {
     );
 
     static { // First input is the distance, Second input is the angle
-        DISTANCE_TO_ANGLE_MAP.put(0.0,0.0);
-        DISTANCE_TO_ANGLE_MAP.put(0.0,0.0);
-        DISTANCE_TO_ANGLE_MAP.put(0.0,0.0);
-        DISTANCE_TO_ANGLE_MAP.put(0.0,0.0);
-        DISTANCE_TO_ANGLE_MAP.put(0.0,0.0);
-        DISTANCE_TO_ANGLE_MAP.put(0.0,0.0);
-        DISTANCE_TO_ANGLE_MAP.put(0.0,0.0);
-        DISTANCE_TO_ANGLE_MAP.put(0.0,0.0);
-        DISTANCE_TO_ANGLE_MAP.put(0.0,0.0);
-        DISTANCE_TO_ANGLE_MAP.put(0.0,0.0);
-        DISTANCE_TO_ANGLE_MAP.put(0.0,0.0);
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
+        DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
     }
 
 
