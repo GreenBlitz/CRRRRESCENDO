@@ -74,8 +74,6 @@ public class SimulationElbow implements IElbow {
 
         inputs.appliedOutput = appliedVoltage;
         inputs.outputCurrent = elbowSimulation.getCurrentDrawAmps();
-
-
         inputs.position = elbowSimulation.getAngleRads();
         inputs.velocity = elbowSimulation.getVelocityRadPerSec();
         inputs.absoluteEncoderPosition = elbowSimulation.getAngleRads();
