@@ -14,7 +14,7 @@ public class MoveNoteBetweenShooterArm extends GBCommand {
 
     private Roller roller;
 
-    private Supplier<Boolean> isShooterToArm;
+    private Supplier<Boolean> isArmToShooter;
 
     public MoveNoteBetweenShooterArm(){
         roller = Roller.getInstance();
@@ -22,24 +22,24 @@ public class MoveNoteBetweenShooterArm extends GBCommand {
         funnel = Funnel.getInstance();
         require(funnel);
 
-        this.isShooterToArm = ScoringModeSelector::isSpeakerToAmp;
+        this.isArmToShooter = ScoringModeSelector::isSpeakerToAmp;
     }
 
     @Override
     public void execute() {
-        if (isShooterToArm.get()){
-            funnel.rollOut();
-            roller.rollIn();
-        }
-        else {
+        if (isArmToShooter.get()){
             funnel.rollIn();
             roller.rollOut();
+        }
+        else {
+            funnel.rollOut();
+            roller.rollIn();
         }
     }
 
     @Override
     public boolean isFinished() {
-        return isShooterToArm.get() ? funnel.isObjectIn() : Wrist.getInstance().isObjectInside();
+        return isArmToShooter.get() ? Wrist.getInstance().isObjectInside() : funnel.isObjectIn();
     }
 
     @Override

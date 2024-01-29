@@ -11,11 +11,12 @@ public class SwitchModeMotion extends SequentialCommandGroup {
 
     public SwitchModeMotion(ScoringMode mode, BooleanSupplier isNoteInOtherSystem){
         super(
+                new SetScoringMode(mode),
                 new ConditionalCommand(
                         new TransferNotes(),
                         new MoveShooterToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE),
                         isNoteInOtherSystem
-                ),
-                new SetScoringMode(mode));
+                )
+        );
     }
 }
