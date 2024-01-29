@@ -1,9 +1,16 @@
 package edu.greenblitz.robotName.commands.arm.roller;
 
-public class ReverseRunRoller extends RollerCommand{
+import edu.greenblitz.robotName.subsystems.arm.Wrist;
+
+public class RollerCatchNote extends RollerCommand{
     @Override
     public void initialize() {
         roller.rollOut();
+    }
+
+    @Override
+    public boolean isFinished() {
+        return Wrist.getInstance().isObjectInside();
     }
 
     @Override
