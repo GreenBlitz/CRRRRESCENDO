@@ -33,7 +33,7 @@ public class WristConstants {
     public static final double RELATIVE_VELOCITY_CONVERSION_FACTOR = 0.0030332432;
 
     public static final double ABSOLUTE_POSITION_CONVERSION_FACTOR = 0.00302;
-  
+
     public static final double ABSOLUTE_VELOCITY_CONVERSION_FACTOR = 0.00302;
 
     public static final double kS = 1;

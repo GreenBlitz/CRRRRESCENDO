@@ -13,7 +13,6 @@ import org.littletonrobotics.junction.Logger;
 import static edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot.FalconPivotConstants.SIMPLE_MOTOR_FF;
 import static edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants.TOLERANCE;
 
-
 public class Pivot extends GBSubsystem {
 
 	private static Pivot instance;
@@ -22,16 +21,16 @@ public class Pivot extends GBSubsystem {
 
 	private IPivot pivot;
 
-    private Pivot() {
-        pivot = PivotFactory.create();
-        pivotInputs = new PivotInputsAutoLogged();
-        pivot.updateInputs(pivotInputs);
-    }
+	private Pivot() {
+		pivot = PivotFactory.create();
+		pivotInputs = new PivotInputsAutoLogged();
+		pivot.updateInputs(pivotInputs);
+	}
 
-    public static void init() {
-        if (instance == null){
-            instance = new Pivot();
-        }
+	public static void init() {
+		if (instance == null){
+			instance = new Pivot();
+		}
 	}
 
 	public static Pivot getInstance() {
@@ -40,13 +39,13 @@ public class Pivot extends GBSubsystem {
 	}
 
 	@Override
-    public void periodic() {
-        super.periodic();
+	public void periodic() {
+		super.periodic();
 
-        pivot.updateInputs(pivotInputs);
-        Logger.processInputs("Shooter/Pivot", pivotInputs);
-        Logger.recordOutput("Shooter/Pivot", getPivotPose3d());
-    }
+		pivot.updateInputs(pivotInputs);
+		Logger.processInputs("Shooter/Pivot", pivotInputs);
+		Logger.recordOutput("Shooter/Pivot", getPivotPose3d());
+	}
 
 	public void setPower(double power) {
 		pivot.setPower(power);
@@ -56,9 +55,9 @@ public class Pivot extends GBSubsystem {
 		pivot.setVoltage(voltage);
 	}
 
-    public void setIdleMode(NeutralModeValue idleMode) {
-        pivot.setIdleMode(idleMode);
-    }
+	public void setIdleMode(NeutralModeValue idleMode) {
+		pivot.setIdleMode(idleMode);
+	}
 
 	public void resetAngle(Rotation2d position) {
 		pivot.resetAngle(position);
@@ -69,9 +68,9 @@ public class Pivot extends GBSubsystem {
 	}
 
 	public void standInPlace() {
-		pivot.setPower(getStaticFeedForward());
+		pivot.setVoltage(getStaticFeedForward());
 	}
-    public double getStaticFeedForward() {
+	public double getStaticFeedForward() {
 		return Robot.isSimulation() ? 0 : SIMPLE_MOTOR_FF.calculate(0);
 	}
 
@@ -87,18 +86,18 @@ public class Pivot extends GBSubsystem {
 		return pivotInputs.velocity;
 	}
 
-    public Rotation2d getAngle() {
-        return Rotation2d.fromRadians(pivotInputs.position);
-    }
+	public Rotation2d getAngle() {
+		return Rotation2d.fromRadians(pivotInputs.position);
+	}
 
-    public boolean isAtAngle(Rotation2d angle) {
-        return Math.abs(angle.getRadians() - getAngle().getRadians()) <= TOLERANCE;
-    }
+	public boolean isAtAngle(Rotation2d angle) {
+		return Math.abs(angle.getRadians() - getAngle().getRadians()) <= TOLERANCE;
+	}
 
-    public Pose3d getPivotPose3d() {
-        return new Pose3d(
-                PivotConstants.ROBOT_RELATIVE_PIVOT_POSITION,
-                new Rotation3d(getAngle().getRadians(), 0, 0)
-        );
-    }
+	public Pose3d getPivotPose3d() {
+		return new Pose3d(
+				PivotConstants.ROBOT_RELATIVE_PIVOT_POSITION,
+				new Rotation3d(getAngle().getRadians(), 0, 0)
+		);
+	}
 }

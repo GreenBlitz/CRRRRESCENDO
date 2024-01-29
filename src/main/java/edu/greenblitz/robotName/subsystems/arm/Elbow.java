@@ -71,9 +71,9 @@ public class Elbow extends GBSubsystem {
         elbow.moveToAngle(targetAngle);
     }
 
-	public void standInPlace() {
-        elbow.setPower(getStaticFeedForward());
-	}
+    public void standInPlace() {
+        elbow.setVoltage(getStaticFeedForward());
+    }
 
 
     public double getStaticFeedForward() {
@@ -100,15 +100,15 @@ public class Elbow extends GBSubsystem {
         return Math.abs(targetHeight.getRadians() - getAngleInRadians()) <= ElbowConstants.TOLERANCE;
     }
 
-	public boolean isInShooterCollisionRange() {
-		return elbowInputs.position > ElbowConstants.SHOOTER_COLLISION_RANGE.getFirst().getRadians() &&
-				elbowInputs.position < ElbowConstants.SHOOTER_COLLISION_RANGE.getSecond().getRadians();
-	}
+    public boolean isInShooterCollisionRange() {
+        return elbowInputs.position > ElbowConstants.SHOOTER_COLLISION_RANGE.getFirst().getRadians() &&
+                elbowInputs.position < ElbowConstants.SHOOTER_COLLISION_RANGE.getSecond().getRadians();
+    }
 
     public Pose3d getPose3D (){
         return new Pose3d(
                 ElbowConstants.ELBOW_POSITION_RELATIVE_TO_ROBOT,
-                new Rotation3d(elbowInputs.position + SimulationElbowConstants.SIMULATION_OFFSET,0, 0)
+                new Rotation3d(elbowInputs.position + SimulationElbowConstants.MECHANISM_NAME_TO_ROBOT_TRANSLATION,0, 0)
         );
     }
 

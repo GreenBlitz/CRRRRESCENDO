@@ -1,9 +1,7 @@
 package edu.greenblitz.robotName.subsystems.arm;
 
-
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.Robot;
-import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.SimulationElbow.SimulationElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.IWrist;
@@ -78,7 +76,7 @@ public class Wrist extends GBSubsystem {
     }
 
     public void standInPlace() {
-        wrist.setPower(getStaticFeedForward());
+        wrist.setVoltage(getStaticFeedForward());
     }
 
 
@@ -112,7 +110,8 @@ public class Wrist extends GBSubsystem {
 
     public Pose3d getPose3D() {
         Translation3d elbowTranslation = Elbow.getInstance().getPose3D().getTranslation();
-        double trueElbowAngle = Elbow.getInstance().getAngleInRadians() + Math.PI / 2 + SimulationElbowConstants.SIMULATION_OFFSET;
+
+        double trueElbowAngle = Elbow.getInstance().getAngleInRadians() + Math.PI / 2 + SimulationElbowConstants.MECHANISM_NAME_TO_ROBOT_TRANSLATION;
 
         double relativeWristY = ElbowConstants.ARM_LENGTH * Math.sin(-trueElbowAngle);
         double relativeWristZ = ElbowConstants.ARM_LENGTH * Math.cos(trueElbowAngle);
