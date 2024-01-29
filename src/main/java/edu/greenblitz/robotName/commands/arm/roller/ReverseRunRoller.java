@@ -2,7 +2,7 @@ package edu.greenblitz.robotName.commands.arm.roller;
 
 import edu.greenblitz.robotName.subsystems.arm.Wrist;
 
-public class RunRollerReverse extends RollerCommand{
+public class ReverseRunRoller extends RollerCommand{
     @Override
     public void initialize() {
         roller.rollOut();
@@ -10,7 +10,7 @@ public class RunRollerReverse extends RollerCommand{
 
     @Override
     public boolean isFinished() {
-        return !Wrist.getInstance().isObjectInside();
+        return Wrist.getInstance().isObjectInside();
     }
 
     @Override
