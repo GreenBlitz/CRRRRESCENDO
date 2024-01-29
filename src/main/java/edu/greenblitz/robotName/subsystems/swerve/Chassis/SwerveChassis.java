@@ -28,7 +28,6 @@ import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.littletonrobotics.junction.Logger;
 import org.photonvision.EstimatedRobotPose;
-import org.w3c.dom.ls.LSOutput;
 
 import java.util.Optional;
 
@@ -52,7 +51,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     private SwerveModule frontRight, frontLeft, backRight, backLeft;
     private IAngleMeasurementGyro gyro;
     private SwerveDriveKinematics kinematics;
-    private ISwerveModule swerveModule;
+    private ISwerveModule frontLeftSwerveModule;
+    private ISwerveModule backLeftSwerveModule;
+    private ISwerveModule frontRightSwerveModule;
+    private ISwerveModule backRightSwerveModule;
     private SwerveDrivePoseEstimator poseEstimator;
     private Field2d field = new Field2d();
     public static final double TRANSLATION_TOLERANCE = 0.05;
@@ -62,7 +64,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
     private SwerveChassisInputsAutoLogged ChassisInputs = new SwerveChassisInputsAutoLogged();
     private GyroInputsAutoLogged gyroInputs = new GyroInputsAutoLogged();
-    private SwerveModuleInputsAutoLogged swerveModuleInputs = new SwerveModuleInputsAutoLogged();
+    private SwerveModuleInputsAutoLogged frontLeftSwerveModuleInputs = new SwerveModuleInputsAutoLogged();
+    private SwerveModuleInputsAutoLogged backLeftSwerveModuleInputs = new SwerveModuleInputsAutoLogged();
+    private SwerveModuleInputsAutoLogged frontRightSwerveModuleInputs = new SwerveModuleInputsAutoLogged();
+    private SwerveModuleInputsAutoLogged backRightSwerveModuleInputs = new SwerveModuleInputsAutoLogged();
 
     public SwerveChassis() {
         this.frontLeft = new SwerveModule(Module.FRONT_LEFT);
@@ -71,7 +76,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         this.backRight = new SwerveModule(Module.BACK_RIGHT);
 
         this.gyro = GyroFactory.create();
-        this.swerveModule = SwerveModuleFactory.create(Module.FRONT_LEFT);
+        this.frontLeftSwerveModule = SwerveModuleFactory.create(Module.FRONT_LEFT);
+        this.frontRightSwerveModule = SwerveModuleFactory.create(Module.FRONT_RIGHT);
+        this.backLeftSwerveModule = SwerveModuleFactory.create(Module.BACK_LEFT);
+        this.backRightSwerveModule = SwerveModuleFactory.create(Module.BACK_RIGHT);
 
         doVision = true;
 
@@ -112,7 +120,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
         gyro.updateInputs(gyroInputs);
         updateInputs(ChassisInputs);
-        swerveModule.updateInputs(swerveModuleInputs);
+        frontLeftSwerveModule.updateInputs(frontLeftSwerveModuleInputs);
+        backLeftSwerveModule.updateInputs(backLeftSwerveModuleInputs);
+        frontRightSwerveModule.updateInputs(frontRightSwerveModuleInputs);
+        backRightSwerveModule.updateInputs(backRightSwerveModuleInputs);
         Logger.recordOutput("DriveTrain/RobotPose", getRobotPose());
         Logger.recordOutput("DriveTrain/ModuleStates", getSwerveModuleStates());
         Logger.processInputs("DriveTrain/Chassis", ChassisInputs);
