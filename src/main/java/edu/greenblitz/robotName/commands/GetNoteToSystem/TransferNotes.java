@@ -11,8 +11,7 @@ public class TransferNotes extends SequentialCommandGroup {
     public TransferNotes() {
         super(
                 new GetToTransferNotePosition(),
-                new MoveNoteBetweenShooterArm(),
-                new MoveElbowAndWrist()
+                new MoveNoteBetweenShooterArm()
         );
     }
 }

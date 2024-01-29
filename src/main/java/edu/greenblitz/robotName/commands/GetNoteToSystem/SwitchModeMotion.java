@@ -15,6 +15,6 @@ public class SwitchModeMotion extends SequentialCommandGroup {
                         new MoveShooterToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE),
                         isNoteInOtherSystem
                 ),
-                new SetScoringMode(mode));
+                new SetScoringMode(() -> mode));
     }
 }

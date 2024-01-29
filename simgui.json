@@ -18,6 +18,7 @@
       "/SmartDashboard/ShooterMech2D": "Mechanism2d",
       "/SmartDashboard/field": "Field2d",
       "/SmartDashboard/is object in intake entance": "String Chooser",
+      "/SmartDashboard/is object in intake entrance": "String Chooser",
       "/SmartDashboard/is object in intake exit": "String Chooser"
     },
     "windows": {
@@ -27,6 +28,16 @@
         }
       },
       "/SmartDashboard/ArmMech2D": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/SmartDashboard/Funnel Object": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/SmartDashboard/Is Object In Arm?": {
         "window": {
           "visible": true
         }

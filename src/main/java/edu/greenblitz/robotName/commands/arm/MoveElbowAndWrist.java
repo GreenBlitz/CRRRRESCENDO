@@ -16,9 +16,6 @@ public class MoveElbowAndWrist extends ParallelCommandGroup {
     }
 
     public MoveElbowAndWrist() {
-        super(
-                new MoveElbowToAngle(ElbowConstants.PresetPositions.SAFE.ANGLE),
-                new MoveWristToAngle(WristConstants.PresetPositions.SAFE.ANGLE)
-        );
+        this(ElbowConstants.PresetPositions.SAFE.ANGLE, WristConstants.PresetPositions.SAFE.ANGLE);
     }
 }

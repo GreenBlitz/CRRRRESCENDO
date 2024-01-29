@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 public class SwitchBetweenScoringModes extends ConditionalCommand {
     public SwitchBetweenScoringModes() {
         super(
-                new SwitchModeMotion(ScoringMode.AMP, () -> true),
-                new SwitchModeMotion(ScoringMode.SPEAKER, () -> true),
+                new SwitchModeMotion(ScoringMode.AMP, () -> Funnel.getInstance().isObjectIn()),
+                new SwitchModeMotion(ScoringMode.SPEAKER, () -> Wrist.getInstance().isObjectInside()),
                 () -> ScoringModeSelector.isSpeakerToAmp()
         );
     }

@@ -72,17 +72,12 @@ public class Elbow extends GBSubsystem {
     }
 
 	public void standInPlace() {
-		if (Robot.isSimulation()){
-            elbow.setPower(0);
-        }
-        else{
-            elbow.setPower(getStaticFeedForward());
-        }
+        elbow.setPower(getStaticFeedForward());
 	}
 
 
     public double getStaticFeedForward() {
-        return FalconElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(0);
+        return Robot.isSimulation() ? 0 : FalconElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(0);
     }
 
     public double getDynamicFeedForward(double velocity) {
