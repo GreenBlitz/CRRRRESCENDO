@@ -13,7 +13,7 @@ public class ShootingPositionConstants {
 
     public static ShootingZone LEGAL_SHOOTING_ZONE = new ShootingZone(
             CENTER_OF_SHOOTING_ZONE,
-            SHOOTING_ZONE_RADIUS_IN_METERS//,
-//            FieldConstants.ShootingZoneConstants.RESTRICTED_BOUNDS
+            SHOOTING_ZONE_RADIUS_IN_METERS,
+            FieldConstants.ShootingZoneConstants.RESTRICTED_BOUNDS
     );
 }

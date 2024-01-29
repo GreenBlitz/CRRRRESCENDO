@@ -41,13 +41,28 @@ public class ShootingZone extends GBCircle {
         return upperLimitTargetDelta > lowerLimitTargetDelta ? lowerLimit : upperLimit;
     }
 
+    public boolean isInXBound(Translation2d position, Translation2d lowerLimit, Translation2d upperLimit) {
+        return position.getX() > lowerLimit.getX() && position.getX() < upperLimit.getX();
+    }
+
+    public boolean isInYBound(Translation2d position, Translation2d lowerLimit, Translation2d upperLimit) {
+        return position.getY() > lowerLimit.getY() && position.getY() < upperLimit.getY();
+    }
+
+    public boolean isPositionInBound(Translation2d position, Translation2d lowerLimit, Translation2d upperLimit) {
+        boolean isInXBound = lowerLimit.getX() > upperLimit.getX() ?
+                isInXBound(position, upperLimit, lowerLimit) :
+                isInXBound(position, lowerLimit, upperLimit);
+        return isInXBound && isInYBound(position, lowerLimit, upperLimit);
+    }
+
     @Override
     public Translation2d getClosestPositionOnCircleBorder(Translation2d position) {
         Translation2d targetPosition = super.getClosestPositionOnCircleBorder(position);
         for (Pair<Translation2d, Translation2d> bound : restrictedBounds) {
             Translation2d upperLimit = bound.getSecond();
             Translation2d lowerLimit = bound.getFirst();
-            if (targetPosition.getY() > lowerLimit.getY() && targetPosition.getY() < upperLimit.getY()) {
+            if (isPositionInBound(targetPosition, lowerLimit, upperLimit)) {
                 return getClosestLimitToPosition(upperLimit, lowerLimit, targetPosition);
             }
         }

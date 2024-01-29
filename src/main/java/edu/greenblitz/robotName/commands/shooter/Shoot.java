@@ -11,15 +11,15 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class Shoot extends SequentialCommandGroup {
 
-	public Shoot() {
-		super(
-				new RunFlyWheelByShootingPower(),
-				new ParallelCommandGroup(
-						new WaitCommand(FlyWheelConstants.DELAY_SECONDS_TILL_EXIT),
-						new RunFunnel()
-				),
-				new StopFunnel(),
-				new StopFlyWheel()
-		);
-	}
+    public Shoot() {
+        super(
+                new RunFlyWheelByShootingPower(),
+                new ParallelCommandGroup(
+                        new WaitCommand(FlyWheelConstants.DELAY_SECONDS_TILL_EXIT),
+                        new RunFunnel()
+                ),
+                new StopFunnel(),
+                new StopFlyWheel()
+        );
+    }
 }

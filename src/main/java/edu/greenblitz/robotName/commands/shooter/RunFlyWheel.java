@@ -8,4 +8,9 @@ public class RunFlyWheel extends FlyWheelCommand {
     public void execute() {
         flyWheel.setPower(FlyWheelConstants.SHOOTING_POWER);
     }
+
+    @Override
+    public boolean isFinished() {
+        return flyWheel.isAtVelocity(FlyWheelConstants.SHOOTING_POWER);
+    }
 }

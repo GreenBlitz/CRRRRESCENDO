@@ -81,10 +81,10 @@ public class Robot extends LoggedRobot {
         ArmShooterMechanism.getInstance().periodic();
 
         Logger.recordOutput("isAtPosition", ShootingState.isRobotInShootingPosition());
-        Logger.recordOutput("poseOI", OI.getInstance().pose);
         Logger.recordOutput("wifi", ShootingState.getTargetRobotPosition());
         Logger.recordOutput("pivot", Pivot.getInstance().getAngle().getDegrees());
         Logger.recordOutput("target pivot", ShootingState.getTargetShooterAngle().getDegrees());
+        Logger.recordOutput("readyToShoot", ShootingState.isReadyToShoot());
     }
 
     private void initializeAutonomousBuilder() {

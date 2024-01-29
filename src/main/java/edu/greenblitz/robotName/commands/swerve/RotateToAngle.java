@@ -4,19 +4,21 @@ import edu.greenblitz.robotName.shootingStateService.ShootingState;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.wpi.first.math.geometry.Rotation2d;
+import org.littletonrobotics.junction.Logger;
+
+import java.util.function.Supplier;
 
 public class RotateToAngle extends SwerveCommand{
-    private double angleSetPoint;
+    private Supplier<Rotation2d> angleSetPoint;
 
-    public RotateToAngle(Rotation2d angleSetPoint){
+    public RotateToAngle(Supplier<Rotation2d> angleSetPoint){
         super();
-        this.angleSetPoint = angleSetPoint.getRadians();
+        this.angleSetPoint = angleSetPoint;
     }
 
     @Override
     public void initialize(){
-        angleSetPoint = ShootingState.getTargetRobotAngle().getRadians();
-        ChassisConstants.ROTATION_PID_CONTROLLER.setSetpoint(angleSetPoint);
+        ChassisConstants.ROTATION_PID_CONTROLLER.setSetpoint(angleSetPoint.get().getRadians());
     }
 
     @Override
@@ -31,6 +33,6 @@ public class RotateToAngle extends SwerveCommand{
 
     @Override
     public boolean isFinished() {
-        return SwerveChassis.getInstance().getChassisAngle().getRadians() == angleSetPoint;
+        return SwerveChassis.getInstance().getChassisAngle().getRadians() == angleSetPoint.get().getRadians();
     }
 }

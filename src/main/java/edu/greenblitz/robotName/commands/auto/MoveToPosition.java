@@ -9,29 +9,28 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import org.littletonrobotics.junction.Logger;
 
+import java.util.function.Supplier;
+
 public class MoveToPosition extends GBCommand {
 
     private Command moveToFoundPose;
-    private Pose2d end;
+    private Supplier<Pose2d> end;
 
     public MoveToPosition(Pose2d endPoint) {
-        this(endPoint, ChassisConstants.CONSTRAINTS);
-        end = endPoint;
+        end = () -> endPoint;
     }
 
-    public MoveToPosition(Pose2d endPoint, PathConstraints constraints) {
-
+    public MoveToPosition(Supplier<Pose2d> endPoint) {
+        end = endPoint;
     }
 
     @Override
     public void initialize() {
-        end = ShootingState.getTargetRobotPosition();
         moveToFoundPose = AutoBuilder.pathfindToPose(
-                end,
+                end.get(),
                 ChassisConstants.CONSTRAINTS
         );
         moveToFoundPose.initialize();
-        Logger.recordOutput("target", end);
     }
 
     @Override

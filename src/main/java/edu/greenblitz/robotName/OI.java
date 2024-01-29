@@ -36,12 +36,10 @@ public class OI {
 
     private SmartJoystick mainJoystick;
     private SmartJoystick secondJoystick;
-    public Pose2d pose;
 
     private OI() {
         mainJoystick = new SmartJoystick(RobotConstants.Joystick.MAIN);
         secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
-        pose = new Pose2d(3,0, Rotation2d.fromRadians(0));
         initButtons();
         initializeDefaultCommands();
 
@@ -64,7 +62,6 @@ public class OI {
 
     public void initButtons() {
         mainJoystick.L1.whileTrue(new GoToShootingState());
-        mainJoystick.R1.whileTrue(new MovePivotToAngle(new Rotation2d(Math.PI)));
     }
 
     public void initializeDefaultCommands(){
