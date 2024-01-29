@@ -72,7 +72,7 @@ public class Elbow extends GBSubsystem {
     }
 
     public void standInPlace() {
-        elbow.setPower(getStaticFeedForward());
+        elbow.setVoltage(getStaticFeedForward());
     }
 
 
@@ -108,7 +108,7 @@ public class Elbow extends GBSubsystem {
     public Pose3d getPose3D (){
         return new Pose3d(
                 ElbowConstants.ELBOW_POSITION_RELATIVE_TO_ROBOT,
-                new Rotation3d(elbowInputs.position + SimulationElbowConstants.SIMULATION_OFFSET,0, 0)
+                new Rotation3d(elbowInputs.position + SimulationElbowConstants.MECHANISM_NAME_TO_ROBOT_TRANSLATION,0, 0)
         );
     }
 

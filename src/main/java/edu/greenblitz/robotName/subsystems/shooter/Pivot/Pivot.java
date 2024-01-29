@@ -68,7 +68,7 @@ public class Pivot extends GBSubsystem {
 	}
 
 	public void standInPlace() {
-		pivot.setPower(getStaticFeedForward());
+		pivot.setVoltage(getStaticFeedForward());
 	}
 	public double getStaticFeedForward() {
 		return Robot.isSimulation() ? 0 : SIMPLE_MOTOR_FF.calculate(0);
