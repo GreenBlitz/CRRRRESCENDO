@@ -45,6 +45,14 @@ public class Intake extends GBSubsystem {
         setPower(0);
     }
 
+    public void rollIn(){
+        setPower(IntakeConstants.POWER_TO_RUN);
+    }
+
+    public void rollOut(){
+        setPower(IntakeConstants.POWER_TO_REVERSE_RUN);
+    }
+
     public void periodic() {
         intake.updateInputs(intakeInputs);
         Logger.processInputs("intake", intakeInputs);

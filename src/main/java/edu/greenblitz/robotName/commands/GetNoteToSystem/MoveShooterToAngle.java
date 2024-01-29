@@ -27,7 +27,7 @@ public class MoveShooterToAngle extends ConditionalCommand {
 						)
 				),
 				new MovePivotToAngle(targetAngle),
-				() -> Elbow.getInstance().isInDangerZone());
+				() -> Elbow.getInstance().isInShooterCollisionRange());
 	}
 
 }

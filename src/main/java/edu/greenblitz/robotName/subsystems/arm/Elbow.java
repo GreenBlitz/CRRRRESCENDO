@@ -11,7 +11,6 @@ import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
-import edu.wpi.first.math.geometry.Translation3d;
 import org.littletonrobotics.junction.Logger;
 
 public class Elbow extends GBSubsystem {
@@ -105,9 +104,9 @@ public class Elbow extends GBSubsystem {
         return Math.abs(targetHeight.getRadians() - getAngleInRadians()) <= ElbowConstants.TOLERANCE;
     }
 
-	public boolean isInDangerZone() {
-		return elbowInputs.position > ElbowConstants.DANGER_ZONE.getFirst().getRadians() &&
-				elbowInputs.position < ElbowConstants.DANGER_ZONE.getSecond().getRadians();
+	public boolean isInShooterCollisionRange() {
+		return elbowInputs.position > ElbowConstants.SHOOTER_COLLISION_RANGE.getFirst().getRadians() &&
+				elbowInputs.position < ElbowConstants.SHOOTER_COLLISION_RANGE.getSecond().getRadians();
 	}
 
     public Pose3d getPose3D (){

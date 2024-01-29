@@ -24,14 +24,14 @@ public class SimulationIntake implements IIntake {
         );
 
         entranceBeamBreaker = new SendableChooser<>();
-        entranceBeamBreaker.setDefaultOption("True", true);
-        entranceBeamBreaker.addOption("False", false);
-        SmartDashboard.putData("is object in intake", entranceBeamBreaker);
+        entranceBeamBreaker.setDefaultOption("False", false);
+        entranceBeamBreaker.addOption("True", true);
+        SmartDashboard.putData("is object in intake entrance", entranceBeamBreaker);
 
         exitBeamBreaker = new SendableChooser<>();
-        exitBeamBreaker.setDefaultOption("True", true);
-        exitBeamBreaker.addOption("False", false);
-        SmartDashboard.putData("is object in intake", exitBeamBreaker);
+        exitBeamBreaker.setDefaultOption("False", false);
+        exitBeamBreaker.addOption("True", true);
+        SmartDashboard.putData("is object in intake exit", exitBeamBreaker);
     }
 
 
@@ -53,6 +53,5 @@ public class SimulationIntake implements IIntake {
         intakeInputs.velocity = motorSimulation.getAngularVelocityRPM();
         intakeInputs.entranceBeamBreakerValue = entranceBeamBreaker.getSelected();
         intakeInputs.exitBeamBreakerValue = exitBeamBreaker.getSelected();
-
     }
 }

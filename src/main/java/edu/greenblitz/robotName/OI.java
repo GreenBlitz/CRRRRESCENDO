@@ -1,7 +1,11 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
+import edu.greenblitz.robotName.commands.intake.MoveNoteBetweenShooterArm;
+import edu.greenblitz.robotName.commands.intake.NoteToIntake;
+import edu.greenblitz.robotName.commands.intake.NoteToShooter;
 import edu.greenblitz.robotName.commands.auto.MoveToPosition;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingState;
@@ -18,6 +22,9 @@ import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.wpi.first.math.geometry.Rotation2d;
+
+import java.util.function.Supplier;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -59,7 +66,7 @@ public class OI {
         mainJoystick.L1.whileTrue(new GoToShootingState());
         mainJoystick.R1.whileTrue(new MovePivotToAngle(new Rotation2d(Math.PI)));
     }
-    
+
     public void initializeDefaultCommands(){
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
         Battery.getInstance().setDefaultCommand(new BatteryLimiter());

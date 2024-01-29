@@ -97,8 +97,15 @@ public class Field {
     }
 
     public static class ScoringPositions{
-        public final static Pose2d SPEAKER_SCORE_POSITION = new Pose2d(new Translation2d(5,4),new Rotation2d());
-        public final static Pose2d AMP_SCORE_POSITION = new Pose2d(new Translation2d(3,1),new Rotation2d());
-        public final static Pose2d CLIMB_POSITION = new Pose2d(new Translation2d(7,2),new Rotation2d());
+        public final static Pose2d SPEAKER_SCORE_POSITION = new Pose2d(new Translation2d(14.140,5.85),new Rotation2d());
+        public final static Pose2d AMP_SCORE_POSITION = new Pose2d(new Translation2d(14.85,7.5),new Rotation2d());
+        public final static Pose2d CLIMB_POSITION = new Pose2d(new Translation2d(12.733,3.602),new Rotation2d());
+        public final static Pose2d PRE_AMP_SCORE_POSITION = new Pose2d(new Translation2d(14.85,7.3),new Rotation2d());
+    }
+
+    public static class UpStairsFieldPositions{
+        public final static Pose2d SPEAKER_SCORE_POSITION = new Pose2d(new Translation2d(),new Rotation2d());
+        public final static Pose2d AMP_SCORE_POSITION = new Pose2d(new Translation2d(),new Rotation2d());
+        public final static Pose2d CLIMB_POSITION = new Pose2d(new Translation2d(),new Rotation2d());
     }
 }
