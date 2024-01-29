@@ -28,4 +28,8 @@ public class MoveWristToAngle extends WristCommand {
         return wrist.isAtAngle(targetAngle);
     }
 
+    @Override
+    public void end(boolean interrupted) {
+        wrist.standInPlace();
+    }
 }

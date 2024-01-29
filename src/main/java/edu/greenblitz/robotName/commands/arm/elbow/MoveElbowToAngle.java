@@ -26,4 +26,9 @@ public class MoveElbowToAngle extends ElbowCommand {
     public boolean isFinished() {
         return elbow.isAtAngle(targetAngle);
     }
+
+    @Override
+    public void end(boolean interrupted) {
+        elbow.standInPlace();
+    }
 }

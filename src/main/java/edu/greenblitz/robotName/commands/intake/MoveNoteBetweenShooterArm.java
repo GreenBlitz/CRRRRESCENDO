@@ -1,10 +1,10 @@
 package edu.greenblitz.robotName.commands.intake;
 
+import edu.greenblitz.robotName.ScoringModeSelector;
 import edu.greenblitz.robotName.subsystems.arm.Roller;
 import edu.greenblitz.robotName.subsystems.arm.Wrist;
 import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
 import edu.greenblitz.robotName.utils.GBCommand;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.function.Supplier;
 
@@ -14,32 +14,32 @@ public class MoveNoteBetweenShooterArm extends GBCommand {
 
     private Roller roller;
 
-    private Supplier<Boolean> isArmToShooter;
+    private Supplier<Boolean> isShooterToArm;
 
-    public MoveNoteBetweenShooterArm(Supplier<Boolean> isArmToShooter){
+    public MoveNoteBetweenShooterArm(){
         roller = Roller.getInstance();
         require(roller);
         funnel = Funnel.getInstance();
         require(funnel);
 
-        this.isArmToShooter = isArmToShooter;
+        this.isShooterToArm = () -> ScoringModeSelector.isSpeakerToAmp();
     }
 
     @Override
     public void execute() {
-        if (isArmToShooter.get()){
-            funnel.rollIn();
-            roller.rollOut();
-        }
-        else {
+        if (isShooterToArm.get()){
             funnel.rollOut();
             roller.rollIn();
+        }
+        else {
+            funnel.rollIn();
+            roller.rollOut();
         }
     }
 
     @Override
     public boolean isFinished() {
-        return isArmToShooter.get() ? funnel.isObjectIn() : Wrist.getInstance().isObjectInside();
+        return isShooterToArm.get() ? funnel.isObjectIn() : Wrist.getInstance().isObjectInside();
     }
 
     @Override

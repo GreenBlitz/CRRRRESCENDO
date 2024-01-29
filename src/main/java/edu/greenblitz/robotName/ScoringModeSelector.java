@@ -17,4 +17,7 @@ public class ScoringModeSelector {
         currentMode = scoringMode;
     }
 
+    public static boolean isSpeakerToAmp() {
+        return currentMode == ScoringMode.SPEAKER;
+    }
 }
