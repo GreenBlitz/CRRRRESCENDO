@@ -9,16 +9,16 @@ import java.util.function.Supplier;
 
 public class SetScoringMode extends GBCommand {
 
-    private Supplier<ScoringMode> scoringMode;
+    private ScoringMode scoringMode;
 
-    protected SetScoringMode(Supplier<ScoringMode> mode) {
+    protected SetScoringMode(ScoringMode mode) {
         scoringMode = mode;
     }
 
     @Override
     public void initialize() {
-        System.out.println(scoringMode.get());
-        ScoringModeSelector.setScoringMode(scoringMode.get());
+        System.out.println(scoringMode);
+        ScoringModeSelector.setScoringMode(scoringMode);
     }
 
     @Override
