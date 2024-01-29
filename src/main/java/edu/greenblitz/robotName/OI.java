@@ -35,10 +35,9 @@ public class OI {
 	}
 	
 	public void initButtons() {
-		if ((LED.getInstance().rumble())) {
-			mainJoystick.rumble(true, 10.0);
-		}
-		
+		mainJoystick.POV_UP.whileTrue(new InstantCommand(
+				() -> LED.getInstance().rumble()
+		));
 		mainJoystick.A.whileTrue(new InstantCommand(
 				() -> LED.getInstance().setLEDColor(Color.kGreen, 0, LEDConstants.LED_LENGTH)
 		));

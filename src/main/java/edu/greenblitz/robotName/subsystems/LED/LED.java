@@ -85,15 +85,16 @@ public class LED extends GBSubsystem {
 				inShooter = true;
 		}
 	}
-	
+
 	public boolean rumble() {
-		if ((inArm && noteOut)) {
-			return rumble = true;
-		}
-		if ((inShooter && noteOut)) {
-			return rumble = true;
-		}
-		return false;
+//		if ((inArm && noteOut)) {
+//			return rumble = true;
+//		}
+//		if ((inShooter && noteOut)) {
+//			return rumble = true;
+//		}
+//		return false;
+		return rumble = true;
 	}
 	
 	public void turnOff(int index) {
