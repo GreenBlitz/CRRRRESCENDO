@@ -1,10 +1,9 @@
 package edu.greenblitz.robotName.shootingStateService;
 
 import edu.greenblitz.robotName.FieldConstants;
-import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
+import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
-import edu.greenblitz.robotName.utils.shootingCalculations.ShooterAngle;
 import edu.greenblitz.robotName.utils.shootingCalculations.ShootingAngle;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -27,7 +26,7 @@ public class ShootingState {
         return LEGAL_SHOOTING_ZONE.getClosestPositionOnCircleBorder(getRobotPose().getTranslation());
     }
 
-    public static Rotation2d getRobotTargetAngle() {
+    public static Rotation2d getTargetRobotAngle() {
         double angle = LEGAL_SHOOTING_ZONE.getTargetRobotAngle(SwerveChassis.getInstance().getRobotPose().getTranslation()).getRadians();
         angle -= isRobotInShootingPosition() ? Math.PI : 0;
         return new Rotation2d(angle);
@@ -39,7 +38,7 @@ public class ShootingState {
                 new Translation3d(
                         robotPose.getX(),
                         robotPose.getY(),
-                        FieldConstants.MIDDLE_OF_SPEAKER_POSITION.getZ()
+                        PivotConstants.ROBOT_RELATIVE_PIVOT_POSITION.getZ()
                 )
         );
     }
@@ -47,7 +46,7 @@ public class ShootingState {
     public static Pose2d getTargetRobotPosition() {
         return new Pose2d(
                 getRobotTargetTranslation(),
-                getRobotTargetAngle()
+                getTargetRobotAngle()
         );
     }
 

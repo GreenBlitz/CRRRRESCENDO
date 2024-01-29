@@ -17,7 +17,7 @@ public class ShootingAngle {
 
     public static Translation2d getRelativePositionToMiddleOfSpeaker(Translation3d position) {
         Translation3d Speaker = FieldConstants.MIDDLE_OF_SPEAKER_POSITION;
-        double x = GBMath.distance(position, new Translation3d(Speaker.getX(), Speaker.getY(), 0));
+        double x = GBMath.distance(position, new Translation3d(Speaker.getX(), Speaker.getY(), position.getZ()));
         double y = Speaker.getZ() - position.getZ();
         return new Translation2d(x, y);
     }

@@ -15,7 +15,7 @@ public class RotateToAngle extends SwerveCommand{
 
     @Override
     public void initialize(){
-        angleSetPoint = ShootingState.getRobotTargetAngle().getRadians();
+        angleSetPoint = ShootingState.getTargetRobotAngle().getRadians();
         ChassisConstants.ROTATION_PID_CONTROLLER.setSetpoint(angleSetPoint);
     }
 

@@ -3,6 +3,7 @@ package edu.greenblitz.robotName;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.auto.MoveToPosition;
+import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingState;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.swerve.MoveToAmp;
@@ -56,6 +57,7 @@ public class OI {
 
     public void initButtons() {
         mainJoystick.L1.whileTrue(new GoToShootingState());
+        mainJoystick.R1.whileTrue(new MovePivotToAngle(new Rotation2d(Math.PI)));
     }
     
     public void initializeDefaultCommands(){
