@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.shootingStateService;
 
+import edu.greenblitz.robotName.FieldConstants;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
@@ -14,49 +15,51 @@ import static edu.greenblitz.robotName.shootingStateService.ShootingPositionCons
 
 public class ShootingState {
 
-	public static boolean isRobotInShootingPosition() {
-		return LEGAL_SHOOTING_ZONE.isInCircle(getRobotPose().getTranslation());
-	}
+    public static boolean isRobotInShootingPosition() {
+        return LEGAL_SHOOTING_ZONE.isInCircle(getRobotPose().getTranslation());
+    }
 
-	public static Pose2d getRobotPose() {
-		return SwerveChassis.getInstance().getRobotPose();
-	}
+    public static Pose2d getRobotPose() {
+        return SwerveChassis.getInstance().getRobotPose();
+    }
 
-	public static Translation2d getRobotTargetTranslation() {
-		return LEGAL_SHOOTING_ZONE.getClosestPositionOnCircleBorder(getRobotPose().getTranslation());
-	}
+    public static Translation2d getRobotTargetTranslation() {
+        return LEGAL_SHOOTING_ZONE.getClosestPositionOnCircleBorder(getRobotPose().getTranslation());
+    }
 
-	public static Rotation2d getRobotTargetAngle() {
-		return LEGAL_SHOOTING_ZONE.getTargetRobotAngle(SwerveChassis.getInstance().getRobotPose().getTranslation());
-	}
+    public static Rotation2d getRobotTargetAngle() {
+        double angle = LEGAL_SHOOTING_ZONE.getTargetRobotAngle(SwerveChassis.getInstance().getRobotPose().getTranslation()).getRadians();
+        angle -= isRobotInShootingPosition() ? Math.PI : 0;
+        return new Rotation2d(angle);
+    }
 
-	public static Rotation2d getTargetShooterAngle() {
-		Pose2d robotPose = isRobotInShootingPosition() ? getRobotPose() : getTargetRobotPosition();
-		return ShootingAngle.getShootingAngleBasedOnPosition(
-				new Translation3d(
-						robotPose.getX(),
-						robotPose.getY(),
-						RobotConstants.General.SHOOTER_HEIGHT_RELATIVE_TO_GROUND
-				)
-		);
-	}
+    public static Rotation2d getTargetShooterAngle() {
+        Pose2d robotPose = isRobotInShootingPosition() ? getRobotPose() : getTargetRobotPosition();
+        return ShootingAngle.getShootingAngleBasedOnPosition(
+                new Translation3d(
+                        robotPose.getX(),
+                        robotPose.getY(),
+                        FieldConstants.MIDDLE_OF_SPEAKER_POSITION.getZ()
+                )
+        );
+    }
 
-	public static Pose2d getTargetRobotPosition() {
-		return new Pose2d(
-				getRobotTargetTranslation(),
-				getRobotTargetAngle()
-		);
-	}
+    public static Pose2d getTargetRobotPosition() {
+        return new Pose2d(
+                getRobotTargetTranslation(),
+                getRobotTargetAngle()
+        );
+    }
 
-	public static boolean isPositionCorrect() {
-		return SwerveChassis.getInstance().isAtPose(getTargetRobotPosition());
-	}
+    public static boolean isPositionCorrect() {
+        return SwerveChassis.getInstance().isAtPose(getTargetRobotPosition());
+    }
 
-	public static boolean isAngleCorrect() {
-		return Pivot.getInstance().isAtAngle(getTargetShooterAngle());
-	}
+    public static boolean isAngleCorrect() {
+        return Pivot.getInstance().isAtAngle(getTargetShooterAngle());
+    }
 
-	public static boolean isReadyToShoot() {
-		return isAngleCorrect() && isPositionCorrect();
-	}
+    public static boolean isReadyToShoot() {
+        return isAngleCorrect() && isPositionCorrect();
+    }
 }

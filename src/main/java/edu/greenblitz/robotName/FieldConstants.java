@@ -18,7 +18,7 @@ public class FieldConstants {
 
 	public final static double FIELD_WIDTH = 8.0137;
 
-	public static final Translation3d MIDDLE_OF_SPEAKER_POSITION = new Translation3d(2.225, 0.23, 2.045);
+	public static final Translation3d MIDDLE_OF_SPEAKER_POSITION = new Translation3d(15.24, 5.9944, 2.045);
 
 	public static class ShootingZoneConstants {
 		public static final List<Pair<Translation2d, Translation2d>> RESTRICTED_BOUNDS = new ArrayList<>();

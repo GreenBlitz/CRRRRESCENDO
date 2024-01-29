@@ -19,7 +19,6 @@ public class RobotConstants {
         public static final int POWER_DISTRIBUTION_CAN_ID = 20;
         public static final PowerDistribution.ModuleType POWER_DISTRIBUTION_TYPE = PowerDistribution.ModuleType.kRev;
         public final static double RAMP_RATE_VAL = 0.4;
-        public final static double SHOOTER_HEIGHT_RELATIVE_TO_GROUND = 6;
 
         public static class Motors {
 
