@@ -3,9 +3,6 @@ package edu.greenblitz.robotName.commands.GetNoteToSystem;
 import edu.greenblitz.robotName.ScoringModeSelector;
 import edu.greenblitz.robotName.utils.GBCommand;
 import edu.greenblitz.robotName.utils.ScoringMode;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import java.util.function.Supplier;
 
 public class SetScoringMode extends GBCommand {
 

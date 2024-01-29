@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import java.util.function.BooleanSupplier;
 
 public class SwitchModeMotion extends SequentialCommandGroup {
+
     public SwitchModeMotion(ScoringMode mode, BooleanSupplier isNoteInOtherSystem){
         super(
                 new ConditionalCommand(

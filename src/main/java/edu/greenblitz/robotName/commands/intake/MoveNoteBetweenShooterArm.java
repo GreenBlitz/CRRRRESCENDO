@@ -22,7 +22,7 @@ public class MoveNoteBetweenShooterArm extends GBCommand {
         funnel = Funnel.getInstance();
         require(funnel);
 
-        this.isShooterToArm = () -> ScoringModeSelector.isSpeakerToAmp();
+        this.isShooterToArm = ScoringModeSelector::isSpeakerToAmp;
     }
 
     @Override
