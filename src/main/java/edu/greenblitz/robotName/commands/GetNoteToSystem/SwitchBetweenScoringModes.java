@@ -11,7 +11,7 @@ public class SwitchBetweenScoringModes extends ConditionalCommand {
         super(
                 new SwitchModeMotion(ScoringMode.AMP, () -> Funnel.getInstance().isObjectIn()),
                 new SwitchModeMotion(ScoringMode.SPEAKER, () -> Wrist.getInstance().isObjectInside()),
-                () -> ScoringModeSelector.isSpeakerToAmp()
+                ScoringModeSelector::isSpeakerToAmp
         );
     }
 }
