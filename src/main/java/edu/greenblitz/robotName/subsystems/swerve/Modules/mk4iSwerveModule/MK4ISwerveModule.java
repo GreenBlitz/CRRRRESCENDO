@@ -1,5 +1,7 @@
 package edu.greenblitz.robotName.subsystems.swerve.Modules.mk4iSwerveModule;
 
+import com.ctre.phoenix6.BaseStatusSignal;
+import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.controls.*;
 import com.ctre.phoenix6.hardware.CANcoder;
 
@@ -18,10 +20,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MK4ISwerveModule implements ISwerveModule {
 
-    private final GBTalonFXPro angularMotor;
-    private final GBTalonFXPro linearMotor;
+    private GBTalonFXPro angularMotor;
+    private GBTalonFXPro linearMotor;
     private final CANcoder canCoder;
     private final double encoderOffset;
+
+    private StatusSignal<Double> linearPositionStatusSignal;
+    private StatusSignal<Double> linearVelocityStatusSignal;
+    private StatusSignal<Double> linearAccelerationStatusSignal;
+    private StatusSignal<Double> angularPositionStatusSignal;
+    private StatusSignal<Double> angularVelocityStatusSignal;
+    private StatusSignal<Double> angularAccelerationStatusSignal;
+
 
 
     public VelocityVoltage velocityVoltage = new VelocityVoltage(0).withEnableFOC(true);
@@ -98,11 +108,31 @@ public class MK4ISwerveModule implements ISwerveModule {
         angularMotor.stopMotor();
     }
 
+
+    public void updateStatusSignals(boolean refresh){
+        if(refresh){
+            linearVelocityStatusSignal = linearMotor.getVelocity().refresh();
+            linearPositionStatusSignal = linearMotor.getPosition().refresh();
+            linearAccelerationStatusSignal = linearMotor.getAcceleration().refresh();
+            angularVelocityStatusSignal = linearMotor.getVelocity().refresh();
+            angularPositionStatusSignal = linearMotor.getPosition().refresh();
+            angularAccelerationStatusSignal = linearMotor.getAcceleration().refresh();
+        }else{
+            linearVelocityStatusSignal = linearMotor.getVelocity();
+            linearPositionStatusSignal = linearMotor.getPosition();
+            linearAccelerationStatusSignal = linearMotor.getAcceleration();
+            angularVelocityStatusSignal = linearMotor.getVelocity();
+            angularPositionStatusSignal = linearMotor.getPosition();
+            angularAccelerationStatusSignal = linearMotor.getAcceleration();
+        }
+    }
     @Override
     public void updateInputs(SwerveModuleInputsAutoLogged inputs) {
-        
-        inputs.linearVelocity = linearMotor.getVelocity().getValue()  * MK4iSwerveConstants.WHEEL_CIRCUMFERENCE;
-        inputs.angularVelocity = angularMotor.getVelocity().getValue() / MK4iSwerveConstants.ANGULAR_GEAR_RATIO;
+        updateStatusSignals(true);
+
+
+        inputs.linearVelocity = BaseStatusSignal.getLatencyCompensatedValue(linearMotor.getVelocity(), linearMotor.getAcceleration()) / MK4iSwerveConstants.ANGULAR_GEAR_RATIO;
+        inputs.angularVelocity = BaseStatusSignal.getLatencyCompensatedValue(angularMotor.getVelocity(), angularMotor.getAcceleration()) / MK4iSwerveConstants.ANGULAR_GEAR_RATIO;
 
         inputs.linearVoltage = linearMotor.getSupplyVoltage().getValue();
         inputs.angularVoltage = angularMotor.getSupplyVoltage().getValue();
@@ -110,7 +140,7 @@ public class MK4ISwerveModule implements ISwerveModule {
         inputs.linearCurrent = linearMotor.getSupplyCurrent().getValue();
         inputs.angularCurrent = angularMotor.getStatorCurrent().getValue();
         
-        inputs.linearMetersPassed = Units.rotationsToRadians(linearMotor.getPosition().getValue()) * MK4iSwerveConstants.WHEEL_RADIUS;
+        inputs.linearMetersPassed = BaseStatusSignal.getLatencyCompensatedValue(linearPositionStatusSignal, linearVelocityStatusSignal);
         inputs.angularPositionRadians = Conversions.MK4IConversions.convertRevolutionsToRadians(angularMotor.getPosition().getValue());
 
         inputs.isAbsoluteEncoderConnected = canCoder.getVersion().getValue() != 0;
@@ -120,5 +150,6 @@ public class MK4ISwerveModule implements ISwerveModule {
         } else {
             inputs.absoluteEncoderPosition = Units.rotationsToRadians(canCoder.getAbsolutePosition().getValue());
         }
+
     }
 }

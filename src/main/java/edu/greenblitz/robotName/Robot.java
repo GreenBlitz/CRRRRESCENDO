@@ -14,6 +14,7 @@ import edu.greenblitz.robotName.subsystems.arm.Wrist;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
+import edu.greenblitz.robotName.subsystems.swerve.Modules.mk4iSwerveModule.MK4ISwerveModule;
 import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
@@ -88,7 +89,8 @@ public class Robot extends LoggedRobot {
         CommandScheduler.getInstance().run();
         RoborioUtils.updateCurrentCycleTime();
         ArmShooterMechanism.getInstance().periodic();
-    }
+
+        SwerveChassis.getInstance().getModule(SwerveChassis.Module.FRONT_LEFT
 
     private void initializeAutonomousBuilder() {
         AutoBuilder.configureHolonomic(
