@@ -1,7 +1,9 @@
 package edu.greenblitz.robotName.subsystems.arm.ElbowUtils.FalconElbow;
 
 import com.ctre.phoenix6.configs.*;
+import com.ctre.phoenix6.signals.ForwardLimitTypeValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import com.ctre.phoenix6.signals.ReverseLimitTypeValue;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 
 import static edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants.*;
@@ -9,6 +11,10 @@ import static edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants.
 public class FalconElbowConstants {
 
     public static final int FALCON_MOTOR_ID = 1;
+
+    public static final int HARD_REVERSE_LIMIT_SWITCH_ID = 1;
+
+    public static final int HARD_FORWARD_LIMIT_SWITCH_ID = 1;
 
     public static final double kS = 1;
 
@@ -58,6 +64,20 @@ public class FalconElbowConstants {
         SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitThreshold = BACKWARD_ANGLE_LIMIT.getRadians();
     }
 
+    public static final HardwareLimitSwitchConfigs HARDWARE_LIMIT_SWITCH_CONFIGS = new HardwareLimitSwitchConfigs();
+    static{
+        HARDWARE_LIMIT_SWITCH_CONFIGS.ForwardLimitAutosetPositionEnable = true;
+        HARDWARE_LIMIT_SWITCH_CONFIGS.ForwardLimitAutosetPositionValue = FORWARD_ANGLE_LIMIT.getRadians();
+        HARDWARE_LIMIT_SWITCH_CONFIGS.ForwardLimitEnable = true;
+        HARDWARE_LIMIT_SWITCH_CONFIGS.ForwardLimitType = ForwardLimitTypeValue.NormallyOpen;
+        HARDWARE_LIMIT_SWITCH_CONFIGS.ForwardLimitRemoteSensorID = HARD_FORWARD_LIMIT_SWITCH_ID;
+        HARDWARE_LIMIT_SWITCH_CONFIGS.ReverseLimitAutosetPositionEnable = true;
+        HARDWARE_LIMIT_SWITCH_CONFIGS.ReverseLimitAutosetPositionValue = FORWARD_ANGLE_LIMIT.getRadians();
+        HARDWARE_LIMIT_SWITCH_CONFIGS.ReverseLimitEnable = true;
+        HARDWARE_LIMIT_SWITCH_CONFIGS.ReverseLimitType = ReverseLimitTypeValue.NormallyOpen;
+        HARDWARE_LIMIT_SWITCH_CONFIGS.ReverseLimitRemoteSensorID = HARD_REVERSE_LIMIT_SWITCH_ID;
+    }
+
     public static final TalonFXConfiguration TALON_FX_CONFIGURATION = new TalonFXConfiguration();
 
     static{
@@ -65,6 +85,9 @@ public class FalconElbowConstants {
         TALON_FX_CONFIGURATION.ClosedLoopRamps = CLOSED_LOOP_RAMPS_CONFIGS;
         TALON_FX_CONFIGURATION.CurrentLimits = CURRENT_LIMITS_CONFIGS;
         TALON_FX_CONFIGURATION.SoftwareLimitSwitch = SOFTWARE_LIMIT_SWITCH_CONFIGS;
+        TALON_FX_CONFIGURATION.HardwareLimitSwitch = HARDWARE_LIMIT_SWITCH_CONFIGS;
     }
+
+
 
 }
