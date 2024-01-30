@@ -1,13 +1,10 @@
 package edu.greenblitz.robotName.subsystems.LED;
 
-import edu.greenblitz.robotName.OI;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.util.Color;
-import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 import static edu.greenblitz.robotName.subsystems.LED.LEDConstants.LED_LENGTH;
 import static edu.greenblitz.robotName.subsystems.LED.LEDConstants.LED_PORT;
@@ -18,8 +15,8 @@ public class LED extends GBSubsystem {
 	private AddressableLEDBuffer addressableLEDBuffer;
 	private Timer LEDBlinkTimerOff;
 	private Timer LEDBlinkTimerOn;
-	private boolean blinkArm = false;
-	private boolean blinkShooter = false;
+	private boolean blinkIfInArm = false;
+	private boolean blinkIfInShooter = false;
 	private boolean noteOut = false;
 	private boolean inArm = false;
 	private boolean inShooter = false;
@@ -77,15 +74,13 @@ public class LED extends GBSubsystem {
 	public void blinkByNotePlace(RobotMode.NotePlaceInRobot place) {
 		switch (place) {
 			case ARM:
-				startBlinkingArm();
-				inArm = true;
+				blink();
 				break;
 			case SHOOTER:
-				startBlinkingShooter();
-				inShooter = true;
+				blink();
 		}
 	}
-
+	
 	public boolean rumble() {
 //		if ((inArm && noteOut)) {
 //			return rumble = true;
@@ -111,65 +106,34 @@ public class LED extends GBSubsystem {
 		turnOff(section.startIndex(), section.endIndex());
 	}
 	
-	public void startBlinkingArm() {
-		blinkArm = true;
-	}
-	
-	public void stopBlinkingArm() {
-		blinkArm = false;
-	}
-	
-	public void startBlinkingShooter() {
-		blinkShooter = true;
-	}
-	
-	public void stopBlinkingShooter() {
-		blinkShooter = false;
-	}
-	
-	@Override
-	public void periodic() {
-		this.addressableLED.setData(addressableLEDBuffer);
-		if (blinkArm) {
-			if (LEDBlinkTimerOn.get() >= 1) {
-				LEDBlinkTimerOn.reset();
-				LEDBlinkTimerOn.stop();
-				LEDBlinkTimerOff.start();
-				setLEDColor(Color.kDarkBlue, 0, LED_LENGTH);
-			} else if (LEDBlinkTimerOff.get() >= 0.25) {
-				LEDBlinkTimerOff.reset();
-				LEDBlinkTimerOff.stop();
-				LEDBlinkTimerOn.start();
-				turnOff(0, LED_LENGTH);
-			} else {
-				setLEDColor(Color.kDarkBlue, 0, LED_LENGTH);
-			}
-		}
-		if (blinkShooter) {
+	public void blink() {
+		Timer timer = new Timer();
+		while (timer.get() < 1) {
 			if (LEDBlinkTimerOn.get() >= 0.25) {
 				LEDBlinkTimerOn.reset();
 				LEDBlinkTimerOn.stop();
 				LEDBlinkTimerOff.start();
-				setLEDColor(Color.kYellow, 0, LED_LENGTH);
 			} else if (LEDBlinkTimerOff.get() >= 0.25) {
 				LEDBlinkTimerOff.reset();
 				LEDBlinkTimerOff.stop();
 				LEDBlinkTimerOn.start();
-				turnOff(0, LED_LENGTH);
-			} else {
-				setLEDColor(Color.kYellow, 0, LED_LENGTH);
+			}
+			if ((LEDBlinkTimerOff.get() == 1) || (LEDBlinkTimerOn.get() == 1)) {
+				stopBlinkingArm();
 			}
 		}
-		
 	}
-	
-	public enum RobotMode {
-		AMP, SPEAKER, LIFTER;
-		
-		public enum NotePlaceInRobot {
-			SHOOTER, ARM;
+	@Override
+	public void periodic() {
+		this.addressableLED.setData(addressableLEDBuffer);
 		}
+public enum RobotMode {
+	AMP, SPEAKER, LIFTER;
+	
+	public enum NotePlaceInRobot {
+		SHOOTER, ARM;
 	}
+}
 }
 
 
