@@ -32,9 +32,10 @@ public class ReplayElbow implements IElbow {
     }
 
     @Override
-    public SimpleMotorFeedforward getFeedForward() {
-        return null;
+    public void standInPlace() {
+
     }
+
 
     @Override
     public void updateInputs(ElbowInputsAutoLogged inputs) {

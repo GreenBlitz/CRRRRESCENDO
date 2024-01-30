@@ -71,16 +71,7 @@ public class Elbow extends GBSubsystem {
     }
 
     public void standInPlace() {
-        elbow.setVoltage(getStaticFeedForward());
-    }
-
-
-    public double getStaticFeedForward() {
-        return elbow.getFeedForward().calculate(0);
-    }
-
-    public double getDynamicFeedForward(double velocity) {
-        return elbow.getFeedForward().calculate(velocity);
+        elbow.standInPlace();
     }
 
     public double getVoltage() {

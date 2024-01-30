@@ -58,8 +58,8 @@ public class NeoElbow implements IElbow {
     }
 
     @Override
-    public SimpleMotorFeedforward getFeedForward() {
-        return NeoElbowConstants.SIMPLE_MOTOR_FEED_FORWARD;
+    public void standInPlace() {
+        setVoltage(NeoElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(0));
     }
 
     @Override

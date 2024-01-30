@@ -20,7 +20,7 @@ public class FalconElbow implements IElbow {
         motor.getConfigurator().apply(FalconElbowConstants.TALON_FX_CONFIGURATION);
         motor.setNeutralMode(FalconElbowConstants.NEUTRAL_MODE_VALUE);
         motor.optimizeBusUtilization();
-        motionMagicDutyCycle = new MotionMagicDutyCycle(0, true, getFeedForward().calculate(0), 0, true, true, true);
+        motionMagicDutyCycle = new MotionMagicDutyCycle(0, true, FalconElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(0), 0, true, true, true);
     }
 
     @Override
@@ -48,12 +48,12 @@ public class FalconElbow implements IElbow {
     public void moveToAngle(Rotation2d targetAngle) {
         motor.setControl(
                 motionMagicDutyCycle.withPosition(targetAngle.getRadians() / ElbowConstants.CONVERSION_FACTOR)
-                .withFeedForward(getFeedForward().calculate(motor.getVelocity().getValue() * ElbowConstants.CONVERSION_FACTOR )));
+                .withFeedForward(FalconElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(motor.getVelocity().getValue() * ElbowConstants.CONVERSION_FACTOR )));
     }
 
     @Override
-    public SimpleMotorFeedforward getFeedForward() {
-        return FalconElbowConstants.SIMPLE_MOTOR_FEED_FORWARD;
+    public void standInPlace() {
+        setVoltage(FalconElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(0));
     }
 
     @Override

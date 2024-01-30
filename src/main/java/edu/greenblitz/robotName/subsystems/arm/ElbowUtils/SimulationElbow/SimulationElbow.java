@@ -70,8 +70,8 @@ public class SimulationElbow implements IElbow {
     }
 
     @Override
-    public SimpleMotorFeedforward getFeedForward() {
-        return SimulationElbowConstants.SIMPLE_MOTOR_FEEDFORWARD;
+    public void standInPlace() {
+        setVoltage(SimulationElbowConstants.SIMPLE_MOTOR_FEEDFORWARD.calculate(0));
     }
 
     @Override

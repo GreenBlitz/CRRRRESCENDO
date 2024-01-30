@@ -16,7 +16,7 @@ public interface IElbow {
 
     void moveToAngle(Rotation2d targetAngle);
 
-    SimpleMotorFeedforward getFeedForward();
+    void standInPlace();
 
     void updateInputs(ElbowInputsAutoLogged inputs);
 
