@@ -8,6 +8,16 @@ import static edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants.
 
 public class FalconElbowConstants {
 
+    public static final double kS = 1;
+
+    public static final double kV = 1;
+
+    public static final double kG = 1;
+
+    public static final double kA = 1;
+
+    public static final SimpleMotorFeedforward SIMPLE_MOTOR_FEED_FORWARD = new SimpleMotorFeedforward(kS, kV, kA);
+
     public static final NeutralModeValue NEUTRAL_MODE_VALUE = NeutralModeValue.Brake;
 
     public static final MotionMagicConfigs MOTION_MAGIC_CONFIGS = new MotionMagicConfigs();

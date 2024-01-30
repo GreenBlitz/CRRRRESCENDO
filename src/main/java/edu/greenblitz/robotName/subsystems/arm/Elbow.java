@@ -7,7 +7,6 @@ import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowFactory;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.IElbow;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.SimulationElbow.SimulationElbowConstants;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.MotorElbow.MotorElbowConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -77,11 +76,11 @@ public class Elbow extends GBSubsystem {
 
 
     public double getStaticFeedForward() {
-        return Robot.isSimulation() ? 0 : MotorElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(0);
+        return elbow.getFeedForward().calculate(0);
     }
 
     public double getDynamicFeedForward(double velocity) {
-        return MotorElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(velocity);
+        return elbow.getFeedForward().calculate(velocity);
     }
 
     public double getVoltage() {

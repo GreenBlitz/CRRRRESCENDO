@@ -10,6 +10,7 @@ import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.IElbow;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.MotorElbow.MotorElbowConstants;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 import static edu.greenblitz.robotName.subsystems.arm.ElbowUtils.MotorElbow.NeoElbow.NeoElbowConstants.PID_SLOT;
@@ -57,6 +58,11 @@ public class NeoElbow implements IElbow {
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
         motor.getPIDController().setReference(targetAngle.getRadians(), CANSparkMax.ControlType.kPosition, PID_SLOT, motor.getPIDController().getFF());
+    }
+
+    @Override
+    public SimpleMotorFeedforward getFeedForward() {
+        return NeoElbowConstants.SIMPLE_MOTOR_FEED_FORWARD;
     }
 
     @Override

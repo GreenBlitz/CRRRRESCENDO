@@ -7,6 +7,7 @@ import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.IElbow;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
@@ -66,6 +67,11 @@ public class SimulationElbow implements IElbow {
     public void moveToAngle(Rotation2d targetAngle) {
         controller.setSetpoint(targetAngle.getRadians());
         setVoltage(controller.calculate(elbowSimulation.getAngleRads()));
+    }
+
+    @Override
+    public SimpleMotorFeedforward getFeedForward() {
+        return SimulationElbowConstants.SIMPLE_MOTOR_FEEDFORWARD;
     }
 
     @Override

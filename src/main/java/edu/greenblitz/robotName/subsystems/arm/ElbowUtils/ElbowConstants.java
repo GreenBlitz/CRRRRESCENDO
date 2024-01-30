@@ -40,14 +40,6 @@ public class ElbowConstants {
 
     public static final double STARTING_ANGLE = 1;
 
-    public static final double kS = 1;
-
-    public static final double kV = 1;
-
-    public static final double kG = 1;
-
-    public static final double kA = 1;
-
     public static final double TOLERANCE = Units.degreesToRadians(0.5);
 
     public static final int CURRENT_LIMIT = 40;

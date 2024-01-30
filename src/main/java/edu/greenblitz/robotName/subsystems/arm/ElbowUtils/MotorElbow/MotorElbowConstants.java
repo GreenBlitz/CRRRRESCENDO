@@ -8,6 +8,4 @@ public class MotorElbowConstants {
 
     public static final int MOTOR_ID = 1;
 
-    public static final SimpleMotorFeedforward SIMPLE_MOTOR_FEED_FORWARD = new SimpleMotorFeedforward(kS, kV, kA);
-
 }

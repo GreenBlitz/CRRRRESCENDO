@@ -5,9 +5,20 @@ import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
 import edu.greenblitz.robotName.utils.PIDObject;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 
 
 public class NeoElbowConstants {
+
+    public static final double kS = 1;
+
+    public static final double kV = 1;
+
+    public static final double kG = 1;
+
+    public static final double kA = 1;
+
+    public static final SimpleMotorFeedforward SIMPLE_MOTOR_FEED_FORWARD = new SimpleMotorFeedforward(kS, kV, kA);
 
     public static final int PID_SLOT = 0;
 

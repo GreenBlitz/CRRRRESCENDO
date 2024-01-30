@@ -2,9 +2,12 @@ package edu.greenblitz.robotName.subsystems.arm.ElbowUtils.SimulationElbow;
 
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
 import edu.greenblitz.robotName.utils.PIDObject;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.util.Units;
 
 public class SimulationElbowConstants {
+
+    public static final SimpleMotorFeedforward SIMPLE_MOTOR_FEEDFORWARD = new SimpleMotorFeedforward(0,0);
 
     public static final int NUMBER_OF_MOTORS = 1;
 
