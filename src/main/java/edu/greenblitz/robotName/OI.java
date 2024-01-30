@@ -61,7 +61,7 @@ public class OI {
     }
 
     public void initButtons() {
-        mainJoystick.L1.whileTrue(new GoToShootingState());
+
     }
 
     public void initializeDefaultCommands(){

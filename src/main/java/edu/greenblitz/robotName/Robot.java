@@ -79,12 +79,6 @@ public class Robot extends LoggedRobot {
         CommandScheduler.getInstance().run();
         RoborioUtils.updateCurrentCycleTime();
         ArmShooterMechanism.getInstance().periodic();
-
-        Logger.recordOutput("isAtPosition", ShootingState.isRobotInShootingPosition());
-        Logger.recordOutput("wifi", ShootingState.getTargetRobotPosition());
-        Logger.recordOutput("pivot", Pivot.getInstance().getAngle().getDegrees());
-        Logger.recordOutput("target pivot", ShootingState.getTargetShooterAngle().getDegrees());
-        Logger.recordOutput("readyToShoot", ShootingState.isReadyToShoot());
     }
 
     private void initializeAutonomousBuilder() {
@@ -134,6 +128,4 @@ public class Robot extends LoggedRobot {
         }
         Logger.start();
     }
-
-
 }

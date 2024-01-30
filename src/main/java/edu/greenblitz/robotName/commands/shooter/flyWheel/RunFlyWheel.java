@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.commands.shooter;
+package edu.greenblitz.robotName.commands.shooter.flyWheel;
 
 import edu.greenblitz.robotName.commands.shooter.flyWheel.FlyWheelCommand;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
