@@ -5,29 +5,22 @@
       "x": 1.209843844624077,
       "y": 6.715747579077855
     },
-    "rotation": 0
+    "rotation": -142.2531946127254
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
-          "type": "parallel",
+          "type": "named",
           "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "amp start to 5"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "shoot"
-                }
-              }
-            ]
+            "name": "shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "amp start to 5"
           }
         },
         {
@@ -37,22 +30,15 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "5 to 1"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "shoot"
-                }
-              }
-            ]
+            "pathName": "5 to 1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "shoot"
           }
         },
         {
@@ -62,28 +48,27 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "named",
           "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "1 to 6"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "shoot"
-                }
-              }
-            ]
+            "name": "shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "1 to 6"
           }
         },
         {
           "type": "named",
           "data": {
             "name": "grip"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "6 to speaker"
           }
         },
         {

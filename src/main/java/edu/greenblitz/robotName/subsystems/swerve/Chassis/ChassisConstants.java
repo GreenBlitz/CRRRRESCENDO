@@ -6,7 +6,7 @@ import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.ReplanningConfig;
-import edu.greenblitz.robotName.commands.intake.RunIntake;
+import edu.greenblitz.robotName.commands.intake.NoteToShooter;
 import edu.greenblitz.robotName.commands.shooter.ShootByVelocity;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.wpi.first.math.controller.PIDController;
@@ -58,7 +58,7 @@ public class ChassisConstants {
     public static final double ERROR_SPIKE_FOR_REPLANNING = 1;
     static {
         NamedCommands.registerCommand("Shoot", new ShootByVelocity(3000));
-        NamedCommands.registerCommand("Grip", new RunIntake(() -> false));
+        NamedCommands.registerCommand("Grip", new NoteToShooter());
     }
     public static final HolonomicPathFollowerConfig PATH_FOLLOWER_CONFIG = new HolonomicPathFollowerConfig(
             TRANSLATION_PID,

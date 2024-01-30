@@ -5,29 +5,22 @@
       "x": 0.9114728139366188,
       "y": 1.9598770729072998
     },
-    "rotation": 0
+    "rotation": 111.68611478431275
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
-          "type": "parallel",
+          "type": "named",
           "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "source start to 7"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "shoot"
-                }
-              }
-            ]
+            "name": "shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "source start to 7"
           }
         },
         {
@@ -37,22 +30,21 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "7 to 8"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "shoot"
-                }
-              }
-            ]
+            "pathName": "7 to speaker"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "speaker to 8"
           }
         },
         {
@@ -62,22 +54,15 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "8 to 3"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "shoot"
-                }
-              }
-            ]
+            "pathName": "8 to 3"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "shoot"
           }
         },
         {

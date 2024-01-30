@@ -5,7 +5,7 @@
       "x": 0.7543128599770712,
       "y": 4.1
     },
-    "rotation": 0
+    "rotation": 116.26365788721512
   },
   "command": {
     "type": "sequential",
@@ -68,7 +68,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "6 to 5"
+                  "pathName": "6 to speaker"
                 }
               },
               {
