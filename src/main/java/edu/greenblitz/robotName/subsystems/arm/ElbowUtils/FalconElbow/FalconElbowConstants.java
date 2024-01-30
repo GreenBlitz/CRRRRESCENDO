@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.arm.ElbowUtils.MotorElbow.FalconElbow;
+package edu.greenblitz.robotName.subsystems.arm.ElbowUtils.FalconElbow;
 
 import com.ctre.phoenix6.configs.*;
 import com.ctre.phoenix6.signals.NeutralModeValue;
@@ -7,6 +7,8 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import static edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants.*;
 
 public class FalconElbowConstants {
+
+    public static final int FALCON_MOTOR_ID = 1;
 
     public static final double kS = 1;
 

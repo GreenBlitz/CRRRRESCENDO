@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.subsystems.arm.ElbowUtils;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public class ReplayElbow implements IElbow {
@@ -28,6 +29,11 @@ public class ReplayElbow implements IElbow {
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
 
+    }
+
+    @Override
+    public SimpleMotorFeedforward getFeedForward() {
+        return null;
     }
 
     @Override

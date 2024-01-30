@@ -1,19 +1,17 @@
-package edu.greenblitz.robotName.subsystems.arm.ElbowUtils.MotorElbow.NeoElbow;
+package edu.greenblitz.robotName.subsystems.arm.ElbowUtils.NeoElbow;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.SparkMaxAbsoluteEncoder;
+import com.revrobotics.SparkMaxLimitSwitch;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.IElbow;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.MotorElbow.MotorElbowConstants;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
-
-import static edu.greenblitz.robotName.subsystems.arm.ElbowUtils.MotorElbow.NeoElbow.NeoElbowConstants.PID_SLOT;
 
 
 public class NeoElbow implements IElbow {
@@ -21,17 +19,16 @@ public class NeoElbow implements IElbow {
     GBSparkMax motor;
 
     public NeoElbow(){
-        motor = new GBSparkMax(MotorElbowConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        motor = new GBSparkMax(NeoElbowConstants.NEO_MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
         motor.config(NeoElbowConstants.ELBOW_CONFIG_OBJECT);
-
-        motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).setPositionConversionFactor(ElbowConstants.ABSOLUTE_POSITION_CONVERSION_FACTOR);
-        motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).setVelocityConversionFactor(ElbowConstants.ABSOLUTE_VELOCITY_CONVERSION_FACTOR);
 
         motor.getPIDController().setFeedbackDevice(motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle));
         motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
         motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, ElbowConstants.BACKWARD_ANGLE_LIMIT.getRadians());
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, ElbowConstants.FORWARD_ANGLE_LIMIT.getRadians());
+        motor.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoElbowConstants.IS_REVERSE_LIMIT_SWITCH_ENABLE);
+        motor.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoElbowConstants.IS_FORWARD_LIMIT_SWITCH_ENABLE);
     }
 
     @Override
@@ -57,7 +54,7 @@ public class NeoElbow implements IElbow {
 
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
-        motor.getPIDController().setReference(targetAngle.getRadians(), CANSparkMax.ControlType.kPosition, PID_SLOT, motor.getPIDController().getFF());
+        motor.getPIDController().setReference(targetAngle.getRadians(), CANSparkMax.ControlType.kPosition, NeoElbowConstants.PID_SLOT, motor.getPIDController().getFF());
     }
 
     @Override
