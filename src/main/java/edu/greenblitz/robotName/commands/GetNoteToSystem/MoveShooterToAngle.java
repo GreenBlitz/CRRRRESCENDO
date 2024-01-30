@@ -10,28 +10,35 @@ import edu.greenblitz.robotName.utils.GBCommand;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.*;
 
-public class MoveShooterToAngle extends ConditionalCommand {
-	public MoveShooterToAngle(Rotation2d targetAngle) {
-		super(
-				new ParallelCommandGroup(
-						new GBCommand() {
-							@Override
-							public void initialize() {
-								new MoveElbowAndWrist(
-										ElbowConstants.PresetPositions.SAFE.ANGLE,
-										WristConstants.PresetPositions.TRANSFER.ANGLE
-								).schedule();
-							}
-						},
-						new SequentialCommandGroup(
-								new WaitCommand(PivotConstants.DELAY_FOR_NO_COLLISION_SECONDS),
-								new MovePivotToAngle(targetAngle)
-						)
-				),
-				new MovePivotToAngle(targetAngle),
-				() -> Elbow.getInstance().isInShooterCollisionRange()
-		);
+public class MoveShooterToAngle extends GBCommand {
 
+	private Rotation2d targetAngle;
+
+	public MoveShooterToAngle(Rotation2d targetAngle) {
+		this.targetAngle = targetAngle;
 	}
 
+	@Override
+	public void initialize() {
+		if (Elbow.getInstance().isInShooterCollisionRange()){
+			new ParallelCommandGroup(
+					new MoveElbowAndWrist(
+					ElbowConstants.PresetPositions.SAFE.ANGLE,
+					WristConstants.PresetPositions.TRANSFER.ANGLE
+					),
+					new SequentialCommandGroup(
+							new WaitCommand(PivotConstants.DELAY_FOR_NO_COLLISION_SECONDS),
+							new MovePivotToAngle(targetAngle)
+					)
+			).schedule();
+		}
+		else {
+			new MovePivotToAngle(targetAngle).schedule();
+		}
+	}
+
+	@Override
+	public boolean isFinished() {
+		return true;
+	}
 }
