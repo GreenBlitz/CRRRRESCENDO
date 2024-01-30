@@ -3,7 +3,6 @@ package edu.greenblitz.robotName.shootingStateService;
 
 import edu.greenblitz.robotName.FieldConstants;
 import edu.greenblitz.robotName.utils.shootingCalculations.ShootingZone;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 
 public class ShootingPositionConstants {

@@ -7,8 +7,11 @@ import edu.wpi.first.math.geometry.Translation2d;
  * A radius and center position, EPSILON for when the given point is right below the center (Cx == Px)
  */
 public class GBCircle {
+
     private Translation2d centerPosition;
+
     private double radius;
+
     private final double EPSILON = 0.1;
 
     /**
