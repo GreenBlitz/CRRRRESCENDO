@@ -64,6 +64,7 @@ hs_err_pid*
 *~
 
 # temporary files which can be created if a process still has a handle open of a deleted file
+simgui.json
 .fuse_hidden*
 
 # KDE directory preferences
@@ -170,4 +171,3 @@ out/
 
 # Simulation GUI and other tools window save file
 *-window.json
-simgui.json
