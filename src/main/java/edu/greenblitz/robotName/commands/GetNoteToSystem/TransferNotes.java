@@ -1,9 +1,7 @@
 package edu.greenblitz.robotName.commands.GetNoteToSystem;
 
-import edu.greenblitz.robotName.commands.intake.MoveNoteBetweenShooterArm;
+import edu.greenblitz.robotName.commands.arm.MoveNoteBetweenShooterArm;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-
-import java.util.function.Supplier;
 
 public class TransferNotes extends SequentialCommandGroup {
 

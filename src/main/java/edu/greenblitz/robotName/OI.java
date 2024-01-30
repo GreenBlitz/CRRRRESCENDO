@@ -1,17 +1,9 @@
 package edu.greenblitz.robotName;
 
-import edu.greenblitz.robotName.commands.GetNoteToSystem.MoveShooterToAngle;
-import edu.greenblitz.robotName.commands.GetNoteToSystem.SwitchBetweenScoringModes;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
-import edu.greenblitz.robotName.commands.intake.MoveNoteBetweenShooterArm;
-import edu.greenblitz.robotName.commands.intake.NoteToIntake;
-import edu.greenblitz.robotName.commands.intake.NoteToShooter;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
-import edu.greenblitz.robotName.commands.swerve.MoveToAmp;
-import edu.greenblitz.robotName.commands.swerve.MoveToClimbPosition;
-import edu.greenblitz.robotName.commands.swerve.MoveToSpeaker;
 import edu.greenblitz.robotName.subsystems.arm.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.Wrist;
 import edu.greenblitz.robotName.subsystems.Battery;
@@ -21,8 +13,6 @@ import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.wpi.first.math.geometry.Rotation2d;
-
-import java.util.function.Supplier;
 
 import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
 
@@ -55,9 +45,6 @@ public class OI {
     }
 
     public void initButtons() {
-        secondJoystick.A.onTrue(new MoveElbowAndWrist(Rotation2d.fromDegrees(90),Rotation2d.fromDegrees(0)));
-        secondJoystick.B.onTrue(new SwitchBetweenScoringModes());
-        secondJoystick.X.onTrue(new MoveShooterToAngle(Rotation2d.fromDegrees(20)));
     }
 
     public void initializeDefaultCommands(){

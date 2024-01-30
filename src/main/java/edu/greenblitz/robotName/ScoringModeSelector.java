@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.utils.ScoringMode;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ScoringModeSelector {
 
@@ -15,11 +14,10 @@ public class ScoringModeSelector {
     }
 
     public static void setScoringMode(ScoringMode scoringMode) {
-        SmartDashboard.putString("Scoring Mode", currentMode.toString());
         currentMode = scoringMode;
     }
 
-    public static boolean isSpeakerToAmp() {
+    public static boolean isSpeakerMode() {
         return getScoringMode() == ScoringMode.SPEAKER;
     }
 }
