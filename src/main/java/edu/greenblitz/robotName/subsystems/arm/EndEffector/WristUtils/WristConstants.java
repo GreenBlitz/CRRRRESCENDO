@@ -7,9 +7,10 @@ public class WristConstants {
 
     public enum PresetPositions {
 
-        STARTING(Rotation2d.fromDegrees(180)),
-        SCORE(Rotation2d.fromDegrees(220)),
-        TRANSFER(Rotation2d.fromDegrees(180));
+        STARTING(Rotation2d.fromDegrees(90)),
+        SCORE(Rotation2d.fromDegrees(-45)),
+        TRANSFER(Rotation2d.fromDegrees(180)),
+        SAFE(TRANSFER.ANGLE);
 
         public final Rotation2d ANGLE;
 
@@ -23,16 +24,16 @@ public class WristConstants {
 
     public static final double SHOOTER_MASS_KG = 10;
 
-    public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(150);
+    public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(-50);
 
-    public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(250);
+    public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(200);
 
     public static final double RELATIVE_POSITION_CONVERSION_FACTOR = 0.0328;
 
     public static final double RELATIVE_VELOCITY_CONVERSION_FACTOR = 0.0030332432;
 
     public static final double ABSOLUTE_POSITION_CONVERSION_FACTOR = 0.00302;
-  
+
     public static final double ABSOLUTE_VELOCITY_CONVERSION_FACTOR = 0.00302;
 
     public static final double kS = 1;

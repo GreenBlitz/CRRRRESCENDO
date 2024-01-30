@@ -7,6 +7,7 @@ import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotInputsAutoLogged;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
@@ -34,7 +35,7 @@ public class SimulationPivot implements IPivot {
                         PivotConstants.SHOOTER_MASS_KG
                 ),
                 PivotConstants.LENGTH_OF_SHOOTER,
-                PivotConstants.BACKWARD_ANGLE_LIMIT,
+                PivotConstants.BACKWARD_ANGLE_LIMIT.getRadians(),
                 PivotConstants.FORWARD_ANGLE_LIMIT.getRadians(),
                 false,
                 PivotConstants.PresetPositions.STARTING.ANGLE.getRadians()

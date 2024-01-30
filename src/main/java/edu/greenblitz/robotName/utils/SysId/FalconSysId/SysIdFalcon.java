@@ -20,12 +20,12 @@ public class SysIdFalcon extends GBSubsystem {
 
     private static SysIdFalcon instance;
 
-    private final TalonFX motor;
+    private TalonFX motor;
 
-	private final VoltageOut sysIdControl;
-	private final SysIdRoutine.Config config;
-	private final SysIdRoutine.Mechanism mechanism;
-	private final SysIdRoutine sysIdRoutine;
+	private VoltageOut sysIdControl;
+	private SysIdRoutine.Config config;
+	private SysIdRoutine.Mechanism mechanism;
+	private SysIdRoutine sysIdRoutine;
 
 
     private SysIdFalcon() {
