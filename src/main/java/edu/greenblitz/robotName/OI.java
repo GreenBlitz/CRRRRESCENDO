@@ -8,7 +8,6 @@ import edu.greenblitz.robotName.subsystems.arm.Wrist;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
-import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 
@@ -43,11 +42,9 @@ public class OI {
     }
 
     public void initButtons() {
-
     }
 
     public void initializeDefaultCommands(){
-        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
         Battery.getInstance().setDefaultCommand(new BatteryLimiter());
         Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
         Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
