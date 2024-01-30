@@ -100,9 +100,7 @@ public class Wrist extends GBSubsystem {
         return wristInputs.position;
     }
 
-    public boolean isObjectInside() {
-        return wristInputs.isObjectInArm;
-    }
+
 
     public boolean isAtAngle(Rotation2d angle) {
         return Math.abs(angle.getRadians() - getAngleInRadians()) <= TOLERANCE;
