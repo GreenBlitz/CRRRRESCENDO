@@ -28,5 +28,5 @@ public class MovePivotToAngle extends PivotCommand {
 	public boolean isFinished() {
 		return pivot.isAtAngle(targetAngle);
 	}
-	
+
 }

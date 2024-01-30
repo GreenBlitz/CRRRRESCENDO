@@ -18,7 +18,7 @@ public class PivotConstants {
 
         STARTING(Rotation2d.fromDegrees(-50)),
         TRANSFER(Rotation2d.fromDegrees(-10)),
-        PICK_UP(Rotation2d.fromDegrees(-60));
+        PICK_UP(Rotation2d.fromDegrees(-30));
 
         public final Rotation2d ANGLE;
 

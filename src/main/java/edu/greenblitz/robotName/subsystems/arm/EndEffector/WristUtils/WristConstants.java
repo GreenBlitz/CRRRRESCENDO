@@ -9,7 +9,8 @@ public class WristConstants {
 
         STARTING(Rotation2d.fromDegrees(90)),
         SCORE(Rotation2d.fromDegrees(-45)),
-        TRANSFER(Rotation2d.fromDegrees(180));
+        TRANSFER(Rotation2d.fromDegrees(180)),
+        SAFE(TRANSFER.ANGLE);
 
         public final Rotation2d ANGLE;
 
@@ -32,7 +33,7 @@ public class WristConstants {
     public static final double RELATIVE_VELOCITY_CONVERSION_FACTOR = 0.0030332432;
 
     public static final double ABSOLUTE_POSITION_CONVERSION_FACTOR = 0.00302;
-  
+
     public static final double ABSOLUTE_VELOCITY_CONVERSION_FACTOR = 0.00302;
 
     public static final double kS = 1;
