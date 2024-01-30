@@ -24,8 +24,6 @@ public class MK4iSwerveConstants {
 	public static final double WHEEL_RADIUS = Units.inchesToMeters(2);
 	public static final double WHEEL_CIRCUMFERENCE = WHEEL_RADIUS * 2 * Math.PI;
 	public static final double LINEAR_REVOLUTIONS_TO_METERS = RobotConstants.General.Motors.FALCON_REVOLUTIONS_PER_RADIAN * WHEEL_CIRCUMFERENCE / 2 / Math.PI / LINEAR_GEAR_RATIO;
-	public static final double ANGLE_REVOLUTIONS_TO_WHEEL_TO_RPS = 1 / ANGULAR_GEAR_RATIO;
-	public static final double LINEAR_REVOLUTIONS_TO_METERS_PER_SECOND = 1 / LINEAR_GEAR_RATIO * WHEEL_CIRCUMFERENCE;
 	public static final double ANGLE_REVOLUTIONS_TO_RADIANS = RobotConstants.General.Motors.FALCON_REVOLUTIONS_PER_RADIAN / ANGULAR_GEAR_RATIO;
 	public static final TalonFXConfiguration ANGULAR_FALCON_CONFIG_OBJECT = new TalonFXConfiguration();
 	static {

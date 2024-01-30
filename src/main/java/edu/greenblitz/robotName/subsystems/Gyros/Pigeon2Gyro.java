@@ -6,11 +6,15 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Pigeon2Gyro implements IAngleMeasurementGyro{
+
 	private Pigeon2 pigeon2;
+
 	private Rotation2d yawOffset;
 	private Rotation2d pitchOffset;
 	private Rotation2d rollOffset;
+
 	private GyroInputsAutoLogged lastInputs;
+
 	public Pigeon2Gyro(int deviceID){
 		pigeon2 = new Pigeon2(deviceID);
 		lastInputs = new GyroInputsAutoLogged();
@@ -19,6 +23,7 @@ public class Pigeon2Gyro implements IAngleMeasurementGyro{
 		this.rollOffset = new Rotation2d();
 		this.yawOffset = new Rotation2d();
 	}
+
 	@Override
 	public void updateYaw(Rotation2d yaw) {
 		yawOffset.minus(yaw.plus(Rotation2d.fromRadians(lastInputs.yaw)));

@@ -7,7 +7,6 @@ import com.ctre.phoenix6.controls.ControlRequest;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 public class GBTalonFXPro extends TalonFX {
-	
 
 	public GBTalonFXPro(int deviceId) {
 		super(deviceId);
@@ -20,6 +19,7 @@ public class GBTalonFXPro extends TalonFX {
 	public StatusCode setControl(ControlRequest control) {
 		return super.setControl(control);
 	}
+
 	public StatusCode applyConfiguration(TalonFXConfiguration configuration) {
 		return super.getConfigurator().apply(configuration);
 	}

@@ -22,8 +22,6 @@ import edu.wpi.first.math.geometry.Rotation2d;
 
 import java.util.function.Supplier;
 
-import edu.greenblitz.robotName.utils.hid.SmartJoystick;
-
 public class OI {
     private static OI instance;
 

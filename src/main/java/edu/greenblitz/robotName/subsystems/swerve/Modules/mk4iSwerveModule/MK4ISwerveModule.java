@@ -112,15 +112,13 @@ public class MK4ISwerveModule implements ISwerveModule {
         
         inputs.linearMetersPassed = Units.rotationsToRadians(linearMotor.getPosition().getValue()) * MK4iSwerveConstants.WHEEL_RADIUS;
         inputs.angularPositionRadians = Conversions.MK4IConversions.convertRevolutionsToRadians(angularMotor.getPosition().getValue());
-        
+
+        inputs.isAbsoluteEncoderConnected = canCoder.getVersion().getValue() != 0;
+
         if (Double.isNaN(canCoder.getAbsolutePosition().getValue())) {
             inputs.absoluteEncoderPosition = 0;
         } else {
             inputs.absoluteEncoderPosition = Units.rotationsToRadians(canCoder.getAbsolutePosition().getValue());
         }
-        inputs.isAbsoluteEncoderConnected = canCoder.getVersion().getValue() != 0;
-        
-        SmartDashboard.putNumber("velocity", linearMotor.getVelocity().getValue());
-        SmartDashboard.putNumber("dist", inputs.linearMetersPassed);
     }
 }

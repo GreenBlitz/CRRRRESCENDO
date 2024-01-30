@@ -35,23 +35,8 @@ public class Conversions {
             return angleInRevolutions * MK4iSwerveConstants.LINEAR_REVOLUTIONS_TO_METERS;
         }
 
-        public static double convertSensorVelocityToRPM(double ticks){
-            return ticks * MK4iSwerveConstants.ANGLE_REVOLUTIONS_TO_WHEEL_TO_RPS;
-        }
-        public static double convertSensorTicksToRadPerSecond(double ticks){
-            return convertRPMToRadiansPerSec(convertSensorVelocityToRPM(ticks));
-        }
-        public static double convertSensorVelocityToMeterPerSecond(double selectedSensorVelocity){
-            return selectedSensorVelocity * MK4iSwerveConstants.LINEAR_REVOLUTIONS_TO_METERS_PER_SECOND;
-        }
         public static double convertRPMToMeterPerSecond (double rpm){
             return Conversions.convertRPMToMeterPerSecond(rpm, MK4iSwerveConstants.WHEEL_CIRCUMFERENCE / (2 * Math.PI));
         }
     }
-
-
-
-
-
-
 }
