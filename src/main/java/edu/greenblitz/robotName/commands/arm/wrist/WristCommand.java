@@ -12,4 +12,7 @@ public class WristCommand extends GBCommand {
         require(wrist);
     }
 
+    public void end(boolean interrupted) {
+        wrist.standInPlace();
+    }
 }
