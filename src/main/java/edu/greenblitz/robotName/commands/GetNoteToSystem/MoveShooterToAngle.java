@@ -21,16 +21,7 @@ public class MoveShooterToAngle extends GBCommand {
 	@Override
 	public void initialize() {
 		if (Elbow.getInstance().isInShooterCollisionRange()){
-			new ParallelCommandGroup(
-					new MoveElbowAndWrist(
-					ElbowConstants.PresetPositions.SAFE.ANGLE,
-					WristConstants.PresetPositions.TRANSFER.ANGLE
-					),
-					new SequentialCommandGroup(
-							new WaitCommand(PivotConstants.DELAY_FOR_NO_COLLISION_SECONDS),
-							new MovePivotToAngle(targetAngle)
-					)
-			).schedule();
+			new MoveShooterIfInDangerZone(targetAngle).schedule();
 		}
 		else {
 			new MovePivotToAngle(targetAngle).schedule();
