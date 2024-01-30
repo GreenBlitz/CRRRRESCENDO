@@ -39,7 +39,7 @@ public class MoveNoteBetweenShooterArm extends GBCommand {
 
     @Override
     public boolean isFinished() {
-        return isArmToShooter.get() ? funnel.isObjectIn() : Wrist.getInstance().isObjectInside();
+        return isArmToShooter.get() ? funnel.isObjectIn() : roller.isObjectInside();
     }
 
     @Override
