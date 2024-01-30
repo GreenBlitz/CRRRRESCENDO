@@ -24,6 +24,8 @@ public class NeoWristConstants {
             .withPID(NEO_PID)
             .withIdleMode(CANSparkMax.IdleMode.kBrake)
             .withRampRate(RobotConstants.General.RAMP_RATE_VAL)
+            .withPositionConversionFactor(RELATIVE_POSITION_CONVERSION_FACTOR)
+            .withVelocityConversionFactor(RELATIVE_VELOCITY_CONVERSION_FACTOR)
             .withCurrentLimit(CURRENT_LIMIT);
     public static final int BEAM_BREAKER_CHANNEL = 1;
 }

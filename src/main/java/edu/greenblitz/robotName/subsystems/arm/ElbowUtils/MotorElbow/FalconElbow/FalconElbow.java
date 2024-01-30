@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.arm.ElbowUtils.FalconElbow;
+package edu.greenblitz.robotName.subsystems.arm.ElbowUtils.MotorElbow.FalconElbow;
 
 import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -6,6 +6,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.IElbow;
+import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.MotorElbow.MotorElbowConstants;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public class FalconElbow implements IElbow {
@@ -15,11 +16,11 @@ public class FalconElbow implements IElbow {
     private MotionMagicDutyCycle motionMagicDutyCycle;
 
     public FalconElbow() {
-        motor = new TalonFX(FalconElbowConstants.MOTOR_ID);
+        motor = new TalonFX(MotorElbowConstants.MOTOR_ID);
         motor.getConfigurator().apply(FalconElbowConstants.TALON_FX_CONFIGURATION);
         motor.setNeutralMode(FalconElbowConstants.NEUTRAL_MODE_VALUE);
         motor.optimizeBusUtilization();
-        motionMagicDutyCycle = new MotionMagicDutyCycle(0, true,FalconElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(0), 0, true, true, true);
+        motionMagicDutyCycle = new MotionMagicDutyCycle(0, true,MotorElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(0), 0, true, true, true);
     }
 
     @Override
@@ -47,7 +48,7 @@ public class FalconElbow implements IElbow {
     public void moveToAngle(Rotation2d targetAngle) {
         motor.setControl(
                 motionMagicDutyCycle.withPosition(targetAngle.getRadians() / ElbowConstants.RELATIVE_POSITION_CONVERSION_FACTOR)
-                .withFeedForward(FalconElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(motor.getVelocity().getValue() * ElbowConstants.RELATIVE_VELOCITY_CONVERSION_FACTOR )));
+                .withFeedForward(MotorElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(motor.getVelocity().getValue() * ElbowConstants.RELATIVE_VELOCITY_CONVERSION_FACTOR )));
     }
 
     @Override

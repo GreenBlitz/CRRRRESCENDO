@@ -5,13 +5,14 @@ import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowFactory;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowInputsAutoLogged;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.FalconElbow.FalconElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.IElbow;
+import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.MotorElbow.MotorElbowConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import org.littletonrobotics.junction.Logger;
+
 
 public class Elbow extends GBSubsystem {
 
@@ -81,11 +82,11 @@ public class Elbow extends GBSubsystem {
 
 
     public double getStaticFeedForward() {
-        return FalconElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(0);
+        return MotorElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(0);
     }
 
     public double getDynamicFeedForward(double velocity) {
-        return FalconElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(velocity);
+        return MotorElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(velocity);
     }
 
     public double getVoltage() {
