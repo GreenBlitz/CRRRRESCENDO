@@ -13,7 +13,7 @@ public class SwitchModeMotion extends SequentialCommandGroup {
         super(
                 new SetScoringMode(mode),
                 new ConditionalCommand(
-                        new TransferNotes(),
+                        new TransferNote(),
                         new MoveShooterToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE),
                         isNoteInOtherSystem
                 )
