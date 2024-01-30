@@ -35,28 +35,23 @@ public class OI {
 	}
 	
 	public void initButtons() {
-		if (LED.getInstance().rumble()) {
-			mainJoystick.rumble(true, 1);
-		}
-		mainJoystick.POV_UP.whileTrue(new InstantCommand(
-				() -> LED.getInstance().rumble()
-		));
 		
+		
+//		mainJoystick.A.whileTrue(new InstantCommand(
+//						() -> LED.getInstance().blinkByNotePlace(LED.RobotMode.NotePlaceInRobot.ARM))
+//		);
 		mainJoystick.A.whileTrue(new InstantCommand(
-				() -> LED.getInstance().setLEDColor(Color.kGreen, 0, LEDConstants.LED_LENGTH)
-		));
+						() -> LED.getInstance().blinkIfInArm())
+		);
 		mainJoystick.X.whileTrue(new InstantCommand(
 				() -> LED.getInstance().turnOff(0, LEDConstants.LED_LENGTH)
 		));
-//		mainJoystick.B.whileTrue(new InstantCommand(
-//				() -> LED.getInstance().colorByMode(LED.RobotMode.AMP)
-//		));
 		mainJoystick.Y.whileTrue(new InstantCommand(
 				() -> LED.getInstance().colorByMode(LED.RobotMode.SPEAKER)
 		));
 		mainJoystick.B.whileTrue(
 				new InstantCommand(
-						() -> LED.getInstance().blinkByNotePlace(LED.RobotMode.NotePlaceInRobot.ARM))
+						() -> LED.getInstance().blinkByNotePlace(LED.RobotMode.NotePlaceInRobot.SHOOTER))
 		);
 	}
 	
