@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.commands.GetNoteToSystem;
 
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
+import edu.greenblitz.robotName.commands.arm.WaitUntilArmIsSafe;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants;
@@ -20,7 +21,7 @@ public class MoveShooterIfInDangerZone extends ParallelCommandGroup {
                         WristConstants.PresetPositions.TRANSFER.ANGLE
                 ),
                 new SequentialCommandGroup(
-                        new WaitCommand(PivotConstants.DELAY_FOR_NO_COLLISION_SECONDS),
+                        new WaitUntilArmIsSafe(),
                         new MovePivotToAngle(targetAngle)
                 )
         );
