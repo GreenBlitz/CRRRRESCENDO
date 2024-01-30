@@ -7,9 +7,9 @@ import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConst
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 
-public class GetToTransferNotePosition extends ParallelCommandGroup {
+public class MoveToTransferNotePosition extends ParallelCommandGroup {
 
-    public GetToTransferNotePosition() {
+    public MoveToTransferNotePosition() {
         super(
                 new MoveElbowAndWrist(
                         ElbowConstants.PresetPositions.TRANSFER.ANGLE,
