@@ -12,5 +12,8 @@ public class ElbowCommand extends GBCommand {
         require(elbow);
     }
 
+    public void end(boolean interrupted) {
+        elbow.standInPlace();
+    }
 
 }
