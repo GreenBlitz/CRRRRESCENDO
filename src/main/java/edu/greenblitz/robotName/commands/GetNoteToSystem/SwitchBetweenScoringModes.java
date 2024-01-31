@@ -1,9 +1,6 @@
 package edu.greenblitz.robotName.commands.GetNoteToSystem;
 
 import edu.greenblitz.robotName.ScoringModeSelector;
-import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants;
 import edu.greenblitz.robotName.subsystems.arm.Wrist;
 import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
 import edu.greenblitz.robotName.utils.ScoringMode;
