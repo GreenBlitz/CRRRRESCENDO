@@ -7,12 +7,12 @@ import edu.greenblitz.robotName.utils.ScoringMode;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.ProxyCommand;
 
-public class SwitchBetweenScoringModes extends ProxyCommand {
-    public SwitchBetweenScoringModes() {
+public class FullySwitchScoringMode extends ProxyCommand {
+    public FullySwitchScoringMode() {
         super(
                 () -> new ConditionalCommand(
-                        SwitchModeMotion.getCommand(ScoringMode.AMP, () -> Funnel.getInstance().isObjectIn()).get(),
-                        SwitchModeMotion.getCommand(ScoringMode.SPEAKER, () -> Roller.getInstance().isObjectInside()).get(),
+                        SwitchingScoringModeMovement.getCommand(ScoringMode.AMP, () -> Funnel.getInstance().isObjectIn()),
+                        SwitchingScoringModeMovement.getCommand(ScoringMode.SPEAKER, () -> Roller.getInstance().isObjectInside()),
                         ScoringModeSelector::isSpeakerMode
                 )
         );
