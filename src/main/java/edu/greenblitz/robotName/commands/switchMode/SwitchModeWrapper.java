@@ -1,11 +1,12 @@
-package edu.greenblitz.robotName.commands.GetNoteToSystem;
+package edu.greenblitz.robotName.commands.switchMode;
 
 import edu.greenblitz.robotName.commands.shooter.pivot.RequirePivot;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-public class SwitchWrapper extends SequentialCommandGroup {
+public class SwitchModeWrapper extends SequentialCommandGroup {
 
-    public SwitchWrapper(){
+    public SwitchModeWrapper(){
         super(new RequirePivot(), new SwitchBetweenScoringModes());
     }
+
 }

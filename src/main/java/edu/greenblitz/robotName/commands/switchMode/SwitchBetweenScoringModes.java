@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.commands.GetNoteToSystem;
+package edu.greenblitz.robotName.commands.switchMode;
 
 import edu.greenblitz.robotName.ScoringModeSelector;
 import edu.greenblitz.robotName.subsystems.arm.Wrist;
@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj2.command.ProxyCommand;
 
 public class SwitchBetweenScoringModes extends ProxyCommand {
     public SwitchBetweenScoringModes() {
-        super( () ->
-                new ConditionalCommand(
+        super(
+                () -> new ConditionalCommand(
                         SwitchModeMotion.getCommand(ScoringMode.AMP, () -> Funnel.getInstance().isObjectIn()).get(),
                         SwitchModeMotion.getCommand(ScoringMode.SPEAKER, () -> Wrist.getInstance().isObjectInside()).get(),
                         ScoringModeSelector::isSpeakerMode

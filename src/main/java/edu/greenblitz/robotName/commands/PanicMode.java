@@ -1,6 +1,6 @@
 package edu.greenblitz.robotName.commands;
 
-import edu.greenblitz.robotName.commands.GetNoteToSystem.MoveShooterToAngle;
+import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.subsystems.arm.Elbow;

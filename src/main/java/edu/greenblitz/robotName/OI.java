@@ -1,7 +1,7 @@
 package edu.greenblitz.robotName;
 
-import edu.greenblitz.robotName.commands.GetNoteToSystem.MoveShooterToAngle;
-import edu.greenblitz.robotName.commands.GetNoteToSystem.SwitchWrapper;
+import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
+import edu.greenblitz.robotName.commands.switchMode.SwitchModeWrapper;
 import edu.greenblitz.robotName.commands.PanicMode;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
@@ -51,7 +51,7 @@ public class OI {
 
     public void initButtons() {
         secondJoystick.L1.onTrue(new PanicMode());
-        secondJoystick.R1.onTrue(new SwitchWrapper());
+        secondJoystick.R1.onTrue(new SwitchModeWrapper());
         secondJoystick.A.onTrue(MoveShooterToAngle.getCommand(PivotConstants.PresetPositions.STARTING.ANGLE));
         secondJoystick.X.onTrue(MoveShooterToAngle.getCommand(PivotConstants.PresetPositions.TRANSFER.ANGLE));
         secondJoystick.B.onTrue(new MoveElbowAndWrist(ElbowConstants.PresetPositions.SCORE.ANGLE, WristConstants.PresetPositions.SCORE.ANGLE));

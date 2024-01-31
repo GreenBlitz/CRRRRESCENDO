@@ -1,22 +1,21 @@
-package edu.greenblitz.robotName.commands.GetNoteToSystem;
+package edu.greenblitz.robotName.commands.getNoteToSystem;
 
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 
+public class MoveToTransferNotePosition extends ParallelCommandGroup {
 
-public class MoveShooterIfInDangerZone extends SequentialCommandGroup {
-
-    public MoveShooterIfInDangerZone(Rotation2d targetAngle) {
+    public MoveToTransferNotePosition() {
         super(
                 new MoveElbowAndWrist(
-                        ElbowConstants.PresetPositions.SAFE.ANGLE,
+                        ElbowConstants.PresetPositions.TRANSFER.ANGLE,
                         WristConstants.PresetPositions.TRANSFER.ANGLE
                 ),
-                new MovePivotToAngle(targetAngle)
+                new MovePivotToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE)
         );
     }
 }
