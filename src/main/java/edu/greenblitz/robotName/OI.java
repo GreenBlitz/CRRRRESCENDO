@@ -2,6 +2,7 @@ package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
+import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnel;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
@@ -12,6 +13,7 @@ import edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
+import edu.wpi.first.math.geometry.Rotation2d;
 
 public class OI {
     private static OI instance;
@@ -42,8 +44,8 @@ public class OI {
     }
 
     public void initButtons() {
-        secondJoystick.A.whileTrue(new RunFunnel(FunnelConstants.ROLL_POWER));
-        secondJoystick.B.whileTrue(new RunFunnel(FunnelConstants.EJECT_POWER));
+        secondJoystick.A.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(90)));
+        secondJoystick.B.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(0)));
     }
 
     public void initializeDefaultCommands(){

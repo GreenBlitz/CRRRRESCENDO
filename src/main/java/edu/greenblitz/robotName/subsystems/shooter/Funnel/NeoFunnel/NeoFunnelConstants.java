@@ -6,7 +6,7 @@ import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 
 public class NeoFunnelConstants {
-    public static final int FUNNEL_ID = 52;
+    public static final int FUNNEL_ID = 0;
 
     public static final SparkMaxLimitSwitch.Type SWITCH_TYPE = SparkMaxLimitSwitch.Type.kNormallyClosed;
 

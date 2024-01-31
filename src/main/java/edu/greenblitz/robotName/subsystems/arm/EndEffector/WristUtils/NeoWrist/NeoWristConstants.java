@@ -10,11 +10,11 @@ import static edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.Wri
 
 public class NeoWristConstants {
 
-    public static final int MOTOR_ID = 1;
+    public static final int MOTOR_ID = 52;
 
     public static final int PID_SLOT = 0;
 
-    public static final PIDObject NEO_PID = new PIDObject().withKp(0.8).withKd(0.3).withKi(0).withMaxPower(1);
+    public static final PIDObject NEO_PID = new PIDObject().withKp(0.8).withKd(0).withKi(0).withMaxPower(1);
 
     public static final SimpleMotorFeedforward WRIST_FEED_FORWARD = new SimpleMotorFeedforward(kS,kV,kA);
 

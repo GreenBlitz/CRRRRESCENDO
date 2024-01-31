@@ -36,13 +36,13 @@ public class WristConstants {
 
     public static final double ABSOLUTE_VELOCITY_CONVERSION_FACTOR = 0.00302;
 
-    public static final double kS = 1;
+    public static final double kS = 0;
 
-    public static final double kV = 1;
+    public static final double kV = 0;
 
-    public static final double kG = 1;
+    public static final double kG = 0;
 
-    public static final double kA = 1;
+    public static final double kA = 0;
 
     public static final double TOLERANCE = Units.degreesToRadians(0.5);
 
