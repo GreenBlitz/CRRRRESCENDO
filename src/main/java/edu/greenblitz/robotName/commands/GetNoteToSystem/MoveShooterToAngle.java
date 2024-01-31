@@ -10,33 +10,17 @@ import edu.greenblitz.robotName.utils.GBCommand;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.*;
 
-public class MoveShooterToAngle extends GBCommand {
+import java.util.function.Supplier;
 
-	private Rotation2d targetAngle;
-	private Command selectedCommand;
+public class MoveShooterToAngle {
 
-	public MoveShooterToAngle(Rotation2d targetAngle) {
-		this.targetAngle = targetAngle;
-	}
-
-	@Override
-	public void initialize() {
+	public static Command getCommand(Rotation2d targetAngle) {
 		if (Elbow.getInstance().isInShooterCollisionRange()){
-			selectedCommand = new MoveShooterIfInDangerZone(targetAngle);
+			return new MoveShooterIfInDangerZone(targetAngle);
 		}
 		else {
-			selectedCommand = new MovePivotToAngle(targetAngle);
+			return new MovePivotToAngle(targetAngle);
 		}
-		selectedCommand.schedule();
 	}
 
-	@Override
-	public boolean isFinished() {
-		return selectedCommand.isFinished();
-	}
-
-	@Override
-	public void end(boolean interrupted) {
-		selectedCommand.end(interrupted);
-	}
 }
