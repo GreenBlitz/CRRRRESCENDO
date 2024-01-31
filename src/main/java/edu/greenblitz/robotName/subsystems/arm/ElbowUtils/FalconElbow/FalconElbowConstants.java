@@ -67,12 +67,12 @@ public class FalconElbowConstants {
     public static final HardwareLimitSwitchConfigs HARDWARE_LIMIT_SWITCH_CONFIGS = new HardwareLimitSwitchConfigs();
     static{
         HARDWARE_LIMIT_SWITCH_CONFIGS.ForwardLimitAutosetPositionEnable = true;
-        HARDWARE_LIMIT_SWITCH_CONFIGS.ForwardLimitAutosetPositionValue = FORWARD_ANGLE_LIMIT.getRadians();
+        HARDWARE_LIMIT_SWITCH_CONFIGS.ForwardLimitAutosetPositionValue = FORWARD_ANGLE_LIMIT.getRotations();
         HARDWARE_LIMIT_SWITCH_CONFIGS.ForwardLimitEnable = true;
         HARDWARE_LIMIT_SWITCH_CONFIGS.ForwardLimitType = ForwardLimitTypeValue.NormallyOpen;
         HARDWARE_LIMIT_SWITCH_CONFIGS.ForwardLimitRemoteSensorID = HARD_FORWARD_LIMIT_SWITCH_ID;
         HARDWARE_LIMIT_SWITCH_CONFIGS.ReverseLimitAutosetPositionEnable = true;
-        HARDWARE_LIMIT_SWITCH_CONFIGS.ReverseLimitAutosetPositionValue = FORWARD_ANGLE_LIMIT.getRadians();
+        HARDWARE_LIMIT_SWITCH_CONFIGS.ReverseLimitAutosetPositionValue = FORWARD_ANGLE_LIMIT.getRotations();
         HARDWARE_LIMIT_SWITCH_CONFIGS.ReverseLimitEnable = true;
         HARDWARE_LIMIT_SWITCH_CONFIGS.ReverseLimitType = ReverseLimitTypeValue.NormallyOpen;
         HARDWARE_LIMIT_SWITCH_CONFIGS.ReverseLimitRemoteSensorID = HARD_REVERSE_LIMIT_SWITCH_ID;
