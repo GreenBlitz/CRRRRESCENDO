@@ -1,6 +1,5 @@
 package edu.greenblitz.robotName;
 
-import edu.greenblitz.robotName.shootingStateService.ShootingState;
 import edu.greenblitz.robotName.subsystems.Dashboard;
 
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -17,23 +16,16 @@ import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
 import edu.greenblitz.robotName.utils.FMSUtils;
-import edu.greenblitz.robotName.utils.GBCircle;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
-import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
-import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.Battery;
-import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;

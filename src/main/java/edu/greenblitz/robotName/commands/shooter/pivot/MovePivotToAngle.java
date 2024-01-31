@@ -1,7 +1,7 @@
 package edu.greenblitz.robotName.commands.shooter.pivot;
 
 import edu.greenblitz.robotName.Robot;
-import edu.greenblitz.robotName.shootingStateService.ShootingState;
+import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public class MovePivotToAngle extends PivotCommand {
@@ -14,7 +14,7 @@ public class MovePivotToAngle extends PivotCommand {
 
 	@Override
 	public void initialize() {
-		targetAngle = ShootingState.getTargetShooterAngle();
+		targetAngle = ShootingStateCalculations.getTargetShooterAngle();
 		pivot.moveToAngle(targetAngle);
 	}
 

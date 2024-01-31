@@ -1,6 +1,5 @@
 package edu.greenblitz.robotName.shootingStateService;
 
-import edu.greenblitz.robotName.FieldConstants;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
@@ -12,7 +11,7 @@ import edu.wpi.first.math.geometry.Translation3d;
 
 import static edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants.LEGAL_SHOOTING_ZONE;
 
-public class ShootingState {
+public class ShootingStateCalculations {
 
     public static boolean isRobotInShootingPosition() {
         return LEGAL_SHOOTING_ZONE.isInCircle(getRobotPose().getTranslation());

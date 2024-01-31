@@ -9,7 +9,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 public class GBCircle {
     private Translation2d centerPosition;
     private double radius;
-    private final double EPSILON = 0.1;
+    private final static double EPSILON = 0.1;
 
     /**
      * Constructor using the center and radius.
