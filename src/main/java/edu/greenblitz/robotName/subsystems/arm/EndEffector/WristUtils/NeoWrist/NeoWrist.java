@@ -12,7 +12,6 @@ import edu.wpi.first.math.filter.Debouncer;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DigitalInput;
 
-import static edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.NeoWrist.NeoWristConstants.BEAM_BREAKER_CHANNEL;
 import static edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.NeoWrist.NeoWristConstants.PID_SLOT;
 import static edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants.*;
 
@@ -20,9 +19,6 @@ public class NeoWrist implements IWrist {
 
     private GBSparkMax motor;
 
-    private Debouncer debouncer;
-
-    private DigitalInput beamBreaker;
 
     public NeoWrist() {
         motor = new GBSparkMax(NeoWristConstants.PID_SLOT, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -40,8 +36,6 @@ public class NeoWrist implements IWrist {
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, WristConstants.BACKWARD_ANGLE_LIMIT.getRadians());
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, WristConstants.FORWARD_ANGLE_LIMIT.getRadians());
 
-        beamBreaker = new DigitalInput(BEAM_BREAKER_CHANNEL);
-        debouncer = new Debouncer(NeoWristConstants.DEBOUNCE_TIME_FOR_LIMIT_SWITCH);
     }
 
     @Override
@@ -79,7 +73,7 @@ public class NeoWrist implements IWrist {
         inputs.temperature = motor.getMotorTemperature();
         inputs.hasReachedBackwardLimit = Math.abs(inputs.position - BACKWARD_ANGLE_LIMIT.getRadians()) <= TOLERANCE;
         inputs.hasReachedForwardLimit = Math.abs(inputs.position - FORWARD_ANGLE_LIMIT.getRadians()) <= TOLERANCE;
-        inputs.isObjectInArm = debouncer.calculate(beamBreaker.get());
+
     }
 
 }

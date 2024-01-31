@@ -24,8 +24,6 @@ public class SimulationWrist implements IWrist {
 
     private PIDController controller;
 
-    private SendableChooser<Boolean> isObjectInArm;
-
     public SimulationWrist() {
         wristSimulation = new SingleJointedArmSim(
                 DCMotor.getNEO(SimulationWristConstants.NUMBER_OF_MOTORS),
@@ -42,11 +40,6 @@ public class SimulationWrist implements IWrist {
         );
 
         controller = SimulationWristConstants.SIMULATION_PID.getPIDController();
-
-        isObjectInArm = new SendableChooser<>();
-        isObjectInArm.setDefaultOption("False", false);
-        isObjectInArm.addOption("True", true);
-        SmartDashboard.putData("Is Object In Arm?", isObjectInArm);
     }
 
 
@@ -89,6 +82,6 @@ public class SimulationWrist implements IWrist {
         inputs.temperature = 0;
         inputs.hasReachedForwardLimit = wristSimulation.hasHitLowerLimit();
         inputs.hasReachedBackwardLimit = wristSimulation.hasHitLowerLimit();
-        inputs.isObjectInArm = isObjectInArm.getSelected();
+
     }
 }

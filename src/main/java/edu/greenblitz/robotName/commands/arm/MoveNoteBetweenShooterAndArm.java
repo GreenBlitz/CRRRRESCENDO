@@ -5,6 +5,7 @@ import edu.greenblitz.robotName.subsystems.arm.Roller;
 import edu.greenblitz.robotName.subsystems.arm.Wrist;
 import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
 import edu.greenblitz.robotName.utils.GBCommand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MoveNoteBetweenShooterAndArm extends GBCommand {
 
@@ -40,7 +41,7 @@ public class MoveNoteBetweenShooterAndArm extends GBCommand {
 
     @Override
     public boolean isFinished() {
-        return isTargetModeSpeaker ? funnel.isObjectIn() :  Wrist.getInstance().isObjectInside() ;
+        return isTargetModeSpeaker ? funnel.isObjectIn() :  roller.isObjectInside() ;
     }
 
     @Override
