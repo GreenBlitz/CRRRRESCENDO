@@ -3,7 +3,7 @@ package edu.greenblitz.robotName.commands.shooter.flyWheel;
 
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 
-public class RunFlyWheelByShootingPower extends FlyWheelCommand {
+public class RunFlyWheelByPowerConstant extends FlyWheelCommand {
 
 	@Override
 	public void initialize() {

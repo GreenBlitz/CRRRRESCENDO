@@ -12,6 +12,11 @@ public class RunFunnel extends FunnelCommand {
 
     @Override
     public boolean isFinished() {
-        return funnel.isObjectIn();
+        return !funnel.isObjectIn();
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        funnel.stop();
     }
 }
