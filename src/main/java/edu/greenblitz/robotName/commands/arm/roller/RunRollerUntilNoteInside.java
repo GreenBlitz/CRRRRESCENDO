@@ -2,7 +2,7 @@ package edu.greenblitz.robotName.commands.arm.roller;
 
 import edu.greenblitz.robotName.subsystems.arm.Wrist;
 
-public class RollerCatchNote extends RollerCommand{
+public class RunRollerUntilNoteInside extends RollerCommand{
     @Override
     public void initialize() {
         roller.rollOut();
