@@ -13,7 +13,7 @@ public class ReleaseNote extends RollerCommand{
     @Override
     public boolean isFinished() {
         if (!Wrist.getInstance().isObjectInside()){
-            new WaitCommand(RollerConstants.TIME_AFTER_OBJECT_IN_ROBOT).schedule();
+            new WaitCommand(RollerConstants.TIME_UNTIL_NOTE_EXIT_ARM).schedule();
             return true;
         }
         return false;
