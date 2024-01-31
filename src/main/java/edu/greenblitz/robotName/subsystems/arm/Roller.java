@@ -54,4 +54,8 @@ public class Roller extends GBSubsystem {
 	public void stop() {
 		setPower(0);
 	}
+
+	public boolean isObjectInside() {
+		return rollerInputs.isObjectInArm;
+	}
 }
