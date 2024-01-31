@@ -7,7 +7,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
 
-public class ShootingAngle {
+public class ShootingAngleCalculations {
 
     public static Rotation2d getShootingAngleBasedOnPosition(Translation3d position) {
         Translation2d relativeSpeakerPosition = getRelativePositionToMiddleOfSpeaker(position);
