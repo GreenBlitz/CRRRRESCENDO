@@ -16,7 +16,7 @@ public class SwitchingScoringModeMovement {
             return new ParallelCommandGroup(new SetScoringMode(mode), new TransferNote());
         }
         else {
-            return new ParallelCommandGroup(new SetScoringMode(mode), MoveShooterToAngle.getCommand(PivotConstants.PresetPositions.PICK_UP.ANGLE));
+            return new ParallelCommandGroup(new SetScoringMode(mode), MoveShooterToAngle.getCommand(PivotConstants.PresetPositions.PICK_UP));
         }
     }
 
