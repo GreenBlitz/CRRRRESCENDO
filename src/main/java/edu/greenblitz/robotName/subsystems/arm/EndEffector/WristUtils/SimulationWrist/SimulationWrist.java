@@ -32,7 +32,7 @@ public class SimulationWrist implements IWrist {
                 SimulationWristConstants.GEAR_RATIO,
                 SingleJointedArmSim.estimateMOI(
                         WristConstants.LENGTH_OF_ENDEFFECTOR,
-                        WristConstants.SHOOTER_MASS_KG
+                        WristConstants.WRIST_MASS_KG
                 ),
                 WristConstants.LENGTH_OF_ENDEFFECTOR,
                 WristConstants.BACKWARD_ANGLE_LIMIT.getRadians(),

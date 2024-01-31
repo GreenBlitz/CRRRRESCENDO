@@ -24,6 +24,7 @@ public class MoveWristToAngle extends WristCommand {
         }
     }
 
+    @Override
     public boolean isFinished() {
         return wrist.isAtAngle(targetAngle);
     }

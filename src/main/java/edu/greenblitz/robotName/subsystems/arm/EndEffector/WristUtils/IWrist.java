@@ -3,7 +3,7 @@ package edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.first.math.geometry.Rotation2d;
 
-public interface IWrist {
+public interface  IWrist {
 
     void setPower(double power);
 

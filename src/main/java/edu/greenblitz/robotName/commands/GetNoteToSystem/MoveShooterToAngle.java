@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.*;
 public class MoveShooterToAngle extends GBCommand {
 
 	private Rotation2d targetAngle;
+	private Command selectedCommand;
 
 	public MoveShooterToAngle(Rotation2d targetAngle) {
 		this.targetAngle = targetAngle;
@@ -21,15 +22,21 @@ public class MoveShooterToAngle extends GBCommand {
 	@Override
 	public void initialize() {
 		if (Elbow.getInstance().isInShooterCollisionRange()){
-			new MoveShooterIfInDangerZone(targetAngle).schedule();
+			selectedCommand = new MoveShooterIfInDangerZone(targetAngle);
 		}
 		else {
-			new MovePivotToAngle(targetAngle).schedule();
+			selectedCommand = new MovePivotToAngle(targetAngle);
 		}
+		selectedCommand.schedule();
 	}
 
 	@Override
 	public boolean isFinished() {
-		return true;
+		return selectedCommand.isFinished();
+	}
+
+	@Override
+	public void end(boolean interrupted) {
+		selectedCommand.end(interrupted);
 	}
 }
