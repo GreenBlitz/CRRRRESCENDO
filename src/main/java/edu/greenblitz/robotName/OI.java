@@ -40,9 +40,9 @@ public class OI {
 //		mainJoystick.A.whileTrue(new InstantCommand(
 //						() -> LED.getInstance().blinkByNotePlace(LED.RobotMode.NotePlaceInRobot.ARM))
 //		);
-		mainJoystick.A.whileTrue(new InstantCommand(
-						() -> LED.getInstance().blinkIfInArm())
-		);
+//		mainJoystick.A.whileTrue(new InstantCommand(
+//						() -> LED.getInstance().blinkIfInArm())
+//		);
 		mainJoystick.X.whileTrue(new InstantCommand(
 				() -> LED.getInstance().turnOff(0, LEDConstants.LED_LENGTH)
 		));

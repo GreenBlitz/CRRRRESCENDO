@@ -19,6 +19,10 @@ public class LED extends GBSubsystem {
 	private boolean inArm = false;
 	private boolean inShooter = false;
 	private boolean rumble = false;
+	private boolean blinkArm = false;
+	private boolean blinkShooter = false;
+	private boolean isBlinking = false;
+	
 	
 	private LED() {
 		this.addressableLED = new AddressableLED(LED_PORT);
@@ -74,6 +78,21 @@ public class LED extends GBSubsystem {
 	@Override
 	public void periodic() {
 		this.addressableLED.setData(addressableLEDBuffer);
+		if (blinkArm) {
+			if (LEDBlinkTimerOn.get() >= 0.25) {
+				LEDBlinkTimerOn.reset();
+				LEDBlinkTimerOff.start();
+				setLEDColor(Color.kDarkBlue, 0, LED_LENGTH);
+			} else if (LEDBlinkTimerOff.get() >= 0.25) {
+				LEDBlinkTimerOff.reset();
+				LEDBlinkTimerOn.start();
+				turnOff(0, LED_LENGTH);
+			} else {
+				setLEDColor(Color.kDarkBlue, 0, LED_LENGTH);
+			}
+		}
+		
+		
 	}
 	
 	public enum RobotMode {
@@ -98,12 +117,47 @@ public class LED extends GBSubsystem {
 	public void blinkByNotePlace(RobotMode.NotePlaceInRobot place) {
 		switch (place) {
 			case ARM:
-				blinkIfInArm();
+				LEDBlinkTimerOn.start();
+//				blinkIfInShooter();
+				startBlinkingArm();
+				isBlinking = true;
 				inArm = true;
+				while (isBlinking){
+					if (LEDBlinkTimerOn.get() == 1) {
+						stopBlinkingArm();
+						LEDBlinkTimerOn.reset();
+						LEDBlinkTimerOff.reset();
+					}
+				}
 				break;
 			case SHOOTER:
-				blinkIfInShooter();
+				LEDBlinkTimerOn.start();
+//				blinkIfInShooter();
+				startBlinkingShooter();
+				isBlinking = true;
 				inShooter = true;
+				if (blinkShooter) {
+					if (LEDBlinkTimerOn.get() > 0.25) {
+						LEDBlinkTimerOn.reset();
+						LEDBlinkTimerOn.stop();
+						LEDBlinkTimerOff.start();
+						setLEDColor(Color.kYellow, 0, LED_LENGTH);
+					} else if (LEDBlinkTimerOff.get() > 0.25) {
+						LEDBlinkTimerOff.reset();
+						LEDBlinkTimerOff.stop();
+						LEDBlinkTimerOn.start();
+						turnOff(0, LED_LENGTH);
+					} else {
+						setLEDColor(Color.kYellow, 0, LED_LENGTH);
+					}
+				}
+				while (isBlinking){
+					if (LEDBlinkTimerOn.get() == 10) {
+						stopBlinkingShooter();
+						LEDBlinkTimerOn.reset() ;
+						LEDBlinkTimerOff.reset();
+					}
+				}
 				break;
 		}
 	}
@@ -119,10 +173,22 @@ public class LED extends GBSubsystem {
 	}
 	
 	
-	public void stopBlink() {
-		turnOff(0, LED_LENGTH);
+	public void startBlinkingArm() {
+		blinkArm = true;
 	}
 	
+	public void stopBlinkingArm() {
+		blinkArm = false;
+	}
+	
+	public void startBlinkingShooter() {
+		blinkShooter = true;
+	}
+	
+	public void stopBlinkingShooter() {
+		blinkShooter = false;
+	}
+
 //	public void blinkIfInArm() {
 //		Timer timer = new Timer();
 //		timer.start();
@@ -141,7 +207,7 @@ public class LED extends GBSubsystem {
 //			}
 //		}
 //	}
-	
+
 //	public void blinkIfInShooter() {
 //		Timer timer = new Timer();
 //		while (timer.get() <= 1) {
@@ -160,32 +226,6 @@ public class LED extends GBSubsystem {
 //			}
 //		}
 //	}
-	
-	public static void initBlink(){
-	
-	}
-	public boolean shouldBlink(){
-		return ;
-	}
-	public boolean isOn(){
-		return ;
-	}
-	public boolean isOff(){
-		return ;
-	}
-	public boolean shouldBeOn(){
-		return ;
-	}
-	public boolean shouldBeOff(){
-		return ;
-	}
-	
-	
-	
-	
-	
-	
-	
 }
 
 
