@@ -50,12 +50,6 @@ public class OI {
     }
 
     public void initButtons() {
-        secondJoystick.L1.onTrue(new PanicMode());
-        secondJoystick.R1.onTrue(new ToggleScoringMode());
-        secondJoystick.A.onTrue(MoveShooterToAngle.getCommand(PivotConstants.PresetPositions.STARTING));
-        secondJoystick.X.onTrue(MoveShooterToAngle.getCommand(PivotConstants.PresetPositions.TRANSFER));
-        secondJoystick.B.onTrue(new MoveElbowAndWrist(ElbowConstants.PresetPositions.SCORE.ANGLE, WristConstants.PresetPositions.SCORE.ANGLE));
-        secondJoystick.Y.onTrue(new MoveElbowAndWrist(ElbowConstants.PresetPositions.SAFE.ANGLE, WristConstants.PresetPositions.SAFE.ANGLE));
     }
 
     public void initializeDefaultCommands(){
