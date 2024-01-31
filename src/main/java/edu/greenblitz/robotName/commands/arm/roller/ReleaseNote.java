@@ -4,7 +4,7 @@ import edu.greenblitz.robotName.subsystems.arm.EndEffector.RollerUtils.RollerCon
 import edu.greenblitz.robotName.subsystems.arm.Wrist;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-public class ShootFromRollerToAmp extends RollerCommand{
+public class ReleaseNote extends RollerCommand{
     @Override
     public void initialize() {
         roller.rollIn();
@@ -13,7 +13,7 @@ public class ShootFromRollerToAmp extends RollerCommand{
     @Override
     public boolean isFinished() {
         if (!Wrist.getInstance().isObjectInside()){
-            new WaitCommand(RollerConstants.TIME_AFTER_OBJECT_IN_ROBOT);
+            new WaitCommand(RollerConstants.TIME_AFTER_OBJECT_IN_ROBOT).schedule();
             return true;
         }
         return false;
