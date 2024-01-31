@@ -1,12 +1,11 @@
 package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.GetNoteToSystem.MoveShooterToAngle;
-import edu.greenblitz.robotName.commands.GetNoteToSystem.SwitchBetweenScoringModes;
+import edu.greenblitz.robotName.commands.GetNoteToSystem.SwitchWrapper;
 import edu.greenblitz.robotName.commands.PanicMode;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
-import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
 import edu.greenblitz.robotName.subsystems.arm.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
@@ -19,7 +18,6 @@ import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
-import edu.wpi.first.math.geometry.Rotation2d;
 
 import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
 
@@ -53,7 +51,7 @@ public class OI {
 
     public void initButtons() {
         secondJoystick.L1.onTrue(new PanicMode());
-        secondJoystick.R1.onTrue(new SwitchBetweenScoringModes());
+        secondJoystick.R1.onTrue(new SwitchWrapper());
         secondJoystick.A.onTrue(MoveShooterToAngle.getCommand(PivotConstants.PresetPositions.STARTING.ANGLE));
         secondJoystick.X.onTrue(MoveShooterToAngle.getCommand(PivotConstants.PresetPositions.TRANSFER.ANGLE));
         secondJoystick.B.onTrue(new MoveElbowAndWrist(ElbowConstants.PresetPositions.SCORE.ANGLE, WristConstants.PresetPositions.SCORE.ANGLE));
