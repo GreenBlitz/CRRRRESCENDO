@@ -41,7 +41,7 @@ public class MoveNoteBetweenShooterAndArm extends GBCommand {
 
     @Override
     public boolean isFinished() {
-        return isTargetModeSpeaker ? roller.isObjectInside() : funnel.isObjectIn();
+        return isTargetModeSpeaker ? funnel.isObjectIn() :  roller.isObjectInside() ;
     }
 
     @Override

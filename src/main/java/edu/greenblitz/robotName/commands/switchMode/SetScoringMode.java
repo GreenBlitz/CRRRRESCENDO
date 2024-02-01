@@ -1,11 +1,11 @@
-package edu.greenblitz.robotName.commands.GetNoteToSystem;
+package edu.greenblitz.robotName.commands.switchMode;
 
 import edu.greenblitz.robotName.ScoringModeSelector;
-import edu.greenblitz.robotName.utils.GBCommand;
 import edu.greenblitz.robotName.utils.ScoringMode;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 
-public class SetScoringMode extends GBCommand {
+public class SetScoringMode extends InstantCommand {
 
     private ScoringMode scoringMode;
 
@@ -18,8 +18,4 @@ public class SetScoringMode extends GBCommand {
         ScoringModeSelector.setScoringMode(scoringMode);
     }
 
-    @Override
-    public boolean isFinished() {
-        return true;
-    }
 }
