@@ -52,9 +52,9 @@ public class Robot extends LoggedRobot {
     public void robotInit() {
         Pathfinding.setPathfinder(new LocalADStar());
         CommandScheduler.getInstance().enable();
-        initializeLogger();
+//        initializeLogger();
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
-        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+//        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
         initializeSubsystems();
         SwerveChassis.getInstance().resetAllEncoders();
         initializeAutonomousBuilder();
@@ -65,17 +65,17 @@ public class Robot extends LoggedRobot {
         MultiLimelight.init();
         SwerveChassis.init();
 
-        Pivot.init();
-        Funnel.init();
+//        Pivot.init();
+//        Funnel.init();
         FlyWheel.init();
-
-        Elbow.init();
-        Wrist.init();
-        Roller.init();
-        ArmShooterMechanism.init();
-
-        Lifter.init();
-        Intake.init();
+//
+//        Elbow.init();
+//        Wrist.init();
+//        Roller.init();
+//        ArmShooterMechanism.init();
+//
+//        Lifter.init();
+//        Intake.init();
     }
 
     @Override
@@ -87,7 +87,7 @@ public class Robot extends LoggedRobot {
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
         RoborioUtils.updateCurrentCycleTime();
-        ArmShooterMechanism.getInstance().periodic();
+//        ArmShooterMechanism.getInstance().periodic();
     }
 
     private void initializeAutonomousBuilder() {

@@ -43,10 +43,10 @@ public class OI {
     }
 
     public void initializeDefaultCommands(){
-        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-        Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
-        Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
-        Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
+//        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+//        Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
+//        Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
+//        Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
     }
 
   
