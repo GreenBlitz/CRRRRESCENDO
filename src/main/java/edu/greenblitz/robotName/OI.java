@@ -1,10 +1,12 @@
 package edu.greenblitz.robotName;
 
 
+import edu.greenblitz.robotName.commands.LED.BlinkIfInArm;
+import edu.greenblitz.robotName.commands.LED.ConditionalRumble;
+import edu.greenblitz.robotName.commands.LED.Rumble;
 import edu.greenblitz.robotName.subsystems.LED.LED;
 import edu.greenblitz.robotName.subsystems.LED.LEDConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
-import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 public class OI {
@@ -35,24 +37,13 @@ public class OI {
 	}
 	
 	public void initButtons() {
-		
-		
-//		mainJoystick.A.whileTrue(new InstantCommand(
-//						() -> LED.getInstance().blinkByNotePlace(LED.RobotMode.NotePlaceInRobot.ARM))
-//		);
-//		mainJoystick.A.whileTrue(new InstantCommand(
-//						() -> LED.getInstance().blinkIfInArm())
-//		);
+		mainJoystick.A.whileTrue(new InstantCommand(
+						() -> LED.getInstance().blinkIfInArm())
+		);
 		mainJoystick.X.whileTrue(new InstantCommand(
 				() -> LED.getInstance().turnOff(0, LEDConstants.LED_LENGTH)
 		));
-		mainJoystick.Y.whileTrue(new InstantCommand(
-				() -> LED.getInstance().colorByMode(LED.RobotMode.SPEAKER)
-		));
-		mainJoystick.B.whileTrue(
-				new InstantCommand(
-						() -> LED.getInstance().blinkByNotePlace(LED.RobotMode.NotePlaceInRobot.SHOOTER))
-		);
+		mainJoystick.B.onTrue(new BlinkIfInArm());
+		mainJoystick.Y.onTrue(new ConditionalRumble());
 	}
-	
 }
