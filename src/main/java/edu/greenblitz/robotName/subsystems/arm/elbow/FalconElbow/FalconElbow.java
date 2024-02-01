@@ -1,11 +1,11 @@
-package edu.greenblitz.robotName.subsystems.arm.ElbowUtils.FalconElbow;
+package edu.greenblitz.robotName.subsystems.arm.elbow.FalconElbow;
 
 import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowInputsAutoLogged;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.IElbow;
+import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
+import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.arm.elbow.IElbow;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public class FalconElbow implements IElbow {

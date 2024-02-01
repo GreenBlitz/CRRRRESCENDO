@@ -1,6 +1,6 @@
-package edu.greenblitz.robotName.subsystems.arm.ElbowUtils.SimulationElbow;
+package edu.greenblitz.robotName.subsystems.arm.elbow.SimulationElbow;
 
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
+import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.utils.PIDObject;
 import edu.wpi.first.math.util.Units;
 

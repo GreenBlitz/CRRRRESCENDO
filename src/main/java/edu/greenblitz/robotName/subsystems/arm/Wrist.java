@@ -2,8 +2,9 @@ package edu.greenblitz.robotName.subsystems.arm;
 
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.Robot;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.SimulationElbow.SimulationElbowConstants;
+import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
+import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
+import edu.greenblitz.robotName.subsystems.arm.elbow.SimulationElbow.SimulationElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.IWrist;
 import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.NeoWrist.NeoWristConstants;
 import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristFactory;

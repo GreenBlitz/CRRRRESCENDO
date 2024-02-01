@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.arm.ElbowUtils;
+package edu.greenblitz.robotName.subsystems.arm.elbow;
 
 import org.littletonrobotics.junction.AutoLog;
 

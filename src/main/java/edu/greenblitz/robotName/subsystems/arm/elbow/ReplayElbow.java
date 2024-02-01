@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.arm.ElbowUtils;
+package edu.greenblitz.robotName.subsystems.arm.elbow;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.math.geometry.Rotation2d;

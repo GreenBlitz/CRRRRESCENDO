@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.arm.ElbowUtils;
+package edu.greenblitz.robotName.subsystems.arm.elbow;
 
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Rotation2d;

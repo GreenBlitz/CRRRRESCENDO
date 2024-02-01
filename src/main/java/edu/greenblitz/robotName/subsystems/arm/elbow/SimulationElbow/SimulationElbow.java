@@ -1,10 +1,10 @@
-package edu.greenblitz.robotName.subsystems.arm.ElbowUtils.SimulationElbow;
+package edu.greenblitz.robotName.subsystems.arm.elbow.SimulationElbow;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowInputsAutoLogged;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.IElbow;
+import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
+import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.arm.elbow.IElbow;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
