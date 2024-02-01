@@ -41,9 +41,7 @@ public class GBMath {
 
     /**
      * Using a variable it returns the output of the sigmoid function.
-     * This is a commonly used activation function in data science, but here
-     * it is used to interpolate between the distance of two points and the speed needed
-     * to get the first point to that second.
+     * This is a commonly used activation function in data science.
      *
      * @param variable    The variable that is being sigmoided.
      * @param center      The center of the sigmoid, at this point the value of the function will be equal to 0.5.
