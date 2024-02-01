@@ -1,9 +1,6 @@
 package edu.greenblitz.robotName.utils;
 
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.geometry.Translation3d;
-import edu.wpi.first.math.util.Units;
 
 public class GBMath {
     /**
@@ -22,11 +19,10 @@ public class GBMath {
 
 
     /**
-     *
      * Gets a line and a target point and returns the distance between that point and the line.
      *
-     * @param startPoint The first point defining the line.
-     * @param endPoint The second point defining the line.
+     * @param startPoint  The first point defining the line.
+     * @param endPoint    The second point defining the line.
      * @param targetPoint The point that is distancing the line.
      * @return The minimum distance between the target point and the line between the first two points.
      */
@@ -44,16 +40,15 @@ public class GBMath {
     }
 
     /**
-     *
      * Using a variable it returns the output of the sigmoid function.
      * This is a commonly used activation function in data science, but here
      * it is used to interpolate between the distance of two points and the speed needed
      * to get the first point to that second.
      *
-     * @param variable The variable that is being sigmoided.
-     * @param center The center of the sigmoid, at this point the value of the function will be equal to 0.5.
+     * @param variable    The variable that is being sigmoided.
+     * @param center      The center of the sigmoid, at this point the value of the function will be equal to 0.5.
      * @param squishyness How quickly the sigmoid function rises.
-     * @param minHeight The minimum height of the sigmoid function.
+     * @param minHeight   The minimum height of the sigmoid function.
      * @return The output of the sigmoid.
      */
     public static double sigmoid(double variable, double center, double squishyness, double minHeight) {
