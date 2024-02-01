@@ -7,19 +7,19 @@ import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.*;
 
-public class MoveShooterToAngle {
+public class MoveShooterToAngle extends ProxyCommand{
 
-	public static Command getCommand(Rotation2d targetAngle) {
+
+	public MoveShooterToAngle(Rotation2d targetAngle) {
+		super(() -> getCommand(targetAngle));
+	}
+	private static Command getCommand(Rotation2d targetAngle) {
 		if (Elbow.getInstance().isInShooterCollisionRange()){
 			return new MovePivotIfInDangerZone(targetAngle);
 		}
 		else {
 			return new MovePivotToAngle(targetAngle);
 		}
-	}
-
-	public static Command getCommand(PivotConstants.PresetPositions targetPosition) {
-		return getCommand(targetPosition.ANGLE);
 	}
 
 }
