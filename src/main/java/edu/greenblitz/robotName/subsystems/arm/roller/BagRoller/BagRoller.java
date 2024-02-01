@@ -1,10 +1,9 @@
-package edu.greenblitz.robotName.subsystems.arm.EndEffector.RollerUtils.BagRoller;
+package edu.greenblitz.robotName.subsystems.arm.roller.BagRoller;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.RollerUtils.IRoller;
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.RollerUtils.RollerInputsAutoLogged;
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.NeoWrist.NeoWristConstants;
+import edu.greenblitz.robotName.subsystems.arm.roller.IRoller;
+import edu.greenblitz.robotName.subsystems.arm.roller.RollerInputsAutoLogged;
 import edu.wpi.first.math.filter.Debouncer;
 import edu.wpi.first.wpilibj.DigitalInput;
 
