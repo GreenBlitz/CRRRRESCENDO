@@ -25,14 +25,14 @@ public class PivotConstants {
 
     }
 
-    public enum AutoNomousShooting {
+    public enum AutonomousShooting {
         SPEAKER_SIDES(Rotation2d.fromDegrees(64.5)),
         SPEAKER_MIDDLE(Rotation2d.fromDegrees(66.2)),
         AMP_EDGE(Rotation2d.fromDegrees(32.8)),
         PODIUM(Rotation2d.fromDegrees(40.8));
-        public final Rotation2d ANGLE_FOR_AUTONOMOUS_SHOOTING;
-        AutoNomousShooting(Rotation2d angle) {
-            this.ANGLE_FOR_AUTONOMOUS_SHOOTING = angle;
+        public final Rotation2d ANGLE;
+        AutonomousShooting(Rotation2d angle) {
+            this.ANGLE = angle;
         }
     }
 

@@ -94,6 +94,10 @@ public class Pivot extends GBSubsystem {
 		return Math.abs(angle.getRadians() - getAngle().getRadians()) <= TOLERANCE;
 	}
 
+	public Rotation2d getAutonomousShootingPosition(){
+		switch ()
+		return PivotConstants.AutonomousShooting.SPEAKER_MIDDLE.ANGLE;
+	}
 	public Pose3d getPivotPose3d() {
 		return new Pose3d(
 				PivotConstants.ROBOT_RELATIVE_PIVOT_POSITION,
