@@ -28,4 +28,5 @@ public class NeoLifterConstants {
     public static final SparkMaxLimitSwitch.Type FORWARD_LIMIT_SWITCH_TYPE = SparkMaxLimitSwitch.Type.kNormallyClosed;
 
     public static final SparkMaxLimitSwitch.Type BACKWARD_LIMIT_SWITCH_TYPE = SparkMaxLimitSwitch.Type.kNormallyClosed;
+    public static final int PID_SLOT = 0;
 }

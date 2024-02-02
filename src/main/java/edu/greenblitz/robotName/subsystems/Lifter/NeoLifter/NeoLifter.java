@@ -51,7 +51,7 @@ public class NeoLifter implements ILifter {
 
     @Override
     public void goToPosition(Rotation2d position) {
-        motor.getPIDController().setReference(position.getRadians(), CANSparkMax.ControlType.kPosition, 0 , NeoLifterConstants.FEED_FORWARD.calculate(position.getRadians()));
+        motor.getPIDController().setReference(position.getRadians(), CANSparkMax.ControlType.kPosition, NeoLifterConstants.PID_SLOT , NeoLifterConstants.FEED_FORWARD.calculate(position.getRadians()));
     }
 
     @Override
