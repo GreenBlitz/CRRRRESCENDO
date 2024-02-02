@@ -18,13 +18,11 @@ public class Pivot extends GBSubsystem {
 
 	private static Pivot instance;
 	private PivotInputsAutoLogged pivotInputs;
-	Pose2d robotPose;
 	private IPivot pivot;
 
 	private Pivot() {
 		pivot = PivotFactory.create();
 		pivotInputs = new PivotInputsAutoLogged();
-		robotPose = SwerveChassis.getInstance().getRobotPose();
 		pivot.updateInputs(pivotInputs);
 	}
 
