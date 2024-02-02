@@ -5,6 +5,7 @@ import edu.greenblitz.robotName.subsystems.Lifter.NeoLifter.NeoLifterConstants;
 import edu.greenblitz.robotName.subsystems.Lifter.SimulationLifter.SimulationLifterConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation3d;
 import org.littletonrobotics.junction.Logger;
@@ -41,7 +42,7 @@ public class Lifter extends GBSubsystem {
         Logger.recordOutput("Lifter/Lifter",getLifterPose());
     }
 
-    public void goToPosition(double targetPosition) {
+    public void goToPosition(Rotation2d targetPosition) {
         lifter.goToPosition(targetPosition);
     }
 
@@ -73,18 +74,18 @@ public class Lifter extends GBSubsystem {
         return lifterInputs.isBackwardSwitchPressed;
     }
 
-    public boolean isMotorAtPosition(double targetPosition) {
-        return Math.abs(targetPosition - lifterInputs.position) < LifterConstants.TOLERANCE;
+    public boolean isMotorAtPosition(Rotation2d targetPosition) {
+        return Math.abs(targetPosition.getRadians() - lifterInputs.position.getRadians()) < LifterConstants.TOLERANCE;
     }
 
-    public double getPosition(){
+    public Rotation2d getPosition(){
         return lifterInputs.position;
     }
 
     public Pose3d getLifterPose() {
         return new Pose3d(
                 LifterConstants.ROBOT_RELATIVE_LIFTER_POSITION,
-                new Rotation3d(0,lifterInputs.position,0).plus(LifterConstants.ROBOT_RELATIVE_LIFTER_ROTATION)
+                new Rotation3d(0,lifterInputs.position.getRadians(),0).plus(LifterConstants.ROBOT_RELATIVE_LIFTER_ROTATION)
         );
     }
 }

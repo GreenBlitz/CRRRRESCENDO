@@ -6,6 +6,7 @@ import edu.greenblitz.robotName.subsystems.Lifter.ILifter;
 import edu.greenblitz.robotName.subsystems.Lifter.LifterInputsAutoLogged;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import org.littletonrobotics.junction.Logger;
@@ -48,8 +49,8 @@ public class SimulationLifter implements ILifter {
     }
 
     @Override
-    public void goToPosition(double position) {
-        setVoltage(pidController.calculate(motorSimulation.getAngularPositionRotations(), position));
+    public void goToPosition(Rotation2d position) {
+        setVoltage(pidController.calculate(motorSimulation.getAngularPositionRotations(), position.getRadians()));
     }
 
     @Override
@@ -57,7 +58,7 @@ public class SimulationLifter implements ILifter {
         motorSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
         inputs.appliedOutput = appliedOutput;
         inputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
-        inputs.position = motorSimulation.getAngularPositionRotations();
+        inputs.position = Rotation2d.fromRadians(motorSimulation.getAngularPositionRotations());
         inputs.velocity = motorSimulation.getAngularVelocityRPM();
     }
 }

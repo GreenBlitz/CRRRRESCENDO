@@ -1,12 +1,11 @@
 package edu.greenblitz.robotName.subsystems.Lifter.NeoLifter;
 
-import com.revrobotics.CANDigitalInput;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
-import com.revrobotics.SparkMaxLimitSwitch;
 import edu.greenblitz.robotName.subsystems.Lifter.ILifter;
 import edu.greenblitz.robotName.subsystems.Lifter.LifterInputsAutoLogged;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
+import edu.wpi.first.math.geometry.Rotation2d;
 
 import static edu.greenblitz.robotName.subsystems.Lifter.NeoLifter.NeoLifterConstants.*;
 
@@ -49,15 +48,15 @@ public class NeoLifter implements ILifter {
     }
 
     @Override
-    public void goToPosition(double position) {
-        motor.getPIDController().setReference(position, CANSparkMax.ControlType.kPosition, 0 , FEED_FORWARD.calculate(position));
+    public void goToPosition(Rotation2d position) {
+        motor.getPIDController().setReference(position.getRadians(), CANSparkMax.ControlType.kPosition, 0 , FEED_FORWARD.calculate(position.getRadians()));
     }
 
     @Override
     public void updateInputs(LifterInputsAutoLogged inputs) {
         inputs.appliedOutput = motor.getAppliedOutput();
         inputs.outputCurrent = motor.getOutputCurrent();
-        inputs.position = motor.getEncoder().getPosition();
+        inputs.position = Rotation2d.fromRadians(motor.getEncoder().getPosition());
         inputs.velocity = motor.getEncoder().getVelocity();
         inputs.isForwardSwitchPressed = motor.getForwardLimitSwitch(FORWARD_LIMIT_SWITCH_TYPE).isPressed();
         inputs.isBackwardSwitchPressed = motor.getReverseLimitSwitch(BACKWARD_LIMIT_SWITCH_TYPE).isPressed();

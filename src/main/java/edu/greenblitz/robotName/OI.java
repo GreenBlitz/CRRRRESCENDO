@@ -1,5 +1,7 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.lifter.LiftUp;
+import edu.greenblitz.robotName.commands.lifter.ReverseLifting;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
@@ -50,6 +52,8 @@ public class OI {
     }
 
     public void initButtons() {
+        secondJoystick.A.whileTrue(new LiftUp());
+        secondJoystick.B.whileTrue(new ReverseLifting());
     }
 
     public void initializeDefaultCommands(){

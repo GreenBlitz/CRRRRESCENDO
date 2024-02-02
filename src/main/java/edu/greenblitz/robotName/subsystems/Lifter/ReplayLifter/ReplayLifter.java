@@ -3,6 +3,7 @@ package edu.greenblitz.robotName.subsystems.Lifter.ReplayLifter;
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.subsystems.Lifter.ILifter;
 import edu.greenblitz.robotName.subsystems.Lifter.LifterInputsAutoLogged;
+import edu.wpi.first.math.geometry.Rotation2d;
 
 public class ReplayLifter implements ILifter {
     @Override
@@ -31,7 +32,7 @@ public class ReplayLifter implements ILifter {
     }
 
     @Override
-    public void goToPosition(double position) {
+    public void goToPosition(Rotation2d position) {
 
     }
 

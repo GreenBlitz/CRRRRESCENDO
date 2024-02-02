@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.Lifter;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation3d;
 
@@ -14,6 +15,6 @@ public class LifterConstants {
 
     public static final double TOLERANCE = 0.04;
 
-    public static final double LIFTER_RETRACTED_POSITION = 0;
-    public static final double LIFTER_EXTENDED_POSITION = 2.5;
+    public static final Rotation2d LIFTER_RETRACTED_POSITION = Rotation2d.fromDegrees(0);
+    public static final Rotation2d LIFTER_EXTENDED_POSITION = Rotation2d.fromDegrees(135);
 }
