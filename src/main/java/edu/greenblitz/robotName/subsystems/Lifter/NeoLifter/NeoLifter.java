@@ -33,8 +33,8 @@ public class NeoLifter implements ILifter {
     }
 
     @Override
-    public void resetEncoder(double position) {
-        motor.getEncoder().setPosition(position);
+    public void resetEncoder(Rotation2d position) {
+        motor.getEncoder().setPosition(position.getRadians());
     }
 
     @Override

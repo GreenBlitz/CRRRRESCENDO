@@ -11,7 +11,7 @@ public class LifterConstants {
 
     public static final Rotation3d ROBOT_RELATIVE_LIFTER_ROTATION = new Rotation3d(Math.PI,0,-Math.PI/2);
 
-    public static final double ENCODER_POSE_WHEN_RESET = 0;
+    public static final Rotation2d ENCODER_POSE_WHEN_RESET = 0;
 
     public static final double TOLERANCE = 0.04;
 

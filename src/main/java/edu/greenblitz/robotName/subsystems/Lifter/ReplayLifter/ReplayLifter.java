@@ -17,7 +17,7 @@ public class ReplayLifter implements ILifter {
     }
 
     @Override
-    public void resetEncoder(double position) {
+    public void resetEncoder(Rotation2d position) {
 
     }
 

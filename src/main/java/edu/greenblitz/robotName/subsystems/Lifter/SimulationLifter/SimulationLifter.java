@@ -34,7 +34,7 @@ public class SimulationLifter implements ILifter {
     }
 
     @Override
-    public void resetEncoder(double position) {
+    public void resetEncoder(Rotation2d position) {
         Logger.recordOutput("Lifter", "tried setting the position to " + position);
     }
 

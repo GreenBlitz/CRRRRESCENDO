@@ -54,7 +54,7 @@ public class Lifter extends GBSubsystem {
         lifter.setVoltage(voltage);
     }
 
-    public void resetEncoder(double position) {
+    public void resetEncoder(Rotation2d position) {
         lifter.resetEncoder(position);
     }
 
