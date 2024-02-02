@@ -19,7 +19,7 @@ public class NeoElbow implements IElbow {
         motor = new GBSparkMax(NeoElbowConstants.NEO_MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
         motor.config(NeoElbowConstants.ELBOW_CONFIG_OBJECT);
 
-        motor.getPIDController().setFeedbackDevice(motor.getAlternateEncoder(SparkMaxAlternateEncoder.Type.kQuadrature, NeoElbowConstants.COUNTS_PER_REVOLUTION));
+        motor.getPIDController().setFeedbackDevice(motor.getEncoder());
         motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
         motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, ElbowConstants.BACKWARD_ANGLE_LIMIT.getRadians());
