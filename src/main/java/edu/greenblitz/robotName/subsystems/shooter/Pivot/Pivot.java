@@ -1,9 +1,12 @@
 package edu.greenblitz.robotName.subsystems.shooter.Pivot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.greenblitz.robotName.Field;
+import edu.greenblitz.robotName.OdometryConstants;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.*;
@@ -92,6 +95,21 @@ public class Pivot extends GBSubsystem {
 
 	public boolean isAtAngle(Rotation2d angle) {
 		return Math.abs(angle.getRadians() - getAngle().getRadians()) <= TOLERANCE;
+	}
+	public Rotation2d getChassisAngleForAutoShooting(Pose2d position){
+		if (Math.abs(Field.PositionsToShootAutomaticallyFrom.AMP_EDGE.getX()-position.getX())< OdometryConstants.TOLERANCE && Math.abs(Field.PositionsToShootAutomaticallyFrom.AMP_EDGE.getY()-position.getY())< OdometryConstants.TOLERANCE)){
+			return PivotConstants.PivotAnglesAutoShoot.AMP_EDGE.ANGLE;
+		}
+		if (Math.abs(Field.PositionsToShootAutomaticallyFrom.PODIUM.getX()-position.getX())< OdometryConstants.TOLERANCE && Math.abs(Field.PositionsToShootAutomaticallyFrom.PODIUM.getY()-position.getY())< OdometryConstants.TOLERANCE)){
+			return PivotConstants.PivotAnglesAutoShoot.PODIUM.ANGLE;
+		}
+		if (Math.abs(Field.PositionsToShootAutomaticallyFrom.SPEAKER_LEFT.getX()-position.getX())< OdometryConstants.TOLERANCE && Math.abs(Field.PositionsToShootAutomaticallyFrom.SPEAKER_LEFT.getY()-position.getY())< OdometryConstants.TOLERANCE)){
+			return PivotConstants.PivotAnglesAutoShoot.SPEAKER_LEFT.ANGLE;
+		}
+		if (Math.abs(Field.PositionsToShootAutomaticallyFrom.SPEAKER_RIGHT.getX()-position.getX())< OdometryConstants.TOLERANCE && Math.abs(Field.PositionsToShootAutomaticallyFrom.SPEAKER_RIGHT.getY()-position.getY())< OdometryConstants.TOLERANCE)){
+			return PivotConstants.PivotAnglesAutoShoot.SPEAKER_RIGHT.ANGLE;
+		}
+		return PivotConstants.PivotAnglesAutoShoot.SPEAKER_MIDDLE.ANGLE;
 	}
 
 	public Pose3d getPivotPose3d() {

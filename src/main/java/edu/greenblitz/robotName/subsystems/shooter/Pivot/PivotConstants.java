@@ -28,6 +28,20 @@ public class PivotConstants {
 
     }
 
+    public enum PivotAnglesAutoShoot{
+        //to be fulfilled
+        SPEAKER_MIDDLE(Rotation2d.fromDegrees()),
+        SPEAKER_RIGHT(Rotation2d.fromDegrees()),
+        SPEAKER_LEFT(Rotation2d.fromDegrees()),
+        PODIUM(Rotation2d.fromDegrees()),
+        AMP_EDGE(Rotation2d.fromDegrees());
+        public final Rotation2d ANGLE;
+
+        PivotAnglesAutoShoot(Rotation2d angle){
+            this.ANGLE = angle;
+        }
+    }
+
     public static final double SHOOTER_MASS_KG = 10;
 
     public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(-80);

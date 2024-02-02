@@ -1,8 +1,6 @@
 package edu.greenblitz.robotName.subsystems.swerve.Chassis;
 
-import edu.greenblitz.robotName.Robot;
-import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.VisionConstants;
+import edu.greenblitz.robotName.*;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.subsystems.Gyros.GyroFactory;
 import edu.greenblitz.robotName.subsystems.Gyros.GyroInputsAutoLogged;
@@ -502,6 +500,21 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         doVision = true;
     }
 
+    public Rotation2d getChassisAngleForAutoShooting(Pose2d position){
+        if (Math.abs(Field.PositionsToShootAutomaticallyFrom.AMP_EDGE.getX()-position.getX())< OdometryConstants.TOLERANCE && Math.abs(Field.PositionsToShootAutomaticallyFrom.AMP_EDGE.getY()-position.getY())< OdometryConstants.TOLERANCE)){
+            return ChassisConstants.ChassisAnglesAutoShoot.AMP_EDGE.ANGLE;
+        }
+        if (Math.abs(Field.PositionsToShootAutomaticallyFrom.PODIUM.getX()-position.getX())< OdometryConstants.TOLERANCE && Math.abs(Field.PositionsToShootAutomaticallyFrom.PODIUM.getY()-position.getY())< OdometryConstants.TOLERANCE)){
+            return ChassisConstants.ChassisAnglesAutoShoot.PODIUM.ANGLE;
+        }
+        if (Math.abs(Field.PositionsToShootAutomaticallyFrom.SPEAKER_LEFT.getX()-position.getX())< OdometryConstants.TOLERANCE && Math.abs(Field.PositionsToShootAutomaticallyFrom.SPEAKER_LEFT.getY()-position.getY())< OdometryConstants.TOLERANCE)){
+            return ChassisConstants.ChassisAnglesAutoShoot.SPEAKER_LEFT.ANGLE;
+        }
+        if (Math.abs(Field.PositionsToShootAutomaticallyFrom.SPEAKER_RIGHT.getX()-position.getX())< OdometryConstants.TOLERANCE && Math.abs(Field.PositionsToShootAutomaticallyFrom.SPEAKER_RIGHT.getY()-position.getY())< OdometryConstants.TOLERANCE)){
+            return ChassisConstants.ChassisAnglesAutoShoot.SPEAKER_RIGHT.ANGLE;
+        }
+        return ChassisConstants.ChassisAnglesAutoShoot.SPEAKER_MIDDLE.ANGLE;
+    }
     @Override
     public void updateInputs(SwerveChassisInputsAutoLogged inputs) {
         inputs.isVisionEnabled = doVision;

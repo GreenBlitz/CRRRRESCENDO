@@ -71,6 +71,18 @@ public class ChassisConstants {
             MAX_ANGULAR_SPEED,
             MAX_ANGULAR_ACCELERATION
     );
+    public enum ChassisAnglesAutoShoot{
+        //to be fulfilled
+        SPEAKER_MIDDLE(Rotation2d.fromDegrees()),
+        SPEAKER_RIGHT(Rotation2d.fromDegrees()),
+        SPEAKER_LEFT(Rotation2d.fromDegrees()),
+        PODIUM(Rotation2d.fromDegrees()),
+        AMP_EDGE(Rotation2d.fromDegrees());
+        public final Rotation2d ANGLE;
+        ChassisAnglesAutoShoot(Rotation2d angle){
+            this.ANGLE = angle;
+        }
+    }
     public static final MoveByJoysticks.DriveMode DRIVE_MODE = MoveByJoysticks.DriveMode.NORMAL;
 
     public static final boolean FORWARD_VALUE_INVERTED = false;

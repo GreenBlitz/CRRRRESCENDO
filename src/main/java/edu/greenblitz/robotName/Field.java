@@ -108,4 +108,14 @@ public class Field {
         public final static Pose2d AMP_SCORE_POSITION = new Pose2d(new Translation2d(),new Rotation2d());
         public final static Pose2d CLIMB_POSITION = new Pose2d(new Translation2d(),new Rotation2d());
     }
+
+
+    public static class PositionsToShootAutomaticallyFrom{
+        //to be fulfilled
+        public final static Pose2d SPEAKER_MIDDLE= new Pose2d(new Transform2d(,), new Rotation2d());
+        public final static Pose2d SPEAKER_RIGHT= new Pose2d(new Transform2d(,), new Rotation2d());
+        public final static Pose2d SPEAKER_LEFT= new Pose2d(new Transform2d(,), new Rotation2d());
+        public final static Pose2d AMP_EDGE= new Pose2d(new Transform2d(,), new Rotation2d());
+        public final static Pose2d PODIUM= new Pose2d(new Transform2d(,), new Rotation2d());
+    }
 }
