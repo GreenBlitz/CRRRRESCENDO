@@ -20,7 +20,7 @@ public class NeoWrist implements IWrist {
         motor = new GBSparkMax(NeoWristConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
         motor.config(NeoWristConstants.WRIST_CONFIG_OBJECT);
 
-        motor.getPIDController().setFeedbackDevice(motor.getAlternateEncoder(SparkMaxAlternateEncoder.Type.kQuadrature, NeoWristConstants.COUNTS_PER_REVOLUTION));
+        motor.getPIDController().setFeedbackDevice(motor.getEncoder());
 
         motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).setPositionConversionFactor(WristConstants.ABSOLUTE_POSITION_CONVERSION_FACTOR);
         motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).setVelocityConversionFactor(WristConstants.ABSOLUTE_VELOCITY_CONVERSION_FACTOR);
