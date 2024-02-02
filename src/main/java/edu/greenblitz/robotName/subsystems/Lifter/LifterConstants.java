@@ -18,4 +18,10 @@ public class LifterConstants {
     public static final Rotation2d LIFTER_RETRACTED_POSITION = Rotation2d.fromDegrees(0);
 
     public static final Rotation2d LIFTER_EXTENDED_POSITION = Rotation2d.fromDegrees(135);
+
+    public static final Rotation2d FORWARD_LIMIT = Rotation2d.fromDegrees(-10);
+
+    public static final Rotation2d BACKWARD_LIMIT = Rotation2d.fromDegrees(180);
+    public static final double LENGTH_OF_LIFTER = 0.45;
+    public static final Rotation2d STARTING_ANGLE = Rotation2d.fromDegrees(0);
 }

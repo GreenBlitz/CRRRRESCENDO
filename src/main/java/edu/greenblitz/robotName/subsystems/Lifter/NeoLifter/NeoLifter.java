@@ -3,11 +3,10 @@ package edu.greenblitz.robotName.subsystems.Lifter.NeoLifter;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import edu.greenblitz.robotName.subsystems.Lifter.ILifter;
+import edu.greenblitz.robotName.subsystems.Lifter.LifterConstants;
 import edu.greenblitz.robotName.subsystems.Lifter.LifterInputsAutoLogged;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.geometry.Rotation2d;
-
-import static edu.greenblitz.robotName.subsystems.Lifter.NeoLifter.NeoLifterConstants.*;
 
 public class NeoLifter implements ILifter {
 
@@ -17,8 +16,11 @@ public class NeoLifter implements ILifter {
         motor = new GBSparkMax(NeoLifterConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
         motor.config(NeoLifterConstants.CONFIG);
 
-        motor.getReverseLimitSwitch(FORWARD_LIMIT_SWITCH_TYPE).enableLimitSwitch(true);
-        motor.getForwardLimitSwitch(BACKWARD_LIMIT_SWITCH_TYPE).enableLimitSwitch(true);
+        motor.getReverseLimitSwitch(NeoLifterConstants.FORWARD_LIMIT_SWITCH_TYPE).enableLimitSwitch(true);
+        motor.getForwardLimitSwitch(NeoLifterConstants.BACKWARD_LIMIT_SWITCH_TYPE).enableLimitSwitch(true);
+
+        motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, LifterConstants.BACKWARD_LIMIT.getRadians());
+        motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, LifterConstants.FORWARD_LIMIT.getRadians());
         motor.setIdleMode(CANSparkMax.IdleMode.kBrake);
     }
     
@@ -49,7 +51,7 @@ public class NeoLifter implements ILifter {
 
     @Override
     public void goToPosition(Rotation2d position) {
-        motor.getPIDController().setReference(position.getRadians(), CANSparkMax.ControlType.kPosition, 0 , FEED_FORWARD.calculate(position.getRadians()));
+        motor.getPIDController().setReference(position.getRadians(), CANSparkMax.ControlType.kPosition, 0 , NeoLifterConstants.FEED_FORWARD.calculate(position.getRadians()));
     }
 
     @Override
@@ -58,7 +60,7 @@ public class NeoLifter implements ILifter {
         inputs.outputCurrent = motor.getOutputCurrent();
         inputs.position = motor.getEncoder().getPosition();
         inputs.velocity = motor.getEncoder().getVelocity();
-        inputs.isForwardSwitchPressed = motor.getForwardLimitSwitch(FORWARD_LIMIT_SWITCH_TYPE).isPressed();
-        inputs.isBackwardSwitchPressed = motor.getReverseLimitSwitch(BACKWARD_LIMIT_SWITCH_TYPE).isPressed();
+        inputs.isForwardSwitchPressed = motor.getForwardLimitSwitch(NeoLifterConstants.FORWARD_LIMIT_SWITCH_TYPE).isPressed();
+        inputs.isBackwardSwitchPressed = motor.getReverseLimitSwitch(NeoLifterConstants.BACKWARD_LIMIT_SWITCH_TYPE).isPressed();
     }
 }
