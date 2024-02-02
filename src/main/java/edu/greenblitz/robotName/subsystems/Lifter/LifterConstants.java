@@ -16,5 +16,6 @@ public class LifterConstants {
     public static final double TOLERANCE = 0.04;
 
     public static final Rotation2d LIFTER_RETRACTED_POSITION = Rotation2d.fromDegrees(0);
+
     public static final Rotation2d LIFTER_EXTENDED_POSITION = Rotation2d.fromDegrees(135);
 }

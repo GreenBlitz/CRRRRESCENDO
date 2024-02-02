@@ -12,6 +12,8 @@ public class LifterInputs {
     public double position;
 
     public double velocity;
+
     public boolean isForwardSwitchPressed;
+
     public boolean isBackwardSwitchPressed;
 }
