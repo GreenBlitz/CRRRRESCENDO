@@ -12,9 +12,13 @@ import edu.wpi.first.math.filter.Debouncer;
 import static edu.greenblitz.robotName.subsystems.Intake.neoIntake.NeoIntakeConstants.*;
 
 public class NeoIntake implements IIntake {
+
 	private GBSparkMax motor;
+
 	private Debouncer entranceBeamBreaker;
+
 	private Debouncer exitBeamBreaker;
+
 
 	public NeoIntake() {
 		motor = new GBSparkMax(NeoIntakeConstants.INTAKE_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
