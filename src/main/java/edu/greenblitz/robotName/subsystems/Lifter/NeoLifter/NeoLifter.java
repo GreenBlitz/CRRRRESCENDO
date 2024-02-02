@@ -56,7 +56,7 @@ public class NeoLifter implements ILifter {
     public void updateInputs(LifterInputsAutoLogged inputs) {
         inputs.appliedOutput = motor.getAppliedOutput();
         inputs.outputCurrent = motor.getOutputCurrent();
-        inputs.position = Rotation2d.fromRadians(motor.getEncoder().getPosition());
+        inputs.position = motor.getEncoder().getPosition();
         inputs.velocity = motor.getEncoder().getVelocity();
         inputs.isForwardSwitchPressed = motor.getForwardLimitSwitch(FORWARD_LIMIT_SWITCH_TYPE).isPressed();
         inputs.isBackwardSwitchPressed = motor.getReverseLimitSwitch(BACKWARD_LIMIT_SWITCH_TYPE).isPressed();

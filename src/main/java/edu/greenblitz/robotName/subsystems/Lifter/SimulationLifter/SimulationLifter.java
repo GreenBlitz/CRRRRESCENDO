@@ -58,7 +58,7 @@ public class SimulationLifter implements ILifter {
         motorSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
         inputs.appliedOutput = appliedOutput;
         inputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
-        inputs.position = Rotation2d.fromRadians(motorSimulation.getAngularPositionRotations());
+        inputs.position = motorSimulation.getAngularPositionRotations();
         inputs.velocity = motorSimulation.getAngularVelocityRPM();
     }
 }

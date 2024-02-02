@@ -75,17 +75,17 @@ public class Lifter extends GBSubsystem {
     }
 
     public boolean isMotorAtPosition(Rotation2d targetPosition) {
-        return Math.abs(targetPosition.getRadians() - lifterInputs.position.getRadians()) < LifterConstants.TOLERANCE;
+        return Math.abs(targetPosition.getRadians() - lifterInputs.position) < LifterConstants.TOLERANCE;
     }
 
     public Rotation2d getPosition(){
-        return lifterInputs.position;
+        return Rotation2d.fromRadians(lifterInputs.position);
     }
 
     public Pose3d getLifterPose() {
         return new Pose3d(
                 LifterConstants.ROBOT_RELATIVE_LIFTER_POSITION,
-                new Rotation3d(0,lifterInputs.position.getRadians(),0).plus(LifterConstants.ROBOT_RELATIVE_LIFTER_ROTATION)
+                new Rotation3d(0,lifterInputs.position,0).plus(LifterConstants.ROBOT_RELATIVE_LIFTER_ROTATION)
         );
     }
 }
