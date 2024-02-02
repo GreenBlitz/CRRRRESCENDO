@@ -15,5 +15,7 @@ public interface IWrist {
 
     void moveToAngle(Rotation2d targetAngle);
 
+    void standInPlace();
+
     void updateInputs(WristInputsAutoLogged inputs);
 }

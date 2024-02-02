@@ -10,8 +10,6 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.BATTERY_VOLTAGE;
@@ -68,6 +66,11 @@ public class SimulationWrist implements IWrist {
     public void moveToAngle(Rotation2d targetAngle) {
         controller.setSetpoint(targetAngle.getRadians());
         setVoltage(controller.calculate(wristSimulation.getAngleRads()));
+    }
+
+    @Override
+    public void standInPlace() {
+        setVoltage(SimulationWristConstants.SIMULATION_FEED_FORWARD.calculate(0));
     }
 
     @Override

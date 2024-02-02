@@ -76,16 +76,7 @@ public class Wrist extends GBSubsystem {
     }
 
     public void standInPlace() {
-        wrist.setVoltage(getStaticFeedForward());
-    }
-
-
-    public double getStaticFeedForward() {
-        return Robot.isSimulation() ? 0 : NeoWristConstants.WRIST_FEED_FORWARD.calculate(0);
-    }
-
-    public double getDynamicFeedForward(double velocity) {
-        return NeoWristConstants.WRIST_FEED_FORWARD.calculate(velocity);
+        wrist.standInPlace();
     }
 
     public double getVoltage() {

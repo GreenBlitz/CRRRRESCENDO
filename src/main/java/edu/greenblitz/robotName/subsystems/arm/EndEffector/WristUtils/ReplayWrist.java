@@ -31,6 +31,11 @@ public class ReplayWrist implements IWrist {
     }
 
     @Override
+    public void standInPlace() {
+
+    }
+
+    @Override
     public void updateInputs(WristInputsAutoLogged inputs) {
 
     }
