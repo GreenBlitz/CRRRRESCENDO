@@ -13,7 +13,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 
 public class NeoElbow implements IElbow {
 
-    GBSparkMax motor;
+    private GBSparkMax motor;
 
     public NeoElbow(){
         motor = new GBSparkMax(NeoElbowConstants.NEO_MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);

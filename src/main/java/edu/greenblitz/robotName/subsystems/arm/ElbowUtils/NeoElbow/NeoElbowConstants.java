@@ -30,8 +30,6 @@ public class NeoElbowConstants {
 
     public static final PIDObject PID = new PIDObject().withKp(0.8).withKd(0.3).withKi(0).withMaxPower(1);
 
-    public static final int COUNTS_PER_REVOLUTION = 8192;
-
     public static final GBSparkMax.SparkMaxConfObject ELBOW_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
             .withPID(PID)
             .withIdleMode(CANSparkMax.IdleMode.kBrake)
