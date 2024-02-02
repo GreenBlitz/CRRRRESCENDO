@@ -11,6 +11,7 @@ import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import static edu.greenblitz.robotName.subsystems.Lifter.NeoLifter.NeoLifterConstants.*;
 
 public class NeoLifter implements ILifter {
+
     private GBSparkMax motor;
 
     public NeoLifter() {

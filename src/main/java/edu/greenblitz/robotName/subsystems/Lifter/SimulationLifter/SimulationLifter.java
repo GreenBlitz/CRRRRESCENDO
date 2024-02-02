@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import org.littletonrobotics.junction.Logger;
 
 public class SimulationLifter implements ILifter {
+
     private DCMotorSim motorSimulation;
     private double appliedOutput;
     private ProfiledPIDController pidController;
@@ -24,7 +25,6 @@ public class SimulationLifter implements ILifter {
     public void setPower(double power) {
         setVoltage(power * RobotConstants.SimulationConstants.BATTERY_VOLTAGE);
     }
-
 
     @Override
     public void setVoltage(double voltage) {

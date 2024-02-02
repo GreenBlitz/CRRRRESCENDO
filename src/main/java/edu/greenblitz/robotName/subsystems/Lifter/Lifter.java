@@ -58,7 +58,7 @@ public class Lifter extends GBSubsystem {
     }
 
     public void resetEncoder() {
-        resetEncoder(NeoLifterConstants.ENCODER_POSE_WHEN_RESET);
+        resetEncoder(LifterConstants.ENCODER_POSE_WHEN_RESET);
     }
 
     public void stopMotor() {
@@ -74,7 +74,7 @@ public class Lifter extends GBSubsystem {
     }
 
     public boolean isMotorAtPosition(double targetPosition) {
-        return Math.abs(targetPosition - lifterInputs.position) < NeoLifterConstants.TOLERANCE;
+        return Math.abs(targetPosition - lifterInputs.position) < LifterConstants.TOLERANCE;
     }
 
     public double getPosition(){
@@ -83,8 +83,8 @@ public class Lifter extends GBSubsystem {
 
     public Pose3d getLifterPose() {
         return new Pose3d(
-                SimulationLifterConstants.ROBOT_RELATIVE_LIFTER_POSITION,
-                new Rotation3d(0,lifterInputs.position,0).plus(SimulationLifterConstants.ROBOT_RELATIVE_LIFTER_ROTATION)
+                LifterConstants.ROBOT_RELATIVE_LIFTER_POSITION,
+                new Rotation3d(0,lifterInputs.position,0).plus(LifterConstants.ROBOT_RELATIVE_LIFTER_ROTATION)
         );
     }
 }
