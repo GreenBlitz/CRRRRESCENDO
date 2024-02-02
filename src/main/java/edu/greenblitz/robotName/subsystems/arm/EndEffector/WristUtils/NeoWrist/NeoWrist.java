@@ -22,11 +22,8 @@ public class NeoWrist implements IWrist {
 
         motor.getPIDController().setFeedbackDevice(motor.getEncoder());
 
-        motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).setPositionConversionFactor(WristConstants.ABSOLUTE_POSITION_CONVERSION_FACTOR);
-        motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).setVelocityConversionFactor(WristConstants.ABSOLUTE_VELOCITY_CONVERSION_FACTOR);
-
-        motor.getEncoder().setPositionConversionFactor(RELATIVE_CONVERSION_FACTOR);
-        motor.getEncoder().setVelocityConversionFactor(RELATIVE_CONVERSION_FACTOR);
+        motor.getEncoder().setPositionConversionFactor(CONVERSION_FACTOR);
+        motor.getEncoder().setVelocityConversionFactor(CONVERSION_FACTOR);
 
         motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
         motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
