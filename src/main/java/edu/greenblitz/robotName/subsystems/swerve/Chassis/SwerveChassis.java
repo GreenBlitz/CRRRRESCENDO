@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.swerve.Chassis;
 
+import edu.greenblitz.robotName.OdometryConstants;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.VisionConstants;
@@ -9,6 +10,8 @@ import edu.greenblitz.robotName.subsystems.Gyros.GyroInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.Gyros.IAngleMeasurementGyro;
 import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.Photonvision;
+import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
+import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.ISwerveModule;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModule;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModuleFactory;
@@ -502,6 +505,21 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         doVision = true;
     }
 
+    public Rotation2d DefinedAngleForAutonomousShootingInDefinedPosition(){
+        if (Math.abs(OdometryConstants.SOURCE.getX()-poseEstimator.getEstimatedPosition().getX())<OdometryConstants.ESTIMATED_ROBOT_POSITION_TOLERANCE) {
+            return PivotConstants.AutonomousShooting.AMP_EDGE.ANGLE;
+        }
+        else if (Math.abs(OdometryConstants.PODIUM.getX()-poseEstimator.getEstimatedPosition().getX())<OdometryConstants.ESTIMATED_ROBOT_POSITION_TOLERANCE) {
+            return PivotConstants.AutonomousShooting.PODIUM.ANGLE;
+        }
+        else if (Math.abs(OdometryConstants.SPEAKER_LEFT.getX()-poseEstimator.getEstimatedPosition().getX())<OdometryConstants.ESTIMATED_ROBOT_POSITION_TOLERANCE) {
+            return PivotConstants.AutonomousShooting.SPEAKER_SIDES.ANGLE;
+        }
+        else if (Math.abs(OdometryConstants.SPEAKER_RIGHT.getX()-poseEstimator.getEstimatedPosition().getX())<OdometryConstants.ESTIMATED_ROBOT_POSITION_TOLERANCE) {
+            return PivotConstants.AutonomousShooting.SPEAKER_SIDES.ANGLE;
+        }
+        return PivotConstants.AutonomousShooting.SPEAKER_MIDDLE.ANGLE;
+    }
     @Override
     public void updateInputs(SwerveChassisInputsAutoLogged inputs) {
         inputs.isVisionEnabled = doVision;

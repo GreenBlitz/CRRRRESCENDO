@@ -4,6 +4,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.*;
@@ -16,14 +17,14 @@ import static edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants.T
 public class Pivot extends GBSubsystem {
 
 	private static Pivot instance;
-
 	private PivotInputsAutoLogged pivotInputs;
-
+	Pose2d robotPose;
 	private IPivot pivot;
 
 	private Pivot() {
 		pivot = PivotFactory.create();
 		pivotInputs = new PivotInputsAutoLogged();
+		robotPose = SwerveChassis.getInstance().getRobotPose();
 		pivot.updateInputs(pivotInputs);
 	}
 
@@ -89,14 +90,8 @@ public class Pivot extends GBSubsystem {
 	public Rotation2d getAngle() {
 		return Rotation2d.fromRadians(pivotInputs.position);
 	}
-
 	public boolean isAtAngle(Rotation2d angle) {
 		return Math.abs(angle.getRadians() - getAngle().getRadians()) <= TOLERANCE;
-	}
-
-	public Rotation2d getAutonomousShootingPosition(){
-		switch ()
-		return PivotConstants.AutonomousShooting.SPEAKER_MIDDLE.ANGLE;
 	}
 	public Pose3d getPivotPose3d() {
 		return new Pose3d(
