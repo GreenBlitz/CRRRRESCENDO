@@ -45,7 +45,7 @@ public class SimulationLifter implements ILifter {
 
     @Override
     public void setIdleMode(CANSparkMax.IdleMode idleMode) {
-        Logger.getInstance().recordOutput("Lifter", "tried setting the idleMode to " + idleMode.name());
+        Logger.recordOutput("Lifter", "tried setting the idleMode to " + idleMode.name());
     }
 
     @Override
