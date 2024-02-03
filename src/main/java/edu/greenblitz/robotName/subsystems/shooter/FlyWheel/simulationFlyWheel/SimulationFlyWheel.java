@@ -14,9 +14,9 @@ public class SimulationFlyWheel implements IFlyWheel {
 
     private FlywheelSim leftMotorFlywheel;
 
-    private double rightMotorApplied;
+    private double rightMotorAppliedOutput;
 
-    private double leftMotorApplied;
+    private double leftMotorAppliedOutput;
 
     private PIDController rightMotorPIDController;
 
@@ -48,12 +48,12 @@ public class SimulationFlyWheel implements IFlyWheel {
 
     @Override
     public void setVoltage(double rightVoltage, double leftVoltage) {
-        rightMotorApplied = MathUtil.clamp(
+        rightMotorAppliedOutput = MathUtil.clamp(
                 rightVoltage,
                 -RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE,
                 RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE
         );
-        leftMotorApplied = MathUtil.clamp(
+        leftMotorAppliedOutput = MathUtil.clamp(
                 leftVoltage,
                 -RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE,
                 RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE

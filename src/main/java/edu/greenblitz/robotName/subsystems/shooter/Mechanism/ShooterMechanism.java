@@ -19,7 +19,7 @@ public class ShooterMechanism extends GBSubsystem {
 
     private MechanismRoot2d rootPivot;
 
-    private final MechanismLigament2d pivot;
+    private final MechanismLigament2d pivotMechanism;
 
 
     public static void init() {
@@ -29,7 +29,7 @@ public class ShooterMechanism extends GBSubsystem {
     public ShooterMechanism(){
         shooterMechanism = new Mechanism2d(SIZE_OF_MECHANISM.getX(),SIZE_OF_MECHANISM.getY());
         rootPivot = shooterMechanism.getRoot("pivot_root", PIVOT_COORDINATES.getX(), PIVOT_COORDINATES.getY());
-        pivot = rootPivot.append(new MechanismLigament2d("pivot", PivotConstants.LENGTH_OF_SHOOTER, Units.radiansToDegrees(PivotConstants.STARTING_ANGLE),LINE_WIDTH, PIVOT_COLOR));
+        pivotMechanism = rootPivot.append(new MechanismLigament2d("pivot", PivotConstants.LENGTH_OF_SHOOTER, Units.radiansToDegrees(PivotConstants.STARTING_ANGLE),LINE_WIDTH, PIVOT_COLOR));
         SmartDashboard.putData("ShooterMech2D", shooterMechanism);
     }
 
@@ -38,7 +38,7 @@ public class ShooterMechanism extends GBSubsystem {
         super.periodic();
 
         double pivotAngle = Pivot.getInstance().getAngle().getRadians();
-        pivot.setAngle(Units.radiansToDegrees(pivotAngle));
+        pivotMechanism.setAngle(Units.radiansToDegrees(pivotAngle));
 
         Logger.recordOutput("Pivot/SimPose3D", Pivot.getInstance().getAngle().getRadians());
     }
