@@ -3,10 +3,10 @@ package edu.greenblitz.robotName.subsystems.arm.wrist.NeoWrist;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.SparkMaxAbsoluteEncoder;
+import com.revrobotics.SparkMaxLimitSwitch;
 import edu.greenblitz.robotName.subsystems.Battery;
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants;
-import edu.greenblitz.robotName.subsystems.arm.wrist.IWrist;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
+import edu.greenblitz.robotName.subsystems.arm.wrist.IWrist;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristInputsAutoLogged;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -25,8 +25,8 @@ public class NeoWrist implements IWrist {
         motor.getEncoder().setPositionConversionFactor(WristConstants.CONVERSION_FACTOR);
         motor.getEncoder().setVelocityConversionFactor(WristConstants.CONVERSION_FACTOR);
 
-        motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, IS_SOFT_FORWARD_LIMIT_ENABLED);
-        motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, IS_SOFT_BACKWARD_LIMIT_ENABLED);
+        motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, NeoWristConstants.IS_SOFT_FORWARD_LIMIT_ENABLED);
+        motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, NeoWristConstants.IS_SOFT_BACKWARD_LIMIT_ENABLED);
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, WristConstants.BACKWARD_ANGLE_LIMIT.getRadians());
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, WristConstants.FORWARD_ANGLE_LIMIT.getRadians());
 
@@ -61,14 +61,14 @@ public class NeoWrist implements IWrist {
         motor.getPIDController().setReference(
                 targetAngle.getRadians(),
                 CANSparkMax.ControlType.kPosition,
-                PID_SLOT,
-                NeoWristConstants.MOTOR_FEED_FORWARD.calculate(motor.getEncoder().getVelocity())
+                NeoWristConstants.PID_SLOT,
+                NeoWristConstants.WRIST_FEED_FORWARD.calculate(motor.getEncoder().getVelocity())
         );
     }
 
     @Override
     public void standInPlace() {
-        setVoltage(NeoWristConstants.MOTOR_FEED_FORWARD.calculate(0));
+        setVoltage(NeoWristConstants.WRIST_FEED_FORWARD.calculate(0));
     }
 
     @Override

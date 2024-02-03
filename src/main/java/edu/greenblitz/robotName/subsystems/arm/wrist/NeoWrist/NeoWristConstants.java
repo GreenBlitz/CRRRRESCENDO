@@ -21,10 +21,10 @@ public class NeoWristConstants {
             .withPID(PID)
             .withIdleMode(CANSparkMax.IdleMode.kBrake)
             .withRampRate(RobotConstants.General.RAMP_RATE_VAL)
+            .withCurrentLimit(WristConstants.CURRENT_LIMIT)
+            .withPositionConversionFactor(WristConstants.CONVERSION_FACTOR)
+            .withVelocityConversionFactor(WristConstants.CONVERSION_FACTOR)
             .withCurrentLimit(WristConstants.CURRENT_LIMIT);
-            .withPositionConversionFactor(CONVERSION_FACTOR)
-            .withVelocityConversionFactor(CONVERSION_FACTOR)
-            .withCurrentLimit(CURRENT_LIMIT);
 
     public static final boolean IS_BACKWARD_LIMIT_SWITCH_ENABLED = false;
 
