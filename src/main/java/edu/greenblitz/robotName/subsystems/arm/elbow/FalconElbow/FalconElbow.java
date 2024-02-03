@@ -46,8 +46,8 @@ public class FalconElbow implements IElbow {
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
         motor.setControl(
-                motionMagicDutyCycle.withPosition(targetAngle.getRadians() / ElbowConstants.CONVERSION_FACTOR)
-                .withFeedForward(FalconElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(motor.getVelocity().getValue() * ElbowConstants.CONVERSION_FACTOR )));
+                motionMagicDutyCycle.withPosition(targetAngle.getRadians() / ElbowConstants.GEAR_RATIO)
+                .withFeedForward(FalconElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(motor.getVelocity().getValue() * ElbowConstants.GEAR_RATIO)));
     }
 
     @Override
@@ -59,9 +59,9 @@ public class FalconElbow implements IElbow {
     public void updateInputs(ElbowInputsAutoLogged inputs) {
         inputs.outputCurrent = motor.getSupplyCurrent().getValue();
         inputs.appliedOutput = motor.getMotorVoltage().getValue();
-        inputs.position = motor.getPosition().getValue() * ElbowConstants.CONVERSION_FACTOR;
-        inputs.velocity = motor.getVelocity().getValue() * ElbowConstants.CONVERSION_FACTOR;
-        inputs.absoluteEncoderPosition = motor.getDutyCycle().getValue() * ElbowConstants.CONVERSION_FACTOR;
+        inputs.position = motor.getPosition().getValue() * ElbowConstants.GEAR_RATIO;
+        inputs.velocity = motor.getVelocity().getValue() * ElbowConstants.GEAR_RATIO;
+        inputs.absoluteEncoderPosition = motor.getDutyCycle().getValue() * ElbowConstants.GEAR_RATIO;
         inputs.temperature = motor.getDeviceTemp().getValue();
         inputs.hasReachedForwardLimit = motor.getFault_ForwardSoftLimit().getValue();
         inputs.hasReachedBackwardLimit = motor.getFault_ReverseSoftLimit().getValue();

@@ -19,7 +19,7 @@ public class NeoElbow implements IElbow {
     private ElbowInputsAutoLogged inputs;
 
     public NeoElbow(){
-        motor = new GBSparkMax(NeoElbowConstants.NEO_MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        motor = new GBSparkMax(NeoElbowConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
         motor.config(NeoElbowConstants.ELBOW_CONFIG_OBJECT);
 
         motor.getPIDController().setFeedbackDevice(motor.getEncoder());
@@ -27,8 +27,8 @@ public class NeoElbow implements IElbow {
         motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, ElbowConstants.BACKWARD_ANGLE_LIMIT.getRadians());
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, ElbowConstants.FORWARD_ANGLE_LIMIT.getRadians());
-        motor.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoElbowConstants.IS_REVERSE_LIMIT_SWITCH_ENABLE);
-        motor.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoElbowConstants.IS_FORWARD_LIMIT_SWITCH_ENABLE);
+        motor.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoElbowConstants.ENABLE_REVERSE_LIMIT_SWITCH);
+        motor.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoElbowConstants.ENABLE_FORWARD_LIMIT_SWITCH);
 
         resetAngle(Rotation2d.fromRotations(motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition()));
     }
@@ -45,8 +45,7 @@ public class NeoElbow implements IElbow {
 
     @Override
     public void setIdleMode(NeutralModeValue idleMode) {
-        CANSparkMax.IdleMode neoIdleMode = (idleMode == NeutralModeValue.Brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
-        motor.setIdleMode(neoIdleMode);
+        motor.setIdleModeByNeutralMode(idleMode);
     }
 
     @Override
