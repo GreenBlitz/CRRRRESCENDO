@@ -2,16 +2,14 @@ package edu.greenblitz.robotName.commands.shooter.shootingState;
 
 import edu.greenblitz.robotName.commands.shooter.Shoot;
 import edu.greenblitz.robotName.utils.GBCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-public class GoToShootingStateAndShoot extends GBCommand {
+public class GoToShootingStateAndShoot extends SequentialCommandGroup {
 
-    @Override
-    public void initialize() {
-        new GoToShootingState();
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        new Shoot();
+    public GoToShootingStateAndShoot() {
+        super(
+                new GoToShootingState(),
+                new Shoot()
+        );
     }
 }
