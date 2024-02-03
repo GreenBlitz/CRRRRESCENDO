@@ -11,9 +11,11 @@ import edu.greenblitz.robotName.subsystems.swerve.Modules.ISwerveModule;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModuleInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.swerve.SwerveModuleConfigObject;
 import edu.greenblitz.robotName.utils.Conversions;
+import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.greenblitz.robotName.utils.motors.GBTalonFXPro;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MK4ISwerveModule implements ISwerveModule {
@@ -114,6 +116,7 @@ public class MK4ISwerveModule implements ISwerveModule {
         inputs.angularPositionRadians = Conversions.MK4IConversions.convertRevolutionsToRadians(angularMotor.getPosition().getValue());
 
         inputs.isAbsoluteEncoderConnected = canCoder.getVersion().getValue() != 0;
+
 
         if (Double.isNaN(canCoder.getAbsolutePosition().getValue())) {
             inputs.absoluteEncoderPosition = 0;
