@@ -16,8 +16,8 @@ public class NeoLifter implements ILifter {
         motor = new GBSparkMax(NeoLifterConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
         motor.config(NeoLifterConstants.CONFIG);
 
-        motor.getReverseLimitSwitch(NeoLifterConstants.FORWARD_LIMIT_SWITCH_TYPE).enableLimitSwitch(NeoLifterConstants.ENABLE_BACKWARD_LIMIT_SWITCH);
-        motor.getForwardLimitSwitch(NeoLifterConstants.BACKWARD_LIMIT_SWITCH_TYPE).enableLimitSwitch(NeoLifterConstants.ENABLE_FORWARD_LIMIT_SWITCH);
+        motor.getReverseLimitSwitch(NeoLifterConstants.FORWARD_LIMIT_SWITCH_TYPE).enableLimitSwitch(NeoLifterConstants.IS_BACKWARD_LIMIT_SWITCH_ENABLED);
+        motor.getForwardLimitSwitch(NeoLifterConstants.BACKWARD_LIMIT_SWITCH_TYPE).enableLimitSwitch(NeoLifterConstants.IS_FORWARD_LIMIT_SWITCH_ENABLED);
 
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, LifterConstants.BACKWARD_LIMIT.getRadians());
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, LifterConstants.FORWARD_LIMIT.getRadians());
