@@ -11,6 +11,8 @@ public class PivotCommand extends GBCommand {
 		pivot = Pivot.getInstance();
 		require(pivot);
 	}
-	
-	
+
+	public void end(boolean interrupted) {
+		pivot.standInPlace();
+	}
 }
