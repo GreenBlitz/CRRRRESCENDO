@@ -13,7 +13,7 @@ import java.util.Optional;
 
 
 class Limelight {
-    private NetworkTableEntry robotPoseEntry, idEntry, tagPoseEntry;
+    private NetworkTableEntry robotPoseEntry, idEntry, tagPoseEntry,limelightSettingsEntry;
     private String name;
 
     public Limelight(String limelightName) {
@@ -22,6 +22,7 @@ class Limelight {
         robotPoseEntry = NetworkTableInstance.getDefault().getTable(name).getEntry(robotPoseQuery);
         tagPoseEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("targetpose_cameraspace");
         idEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("tid");
+        limelightSettingsEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("pipeline");
     }
     
 
@@ -50,6 +51,10 @@ class Limelight {
     }
     public boolean hasTarget() {
         return getUpdatedPose2DEstimation().isPresent();
+    }
+
+    public void changePipeline(int pipeline){
+        limelightSettingsEntry.setInteger(pipeline);
     }
 
 
