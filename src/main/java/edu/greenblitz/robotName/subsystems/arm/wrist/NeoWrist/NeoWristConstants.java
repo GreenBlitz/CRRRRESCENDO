@@ -20,7 +20,7 @@ public class NeoWristConstants {
     public static final GBSparkMax.SparkMaxConfObject WRIST_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
             .withPID(PID)
             .withIdleMode(CANSparkMax.IdleMode.kBrake)
-            .withRampRate(RobotConstants.General.RAMP_RATE_VAL)
+            .withRampRate(RobotConstants.General.RAMP_RATE_VALUE)
             .withCurrentLimit(WristConstants.CURRENT_LIMIT)
             .withPositionConversionFactor(WristConstants.CONVERSION_FACTOR)
             .withVelocityConversionFactor(WristConstants.CONVERSION_FACTOR)
