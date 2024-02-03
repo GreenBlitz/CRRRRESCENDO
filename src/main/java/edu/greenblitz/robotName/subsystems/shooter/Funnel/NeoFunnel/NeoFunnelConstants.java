@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName.subsystems.shooter.Funnel.NeoFunnel;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.SparkMaxLimitSwitch;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 
@@ -16,7 +15,7 @@ public class NeoFunnelConstants {
 
     public static final GBSparkMax.SparkMaxConfObject FUNNEL_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
             .withIdleMode(CANSparkMax.IdleMode.kBrake)
-            .withRampRate(RobotConstants.General.RAMP_RATE_VAL)
+            .withRampRate(RobotConstants.General.RAMP_RATE_VALUE)
             .withCurrentLimit(CURRENT_LIMIT);
 
 }

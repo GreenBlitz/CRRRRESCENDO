@@ -21,11 +21,14 @@ public class NeoIntakeConstants {
 
     public static final SparkMaxLimitSwitch.Type EXIT_BEAM_BREAKER_TYPE = SparkMaxLimitSwitch.Type.kNormallyClosed ;
 
+    public static final boolean IS_ENTRANCE_BEAM_BREAKER_ACTIVE = false;
+    public static final boolean IS_EXIT_BEAM_BREAKER_ACTIVE = false;
+
     public static final int CURRENT_LIMIT = 40;
 
     public static final GBSparkMax.SparkMaxConfObject INTAKE_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
             .withIdleMode(CANSparkMax.IdleMode.kBrake)
-            .withRampRate(RobotConstants.General.RAMP_RATE_VAL)
+            .withRampRate(RobotConstants.General.RAMP_RATE_VALUE)
             .withCurrentLimit(CURRENT_LIMIT);
 
 }

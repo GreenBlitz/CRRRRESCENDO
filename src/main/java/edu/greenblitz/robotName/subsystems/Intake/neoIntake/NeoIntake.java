@@ -27,8 +27,8 @@ public class NeoIntake implements IIntake {
 		entranceBeamBreaker = new Debouncer(NeoIntakeConstants.ENTRANCE_DEBOUNCE_TIME_FOR_LIMIT_SWITCH);
 		exitBeamBreaker = new Debouncer(NeoIntakeConstants.EXIT_DEBOUNCE_TIME_FOR_LIMIT_SWITCH);
 
-		motor.getReverseLimitSwitch(ENTRANCE_BEAM_BREAKER_TYPE).enableLimitSwitch(false);
-		motor.getForwardLimitSwitch(EXIT_BEAM_BREAKER_TYPE).enableLimitSwitch(false);
+		motor.getReverseLimitSwitch(ENTRANCE_BEAM_BREAKER_TYPE).enableLimitSwitch(IS_ENTRANCE_BEAM_BREAKER_ACTIVE);
+		motor.getForwardLimitSwitch(EXIT_BEAM_BREAKER_TYPE).enableLimitSwitch(IS_EXIT_BEAM_BREAKER_ACTIVE);
 	}
 	
 	@Override
