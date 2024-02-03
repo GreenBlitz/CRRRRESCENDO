@@ -1,8 +1,8 @@
-package edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils;
+package edu.greenblitz.robotName.subsystems.arm.wrist;
 
 import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.NeoWrist.NeoWrist;
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.SimulationWrist.SimulationWrist;
+import edu.greenblitz.robotName.subsystems.arm.wrist.NeoWrist.NeoWrist;
+import edu.greenblitz.robotName.subsystems.arm.wrist.SimulationWrist.SimulationWrist;
 
 public class WristFactory {
     public static IWrist create() {

@@ -1,19 +1,14 @@
-package edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.NeoWrist;
+package edu.greenblitz.robotName.subsystems.arm.wrist.NeoWrist;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.SparkMaxAbsoluteEncoder;
 import edu.greenblitz.robotName.subsystems.Battery;
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.IWrist;
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants;
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.arm.wrist.IWrist;
+import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
+import edu.greenblitz.robotName.subsystems.arm.wrist.WristInputsAutoLogged;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
-import edu.wpi.first.math.filter.Debouncer;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.DigitalInput;
-
-import static edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.NeoWrist.NeoWristConstants.PID_SLOT;
-import static edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants.*;
 
 public class NeoWrist implements IWrist {
 
@@ -27,8 +22,8 @@ public class NeoWrist implements IWrist {
         motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).setPositionConversionFactor(WristConstants.ABSOLUTE_POSITION_CONVERSION_FACTOR);
         motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).setVelocityConversionFactor(WristConstants.ABSOLUTE_VELOCITY_CONVERSION_FACTOR);
 
-        motor.getEncoder().setPositionConversionFactor(RELATIVE_POSITION_CONVERSION_FACTOR);
-        motor.getEncoder().setVelocityConversionFactor(RELATIVE_VELOCITY_CONVERSION_FACTOR);
+        motor.getEncoder().setPositionConversionFactor(WristConstants.RELATIVE_POSITION_CONVERSION_FACTOR);
+        motor.getEncoder().setVelocityConversionFactor(WristConstants.RELATIVE_VELOCITY_CONVERSION_FACTOR);
 
         motor.getPIDController().setFeedbackDevice(motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle));
         motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
@@ -60,7 +55,7 @@ public class NeoWrist implements IWrist {
 
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
-        motor.getPIDController().setReference(targetAngle.getRadians(), CANSparkMax.ControlType.kPosition, PID_SLOT, motor.getPIDController().getFF());
+        motor.getPIDController().setReference(targetAngle.getRadians(), CANSparkMax.ControlType.kPosition, NeoWristConstants.PID_SLOT, motor.getPIDController().getFF());
     }
 
     @Override
@@ -71,8 +66,8 @@ public class NeoWrist implements IWrist {
         inputs.velocity = motor.getEncoder().getVelocity();
         inputs.absoluteEncoderPosition = motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition();
         inputs.temperature = motor.getMotorTemperature();
-        inputs.hasReachedBackwardLimit = Math.abs(inputs.position - BACKWARD_ANGLE_LIMIT.getRadians()) <= TOLERANCE;
-        inputs.hasReachedForwardLimit = Math.abs(inputs.position - FORWARD_ANGLE_LIMIT.getRadians()) <= TOLERANCE;
+        inputs.hasReachedBackwardLimit = Math.abs(inputs.position - WristConstants.BACKWARD_ANGLE_LIMIT.getRadians()) <= WristConstants.TOLERANCE;
+        inputs.hasReachedForwardLimit = Math.abs(inputs.position - WristConstants.FORWARD_ANGLE_LIMIT.getRadians()) <= WristConstants.TOLERANCE;
 
     }
 

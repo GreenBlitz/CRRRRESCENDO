@@ -1,13 +1,10 @@
-package edu.greenblitz.robotName.subsystems.arm;
+package edu.greenblitz.robotName.subsystems.arm.roller;
 
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.RollerUtils.IRoller;
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.RollerUtils.RollerFactory;
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.RollerUtils.RollerInputsAutoLogged;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.arm.EndEffector.RollerUtils.RollerConstants.ROLL_BACKWARD_POWER;
-import static edu.greenblitz.robotName.subsystems.arm.EndEffector.RollerUtils.RollerConstants.ROLL_FORWARD_POWER;
+import static edu.greenblitz.robotName.subsystems.arm.roller.RollerConstants.ROLL_BACKWARD_POWER;
+import static edu.greenblitz.robotName.subsystems.arm.roller.RollerConstants.ROLL_FORWARD_POWER;
 
 public class Roller extends GBSubsystem {
 	

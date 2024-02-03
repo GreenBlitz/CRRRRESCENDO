@@ -1,8 +1,8 @@
-package edu.greenblitz.robotName.subsystems.arm.EndEffector.RollerUtils.SimulationRoller;
+package edu.greenblitz.robotName.subsystems.arm.roller.SimulationRoller;
 
 import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.RollerUtils.IRoller;
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.RollerUtils.RollerInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.arm.roller.IRoller;
+import edu.greenblitz.robotName.subsystems.arm.roller.RollerInputsAutoLogged;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;

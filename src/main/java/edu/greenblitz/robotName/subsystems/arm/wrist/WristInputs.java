@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils;
+package edu.greenblitz.robotName.subsystems.arm.wrist;
 
 import org.littletonrobotics.junction.AutoLog;
 
