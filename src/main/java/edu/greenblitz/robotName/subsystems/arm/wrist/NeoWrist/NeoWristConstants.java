@@ -7,6 +7,8 @@ import edu.greenblitz.robotName.utils.PIDObject;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 
+import static edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants.CURRENT_LIMIT;
+
 public class NeoWristConstants {
 
     public static final int MOTOR_ID = 1;
@@ -20,7 +22,8 @@ public class NeoWristConstants {
     public static final GBSparkMax.SparkMaxConfObject WRIST_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
             .withPID(NEO_PID)
             .withIdleMode(CANSparkMax.IdleMode.kBrake)
-            .withRampRate(RobotConstants.General.RAMP_RATE_VAL)
-            .withCurrentLimit(WristConstants.CURRENT_LIMIT);
+            .withRampRate(RobotConstants.General.RAMP_RATE_VALUE)
+            .withCurrentLimit(CURRENT_LIMIT);
+
 
 }
