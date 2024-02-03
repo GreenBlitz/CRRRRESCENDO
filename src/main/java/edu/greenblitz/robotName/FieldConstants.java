@@ -5,7 +5,6 @@ import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
-import edu.wpi.first.wpilibj.DriverStation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +24,7 @@ public class FieldConstants {
 
     public static final Translation3d MIDDLE_OF_BLUE_SPEAKER_POSITION = new Translation3d(0,0,0);
 
-    public static final Translation3d MIDDLE_OF_SPEAKER = FMSUtils.isRedAlliance() ? MIDDLE_OF_RED_SPEAKER_POSITION : MIDDLE_OF_BLUE_SPEAKER_POSITION;
+    public static final Translation3d MIDDLE_OF_SPEAKER_POSITION = FMSUtils.isRedAlliance() ? MIDDLE_OF_RED_SPEAKER_POSITION : MIDDLE_OF_BLUE_SPEAKER_POSITION;
 
     public static class FieldZones {
 
