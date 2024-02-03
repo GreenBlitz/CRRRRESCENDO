@@ -1,6 +1,9 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowByJoystick;
+import edu.greenblitz.robotName.commands.arm.wrist.MoveWristByJoystick;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
+import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
 import edu.greenblitz.robotName.commands.PanicMode;
