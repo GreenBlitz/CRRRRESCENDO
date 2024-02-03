@@ -93,5 +93,6 @@ public class SimulationWrist implements IWrist {
         inputs.hasReachedForwardLimit = wristSimulation.hasHitLowerLimit();
         inputs.hasReachedBackwardLimit = wristSimulation.hasHitLowerLimit();
 
+        lastInputs = inputs;
     }
 }
