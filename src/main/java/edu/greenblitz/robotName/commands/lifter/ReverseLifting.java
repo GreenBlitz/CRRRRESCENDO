@@ -10,7 +10,7 @@ public class ReverseLifting extends LifterCommand {
 
     @Override
     public boolean isFinished() {
-        return lifter.isAtPosition(LifterConstants.LIFTER_RETRACTED_POSITION);
+        return lifter.isSwitchPressed();
     }
 
     @Override
