@@ -1,5 +1,7 @@
 package edu.greenblitz.robotName.subsystems.swerve.Chassis;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.VisionConstants;
@@ -127,6 +129,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         backLeftSwerveModule.updateInputs(backLeftSwerveModuleInputs);
         frontRightSwerveModule.updateInputs(frontRightSwerveModuleInputs);
         backRightSwerveModule.updateInputs(backRightSwerveModuleInputs);
+
         Logger.recordOutput("DriveTrain/RobotPose", getRobotPose());
         Logger.recordOutput("DriveTrain/ModuleStates", getSwerveModuleStates());
         Logger.processInputs("DriveTrain/Chassis", ChassisInputs);
@@ -274,14 +277,12 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     }
 
     public void moveByChassisSpeeds(ChassisSpeeds fieldRelativeSpeeds, Rotation2d currentAng) {
-        ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
-                fieldRelativeSpeeds,
+        moveByChassisSpeeds(
+                fieldRelativeSpeeds.vxMetersPerSecond,
+                fieldRelativeSpeeds.vyMetersPerSecond,
+                fieldRelativeSpeeds.omegaRadiansPerSecond,
                 currentAng
         );
-        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
-        SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
-        SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
-        setModuleStates(desaturatedStates);
     }
 
     /**
@@ -297,6 +298,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         }
         SwerveModuleState[] desaturatedStates = new SwerveModuleState[states.length];
         for (int i = 0; i < states.length; i++) {
+            desaturatedStates[i] = new SwerveModuleState(states[i].speedMetersPerSecond / desaturationFactor, states[i].angle);
             desaturatedStates[i] = new SwerveModuleState(states[i].speedMetersPerSecond / desaturationFactor, states[i].angle);
         }
         return desaturatedStates;
