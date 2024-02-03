@@ -26,7 +26,17 @@ public class ReplayWrist implements IWrist {
     }
 
     @Override
+    public void resetEncoder() {
+
+    }
+
+    @Override
     public void moveToAngle(Rotation2d targetAngle) {
+
+    }
+
+    @Override
+    public void standInPlace() {
 
     }
 
