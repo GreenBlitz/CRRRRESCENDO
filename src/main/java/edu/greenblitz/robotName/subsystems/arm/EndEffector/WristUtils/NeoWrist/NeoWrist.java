@@ -8,7 +8,7 @@ import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristInput
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.geometry.Rotation2d;
 
-import static edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.NeoWrist.NeoWristConstants.PID_SLOT;
+import static edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.NeoWrist.NeoWristConstants.*;
 import static edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants.*;
 
 public class NeoWrist implements IWrist {
@@ -25,13 +25,13 @@ public class NeoWrist implements IWrist {
         motor.getEncoder().setPositionConversionFactor(CONVERSION_FACTOR);
         motor.getEncoder().setVelocityConversionFactor(CONVERSION_FACTOR);
 
-        motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
-        motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
+        motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, IS_SOFT_FORWARD_LIMIT_ENABLED);
+        motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, IS_SOFT_BACKWARD_LIMIT_ENABLED);
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, WristConstants.BACKWARD_ANGLE_LIMIT.getRadians());
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, WristConstants.FORWARD_ANGLE_LIMIT.getRadians());
 
-        motor.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoWristConstants.IS_REVERSE_LIMIT_SWITCH_ENABLE);
-        motor.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoWristConstants.IS_FORWARD_LIMIT_SWITCH_ENABLE);
+        motor.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoWristConstants.IS_BACKWARD_LIMIT_SWITCH_ENABLED);
+        motor.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoWristConstants.IS_FORWARD_LIMIT_SWITCH_ENABLED);
 
         resetAngle(Rotation2d.fromRotations(motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition()));
     }
@@ -58,7 +58,12 @@ public class NeoWrist implements IWrist {
 
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
-        motor.getPIDController().setReference(targetAngle.getRadians(), CANSparkMax.ControlType.kPosition, PID_SLOT, motor.getPIDController().getFF());
+        motor.getPIDController().setReference(
+                targetAngle.getRadians(),
+                CANSparkMax.ControlType.kPosition,
+                PID_SLOT,
+                NeoWristConstants.MOTOR_FEED_FORWARD.calculate(motor.getEncoder().getVelocity())
+        );
     }
 
     @Override
