@@ -10,7 +10,7 @@ import static edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants.*;
 
 public class FalconElbowConstants {
 
-    public static final int FALCON_MOTOR_ID = 1;
+    public static final int MOTOR_ID = 1;
 
     public static final int HARD_REVERSE_LIMIT_SWITCH_ID = 1;
 

@@ -9,6 +9,8 @@ import edu.greenblitz.robotName.subsystems.arm.elbow.IElbow;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.geometry.Rotation2d;
 
+import static edu.greenblitz.robotName.subsystems.arm.elbow.NeoElbow.NeoElbowConstants.SIMPLE_MOTOR_FEED_FORWARD;
+
 
 public class NeoElbow implements IElbow {
 
@@ -52,12 +54,12 @@ public class NeoElbow implements IElbow {
 
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
-        motor.getPIDController().setReference(targetAngle.getRadians(), CANSparkMax.ControlType.kPosition, NeoElbowConstants.PID_SLOT, motor.getPIDController().getFF());
+        motor.getPIDController().setReference(targetAngle.getRadians(), CANSparkMax.ControlType.kPosition, NeoElbowConstants.PID_SLOT, SIMPLE_MOTOR_FEED_FORWARD.calculate(0));
     }
 
     @Override
     public void standInPlace() {
-        setVoltage(NeoElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(0));
+        setVoltage(SIMPLE_MOTOR_FEED_FORWARD.calculate(0));
     }
 
     @Override

@@ -15,7 +15,7 @@ public class FalconElbow implements IElbow {
     private MotionMagicDutyCycle motionMagicDutyCycle;
 
     public FalconElbow() {
-        motor = new TalonFX(FalconElbowConstants.FALCON_MOTOR_ID);
+        motor = new TalonFX(FalconElbowConstants.MOTOR_ID);
         motor.getConfigurator().apply(FalconElbowConstants.TALON_FX_CONFIGURATION);
         motor.setNeutralMode(FalconElbowConstants.NEUTRAL_MODE_VALUE);
         motor.optimizeBusUtilization();
