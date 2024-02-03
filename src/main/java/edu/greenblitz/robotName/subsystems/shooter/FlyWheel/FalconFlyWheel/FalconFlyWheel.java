@@ -13,11 +13,12 @@ import static edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FalconFlyWhee
 
 
 public class FalconFlyWheel implements IFlyWheel {
+
     private TalonFX rightMotor;
+
     private TalonFX leftMotor;
 
-
-    VelocityVoltage rightMotorVelocityVoltage = new VelocityVoltage(0).withEnableFOC(true),
+    private VelocityVoltage rightMotorVelocityVoltage = new VelocityVoltage(0).withEnableFOC(true),
             leftMotorVelocityVoltage = new VelocityVoltage(0).withEnableFOC(true);
 
     public FalconFlyWheel() {
@@ -35,19 +36,19 @@ public class FalconFlyWheel implements IFlyWheel {
     }
 
     @Override
-    public void setPower(double rightPower, double leftPower) {
+    public void setPower(double leftPower, double rightPower) {
         rightMotor.set(rightPower);
         leftMotor.set(leftPower);
     }
 
     @Override
-    public void setVoltage(double rightVoltage, double leftVoltage) {
+    public void setVoltage(double leftVoltage, double rightVoltage) {
         rightMotor.setVoltage(rightVoltage);
         leftMotor.setVoltage(leftVoltage);
     }
 
     @Override
-    public void setVelocity(double rightVelocity, double leftVelocity) {
+    public void setVelocity(double leftVelocity, double rightVelocity) {
         rightMotor.setControl(rightMotorVelocityVoltage.withVelocity(rightVelocity));
         leftMotor.setControl(leftMotorVelocityVoltage.withVelocity(leftVelocity));
     }

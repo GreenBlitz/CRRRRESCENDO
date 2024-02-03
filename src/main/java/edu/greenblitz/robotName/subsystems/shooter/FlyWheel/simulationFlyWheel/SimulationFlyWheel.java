@@ -9,24 +9,31 @@ import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 
 public class SimulationFlyWheel implements IFlyWheel {
+
     private FlywheelSim rightMotorFlywheel;
+
     private FlywheelSim leftMotorFlywheel;
-    private double rightMotorApplied, leftMotorApplied;
+
+    private double rightMotorApplied;
+
+    private double leftMotorApplied;
+
     private PIDController rightMotorPIDController;
+
     private PIDController leftMotorPIDController;
 
     public SimulationFlyWheel() {
         rightMotorFlywheel = new FlywheelSim(
                 DCMotor.getNEO(SimulationFlyWheelConstants.RightMotor.NUMBER_OF_MOTORS),
                 SimulationFlyWheelConstants.RightMotor.GEARING,
-                SimulationFlyWheelConstants.RightMotor.J_KG_METERS_SQUARED
+                SimulationFlyWheelConstants.RightMotor.MOMENT_OF_INERTIA
         );
         rightMotorPIDController = SimulationFlyWheelConstants.RightMotor.SIMULATION_PID;
 
         leftMotorFlywheel = new FlywheelSim(
                 DCMotor.getNEO(SimulationFlyWheelConstants.LeftMotor.NUMBER_OF_MOTORS),
                 SimulationFlyWheelConstants.LeftMotor.GEARING,
-                SimulationFlyWheelConstants.LeftMotor.J_KG_METERS_SQUARED
+                SimulationFlyWheelConstants.LeftMotor.MOMENT_OF_INERTIA
         );
         leftMotorPIDController = SimulationFlyWheelConstants.LeftMotor.SIMULATION_PID;
     }
@@ -35,9 +42,8 @@ public class SimulationFlyWheel implements IFlyWheel {
     public void setPower(double rightPower, double leftPower) {
         setVoltage(
                 rightPower * RobotConstants.SimulationConstants.BATTERY_VOLTAGE,
-                leftPower  * RobotConstants.SimulationConstants.BATTERY_VOLTAGE
+                leftPower * RobotConstants.SimulationConstants.BATTERY_VOLTAGE
         );
-
     }
 
     @Override
@@ -63,7 +69,6 @@ public class SimulationFlyWheel implements IFlyWheel {
                 rightMotorPIDController.calculate(rightMotorFlywheel.getAngularVelocityRPM()),
                 leftMotorPIDController.calculate(leftMotorFlywheel.getAngularVelocityRPM())
         );
-
     }
 
     @Override

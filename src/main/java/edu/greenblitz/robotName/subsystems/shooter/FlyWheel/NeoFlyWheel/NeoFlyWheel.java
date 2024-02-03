@@ -8,32 +8,35 @@ import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.IFlyWheel;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import java.util.PrimitiveIterator;
+
 
 public class NeoFlyWheel implements IFlyWheel {
-    private GBSparkMax rightMotor, leftMotor;
+
+    private GBSparkMax leftMotor;
+    private GBSparkMax rightMotor;
 
     public NeoFlyWheel() {
         rightMotor = new GBSparkMax(NeoFlyWheelConstants.RightMotor.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
         rightMotor.config(NeoFlyWheelConstants.RightMotor.CONFIG);
         leftMotor = new GBSparkMax(NeoFlyWheelConstants.LeftMotor.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
         leftMotor.config(NeoFlyWheelConstants.LeftMotor.CONFIG);
-        
     }
 
     @Override
-    public void setPower(double rightPower, double leftPower) {
+    public void setPower(double leftPower, double rightPower) {
         rightMotor.set(rightPower);
         leftMotor.set(leftPower);
     }
 
     @Override
-    public void setVoltage(double rightVoltage, double leftVoltage) {
+    public void setVoltage(double leftVoltage, double rightVoltage) {
         rightMotor.setVoltage(rightVoltage);
         leftMotor.setVoltage(leftVoltage);
     }
 
     @Override
-    public void setVelocity(double rightVelocity, double leftVelocity) {
+    public void setVelocity(double leftVelocity, double rightVelocity) {
         rightMotor.getPIDController().setReference(
                 rightVelocity,
                 CANSparkMax.ControlType.kVelocity,

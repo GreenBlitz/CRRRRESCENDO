@@ -1,13 +1,12 @@
 package edu.greenblitz.robotName.subsystems.shooter.FlyWheel;
 
-
-
 public interface IFlyWheel {
-    void setPower(double rightPower, double leftPower);
 
-    void setVoltage(double rightVoltage, double leftVoltage);
+    void setPower(double leftPower, double rightPower);
 
-    void setVelocity(double rightVelocity, double leftVelocity);
+    void setVoltage(double leftVoltage, double rightVoltage);
+
+    void setVelocity(double leftVelocity, double rightVelocity);
 
     void updateInputs(FlyWheelInputsAutoLogged inputs);
 }

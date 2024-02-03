@@ -26,20 +26,20 @@ public class FlyWheel extends GBSubsystem {
         return instance;
     }
 
-    public void setPower(double rightPower, double leftPower) {
+    public void setPower(double leftPower, double rightPower) {
         flyWheel.setPower(rightPower, leftPower);
     }
 
-    public void setVoltage (double rightVoltage, double leftVoltage){
-        flyWheel.setVoltage(rightVoltage,leftVoltage);
+    public void setVoltage(double leftVoltage, double rightVoltage) {
+        flyWheel.setVoltage(rightVoltage, leftVoltage);
     }
 
-    public void setVelocity(double rightVelocity,double leftVelocity) {
+    public void setVelocity(double leftVelocity, double rightVelocity) {
         flyWheel.setVelocity(rightVelocity, leftVelocity);
     }
 
     public void stop() {
-        flyWheel.setPower(0,0);
+        flyWheel.setPower(0, 0);
     }
 
     public void setPreparedToShoot(boolean isPreparedToShoot) {

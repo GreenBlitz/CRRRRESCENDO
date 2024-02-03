@@ -64,5 +64,4 @@ public class FalconFlyWheelConstants {
             CURRENT_LIMITS_CONFIGS.SupplyTimeThreshold = 4;
         }
     }
-
 }
