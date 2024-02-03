@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.commands.arm;
+package edu.greenblitz.robotName.commands.getNoteToSystem;
 
 import edu.greenblitz.robotName.ScoringModeSelector;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
