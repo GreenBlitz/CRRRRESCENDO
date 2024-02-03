@@ -15,6 +15,7 @@ public class NeoWrist implements IWrist {
 
     private GBSparkMax motor;
 
+    private WristInputsAutoLogged lastInputs;
 
     public NeoWrist() {
         motor = new GBSparkMax(NeoWristConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -62,13 +63,13 @@ public class NeoWrist implements IWrist {
                 targetAngle.getRadians(),
                 CANSparkMax.ControlType.kPosition,
                 NeoWristConstants.PID_SLOT,
-                NeoWristConstants.WRIST_FEED_FORWARD.calculate(motor.getEncoder().getVelocity())
+                NeoWristConstants.WRIST_FEED_FORWARD.calculate(lastInputs.velocity)
         );
     }
 
     @Override
     public void standInPlace() {
-        setVoltage(NeoWristConstants.WRIST_FEED_FORWARD.calculate(0));
+        setVoltage(NeoWristConstants.WRIST_FEED_FORWARD.calculate(0) * Math.cos(lastInputs.position));
     }
 
     @Override
@@ -82,6 +83,7 @@ public class NeoWrist implements IWrist {
         inputs.hasReachedBackwardLimit = Math.abs(inputs.position - WristConstants.BACKWARD_ANGLE_LIMIT.getRadians()) <= WristConstants.TOLERANCE;
         inputs.hasReachedForwardLimit = Math.abs(inputs.position - WristConstants.FORWARD_ANGLE_LIMIT.getRadians()) <= WristConstants.TOLERANCE;
 
+        lastInputs = inputs;
     }
 
 }

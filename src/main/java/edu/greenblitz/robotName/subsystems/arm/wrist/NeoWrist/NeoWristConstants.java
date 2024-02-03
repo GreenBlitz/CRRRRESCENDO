@@ -15,7 +15,7 @@ public class NeoWristConstants {
 
     public static final PIDObject PID = new PIDObject().withKp(0.8).withKd(0.3).withKi(0).withMaxPower(1);
 
-    public static final SimpleMotorFeedforward WRIST_FEED_FORWARD = new SimpleMotorFeedforward(WristConstants.kS, WristConstants.kV, WristConstants.kA);
+    public static final SimpleMotorFeedforward WRIST_FEED_FORWARD = new SimpleMotorFeedforward(1, 1, 1);
 
     public static final GBSparkMax.SparkMaxConfObject WRIST_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
             .withPID(PID)

@@ -22,6 +22,8 @@ public class SimulationWrist implements IWrist {
 
     private PIDController controller;
 
+    private WristInputsAutoLogged lastInputs;
+
     public SimulationWrist() {
         wristSimulation = new SingleJointedArmSim(
                 DCMotor.getNEO(SimulationWristConstants.NUMBER_OF_MOTORS),
@@ -65,12 +67,12 @@ public class SimulationWrist implements IWrist {
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
         controller.setSetpoint(targetAngle.getRadians());
-        setVoltage(controller.calculate(wristSimulation.getAngleRads()));
+        setVoltage(controller.calculate(lastInputs.position));
     }
 
     @Override
     public void standInPlace() {
-        setVoltage(SimulationWristConstants.SIMULATION_FEED_FORWARD.calculate(0));
+        setVoltage(SimulationWristConstants.SIMULATION_FEED_FORWARD.calculate(0) * Math.cos(lastInputs.position));
     }
 
     @Override
