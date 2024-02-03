@@ -4,13 +4,10 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.Field;
 import edu.greenblitz.robotName.OdometryConstants;
 import edu.greenblitz.robotName.Robot;
-import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.Battery;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.*;
-import edu.wpi.first.math.util.Units;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot.FalconPivotConstants.SIMPLE_MOTOR_FF;
@@ -96,7 +93,7 @@ public class Pivot extends GBSubsystem {
 	public boolean isAtAngle(Rotation2d angle) {
 		return Math.abs(angle.getRadians() - getAngle().getRadians()) <= TOLERANCE;
 	}
-	public Rotation2d getChassisAngleForAutoShooting(Pose2d position){
+	public Rotation2d getPivotAngleForAutoShooting(Pose2d position){
 		if (Math.abs(Field.PositionsToShootAutomaticallyFrom.AMP_EDGE.getX()-position.getX())< OdometryConstants.TOLERANCE && Math.abs(Field.PositionsToShootAutomaticallyFrom.AMP_EDGE.getY()-position.getY())< OdometryConstants.TOLERANCE)){
 			return PivotConstants.PivotAnglesAutoShoot.AMP_EDGE.ANGLE;
 		}
