@@ -14,12 +14,24 @@ public class FalconElbow implements IElbow {
 
     private MotionMagicDutyCycle motionMagicDutyCycle;
 
+    private ElbowInputsAutoLogged lastInputs;
+
     public FalconElbow() {
+        lastInputs = new ElbowInputsAutoLogged();
+
         motor = new TalonFX(FalconElbowConstants.MOTOR_ID);
         motor.getConfigurator().apply(FalconElbowConstants.TALON_FX_CONFIGURATION);
         motor.setNeutralMode(FalconElbowConstants.NEUTRAL_MODE_VALUE);
         motor.optimizeBusUtilization();
-        motionMagicDutyCycle = new MotionMagicDutyCycle(0, true, FalconElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(0), 0, true, true, true);
+        motionMagicDutyCycle = new MotionMagicDutyCycle(
+                0,
+                true,
+                0,
+                0,
+                true,
+                true,
+                true
+        );
     }
 
     @Override
@@ -47,23 +59,22 @@ public class FalconElbow implements IElbow {
     public void moveToAngle(Rotation2d targetAngle) {
         motor.setControl(
                 motionMagicDutyCycle.withPosition(targetAngle.getRadians() / ElbowConstants.GEAR_RATIO)
-                .withFeedForward(FalconElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(motor.getVelocity().getValue() * ElbowConstants.GEAR_RATIO)));
-    }
-
-    @Override
-    public void standInPlace() {
-        setVoltage(FalconElbowConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(0));
+                .withFeedForward(FalconElbowConstants.ELBOW_FEED_FORWARD.calculate(lastInputs.position.getRadians(), lastInputs.velocity * ElbowConstants.GEAR_RATIO)
+                )
+        );
     }
 
     @Override
     public void updateInputs(ElbowInputsAutoLogged inputs) {
         inputs.outputCurrent = motor.getSupplyCurrent().getValue();
         inputs.appliedOutput = motor.getMotorVoltage().getValue();
-        inputs.position = motor.getPosition().getValue() * ElbowConstants.GEAR_RATIO;
+        inputs.position = Rotation2d.fromRadians(motor.getPosition().getValue() * ElbowConstants.GEAR_RATIO);
         inputs.velocity = motor.getVelocity().getValue() * ElbowConstants.GEAR_RATIO;
         inputs.absoluteEncoderPosition = motor.getDutyCycle().getValue() * ElbowConstants.GEAR_RATIO;
         inputs.temperature = motor.getDeviceTemp().getValue();
         inputs.hasReachedForwardLimit = motor.getFault_ForwardSoftLimit().getValue();
         inputs.hasReachedBackwardLimit = motor.getFault_ReverseSoftLimit().getValue();
+
+        lastInputs = inputs;
     }
 }

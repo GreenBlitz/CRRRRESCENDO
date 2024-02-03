@@ -16,7 +16,7 @@ public class NeoElbow implements IElbow {
 
     private GBSparkMax motor;
 
-    private ElbowInputsAutoLogged inputs;
+    private ElbowInputsAutoLogged lastInputs;
 
     public NeoElbow(){
         motor = new GBSparkMax(NeoElbowConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -59,25 +59,21 @@ public class NeoElbow implements IElbow {
                 targetAngle.getRadians(),
                 CANSparkMax.ControlType.kPosition,
                 NeoElbowConstants.PID_SLOT,
-                ELBOW_FEEDFORWARD.calculate(this.inputs.position,0)
+                ELBOW_FEEDFORWARD.calculate(targetAngle.getRadians(), 0)
         );
     }
 
     @Override
-    public void standInPlace() {
-        setVoltage(ELBOW_FEEDFORWARD.calculate(this.inputs.position,0));
-    }
-
-    @Override
     public void updateInputs(ElbowInputsAutoLogged inputs) {
-        this.inputs = inputs;
         inputs.appliedOutput = motor.getAppliedOutput() *  Battery.getInstance().getCurrentVoltage();
         inputs.outputCurrent = motor.getOutputCurrent();
-        inputs.position = motor.getEncoder().getPosition();
+        inputs.position = Rotation2d.fromRadians(motor.getEncoder().getPosition());
         inputs.velocity = motor.getEncoder().getVelocity();
         inputs.absoluteEncoderPosition = motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition();
         inputs.temperature = motor.getMotorTemperature();
-        inputs.hasReachedBackwardLimit = Math.abs(inputs.position - ElbowConstants.BACKWARD_ANGLE_LIMIT.getRadians()) <= ElbowConstants.TOLERANCE;
-        inputs.hasReachedForwardLimit = Math.abs(inputs.position - ElbowConstants.FORWARD_ANGLE_LIMIT.getRadians()) <= ElbowConstants.TOLERANCE;
+        inputs.hasReachedBackwardLimit = Math.abs(inputs.position.getRadians() - ElbowConstants.BACKWARD_ANGLE_LIMIT.getRadians()) <= ElbowConstants.TOLERANCE;
+        inputs.hasReachedForwardLimit = Math.abs(inputs.position.getRadians() - ElbowConstants.FORWARD_ANGLE_LIMIT.getRadians()) <= ElbowConstants.TOLERANCE;
+
+        lastInputs = inputs;
     }
 }

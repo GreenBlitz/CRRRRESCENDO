@@ -32,12 +32,6 @@ public class ReplayElbow implements IElbow {
     }
 
     @Override
-    public void standInPlace() {
-
-    }
-
-
-    @Override
     public void updateInputs(ElbowInputsAutoLogged inputs) {
 
     }

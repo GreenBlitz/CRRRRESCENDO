@@ -4,6 +4,7 @@ import com.ctre.phoenix6.configs.*;
 import com.ctre.phoenix6.signals.ForwardLimitTypeValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.ReverseLimitTypeValue;
+import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 
 import static edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants.*;
@@ -24,7 +25,7 @@ public class FalconElbowConstants {
 
     public static final double kA = 1;
 
-    public static final SimpleMotorFeedforward SIMPLE_MOTOR_FEED_FORWARD = new SimpleMotorFeedforward(kS, kV, kA);
+    public static final ArmFeedforward ELBOW_FEED_FORWARD = new ArmFeedforward(kS, kG, kV, kA);
 
     public static final NeutralModeValue NEUTRAL_MODE_VALUE = NeutralModeValue.Brake;
 

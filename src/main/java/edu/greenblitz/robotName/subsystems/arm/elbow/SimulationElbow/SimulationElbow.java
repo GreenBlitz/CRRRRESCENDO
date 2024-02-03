@@ -70,17 +70,12 @@ public class SimulationElbow implements IElbow {
     }
 
     @Override
-    public void standInPlace() {
-        setVoltage(SimulationElbowConstants.SIMPLE_MOTOR_FEEDFORWARD.calculate(0));
-    }
-
-    @Override
     public void updateInputs(ElbowInputsAutoLogged inputs) {
         elbowSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
 
         inputs.appliedOutput = appliedVoltage;
         inputs.outputCurrent = elbowSimulation.getCurrentDrawAmps();
-        inputs.position = elbowSimulation.getAngleRads();
+        inputs.position = Rotation2d.fromRadians(elbowSimulation.getAngleRads());
         inputs.velocity = elbowSimulation.getVelocityRadPerSec();
         inputs.absoluteEncoderPosition = elbowSimulation.getAngleRads();
         inputs.temperature = 0;

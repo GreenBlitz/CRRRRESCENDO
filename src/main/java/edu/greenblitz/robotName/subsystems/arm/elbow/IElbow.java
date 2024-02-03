@@ -16,8 +16,6 @@ public interface IElbow {
 
     void moveToAngle(Rotation2d targetAngle);
 
-    void standInPlace();
-
     void updateInputs(ElbowInputsAutoLogged inputs);
 
 }

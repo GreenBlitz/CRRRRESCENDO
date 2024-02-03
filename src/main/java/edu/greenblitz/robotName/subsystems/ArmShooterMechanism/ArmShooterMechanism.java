@@ -68,7 +68,7 @@ public class ArmShooterMechanism {
 
 
     public void periodic() {
-        double elbowAngle = elbow.getAngleInRadians();
+        double elbowAngle = elbow.getAngle().getRadians();
         double wristAngle = wrist.getAngleInRadians();
         double pivotAngle = pivot.getAngle().getRadians();
 
