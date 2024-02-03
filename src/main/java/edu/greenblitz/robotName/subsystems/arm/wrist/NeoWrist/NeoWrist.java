@@ -67,7 +67,7 @@ public class NeoWrist implements IWrist {
                 targetAngle.getRadians(),
                 CANSparkMax.ControlType.kPosition,
                 NeoWristConstants.PID_SLOT,
-                NeoWristConstants.WRIST_FEED_FORWARD.calculate(lastInputs.position,lastInputs.velocity)
+                NeoWristConstants.WRIST_FEED_FORWARD.calculate(targetAngle.getRadians(), lastInputs.velocity)
         );
     }
 
