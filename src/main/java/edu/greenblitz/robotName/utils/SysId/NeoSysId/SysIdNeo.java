@@ -47,8 +47,9 @@ public class SysIdNeo extends GBSubsystem {
     }
 
     public static void init(){
-        if (instance==null)
+        if (instance==null) {
             instance = new SysIdNeo();
+        }
     }
 
     public static SysIdNeo getInstance(){
