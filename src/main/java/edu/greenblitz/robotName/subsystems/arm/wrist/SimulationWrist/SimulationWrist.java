@@ -65,6 +65,11 @@ public class SimulationWrist implements IWrist {
     }
 
     @Override
+    public void resetEncoder() {
+        Logger.recordOutput("Arm/Wrist", "tried to reset the encoder");
+    }
+
+    @Override
     public void moveToAngle(Rotation2d targetAngle) {
         controller.setSetpoint(targetAngle.getRadians());
         setVoltage(controller.calculate(lastInputs.position));

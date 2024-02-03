@@ -27,7 +27,9 @@ public class Wrist extends GBSubsystem {
     private Wrist() {
         wrist = WristFactory.create();
         wristInputs = new WristInputsAutoLogged();
+
         wrist.updateInputs(wristInputs);
+        wrist.resetEncoder();
     }
 
     public static void init() {

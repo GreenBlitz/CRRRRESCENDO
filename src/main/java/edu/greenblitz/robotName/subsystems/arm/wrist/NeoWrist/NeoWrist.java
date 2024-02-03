@@ -34,7 +34,6 @@ public class NeoWrist implements IWrist {
         motor.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoWristConstants.IS_BACKWARD_LIMIT_SWITCH_ENABLED);
         motor.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoWristConstants.IS_FORWARD_LIMIT_SWITCH_ENABLED);
 
-        resetAngle(Rotation2d.fromRotations(motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition()));
     }
 
     @Override
@@ -55,6 +54,11 @@ public class NeoWrist implements IWrist {
     @Override
     public void resetAngle(Rotation2d position) {
         motor.getEncoder().setPosition(position.getRadians());
+    }
+
+    @Override
+    public void resetEncoder() {
+        resetAngle(Rotation2d.fromRotations(motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition()));
     }
 
     @Override
