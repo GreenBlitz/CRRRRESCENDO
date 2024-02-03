@@ -9,12 +9,14 @@ import edu.greenblitz.robotName.subsystems.arm.elbow.IElbow;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.geometry.Rotation2d;
 
-import static edu.greenblitz.robotName.subsystems.arm.elbow.NeoElbow.NeoElbowConstants.SIMPLE_MOTOR_FEED_FORWARD;
+import static edu.greenblitz.robotName.subsystems.arm.elbow.NeoElbow.NeoElbowConstants.ELBOW_FEEDFORWARD;
 
 
 public class NeoElbow implements IElbow {
 
     private GBSparkMax motor;
+
+    private ElbowInputsAutoLogged inputs;
 
     public NeoElbow(){
         motor = new GBSparkMax(NeoElbowConstants.NEO_MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -54,16 +56,22 @@ public class NeoElbow implements IElbow {
 
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
-        motor.getPIDController().setReference(targetAngle.getRadians(), CANSparkMax.ControlType.kPosition, NeoElbowConstants.PID_SLOT, SIMPLE_MOTOR_FEED_FORWARD.calculate(0));
+        motor.getPIDController().setReference(
+                targetAngle.getRadians(),
+                CANSparkMax.ControlType.kPosition,
+                NeoElbowConstants.PID_SLOT,
+                ELBOW_FEEDFORWARD.calculate(this.inputs.position,0)
+        );
     }
 
     @Override
     public void standInPlace() {
-        setVoltage(SIMPLE_MOTOR_FEED_FORWARD.calculate(0));
+        setVoltage(ELBOW_FEEDFORWARD.calculate(this.inputs.position,0));
     }
 
     @Override
     public void updateInputs(ElbowInputsAutoLogged inputs) {
+        this.inputs = inputs;
         inputs.appliedOutput = motor.getAppliedOutput() *  Battery.getInstance().getCurrentVoltage();
         inputs.outputCurrent = motor.getOutputCurrent();
         inputs.position = motor.getEncoder().getPosition();
