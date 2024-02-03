@@ -21,5 +21,4 @@ public class PivotInputs {
 
     public boolean hasHitBackwardsLimit;
 
-    public boolean isObjectInside;
 }

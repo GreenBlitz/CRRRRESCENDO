@@ -37,10 +37,10 @@ public class ShooterMechanism extends GBSubsystem {
     public void periodic() {
         super.periodic();
 
-        double pivotAngle = Pivot.getInstance().getAngleInRadians();
+        double pivotAngle = Pivot.getInstance().getAngle().getRadians();
         pivot.setAngle(Units.radiansToDegrees(pivotAngle));
 
-        Logger.recordOutput("Pivot/SimPose3D", Pivot.getInstance().getAngleInRadians());
+        Logger.recordOutput("Pivot/SimPose3D", Pivot.getInstance().getAngle().getRadians());
     }
 
 }

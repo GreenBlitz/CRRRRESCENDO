@@ -12,8 +12,8 @@ public class MotorConstants {
 	public static final SoftwareLimitSwitchConfigs SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();
 	static {
 		SWITCH_CONFIGS.ForwardSoftLimitEnable = false;
-		SWITCH_CONFIGS.ForwardSoftLimitThreshold = FORWARD_ANGLE_LIMIT;
+		SWITCH_CONFIGS.ForwardSoftLimitThreshold = FORWARD_ANGLE_LIMIT.getRadians();
 		SWITCH_CONFIGS.ReverseSoftLimitEnable = false;
-		SWITCH_CONFIGS.ReverseSoftLimitThreshold = BACKWARD_ANGLE_LIMIT;
+		SWITCH_CONFIGS.ReverseSoftLimitThreshold = BACKWARD_ANGLE_LIMIT.getRadians();
 	}
 }
