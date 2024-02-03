@@ -3,7 +3,7 @@ package edu.greenblitz.robotName.commands;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
-import edu.greenblitz.robotName.subsystems.arm.Elbow;
+import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 
