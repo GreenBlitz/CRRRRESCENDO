@@ -2,9 +2,9 @@ package edu.greenblitz.robotName.subsystems.arm.wrist;
 
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.Robot;
-import edu.greenblitz.robotName.subsystems.arm.Elbow;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.SimulationElbow.SimulationElbowConstants;
+import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
+import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
+import edu.greenblitz.robotName.subsystems.arm.elbow.SimulationElbow.SimulationElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.wrist.NeoWrist.NeoWristConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Pose3d;

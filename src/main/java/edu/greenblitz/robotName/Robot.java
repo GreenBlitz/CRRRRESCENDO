@@ -8,7 +8,7 @@ import edu.greenblitz.robotName.subsystems.Intake.Intake;
 import edu.greenblitz.robotName.subsystems.Lifter.Lifter;
 import edu.greenblitz.robotName.subsystems.ArmShooterMechanism.ArmShooterMechanism;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
-import edu.greenblitz.robotName.subsystems.arm.Elbow;
+import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;

@@ -1,7 +1,7 @@
 package edu.greenblitz.robotName.subsystems.ArmShooterMechanism;
 
-import edu.greenblitz.robotName.subsystems.arm.Elbow;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
+import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
+import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;

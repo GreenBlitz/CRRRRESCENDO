@@ -1,13 +1,9 @@
-package edu.greenblitz.robotName.subsystems.arm;
+package edu.greenblitz.robotName.subsystems.arm.elbow;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.Robot;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowFactory;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowInputsAutoLogged;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.FalconElbow.FalconElbowConstants;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.IElbow;
-import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.SimulationElbow.SimulationElbowConstants;
+import edu.greenblitz.robotName.subsystems.arm.elbow.FalconElbow.FalconElbowConstants;
+import edu.greenblitz.robotName.subsystems.arm.elbow.SimulationElbow.SimulationElbowConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
