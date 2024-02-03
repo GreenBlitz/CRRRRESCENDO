@@ -1,6 +1,6 @@
-package edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.SimulationWrist;
+package edu.greenblitz.robotName.subsystems.arm.wrist.SimulationWrist;
 
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants;
+import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.greenblitz.robotName.utils.PIDObject;
 
 public class SimulationWristConstants {

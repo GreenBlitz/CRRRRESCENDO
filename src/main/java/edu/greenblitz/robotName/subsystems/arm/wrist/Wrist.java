@@ -1,13 +1,11 @@
-package edu.greenblitz.robotName.subsystems.arm;
+package edu.greenblitz.robotName.subsystems.arm.wrist;
 
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.Robot;
+import edu.greenblitz.robotName.subsystems.arm.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.SimulationElbow.SimulationElbowConstants;
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.IWrist;
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.NeoWrist.NeoWristConstants;
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristFactory;
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.arm.wrist.NeoWrist.NeoWristConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -15,7 +13,7 @@ import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation3d;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants.TOLERANCE;
+import static edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants.TOLERANCE;
 
 public class Wrist extends GBSubsystem {
 

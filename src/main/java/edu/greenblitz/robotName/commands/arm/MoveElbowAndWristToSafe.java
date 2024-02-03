@@ -1,7 +1,7 @@
 package edu.greenblitz.robotName.commands.arm;
 
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants;
+import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 
 public class MoveElbowAndWristToSafe extends MoveElbowAndWrist {
 

@@ -2,8 +2,8 @@ package edu.greenblitz.robotName.subsystems.ArmShooterMechanism;
 
 import edu.greenblitz.robotName.subsystems.arm.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.ElbowUtils.ElbowConstants;
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.WristConstants;
-import edu.greenblitz.robotName.subsystems.arm.Wrist;
+import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
+import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
 import edu.wpi.first.math.util.Units;
@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismRoot2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.subsystems.ArmShooterMechanism.ArmShooterMechanismConstants.*;
 import static edu.greenblitz.robotName.subsystems.ArmShooterMechanism.ArmShooterMechanismConstants.PivotMechanismConstants.*;
