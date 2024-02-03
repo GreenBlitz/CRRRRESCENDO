@@ -1,10 +1,11 @@
 package edu.greenblitz.robotName.commands.shooter;
 
-import edu.greenblitz.robotName.subsystems.Shooter.FlyWheel.FlyWheelConstants;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 
 public class ShootByVelocity extends FlyWheelCommand {
 
     private int timeInShootingSpeed;
+
     private double velocity;
 
     public ShootByVelocity(double velocity) {
@@ -18,7 +19,7 @@ public class ShootByVelocity extends FlyWheelCommand {
 
     @Override
     public void execute() {
-        flyWheel.setVelocity(velocity, velocity * 0.8);
+        flyWheel.setVelocity(velocity, velocity * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR);
         if (flyWheel.isAtVelocity(velocity)) {
             timeInShootingSpeed++;
         } else {
