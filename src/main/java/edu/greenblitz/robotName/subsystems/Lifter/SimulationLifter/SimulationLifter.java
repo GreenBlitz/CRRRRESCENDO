@@ -22,7 +22,10 @@ public class SimulationLifter implements ILifter {
         lifterSimulation = new SingleJointedArmSim(
                 DCMotor.getNEO(SimulationLifterConstants.NUMBER_OF_MOTORS),
                 SimulationLifterConstants.GEAR_RATIO,
-                SimulationLifterConstants.MOMENT_OF_INERTIA,
+                SingleJointedArmSim.estimateMOI(
+                        LifterConstants.LENGTH_OF_LIFTER,
+                        LifterConstants.LIFTER_MASS_KG
+                ),
                 LifterConstants.LENGTH_OF_LIFTER,
                 LifterConstants.BACKWARD_LIMIT.getRadians(),
                 LifterConstants.FORWARD_LIMIT.getRadians(),

@@ -15,7 +15,7 @@ public class LiftUp extends LifterCommand {
 
     @Override
     public boolean isFinished() {
-        return lifter.isMotorAtPosition(LifterConstants.LIFTER_EXTENDED_POSITION);
+        return lifter.isAtPosition(LifterConstants.LIFTER_EXTENDED_POSITION);
     }
 
     @Override
