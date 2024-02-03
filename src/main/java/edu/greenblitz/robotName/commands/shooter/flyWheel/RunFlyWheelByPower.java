@@ -15,6 +15,6 @@ public class RunFlyWheelByPower extends FlyWheelCommand {
 
     @Override
     public void end(boolean interrupted) {
-        flyWheel.setPower(0);
+        flyWheel.stop();
     }
 }

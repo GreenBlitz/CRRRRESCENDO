@@ -7,6 +7,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import java.util.function.Supplier;
 
 public class RotateToAngle extends SwerveCommand{
+
     private Supplier<Rotation2d> angleSetPoint;
 
     public RotateToAngle(Supplier<Rotation2d> angleSetPoint){
@@ -31,6 +32,6 @@ public class RotateToAngle extends SwerveCommand{
 
     @Override
     public boolean isFinished() {
-        return SwerveChassis.getInstance().getChassisAngle().getRadians() == angleSetPoint.get().getRadians();
+        return (SwerveChassis.getInstance().getChassisAngle().getRadians() - angleSetPoint.get().getRadians()) <= ChassisConstants.ANGLE_TOLERANCE_RADIANS;
     }
 }

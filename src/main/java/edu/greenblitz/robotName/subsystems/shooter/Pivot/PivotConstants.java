@@ -52,6 +52,7 @@ public class PivotConstants {
     public static final double TOLERANCE = Units.degreesToRadians(0.5);
 
     public static final double DELAY_FOR_NO_COLLISION_SECONDS = 1.5;
+
     public static final InterpolatingTreeMap<Double, Double> DISTANCE_TO_ANGLE_MAP = new InterpolatingTreeMap<>(
             InverseInterpolator.forDouble(), Interpolator.forDouble()
     );
@@ -69,6 +70,4 @@ public class PivotConstants {
         DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
         DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
     }
-
-
 }

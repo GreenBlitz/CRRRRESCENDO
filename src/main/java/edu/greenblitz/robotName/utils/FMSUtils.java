@@ -3,8 +3,6 @@ package edu.greenblitz.robotName.utils;
 import edu.wpi.first.wpilibj.DriverStation;
 import org.littletonrobotics.junction.Logger;
 
-import java.security.PublicKey;
-
 public class FMSUtils {
 
     private static final DriverStation.Alliance DEFAULT_ALLIANCE = DriverStation.Alliance.Blue;

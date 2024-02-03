@@ -8,6 +8,5 @@ public class FlyWheelConstants {
 
     public static final double SHOOTING_POWER = 0.9;
 
-    public static final double DELAY_SECONDS_TILL_EXIT = 1;
-
+    public static final double DELAY_SECONDS_UNTIL_EXIT = 1;
 }
