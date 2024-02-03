@@ -14,6 +14,7 @@ public class RobotConstants {
 	      public static final int POWER_DISTRIBUTION_CAN_ID = 20;
         public static final PowerDistribution.ModuleType POWER_DISTRIBUTION_TYPE = PowerDistribution.ModuleType.kRev;
         public final static double RAMP_RATE_VAL = 0.4;
+		public static final double SAFETY_POWER_CONVERSION_FACTOR = 0.5;
 		
 		public static class Motors {
 			

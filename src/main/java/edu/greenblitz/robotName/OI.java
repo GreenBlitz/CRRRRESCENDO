@@ -1,6 +1,6 @@
 package edu.greenblitz.robotName;
 
-import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
+import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.intake.MoveNoteBetweenShooterArm;
@@ -14,16 +14,21 @@ import edu.greenblitz.robotName.commands.swerve.MoveToAmp;
 import edu.greenblitz.robotName.commands.swerve.MoveToClimbPosition;
 import edu.greenblitz.robotName.commands.swerve.MoveToSpeaker;
 import edu.greenblitz.robotName.shootingStateService.ShootingState;
-import edu.greenblitz.robotName.subsystems.arm.Elbow;
-import edu.greenblitz.robotName.subsystems.arm.Wrist;
+import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
+import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+
+import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
+
+import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 import java.util.function.Supplier;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -63,7 +68,8 @@ public class OI {
 
     }
 
-    public void initializeDefaultCommands(){
+    public void initializeDefaultCommands() {
+        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
         Battery.getInstance().setDefaultCommand(new BatteryLimiter());
         Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
         Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());

@@ -18,6 +18,7 @@ public class PivotConstants {
 
         STARTING(Rotation2d.fromDegrees(-50)),
         TRANSFER(Rotation2d.fromDegrees(-10)),
+        SAFE(Rotation2d.fromDegrees(-60)),
         PICK_UP(Rotation2d.fromDegrees(-30));
 
         public final Rotation2d ANGLE;
@@ -68,6 +69,4 @@ public class PivotConstants {
         DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
         DISTANCE_TO_ANGLE_MAP.put(0.0, 0.0);
     }
-
-
 }
