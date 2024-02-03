@@ -5,9 +5,11 @@ import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation3d;
 
 public class VisionConstants {
-	public static final String[] LIMELIGHT_NAMES = new String[]{"limelight-front","limelight-back","limelight-gb"};
+	public static final String[] LIMELIGHT_NAMES = new String[]{"limelight-front","limelight-back"};
+	public static final String OBJECT_DETECTION_LIMELIGHT_NAME = "limelight-gb";
 	public static double STANDARD_DEVIATION_ODOMETRY = 1;
 	public static int LIMELIGHT_ENTRY_ARRAY_LENGTH = 7;
+	public static int OBJECT_DETECTION_LIMELIGHT_ENTRY_ARRAY_LENGTH = 7;
 	public static double STANDARD_DEVIATION_ODOMETRY_ANGLE = 0.01;
 	public static double STANDARD_DEVIATION_VISION2D = 0.5;
 	public static double STANDARD_DEVIATION_VISION_ANGLE = 0.6;
