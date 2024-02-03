@@ -28,7 +28,7 @@ public class KazaSwerveConstants {
 	public static final GBSparkMax.SparkMaxConfObject BASE_LINEAR_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
 			.withIdleMode(CANSparkMax.IdleMode.kBrake)
 			.withCurrentLimit(40)
-			.withRampRate(RobotConstants.General.RAMP_RATE_VAL)
+			.withRampRate(RobotConstants.General.RAMP_RATE_VALUE)
 			.withPID(LINEAR_PID)
 			.withPositionConversionFactor(LINEAR_MOTOR_POSITION_CONVERSION_FACTOR)
 			.withVelocityConversionFactor(LINEAR_TICKS_TO_METERS_PER_SECOND);
@@ -37,7 +37,7 @@ public class KazaSwerveConstants {
 	public static final GBSparkMax.SparkMaxConfObject BASE_ANGULAR_MOTOR_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
 			.withIdleMode(CANSparkMax.IdleMode.kBrake)
 			.withCurrentLimit(30)
-			.withRampRate(RobotConstants.General.RAMP_RATE_VAL)
+			.withRampRate(RobotConstants.General.RAMP_RATE_VALUE)
 			.withInverted(true)
 			.withPID(ANGULAR_PID)
 			.withPositionConversionFactor(ANGULAR_TICKS_TO_RADIANS)
