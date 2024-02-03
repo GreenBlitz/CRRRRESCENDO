@@ -77,7 +77,7 @@ public class SimulationWrist implements IWrist {
 
     @Override
     public void standInPlace() {
-        setVoltage(SimulationWristConstants.SIMULATION_FEED_FORWARD.calculate(0) * Math.cos(lastInputs.position));
+        setVoltage(SimulationWristConstants.SIMULATION_FEED_FORWARD.calculate(lastInputs.position,0));
     }
 
     @Override

@@ -5,6 +5,7 @@ import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.greenblitz.robotName.utils.PIDObject;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
+import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 
 public class NeoWristConstants {
@@ -15,7 +16,7 @@ public class NeoWristConstants {
 
     public static final PIDObject PID = new PIDObject().withKp(0.8).withKd(0.3).withKi(0).withMaxPower(1);
 
-    public static final SimpleMotorFeedforward WRIST_FEED_FORWARD = new SimpleMotorFeedforward(1, 1, 1);
+    public static final ArmFeedforward WRIST_FEED_FORWARD = new ArmFeedforward(1, 1, 1);
 
     public static final GBSparkMax.SparkMaxConfObject WRIST_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
             .withPID(PID)

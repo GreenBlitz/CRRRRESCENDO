@@ -67,13 +67,13 @@ public class NeoWrist implements IWrist {
                 targetAngle.getRadians(),
                 CANSparkMax.ControlType.kPosition,
                 NeoWristConstants.PID_SLOT,
-                NeoWristConstants.WRIST_FEED_FORWARD.calculate(lastInputs.velocity)
+                NeoWristConstants.WRIST_FEED_FORWARD.calculate(lastInputs.position,lastInputs.velocity)
         );
     }
 
     @Override
     public void standInPlace() {
-        setVoltage(NeoWristConstants.WRIST_FEED_FORWARD.calculate(0) * Math.cos(lastInputs.position));
+        setVoltage(NeoWristConstants.WRIST_FEED_FORWARD.calculate(lastInputs.position,0));
     }
 
     @Override

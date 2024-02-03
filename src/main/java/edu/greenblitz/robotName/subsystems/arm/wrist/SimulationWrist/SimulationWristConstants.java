@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.subsystems.arm.wrist.SimulationWrist;
 
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.greenblitz.robotName.utils.PIDObject;
+import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 
 public class SimulationWristConstants {
@@ -12,6 +13,6 @@ public class SimulationWristConstants {
 
     public static final PIDObject SIMULATION_PID = new PIDObject().withKp(0.5).withKd(0).withMaxPower(1);
 
-    public static final SimpleMotorFeedforward SIMULATION_FEED_FORWARD = new SimpleMotorFeedforward(0,0);
+    public static final ArmFeedforward SIMULATION_FEED_FORWARD = new ArmFeedforward(0,0,0);
 
 }
