@@ -42,6 +42,7 @@ public class RobotConstants {
 	public static class Joystick{
 		public static final int MAIN = 0;
 		public static final int SECOND = 1;
+		public static final int THIRD = 2;
 	}
     public static class Pneumatics {
         public static final int PCM_ID = 20;

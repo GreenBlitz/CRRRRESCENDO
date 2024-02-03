@@ -11,7 +11,7 @@ public class Roller extends GBSubsystem {
 	private static Roller instance;
 	private RollerInputsAutoLogged rollerInputs;
 	private IRoller roller;
-	
+	boolean isObjectIn;
 	private Roller() {
 		roller = RollerFactory.create();
 		rollerInputs = new RollerInputsAutoLogged();
@@ -53,6 +53,10 @@ public class Roller extends GBSubsystem {
 	}
 
 	public boolean isObjectInside() {
-		return rollerInputs.isObjectInArm;
+		return isObjectIn;
+	}
+
+	public void toggleObjectInside() {
+		isObjectIn = !isObjectIn;
 	}
 }

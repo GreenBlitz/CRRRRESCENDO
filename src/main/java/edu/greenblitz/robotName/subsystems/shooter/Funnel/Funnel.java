@@ -10,7 +10,7 @@ public class Funnel extends GBSubsystem {
 	private static Funnel instance;
 	private FunnelInputsAutoLogged funnelInputs;
 	private IFunnel funnel;
-	
+	boolean isObjectIn;
 	private Funnel() {
 		funnel = FunnelFactory.create();
 		funnelInputs = new FunnelInputsAutoLogged();
@@ -61,9 +61,11 @@ public class Funnel extends GBSubsystem {
 	}
 	
 	public boolean isObjectIn() {
-		return funnelInputs.isObjectIn;
+		return isObjectIn;
 	}
 
-	
+	public void toggleObjectInside() {
+		isObjectIn = !isObjectIn;
+	}
 	
 }
