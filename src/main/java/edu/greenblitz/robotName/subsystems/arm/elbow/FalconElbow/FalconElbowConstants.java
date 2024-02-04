@@ -29,6 +29,8 @@ public class FalconElbowConstants {
 
     public static final NeutralModeValue NEUTRAL_MODE_VALUE = NeutralModeValue.Brake;
 
+    public static final int MOTION_MAGIC_PID_SLOT = 1;
+
     public static final MotionMagicConfigs MOTION_MAGIC_CONFIGS = new MotionMagicConfigs();
 
     static {
