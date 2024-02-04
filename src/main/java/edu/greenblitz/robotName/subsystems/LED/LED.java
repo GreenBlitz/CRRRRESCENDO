@@ -1,8 +1,12 @@
 package edu.greenblitz.robotName.subsystems.LED;
 
+import edu.greenblitz.robotName.ScoringModeSelector;
 import edu.greenblitz.robotName.commands.LED.BlinkIfInArm;
 import edu.greenblitz.robotName.commands.LED.BlinkIfInShooter;
 import edu.greenblitz.robotName.commands.LED.Rumble;
+import edu.greenblitz.robotName.subsystems.Intake.Intake;
+import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
+import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
@@ -17,12 +21,8 @@ public class LED extends GBSubsystem {
 	private AddressableLED addressableLED;
 	private AddressableLEDBuffer addressableLEDBuffer;
 	private Timer LEDBlinkTimer;
-	private boolean blinkArm = false;
-	private boolean blinkShooter = false;
-	private boolean noteOut = false;
-	private boolean inArm = false;
-	private boolean inShooter = false;
-	
+	private boolean noteOut;
+	private boolean noteInRobot;
 	
 	private LED() {
 		this.addressableLED = new AddressableLED(LED_PORT);
@@ -30,8 +30,8 @@ public class LED extends GBSubsystem {
 		this.addressableLED.setLength(LED_LENGTH);
 		this.addressableLED.start();
 		LEDBlinkTimer = new Timer();
-		
-		
+		noteOut = false;
+		noteInRobot = false;
 	}
 	
 	public static LED getInstance() {
@@ -49,7 +49,7 @@ public class LED extends GBSubsystem {
 		LEDBlinkTimer.restart();
 	}
 	
-	public double getTimerTime(){
+	public double getTimerTime() {
 		return LEDBlinkTimer.get();
 	}
 	
@@ -85,23 +85,16 @@ public class LED extends GBSubsystem {
 	@Override
 	public void periodic() {
 		this.addressableLED.setData(addressableLEDBuffer);
+		blinkByNotePlace();
+		noteMode();
+		rumbleIfNoteOut();
 	}
 	
-	public enum RobotMode {
-		AMP, SPEAKER, LIFTER;
-	}
-	
-	public enum NotePlaceInRobot {
-		SHOOTER, ARM;
-	}
-	
-	public void colorByMode(RobotMode mode) {
-		switch (mode) {
-			case AMP:
-				setLEDColor(Color.kBlue, 0, LED_LENGTH);
-				break;
-			case SPEAKER:
-				setLEDColor(Color.kYellow, 0, LED_LENGTH);
+	public void colorByMode() {
+		if (ScoringModeSelector.isAmpMode()) {
+			setLEDColor(LEDConstants.AMP_MODE_COLOR, LEDConstants.ALL_LED);
+		} else {
+			setLEDColor(LEDConstants.SHOOTER_MODE_COLOR, LEDConstants.ALL_LED);
 		}
 	}
 	
@@ -121,16 +114,40 @@ public class LED extends GBSubsystem {
 		}
 	}
 	
-	public void blinkByNotePlace(NotePlaceInRobot place) {
-		switch (place) {
-			case ARM:
-				inArm = true;
-				new BlinkIfInArm().schedule();
-				break;
-			case SHOOTER:
+	public void blinkByNotePlace() {
+		if (noteInRobot) {
+			if (Funnel.getInstance().isObjectIn()) {
 				new BlinkIfInShooter().schedule();
-				inShooter = true;
-				break;
+			} else if (Roller.getInstance().isObjectInside()) {
+				new BlinkIfInArm().schedule();
+			}
+		}
+	}
+	
+	public void noteMode() {
+		if (Intake.getInstance().getExitBeamBreakerValue()
+				|| Intake.getInstance().getEntranceBeamBreakerValue()
+				|| Funnel.getInstance().isObjectIn()
+				|| Roller.getInstance().isObjectInside()) {
+			noteInRobot = true;
+		}
+		if (!(Intake.getInstance().getExitBeamBreakerValue())
+				&& !(Intake.getInstance().getEntranceBeamBreakerValue())
+				&& !(Funnel.getInstance().isObjectIn())
+				&& !(Roller.getInstance().isObjectInside())) {
+			noteOut = true;
+		}
+		else{
+			noteOut = false;
+		}
+	}
+	
+	public void rumbleIfNoteOut() {
+		if (noteInRobot) {
+			if (noteOut) {
+				new Rumble().schedule();
+				noteInRobot = false;
+			}
 		}
 	}
 }

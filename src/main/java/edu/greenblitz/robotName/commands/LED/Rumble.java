@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.commands.LED;
 
 import edu.greenblitz.robotName.OI;
+import edu.greenblitz.robotName.subsystems.LED.LED;
 import edu.greenblitz.robotName.subsystems.LED.LEDConstants;
 import edu.greenblitz.robotName.utils.GBCommand;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
@@ -15,6 +16,7 @@ public class Rumble extends GBCommand {
 	
 	@Override
 	public void initialize() {
+//		LED.getInstance().noteMode() = false;
 		timer.reset();
 		timer.start();
 	}

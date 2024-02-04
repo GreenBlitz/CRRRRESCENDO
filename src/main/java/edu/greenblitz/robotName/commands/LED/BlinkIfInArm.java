@@ -6,7 +6,7 @@ import edu.greenblitz.robotName.utils.GBCommand;
 import edu.wpi.first.wpilibj.Timer;
 
 public class BlinkIfInArm extends GBCommand {
-	
+	private Timer timer;
 	private double endTime;
 	
 	private LED led;

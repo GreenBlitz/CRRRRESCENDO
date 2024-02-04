@@ -9,7 +9,7 @@ public class SetScoringMode extends InstantCommand {
 
     private ScoringMode scoringMode;
 
-    protected SetScoringMode(ScoringMode mode) {
+    public SetScoringMode(ScoringMode mode) {
         scoringMode = mode;
     }
 

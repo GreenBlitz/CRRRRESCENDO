@@ -83,7 +83,6 @@ public class Robot extends LoggedRobot {
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
         RoborioUtils.updateCurrentCycleTime();
-        ArmShooterMechanism.getInstance().periodic();
     }
 
     private void initializeAutonomousBuilder() {
