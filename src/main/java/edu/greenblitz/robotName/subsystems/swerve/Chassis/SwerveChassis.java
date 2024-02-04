@@ -1,5 +1,7 @@
 package edu.greenblitz.robotName.subsystems.swerve.Chassis;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.VisionConstants;
@@ -9,7 +11,10 @@ import edu.greenblitz.robotName.subsystems.Gyros.GyroInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.Gyros.IAngleMeasurementGyro;
 import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.Photonvision;
+import edu.greenblitz.robotName.subsystems.swerve.Modules.ISwerveModule;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModule;
+import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModuleFactory;
+import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModuleInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.mk4iSwerveModule.MK4iSwerveConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.greenblitz.robotName.utils.RoborioUtils;
@@ -51,6 +56,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     private SwerveModule frontRight, frontLeft, backRight, backLeft;
     private IAngleMeasurementGyro gyro;
     private SwerveDriveKinematics kinematics;
+    private ISwerveModule frontLeftSwerveModule;
+    private ISwerveModule backLeftSwerveModule;
+    private ISwerveModule frontRightSwerveModule;
+    private ISwerveModule backRightSwerveModule;
     private SwerveDrivePoseEstimator poseEstimator;
     private Field2d field = new Field2d();
     public static final double TRANSLATION_TOLERANCE = 0.05;
@@ -60,6 +69,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
     private SwerveChassisInputsAutoLogged ChassisInputs = new SwerveChassisInputsAutoLogged();
     private GyroInputsAutoLogged gyroInputs = new GyroInputsAutoLogged();
+    private SwerveModuleInputsAutoLogged frontLeftSwerveModuleInputs = new SwerveModuleInputsAutoLogged();
+    private SwerveModuleInputsAutoLogged backLeftSwerveModuleInputs = new SwerveModuleInputsAutoLogged();
+    private SwerveModuleInputsAutoLogged frontRightSwerveModuleInputs = new SwerveModuleInputsAutoLogged();
+    private SwerveModuleInputsAutoLogged backRightSwerveModuleInputs = new SwerveModuleInputsAutoLogged();
 
     public SwerveChassis() {
         this.frontLeft = new SwerveModule(Module.FRONT_LEFT);
@@ -68,6 +81,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         this.backRight = new SwerveModule(Module.BACK_RIGHT);
 
         this.gyro = GyroFactory.create();
+        this.frontLeftSwerveModule = SwerveModuleFactory.create(Module.FRONT_LEFT);
+        this.frontRightSwerveModule = SwerveModuleFactory.create(Module.FRONT_RIGHT);
+        this.backLeftSwerveModule = SwerveModuleFactory.create(Module.BACK_LEFT);
+        this.backRightSwerveModule = SwerveModuleFactory.create(Module.BACK_RIGHT);
 
         doVision = true;
 
@@ -108,6 +125,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
         gyro.updateInputs(gyroInputs);
         updateInputs(ChassisInputs);
+        frontLeftSwerveModule.updateInputs(frontLeftSwerveModuleInputs);
+        backLeftSwerveModule.updateInputs(backLeftSwerveModuleInputs);
+        frontRightSwerveModule.updateInputs(frontRightSwerveModuleInputs);
+        backRightSwerveModule.updateInputs(backRightSwerveModuleInputs);
 
         Logger.recordOutput("DriveTrain/RobotPose", getRobotPose());
         Logger.recordOutput("DriveTrain/ModuleStates", getSwerveModuleStates());
@@ -129,18 +150,13 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
      * @return returns the swerve module based on its name
      */
     public SwerveModule getModule(Module module) {
-        switch (module) {
-            case BACK_LEFT:
-                return backLeft;
-            case BACK_RIGHT:
-                return backRight;
-            case FRONT_LEFT:
-                return frontLeft;
-            case FRONT_RIGHT:
-                return frontRight;
-        }
-        return null;
-    }
+		return switch (module) {
+            case BACK_LEFT -> backLeft;
+            case BACK_RIGHT -> backRight;
+			case FRONT_LEFT -> frontLeft;
+			case FRONT_RIGHT -> frontRight;
+		};
+	}
 
     /**
      * stops all the modules (power(0))
@@ -216,6 +232,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         return Rotation2d.fromRadians(gyroInputs.yaw);
     }
 
+
     public Rotation2d getChassisAngle() {
         return getRobotPose().getRotation();
     }
@@ -260,14 +277,12 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     }
 
     public void moveByChassisSpeeds(ChassisSpeeds fieldRelativeSpeeds, Rotation2d currentAng) {
-        ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
-                fieldRelativeSpeeds,
+        moveByChassisSpeeds(
+                fieldRelativeSpeeds.vxMetersPerSecond,
+                fieldRelativeSpeeds.vyMetersPerSecond,
+                fieldRelativeSpeeds.omegaRadiansPerSecond,
                 currentAng
         );
-        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
-        SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
-        SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
-        setModuleStates(desaturatedStates);
     }
 
     /**
@@ -283,6 +298,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         }
         SwerveModuleState[] desaturatedStates = new SwerveModuleState[states.length];
         for (int i = 0; i < states.length; i++) {
+            desaturatedStates[i] = new SwerveModuleState(states[i].speedMetersPerSecond / desaturationFactor, states[i].angle);
             desaturatedStates[i] = new SwerveModuleState(states[i].speedMetersPerSecond / desaturationFactor, states[i].angle);
         }
         return desaturatedStates;

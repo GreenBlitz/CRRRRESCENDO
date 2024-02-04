@@ -15,6 +15,7 @@ public class PivotConstants {
 
         STARTING(Rotation2d.fromDegrees(-50)),
         TRANSFER(Rotation2d.fromDegrees(-10)),
+        SAFE(Rotation2d.fromDegrees(-60)),
         PICK_UP(Rotation2d.fromDegrees(-30));
 
         public final Rotation2d ANGLE;
@@ -46,7 +47,5 @@ public class PivotConstants {
     public static final double kA = 1;
 
     public static final double TOLERANCE = Units.degreesToRadians(0.5);
-
-    public static final double DELAY_FOR_NO_COLLISION_SECONDS = 1.5;
 
 }
