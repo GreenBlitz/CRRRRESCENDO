@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.commands.shooter;
 
+import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheel;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.StopFlyWheel;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnel;
 import edu.greenblitz.robotName.commands.shooter.funnel.StopFunnel;
@@ -12,6 +13,7 @@ public class Shoot extends SequentialCommandGroup {
 
     public Shoot() {
         super(
+                new RunFlyWheel(),
                 new ParallelCommandGroup(
                         new WaitCommand(FlyWheelConstants.DELAY_SECONDS_TILL_EXIT),
                         new RunFunnel()
