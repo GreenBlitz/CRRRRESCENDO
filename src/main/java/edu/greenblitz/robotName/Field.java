@@ -111,11 +111,11 @@ public class Field {
 
 
     public static class PositionsToShootAutomaticallyFrom{
-        //to be fulfilled
-        public final static Pose2d SPEAKER_MIDDLE= new Pose2d(new Transform2d(,), new Rotation2d());
-        public final static Pose2d SPEAKER_RIGHT= new Pose2d(new Transform2d(,), new Rotation2d());
-        public final static Pose2d SPEAKER_LEFT= new Pose2d(new Transform2d(,), new Rotation2d());
-        public final static Pose2d AMP_EDGE= new Pose2d(new Transform2d(,), new Rotation2d());
-        public final static Pose2d PODIUM= new Pose2d(new Transform2d(,), new Rotation2d());
+        //The values are random
+        public final static Pose2d SPEAKER_MIDDLE= new Pose2d(new Translation2d(70,70),new Rotation2d());
+        public final static Pose2d SPEAKER_RIGHT= new Pose2d(new Translation2d(30,30), new Rotation2d());
+        public final static Pose2d SPEAKER_LEFT= new Pose2d(new Translation2d(40,40), new Rotation2d());
+        public final static Pose2d AMP_EDGE= new Pose2d(new Translation2d(50,50), new Rotation2d());
+        public final static Pose2d PODIUM= new Pose2d(new Translation2d(60,60), new Rotation2d());
     }
 }

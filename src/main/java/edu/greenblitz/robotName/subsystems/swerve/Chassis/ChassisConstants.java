@@ -73,11 +73,11 @@ public class ChassisConstants {
     );
     public enum ChassisAnglesAutoShoot{
         //to be fulfilled
-        SPEAKER_MIDDLE(Rotation2d.fromDegrees()),
-        SPEAKER_RIGHT(Rotation2d.fromDegrees()),
-        SPEAKER_LEFT(Rotation2d.fromDegrees()),
-        PODIUM(Rotation2d.fromDegrees()),
-        AMP_EDGE(Rotation2d.fromDegrees());
+        SPEAKER_MIDDLE(Rotation2d.fromDegrees(10)),
+        SPEAKER_RIGHT(Rotation2d.fromDegrees(20)),
+        SPEAKER_LEFT(Rotation2d.fromDegrees(30)),
+        PODIUM(Rotation2d.fromDegrees(40)),
+        AMP_EDGE(Rotation2d.fromDegrees(50));
         public final Rotation2d ANGLE;
         ChassisAnglesAutoShoot(Rotation2d angle){
             this.ANGLE = angle;
