@@ -56,10 +56,6 @@ public class ChassisConstants {
     public static final PIDConstants ROTATION_PID = new PIDConstants(3.6, 0, 0);
     public static final double TOTAL_ERROR_FOR_REPLANNING = 0.5;
     public static final double ERROR_SPIKE_FOR_REPLANNING = 1;
-    static {
-        NamedCommands.registerCommand("Shoot", new ShootByVelocity(3000));
-        NamedCommands.registerCommand("Grip", new NoteToShooter());
-    }
     public static final HolonomicPathFollowerConfig PATH_FOLLOWER_CONFIG = new HolonomicPathFollowerConfig(
             TRANSLATION_PID,
             ROTATION_PID,
