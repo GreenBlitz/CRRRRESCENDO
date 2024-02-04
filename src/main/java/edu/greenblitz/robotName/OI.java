@@ -2,7 +2,7 @@ package edu.greenblitz.robotName;
 
 
 import edu.greenblitz.robotName.commands.LED.BlinkIfInArm;
-import edu.greenblitz.robotName.commands.LED.ConditionalRumble;
+import edu.greenblitz.robotName.commands.LED.BlinkIfInShooter;
 import edu.greenblitz.robotName.commands.LED.Rumble;
 import edu.greenblitz.robotName.subsystems.LED.LED;
 import edu.greenblitz.robotName.subsystems.LED.LEDConstants;
@@ -35,10 +35,14 @@ public class OI {
     }
 
     public static OI getInstance() {
+        init();
+        return instance;
+    }
+    
+    public static void init(){
         if (instance == null) {
             instance = new OI();
         }
-        return instance;
     }
 
     public SmartJoystick getMainJoystick() {
@@ -50,15 +54,22 @@ public class OI {
     }
 
     public void initButtons() {
+        ledButtons();
     }
 
     public void initializeDefaultCommands(){
-        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
-        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-        Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
-        Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
-        Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
+//        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
+//        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+//        Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
+//        Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
+//        Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
     }
 
+    public void ledButtons(){
+        mainJoystick.A.onTrue(new BlinkIfInArm());
+        mainJoystick.B.onTrue(new BlinkIfInShooter());
+        mainJoystick.X.whileTrue(new InstantCommand(() -> LED.getInstance().turnOff(LEDConstants.ALL_LED)));
+        mainJoystick.Y.onTrue(new Rumble());
+    }
   
 }

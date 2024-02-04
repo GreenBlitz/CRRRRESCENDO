@@ -6,7 +6,7 @@ import edu.greenblitz.robotName.utils.GBCommand;
 import edu.wpi.first.wpilibj.Timer;
 
 public class BlinkIfInShooter extends GBCommand {
-	private Timer timer;
+	
 	private double endTime;
 	private LED led;
 	
@@ -14,12 +14,10 @@ public class BlinkIfInShooter extends GBCommand {
 		endTime = LEDConstants.BLINKING_TIME;
 		led = LED.getInstance();
 		require(led);
-		timer = new Timer();
 	}
 	
 	@Override
 	public void initialize() {
-		timer.start();
 		led.startTimer();
 	}
 	
@@ -30,13 +28,11 @@ public class BlinkIfInShooter extends GBCommand {
 	
 	@Override
 	public boolean isFinished() {
-		return timer.get() > endTime;
-		
+		return led.getTimerTime() > endTime;
 	}
 	
 	@Override
 	public void end(boolean interrupted) {
 		led.setLEDColor(LEDConstants.SHOOTER_MODE_COLOR, LEDConstants.ALL_LED);
-		timer.reset();
 	}
 }

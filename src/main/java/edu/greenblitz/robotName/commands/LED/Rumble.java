@@ -9,30 +9,28 @@ import edu.wpi.first.wpilibj.Timer;
 public class Rumble extends GBCommand {
 	
 	private Timer timer;
-	private SmartJoystick mainJoystick;
-	public void rumble(){
-		mainJoystick = OI.getInstance().getMainJoystick();
+	public Rumble(){
 		timer = new Timer();
 	}
 	
 	@Override
 	public void initialize() {
+		timer.reset();
 		timer.start();
 	}
 	
 	@Override
 	public void execute() {
-		mainJoystick.rumble(LEDConstants.RUMBLE_LEFT_MOTOR, LEDConstants.RUMBLE_POWER);
+		OI.getInstance().getMainJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, LEDConstants.RUMBLE_POWER);
 	}
 	
 	@Override
 	public boolean isFinished() {
-		return timer.get() >= LEDConstants.BLINKING_TIME;
+		return timer.get() >= LEDConstants.RUMBLE_TIME;
 	}
 	
 	@Override
 	public void end(boolean interrupted) {
-		mainJoystick.rumble(LEDConstants.RUMBLE_LEFT_MOTOR, 0);
-		timer.reset();
+		OI.getInstance().getMainJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, 0);
 	}
 }

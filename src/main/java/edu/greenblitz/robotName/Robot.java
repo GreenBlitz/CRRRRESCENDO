@@ -5,6 +5,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
 import edu.greenblitz.robotName.subsystems.Intake.Intake;
+import edu.greenblitz.robotName.subsystems.LED.LED;
 import edu.greenblitz.robotName.subsystems.Lifter.Lifter;
 import edu.greenblitz.robotName.subsystems.ArmShooterMechanism.ArmShooterMechanism;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
@@ -49,10 +50,11 @@ public class Robot extends LoggedRobot {
         initializeLogger();
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
         Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-        initializeSubsystems();
+        //initializeSubsystems();
+        LED.init();
         SwerveChassis.getInstance().resetAllEncoders();
         initializeAutonomousBuilder();
-        OI.getInstance();
+        OI.init();
     }
 
     public void initializeSubsystems() {

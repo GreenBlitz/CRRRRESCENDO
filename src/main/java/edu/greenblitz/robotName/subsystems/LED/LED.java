@@ -49,6 +49,11 @@ public class LED extends GBSubsystem {
 		LEDBlinkTimer.restart();
 	}
 	
+	public double getTimerTime(){
+		return LEDBlinkTimer.get();
+	}
+	
+	
 	public void setLEDColor(Color color, Section section) {
 		setLEDColor(color, section.startIndex(), section.endIndex());
 	}
@@ -114,11 +119,6 @@ public class LED extends GBSubsystem {
 		} else {
 			setLEDColor(LEDConstants.SHOOTER_MODE_COLOR, LEDConstants.ALL_LED);
 		}
-	}
-	
-	public boolean rumble() {
-		new Rumble().schedule();
-		return false;
 	}
 	
 	public void blinkByNotePlace(NotePlaceInRobot place) {

@@ -30,7 +30,7 @@ public class BatteryLimiter extends GBCommand {
         double currentAverageVoltage = voltageFilter.calculate(battery.getCurrentVoltage());
         if (currentAverageVoltage <= battery.getMinimumVoltage()
                 && DriverStation.getMatchType() == DriverStation.MatchType.None) {
-            throw new java.lang.RuntimeException("Battery is low");
+            //throw new java.lang.RuntimeException("Battery is low");
         }
     }
 }
