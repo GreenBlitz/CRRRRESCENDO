@@ -6,4 +6,8 @@ public class GyroConstants {
         public static final int ID = 12;
     }
 
+    public static class Pigeon2Gyro {
+        public static final int ID = 0;
+    }
+
 }
