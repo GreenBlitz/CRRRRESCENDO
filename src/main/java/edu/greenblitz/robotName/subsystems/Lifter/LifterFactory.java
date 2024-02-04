@@ -11,7 +11,7 @@ public class LifterFactory {
         return switch (RobotConstants.ROBOT_TYPE) {
             case ROBOT_NAME -> new NeoLifter();
             case REPLAY -> new ReplayLifter();
-            case SIMULATION -> new SimulationLifter();
+            default -> new SimulationLifter();
         };
     }
 }

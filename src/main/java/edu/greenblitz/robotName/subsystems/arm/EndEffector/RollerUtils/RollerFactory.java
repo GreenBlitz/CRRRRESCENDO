@@ -9,7 +9,7 @@ public class RollerFactory {
 		return switch (RobotConstants.ROBOT_TYPE) {
 			case ROBOT_NAME -> new BagRoller();
 			case REPLAY -> new ReplayRoller();
-			case SIMULATION -> new SimulationRoller();
+			default-> new SimulationRoller();
 		};
 	}
 }

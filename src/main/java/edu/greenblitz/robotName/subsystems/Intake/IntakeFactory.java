@@ -9,7 +9,7 @@ public class IntakeFactory {
         return switch (RobotConstants.ROBOT_TYPE) {
             case ROBOT_NAME -> new NeoIntake();
             case REPLAY -> new ReplayIntake();
-			case SIMULATION -> new SimulationIntake();
+            default -> new SimulationIntake();
         };
 		
 	}

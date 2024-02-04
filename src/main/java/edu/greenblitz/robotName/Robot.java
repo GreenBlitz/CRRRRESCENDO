@@ -45,17 +45,18 @@ public class Robot extends LoggedRobot {
     public enum RobotType {
         ROBOT_NAME,
         SIMULATION,
+        PEGASWERVE,
         REPLAY
     }
 
     @Override
     public void robotInit() {
+        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
         Pathfinding.setPathfinder(new LocalADStar());
         CommandScheduler.getInstance().enable();
 //        initializeLogger();
-        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
 //        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-        initializeSubsystems();
+//        initializeSubsystems();
         SwerveChassis.getInstance().resetAllEncoders();
         initializeAutonomousBuilder();
         OI.getInstance();
@@ -67,7 +68,7 @@ public class Robot extends LoggedRobot {
 
 //        Pivot.init();
 //        Funnel.init();
-        FlyWheel.init();
+//        FlyWheel.init();
 //
 //        Elbow.init();
 //        Wrist.init();
@@ -80,7 +81,7 @@ public class Robot extends LoggedRobot {
 
     @Override
     public void teleopInit() {
-        Dashboard.getInstance().activateDriversDashboard();
+//        Dashboard.getInstance().activateDriversDashboard();
     }
 
     @Override

@@ -12,7 +12,7 @@ public class SwerveModuleFactory {
     public static ISwerveModule create(SwerveChassis.Module module) {
         return switch (RobotConstants.ROBOT_TYPE) {
             case REPLAY -> new ReplaySwerveModule();
-            case ROBOT_NAME -> new KazaSwerveModule(module);
+            case PEGASWERVE -> new KazaSwerveModule(module);
             default -> new SimulationSwerveModule(module);
         };
     }

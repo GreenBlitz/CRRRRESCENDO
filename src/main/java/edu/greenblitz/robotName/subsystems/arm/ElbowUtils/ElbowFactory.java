@@ -9,7 +9,7 @@ public class ElbowFactory {
         return switch (RobotConstants.ROBOT_TYPE) {
             case ROBOT_NAME -> new FalconElbow();
             case REPLAY -> new ReplayElbow();
-            case SIMULATION -> new SimulationElbow();
+            default -> new SimulationElbow();
         };
     }
 }

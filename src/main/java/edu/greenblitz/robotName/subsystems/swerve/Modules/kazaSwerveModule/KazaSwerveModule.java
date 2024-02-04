@@ -53,6 +53,10 @@ public class KazaSwerveModule implements ISwerveModule {
         linearMotor = new GBSparkMax(linearMotorID, CANSparkMaxLowLevel.MotorType.kBrushless);
         linearMotor.config(KazaSwerveConstants.BASE_LINEAR_CONFIG_OBJECT.withInverted(linInverted));
 
+
+        System.out.println("=====================" + module.toString());
+        System.out.println(linearMotor.getDeviceId());
+        System.out.println(angleMotor.getDeviceId());
         lamprey = new AnalogInput(lampreyID);
         lamprey.setAverageBits(KazaSwerveConstants.LAMPREY_AVERAGE_BITS);
         this.linearFeedForward = new SimpleMotorFeedforward(KazaSwerveConstants.ks, KazaSwerveConstants.kv, KazaSwerveConstants.ka);

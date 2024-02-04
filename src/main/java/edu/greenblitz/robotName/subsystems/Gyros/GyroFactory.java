@@ -6,9 +6,9 @@ public class GyroFactory {
 
     public static IAngleMeasurementGyro create() {
         return switch (RobotConstants.ROBOT_TYPE) {
-            case ROBOT_NAME -> new PigeonGyro(GyroConstants.PigeonGyro.ID);
+            case PEGASWERVE -> new PigeonGyro(GyroConstants.PigeonGyro.ID);
             case REPLAY -> new ReplayGyro();
-            case SIMULATION -> new SimulationGyro();
+            default-> new SimulationGyro();
         };
     }
 }
