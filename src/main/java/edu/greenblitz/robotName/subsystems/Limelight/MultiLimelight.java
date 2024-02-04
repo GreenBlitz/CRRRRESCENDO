@@ -21,6 +21,7 @@ public class MultiLimelight extends GBSubsystem {
 		for(String limelightName : VisionConstants.LIMELIGHT_NAMES){
 			limelights.add(new Limelight(limelightName));
 		}
+		initializeLimelightPipeline();
 	}
 
 
@@ -59,10 +60,22 @@ public class MultiLimelight extends GBSubsystem {
 		Limelight limelight = new Limelight(VisionConstants.OBJECT_DETECTION_LIMELIGHT_NAME);
 		if (isObjectDetection) {
 			limelight.changePipeline(VisionConstants.OBJECT_DETECTION_PIPELINE);
+			if(limelights.contains(limelight)){
+				limelights.remove(limelight);
+			}
 		} else {
 			limelight.changePipeline(VisionConstants.APRILTAG_PIPELINE);
 			limelights.add(limelight);
 		}
+	}
+
+	public void initializeLimelightPipeline(){
+		changePipeline(false);
+	}
+
+	public int getLimelightPipeline(){
+		Limelight limelight = new Limelight(VisionConstants.OBJECT_DETECTION_LIMELIGHT_NAME);
+		return limelight.getPipeline();
 	}
 	
 	

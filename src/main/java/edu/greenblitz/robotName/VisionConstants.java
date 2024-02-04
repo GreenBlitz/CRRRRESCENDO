@@ -21,6 +21,7 @@ public class VisionConstants {
 	public final static double APRIL_TAG_HEIGHT_TOLERANCE = 0.04;//cm
 	public final static int APRILTAG_PIPELINE = 0;
 	public final static int OBJECT_DETECTION_PIPELINE = 1;
+	public final static double OBJECT_DETECTION_THRESHOLD = 0.6;
 	
 	public static enum LIMELIGHT_ARRAY_VALUES{
 		X_AXIS,
@@ -29,7 +30,8 @@ public class VisionConstants {
 		ROLL_ANGLE,
 		PITCH_ANGLE,
 		YAW_ANGLE,
-		TOTAL_LATENCY ;
+		TOTAL_LATENCY,
+		OBJECT_DETECTION_CONFIDENCE;
 	}
 
 	public static int getValue(LIMELIGHT_ARRAY_VALUES value) {
@@ -56,6 +58,7 @@ public class VisionConstants {
 			case TOTAL_LATENCY -> {
 				arrayValue = 6;
 			}
+			case OBJECT_DETECTION_CONFIDENCE -> arrayValue = 0;
 		}
 		return arrayValue;
 	}

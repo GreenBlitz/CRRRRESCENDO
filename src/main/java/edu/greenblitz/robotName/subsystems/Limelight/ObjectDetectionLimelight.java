@@ -29,12 +29,24 @@ public class ObjectDetectionLimelight {
 	}
 
 	public Pose2d getObjectPosition(){
+		MultiLimelight.getInstance().changePipeline(true);
+
 		double[] poseArray = notePositionEntry.getDoubleArray(new double[VisionConstants.OBJECT_DETECTION_LIMELIGHT_ENTRY_ARRAY_LENGTH]);
 
 		double xPosition = poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.X_AXIS)];
 
 		double yPosition = poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.Y_AXIS)];
 
+		MultiLimelight.getInstance().initializeLimelightPipeline();
+
 		return new Pose2d(new Translation2d(xPosition,yPosition), new Rotation2d());
+	}
+
+	public boolean getTargetConfidence(){
+		double[] poseArray = notePositionEntry.getDoubleArray(new double[VisionConstants.OBJECT_DETECTION_LIMELIGHT_ENTRY_ARRAY_LENGTH]);
+
+		double targetConfidence = poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.OBJECT_DETECTION_CONFIDENCE)];
+
+		return targetConfidence >= VisionConstants.OBJECT_DETECTION_THRESHOLD;
 	}
 }

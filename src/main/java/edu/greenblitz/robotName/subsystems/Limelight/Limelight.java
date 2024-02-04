@@ -57,6 +57,10 @@ class Limelight {
         limelightSettingsEntry.setInteger(pipeline);
     }
 
+    public int getPipeline(){
+        return (int) limelightSettingsEntry.getInteger(-1);
+    }
+
 
 
 }
