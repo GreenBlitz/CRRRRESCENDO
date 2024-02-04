@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.subsystems.shooter.Funnel;
 
 import edu.greenblitz.robotName.utils.GBSubsystem;
+import edu.wpi.first.math.geometry.Rotation2d;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants.EJECT_POWER;
@@ -55,6 +56,10 @@ public class Funnel extends GBSubsystem {
 		setPower(0);
 	}
 
+	public void resetEncoder(Rotation2d position) {
+		funnel.resetEncoder(position);
+	}
+
 
 	public double getVoltage() {
 		return funnelInputs.appliedOutput;
@@ -64,6 +69,11 @@ public class Funnel extends GBSubsystem {
 		return funnelInputs.isObjectIn;
 	}
 
+	public double getPosition() {
+		return funnelInputs.position;
+	}
 
-
+	public void moveToPosition (Rotation2d position){
+		funnel.moveToPosition(position);
+	}
 }
