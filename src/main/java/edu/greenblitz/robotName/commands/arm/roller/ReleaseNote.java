@@ -1,7 +1,7 @@
 package edu.greenblitz.robotName.commands.arm.roller;
 
-import edu.greenblitz.robotName.subsystems.arm.EndEffector.RollerUtils.RollerConstants;
-import edu.greenblitz.robotName.subsystems.arm.Wrist;
+import edu.greenblitz.robotName.subsystems.arm.roller.RollerConstants;
+import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class ReleaseNote extends RollerCommand{
@@ -12,7 +12,7 @@ public class ReleaseNote extends RollerCommand{
 
     @Override
     public boolean isFinished() {
-        if (!Wrist.getInstance().isObjectInside()){
+        if (!roller.isObjectInside()){
             new WaitCommand(RollerConstants.TIME_UNTIL_NOTE_EXIT_ROLLER).schedule();
             return true;
         }
