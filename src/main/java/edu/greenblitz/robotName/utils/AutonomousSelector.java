@@ -12,20 +12,17 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 public class AutonomousSelector {
 	static private AutonomousSelector instance; //i did some shenanigan with the static private hehe
-	private SendableChooser<Command> chooser;
+	private final SendableChooser<Command> chooser;
 	
 	private AutonomousSelector(){
 //      chooser.addOption("auto name", new PathPlannerAuto("auto name");
 		chooser = AutoBuilder.buildAutoChooser();
 		ShuffleboardTab tab = Shuffleboard.getTab("auto");
-		tab.add("autonomous chooser", AutoBuilder.buildAutoChooser());
+		tab.add("autonomous chooser", chooser);
 	}
 
 	public Command getChosenValue (){
-		if(chooser.getSelected() == null){return new InstantCommand();}
-		else {
-			return chooser.getSelected();
-		}
+		return chooser.getSelected();
 	}
 
 	public static AutonomousSelector getInstance () {

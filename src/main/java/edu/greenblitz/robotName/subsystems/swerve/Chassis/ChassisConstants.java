@@ -3,14 +3,7 @@ package edu.greenblitz.robotName.subsystems.swerve.Chassis;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.ReplanningConfig;
-
-import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.path.PathConstraints;
-import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
-import com.pathplanner.lib.util.PIDConstants;
-import com.pathplanner.lib.util.ReplanningConfig;
-import edu.greenblitz.robotName.commands.intake.NoteToShooter;
-import edu.greenblitz.robotName.commands.shooter.ShootByVelocity;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -59,10 +52,6 @@ public class ChassisConstants {
     public static final PIDConstants ROTATION_PID = new PIDConstants(3.6, 0, 0);
     public static final double TOTAL_ERROR_FOR_REPLANNING = 0.5;
     public static final double ERROR_SPIKE_FOR_REPLANNING = 1;
-    static {
-        NamedCommands.registerCommand("Shoot", new ShootByVelocity(3000));
-        NamedCommands.registerCommand("Grip", new NoteToShooter());
-    }
     public static final HolonomicPathFollowerConfig PATH_FOLLOWER_CONFIG = new HolonomicPathFollowerConfig(
             TRANSLATION_PID,
             ROTATION_PID,
@@ -85,28 +74,5 @@ public class ChassisConstants {
 
     public static final boolean FORWARD_VALUE_INVERTED = false;
     public static final boolean LEFTWARD_VALUE_INVERTED = true;
-
-    public static class Autonomous {
-        public static final PIDConstants TRANSLATION_PID = new PIDConstants(2,0,0);
-        public static final PIDConstants ROTATION_PID = new PIDConstants(2,0,0);
-        public static final double ROBOT_WIDTH_IN_METERS = 0.79;
-        public static final double BUMPER_WIDTH = 0.13;
-        public static final double TOTAL_ERROR_FOR_REPLANNING = 0.5;
-        public static final double ERROR_SPIKE_FOR_REPLANNING = 1;
-        public static final HolonomicPathFollowerConfig HOLONOMIC_PATH_FOLLOWER_CONFIG = new HolonomicPathFollowerConfig(
-                TRANSLATION_PID,
-                ROTATION_PID,
-                MAX_VELOCITY,
-                Math.sqrt(
-                        Math.pow((ROBOT_WIDTH_IN_METERS+BUMPER_WIDTH),2) * 2
-                ),
-                new ReplanningConfig(
-                        true,
-                        true,
-                        TOTAL_ERROR_FOR_REPLANNING,
-                        ERROR_SPIKE_FOR_REPLANNING
-                )
-        );
-    }
 
 }
