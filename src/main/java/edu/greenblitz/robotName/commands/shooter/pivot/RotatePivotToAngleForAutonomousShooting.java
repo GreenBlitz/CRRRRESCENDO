@@ -5,6 +5,6 @@ import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 
 public class RotatePivotToAngleForAutonomousShooting extends MovePivotToAngle{
     public RotatePivotToAngleForAutonomousShooting(){
-        super(Pivot.getInstance().getPivotAngleForAutoShooting(SwerveChassis.getInstance().getRobotPose()));
+        super(Pivot.getInstance().getPivotAngleForAutoShooting());
     }
 }

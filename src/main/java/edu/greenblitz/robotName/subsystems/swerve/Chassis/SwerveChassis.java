@@ -12,6 +12,7 @@ import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModule;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModuleFactory;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModuleInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.mk4iSwerveModule.MK4iSwerveConstants;
+import edu.greenblitz.robotName.utils.GBMath;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.MatBuilder;
@@ -501,19 +502,23 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     }
 
     public Rotation2d getChassisAngleForAutoShooting(Pose2d position){
-        if (Math.abs(Field.PositionsToShootAutomaticallyFrom.AMP_EDGE.getX()-position.getX())< OdometryConstants.TOLERANCE && Math.abs(Field.PositionsToShootAutomaticallyFrom.AMP_EDGE.getY()-position.getY())< OdometryConstants.TOLERANCE)){
+        if (GBMath.isPositionWithinTolerance(Field.PositionsToShootAutomaticallyFrom.AMP_EDGE,position,OdometryConstants.TOLERANCE)){
             return ChassisConstants.ChassisAnglesAutoShoot.AMP_EDGE.ANGLE;
         }
-        if (Math.abs(Field.PositionsToShootAutomaticallyFrom.PODIUM.getX()-position.getX())< OdometryConstants.TOLERANCE && Math.abs(Field.PositionsToShootAutomaticallyFrom.PODIUM.getY()-position.getY())< OdometryConstants.TOLERANCE)){
+        if ((GBMath.isPositionWithinTolerance(Field.PositionsToShootAutomaticallyFrom.PODIUM,position,OdometryConstants.TOLERANCE))){
             return ChassisConstants.ChassisAnglesAutoShoot.PODIUM.ANGLE;
         }
-        if (Math.abs(Field.PositionsToShootAutomaticallyFrom.SPEAKER_LEFT.getX()-position.getX())< OdometryConstants.TOLERANCE && Math.abs(Field.PositionsToShootAutomaticallyFrom.SPEAKER_LEFT.getY()-position.getY())< OdometryConstants.TOLERANCE)){
+        if ((GBMath.isPositionWithinTolerance(Field.PositionsToShootAutomaticallyFrom.SPEAKER_LEFT,position,OdometryConstants.TOLERANCE))){
             return ChassisConstants.ChassisAnglesAutoShoot.SPEAKER_LEFT.ANGLE;
         }
-        if (Math.abs(Field.PositionsToShootAutomaticallyFrom.SPEAKER_RIGHT.getX()-position.getX())< OdometryConstants.TOLERANCE && Math.abs(Field.PositionsToShootAutomaticallyFrom.SPEAKER_RIGHT.getY()-position.getY())< OdometryConstants.TOLERANCE)){
+        if ((GBMath.isPositionWithinTolerance(Field.PositionsToShootAutomaticallyFrom.SPEAKER_RIGHT,position,OdometryConstants.TOLERANCE))){
             return ChassisConstants.ChassisAnglesAutoShoot.SPEAKER_RIGHT.ANGLE;
         }
         return ChassisConstants.ChassisAnglesAutoShoot.SPEAKER_MIDDLE.ANGLE;
+    }
+
+    public Rotation2d getChassisAngleForAutoShooting(){
+        return getChassisAngleForAutoShooting(this.getRobotPose());
     }
     @Override
     public void updateInputs(SwerveChassisInputsAutoLogged inputs) {

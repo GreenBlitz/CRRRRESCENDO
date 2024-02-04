@@ -7,6 +7,6 @@ import java.util.function.Supplier;
 
 public class RotateChassisToAngleForAutoShooting extends RotateToAngle{
     public RotateChassisToAngleForAutoShooting() {
-        super((Supplier<Rotation2d>) SwerveChassis.getInstance().getChassisAngleForAutoShooting(SwerveChassis.getInstance().getRobotPose()));
+        super((Supplier<Rotation2d>) SwerveChassis.getInstance().getChassisAngleForAutoShooting());
     }
 }

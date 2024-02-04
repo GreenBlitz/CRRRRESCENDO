@@ -5,6 +5,8 @@ import edu.greenblitz.robotName.Field;
 import edu.greenblitz.robotName.OdometryConstants;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.greenblitz.robotName.utils.GBMath;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.*;
@@ -94,21 +96,23 @@ public class Pivot extends GBSubsystem {
 		return Math.abs(angle.getRadians() - getAngle().getRadians()) <= TOLERANCE;
 	}
 	public Rotation2d getPivotAngleForAutoShooting(Pose2d position){
-		if (Math.abs(Field.PositionsToShootAutomaticallyFrom.AMP_EDGE.getX()-position.getX())< OdometryConstants.TOLERANCE && Math.abs(Field.PositionsToShootAutomaticallyFrom.AMP_EDGE.getY()-position.getY())< OdometryConstants.TOLERANCE)){
+		if ((GBMath.isPositionWithinTolerance(Field.PositionsToShootAutomaticallyFrom.AMP_EDGE,position,OdometryConstants.TOLERANCE))){
 			return PivotConstants.PivotAnglesAutoShoot.AMP_EDGE.ANGLE;
 		}
-		if (Math.abs(Field.PositionsToShootAutomaticallyFrom.PODIUM.getX()-position.getX())< OdometryConstants.TOLERANCE && Math.abs(Field.PositionsToShootAutomaticallyFrom.PODIUM.getY()-position.getY())< OdometryConstants.TOLERANCE)){
+		if ((GBMath.isPositionWithinTolerance(Field.PositionsToShootAutomaticallyFrom.PODIUM,position,OdometryConstants.TOLERANCE))){
 			return PivotConstants.PivotAnglesAutoShoot.PODIUM.ANGLE;
 		}
-		if (Math.abs(Field.PositionsToShootAutomaticallyFrom.SPEAKER_LEFT.getX()-position.getX())< OdometryConstants.TOLERANCE && Math.abs(Field.PositionsToShootAutomaticallyFrom.SPEAKER_LEFT.getY()-position.getY())< OdometryConstants.TOLERANCE)){
+		if ((GBMath.isPositionWithinTolerance(Field.PositionsToShootAutomaticallyFrom.SPEAKER_LEFT,position,OdometryConstants.TOLERANCE))){
 			return PivotConstants.PivotAnglesAutoShoot.SPEAKER_LEFT.ANGLE;
 		}
-		if (Math.abs(Field.PositionsToShootAutomaticallyFrom.SPEAKER_RIGHT.getX()-position.getX())< OdometryConstants.TOLERANCE && Math.abs(Field.PositionsToShootAutomaticallyFrom.SPEAKER_RIGHT.getY()-position.getY())< OdometryConstants.TOLERANCE)){
+		if ((GBMath.isPositionWithinTolerance(Field.PositionsToShootAutomaticallyFrom.SPEAKER_RIGHT,position,OdometryConstants.TOLERANCE))){
 			return PivotConstants.PivotAnglesAutoShoot.SPEAKER_RIGHT.ANGLE;
 		}
 		return PivotConstants.PivotAnglesAutoShoot.SPEAKER_MIDDLE.ANGLE;
 	}
-
+	public Rotation2d getPivotAngleForAutoShooting(){
+		return getPivotAngleForAutoShooting(SwerveChassis.getInstance().getRobotPose());
+	}
 	public Pose3d getPivotPose3d() {
 		return new Pose3d(
 				PivotConstants.ROBOT_RELATIVE_PIVOT_POSITION,
