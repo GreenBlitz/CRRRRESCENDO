@@ -14,7 +14,6 @@ public class MovePivotToAngle extends PivotCommand {
 
 	@Override
 	public void initialize() {
-		targetAngle = ShootingStateCalculations.getTargetShooterAngle();
 		pivot.moveToAngle(targetAngle);
 	}
 
