@@ -17,7 +17,7 @@ public class ShootingStateCalculations {
         return LEGAL_SHOOTING_ZONE.isInCircle(getRobotPose().getTranslation());
     }
 
-    public static Pose2d getRobotPose() {
+    private static Pose2d getRobotPose() {
         return SwerveChassis.getInstance().getRobotPose();
     }
 
