@@ -1,14 +1,17 @@
 package edu.greenblitz.robotName.commands.LED;
 
 import edu.greenblitz.robotName.OI;
+import edu.greenblitz.robotName.subsystems.LED.LEDConstants;
 import edu.greenblitz.robotName.utils.GBCommand;
+import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.wpi.first.wpilibj.Timer;
 
 public class Rumble extends GBCommand {
 	
-	Timer timer;
-	
-	public Rumble(){
+	private Timer timer;
+	private SmartJoystick mainJoystick;
+	public void rumble(){
+		mainJoystick = OI.getInstance().getMainJoystick();
 		timer = new Timer();
 	}
 	
@@ -19,17 +22,17 @@ public class Rumble extends GBCommand {
 	
 	@Override
 	public void execute() {
-		OI.getInstance().getMainJoystick().rumble(true, 0.5);
+		mainJoystick.rumble(LEDConstants.RUMBLE_LEFT_MOTOR, LEDConstants.RUMBLE_POWER);
 	}
 	
 	@Override
 	public boolean isFinished() {
-		return timer.get()>=5;
+		return timer.get() >= LEDConstants.BLINKING_TIME;
 	}
 	
 	@Override
 	public void end(boolean interrupted) {
-		OI.getInstance().getMainJoystick().rumble(true, 0);
+		mainJoystick.rumble(LEDConstants.RUMBLE_LEFT_MOTOR, 0);
 		timer.reset();
 	}
 }

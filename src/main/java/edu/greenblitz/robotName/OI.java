@@ -18,7 +18,6 @@ public class OI {
 	private OI() {
 		mainJoystick = new SmartJoystick(RobotConstants.Joystick.MAIN);
 		secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
-		initButtons();
 	}
 	
 	public static OI getInstance() {
@@ -34,16 +33,5 @@ public class OI {
 	
 	public SmartJoystick getSecondJoystick() {
 		return secondJoystick;
-	}
+	}}
 	
-	public void initButtons() {
-		mainJoystick.A.whileTrue(new InstantCommand(
-						() -> LED.getInstance().blinkIfInArm())
-		);
-		mainJoystick.X.whileTrue(new InstantCommand(
-				() -> LED.getInstance().turnOff(0, LEDConstants.LED_LENGTH)
-		));
-		mainJoystick.B.onTrue(new BlinkIfInArm());
-		mainJoystick.Y.onTrue(new ConditionalRumble());
-	}
-}

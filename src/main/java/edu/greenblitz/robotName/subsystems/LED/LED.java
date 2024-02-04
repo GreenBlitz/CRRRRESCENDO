@@ -2,12 +2,11 @@ package edu.greenblitz.robotName.subsystems.LED;
 
 import edu.greenblitz.robotName.commands.LED.BlinkIfInArm;
 import edu.greenblitz.robotName.commands.LED.BlinkIfInShooter;
+import edu.greenblitz.robotName.commands.LED.Rumble;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 
 import static edu.greenblitz.robotName.subsystems.LED.LEDConstants.LED_LENGTH;
@@ -20,8 +19,7 @@ public class LED extends GBSubsystem {
 	private Timer LEDBlinkTimer;
 	private boolean blinkArm = false;
 	private boolean blinkShooter = false;
-	//private boolean noteOut = false;
-	private SendableChooser<Boolean> noteOut;
+	private boolean noteOut = false;
 	private boolean inArm = false;
 	private boolean inShooter = false;
 	
@@ -31,12 +29,8 @@ public class LED extends GBSubsystem {
 		this.addressableLEDBuffer = new AddressableLEDBuffer(LED_LENGTH);
 		this.addressableLED.setLength(LED_LENGTH);
 		this.addressableLED.start();
-		
 		LEDBlinkTimer = new Timer();
-		noteOut = new SendableChooser<>();
-		noteOut.setDefaultOption("False", false);
-		noteOut.addOption("True", true);
-		SmartDashboard.putData("is object in robot: ", noteOut);
+		
 		
 	}
 	
@@ -90,10 +84,10 @@ public class LED extends GBSubsystem {
 	
 	public enum RobotMode {
 		AMP, SPEAKER, LIFTER;
-		
-		public enum NotePlaceInRobot {
-			SHOOTER, ARM;
-		}
+	}
+	
+	public enum NotePlaceInRobot {
+		SHOOTER, ARM;
 	}
 	
 	public void colorByMode(RobotMode mode) {
@@ -108,26 +102,25 @@ public class LED extends GBSubsystem {
 	
 	public void blinkIfInArm() {
 		if (LEDBlinkTimer.get() % (LEDConstants.BLINK_DURATION * 2) >= LEDConstants.BLINK_DURATION) {
-			turnOff(0, LED_LENGTH);
+			turnOff(LEDConstants.ALL_LED);
 		} else {
-			setLEDColor(Color.kDarkBlue, 0, LED_LENGTH);
+			setLEDColor(LEDConstants.AMP_MODE_COLOR, LEDConstants.ALL_LED);
 		}
 	}
 	
 	public void blinkIfInShooter() {
 		if (LEDBlinkTimer.get() % (LEDConstants.BLINK_DURATION * 2) >= LEDConstants.BLINK_DURATION) {
-			turnOff(0, LED_LENGTH);
+			turnOff(LEDConstants.ALL_LED);
 		} else {
-			setLEDColor(Color.kDarkBlue, 0, LED_LENGTH);
+			setLEDColor(LEDConstants.SHOOTER_MODE_COLOR, LEDConstants.ALL_LED);
 		}
 	}
 	
 	public boolean rumble() {
-		SmartDashboard.putString("aaaaaa",noteOut.getSelected().toString());
-		return noteOut.getSelected();
+		new Rumble().schedule();
 	}
 	
-	public void blinkByNotePlace(RobotMode.NotePlaceInRobot place) {
+	public void blinkByNotePlace(NotePlaceInRobot place) {
 		switch (place) {
 			case ARM:
 				inArm = true;
@@ -140,10 +133,3 @@ public class LED extends GBSubsystem {
 		}
 	}
 }
-
-
-
-
-
-
-

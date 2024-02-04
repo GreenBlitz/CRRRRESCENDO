@@ -1,33 +1,31 @@
 package edu.greenblitz.robotName.commands.LED;
+
 import edu.greenblitz.robotName.subsystems.LED.LED;
 import edu.greenblitz.robotName.subsystems.LED.LEDConstants;
 import edu.greenblitz.robotName.utils.GBCommand;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.util.Color;
-import edu.wpi.first.wpilibj2.command.Subsystem;
 
 public class BlinkIfInShooter extends GBCommand {
-	Timer timer;
-	double endTime = 5.0;
-	public void time(double timeRunning){
-		this.endTime = timeRunning;
-	}
+	private Timer timer;
+	private double endTime;
+	private LED led;
 	
-	@Override
-	public void require(Subsystem LED) {
-		super.require(LED);
+	public BlinkIfInShooter() {
+		endTime = LEDConstants.BLINKING_TIME;
+		led = LED.getInstance();
+		require(led);
+		timer = new Timer();
 	}
 	
 	@Override
 	public void initialize() {
-		timer = new Timer();
 		timer.start();
-		LED.getInstance().startTimer();
+		led.startTimer();
 	}
 	
 	@Override
 	public void execute() {
-		LED.getInstance().blinkIfInShooter();
+		led.blinkIfInShooter();
 	}
 	
 	@Override
@@ -38,7 +36,7 @@ public class BlinkIfInShooter extends GBCommand {
 	
 	@Override
 	public void end(boolean interrupted) {
-		LED.getInstance().setLEDColor(Color.kRed,0, LEDConstants.LED_LENGTH);
-		super.end(interrupted);
+		led.setLEDColor(LEDConstants.SHOOTER_MODE_COLOR, LEDConstants.ALL_LED);
+		timer.reset();
 	}
 }
