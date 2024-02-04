@@ -118,6 +118,7 @@ public class LED extends GBSubsystem {
 	
 	public boolean rumble() {
 		new Rumble().schedule();
+		return false;
 	}
 	
 	public void blinkByNotePlace(NotePlaceInRobot place) {
