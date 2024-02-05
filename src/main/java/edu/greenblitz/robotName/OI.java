@@ -45,11 +45,7 @@ public class OI {
     }
 
     public void initButtons() {
-        secondJoystick.Y.onTrue(new MovePivotToAngle(PivotConstants.PresetPositions.SAFE.ANGLE));
-        secondJoystick.X.onTrue(new MovePivotToAngle(PivotConstants.PresetPositions.STARTING.ANGLE));
-        secondJoystick.A.onTrue(new MovePivotToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
-        secondJoystick.B.onTrue(new MovePivotToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE));
-      }
+    }
 
     public void initializeDefaultCommands(){
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
