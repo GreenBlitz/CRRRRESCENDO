@@ -9,7 +9,7 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 
 public class NeoWristConstants {
 
-    public static final int MOTOR_ID = 1;
+    public static final int MOTOR_ID = 4;
 
     public static final int PID_SLOT = 0;
 
