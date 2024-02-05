@@ -18,9 +18,9 @@ public class Field {
 
     public static Pose2d mirrorPositionToOtherSide(Pose2d pose){
         Pose2d mirroredPose = new Pose2d(
-                pose.getX(),
-                FieldConstants.fieldWidth - pose.getY(),
-                pose.getRotation());
+                FieldConstants.fieldLength - pose.getX(),
+                pose.getY(),
+                pose.getRotation().rotateBy(Rotation2d.fromDegrees(180)));
         return mirroredPose;
     }
 
