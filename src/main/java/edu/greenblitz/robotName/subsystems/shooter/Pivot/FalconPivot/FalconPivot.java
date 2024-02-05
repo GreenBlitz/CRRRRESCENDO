@@ -53,7 +53,7 @@ public class FalconPivot implements IPivot {
         motor.setControl(new MotionMagicDutyCycle(
                 targetAngle.getRadians() / PivotConstants.RELATIVE_POSITION_CONVERSION_FACTOR,
                 true,
-                PIVOT_FEED_FORWARD.calculate(lastInputs.position.getRadians(), lastInputs.velocity),
+                PIVOT_FEED_FORWARD.calculate(targetAngle.getRadians(), 0),
                 MOTION_MAGIC_PID_SLOT,
                 true,
                 true,
@@ -67,7 +67,7 @@ public class FalconPivot implements IPivot {
                         targetAngle.getRadians(),
                         0.0,
                         true,
-                        PIVOT_FEED_FORWARD.calculate(lastInputs.position.getRadians(), lastInputs.velocity),
+                        PIVOT_FEED_FORWARD.calculate(targetAngle.getRadians(), 0),
                         STAND_IN_PLACE_PID_SLOT,
                         true,
                         true,
