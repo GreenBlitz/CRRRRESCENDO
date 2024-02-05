@@ -3,6 +3,7 @@ package edu.greenblitz.robotName.subsystems.shooter.Pivot;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.shooter.Pivot.SimulationPivot.SimulationPivotConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.*;
@@ -94,7 +95,7 @@ public class Pivot extends GBSubsystem {
 	public Pose3d getPivotPose3d() {
 		return new Pose3d(
 				PivotConstants.ROBOT_RELATIVE_PIVOT_POSITION,
-				new Rotation3d(getAngle().getRadians(), 0, 0)
+				new Rotation3d(getAngle().getRadians() - SimulationPivotConstants.MECHANISM_NAME_TO_ROBOT_TRANSLATION.getRadians(), 0, 0)
 		);
 	}
 }
