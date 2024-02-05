@@ -68,7 +68,7 @@ public class FalconElbow implements IElbow {
                         targetAngle.getRotations(),
                         0.0,
                         true,
-                        FalconElbowConstants.ELBOW_FEED_FORWARD.calculate(lastInputs.position.getRadians(), lastInputs.velocity),
+                        FalconElbowConstants.ELBOW_FEED_FORWARD.calculate(targetAngle.getRadians(), 0),
                         STAND_IN_PLACE_PID_SLOT,
                         true,
                         true,
