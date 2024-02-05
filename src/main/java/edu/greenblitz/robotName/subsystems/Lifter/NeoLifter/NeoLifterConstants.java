@@ -9,7 +9,7 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 
 public class NeoLifterConstants {
-    public static final int MOTOR_ID = 1;
+    public static final int MOTOR_ID = 50;
     public static final GBSparkMax.SparkMaxConfObject CONFIG = new GBSparkMax.SparkMaxConfObject()
             .withPID(new PIDObject(3.6, 1, 0));
     public static final double TOLERANCE = 0.04;

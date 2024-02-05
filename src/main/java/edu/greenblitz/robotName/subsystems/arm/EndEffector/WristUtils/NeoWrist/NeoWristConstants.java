@@ -10,7 +10,7 @@ import static edu.greenblitz.robotName.subsystems.arm.EndEffector.WristUtils.Wri
 
 public class NeoWristConstants {
 
-    public static final int MOTOR_ID = 1;
+    public static final int MOTOR_ID = 1123;
 
     public static final int PID_SLOT = 0;
 

@@ -12,7 +12,8 @@ public class SwerveModuleFactory {
     public static ISwerveModule create(SwerveChassis.Module module) {
         return switch (RobotConstants.ROBOT_TYPE) {
             case REPLAY -> new ReplaySwerveModule();
-            case ROBOT_NAME -> new MK4ISwerveModule(module);
+            case ROBOT_NAME -> new KazaSwerveModule(module);
+//            case ROBOT_NAME -> new MK4ISwerveModule(module);
             default -> new SimulationSwerveModule(module);
         };
     }
