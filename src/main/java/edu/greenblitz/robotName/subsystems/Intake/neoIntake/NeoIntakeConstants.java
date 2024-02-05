@@ -4,7 +4,7 @@ import com.revrobotics.SparkMaxLimitSwitch;
 
 public class NeoIntakeConstants {
 
-    public static final int INTAKE_ID = 0;
+    public static final int INTAKE_ID = 34;
 
     public static final int ENTRANCE_BEAM_BREAKER_CHANNEL = 0;
 
