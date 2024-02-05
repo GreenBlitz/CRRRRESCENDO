@@ -55,8 +55,8 @@ public class ShootingZone extends GBCircle {
     }
 
     @Override
-    public Translation2d getClosestPositionOnCircleBorder(Translation2d position) {
-        Translation2d targetPosition = super.getClosestPositionOnCircleBorder(position);
+    public Translation2d getClosestCirclePosition(Translation2d position) {
+        Translation2d targetPosition = super.getClosestCirclePosition(position);
         for (Pair<Translation2d, Translation2d> bound : restrictedBounds) {
             Translation2d upperLimit = bound.getSecond();
             Translation2d lowerLimit = bound.getFirst();

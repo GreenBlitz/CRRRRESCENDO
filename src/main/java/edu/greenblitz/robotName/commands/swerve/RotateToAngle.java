@@ -32,6 +32,6 @@ public class RotateToAngle extends SwerveCommand{
 
     @Override
     public boolean isFinished() {
-        return (SwerveChassis.getInstance().getChassisAngle().getRadians() - angleSetPoint.get().getRadians()) <= ChassisConstants.ANGLE_TOLERANCE_RADIANS;
+        return Math.abs(SwerveChassis.getInstance().getChassisAngle().getRadians() - angleSetPoint.get().getRadians()) <= ChassisConstants.ANGLE_TOLERANCE_RADIANS;
     }
 }

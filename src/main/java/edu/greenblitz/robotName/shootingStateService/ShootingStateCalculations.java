@@ -22,42 +22,33 @@ public class ShootingStateCalculations {
     }
 
     public static Translation2d getRobotTargetTranslation() {
-        return LEGAL_SHOOTING_ZONE.getClosestPositionOnCircleBorder(getRobotPose().getTranslation());
+        return LEGAL_SHOOTING_ZONE.getClosestCirclePosition(getRobotPose().getTranslation());
     }
 
     public static Rotation2d getTargetRobotAngle() {
-        double angle = LEGAL_SHOOTING_ZONE.getTargetRobotAngle(SwerveChassis.getInstance().getRobotPose().getTranslation()).getRadians();
+        double angle = LEGAL_SHOOTING_ZONE.getTargetRobotAngle(this.getRobotPose().getTranslation()).getRadians();
         angle -= isRobotInShootingPosition() ? Math.PI : 0;
         return new Rotation2d(angle);
     }
 
     public static Rotation2d getTargetShooterAngle() {
         Pose2d robotPose = isRobotInShootingPosition() ? getRobotPose() : getTargetRobotPosition();
-        return ShootingAngleCalculations.getShootingAngleBasedOnPosition(
-                new Translation3d(
-                        robotPose.getX(),
-                        robotPose.getY(),
-                        PivotConstants.ROBOT_RELATIVE_PIVOT_POSITION.getZ()
-                )
-        );
+        return ShootingAngleCalculations.getShootingAngle(new Translation3d(robotPose.getX(), robotPose.getY(), PivotConstants.ROBOT_RELATIVE_PIVOT_POSITION.getZ()));
     }
 
     public static Pose2d getTargetRobotPosition() {
-        return new Pose2d(
-                getRobotTargetTranslation(),
-                getTargetRobotAngle()
-        );
+        return new Pose2d(getRobotTargetTranslation(), getTargetRobotAngle());
     }
 
-    public static boolean isPositionCorrect() {
+    public static boolean isChassisAtPosition() {
         return SwerveChassis.getInstance().isAtPose(getTargetRobotPosition());
     }
 
-    public static boolean isAngleCorrect() {
+    public static boolean isPivotAtAngle() {
         return Pivot.getInstance().isAtAngle(getTargetShooterAngle());
     }
 
     public static boolean isReadyToShoot() {
-        return isAngleCorrect() && isPositionCorrect();
+        return isPivotAtAngle() && isChassisAtPosition();
     }
 }

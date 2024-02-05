@@ -9,7 +9,7 @@ import edu.wpi.first.math.geometry.Translation3d;
 
 public class ShootingAngleCalculations {
 
-    public static Rotation2d getShootingAngleBasedOnPosition(Translation3d position) {
+    public static Rotation2d getShootingAngle(Translation3d position) {
         Translation2d relativeSpeakerPosition = getRelativePositionToMiddleOfSpeaker(position);
         double targetAngle = Math.atan(relativeSpeakerPosition.getY() / relativeSpeakerPosition.getX());
         return new Rotation2d(-targetAngle);

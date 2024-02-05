@@ -80,7 +80,7 @@ public class GBCircle {
      * @param position The position of the point.
      * @return The position of the closest point.
      */
-    public Translation2d getClosestPositionOnCircleBorder(Translation2d position) {
+    public Translation2d getClosestCirclePosition(Translation2d position) {
         if (position.getX() == centerPosition.getX()) {
             return position.plus(new Translation2d(EPSILON, 0));
         }
