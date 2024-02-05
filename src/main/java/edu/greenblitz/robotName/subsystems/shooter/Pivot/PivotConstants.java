@@ -40,12 +40,6 @@ public class PivotConstants {
 
     public static final Translation3d ROBOT_RELATIVE_PIVOT_POSITION = new Translation3d(0,0.1,0.15);
 
-    public static final double kS = 1;
-
-    public static final double kV = 1;
-
-    public static final double kA = 1;
-
     public static final double TOLERANCE = Units.degreesToRadians(0.5);
 
 }
