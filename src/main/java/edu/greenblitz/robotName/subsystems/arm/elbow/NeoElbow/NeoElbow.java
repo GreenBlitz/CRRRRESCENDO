@@ -16,8 +16,6 @@ public class NeoElbow implements IElbow {
 
     private GBSparkMax motor;
 
-    private ElbowInputsAutoLogged lastInputs;
-
     public NeoElbow(){
         motor = new GBSparkMax(NeoElbowConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
         motor.config(NeoElbowConstants.ELBOW_CONFIG_OBJECT);
@@ -78,7 +76,5 @@ public class NeoElbow implements IElbow {
         inputs.temperature = motor.getMotorTemperature();
         inputs.hasReachedBackwardLimit = Math.abs(inputs.position.getRadians() - ElbowConstants.BACKWARD_ANGLE_LIMIT.getRadians()) <= ElbowConstants.TOLERANCE;
         inputs.hasReachedForwardLimit = Math.abs(inputs.position.getRadians() - ElbowConstants.FORWARD_ANGLE_LIMIT.getRadians()) <= ElbowConstants.TOLERANCE;
-
-        lastInputs = inputs;
     }
 }

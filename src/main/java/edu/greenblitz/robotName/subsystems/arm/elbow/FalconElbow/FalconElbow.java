@@ -15,11 +15,7 @@ public class FalconElbow implements IElbow {
 
     private TalonFX motor;
 
-    private ElbowInputsAutoLogged lastInputs;
-
     public FalconElbow() {
-        lastInputs = new ElbowInputsAutoLogged();
-
         motor = new TalonFX(FalconElbowConstants.MOTOR_ID);
         motor.getConfigurator().apply(FalconElbowConstants.TALON_FX_CONFIGURATION);
         motor.setNeutralMode(FalconElbowConstants.NEUTRAL_MODE_VALUE);
@@ -53,7 +49,7 @@ public class FalconElbow implements IElbow {
                 new MotionMagicDutyCycle(
                         targetAngle.getRotations() / ElbowConstants.GEAR_RATIO,
                         true,
-                        FalconElbowConstants.ELBOW_FEED_FORWARD.calculate(lastInputs.position.getRadians(), lastInputs.velocity),
+                        FalconElbowConstants.ELBOW_FEED_FORWARD.calculate(targetAngle.getRadians(), 0),
                         FalconElbowConstants.MOTION_MAGIC_PID_SLOT,
                         true,
                         true,
@@ -87,7 +83,5 @@ public class FalconElbow implements IElbow {
         inputs.temperature = motor.getDeviceTemp().getValue();
         inputs.hasReachedForwardLimit = motor.getFault_ForwardSoftLimit().getValue();
         inputs.hasReachedBackwardLimit = motor.getFault_ReverseSoftLimit().getValue();
-
-        lastInputs = inputs;
     }
 }
