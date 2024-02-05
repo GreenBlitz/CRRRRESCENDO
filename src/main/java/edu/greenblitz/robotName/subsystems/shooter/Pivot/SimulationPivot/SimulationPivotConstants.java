@@ -1,11 +1,7 @@
 package edu.greenblitz.robotName.subsystems.shooter.Pivot.SimulationPivot;
 
 import edu.greenblitz.robotName.utils.PIDObject;
-import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Rotation3d;
-import edu.wpi.first.math.geometry.Translation3d;
-import edu.wpi.first.math.util.Units;
 
 import static edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants.RELATIVE_POSITION_CONVERSION_FACTOR;
 
@@ -19,6 +15,6 @@ public class SimulationPivotConstants {
 
     public static final PIDObject SIMULATION_PID = new PIDObject().withKp(0.3).withKd(0).withMaxPower(1);
 
-    public static final Rotation2d MECHANISM_NAME_TO_ROBOT_TRANSLATION =Rotation2d.fromDegrees(90);
+    public static final Rotation2d SIMULATION_CONVERSION_PIVOT_ANGLE =Rotation2d.fromDegrees(90);
 
 }

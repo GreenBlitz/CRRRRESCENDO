@@ -63,7 +63,7 @@ public class ArmShooterMechanism {
         wristJoint = elbowJoint.append(new MechanismLigament2d("wrist", WristConstants.LENGTH_OF_ENDEFFECTOR, WristConstants.PresetPositions.STARTING.ANGLE.getDegrees(), WRIST_LINE_WIDTH, COLOR_OF_WRIST));
 
         rootPivot = armMechanism.getRoot("pivot_root", PIVOT_COORDINATES.getX(), PIVOT_COORDINATES.getY());
-        pivotJoint = rootPivot.append(new MechanismLigament2d("pivot", PivotConstants.LENGTH_OF_SHOOTER, PivotConstants.PresetPositions.STARTING.ANGLE.getDegrees() + SimulationPivotConstants.MECHANISM_NAME_TO_ROBOT_TRANSLATION.getDegrees() ,LINE_WIDTH, PIVOT_COLOR));
+        pivotJoint = rootPivot.append(new MechanismLigament2d("pivot", PivotConstants.LENGTH_OF_SHOOTER, PivotConstants.PresetPositions.STARTING.ANGLE.getDegrees() + SimulationPivotConstants.SIMULATION_CONVERSION_PIVOT_ANGLE.getDegrees() ,LINE_WIDTH, PIVOT_COLOR));
 
         SmartDashboard.putData("ArmMech2D", armMechanism);
     }
@@ -76,6 +76,6 @@ public class ArmShooterMechanism {
 
         elbowJoint.setAngle(Units.radiansToDegrees(elbowAngle));
         wristJoint.setAngle(Units.radiansToDegrees(wristAngle));
-        pivotJoint.setAngle(pivotAngle.getDegrees() + SimulationPivotConstants.MECHANISM_NAME_TO_ROBOT_TRANSLATION.getDegrees());
+        pivotJoint.setAngle(pivotAngle.getDegrees() + SimulationPivotConstants.SIMULATION_CONVERSION_PIVOT_ANGLE.getDegrees());
     }
 }

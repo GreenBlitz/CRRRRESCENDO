@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName.subsystems.shooter.Pivot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.SimulationPivot.SimulationPivotConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
@@ -9,7 +8,6 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.*;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot.FalconPivotConstants.PIVOT_FEED_FORWARD;
 import static edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants.TOLERANCE;
 
 public class Pivot extends GBSubsystem {
@@ -45,7 +43,7 @@ public class Pivot extends GBSubsystem {
 
 		pivot.updateInputs(pivotInputs);
 		Logger.processInputs("Shooter/Pivot", pivotInputs);
-		Logger.recordOutput("Shooter/Pivot", getPivotPose3d());
+		Logger.recordOutput("Shooter/Pivot", getSimulationPivotPosition3d());
 	}
 
 	public void setCurrentAngle(Rotation2d angle){
@@ -92,10 +90,10 @@ public class Pivot extends GBSubsystem {
 		return Math.abs(angle.getRadians() - getAngle().getRadians()) <= TOLERANCE;
 	}
 
-	public Pose3d getPivotPose3d() {
+	public Pose3d getSimulationPivotPosition3d() {
 		return new Pose3d(
 				PivotConstants.ROBOT_RELATIVE_PIVOT_POSITION,
-				new Rotation3d(getAngle().getRadians() - SimulationPivotConstants.MECHANISM_NAME_TO_ROBOT_TRANSLATION.getRadians(), 0, 0)
+				new Rotation3d(getAngle().getRadians() - SimulationPivotConstants.SIMULATION_CONVERSION_PIVOT_ANGLE.getRadians(), 0, 0)
 		);
 	}
 }
