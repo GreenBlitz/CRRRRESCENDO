@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.shooter.ShootByPower;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
@@ -52,14 +53,15 @@ public class OI {
     }
 
     public void initButtons() {
+        mainJoystick.A.whileTrue(new ShootByPower(0.8));
     }
 
     public void initializeDefaultCommands() {
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
-        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-        Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
-        Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
-        Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
+//        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+//        Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
+//        Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
+//        Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
     }
 
 
