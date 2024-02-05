@@ -37,8 +37,6 @@ public class PivotConstants {
 
     public static final double RELATIVE_VELOCITY_CONVERSION_FACTOR = 0.0030332432;
 
-    public static final double ABSOLUTE_POSITION_CONVERSION_FACTOR = 0.00302;
-
     public static final Translation3d ROBOT_RELATIVE_PIVOT_POSITION = new Translation3d(0,0.1,0.15);
 
     public static final double TOLERANCE = Units.degreesToRadians(0.5);
