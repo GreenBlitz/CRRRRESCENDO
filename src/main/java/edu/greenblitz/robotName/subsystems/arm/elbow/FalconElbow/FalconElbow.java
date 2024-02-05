@@ -51,7 +51,7 @@ public class FalconElbow implements IElbow {
     public void moveToAngle(Rotation2d targetAngle) {
         motor.setControl(
                 new MotionMagicDutyCycle(
-                        targetAngle.getRadians() / ElbowConstants.GEAR_RATIO,
+                        targetAngle.getRotations() / ElbowConstants.GEAR_RATIO,
                         true,
                         FalconElbowConstants.ELBOW_FEED_FORWARD.calculate(lastInputs.position.getRadians(), lastInputs.velocity),
                         FalconElbowConstants.MOTION_MAGIC_PID_SLOT,
@@ -65,7 +65,7 @@ public class FalconElbow implements IElbow {
     @Override
     public void standInPlace(Rotation2d targetAngle) {
         motor.setControl(new PositionVoltage(
-                        targetAngle.getRadians(),
+                        targetAngle.getRotations(),
                         0.0,
                         true,
                         FalconElbowConstants.ELBOW_FEED_FORWARD.calculate(lastInputs.position.getRadians(), lastInputs.velocity),
