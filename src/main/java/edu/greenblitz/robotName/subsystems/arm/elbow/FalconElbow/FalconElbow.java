@@ -1,12 +1,15 @@
 package edu.greenblitz.robotName.subsystems.arm.elbow.FalconElbow;
 
 import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
+import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.arm.elbow.IElbow;
 import edu.wpi.first.math.geometry.Rotation2d;
+
+import static edu.greenblitz.robotName.subsystems.arm.elbow.FalconElbow.FalconElbowConstants.STAND_IN_PLACE_PID_SLOT;
 
 public class FalconElbow implements IElbow {
 
@@ -50,8 +53,23 @@ public class FalconElbow implements IElbow {
                 new MotionMagicDutyCycle(
                         targetAngle.getRadians() / ElbowConstants.GEAR_RATIO,
                         true,
-                        FalconElbowConstants.ELBOW_FEED_FORWARD.calculate(lastInputs.position.getRadians(), lastInputs.velocity * ElbowConstants.GEAR_RATIO),
+                        FalconElbowConstants.ELBOW_FEED_FORWARD.calculate(lastInputs.position.getRadians(), lastInputs.velocity),
                         FalconElbowConstants.MOTION_MAGIC_PID_SLOT,
+                        true,
+                        true,
+                        true
+                )
+        );
+    }
+
+    @Override
+    public void standInPlace(Rotation2d targetAngle) {
+        motor.setControl(new PositionVoltage(
+                        targetAngle.getRadians(),
+                        0.0,
+                        true,
+                        FalconElbowConstants.ELBOW_FEED_FORWARD.calculate(lastInputs.position.getRadians(), lastInputs.velocity),
+                        STAND_IN_PLACE_PID_SLOT,
                         true,
                         true,
                         true

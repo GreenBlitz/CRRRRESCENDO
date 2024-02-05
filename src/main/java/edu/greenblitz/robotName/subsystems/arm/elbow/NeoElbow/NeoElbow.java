@@ -64,6 +64,11 @@ public class NeoElbow implements IElbow {
     }
 
     @Override
+    public void standInPlace(Rotation2d targetAngle) {
+        moveToAngle(targetAngle);
+    }
+
+    @Override
     public void updateInputs(ElbowInputsAutoLogged inputs) {
         inputs.appliedOutput = motor.getAppliedOutput() *  Battery.getInstance().getCurrentVoltage();
         inputs.outputCurrent = motor.getOutputCurrent();

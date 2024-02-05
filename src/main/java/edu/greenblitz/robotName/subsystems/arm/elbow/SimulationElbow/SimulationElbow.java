@@ -70,6 +70,11 @@ public class SimulationElbow implements IElbow {
     }
 
     @Override
+    public void standInPlace(Rotation2d targetAngle) {
+        elbowSimulation.setInputVoltage(0);
+    }
+
+    @Override
     public void updateInputs(ElbowInputsAutoLogged inputs) {
         elbowSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
 
