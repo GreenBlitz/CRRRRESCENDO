@@ -13,10 +13,10 @@ public class PivotConstants {
     public static final double WIDTH_OF_SHOOTER = 0.22;
     public enum PresetPositions {
 
-        STARTING(Rotation2d.fromDegrees(-50)),
-        TRANSFER(Rotation2d.fromDegrees(-10)),
-        SAFE(Rotation2d.fromDegrees(-60)),
-        PICK_UP(Rotation2d.fromDegrees(-30));
+        STARTING(Rotation2d.fromDegrees(150)),
+        TRANSFER(Rotation2d.fromDegrees(100)),
+        SAFE(Rotation2d.fromDegrees(170)),
+        PICK_UP(Rotation2d.fromDegrees(0));
 
         public final Rotation2d ANGLE;
 
@@ -28,9 +28,9 @@ public class PivotConstants {
 
     public static final double SHOOTER_MASS_KG = 10;
 
-    public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(-80);
+    public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(90);
 
-    public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(0);
+    public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(180);
 
     public static final double RELATIVE_POSITION_CONVERSION_FACTOR = 0.0328;
 
