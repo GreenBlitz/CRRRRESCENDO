@@ -89,8 +89,9 @@ public class Robot extends LoggedRobot {
     }
 
     private void initializeAutonomousBuilder() {
-        NamedCommands.registerCommand("shoot", new ShootByVelocity(3000).raceWith(new WaitCommand(1)));
-        NamedCommands.registerCommand("grip", new NoteToShooter().raceWith(new WaitCommand(1.85)));
+        NamedCommands.registerCommand("run flywheel", RunFlyWheelByPowerConstant());
+        NamedCommands.registerCommand("shoot", new GoToShootingStateAndShoot());
+        NamedCommands.registerCommand("grip", new NoteToShooter());
         AutoBuilder.configureHolonomic(
                 SwerveChassis.getInstance()::getRobotPose,
                 SwerveChassis.getInstance()::resetChassisPose,
