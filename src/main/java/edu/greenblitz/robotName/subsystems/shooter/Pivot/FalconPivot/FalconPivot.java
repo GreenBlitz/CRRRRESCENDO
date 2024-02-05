@@ -16,15 +16,11 @@ public class FalconPivot implements IPivot {
 
     private TalonFX motor;
 
-    private PivotInputsAutoLogged lastInputs;
-
     public FalconPivot() {
         motor = new TalonFX(MOTOR_ID);
         motor.getConfigurator().apply(TALON_FX_CONFIGURATION);
         motor.setNeutralMode(NEUTRAL_MODE_VALUE);
         motor.optimizeBusUtilization();
-
-        lastInputs = new PivotInputsAutoLogged();
     }
 
 
@@ -51,7 +47,7 @@ public class FalconPivot implements IPivot {
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
         motor.setControl(new MotionMagicDutyCycle(
-                targetAngle.getRadians() / PivotConstants.RELATIVE_POSITION_CONVERSION_FACTOR,
+                targetAngle.getRotations() / PivotConstants.RELATIVE_POSITION_CONVERSION_FACTOR,
                 true,
                 PIVOT_FEED_FORWARD.calculate(targetAngle.getRadians(), 0),
                 MOTION_MAGIC_PID_SLOT,
@@ -64,7 +60,7 @@ public class FalconPivot implements IPivot {
     @Override
     public void standInPlace(Rotation2d targetAngle) {
         motor.setControl(new PositionVoltage(
-                        targetAngle.getRadians(),
+                        targetAngle.getRotations(),
                         0.0,
                         true,
                         PIVOT_FEED_FORWARD.calculate(targetAngle.getRadians(), 0),
@@ -86,7 +82,5 @@ public class FalconPivot implements IPivot {
         inputs.temperature = motor.getDeviceTemp().getValue();
         inputs.hasHitForwardLimit = motor.getFault_ForwardSoftLimit().getValue();
         inputs.hasHitBackwardsLimit = motor.getFault_ReverseSoftLimit().getValue();
-
-        lastInputs = inputs;
     }
 }
