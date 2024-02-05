@@ -6,7 +6,7 @@ import edu.wpi.first.math.geometry.Translation3d;
 
 public class VisionConstants {
 	public static final String[] LIMELIGHT_NAMES = new String[]{"limelight-front","limelight-back"};
-	public static final String OBJECT_DETECTION_LIMELIGHT_NAME = "limelight-gb";
+	public static final String OBJECT_DETECTION_LIMELIGHT_NAME = "10.45.90.101";
 	public static double STANDARD_DEVIATION_ODOMETRY = 1;
 	public static int LIMELIGHT_ENTRY_ARRAY_LENGTH = 7;
 	public static int OBJECT_DETECTION_LIMELIGHT_ENTRY_ARRAY_LENGTH = 7;
@@ -30,13 +30,12 @@ public class VisionConstants {
 		ROLL_ANGLE,
 		PITCH_ANGLE,
 		YAW_ANGLE,
-		TOTAL_LATENCY,
-		OBJECT_DETECTION_CONFIDENCE;
+		TOTAL_LATENCY;
 	}
 
 	public static int getValue(LIMELIGHT_ARRAY_VALUES value) {
 		int arrayValue = -1;
-		switch (value){
+		switch (value) {
 			case X_AXIS -> {
 				arrayValue = 0;
 			}
@@ -58,7 +57,6 @@ public class VisionConstants {
 			case TOTAL_LATENCY -> {
 				arrayValue = 6;
 			}
-			case OBJECT_DETECTION_CONFIDENCE -> arrayValue = 0;
 		}
 		return arrayValue;
 	}

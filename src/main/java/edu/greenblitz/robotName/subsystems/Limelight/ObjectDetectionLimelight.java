@@ -9,13 +9,15 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 
 public class ObjectDetectionLimelight {
-	private NetworkTableEntry notePositionEntry;
+	private NetworkTableEntry xNotePositionEntry, yNotePositionEntry, confidenceNotePositionEntry;
 	private static ObjectDetectionLimelight instance;
 
 	public ObjectDetectionLimelight(){
 		String name = VisionConstants.OBJECT_DETECTION_LIMELIGHT_NAME;
 
-		notePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("");
+		xNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("json").getInstance().getTable("Detector").getInstance().getEntry("tx");
+		yNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("json").getInstance().getTable("Detector").getInstance().getEntry("ty");
+		confidenceNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("json").getInstance().getEntry("tx");
 	}
 
 	public static ObjectDetectionLimelight getInstance() {
@@ -31,11 +33,9 @@ public class ObjectDetectionLimelight {
 	public Pose2d getObjectPosition(){
 		MultiLimelight.getInstance().changePipeline(true);
 
-		double[] poseArray = notePositionEntry.getDoubleArray(new double[VisionConstants.OBJECT_DETECTION_LIMELIGHT_ENTRY_ARRAY_LENGTH]);
 
-		double xPosition = poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.X_AXIS)];
-
-		double yPosition = poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.Y_AXIS)];
+		double xPosition = xNotePositionEntry.getDouble(-1);
+		double yPosition = yNotePositionEntry.getDouble(-1);
 
 		MultiLimelight.getInstance().initializeLimelightPipeline();
 
@@ -43,9 +43,8 @@ public class ObjectDetectionLimelight {
 	}
 
 	public boolean getTargetConfidence(){
-		double[] poseArray = notePositionEntry.getDoubleArray(new double[VisionConstants.OBJECT_DETECTION_LIMELIGHT_ENTRY_ARRAY_LENGTH]);
 
-		double targetConfidence = poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.OBJECT_DETECTION_CONFIDENCE)];
+		double targetConfidence = confidenceNotePositionEntry.getDouble(-1);
 
 		return targetConfidence >= VisionConstants.OBJECT_DETECTION_THRESHOLD;
 	}

@@ -1,7 +1,9 @@
 package edu.greenblitz.robotName.subsystems;
+import edu.greenblitz.robotName.subsystems.Limelight.ObjectDetectionLimelight;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.greenblitz.robotName.utils.GetObjectAngleRelativeToRobot;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
@@ -59,11 +61,13 @@ public class Dashboard extends GBSubsystem {
         //battery
         driversTab.addDouble("Battery", () -> Battery.getInstance().getCurrentVoltage())
                 .withPosition(9, 3);
-
-
+        driversTab.addDouble("limelight pipeline", () -> MultiLimelight.getInstance().getLimelightPipeline());
+        driversTab.addDouble("note angle", GetObjectAngleRelativeToRobot::getObjectAngle);
+        driversTab.addDouble("note pos", () -> ObjectDetectionLimelight.getInstance().getObjectPosition().getX());
         //field
         driversTab.add("Field", SwerveChassis.getInstance().getField()).withPosition(5, 2).withSize(3, 2);
         driversTab.addDouble("std devs",()->MultiLimelight.getInstance().getDynamicStdDevs(0));
+
     }
 
 

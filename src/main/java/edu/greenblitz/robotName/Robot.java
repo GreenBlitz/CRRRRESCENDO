@@ -59,19 +59,19 @@ public class Robot extends LoggedRobot {
     public void initializeSubsystems() {
         MultiLimelight.init();
         ObjectDetectionLimelight.init();
-        SwerveChassis.init();
-
-        Pivot.init();
-        Funnel.init();
-        FlyWheel.init();
-
-        Elbow.init();
-        Wrist.init();
-        Roller.init();
-        ArmShooterMechanism.init();
-
-        Lifter.init();
-        Intake.init();
+//        SwerveChassis.init();
+//
+//        Pivot.init();
+//        Funnel.init();
+//        FlyWheel.init();
+//
+//        Elbow.init();
+//        Wrist.init();
+//        Roller.init();
+//        ArmShooterMechanism.init();
+//
+//        Lifter.init();
+//        Intake.init();
     }
 
     @Override
