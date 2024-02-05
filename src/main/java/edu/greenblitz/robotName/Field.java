@@ -115,7 +115,7 @@ public class Field {
         public final static Pose2d SPEAKER_MIDDLE= new Pose2d(new Translation2d(2.66,1.33),new Rotation2d());
         public final static Pose2d SPEAKER_RIGHT= new Pose2d(new Translation2d(1.51,0.671), new Rotation2d());
         public final static Pose2d SPEAKER_LEFT= new Pose2d(new Translation2d(3.82,6.71), new Rotation2d());
-        public final static Pose2d AMP_EDGE= new Pose2d(new Translation2d(3,3), new Rotation2d());
-        public final static Pose2d PODIUM= new Pose2d(new Translation2d(2.66,3), new Rotation2d());
+        public final static Pose2d AMP_EDGE= new Pose2d(new Translation2d(,), new Rotation2d());
+        public final static Pose2d PODIUM= new Pose2d(new Translation2d(,), new Rotation2d());
     }
 }
