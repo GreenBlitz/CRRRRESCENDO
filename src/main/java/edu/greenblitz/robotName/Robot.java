@@ -54,7 +54,7 @@ public class Robot extends LoggedRobot {
         CommandScheduler.getInstance().enable();
 //        initializeLogger();
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
-        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+//        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
         initializeSubsystems();
         SwerveChassis.getInstance().resetAllEncoders();
         initializeAutonomousBuilder();
