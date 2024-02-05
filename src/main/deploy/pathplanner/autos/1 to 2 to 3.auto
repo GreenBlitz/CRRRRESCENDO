@@ -12,6 +12,12 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "run fly wheel"
+          }
+        },
+        {
           "type": "parallel",
           "data": {
             "commands": [

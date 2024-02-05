@@ -3,10 +3,11 @@ package edu.greenblitz.robotName;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByPowerConstant;
+import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingStateAndShoot;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
 import edu.greenblitz.robotName.commands.intake.NoteToShooter;
-import edu.greenblitz.robotName.commands.shooter.ShootByVelocity;
 import edu.greenblitz.robotName.subsystems.Intake.Intake;
 import edu.greenblitz.robotName.subsystems.Lifter.Lifter;
 import edu.greenblitz.robotName.subsystems.ArmShooterMechanism.ArmShooterMechanism;
@@ -31,7 +32,6 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
 import org.littletonrobotics.junction.Logger;
@@ -91,8 +91,9 @@ public class Robot extends LoggedRobot {
     }
 
     private void initializeAutonomousBuilder() {
-        NamedCommands.registerCommand("shoot", new ShootByVelocity(3000).raceWith(new WaitCommand(1)));
-        NamedCommands.registerCommand("grip", new NoteToShooter().raceWith(new WaitCommand(1.85)));
+        NamedCommands.registerCommand("run flywheel", RunFlyWheelByPowerConstant());
+        NamedCommands.registerCommand("shoot", new GoToShootingStateAndShoot());
+        NamedCommands.registerCommand("grip", new NoteToShooter());
         AutoBuilder.configureHolonomic(
                 SwerveChassis.getInstance()::getRobotPose,
                 SwerveChassis.getInstance()::resetChassisPosition,
