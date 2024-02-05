@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.utils.motors;
 
 
+import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import edu.greenblitz.robotName.utils.PIDObject;
@@ -50,6 +51,11 @@ public class GBSparkMax extends CANSparkMax {
 	}
 	public REVLibError setSoftLimit(SoftLimitDirection direction, double limit) {
 		return super.setSoftLimit(direction,(float) limit);
+	}
+	
+	public void setIdleModeByNeutralMode(NeutralModeValue idleMode){
+		CANSparkMax.IdleMode neoIdleMode = (idleMode == NeutralModeValue.Brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
+		super.setIdleMode(neoIdleMode);
 	}
 	
 	/**

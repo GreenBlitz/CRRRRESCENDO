@@ -7,6 +7,7 @@ import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.arm.elbow.IElbow;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
@@ -69,12 +70,17 @@ public class SimulationElbow implements IElbow {
     }
 
     @Override
+    public void standInPlace(Rotation2d targetAngle) {
+        elbowSimulation.setInputVoltage(0);
+    }
+
+    @Override
     public void updateInputs(ElbowInputsAutoLogged inputs) {
         elbowSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
 
         inputs.appliedOutput = appliedVoltage;
         inputs.outputCurrent = elbowSimulation.getCurrentDrawAmps();
-        inputs.position = elbowSimulation.getAngleRads();
+        inputs.position = Rotation2d.fromRadians(elbowSimulation.getAngleRads());
         inputs.velocity = elbowSimulation.getVelocityRadPerSec();
         inputs.absoluteEncoderPosition = elbowSimulation.getAngleRads();
         inputs.temperature = 0;
