@@ -63,10 +63,11 @@ public class Dashboard extends GBSubsystem {
                 .withPosition(9, 3);
         driversTab.addDouble("limelight pipeline", () -> MultiLimelight.getInstance().getLimelightPipeline());
         driversTab.addDouble("note angle", GetObjectAngleRelativeToRobot::getObjectAngle);
-        driversTab.addDouble("note pos", () -> ObjectDetectionLimelight.getInstance().getObjectPosition().getX());
+        driversTab.addDouble("note pos", () -> ObjectDetectionLimelight.getInstance().isX());
         //field
         driversTab.add("Field", SwerveChassis.getInstance().getField()).withPosition(5, 2).withSize(3, 2);
         driversTab.addDouble("std devs",()->MultiLimelight.getInstance().getDynamicStdDevs(0));
+        driversTab.addBoolean("llnt", () -> ObjectDetectionLimelight.getInstance().isNT());
 
     }
 

@@ -70,7 +70,7 @@ public class MultiLimelight extends GBSubsystem {
 	}
 
 	public void initializeLimelightPipeline(){
-		changePipeline(true);
+		changePipeline(false);
 	}
 
 	public int getLimelightPipeline(){
