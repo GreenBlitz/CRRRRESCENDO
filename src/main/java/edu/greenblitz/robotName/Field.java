@@ -101,10 +101,12 @@ public class Field {
         public final static Pose2d RED_SCORE_POSITION = new Pose2d(new Translation2d(14.85,7.5),new Rotation2d());
         public final static Pose2d RED_CLIMB_POSITION = new Pose2d(new Translation2d(12.733,3.602),new Rotation2d());
         public final static Pose2d RED_PRE_AMP_SCORE_POSITION = new Pose2d(new Translation2d(14.85,7.3),new Rotation2d());
+        public final static Pose2d RED_AMP_SCORE_POSITION = new Pose2d(new Translation2d(14.85, 7.5), new Rotation2d());
         public final static Pose2d BLUE_SPEAKER_SCORE_POSITION = mirrorPositionToOtherSide(RED_SPEAKER_SCORE_POSITION);
         public final static Pose2d BLUE_SCORE_POSITION = mirrorPositionToOtherSide(RED_SCORE_POSITION);
         public final static Pose2d BLUE_CLIMB_POSITION = mirrorPositionToOtherSide(RED_CLIMB_POSITION);
         public final static Pose2d BLUE_PRE_AMP_SCORE_POSITION = mirrorPositionToOtherSide(RED_PRE_AMP_SCORE_POSITION);
+        public final static Pose2d BLUE_AMP_SCORE_POSITION = mirrorPositionToOtherSide(RED_AMP_SCORE_POSITION);
     }
 
     public static class UpStairsFieldPositions{
