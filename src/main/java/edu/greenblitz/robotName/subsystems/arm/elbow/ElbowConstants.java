@@ -3,7 +3,6 @@ package edu.greenblitz.robotName.subsystems.arm.elbow;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation3d;
-import edu.wpi.first.math.util.Units;
 
 public class ElbowConstants {
 
@@ -33,7 +32,7 @@ public class ElbowConstants {
 
     public static final double GEAR_RATIO = 1;
 
-    public static final double TOLERANCE = Units.degreesToRadians(0.5);
+    public static final Rotation2d TOLERANCE = Rotation2d.fromDegrees(0.5);
 
     public static final int CURRENT_LIMIT = 40;
 
