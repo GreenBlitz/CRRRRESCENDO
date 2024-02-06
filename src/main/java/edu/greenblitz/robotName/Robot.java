@@ -50,12 +50,10 @@ public class Robot extends LoggedRobot {
         Pathfinding.setPathfinder(new LocalADStar());
         CommandScheduler.getInstance().enable();
         initializeLogger();
-        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
-        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
         initializeAutonomousBuilder();
         initializeSubsystems();
         SwerveChassis.getInstance().resetAllEncoders();
-        OI.getInstance();
+        OI.init();
     }
 
     public void initializeSubsystems() {
