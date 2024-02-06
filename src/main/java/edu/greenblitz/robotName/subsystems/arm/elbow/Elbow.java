@@ -68,11 +68,14 @@ public class Elbow extends GBSubsystem {
     }
 
     public void standInPlace() {
-        elbow.moveToAngle(currentAngle);
+        elbow.standInPlace(currentAngle);
     }
 
     public void setCurrentAngle(Rotation2d angle){
         currentAngle = angle;
+    }
+    public Rotation2d getCurrentAngle(){
+        return currentAngle;
     }
 
     public double getVoltage() {
@@ -99,7 +102,7 @@ public class Elbow extends GBSubsystem {
     public Pose3d getPose3D (){
         return new Pose3d(
                 ElbowConstants.ELBOW_POSITION_RELATIVE_TO_ROBOT,
-                new Rotation3d(elbowInputs.position.getRadians() + SimulationElbowConstants.MECHANISM_NAME_TO_ROBOT_TRANSLATION,0, 0)
+                new Rotation3d(elbowInputs.position.getRadians() ,0, 0)//+ SimulationElbowConstants.MECHANISM_NAME_TO_ROBOT_TRANSLATION
         );
     }
 

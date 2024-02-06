@@ -1,10 +1,12 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
+import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
@@ -43,6 +45,10 @@ public class OI {
     }
 
     public void initButtons() {
+        secondJoystick.B.onTrue(new MoveElbowToAngle(ElbowConstants.PresetPositions.SCORE.ANGLE));//90
+        secondJoystick.A.onTrue(new MoveElbowToAngle(ElbowConstants.PresetPositions.SAFE.ANGLE));//0
+        secondJoystick.Y.onTrue(new MoveElbowToAngle(ElbowConstants.PresetPositions.STARTING.ANGLE));//270
+        secondJoystick.X.onTrue(new MoveElbowToAngle(ElbowConstants.PresetPositions.TRANSFER.ANGLE));//180
     }
 
     public void initializeDefaultCommands(){
