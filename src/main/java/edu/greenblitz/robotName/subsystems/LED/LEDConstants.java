@@ -13,7 +13,7 @@ public class LEDConstants {
  
 	public static final Color AMP_MODE_COLOR = Color.kBlue;
  
-	public static final Color SHOOTER_MODE_COLOR = Color.kYellow;
+	public static final Color SPEAKER_MODE_COLOR = Color.kYellow;
  
 	public static final Section ALL_LED = new Section(0, LED_LENGTH);
  

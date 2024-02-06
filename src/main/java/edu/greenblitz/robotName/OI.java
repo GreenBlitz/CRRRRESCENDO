@@ -1,24 +1,12 @@
 package edu.greenblitz.robotName;
 
 
-import edu.greenblitz.robotName.commands.LED.BlinkIfInArm;
-import edu.greenblitz.robotName.commands.LED.BlinkIfInShooter;
-import edu.greenblitz.robotName.commands.LED.Rumble;
+import edu.greenblitz.robotName.commands.LED.UpdateLEDState;
 import edu.greenblitz.robotName.commands.switchMode.SetScoringMode;
-import edu.greenblitz.robotName.subsystems.LED.LED;
-import edu.greenblitz.robotName.subsystems.LED.LEDConstants;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
-import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
-import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
-import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
-import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
-import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
-import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.LED.LED;
 import edu.greenblitz.robotName.utils.ScoringMode;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 
 import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
@@ -65,7 +53,7 @@ public class OI {
 //        Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
 //        Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
 //        Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
-    
+        LED.getInstance().setDefaultCommand(new UpdateLEDState());
     }
 
     public void ledButtons(){
