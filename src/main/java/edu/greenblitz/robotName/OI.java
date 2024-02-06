@@ -45,10 +45,6 @@ public class OI {
     }
 
     public void initButtons() {
-        secondJoystick.B.onTrue(new MoveElbowToAngle(ElbowConstants.PresetPositions.SCORE.ANGLE));//90
-        secondJoystick.A.onTrue(new MoveElbowToAngle(ElbowConstants.PresetPositions.SAFE.ANGLE));//0
-        secondJoystick.Y.onTrue(new MoveElbowToAngle(ElbowConstants.PresetPositions.STARTING.ANGLE));//270
-        secondJoystick.X.onTrue(new MoveElbowToAngle(ElbowConstants.PresetPositions.TRANSFER.ANGLE));//180
     }
 
     public void initializeDefaultCommands(){
