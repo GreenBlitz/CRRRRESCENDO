@@ -7,7 +7,6 @@ import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.arm.elbow.IElbow;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;

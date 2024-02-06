@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName.subsystems.arm.elbow;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.greenblitz.robotName.subsystems.arm.elbow.SimulationElbow.SimulationElbowConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -87,8 +86,8 @@ public class Elbow extends GBSubsystem {
         return elbowInputs.position;
     }
 
-    public boolean isAtAngle(Rotation2d targetHeight) {
-        return Math.abs(targetHeight.getRadians() - getAngle().getRadians()) <= ElbowConstants.TOLERANCE;
+    public boolean isAtAngle(Rotation2d targetAngle) {
+        return Math.abs(targetAngle.getRadians() - getAngle().getRadians()) <= ElbowConstants.TOLERANCE;
     }
 
     public boolean isInShooterCollisionRange() {

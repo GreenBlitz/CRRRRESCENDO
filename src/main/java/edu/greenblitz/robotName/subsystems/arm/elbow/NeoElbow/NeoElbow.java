@@ -11,7 +11,6 @@ import edu.wpi.first.math.geometry.Rotation2d;
 
 import static edu.greenblitz.robotName.subsystems.arm.elbow.NeoElbow.NeoElbowConstants.ELBOW_FEEDFORWARD;
 
-
 public class NeoElbow implements IElbow {
 
     private GBSparkMax motor;

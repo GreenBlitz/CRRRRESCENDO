@@ -7,7 +7,6 @@ import edu.greenblitz.robotName.utils.PIDObject;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.controller.ArmFeedforward;
 
-
 public class NeoElbowConstants {
 
     public static final int MOTOR_ID = 1;
