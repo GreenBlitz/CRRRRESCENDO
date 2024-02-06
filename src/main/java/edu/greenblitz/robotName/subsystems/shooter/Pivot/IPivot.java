@@ -15,7 +15,5 @@ public interface IPivot {
 
     void moveToAngle(Rotation2d targetAngle);
 
-    void standInPlace(Rotation2d targetAngle);
-
     void updateInputs(PivotInputsAutoLogged inputs);
 }

@@ -31,11 +31,6 @@ public class ReplayPivot implements IPivot{
     }
 
     @Override
-    public void standInPlace(Rotation2d targetAngle) {
-
-    }
-
-    @Override
     public void updateInputs(PivotInputsAutoLogged inputs) {
 
     }
