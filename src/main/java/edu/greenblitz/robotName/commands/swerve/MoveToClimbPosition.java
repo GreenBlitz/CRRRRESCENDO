@@ -8,6 +8,6 @@ import edu.wpi.first.wpilibj.DriverStation;
 public class MoveToClimbPosition extends MoveToPosition {
 
     public MoveToClimbPosition() {
-        super(FMSUtils.getAlliance() == DriverStation.Alliance.Blue ? Field.ScoringPositions.RED_CLIMB_POSITION : Field.ScoringPositions.BLUE_CLIMB_POSITION);
+        super(FMSUtils.getAlliance() == DriverStation.Alliance.Red ? Field.ScoringPositions.RED_CLIMB_POSITION : Field.ScoringPositions.BLUE_CLIMB_POSITION);
     }
 }
