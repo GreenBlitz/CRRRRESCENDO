@@ -5,21 +5,17 @@ import edu.greenblitz.robotName.subsystems.LED.LEDConstants;
 import edu.greenblitz.robotName.utils.GBCommand;
 import edu.wpi.first.wpilibj.Timer;
 
-public class BlinkIfInArm extends GBCommand {
-	private Timer timer;
-	private double endTime;
-	
+public class  BlinkIfInArm extends GBCommand {
 	private LED led;
 	
 	public BlinkIfInArm() {
-		endTime = LEDConstants.BLINKING_TIME;
 		led = LED.getInstance();
 		require(led);
 	}
 	
 	@Override
 	public void initialize() {
-		led.startTimer();
+		led.restartTimer();
 	}
 	
 	@Override
@@ -29,7 +25,7 @@ public class BlinkIfInArm extends GBCommand {
 	
 	@Override
 	public boolean isFinished() {
-		return led.getTimerTime() > endTime;
+		return led.getTimerTime() > LEDConstants.BLINKING_TIME;
 	}
 	
 	@Override

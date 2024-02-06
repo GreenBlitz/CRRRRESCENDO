@@ -21,7 +21,7 @@ public class LED extends GBSubsystem {
 	private AddressableLED addressableLED;
 	private AddressableLEDBuffer addressableLEDBuffer;
 	private Timer LEDBlinkTimer;
-	private boolean noteOut;
+	private boolean didNoteExitRobot;
 	private boolean noteInRobot;
 	
 	private LED() {
@@ -30,7 +30,7 @@ public class LED extends GBSubsystem {
 		this.addressableLED.setLength(LED_LENGTH);
 		this.addressableLED.start();
 		LEDBlinkTimer = new Timer();
-		noteOut = false;
+		didNoteExitRobot = false;
 		noteInRobot = false;
 	}
 	
@@ -45,14 +45,13 @@ public class LED extends GBSubsystem {
 		}
 	}
 	
-	public void startTimer() {
+	public void restartTimer() {
 		LEDBlinkTimer.restart();
 	}
 	
 	public double getTimerTime() {
 		return LEDBlinkTimer.get();
 	}
-	
 	
 	public void setLEDColor(Color color, Section section) {
 		setLEDColor(color, section.startIndex(), section.endIndex());
@@ -135,16 +134,15 @@ public class LED extends GBSubsystem {
 				&& !(Intake.getInstance().getEntranceBeamBreakerValue())
 				&& !(Funnel.getInstance().isObjectIn())
 				&& !(Roller.getInstance().isObjectInside())) {
-			noteOut = true;
-		}
-		else{
-			noteOut = false;
+			didNoteExitRobot = true;
+		} else {
+			didNoteExitRobot = false;
 		}
 	}
 	
 	public void rumbleIfNoteOut() {
 		if (noteInRobot) {
-			if (noteOut) {
+			if (didNoteExitRobot) {
 				new Rumble().schedule();
 				noteInRobot = false;
 			}
