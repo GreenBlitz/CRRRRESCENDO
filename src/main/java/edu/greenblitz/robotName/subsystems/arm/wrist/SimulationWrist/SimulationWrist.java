@@ -72,12 +72,7 @@ public class SimulationWrist implements IWrist {
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
         controller.setSetpoint(targetAngle.getRadians());
-        setVoltage(controller.calculate(lastInputs.position));
-    }
-
-    @Override
-    public void standInPlace() {
-        setVoltage(SimulationWristConstants.SIMULATION_FEED_FORWARD.calculate(lastInputs.position,0));
+        setVoltage(controller.calculate(lastInputs.position.getRadians()));
     }
 
     @Override
@@ -86,7 +81,7 @@ public class SimulationWrist implements IWrist {
 
         inputs.appliedOutput = appliedVoltage;
         inputs.outputCurrent = wristSimulation.getCurrentDrawAmps();
-        inputs.position = wristSimulation.getAngleRads();
+        inputs.position = Rotation2d.fromRadians(wristSimulation.getAngleRads());
         inputs.velocity = wristSimulation.getVelocityRadPerSec();
         inputs.absoluteEncoderPosition = wristSimulation.getAngleRads();
         inputs.temperature = 0;
