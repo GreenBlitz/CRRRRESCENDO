@@ -2,8 +2,8 @@ package edu.greenblitz.robotName.commands.arm.roller;
 
 public class RunRollerUntilNoteInside extends RollerCommand{
     @Override
-    public void initialize() {
-        roller.rollOut();
+    public void execute() {
+        roller.rollIn();
     }
 
     @Override
