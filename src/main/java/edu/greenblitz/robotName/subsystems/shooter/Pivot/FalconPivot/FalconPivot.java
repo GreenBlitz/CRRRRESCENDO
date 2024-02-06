@@ -46,20 +46,22 @@ public class FalconPivot implements IPivot {
 
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
-        motor.setControl(new MotionMagicDutyCycle(
-                targetAngle.getRotations() / PivotConstants.RELATIVE_POSITION_CONVERSION_FACTOR,
-                true,
-                PIVOT_FEED_FORWARD.calculate(targetAngle.getRadians(), 0),
-                MOTION_MAGIC_PID_SLOT,
-                true,
-                true,
-                true
+        motor.setControl(
+                new MotionMagicDutyCycle(
+                    targetAngle.getRotations() / PivotConstants.RELATIVE_POSITION_CONVERSION_FACTOR,
+                    true,
+                    PIVOT_FEED_FORWARD.calculate(targetAngle.getRadians(), 0),
+                    MOTION_MAGIC_PID_SLOT,
+                    true,
+                    true,
+                    true
         ));
     }
 
     @Override
     public void standInPlace(Rotation2d targetAngle) {
-        motor.setControl(new PositionVoltage(
+        motor.setControl(
+                new PositionVoltage(
                         targetAngle.getRotations(),
                         0.0,
                         true,

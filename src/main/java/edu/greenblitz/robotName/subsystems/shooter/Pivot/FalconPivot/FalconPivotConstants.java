@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot;
 
 import com.ctre.phoenix6.configs.*;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
 import edu.wpi.first.math.controller.ArmFeedforward;
 
 
@@ -51,9 +52,9 @@ public class FalconPivotConstants {
     public static final SoftwareLimitSwitchConfigs SOFTWARE_LIMIT_SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();
     static {
         SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitEnable = true;
-        SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitThreshold = 1;
+        SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitThreshold = PivotConstants.FORWARD_ANGLE_LIMIT.getRotations();
         SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitEnable = true;
-        SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitThreshold = 0;
+        SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitThreshold = PivotConstants.BACKWARD_ANGLE_LIMIT.getRotations();
     }
 
     public static final TalonFXConfiguration TALON_FX_CONFIGURATION = new TalonFXConfiguration();

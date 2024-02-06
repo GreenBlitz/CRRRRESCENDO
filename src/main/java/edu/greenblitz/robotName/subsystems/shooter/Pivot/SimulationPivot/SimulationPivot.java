@@ -19,7 +19,7 @@ import static edu.greenblitz.robotName.subsystems.shooter.Pivot.SimulationPivot.
 
 public class SimulationPivot implements IPivot {
 
-    SingleJointedArmSim pivotSimulation;
+    private SingleJointedArmSim pivotSimulation;
 
     private double appliedVoltage;
 
