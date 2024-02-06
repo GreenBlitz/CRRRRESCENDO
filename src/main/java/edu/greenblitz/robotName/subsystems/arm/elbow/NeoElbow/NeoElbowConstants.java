@@ -33,7 +33,7 @@ public class NeoElbowConstants {
     public static final GBSparkMax.SparkMaxConfObject ELBOW_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
             .withPID(PID)
             .withIdleMode(CANSparkMax.IdleMode.kBrake)
-            .withRampRate(RobotConstants.General.RAMP_RATE_VAL)
+            .withRampRate(RobotConstants.General.RAMP_RATE_VALUE)
             .withPositionConversionFactor(ElbowConstants.GEAR_RATIO)
             .withVelocityConversionFactor(ElbowConstants.GEAR_RATIO)
             .withCurrentLimit(ElbowConstants.CURRENT_LIMIT);
