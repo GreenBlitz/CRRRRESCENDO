@@ -69,7 +69,7 @@ public class NeoElbow implements IElbow {
     public void updateInputs(ElbowInputsAutoLogged inputs) {
         inputs.appliedOutput = motor.getAppliedOutput() *  Battery.getInstance().getCurrentVoltage();
         inputs.outputCurrent = motor.getOutputCurrent();
-        inputs.position = Rotation2d.fromRadians(motor.getEncoder().getPosition());
+        inputs.position = Rotation2d.fromRotations(motor.getEncoder().getPosition());
         inputs.velocity = motor.getEncoder().getVelocity();
         inputs.absoluteEncoderPosition = motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition();
         inputs.temperature = motor.getMotorTemperature();
