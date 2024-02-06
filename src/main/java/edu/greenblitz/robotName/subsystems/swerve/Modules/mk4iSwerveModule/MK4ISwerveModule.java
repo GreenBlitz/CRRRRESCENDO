@@ -114,16 +114,16 @@ public class MK4ISwerveModule implements ISwerveModule {
             linearVelocityStatusSignal = linearMotor.getVelocity().refresh();
             linearPositionStatusSignal = linearMotor.getPosition().refresh();
             linearAccelerationStatusSignal = linearMotor.getAcceleration().refresh();
-            angularVelocityStatusSignal = linearMotor.getVelocity().refresh();
-            angularPositionStatusSignal = linearMotor.getPosition().refresh();
-            angularAccelerationStatusSignal = linearMotor.getAcceleration().refresh();
+            angularVelocityStatusSignal = angularMotor.getVelocity().refresh();
+            angularPositionStatusSignal = angularMotor.getPosition().refresh();
+            angularAccelerationStatusSignal = angularMotor.getAcceleration().refresh();
         }else{
             linearVelocityStatusSignal = linearMotor.getVelocity();
             linearPositionStatusSignal = linearMotor.getPosition();
             linearAccelerationStatusSignal = linearMotor.getAcceleration();
-            angularVelocityStatusSignal = linearMotor.getVelocity();
-            angularPositionStatusSignal = linearMotor.getPosition();
-            angularAccelerationStatusSignal = linearMotor.getAcceleration();
+            angularVelocityStatusSignal = angularMotor.getVelocity();
+            angularPositionStatusSignal = angularMotor.getPosition();
+            angularAccelerationStatusSignal = angularMotor.getAcceleration();
         }
     }
     @Override
@@ -131,8 +131,8 @@ public class MK4ISwerveModule implements ISwerveModule {
         updateStatusSignals(true);
 
 
-        inputs.linearVelocity = BaseStatusSignal.getLatencyCompensatedValue(linearMotor.getVelocity(), linearMotor.getAcceleration()) / MK4iSwerveConstants.ANGULAR_GEAR_RATIO;
-        inputs.angularVelocity = BaseStatusSignal.getLatencyCompensatedValue(angularMotor.getVelocity(), angularMotor.getAcceleration()) / MK4iSwerveConstants.ANGULAR_GEAR_RATIO;
+        inputs.linearVelocity = BaseStatusSignal.getLatencyCompensatedValue(linearVelocityStatusSignal, linearAccelerationStatusSignal) / MK4iSwerveConstants.ANGULAR_GEAR_RATIO;
+        inputs.angularVelocity = BaseStatusSignal.getLatencyCompensatedValue(angularVelocityStatusSignal, angularAccelerationStatusSignal) / MK4iSwerveConstants.ANGULAR_GEAR_RATIO;
 
         inputs.linearVoltage = linearMotor.getSupplyVoltage().getValue();
         inputs.angularVoltage = angularMotor.getSupplyVoltage().getValue();
@@ -141,7 +141,7 @@ public class MK4ISwerveModule implements ISwerveModule {
         inputs.angularCurrent = angularMotor.getStatorCurrent().getValue();
         
         inputs.linearMetersPassed = BaseStatusSignal.getLatencyCompensatedValue(linearPositionStatusSignal, linearVelocityStatusSignal);
-        inputs.angularPositionRadians = Conversions.MK4IConversions.convertRevolutionsToRadians(angularMotor.getPosition().getValue());
+        inputs.angularPositionRadians = Conversions.MK4IConversions.convertRevolutionsToRadians(angularPositionStatusSignal.getValue());
 
         inputs.isAbsoluteEncoderConnected = canCoder.getVersion().getValue() != 0;
 
