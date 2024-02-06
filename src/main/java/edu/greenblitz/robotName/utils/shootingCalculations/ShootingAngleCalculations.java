@@ -9,16 +9,19 @@ import edu.wpi.first.math.geometry.Translation3d;
 
 public class ShootingAngleCalculations {
 
-    public static Rotation2d getShootingAngle(Translation3d position) {
-        Translation2d relativeSpeakerPosition = getRelativePositionToMiddleOfSpeaker(position);
+    public static Rotation2d getShootingAngle(Translation3d shooterPosition) {
+        Translation2d relativeSpeakerPosition = getPositionOfSpeakerRelativeToShooter(shooterPosition);
         double targetAngle = Math.atan(relativeSpeakerPosition.getY() / relativeSpeakerPosition.getX());
         return new Rotation2d(-targetAngle);
     }
 
-    public static Translation2d getRelativePositionToMiddleOfSpeaker(Translation3d position) {
-        Translation3d Speaker = FieldConstants.MIDDLE_OF_SPEAKER_POSITION;
-        double x = GBMath.distance(position, new Translation3d(Speaker.getX(), Speaker.getY(), position.getZ()));
-        double y = Speaker.getZ() - position.getZ();
-        return new Translation2d(x, y);
+    public static Translation2d getPositionOfSpeakerRelativeToShooter(Translation3d shooterPosition) {
+        Translation3d speaker = FieldConstants.MIDDLE_OF_SPEAKER_POSITION;
+
+        double distanceInMeters = GBMath.distance(shooterPosition, new Translation3d(speaker.getX(), speaker.getY(), shooterPosition.getZ()));
+        double differenceHeightInMeters = speaker.getZ() - shooterPosition.getZ();
+
+        Translation2d relativeSpeakerPosition = new Translation2d(distanceInMeters, differenceHeightInMeters);
+        return relativeSpeakerPosition;
     }
 }

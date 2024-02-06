@@ -419,10 +419,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         return isAtAngle(goalPose.getRotation()) && isAtX && isAtY;
     }
 
-    public boolean isAtAngle(Rotation2d goalAngle) {
-        Rotation2d angDifference = (goalAngle.minus(goalAngle));
-        return angDifference.getRadians() <= ROTATION_TOLERANCE
-                || (Math.PI * 2) - angDifference.getRadians() <= ROTATION_TOLERANCE;
+    public boolean isAtAngle(Rotation2d targetAngle) {
+        Rotation2d angleDifference = (targetAngle.minus(targetAngle));
+        return angleDifference.getRadians() <= ROTATION_TOLERANCE
+                || (Math.PI * 2) - angleDifference.getRadians() <= ROTATION_TOLERANCE;
     }
 
     public Sendable getField() {

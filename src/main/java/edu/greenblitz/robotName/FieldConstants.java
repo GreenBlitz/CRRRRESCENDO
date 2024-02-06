@@ -2,6 +2,7 @@ package edu.greenblitz.robotName;
 
 
 import edu.greenblitz.robotName.utils.FMSUtils;
+import edu.greenblitz.robotName.utils.shootingCalculations.Bound;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
@@ -28,31 +29,31 @@ public class FieldConstants {
 
     public static class FieldZones {
 
-        public static final List<Pair<Translation2d, Translation2d>> RESTRICTED_BOUNDS = new ArrayList<>();
+        public static final List<Bound> RESTRICTED_BOUNDS = new ArrayList<>();
 
-        public static final Pair<Translation2d, Translation2d> RED_STAGE_ZONE = new Pair<>(
+        public static final Bound RED_STAGE_ZONE = new Bound(
                 new Translation2d(13.8, 3),
                 new Translation2d(12.4, 4.95)
         );
 
-        public static final Pair<Translation2d, Translation2d> BLUE_STAGE_ZONE = new Pair<>(
+        public static final Bound BLUE_STAGE_ZONE = new Bound(
                 new Translation2d(13.8, 3),
                 new Translation2d(12.4, 4.95)
         );
 
-        public static final Pair<Translation2d, Translation2d> RED_FEEDER_ZONE = new Pair<>(
+        public static final Bound RED_FEEDER_ZONE = new Bound(
                 new Translation2d(12.5, 7.4),
                 new Translation2d(15, 15)
         );
 
-        public static final Pair<Translation2d, Translation2d> BLUE_FEEDER_ZONE = new Pair<>(
+        public static final Bound BLUE_FEEDER_ZONE = new Bound(
                 new Translation2d(12.5, 7.4),
                 new Translation2d(15, 15)
         );
 
-        public static final Pair<Translation2d, Translation2d> ENEMY_FEEDER_ZONE = FMSUtils.isRedAlliance() ? BLUE_FEEDER_ZONE : RED_FEEDER_ZONE;
+        public static final Bound ENEMY_FEEDER_ZONE = FMSUtils.isRedAlliance() ? BLUE_FEEDER_ZONE : RED_FEEDER_ZONE;
 
-        public static final Pair<Translation2d, Translation2d> STAGE_ZONE = FMSUtils.isRedAlliance() ? RED_STAGE_ZONE : BLUE_STAGE_ZONE;
+        public static final Bound STAGE_ZONE = FMSUtils.isRedAlliance() ? RED_STAGE_ZONE : BLUE_STAGE_ZONE;
 
         static {
             RESTRICTED_BOUNDS.add(STAGE_ZONE);

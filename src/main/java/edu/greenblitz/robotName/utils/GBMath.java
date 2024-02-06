@@ -47,12 +47,12 @@ public class GBMath {
 	 *
 	 * @param variable    The variable that is being sigmoided.
 	 * @param center      The center of the sigmoid, at this point the value of the function will be equal to 0.5.
-	 * @param squishyness How quickly the sigmoid function rises.
+	 * @param squishiness How quickly the sigmoid function rises.
 	 * @param minHeight   The minimum height of the sigmoid function.
 	 * @return The output of the sigmoid.
 	 */
-	public static double sigmoid(double variable, double center, double squishyness, double minHeight) {
-		return 1 + 1 / Math.exp(squishyness * (center - variable)) + minHeight;
+	public static double sigmoid(double variable, double center, double squishiness, double minHeight) {
+		return 1 + 1 / Math.exp(squishiness * (center - variable)) + minHeight;
 	}
 
 	/**

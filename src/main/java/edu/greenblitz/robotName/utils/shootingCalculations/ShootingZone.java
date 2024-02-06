@@ -3,7 +3,6 @@ package edu.greenblitz.robotName.utils.shootingCalculations;
 
 import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 import edu.greenblitz.robotName.utils.GBCircle;
-import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 
@@ -12,24 +11,24 @@ import java.util.List;
 
 public class ShootingZone extends GBCircle {
 
-    private List<Pair<Translation2d, Translation2d>> restrictedBounds; //first is the lower bound, second is the upper
+    private List<Bound> restrictedBounds;
 
     public ShootingZone(Translation2d position, double radius) {
         super(position, radius);
         restrictedBounds = new ArrayList<>();
     }
 
-    public ShootingZone(Translation2d position, double radius, List<Pair<Translation2d, Translation2d>> restrictedBounds) {
+    public ShootingZone(Translation2d position, double radius, List<Bound> restrictedBounds) {
         super(position, radius);
         this.restrictedBounds = restrictedBounds;
     }
 
-    public void addBound(Pair<Translation2d, Translation2d> bound) {
+    public void addBound(Bound bound) {
 
         restrictedBounds.add(bound);
     }
 
-    public void setRestrictedBounds(List<Pair<Translation2d, Translation2d>> restrictedBounds) {
+    public void setRestrictedBounds(List<Bound> restrictedBounds) {
         this.restrictedBounds = restrictedBounds;
     }
 
@@ -57,9 +56,9 @@ public class ShootingZone extends GBCircle {
     @Override
     public Translation2d getClosestCirclePosition(Translation2d position) {
         Translation2d targetPosition = super.getClosestCirclePosition(position);
-        for (Pair<Translation2d, Translation2d> bound : restrictedBounds) {
-            Translation2d upperLimit = bound.getSecond();
-            Translation2d lowerLimit = bound.getFirst();
+        for (Bound bound : restrictedBounds) {
+            Translation2d upperLimit = bound.getUpperLimit();
+            Translation2d lowerLimit = bound.getLowerLimit();
             if (isPositionInBound(targetPosition, lowerLimit, upperLimit)) {
                 return getClosestLimitToPosition(upperLimit, lowerLimit, targetPosition);
             }
