@@ -28,7 +28,9 @@ public class SimulationGyro implements IAngleMeasurementGyro {
     public void updateInputs(GyroInputsAutoLogged inputs) {
         inputs.roll = 0;
         inputs.pitch = 0;
-        inputs.yaw += SwerveChassis.getInstance().getChassisSpeeds().omegaRadiansPerSecond * RobotConstants.SimulationConstants.TIME_STEP;
+        inputs.yaw += (SwerveChassis.getInstance().getChassisSpeeds().omegaRadiansPerSecond * RobotConstants.SimulationConstants.TIME_STEP);
+
+
 
         lastInputs = inputs;
     }

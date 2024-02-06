@@ -6,10 +6,12 @@ import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.ISwerveModule;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModuleInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
+import edu.greenblitz.robotName.subsystems.swerve.Modules.mk4iSwerveModule.MK4iSwerveConstants;
 import edu.greenblitz.robotName.utils.Conversions;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.system.plant.DCMotor;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import org.littletonrobotics.junction.Logger;
 
@@ -45,15 +47,15 @@ public class SimulationSwerveModule implements ISwerveModule {
 
     @Override
     public void setLinearVelocity(double speed) {
-        final double power = speed / ChassisConstants.MAX_VELOCITY;
-        final double voltage = power * RobotConstants.SimulationConstants.BATTERY_VOLTAGE;
+        double power = speed / ChassisConstants.MAX_VELOCITY;
+        double voltage = power * RobotConstants.SimulationConstants.BATTERY_VOLTAGE;
         setLinearVoltage(voltage);
     }
 
     @Override
     public void rotateToAngle(Rotation2d angle) {
         angularController.setSetpoint(angle.getRadians());
-        final double voltage = angularController.calculate(lastInputs.angularPositionRadians);
+        double voltage = angularController.calculate(lastInputs.angularPositionRadians);
         setAngularVoltage(voltage);
     }
 
@@ -88,8 +90,8 @@ public class SimulationSwerveModule implements ISwerveModule {
         inputs.linearCurrent = linearMotor.getCurrentDrawAmps();
         inputs.angularCurrent = angularMotor.getCurrentDrawAmps();
 
-        inputs.linearMetersPassed = Conversions.MK4IConversions.convertRevolutionToMeters(linearMotor.getAngularPositionRotations());
-        inputs.angularPositionRadians = angularMotor.getAngularPositionRad();
+        inputs.linearMetersPassed =  linearMotor.getAngularPositionRad()* MK4iSwerveConstants.WHEEL_RADIUS;
+        inputs.angularPositionRadians = Math.IEEEremainder(angularMotor.getAngularPositionRad(), 2 * Math.PI);
 
         inputs.absoluteEncoderPosition = inputs.angularPositionRadians;
         inputs.isAbsoluteEncoderConnected = true;

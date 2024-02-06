@@ -1,5 +1,4 @@
 package edu.greenblitz.robotName.subsystems.swerve.Chassis;
-
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.VisionConstants;
@@ -9,10 +8,7 @@ import edu.greenblitz.robotName.subsystems.Gyros.GyroInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.Gyros.IAngleMeasurementGyro;
 import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.Photonvision;
-import edu.greenblitz.robotName.subsystems.swerve.Modules.ISwerveModule;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModule;
-import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModuleFactory;
-import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModuleInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.mk4iSwerveModule.MK4iSwerveConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.greenblitz.robotName.utils.RoborioUtils;
@@ -31,9 +27,7 @@ import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.littletonrobotics.junction.Logger;
 import org.photonvision.EstimatedRobotPose;
-
 import java.util.Optional;
-
 import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.TIME_STEP;
 import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
 import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.FAST_DISCRETION_CONSTANT;
@@ -250,14 +244,12 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     }
 
     public void moveByChassisSpeeds(ChassisSpeeds fieldRelativeSpeeds, Rotation2d currentAng) {
-        ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
-                fieldRelativeSpeeds,
+        moveByChassisSpeeds(
+                fieldRelativeSpeeds.vxMetersPerSecond,
+                fieldRelativeSpeeds.vyMetersPerSecond,
+                fieldRelativeSpeeds.omegaRadiansPerSecond,
                 currentAng
         );
-        chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
-        SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
-        SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
-        setModuleStates(desaturatedStates);
     }
 
     /**
@@ -273,6 +265,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         }
         SwerveModuleState[] desaturatedStates = new SwerveModuleState[states.length];
         for (int i = 0; i < states.length; i++) {
+            desaturatedStates[i] = new SwerveModuleState(states[i].speedMetersPerSecond / desaturationFactor, states[i].angle);
             desaturatedStates[i] = new SwerveModuleState(states[i].speedMetersPerSecond / desaturationFactor, states[i].angle);
         }
         return desaturatedStates;
