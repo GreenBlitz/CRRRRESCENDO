@@ -8,4 +8,11 @@ public class PivotDefaultCommand extends PivotCommand{
 	public void initialize() {
 		pivot.standInPlace();
 	}
+	
+	@Override
+	public void execute() {
+		if (Robot.isSimulation()) {
+			pivot.standInPlace();
+		}
+	}
 }

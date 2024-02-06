@@ -1,7 +1,5 @@
 package edu.greenblitz.robotName;
 
-import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
-import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
@@ -9,7 +7,6 @@ import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.Battery;
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
@@ -46,9 +43,6 @@ public class OI {
     }
 
     public void initButtons() {
-        secondJoystick.A.onTrue(new MovePivotToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE));
-        secondJoystick.B.onTrue(new MovePivotToAngle(PivotConstants.PresetPositions.STARTING.ANGLE));
-        secondJoystick.X.onTrue(new MovePivotToAngle(PivotConstants.PresetPositions.SAFE.ANGLE));
     }
 
     public void initializeDefaultCommands(){
