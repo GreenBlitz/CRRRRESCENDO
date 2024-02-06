@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
@@ -45,6 +46,9 @@ public class OI {
     }
 
     public void initButtons() {
+        secondJoystick.A.onTrue(new MovePivotToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE));
+        secondJoystick.B.onTrue(new MovePivotToAngle(PivotConstants.PresetPositions.STARTING.ANGLE));
+        secondJoystick.X.onTrue(new MovePivotToAngle(PivotConstants.PresetPositions.SAFE.ANGLE));
     }
 
     public void initializeDefaultCommands(){

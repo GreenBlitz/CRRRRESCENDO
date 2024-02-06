@@ -93,7 +93,7 @@ public class Pivot extends GBSubsystem {
 	public Pose3d getSimulationPivotPosition3d() {
 		return new Pose3d(
 				PivotConstants.ROBOT_RELATIVE_PIVOT_POSITION,
-				new Rotation3d(getAngle().getRadians() - SimulationPivotConstants.SIMULATION_CONVERSION_PIVOT_ANGLE.getRadians(), 0, 0)
+				new Rotation3d(-getAngle().getRadians(), 0, 0)
 		);
 	}
 }
