@@ -118,8 +118,11 @@ public class Wrist extends GBSubsystem {
 		);
 	}
 	
-	public Rotation2d getAngleRelativeToGround() {
-		double elbowAngle = Elbow.getInstance().getAngle().getRadians();
-		return new Rotation2d(elbowAngle - wristInputs.position.getRadians());
+	public static Rotation2d getAngleRelativeToGround(Rotation2d elbowRelativeAngle) {
+		return Elbow.getInstance().getAngle().minus(elbowRelativeAngle);
 	}
+    
+    public Rotation2d getAngleRelativeToGround() {
+        return getAngleRelativeToGround(wristInputs.position);
+    }
 }

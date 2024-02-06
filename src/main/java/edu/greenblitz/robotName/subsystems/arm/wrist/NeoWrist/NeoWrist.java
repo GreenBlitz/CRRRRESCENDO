@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.SparkMaxAbsoluteEncoder;
 import com.revrobotics.SparkMaxLimitSwitch;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.greenblitz.robotName.subsystems.arm.wrist.IWrist;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristInputsAutoLogged;
@@ -65,7 +66,7 @@ public class NeoWrist implements IWrist {
                 targetAngle.getRadians(),
                 CANSparkMax.ControlType.kPosition,
                 NeoWristConstants.PID_SLOT,
-                NeoWristConstants.WRIST_FEED_FORWARD.calculate(targetAngle.getRadians(), 0)//TODO ADD THE RELATE TP GROUND
+                NeoWristConstants.WRIST_FEED_FORWARD.calculate(Wrist.getAngleRelativeToGround(targetAngle).getRadians(), 0)
         );
     }
 
