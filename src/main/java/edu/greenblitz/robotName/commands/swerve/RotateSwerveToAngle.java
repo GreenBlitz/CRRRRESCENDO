@@ -6,11 +6,11 @@ import edu.wpi.first.math.geometry.Rotation2d;
 
 import java.util.function.Supplier;
 
-public class RotateToAngle extends SwerveCommand{
+public class RotateSwerveToAngle extends SwerveCommand{
 
     private Supplier<Rotation2d> angleSetPoint;
 
-    public RotateToAngle(Supplier<Rotation2d> angleSetPoint){
+    public RotateSwerveToAngle(Supplier<Rotation2d> angleSetPoint){
         super();
         this.angleSetPoint = angleSetPoint;
     }
