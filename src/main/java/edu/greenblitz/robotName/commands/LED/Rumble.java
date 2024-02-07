@@ -14,8 +14,7 @@ public class Rumble extends GBCommand {
 	
 	@Override
 	public void initialize() {
-		timer.reset();
-		timer.start();
+		timer.restart();
 	}
 	
 	@Override
