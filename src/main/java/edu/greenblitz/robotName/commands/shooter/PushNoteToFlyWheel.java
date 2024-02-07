@@ -13,7 +13,7 @@ public class PushNoteToFlyWheel extends SequentialCommandGroup {
     public PushNoteToFlyWheel() {
         super(
                 new ParallelRaceGroup(
-                        new WaitCommand(FlyWheelConstants.DELAY_SECONDS_TILL_EXIT),
+                        new WaitCommand(FlyWheelConstants.DELAY_SECONDS_UNTIL_EXIT),
                         new RunFunnelByPower(FunnelConstants.ROLL_POWER)
                 ),
                 new StopFlyWheel()

@@ -28,21 +28,6 @@ public class MoveToPosition extends ProxyCommand {
                         ChassisConstants.CONSTRAINTS
                 )
         );
-        moveToFoundPose.initialize();
     }
 
-    @Override
-    public void execute() {
-        moveToFoundPose.execute();
-    }
-
-    @Override
-    public boolean isFinished() {
-        return moveToFoundPose.isFinished();
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        moveToFoundPose.end(interrupted);
-    }
 }

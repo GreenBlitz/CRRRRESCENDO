@@ -1,10 +1,8 @@
 package edu.greenblitz.robotName.commands.swerve;
 
-import edu.greenblitz.robotName.shootingStateService.ShootingState;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.wpi.first.math.geometry.Rotation2d;
-import org.littletonrobotics.junction.Logger;
 
 import java.util.function.Supplier;
 
