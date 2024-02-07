@@ -20,19 +20,16 @@ public class MovePivotToAngle extends PivotCommand {
 	@Override
 	public void initialize() {
 		pivot.moveToAngle(targetAngle.get());
-		System.out.println(targetAngle.get());
 	}
 
 	@Override
 	public void execute() {
-		System.out.println(targetAngle.get());
 		if (Robot.isSimulation()) {
 			pivot.moveToAngle(targetAngle.get());
 		}
 	}
 
 	public boolean isFinished() {
-		System.out.println(pivot.isAtAngle(targetAngle.get()));
 		return pivot.isAtAngle(targetAngle.get());
 	}
 

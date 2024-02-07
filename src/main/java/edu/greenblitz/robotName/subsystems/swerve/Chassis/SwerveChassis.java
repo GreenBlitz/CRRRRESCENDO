@@ -50,7 +50,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     private SwerveDrivePoseEstimator poseEstimator;
     private Field2d field = new Field2d();
     public static final double TRANSLATION_TOLERANCE = 0.05;
-    public static final double ROTATION_TOLERANCE = 0.1;
+    public static final Rotation2d ROTATION_TOLERANCE = Rotation2d.fromDegrees(10);
     private boolean doVision;
     public final double CURRENT_TOLERANCE = 0.5;
 
@@ -171,7 +171,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     }
 
     public boolean isAtAngle(Rotation2d angle) {
-        return Math.abs(getChassisAngle().getRadians() - angle.getRadians()) <= ROTATION_TOLERANCE;
+        return Math.abs(getChassisAngle().getRadians() - angle.getRadians()) <= ROTATION_TOLERANCE.getRadians();
     }
 
     public void resetChassisPose() {
@@ -388,8 +388,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         boolean isAtY = Math.abs(goalPose.getY() - robotPose.getY()) <= TRANSLATION_TOLERANCE;
 
         Rotation2d angDifference = (goalPose.getRotation().minus(robotPose.getRotation()));
-        boolean isAtAngle = angDifference.getRadians() <= ROTATION_TOLERANCE
-                || (Math.PI * 2) - angDifference.getRadians() <= ROTATION_TOLERANCE;
+        boolean isAtAngle = angDifference.getRadians() <= ROTATION_TOLERANCE.getRadians()
+                || (Math.PI * 2) - angDifference.getRadians() <= ROTATION_TOLERANCE.getRadians();
 
         return isAtAngle && isAtX && isAtY;
     }
