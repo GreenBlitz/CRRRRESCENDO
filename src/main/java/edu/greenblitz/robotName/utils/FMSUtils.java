@@ -5,11 +5,9 @@ import org.littletonrobotics.junction.Logger;
 
 public class FMSUtils {
 
-
     private static final DriverStation.Alliance DEFAULT_ALLIANCE = DriverStation.Alliance.Blue;
 
     public static DriverStation.Alliance getAlliance() {
-
         if (DriverStation.getAlliance().isPresent()) {
             Logger.recordOutput("FMS/Alliance", DriverStation.getAlliance().get().name());
             return DriverStation.getAlliance().get();
@@ -18,4 +16,7 @@ public class FMSUtils {
         return DEFAULT_ALLIANCE;
     }
 
+    public static boolean isRedAlliance() {
+        return getAlliance() == DriverStation.Alliance.Red;
+    }
 }

@@ -1,9 +1,10 @@
-package edu.greenblitz.robotName.commands.shooter;
+package edu.greenblitz.robotName.commands.shooter.flyWheel;
 
-public class ShootByPower extends FlyWheelCommand {
+public class RunFlyWheelByPower extends FlyWheelCommand {
 
     private double power;
-    public ShootByPower (double power){
+
+    public RunFlyWheelByPower(double power) {
         this.power = power;
     }
 
@@ -14,6 +15,6 @@ public class ShootByPower extends FlyWheelCommand {
 
     @Override
     public void end(boolean interrupted) {
-        flyWheel.setPower(0);
+        flyWheel.stop();
     }
 }

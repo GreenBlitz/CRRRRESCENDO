@@ -41,4 +41,9 @@ public class PivotConstants {
 
     public static final Rotation2d TOLERANCE = Rotation2d.fromDegrees(0.5);
 
+    public static final double kS = 1;
+
+    public static final double kV = 1;
+
+    public static final double kA = 1;
 }
