@@ -6,13 +6,13 @@ public class ElbowDefaultCommand extends ElbowCommand {
 
     @Override
     public void initialize() {
-       elbow.standInPlace();
+       elbow.standInPlaceForDefault();
     }
 
     @Override
     public void execute() {
         if (Robot.isSimulation()) {
-            elbow.standInPlace();
+            elbow.standInPlaceForDefault();
         }
     }
 }

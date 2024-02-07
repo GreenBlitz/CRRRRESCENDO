@@ -74,6 +74,7 @@ public class OI {
     public void initializeDefaultCommands() {
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
         Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+        Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
     }
 
 

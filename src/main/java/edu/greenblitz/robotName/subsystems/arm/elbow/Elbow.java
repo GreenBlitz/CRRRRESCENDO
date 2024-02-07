@@ -71,6 +71,10 @@ public class Elbow extends GBSubsystem {
         elbow.standInPlace(currentAngle);
     }
 
+    public void standInPlaceForDefault() {
+        elbow.standInPlace(currentAngle);
+    }
+
     public void setCurrentAngle(){
         currentAngle = getAngle();
     }

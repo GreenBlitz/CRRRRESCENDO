@@ -12,8 +12,6 @@ public class PivotConstants {
 
     public static final double LENGTH_OF_SHOOTER = 0.418;
 
-    public static final double WIDTH_OF_SHOOTER = 0.22;
-
     public enum PresetPositions {
 
         STARTING(Rotation2d.fromDegrees(45)),
@@ -41,5 +39,4 @@ public class PivotConstants {
 
     public static final Rotation2d TOLERANCE = Rotation2d.fromDegrees(0.5);
 
-    public static final double DELAY_FOR_NO_COLLISION_SECONDS = 1.5;
 }
