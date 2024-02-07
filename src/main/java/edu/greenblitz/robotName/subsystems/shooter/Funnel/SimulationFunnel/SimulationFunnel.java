@@ -62,7 +62,7 @@ public class SimulationFunnel implements IFunnel {
 	@Override
 	public void moveToPosition(Rotation2d position) {
 		pidController.setSetpoint(position.getRotations());
-		setVoltage(pidController.calculate(lastInputs.angle.getRotations()));
+		setVoltage(pidController.calculate(lastInputs.position.getRotations()));
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class SimulationFunnel implements IFunnel {
 		inputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
 		inputs.temperature = 0;
 		inputs.isObjectIn = isObjectIn.getSelected();
-		inputs.angle = Rotation2d.fromRotations(motorSimulation.getAngularPositionRotations());
+		inputs.position = Rotation2d.fromRotations(motorSimulation.getAngularPositionRotations());
 
 		lastInputs = inputs;
 	}

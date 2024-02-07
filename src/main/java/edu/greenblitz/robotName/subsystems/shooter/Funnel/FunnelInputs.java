@@ -14,6 +14,6 @@ public class FunnelInputs {
 
 	public boolean isObjectIn;
 
-	public Rotation2d angle;
+	public Rotation2d position;
 	
 }
