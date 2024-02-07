@@ -11,8 +11,4 @@ public class RunRollerUntilNoteInside extends RollerCommand{
         return roller.isObjectInside();
     }
 
-    @Override
-    public void end(boolean interrupted) {
-        roller.stop();
-    }
 }
