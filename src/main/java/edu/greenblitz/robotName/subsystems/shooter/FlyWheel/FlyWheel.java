@@ -26,42 +26,64 @@ public class FlyWheel extends GBSubsystem {
         return instance;
     }
 
-    public void setPower(double power) {
-        flyWheel.setPower(power);
+    public void setPower(double leftPower, double rightPower) {
+        flyWheel.setPower(rightPower, leftPower);
     }
 
-    public void setVelocity(double velocity) {
-        flyWheel.setVelocity(velocity);
+    public void setVoltage(double leftVoltage, double rightVoltage) {
+        flyWheel.setVoltage(rightVoltage, leftVoltage);
+    }
+
+    public void setVelocity(double leftVelocity, double rightVelocity) {
+        flyWheel.setVelocity(rightVelocity, leftVelocity);
     }
 
     public void stop() {
-        flyWheel.setPower(0);
+        flyWheel.setPower(0, 0);
     }
 
     public void setPreparedToShoot(boolean isPreparedToShoot) {
         this.isPreparedToShoot = isPreparedToShoot;
     }
 
-    public double getVelocity() {
-        return flyWheelInputs.velocity;
+    public double getRightSideVelocity() {
+        return flyWheelInputs.rightFlywheelVelocity;
     }
 
-    public double getCurrent() {
-        return flyWheelInputs.outputCurrent;
+    public double getRightSideCurrent() {
+        return flyWheelInputs.rightFlywheelCurrent;
     }
 
-    public double getVoltage() {
-        return flyWheelInputs.appliedOutput;
+    public double getRightSideVoltage() {
+        return flyWheelInputs.rightFlywheelVoltage;
     }
-
-
-    public boolean isAtVelocity(double velocity) {
-        return Math.abs(getVelocity() - velocity) < FlyWheelConstants.EPSILON_RPM;
+    
+    
+    
+    public double getLeftSideVelocity() {
+        return flyWheelInputs.leftFlywheelVelocity;
+    }
+    
+    public double getLeftSideCurrent() {
+        return flyWheelInputs.leftFlywheelCurrent;
+    }
+    
+    public double getLeftSideVoltage() {
+        return flyWheelInputs.leftFlywheelVoltage;
+    }
+    
+    
+    public boolean isRightWheelAtVelocity(double velocity) {
+        return Math.abs(getRightSideVelocity() - velocity) < FlyWheelConstants.EPSILON_RPM;
+    }
+    
+    public boolean isLeftWheelAtVelocity(double velocity) {
+        return Math.abs(getLeftSideVelocity() - velocity) < FlyWheelConstants.EPSILON_RPM;
     }
 
     @Override
     public void periodic() {
         flyWheel.updateInputs(flyWheelInputs);
-        Logger.getInstance().processInputs("FlyWheel", flyWheelInputs);
+        Logger.processInputs("FlyWheel", flyWheelInputs);
     }
 }

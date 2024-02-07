@@ -2,7 +2,6 @@ package edu.greenblitz.robotName.subsystems.shooter.Pivot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.subsystems.Battery;
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.SimulationPivot.SimulationPivotConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.*;
