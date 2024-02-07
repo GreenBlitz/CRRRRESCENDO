@@ -23,8 +23,7 @@ public class NeoWristConstants {
             .withRampRate(RobotConstants.General.RAMP_RATE_VALUE)
             .withCurrentLimit(WristConstants.CURRENT_LIMIT)
             .withPositionConversionFactor(WristConstants.CONVERSION_FACTOR)
-            .withVelocityConversionFactor(WristConstants.CONVERSION_FACTOR)
-            .withCurrentLimit(WristConstants.CURRENT_LIMIT);
+            .withVelocityConversionFactor(WristConstants.CONVERSION_FACTOR);
 
 
     public static final boolean IS_BACKWARD_LIMIT_SWITCH_ENABLED = false;

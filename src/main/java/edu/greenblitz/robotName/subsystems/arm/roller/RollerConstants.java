@@ -4,7 +4,7 @@ public class RollerConstants {
 
 	public static final double ROLL_FORWARD_POWER = 1;
 	public static final double ROLL_BACKWARD_POWER = -1;
-	public static final double TIME_UNTIL_NOTE_EXIT_ROLLER = 0.5;
+	public static final double SAFETY_TIME_DIFFERENCE_AFTER_NOTE_RELEASED = 0.5;
 
 
 }

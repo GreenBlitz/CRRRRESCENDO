@@ -8,4 +8,9 @@ public abstract class RollerCommand extends GBCommand {
         roller = Roller.getInstance();
         require(roller);
     }
+
+    @Override
+    public void end(boolean interrupted) {
+        roller.stop();
+    }
 }
