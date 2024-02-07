@@ -5,7 +5,14 @@ import edu.greenblitz.robotName.Robot;
 public class PivotDefaultCommand extends PivotCommand{
 	
 	@Override
-	public void execute() {
+	public void initialize() {
 		pivot.standInPlace();
+	}
+	
+	@Override
+	public void execute() {
+		if (Robot.isSimulation()) {
+			pivot.standInPlace();
+		}
 	}
 }
