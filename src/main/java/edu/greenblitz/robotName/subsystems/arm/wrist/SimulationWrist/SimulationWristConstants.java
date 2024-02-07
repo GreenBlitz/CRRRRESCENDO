@@ -13,6 +13,4 @@ public class SimulationWristConstants {
 
     public static final PIDObject SIMULATION_PID = new PIDObject().withKp(0.5).withKd(0).withMaxPower(1);
 
-    public static final ArmFeedforward SIMULATION_FEED_FORWARD = new ArmFeedforward(0,0,0,0);
-
 }
