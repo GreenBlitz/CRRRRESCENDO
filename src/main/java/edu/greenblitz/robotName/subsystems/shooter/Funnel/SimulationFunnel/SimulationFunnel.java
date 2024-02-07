@@ -24,6 +24,8 @@ public class SimulationFunnel implements IFunnel {
 
 	private PIDController pidController;
 
+	private FunnelInputsAutoLogged lastInputs;
+
 
 	public SimulationFunnel() {
 		motorSimulation = new DCMotorSim(
@@ -36,7 +38,9 @@ public class SimulationFunnel implements IFunnel {
 		isObjectIn.addOption("True", true);
 		SmartDashboard.putData("Funnel Object", isObjectIn);
 
-		pidController = new PIDController();
+		pidController = SIMULATION_PID.getPIDController();
+
+		lastInputs = new FunnelInputsAutoLogged();
 	}
 	
 	@Override
@@ -57,9 +61,8 @@ public class SimulationFunnel implements IFunnel {
 
 	@Override
 	public void moveToPosition(Rotation2d position) {
-
 		pidController.setSetpoint(position.getRotations());
-		setVoltage(pidController.calculate(motorSimulation.getAngularPositionRotations()));
+		setVoltage(pidController.calculate(lastInputs.angle.getRotations()));
 	}
 
 	@Override
@@ -68,6 +71,8 @@ public class SimulationFunnel implements IFunnel {
 		inputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
 		inputs.temperature = 0;
 		inputs.isObjectIn = isObjectIn.getSelected();
-		inputs.position = motorSimulation.getAngularPositionRotations();
+		inputs.angle = Rotation2d.fromRotations(motorSimulation.getAngularPositionRotations());
+
+		lastInputs = inputs;
 	}
 }

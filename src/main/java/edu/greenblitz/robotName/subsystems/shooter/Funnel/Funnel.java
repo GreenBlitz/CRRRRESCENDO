@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.shooter.Funnel;
 
+import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Rotation2d;
 import org.littletonrobotics.junction.Logger;
@@ -69,8 +70,12 @@ public class Funnel extends GBSubsystem {
 		return funnelInputs.isObjectIn;
 	}
 
-	public double getPosition() {
-		return funnelInputs.position;
+	public Rotation2d getAngle() {
+		return funnelInputs.angle;
+	}
+
+	public boolean isAtAngle(Rotation2d targetAngle){
+		return Math.abs(targetAngle.getRadians() - getAngle().getRadians()) <= FunnelConstants.TOLERANCE.getRadians();
 	}
 
 	public void moveToPosition (Rotation2d position){

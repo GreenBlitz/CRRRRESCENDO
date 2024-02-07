@@ -22,6 +22,6 @@ public class RunFunnelByRotations extends FunnelCommand{
 
     @Override
     public boolean isFinished() {
-        return funnel.getPosition() == rotations.getRadians();
+        return funnel.isAtAngle(rotations);
     }
 }

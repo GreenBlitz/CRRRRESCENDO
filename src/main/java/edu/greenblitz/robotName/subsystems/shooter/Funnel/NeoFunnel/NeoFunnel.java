@@ -52,6 +52,6 @@ public class NeoFunnel implements IFunnel {
 		inputs.appliedOutput = motor.getAppliedOutput();
 		inputs.temperature = motor.getMotorTemperature();
 		inputs.isObjectIn = debouncer.calculate(beamBreaker.get());
-		inputs.position = motor.getEncoder().getPosition();
+		inputs.angle = Rotation2d.fromRotations(motor.getEncoder().getPosition());
 	}
 }
