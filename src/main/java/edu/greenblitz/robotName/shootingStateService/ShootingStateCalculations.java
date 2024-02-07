@@ -22,7 +22,7 @@ public class ShootingStateCalculations {
     }
 
     public static Translation2d getRobotTargetTranslation() {
-        return LEGAL_SHOOTING_ZONE.getClosestCirclePosition(getRobotPose().getTranslation());
+        return LEGAL_SHOOTING_ZONE.getClosestCircleRimPosition(getRobotPose().getTranslation());
     }
 
     public static Rotation2d getTargetRobotAngle() {

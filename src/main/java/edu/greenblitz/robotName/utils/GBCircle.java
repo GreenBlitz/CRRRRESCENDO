@@ -80,14 +80,19 @@ public class GBCircle {
      * @param position The position of the point.
      * @return The position of the closest point.
      */
-    public Translation2d getClosestCirclePosition(Translation2d position) {
-        if (position.getX() == centerPosition.getX()) {
-            return position.plus(new Translation2d(EPSILON, 0));
+    public Translation2d getClosestCircleRimPosition(Translation2d position) {
+        double deltaY = position.getY() - centerPosition.getY();
+        double deltaX = position.getX() - centerPosition.getX();
+        if (deltaX == 0) {
+            deltaX = EPSILON;
         }
-        double slope = ((centerPosition.getY() - position.getY()) / (centerPosition.getX() - position.getX()));
-        double angle = Math.atan(slope);
-        double x = radius * Math.cos(angle) * Math.signum(position.getX() - centerPosition.getX()) + centerPosition.getX();
-        double y = radius * Math.sin(angle) * Math.signum(position.getX() - centerPosition.getX()) + centerPosition.getY();
-        return new Translation2d(x, y);
+
+        double slope = deltaY / deltaX;
+        double angleOfSlope = Math.atan(slope);
+
+        double targetX = radius * Math.cos(angleOfSlope) * Math.signum(deltaX) + centerPosition.getX();
+        double targetY = radius * Math.sin(angleOfSlope) * Math.signum(deltaX) + centerPosition.getY();
+
+        return new Translation2d(targetX, targetY);
     }
 }
