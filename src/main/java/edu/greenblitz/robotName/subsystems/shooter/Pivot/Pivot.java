@@ -23,6 +23,7 @@ public class Pivot extends GBSubsystem {
 		pivot = PivotFactory.create();
 		pivotInputs = new PivotInputsAutoLogged();
 		pivot.updateInputs(pivotInputs);
+		currentAngle = getAngle();
 	}
 
 	public static void init() {
@@ -45,10 +46,6 @@ public class Pivot extends GBSubsystem {
 		Logger.recordOutput("Shooter/Pivot", getSimulationPivotPosition3d());
 	}
 
-	public void setCurrentAngle(Rotation2d angle){
-		currentAngle = angle;
-	}
-
 	public void setPower(double power) {
 		pivot.setPower(power);
 	}
@@ -69,8 +66,12 @@ public class Pivot extends GBSubsystem {
 		pivot.moveToAngle(targetAngle);
 	}
 
-	public void standInPlace() {
+	public void standInPlaceWithSet() {
 		currentAngle = getAngle();
+		pivot.standInPlace(currentAngle);
+	}
+
+	public void standInPlace() {
 		pivot.standInPlace(currentAngle);
 	}
 

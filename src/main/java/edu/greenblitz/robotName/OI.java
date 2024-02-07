@@ -75,6 +75,8 @@ public class OI {
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
         Battery.getInstance().setDefaultCommand(new BatteryLimiter());
         Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
+        Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
+        Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
     }
 
 

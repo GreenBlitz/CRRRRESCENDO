@@ -13,6 +13,6 @@ public class PivotCommand extends GBCommand {
 	}
 
 	public void end(boolean interrupted) {
-		pivot.standInPlace();
+		pivot.standInPlaceWithSet();
 	}
 }

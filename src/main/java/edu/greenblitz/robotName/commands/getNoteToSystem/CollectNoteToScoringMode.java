@@ -16,7 +16,7 @@ public class CollectNoteToScoringMode extends SequentialCommandGroup {
                 new ConditionalCommand(
                         new TransferNote(),
                         new InstantCommand(),
-                        () -> ScoringModeSelector.isAmpMode()
+                        ScoringModeSelector::isAmpMode
                 )
         );
     }
