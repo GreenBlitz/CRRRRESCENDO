@@ -17,12 +17,6 @@ import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 
 import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
 
-import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
-
-import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
-
 public class OI {
 
     private static OI instance;
@@ -38,10 +32,14 @@ public class OI {
         initializeDefaultCommands();
     }
 
-    public static OI getInstance() {
+    public static void init(){
         if (instance == null) {
             instance = new OI();
         }
+    }
+
+    public static OI getInstance() {
+        init();
         return instance;
     }
 

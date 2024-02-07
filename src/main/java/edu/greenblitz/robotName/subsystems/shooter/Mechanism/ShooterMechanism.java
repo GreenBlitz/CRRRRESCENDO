@@ -29,7 +29,7 @@ public class ShooterMechanism extends GBSubsystem {
     public ShooterMechanism(){
         shooterMechanism = new Mechanism2d(SIZE_OF_MECHANISM.getX(),SIZE_OF_MECHANISM.getY());
         rootPivot = shooterMechanism.getRoot("pivot_root", PIVOT_COORDINATES.getX(), PIVOT_COORDINATES.getY());
-        pivotMechanism = rootPivot.append(new MechanismLigament2d("pivot", PivotConstants.LENGTH_OF_SHOOTER, Units.radiansToDegrees(PivotConstants.STARTING_ANGLE),LINE_WIDTH, PIVOT_COLOR));
+        pivotMechanism = rootPivot.append(new MechanismLigament2d("pivot", PivotConstants.LENGTH_OF_SHOOTER, Units.radiansToDegrees(PivotConstants.BACKWARD_ANGLE_LIMIT.getRadians()),LINE_WIDTH, PIVOT_COLOR));
         SmartDashboard.putData("ShooterMech2D", shooterMechanism);
     }
 

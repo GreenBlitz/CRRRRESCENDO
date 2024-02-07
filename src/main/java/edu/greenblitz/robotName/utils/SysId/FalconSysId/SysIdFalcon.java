@@ -58,8 +58,9 @@ public class SysIdFalcon extends GBSubsystem {
     }
 
     public static void init(){
-        if (instance==null)
+        if (instance==null) {
             instance = new SysIdFalcon();
+        }
     }
 
     public static SysIdFalcon getInstance(){

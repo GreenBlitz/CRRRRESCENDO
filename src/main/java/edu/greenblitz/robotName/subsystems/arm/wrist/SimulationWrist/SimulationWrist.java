@@ -22,6 +22,8 @@ public class SimulationWrist implements IWrist {
 
     private PIDController controller;
 
+    private WristInputsAutoLogged lastInputs;
+
     public SimulationWrist() {
         wristSimulation = new SingleJointedArmSim(
                 DCMotor.getNEO(SimulationWristConstants.NUMBER_OF_MOTORS),
@@ -63,9 +65,14 @@ public class SimulationWrist implements IWrist {
     }
 
     @Override
+    public void resetEncoder() {
+        Logger.recordOutput("Arm/Wrist", "tried to reset the encoder");
+    }
+
+    @Override
     public void moveToAngle(Rotation2d targetAngle) {
         controller.setSetpoint(targetAngle.getRadians());
-        setVoltage(controller.calculate(wristSimulation.getAngleRads()));
+        setVoltage(controller.calculate(lastInputs.position.getRadians()));
     }
 
     @Override
@@ -74,12 +81,13 @@ public class SimulationWrist implements IWrist {
 
         inputs.appliedOutput = appliedVoltage;
         inputs.outputCurrent = wristSimulation.getCurrentDrawAmps();
-        inputs.position = wristSimulation.getAngleRads();
+        inputs.position = Rotation2d.fromRadians(wristSimulation.getAngleRads());
         inputs.velocity = wristSimulation.getVelocityRadPerSec();
         inputs.absoluteEncoderPosition = wristSimulation.getAngleRads();
         inputs.temperature = 0;
         inputs.hasReachedForwardLimit = wristSimulation.hasHitLowerLimit();
         inputs.hasReachedBackwardLimit = wristSimulation.hasHitLowerLimit();
 
+        lastInputs = inputs;
     }
 }
