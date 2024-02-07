@@ -11,9 +11,7 @@ public class ElbowConstants {
         SAFE(Rotation2d.fromDegrees(30)),
         SCORE(Rotation2d.fromDegrees(140)),
         STARTING(Rotation2d.fromDegrees(180)),
-        TRANSFER(Rotation2d.fromDegrees(10)),
-
-        SCORE_TO_AMP(Rotation2d.fromDegrees(-45));
+        TRANSFER(Rotation2d.fromDegrees(10));
 
         public final Rotation2d ANGLE;
         PresetPositions(Rotation2d angle){

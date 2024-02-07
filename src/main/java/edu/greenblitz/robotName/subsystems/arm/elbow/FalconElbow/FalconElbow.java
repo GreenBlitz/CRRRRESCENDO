@@ -9,8 +9,6 @@ import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.arm.elbow.IElbow;
 import edu.wpi.first.math.geometry.Rotation2d;
 
-import static edu.greenblitz.robotName.subsystems.arm.elbow.FalconElbow.FalconElbowConstants.STAND_IN_PLACE_PID_SLOT;
-
 public class FalconElbow implements IElbow {
 
     private TalonFX motor;
@@ -60,12 +58,13 @@ public class FalconElbow implements IElbow {
 
     @Override
     public void standInPlace(Rotation2d targetAngle) {
-        motor.setControl(new PositionVoltage(
+        motor.setControl(
+                new PositionVoltage(
                         targetAngle.getRotations(),
                         0.0,
                         true,
                         FalconElbowConstants.ELBOW_FEED_FORWARD.calculate(targetAngle.getRadians(), 0),
-                        STAND_IN_PLACE_PID_SLOT,
+                        FalconElbowConstants.STAND_IN_PLACE_PID_SLOT,
                         true,
                         true,
                         true
