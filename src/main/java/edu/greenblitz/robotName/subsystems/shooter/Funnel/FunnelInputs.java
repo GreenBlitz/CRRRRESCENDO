@@ -1,16 +1,19 @@
 package edu.greenblitz.robotName.subsystems.shooter.Funnel;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import org.littletonrobotics.junction.AutoLog;
 
 @AutoLog
 public class FunnelInputs {
 	
-	public static double appliedOutput;
+	public double appliedOutput;
 
-	public static double outputCurrent;
+	public double outputCurrent;
 
-	public static double temperature;
+	public double temperature;
 
-	public static boolean isObjectIn;
+	public boolean isObjectIn;
+
+	public Rotation2d position;
 	
 }

@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.commands.auto;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.path.PathConstraints;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
 import edu.greenblitz.robotName.utils.GBCommand;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -27,5 +28,21 @@ public class MoveToPosition extends ProxyCommand {
                         ChassisConstants.CONSTRAINTS
                 )
         );
+        moveToFoundPose.initialize();
+    }
+
+    @Override
+    public void execute() {
+        moveToFoundPose.execute();
+    }
+
+    @Override
+    public boolean isFinished() {
+        return moveToFoundPose.isFinished();
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        moveToFoundPose.end(interrupted);
     }
 }
