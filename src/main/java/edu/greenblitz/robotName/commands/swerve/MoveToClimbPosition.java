@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 public class MoveToClimbPosition extends MoveToPosition {
 
     public MoveToClimbPosition() {
-        super(FMSUtils.getAlliance() == DriverStation.Alliance.Blue ? getClosestRedClimbPosition() : getClosestBlueClimbPosition());
+        super(FMSUtils.getAlliance() == DriverStation.Alliance.Red ? getClosestRedClimbPosition() : getClosestBlueClimbPosition());
     }
 
     public static Pose2d getClosestRedClimbPosition(){
