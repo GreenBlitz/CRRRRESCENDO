@@ -9,8 +9,7 @@ public class ReleaseNote extends SequentialCommandGroup {
     public ReleaseNote(){
         super(
                 new RunRollerUntilObjectOut(),
-                new WaitCommand(RollerConstants.SAFETY_TIME_DIFFERENCE_AFTER_NOTE_RELEASED),
-                new StopRoller()
+                new WaitCommand(RollerConstants.SAFETY_TIME_DIFFERENCE_AFTER_NOTE_RELEASED)
         );
     }
 }
