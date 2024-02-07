@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-public class Shoot extends SequentialCommandGroup {
+public class ShootFromFlyWheel extends SequentialCommandGroup {
 
-    public Shoot() {
+    public ShootFromFlyWheel() {
         super(
                 new ParallelRaceGroup(
                         new WaitCommand(FlyWheelConstants.DELAY_SECONDS_TILL_EXIT),
