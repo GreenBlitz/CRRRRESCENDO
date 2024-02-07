@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
+import edu.greenblitz.robotName.commands.auto.MoveToPosition;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
@@ -49,10 +50,13 @@ public class OI {
     }
 
     public void initButtons() {
+        mainJoystick.A.onTrue(new MoveToPosition(Field.ScoringPositions.AMP_SCORE_POSITION));
+        mainJoystick.B.onTrue(new MoveToPosition(Field.ScoringPositions.SPEAKER_SCORE_POSITION));
+        mainJoystick.L1.whileTrue(new MoveByJoysticks(DRIVE_MODE));
     }
 
     public void initializeDefaultCommands(){
-        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
+        //SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
         Battery.getInstance().setDefaultCommand(new BatteryLimiter());
         Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
         Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
