@@ -58,6 +58,10 @@ public class SimulationFlyWheel implements IFlyWheel {
                 -RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE,
                 RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE
         );
+
+        leftMotorFlywheel.setInputVoltage(leftMotorAppliedOutput);
+        rightMotorFlywheel.setInputVoltage(rightMotorAppliedOutput);
+
     }
 
     @Override
@@ -75,5 +79,18 @@ public class SimulationFlyWheel implements IFlyWheel {
     public void updateInputs(FlyWheelInputsAutoLogged inputs) {
         rightMotorFlywheel.update(RobotConstants.SimulationConstants.TIME_STEP);
         leftMotorFlywheel.update(RobotConstants.SimulationConstants.TIME_STEP);
+
+
+        inputs.leftFlywheelVelocity = leftMotorFlywheel.getAngularVelocityRPM();
+        inputs.leftFlywheelCurrent = leftMotorFlywheel.getCurrentDrawAmps();
+        inputs.leftFlywheelVoltage = leftMotorAppliedOutput;
+        inputs.leftWheelAcceleration = 0;
+        inputs.leftFlywheelTemperature = 0;
+
+        inputs.rightFlywheelVelocity = rightMotorFlywheel.getAngularVelocityRPM();
+        inputs.rightFlywheelCurrent = rightMotorFlywheel.getCurrentDrawAmps();
+        inputs.rightFlywheelVoltage = rightMotorAppliedOutput;
+        inputs.rightWheelAcceleration = 0;
+        inputs.rightFlywheelTemperature = 0;
     }
 }

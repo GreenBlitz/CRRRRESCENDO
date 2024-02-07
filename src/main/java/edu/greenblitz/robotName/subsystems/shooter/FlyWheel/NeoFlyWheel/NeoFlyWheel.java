@@ -53,8 +53,13 @@ public class NeoFlyWheel implements IFlyWheel {
 
     @Override
     public void updateInputs(FlyWheelInputsAutoLogged inputs) {
-        inputs.appliedOutput = leftMotor.getAppliedOutput();
-        inputs.velocity = leftMotor.getEncoder().getVelocity();
-        inputs.position = leftMotor.getEncoder().getPosition();
+        inputs.leftFlywheelCurrent = leftMotor.getOutputCurrent();
+        inputs.leftFlywheelTemperature = leftMotor.getMotorTemperature();
+        inputs.leftFlywheelVelocity = leftMotor.getEncoder().getVelocity();
+
+        inputs.rightFlywheelCurrent = rightMotor.getOutputCurrent();
+        inputs.rightFlywheelTemperature = rightMotor.getMotorTemperature();
+        inputs.rightFlywheelVelocity = rightMotor.getEncoder().getVelocity();
+
     }
 }
