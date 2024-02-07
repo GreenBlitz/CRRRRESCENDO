@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
-import edu.greenblitz.robotName.commands.auto.MoveToPosition;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
