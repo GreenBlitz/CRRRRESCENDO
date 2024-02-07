@@ -30,7 +30,7 @@ public class WristConstants {
 
     public static final double CONVERSION_FACTOR = 0.0328;
 
-    public static final double TOLERANCE = Units.degreesToRadians(0.5);
+    public static final Rotation2d TOLERANCE = Rotation2d.fromDegrees(0.5);
 
     public static final int CURRENT_LIMIT = 40;
 

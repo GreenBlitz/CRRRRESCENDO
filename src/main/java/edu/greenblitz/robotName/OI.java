@@ -6,6 +6,7 @@ import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
 import edu.greenblitz.robotName.commands.setObjectInIsFunnel;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
+import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
@@ -41,10 +42,14 @@ public class OI {
         initializeDefaultCommands();
     }
 
-    public static OI getInstance() {
+    public static void init(){
         if (instance == null) {
             instance = new OI();
         }
+    }
+
+    public static OI getInstance() {
+        init();
         return instance;
     }
 
