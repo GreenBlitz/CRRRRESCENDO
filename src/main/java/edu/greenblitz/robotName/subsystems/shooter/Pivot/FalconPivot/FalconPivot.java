@@ -11,7 +11,6 @@ import edu.wpi.first.math.geometry.Rotation2d;
 
 import static edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot.FalconPivotConstants.*;
 
-
 public class FalconPivot implements IPivot {
 
     private TalonFX motor;

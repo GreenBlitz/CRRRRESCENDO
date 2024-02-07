@@ -8,29 +8,37 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ProxyCommand;
 import org.littletonrobotics.junction.Logger;
+import edu.wpi.first.wpilibj2.command.ProxyCommand;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 
 import java.util.function.Supplier;
 
 public class MoveToPosition extends ProxyCommand {
 
     public MoveToPosition(Pose2d endPoint) {
-        super(
-                AutoBuilder.pathfindToPose(
-                        endPoint,
-                        ChassisConstants.CONSTRAINTS
-                )
-        );
+        this(endPoint,ChassisConstants.CONSTRAINTS);
+    }
+
+    public MoveToPosition(Supplier<Pose2d> endPoint, PathConstraints constraints) {
+        super( () -> getPoseFinding(endPoint,constraints).get());
     }
 
     public MoveToPosition(Supplier<Pose2d> endPoint) {
-        super( () -> getPoseFinding(endPoint).get());
+        super( () -> getPoseFinding(endPoint,ChassisConstants.CONSTRAINTS).get());
     }
 
-    private static Supplier<Command> getPoseFinding(Supplier<Pose2d> endPoint) {
+    public MoveToPosition(Pose2d endPoint, PathConstraints constraints) {
+        super(() -> AutoBuilder.pathfindToPose(
+                endPoint,
+                constraints
+        ));
+    }
+
+    private static Supplier<Command> getPoseFinding(Supplier<Pose2d> endPoint, PathConstraints constraints) {
         Logger.recordOutput("target",endPoint.get());
         return () -> AutoBuilder.pathfindToPose(
                 endPoint.get(),
-                ChassisConstants.CONSTRAINTS
+                constraints
         );
     }
 

@@ -8,6 +8,8 @@ import edu.wpi.first.math.util.Units;
 
 public class PivotConstants {
 
+    public static final double SHOOTER_MASS_KG = 10;
+
     public static final double LENGTH_OF_SHOOTER = 0.418;
 
     public static final double WIDTH_OF_SHOOTER = 0.22;
@@ -26,8 +28,6 @@ public class PivotConstants {
         }
 
     }
-
-    public static final double SHOOTER_MASS_KG = 10;
 
     public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(0);
 

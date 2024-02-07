@@ -1,5 +1,7 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.shooter.ShootByPower;
+import edu.greenblitz.robotName.commands.shooter.ShootByVelocity;
 import edu.greenblitz.robotName.commands.shooter.funnel.FunnelDefaultCommand;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingStateAndShoot;
@@ -11,6 +13,7 @@ import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.Battery;
+
 import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
@@ -22,10 +25,12 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
 
 public class OI {
+
     private static OI instance;
 
-    private SmartJoystick mainJoystick;
-    private SmartJoystick secondJoystick;
+    private final SmartJoystick mainJoystick;
+
+    private final SmartJoystick secondJoystick;
 
     private OI() {
         mainJoystick = new SmartJoystick(RobotConstants.Joystick.MAIN);
@@ -54,9 +59,10 @@ public class OI {
     }
 
     public void initButtons() {
+        secondJoystick.A.whileTrue(new ShootByVelocity(3000));
     }
 
-    public void initializeDefaultCommands(){
+    public void initializeDefaultCommands() {
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
         Battery.getInstance().setDefaultCommand(new BatteryLimiter());
         Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
