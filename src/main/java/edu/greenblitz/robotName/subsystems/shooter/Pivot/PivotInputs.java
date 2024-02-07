@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.shooter.Pivot;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import org.littletonrobotics.junction.AutoLog;
 
 @AutoLog
@@ -9,7 +10,7 @@ public class PivotInputs {
 
     public double outputCurrent;
 
-    public double position;
+    public Rotation2d position;
 
     public double velocity;
 

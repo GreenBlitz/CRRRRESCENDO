@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.subsystems.arm.elbow;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public interface IElbow {
@@ -15,6 +16,9 @@ public interface IElbow {
 
     void moveToAngle(Rotation2d targetAngle);
 
+    void standInPlace(Rotation2d targetAngle);
+
     void updateInputs(ElbowInputsAutoLogged inputs);
+
 
 }
