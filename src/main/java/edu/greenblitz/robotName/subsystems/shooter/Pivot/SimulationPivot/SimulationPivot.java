@@ -19,12 +19,13 @@ import static edu.greenblitz.robotName.subsystems.shooter.Pivot.SimulationPivot.
 
 public class SimulationPivot implements IPivot {
 
-    SingleJointedArmSim pivotSimulation;
+    private SingleJointedArmSim pivotSimulation;
 
     private double appliedVoltage;
 
     private PIDController controller;
 
+    private PivotInputsAutoLogged lastInputs;
 
     public SimulationPivot() {
         pivotSimulation = new SingleJointedArmSim(
@@ -57,18 +58,23 @@ public class SimulationPivot implements IPivot {
 
     @Override
     public void setIdleMode(NeutralModeValue idleMode) {
-        Logger.recordOutput("Arm/Pivot", "tried setting the idleMode to " + idleMode.name());
+        Logger.recordOutput("Shooter/Pivot", "tried setting the idleMode to " + idleMode.name());
     }
 
     @Override
     public void resetAngle(Rotation2d position) {
-        Logger.recordOutput("Arm/Pivot", "tried to reset the position to " + position);
+        Logger.recordOutput("Shooter/Pivot", "tried to reset the position to " + position);
     }
 
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
         controller.setSetpoint(targetAngle.getRadians());
-        setVoltage(controller.calculate(pivotSimulation.getAngleRads()));
+        setVoltage(controller.calculate(lastInputs.position.getRadians()));
+    }
+
+    @Override
+    public void standInPlace(Rotation2d targetAngle) {
+        setPower(0);
     }
 
     @Override
@@ -77,11 +83,13 @@ public class SimulationPivot implements IPivot {
 
         inputs.appliedOutput = appliedVoltage;
         inputs.outputCurrent = pivotSimulation.getCurrentDrawAmps();
-        inputs.position = pivotSimulation.getAngleRads();
+        inputs.position = Rotation2d.fromRadians(pivotSimulation.getAngleRads());
         inputs.velocity = pivotSimulation.getVelocityRadPerSec();
         inputs.absoluteEncoderPosition = pivotSimulation.getAngleRads();
         inputs.temperature = 0;
         inputs.hasHitForwardLimit = pivotSimulation.hasHitLowerLimit();
         inputs.hasHitBackwardsLimit = pivotSimulation.hasHitLowerLimit();
+        
+        lastInputs = inputs;
     }
 }

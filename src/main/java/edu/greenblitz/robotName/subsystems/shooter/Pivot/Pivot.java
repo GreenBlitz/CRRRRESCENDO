@@ -1,16 +1,13 @@
 package edu.greenblitz.robotName.subsystems.shooter.Pivot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.greenblitz.robotName.Robot;
-import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.shooter.Pivot.SimulationPivot.SimulationPivotConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.*;
-import edu.wpi.first.math.util.Units;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot.FalconPivotConstants.SIMPLE_MOTOR_FF;
 import static edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants.TOLERANCE;
 
 public class Pivot extends GBSubsystem {
@@ -18,6 +15,8 @@ public class Pivot extends GBSubsystem {
 	private static Pivot instance;
 
 	private PivotInputsAutoLogged pivotInputs;
+
+	private Rotation2d currentAngle;
 
 	private IPivot pivot;
 
@@ -44,7 +43,11 @@ public class Pivot extends GBSubsystem {
 
 		pivot.updateInputs(pivotInputs);
 		Logger.processInputs("Shooter/Pivot", pivotInputs);
-		Logger.recordOutput("Shooter/Pivot", getPivotPose3d());
+		Logger.recordOutput("Shooter/Pivot", getSimulationPivotPosition3d());
+	}
+
+	public void setCurrentAngle(Rotation2d angle){
+		currentAngle = angle;
 	}
 
 	public void setPower(double power) {
@@ -68,14 +71,7 @@ public class Pivot extends GBSubsystem {
 	}
 
 	public void standInPlace() {
-		pivot.setVoltage(getStaticFeedForward());
-	}
-	public double getStaticFeedForward() {
-		return Robot.isSimulation() ? 0 : SIMPLE_MOTOR_FF.calculate(0);
-	}
-
-	public double getDynamicFeedForward(double velocity) {
-		return SIMPLE_MOTOR_FF.calculate(velocity);
+		pivot.standInPlace(currentAngle);
 	}
 
 	public double getVoltage() {
@@ -87,17 +83,17 @@ public class Pivot extends GBSubsystem {
 	}
 
 	public Rotation2d getAngle() {
-		return Rotation2d.fromRadians(pivotInputs.position);
+		return pivotInputs.position;
 	}
 
 	public boolean isAtAngle(Rotation2d angle) {
-		return Math.abs(angle.getRadians() - getAngle().getRadians()) <= TOLERANCE;
+		return Math.abs(angle.getRadians() - getAngle().getRadians()) <= TOLERANCE.getRadians();
 	}
 
-	public Pose3d getPivotPose3d() {
+	public Pose3d getSimulationPivotPosition3d() {
 		return new Pose3d(
 				PivotConstants.ROBOT_RELATIVE_PIVOT_POSITION,
-				new Rotation3d(getAngle().getRadians(), 0, 0)
+				new Rotation3d(-getAngle().getRadians(), 0, 0)
 		);
 	}
 }
