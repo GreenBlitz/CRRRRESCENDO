@@ -54,7 +54,6 @@ public class OI {
     }
 
     public void initButtons() {
-        mainJoystick.A.onTrue(new GoToShootingStateAndShoot());
     }
 
     public void initializeDefaultCommands(){
