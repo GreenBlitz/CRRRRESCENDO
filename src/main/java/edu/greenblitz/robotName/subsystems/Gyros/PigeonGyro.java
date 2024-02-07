@@ -45,7 +45,7 @@ public class PigeonGyro implements IAngleMeasurementGyro {
 
     @Override
     public void updateInputs(GyroInputsAutoLogged inputs) {
-        inputs.yaw = -(Math.toRadians(pigeonIMU.getYaw()) - yawOffset.getRadians()) % (2 * Math.PI);
+        inputs.yaw = (Math.toRadians(pigeonIMU.getYaw()) - yawOffset.getRadians()) % (2 * Math.PI);
         inputs.pitch = (Math.toRadians(pigeonIMU.getPitch()) - pitchOffset.getRadians()) % (2 * Math.PI);
         inputs.roll = (Math.toRadians(pigeonIMU.getRoll()) - rollOffset.getRadians()) % (2 * Math.PI);
 

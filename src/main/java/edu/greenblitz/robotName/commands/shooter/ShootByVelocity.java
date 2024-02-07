@@ -19,7 +19,7 @@ public class ShootByVelocity extends FlyWheelCommand {
 
     @Override
     public void execute() {
-        flyWheel.setVelocity(velocity, velocity * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR);
+        flyWheel.setVelocity(velocity, velocity * FlyWheelConstants.DIFFERENTIATING_RATIO);
         if (flyWheel.isAtVelocity(velocity)) {
             timeInShootingSpeed++;
         } else {

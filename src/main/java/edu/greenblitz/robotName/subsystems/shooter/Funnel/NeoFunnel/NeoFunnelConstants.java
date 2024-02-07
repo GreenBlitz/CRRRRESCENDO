@@ -14,7 +14,7 @@ public class NeoFunnelConstants {
     
     public static int BEAM_BREAKER_CHANNEL = 0;
 
-    public static int CURRENT_LIMIT = 1;
+    public static int CURRENT_LIMIT = 40;
 
     public static final GBSparkMax.SparkMaxConfObject FUNNEL_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
             .withIdleMode(CANSparkMax.IdleMode.kBrake)

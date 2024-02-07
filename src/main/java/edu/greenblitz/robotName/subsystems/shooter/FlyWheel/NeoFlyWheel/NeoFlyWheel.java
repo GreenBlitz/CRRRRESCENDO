@@ -56,5 +56,7 @@ public class NeoFlyWheel implements IFlyWheel {
         inputs.appliedOutput = leftMotor.getAppliedOutput();
         inputs.velocity = leftMotor.getEncoder().getVelocity();
         inputs.position = leftMotor.getEncoder().getPosition();
+
+        SmartDashboard.putNumber("velocityyyyyyyyyy", inputs.velocity);
     }
 }
