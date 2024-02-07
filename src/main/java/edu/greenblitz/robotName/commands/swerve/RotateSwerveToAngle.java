@@ -27,7 +27,8 @@ public class RotateSwerveToAngle extends SwerveCommand{
                 0,
                 ChassisConstants.ROTATION_PID_CONTROLLER.calculate(
                         SwerveChassis.getInstance().getChassisAngle().getRadians()),
-                SwerveChassis.getInstance().getChassisAngle());
+                SwerveChassis.getInstance().getChassisAngle()
+        );
     }
 
     @Override
