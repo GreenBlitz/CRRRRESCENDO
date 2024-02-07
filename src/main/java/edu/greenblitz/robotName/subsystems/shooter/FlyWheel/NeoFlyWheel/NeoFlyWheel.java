@@ -2,14 +2,9 @@ package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.NeoFlyWheel;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
-import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.IFlyWheel;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import java.util.PrimitiveIterator;
-
 
 public class NeoFlyWheel implements IFlyWheel {
 

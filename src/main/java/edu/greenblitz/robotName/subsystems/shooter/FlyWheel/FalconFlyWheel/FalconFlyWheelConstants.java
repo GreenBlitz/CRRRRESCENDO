@@ -3,6 +3,7 @@ package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FalconFlyWheel;
 import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 public class FalconFlyWheelConstants {
@@ -34,6 +35,13 @@ public class FalconFlyWheelConstants {
             CURRENT_LIMITS_CONFIGS.SupplyCurrentThreshold = 3;
             CURRENT_LIMITS_CONFIGS.SupplyTimeThreshold = 4;
         }
+
+        public static final TalonFXConfiguration CONFIGURATION = new TalonFXConfiguration();
+        static {
+            CONFIGURATION.CurrentLimits = CURRENT_LIMITS_CONFIGS;
+            CONFIGURATION.ClosedLoopRamps = CLOSED_LOOP_RAMPS_CONFIGS;
+            CONFIGURATION.MotionMagic = MOTION_MAGIC_CONFIGS;
+        }
     }
 
     public static class leftMotorConstants{
@@ -63,5 +71,12 @@ public class FalconFlyWheelConstants {
             CURRENT_LIMITS_CONFIGS.SupplyCurrentThreshold = 3;
             CURRENT_LIMITS_CONFIGS.SupplyTimeThreshold = 4;
         }
+        public static final TalonFXConfiguration CONFIGURATION = new TalonFXConfiguration();
+        static {
+            CONFIGURATION.CurrentLimits = CURRENT_LIMITS_CONFIGS;
+            CONFIGURATION.ClosedLoopRamps = CLOSED_LOOP_RAMPS_CONFIGS;
+            CONFIGURATION.MotionMagic = MOTION_MAGIC_CONFIGS;
+        }
+
     }
 }
