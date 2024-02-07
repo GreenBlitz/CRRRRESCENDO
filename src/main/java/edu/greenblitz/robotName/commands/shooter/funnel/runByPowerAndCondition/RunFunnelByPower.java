@@ -1,5 +1,6 @@
-package edu.greenblitz.robotName.commands.shooter.funnel;
+package edu.greenblitz.robotName.commands.shooter.funnel.runByPowerAndCondition;
 
+import edu.greenblitz.robotName.commands.shooter.funnel.FunnelCommand;
 import edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
@@ -14,11 +15,6 @@ public class RunFunnelByPower extends FunnelCommand {
     @Override
     public void execute() {
         funnel.setPower(power);
-    }
-
-    @Override
-    public boolean isFinished() {
-        return !funnel.isObjectIn();
     }
 
 }
