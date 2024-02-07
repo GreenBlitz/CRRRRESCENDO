@@ -46,7 +46,7 @@ public class Robot extends LoggedRobot {
     public void robotInit() {
         Pathfinding.setPathfinder(new LocalADStar());
         CommandScheduler.getInstance().enable();
-        initializeLogger();
+//        initializeLogger();
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
         Battery.getInstance().setDefaultCommand(new BatteryLimiter());
         //initializeSubsystems();

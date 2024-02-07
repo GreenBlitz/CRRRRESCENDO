@@ -20,7 +20,7 @@ public class LED extends GBSubsystem {
 	private AddressableLED addressableLED;
 	private AddressableLEDBuffer addressableLEDBuffer;
 	private Timer LEDBlinkTimer;
-	private boolean noteInRobot;
+	private boolean lastNotePosition;
 
 	private LED() {
 		this.addressableLED = new AddressableLED(LED_PORT);
@@ -29,7 +29,7 @@ public class LED extends GBSubsystem {
 		this.addressableLED.start();
 		LEDBlinkTimer = new Timer();
 		currentColor = SPEAKER_MODE_COLOR;
-		noteInRobot = false;
+		lastNotePosition = false;
 	}
 	
 	public static LED getInstance() {
@@ -47,8 +47,8 @@ public class LED extends GBSubsystem {
 		return LEDBlinkTimer.get();
 	}
 
-	public void stopLEDBlinkTimer() {
-		LEDBlinkTimer.stop();
+	public boolean getLastNotePosition(){
+		return lastNotePosition;
 	}
 	
 	public void restartTimer() {
@@ -86,11 +86,8 @@ public class LED extends GBSubsystem {
 	
 	@Override
 	public void periodic() {
-		this.addressableLED.setData(addressableLEDBuffer);
 		currentColor = getColorByMode();
-		shouldRumble();
-		updateNoteState();
-
+		this.addressableLED.setData(addressableLEDBuffer);
 	}
 	
 	public void setColorByMode() {
@@ -112,28 +109,13 @@ public class LED extends GBSubsystem {
 				|| Roller.getInstance().isObjectInside());
 	}
 
-	public boolean didNoteExitRobot() {
-		return (!(Intake.getInstance().getExitBeamBreakerValue())
-				&& !(Intake.getInstance().getEntranceBeamBreakerValue())
-				&& !(Funnel.getInstance().isObjectIn())
-				&& !(Roller.getInstance().isObjectInside()));
-
-		}
-
 	public void updateNoteState(){
-		if(isNoteInRobot()){
-			noteInRobot = true;
-		}else if(didNoteExitRobot()){
-			noteInRobot = false;
-		}
-	}
-	
-	public boolean shouldRumble() {
-		return didNoteExitRobot();
+		lastNotePosition = isNoteInRobot();
 	}
 	
 	public void blink(Color color) {
 		LEDBlinkTimer.restart();
+		System.out.println(LEDBlinkTimer);
 		while (LEDBlinkTimer.get() < LEDConstants.BLINKING_TIME) {
 			if ((LED.getInstance().getLEDBlinkTimer()) % (LEDConstants.BLINK_DURATION * 2) >= LEDConstants.BLINK_DURATION) {
 				LED.getInstance().turnOff(LEDConstants.ALL_LED);
