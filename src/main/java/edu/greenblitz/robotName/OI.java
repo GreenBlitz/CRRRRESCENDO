@@ -16,7 +16,6 @@ import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 
 import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
 
-
 public class OI {
     private static OI instance;
 
@@ -51,7 +50,6 @@ public class OI {
     }
 
     public void initButtons() {
-
     }
 
     public void initializeDefaultCommands() {
@@ -62,4 +60,5 @@ public class OI {
         Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
         Funnel.getInstance().setDefaultCommand(new FunnelDefaultCommand());
     }
+
 }
