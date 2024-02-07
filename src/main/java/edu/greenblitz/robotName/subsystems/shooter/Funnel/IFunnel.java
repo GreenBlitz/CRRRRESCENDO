@@ -11,5 +11,6 @@ public interface IFunnel {
 	void updateInputs(FunnelInputsAutoLogged funnelInputs);
 
 	void resetEncoder(Rotation2d position);
+
 	void moveToPosition (Rotation2d position);
 }

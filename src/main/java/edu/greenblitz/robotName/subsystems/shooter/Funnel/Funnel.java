@@ -71,7 +71,7 @@ public class Funnel extends GBSubsystem {
 	}
 
 	public Rotation2d getAngle() {
-		return funnelInputs.angle;
+		return funnelInputs.position;
 	}
 
 	public boolean isAtAngle(Rotation2d targetAngle){
