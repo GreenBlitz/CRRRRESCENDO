@@ -1,6 +1,5 @@
 package edu.greenblitz.robotName;
 
-import edu.greenblitz.robotName.commands.shooter.ShootByPower;
 import edu.greenblitz.robotName.commands.shooter.ShootByVelocity;
 import edu.greenblitz.robotName.commands.shooter.funnel.FunnelDefaultCommand;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
