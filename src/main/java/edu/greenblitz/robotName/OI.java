@@ -1,5 +1,7 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.shooter.ShootByPower;
+import edu.greenblitz.robotName.commands.shooter.ShootByVelocity;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
@@ -52,6 +54,8 @@ public class OI {
     }
 
     public void initButtons() {
+        secondJoystick.A.whileTrue(new ShootByVelocity(3000));
+        secondJoystick.B.whileTrue(new ShootByPower(0.5));
     }
 
     public void initializeDefaultCommands() {
