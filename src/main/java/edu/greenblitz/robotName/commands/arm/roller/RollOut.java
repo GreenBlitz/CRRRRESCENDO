@@ -6,8 +6,4 @@ public class RollOut extends RollerCommand{
         roller.rollOut();
     }
 
-    @Override
-    public void end(boolean interrupted) {
-        roller.stop();
-    }
 }
