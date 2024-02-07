@@ -16,10 +16,10 @@ public class PivotConstants {
 
     public enum PresetPositions {
 
-        STARTING(Rotation2d.fromDegrees(0)),
+        STARTING(Rotation2d.fromDegrees(45)),
         TRANSFER(Rotation2d.fromDegrees(10)),
-        SAFE(Rotation2d.fromDegrees(80)),
-        PICK_UP(Rotation2d.fromDegrees(60));
+        SAFE(Rotation2d.fromDegrees(55)),
+        PICK_UP(Rotation2d.fromDegrees(45));
 
         public final Rotation2d ANGLE;
 
@@ -31,7 +31,7 @@ public class PivotConstants {
 
     public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(0);
 
-    public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(90);
+    public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(62);
 
     public static final double RELATIVE_POSITION_CONVERSION_FACTOR = 0.0328;
 

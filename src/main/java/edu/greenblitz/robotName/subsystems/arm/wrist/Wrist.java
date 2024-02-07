@@ -77,6 +77,7 @@ public class Wrist extends GBSubsystem {
 	}
 
 	public void standInPlace() {
+		currentAngle = getAngle();
 		wrist.moveToAngle(currentAngle);
 	}
 

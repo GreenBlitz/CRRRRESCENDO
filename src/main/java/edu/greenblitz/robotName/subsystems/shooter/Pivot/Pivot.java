@@ -70,6 +70,7 @@ public class Pivot extends GBSubsystem {
 	}
 
 	public void standInPlace() {
+		currentAngle = getAngle();
 		pivot.standInPlace(currentAngle);
 	}
 
