@@ -5,7 +5,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
 import edu.greenblitz.robotName.subsystems.Intake.Intake;
-import edu.greenblit1z.robotName.subsystems.Lifter.Lifter;
+//import edu.greenblit1z.robotName.subsystems.Lifter.Lifter;
 import edu.greenblitz.robotName.subsystems.ArmShooterMechanism.ArmShooterMechanism;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
@@ -68,7 +68,7 @@ public class Robot extends LoggedRobot {
         Roller.init();
         ArmShooterMechanism.init();
 
-        Lifter.init();
+//        Lifter.init();
         Intake.init();
     }
 

@@ -46,21 +46,39 @@ public class FlyWheel extends GBSubsystem {
         this.isPreparedToShoot = isPreparedToShoot;
     }
 
-    public double getVelocity() {
-        return flyWheelInputs.velocity;
+    public double getRightSideVelocity() {
+        return flyWheelInputs.rightFlywheelVelocity;
     }
 
-    public double getCurrent() {
-        return flyWheelInputs.outputCurrent;
+    public double getRightSideCurrent() {
+        return flyWheelInputs.rightFlywheelCurrent;
     }
 
-    public double getVoltage() {
-        return flyWheelInputs.appliedOutput;
+    public double getRightSideVoltage() {
+        return flyWheelInputs.rightFlywheelVoltage;
     }
-
-
-    public boolean isAtVelocity(double velocity) {
-        return Math.abs(getVelocity() - velocity) < FlyWheelConstants.EPSILON_RPM;
+    
+    
+    
+    public double getLeftSideVelocity() {
+        return flyWheelInputs.leftFlywheelVelocity;
+    }
+    
+    public double getLeftSideCurrent() {
+        return flyWheelInputs.leftFlywheelCurrent;
+    }
+    
+    public double getLeftSideVoltage() {
+        return flyWheelInputs.leftFlywheelVoltage;
+    }
+    
+    
+    public boolean isRightWheelAtVelocity(double velocity) {
+        return Math.abs(getRightSideVelocity() - velocity) < FlyWheelConstants.EPSILON_RPM;
+    }
+    
+    public boolean isLeftWheelAtVelocity(double velocity) {
+        return Math.abs(getLeftSideVelocity() - velocity) < FlyWheelConstants.EPSILON_RPM;
     }
 
     @Override
