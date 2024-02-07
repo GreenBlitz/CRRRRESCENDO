@@ -6,6 +6,7 @@ import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
+import edu.greenblitz.robotName.subsystems.TestSparkmax;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.Battery;
@@ -14,6 +15,7 @@ import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
 
@@ -52,16 +54,15 @@ public class OI {
     }
 
     public void initButtons() {
-        secondJoystick.A.whileTrue(new ShootByVelocity(3000));
-        secondJoystick.B.whileTrue(new ShootByPower(0.5));
+        mainJoystick.A.whileTrue(new InstantCommand(() -> TestSparkmax.getInstance().moveMotor(0.2)));
     }
 
     public void initializeDefaultCommands() {
-        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
-        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-        Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
-        Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
-        Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
+//        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
+//        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+//        Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
+//        Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
+//        Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
     }
 
 

@@ -45,27 +45,27 @@ public class Robot extends LoggedRobot {
     public void robotInit() {
         Pathfinding.setPathfinder(new LocalADStar());
         CommandScheduler.getInstance().enable();
-        initializeLogger();
+//        initializeLogger();
         initializeSubsystems();
         SwerveChassis.getInstance().resetAllEncoders();
-        initializeAutonomousBuilder();
+//        initializeAutonomousBuilder();
         OI.init();
     }
 
     public void initializeSubsystems() {
-        MultiLimelight.init();
-        SwerveChassis.init();
-
-        Pivot.init();
-        Funnel.init();
-        FlyWheel.init();
-
-        Elbow.init();
-        Wrist.init();
-        Roller.init();
-
-        Lifter.init();
-        Intake.init();
+//        MultiLimelight.init();
+//        SwerveChassis.init();
+//
+//        Pivot.init();
+//        Funnel.init();
+//        FlyWheel.init();
+//
+//        Elbow.init();
+//        Wrist.init();
+//        Roller.init();
+//
+//        Lifter.init();
+//        Intake.init();
     }
 
     @Override
