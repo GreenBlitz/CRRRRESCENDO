@@ -20,7 +20,7 @@ public class NeoFunnel implements IFunnel {
 	private DigitalInput beamBreaker;
 
 	public NeoFunnel() {
-		motor = new GBSparkMax(FUNNEL_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+		motor = new GBSparkMax(MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
 		motor.config(FUNNEL_CONFIG_OBJECT);
 		beamBreaker = new DigitalInput(BEAM_BREAKER_CHANNEL);
 		debouncer = new Debouncer(DEBOUNCE_TIME_FOR_LIMIT_SWITCH);

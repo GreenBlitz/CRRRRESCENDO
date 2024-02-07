@@ -2,12 +2,12 @@ package edu.greenblitz.robotName.commands.shooter.funnel;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 
-public class DoRotations extends FunnelCommand{
+public class RunFunnelByRotations extends FunnelCommand{
 
     private Rotation2d rotations;
 
-    public DoRotations(Rotation2d rotations) {
-        rotations = rotations;
+    public RunFunnelByRotations(Rotation2d rotations) {
+        this.rotations = rotations;
     }
 
     @Override

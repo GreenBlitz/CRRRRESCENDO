@@ -2,9 +2,9 @@ package edu.greenblitz.robotName.commands.shooter.funnel;
 
 import edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants;
 
-public class reverseRunFunnelByConstnat extends RunFunnelByPower {
+public class ReverseRunFunnelByConstant extends RunFunnelByPower {
 
-    public reverseRunFunnelByConstnat() {
+    public ReverseRunFunnelByConstant() {
         super(FunnelConstants.EJECT_POWER);
     }
 }
