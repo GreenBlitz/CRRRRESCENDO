@@ -12,7 +12,7 @@ public class ShootingAngleCalculations {
     public static Rotation2d getShootingAngle(Translation3d shooterPosition) {
         Translation2d relativeSpeakerPosition = getPositionOfSpeakerRelativeToShooter(shooterPosition);
         double targetAngle = Math.atan(relativeSpeakerPosition.getY() / relativeSpeakerPosition.getX());
-        return new Rotation2d(-targetAngle);
+        return new Rotation2d(targetAngle);
     }
 
     public static Translation2d getPositionOfSpeakerRelativeToShooter(Translation3d shooterPosition) {

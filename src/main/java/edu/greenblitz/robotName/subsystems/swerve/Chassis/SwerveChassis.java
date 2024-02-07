@@ -50,7 +50,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     private SwerveDrivePoseEstimator poseEstimator;
     private Field2d field = new Field2d();
     public static final double TRANSLATION_TOLERANCE = 0.05;
-    public static final double ROTATION_TOLERANCE = 2;
+    public static final double ROTATION_TOLERANCE = 0.1;
     private boolean doVision;
     public final double CURRENT_TOLERANCE = 0.5;
 
@@ -168,6 +168,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
     public boolean isModuleAtAngle(Module module, Rotation2d angle, Rotation2d errorAngleTolerance) {
         return getModule(module).isAtAngle(angle, errorAngleTolerance);
+    }
+
+    public boolean isAtAngle(Rotation2d angle) {
+        return Math.abs(getChassisAngle().getRadians() - angle.getRadians()) <= ROTATION_TOLERANCE;
     }
 
     public void resetChassisPose() {

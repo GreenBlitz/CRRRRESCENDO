@@ -23,7 +23,7 @@ public class FieldConstants {
 
     public static final Translation3d MIDDLE_OF_RED_SPEAKER_POSITION = new Translation3d(15.24, 5.9944, 2.045);
 
-    public static final Translation3d MIDDLE_OF_BLUE_SPEAKER_POSITION = new Translation3d(0,0,0);
+    public static final Translation3d MIDDLE_OF_BLUE_SPEAKER_POSITION = new Translation3d(0.24,5.9944,2.045);
 
     public static final Translation3d MIDDLE_OF_SPEAKER_POSITION = FMSUtils.isRedAlliance() ? MIDDLE_OF_RED_SPEAKER_POSITION : MIDDLE_OF_BLUE_SPEAKER_POSITION;
 
