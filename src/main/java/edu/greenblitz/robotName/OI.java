@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.MoveTestSparkmaxByPower;
 import edu.greenblitz.robotName.commands.shooter.ShootByPower;
 import edu.greenblitz.robotName.commands.shooter.ShootByVelocity;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
@@ -54,7 +55,7 @@ public class OI {
     }
 
     public void initButtons() {
-        mainJoystick.A.whileTrue(new InstantCommand(() -> TestSparkmax.getInstance().moveMotor(0.2)));
+        mainJoystick.A.whileTrue(new MoveTestSparkmaxByPower(0.2));
     }
 
     public void initializeDefaultCommands() {
