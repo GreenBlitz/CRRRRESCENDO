@@ -15,8 +15,7 @@ public class ObjectDetectionLimelight {
 	public ObjectDetectionLimelight(){
 		String name = VisionConstants.OBJECT_DETECTION_LIMELIGHT_NAME;
 
-//		xNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("json").getInstance().getEntry("Detector").getInstance().getEntry("tx");
-		xNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("tid");
+		xNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("json").getInstance().getEntry("Detector").getInstance().getEntry("tx");
 		yNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("json").getInstance().getEntry("Results").getInstance().getEntry("ty");
 		confidenceNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("json").getInstance().getEntry("tx");
 	}
@@ -40,13 +39,13 @@ public class ObjectDetectionLimelight {
 	}
 
 	public Pose2d getObjectPosition(){
-//		MultiLimelight.getInstance().changePipeline(true);
+		MultiLimelight.getInstance().changePipeline(true);
 
 
 		double xPosition = xNotePositionEntry.getDouble(-1);
 		double yPosition = yNotePositionEntry.getDouble(-1);
 
-//		MultiLimelight.getInstance().initializeLimelightPipeline();
+		MultiLimelight.getInstance().initializeLimelightPipeline();
 
 		return new Pose2d(new Translation2d(xPosition,yPosition), new Rotation2d());
 	}
