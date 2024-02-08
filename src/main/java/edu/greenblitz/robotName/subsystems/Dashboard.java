@@ -48,11 +48,6 @@ public class Dashboard extends GBSubsystem {
 
         driverDashboardInitiated = true;
         ShuffleboardTab driversTab = Shuffleboard.getTab("Drivers");
-
-        //arm states
-
-        //pose
-
         ShuffleboardLayout robotPoseWidget = driversTab.getLayout("Robot pose", BuiltInLayouts.kList)
                 .withPosition(0, 2).withSize(1, 2).withProperties(Map.of("Label position", "TOP"));
         robotPoseWidget.addDouble("X", () -> SwerveChassis.getInstance().getRobotPose().getX());
@@ -61,13 +56,11 @@ public class Dashboard extends GBSubsystem {
         //battery
         driversTab.addDouble("Battery", () -> Battery.getInstance().getCurrentVoltage())
                 .withPosition(9, 3);
-        driversTab.addDouble("limelight pipeline", () -> MultiLimelight.getInstance().getLimelightPipeline());
         driversTab.addDouble("note angle", GetObjectAngleRelativeToRobot::getObjectAngle);
         driversTab.addDouble("note pos", () -> ObjectDetectionLimelight.getInstance().isX());
         //field
         driversTab.add("Field", SwerveChassis.getInstance().getField()).withPosition(5, 2).withSize(3, 2);
         driversTab.addDouble("std devs",()->MultiLimelight.getInstance().getDynamicStdDevs(0));
-        driversTab.addBoolean("llnt", () -> ObjectDetectionLimelight.getInstance().isNT());
 
     }
 

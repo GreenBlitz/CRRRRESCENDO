@@ -59,11 +59,11 @@ public class OI {
     }
 
     public void initializeDefaultCommands() {
-//        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
-//        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-//        Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
-//        Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
-//        Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
+        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
+        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+        Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
+        Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
+        Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
     }
 
 
