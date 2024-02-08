@@ -8,9 +8,8 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import org.littletonrobotics.junction.Logger;
 
 public class SwerveModule {
-
-
     ISwerveModule swerveModule;
+
     SwerveModuleInputsAutoLogged swerveModuleInputs;
 
     SwerveChassis.Module module;
@@ -31,7 +30,6 @@ public class SwerveModule {
         swerveModule.updateInputs(swerveModuleInputs);
         Logger.processInputs("DriveTrain/Module" + this.module.toString(), swerveModuleInputs);
     }
-
 
     public void rotateToAngle(Rotation2d angle) {
         targetAngle = angle;
@@ -65,7 +63,6 @@ public class SwerveModule {
     public void resetEncoderToValue() {
         swerveModule.resetAngle(Rotation2d.fromRadians(0));
     }
-
 
     public void resetEncoderByAbsoluteEncoder() {
         resetEncoderToValue(Rotation2d.fromRadians(swerveModuleInputs.absoluteEncoderPosition));
@@ -142,5 +139,4 @@ public class SwerveModule {
     public double getLinVoltage() {
         return swerveModuleInputs.linearVoltage;
     }
-
 }
