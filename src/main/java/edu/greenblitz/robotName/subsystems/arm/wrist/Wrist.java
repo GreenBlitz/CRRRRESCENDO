@@ -80,6 +80,10 @@ public class Wrist extends GBSubsystem {
 		currentAngle = getAngle();
 	}
 
+	public void setCurrentAngle(Rotation2d angle){
+		currentAngle = angle;
+	}
+
 	public void standInPlace() {
 		wrist.moveToAngle(currentAngle);
 	}
