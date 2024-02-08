@@ -56,7 +56,7 @@ public class SimulationFunnel implements IFunnel {
 
 	@Override
 	public void resetEncoder(Rotation2d position) {
-		Logger.recordOutput("Funnel", "tried to reset3 the position to " + position);
+		Logger.recordOutput("Funnel", "tried to reset the position to " + position);
 	}
 
 	@Override
