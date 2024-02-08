@@ -1,7 +1,8 @@
 package edu.greenblitz.robotName.subsystems.Intake.neoIntake;
 
+import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.SparkMaxLimitSwitch;
 import edu.greenblitz.robotName.subsystems.Intake.IIntake;
 import edu.greenblitz.robotName.subsystems.Intake.IntakeConstants;
@@ -21,7 +22,7 @@ public class NeoIntake implements IIntake {
 
 
 	public NeoIntake() {
-		motor = new GBSparkMax(NeoIntakeConstants.INTAKE_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+		motor = new GBSparkMax(NeoIntakeConstants.INTAKE_ID, CANSparkLowLevel.MotorType.kBrushless);
 		motor.config(INTAKE_CONFIG_OBJECT);
 
 		entranceBeamBreaker = new Debouncer(NeoIntakeConstants.ENTRANCE_DEBOUNCE_TIME_FOR_LIMIT_SWITCH);
