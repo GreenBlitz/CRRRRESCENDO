@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public class RunFunnelByPower extends FunnelCommand {
 
-    private double power;
+    private final double power;
 
     public RunFunnelByPower(double power) {
         this.power = power;

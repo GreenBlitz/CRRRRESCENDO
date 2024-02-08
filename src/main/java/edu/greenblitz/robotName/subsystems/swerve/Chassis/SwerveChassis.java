@@ -50,7 +50,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     private SwerveDrivePoseEstimator poseEstimator;
     private Field2d field = new Field2d();
     public static final double TRANSLATION_TOLERANCE = 0.05;
-    public static final Rotation2d ROTATION_TOLERANCE = Rotation2d.fromDegrees(10);
+    public static final Rotation2d ROTATION_TOLERANCE = Rotation2d.fromDegrees(5);
     private boolean doVision;
     public final double CURRENT_TOLERANCE = 0.5;
 

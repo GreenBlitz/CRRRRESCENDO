@@ -1,10 +1,5 @@
 package edu.greenblitz.robotName;
 
-import edu.greenblitz.robotName.commands.shooter.ShootByVelocity;
-import edu.greenblitz.robotName.commands.shooter.funnel.FunnelDefaultCommand;
-import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
-import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingStateAndShoot;
-import edu.greenblitz.robotName.commands.shooter.shootingState.MoveRobotToShootingPosition;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
@@ -14,12 +9,10 @@ import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.Battery;
 
 import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
-import edu.wpi.first.math.geometry.Rotation2d;
 
 import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
 
@@ -67,7 +60,6 @@ public class OI {
         Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
         Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
         Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
-        Funnel.getInstance().setDefaultCommand(new FunnelDefaultCommand());
     }
 
 

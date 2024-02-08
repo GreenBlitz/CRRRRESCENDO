@@ -12,4 +12,9 @@ public abstract class FunnelCommand extends GBCommand {
         funnel = Funnel.getInstance();
         require(funnel);
     }
+
+    @Override
+    public void end(boolean interrupted) {
+        funnel.stop();
+    }
 }
