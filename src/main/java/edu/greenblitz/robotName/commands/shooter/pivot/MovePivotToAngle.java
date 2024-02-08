@@ -9,6 +9,8 @@ public class MovePivotToAngle extends PivotCommand {
 
 	private Supplier<Rotation2d> targetAngle;
 
+	private Rotation2d supplliedTargetAngle;
+
 	public MovePivotToAngle(Rotation2d targetAngle) {
 		this.targetAngle = () -> targetAngle;
 	}
@@ -19,18 +21,21 @@ public class MovePivotToAngle extends PivotCommand {
 
 	@Override
 	public void initialize() {
-		pivot.moveToAngle(targetAngle.get());
+		supplliedTargetAngle = targetAngle.get();
+		System.out.println(supplliedTargetAngle);
+		pivot.moveToAngle(supplliedTargetAngle);
 	}
 
 	@Override
 	public void execute() {
+		System.out.println(pivot.getAngle()+","+supplliedTargetAngle);
 		if (Robot.isSimulation()) {
-			pivot.moveToAngle(targetAngle.get());
+			pivot.moveToAngle(supplliedTargetAngle);
 		}
 	}
 
 	public boolean isFinished() {
-		return pivot.isAtAngle(targetAngle.get());
+		return pivot.isAtAngle(supplliedTargetAngle);
 	}
 
 }
