@@ -22,6 +22,7 @@ public class RotateToAngle extends SwerveCommand {
 
     @Override
     public void initialize() {
+        System.out.println("rotate init");
         ChassisConstants.ROTATION_PID_CONTROLLER.setSetpoint(angleSetPoint.get().getRadians());
     }
 

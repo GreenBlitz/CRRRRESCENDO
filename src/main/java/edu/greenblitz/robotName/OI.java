@@ -11,12 +11,10 @@ import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShooterAngle;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingState;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingStateAndShoot;
 import edu.greenblitz.robotName.commands.shooter.shootingState.MoveRobotToShootingPosition;
-import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
+import edu.greenblitz.robotName.commands.swerve.*;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
-import edu.greenblitz.robotName.commands.swerve.MoveToPosition;
-import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
 import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
 import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
@@ -31,6 +29,7 @@ import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import org.littletonrobotics.junction.Logger;
 
@@ -79,10 +78,9 @@ public class OI {
         secondJoystick.Y.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
         secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
 
-        mainJoystick.A.whileTrue(new ParallelCommandGroup(
-                new GoToShooterAngle(),
-                new MoveRobotToShootingPosition()
-        ));
+        mainJoystick.A.whileTrue(new MoveToSpeaker());
+        mainJoystick.B.whileTrue(new MoveToAmp());
+        mainJoystick.X.whileTrue(new MoveRobotToShootingPosition());
     }
 
     public void initializeDefaultCommands() {
