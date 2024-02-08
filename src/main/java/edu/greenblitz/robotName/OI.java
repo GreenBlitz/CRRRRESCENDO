@@ -30,6 +30,7 @@ import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import org.littletonrobotics.junction.Logger;
 
@@ -78,9 +79,7 @@ public class OI {
         secondJoystick.Y.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
         secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
 
-        mainJoystick.A.whileTrue(new MoveToSpeaker());
-        mainJoystick.B.whileTrue(new MoveToAmp());
-        mainJoystick.X.whileTrue(new MoveRobotToShootingPosition());
+        mainJoystick.A.whileTrue(new GoToShootingStateAndShoot());
     }
 
     public void initializeDefaultCommands() {
