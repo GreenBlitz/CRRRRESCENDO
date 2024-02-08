@@ -35,7 +35,6 @@ public class MoveToPosition extends ProxyCommand {
     }
 
     private static Supplier<Command> getPoseFinding(Supplier<Pose2d> endPoint, PathConstraints constraints) {
-        Logger.recordOutput("target",endPoint.get());
         return () -> AutoBuilder.pathfindToPose(
                 endPoint.get(),
                 constraints
