@@ -22,12 +22,15 @@ public class ShootingStateCalculations {
     }
 
     public static Translation2d getRobotTargetTranslation() {
-        return LEGAL_SHOOTING_ZONE.getClosestCircleRimPosition(getRobotPose().getTranslation());
+        Translation2d robotPosition = getRobotPose().getTranslation();
+        if (LEGAL_SHOOTING_ZONE.isInCircle(robotPosition))
+            return robotPosition;
+        return LEGAL_SHOOTING_ZONE.getClosestCircleRimPosition(robotPosition);
     }
 
     public static Rotation2d getTargetRobotAngle() {
-        double angle = LEGAL_SHOOTING_ZONE.getTargetRobotAngle(getRobotPose().getTranslation()).getRadians();
-        angle -= isRobotInShootingPosition() ? Math.PI : 0;
+        double angle = LEGAL_SHOOTING_ZONE.getTargetRobotAngle().getRadians();
+        System.out.println(angle + "," + getRobotPose().getRotation());
         return new Rotation2d(angle);
     }
 

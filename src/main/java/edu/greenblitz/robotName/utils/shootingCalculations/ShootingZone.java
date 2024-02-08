@@ -35,8 +35,6 @@ public class ShootingZone extends GBCircle {
     public Translation2d getClosestCircleRimPosition(Translation2d position) {
         Translation2d targetPosition = super.getClosestCircleRimPosition(position);
         for (Bound bound : restrictedBounds) {
-            Translation2d upperLimit = bound.getUpperLimit();
-            Translation2d lowerLimit = bound.getLowerLimit();
             if (bound.isPositionInBound(targetPosition)) {
                 return bound.getClosestLimitToPosition(targetPosition);
             }
@@ -44,12 +42,10 @@ public class ShootingZone extends GBCircle {
         return targetPosition;
     }
 
-    public Rotation2d getTargetRobotAngle(Translation2d position) {
-        Translation2d relativePosition = ShootingStateCalculations.getRobotTargetTranslation().minus(position);
+    public Rotation2d getTargetRobotAngle() {
+        Translation2d relativePosition = ShootingStateCalculations.getRobotTargetTranslation().minus(getCenterPosition());
         Rotation2d angle = new Rotation2d(Math.atan2(relativePosition.getY(), relativePosition.getX()));
-        if (angle.getRadians() < 0) {
-            angle = Rotation2d.fromRadians(angle.getRadians()+Math.PI*2);
-        }
+        angle = angle.minus(Rotation2d.fromRotations(0.5));
         return angle;
     }
 }
