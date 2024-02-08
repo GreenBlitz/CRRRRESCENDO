@@ -24,7 +24,6 @@ public class ShootingZone extends GBCircle {
     }
 
     public void addBound(Bound bound) {
-
         restrictedBounds.add(bound);
     }
 
