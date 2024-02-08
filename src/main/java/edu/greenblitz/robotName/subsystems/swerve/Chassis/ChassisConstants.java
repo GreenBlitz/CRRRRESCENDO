@@ -98,5 +98,5 @@ public class ChassisConstants {
 
     public static final boolean IS_JOYSTICK_FORWAR_VALUE_INVERTED = false;
 
-    public static final boolean LEFTWARD_VALUE_INVERTED = true;
+    public static final boolean IS_JOYSTICK_LEFTWARD_VALUE_INVERTED = true;
 }
