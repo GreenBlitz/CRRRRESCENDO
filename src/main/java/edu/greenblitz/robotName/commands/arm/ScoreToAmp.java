@@ -8,8 +8,8 @@ public class ScoreToAmp extends SequentialCommandGroup {
     public ScoreToAmp(){
         super(
                 new MoveElbowAndWrist(
-                        WristConstants.PresetPositions.SCORE.ANGLE,
-                        ElbowConstants.PresetPositions.SCORE.ANGLE
+                        ElbowConstants.PresetPositions.SCORE.ANGLE,
+                        WristConstants.PresetPositions.SCORE.ANGLE
                 ),
                 new RunRollerClockWiseUntilObjectIsOut()
         );
