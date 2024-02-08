@@ -1,9 +1,6 @@
 package edu.greenblitz.robotName.subsystems.arm.wrist.NeoWrist;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
-import com.revrobotics.SparkMaxAbsoluteEncoder;
-import com.revrobotics.SparkMaxLimitSwitch;
+import com.revrobotics.*;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
@@ -17,7 +14,7 @@ public class NeoWrist implements IWrist {
     private GBSparkMax motor;
 
     public NeoWrist() {
-        motor = new GBSparkMax(NeoWristConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        motor = new GBSparkMax(NeoWristConstants.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
         motor.config(NeoWristConstants.WRIST_CONFIG_OBJECT);
 
         motor.getPIDController().setFeedbackDevice(motor.getEncoder());

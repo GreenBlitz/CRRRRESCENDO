@@ -1,7 +1,8 @@
 package edu.greenblitz.robotName.subsystems.Lifter.NeoLifter;
 
+import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.CANSparkLowLevel;
 import edu.greenblitz.robotName.subsystems.Lifter.ILifter;
 import edu.greenblitz.robotName.subsystems.Lifter.LifterConstants;
 import edu.greenblitz.robotName.subsystems.Lifter.LifterInputsAutoLogged;
@@ -13,7 +14,7 @@ public class NeoLifter implements ILifter {
     private GBSparkMax motor;
 
     public NeoLifter() {
-        motor = new GBSparkMax(NeoLifterConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        motor = new GBSparkMax(NeoLifterConstants.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
         motor.config(NeoLifterConstants.CONFIG);
 
         motor.getReverseLimitSwitch(NeoLifterConstants.BACKWARD_LIMIT_SWITCH_TYPE).enableLimitSwitch(NeoLifterConstants.IS_BACKWARD_LIMIT_SWITCH_ENABLED);
