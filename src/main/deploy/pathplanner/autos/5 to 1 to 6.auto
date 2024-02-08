@@ -78,20 +78,20 @@
                       "data": {
                         "name": "grip"
                       }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "6 to shoot"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "shoot"
+                      }
                     }
                   ]
-                }
-              },
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "6 to shoot"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "shoot"
                 }
               }
             ]
