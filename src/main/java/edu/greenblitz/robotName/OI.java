@@ -1,5 +1,7 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.shooter.ShootByPower;
+import edu.greenblitz.robotName.commands.shooter.ShootByVelocity;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
@@ -9,6 +11,7 @@ import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.Battery;
+
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
@@ -18,10 +21,12 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
 
 public class OI {
+
     private static OI instance;
 
-    private SmartJoystick mainJoystick;
-    private SmartJoystick secondJoystick;
+    private final SmartJoystick mainJoystick;
+
+    private final SmartJoystick secondJoystick;
 
     private OI() {
         mainJoystick = new SmartJoystick(RobotConstants.Joystick.MAIN);
@@ -30,10 +35,14 @@ public class OI {
         initializeDefaultCommands();
     }
 
-    public static OI getInstance() {
+    public static void init(){
         if (instance == null) {
             instance = new OI();
         }
+    }
+
+    public static OI getInstance() {
+        init();
         return instance;
     }
 
@@ -46,13 +55,10 @@ public class OI {
     }
 
     public void initButtons() {
-        mainJoystick.A.whileTrue(new RotateToObject());
-        mainJoystick.Y.onTrue(new InstantCommand(() -> MultiLimelight.getInstance().changePipeline(true)));
-        mainJoystick.X.onTrue(new InstantCommand(() -> MultiLimelight.getInstance().changePipeline(false)));
 
     }
 
-    public void initializeDefaultCommands(){
+    public void initializeDefaultCommands() {
 //        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
 //        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
 //        Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
@@ -60,5 +66,5 @@ public class OI {
 //        Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
     }
 
-  
+
 }

@@ -1,20 +1,32 @@
 package edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot;
 
 import com.ctre.phoenix6.configs.*;
+import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
+import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
-
-import static edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants.*;
+import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
+import edu.wpi.first.math.controller.ArmFeedforward;
 
 
 public class FalconPivotConstants {
 
-
-    public static final SimpleMotorFeedforward SIMPLE_MOTOR_FF = new SimpleMotorFeedforward(kS, kV, kA);
-
     public static final NeutralModeValue NEUTRAL_MODE_VALUE = NeutralModeValue.Brake;
 
     public static final int MOTOR_ID = 33;
+
+    public static final double kS = 1;
+
+    public static final double kV = 1;
+
+    public static final double kA = 1;
+
+    public static final double kG = 1;
+
+    public static final ArmFeedforward PIVOT_FEED_FORWARD = new ArmFeedforward(kS, kG, kV, kA);
+
+    public static final int MOTION_MAGIC_PID_SLOT = 1;
+    public static final int STAND_IN_PLACE_PID_SLOT = 1;
 
     public static final MotionMagicConfigs MOTION_MAGIC_CONFIGS = new MotionMagicConfigs();
     static {
@@ -43,13 +55,12 @@ public class FalconPivotConstants {
     public static final SoftwareLimitSwitchConfigs SOFTWARE_LIMIT_SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();
     static {
         SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitEnable = true;
-        SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitThreshold = 1;
+        SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitThreshold = PivotConstants.FORWARD_ANGLE_LIMIT.getRotations();
         SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitEnable = true;
-        SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitThreshold = 0;
+        SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitThreshold = PivotConstants.BACKWARD_ANGLE_LIMIT.getRotations();
     }
 
     public static final TalonFXConfiguration TALON_FX_CONFIGURATION = new TalonFXConfiguration();
-
     static{
         TALON_FX_CONFIGURATION.MotionMagic = MOTION_MAGIC_CONFIGS;
         TALON_FX_CONFIGURATION.ClosedLoopRamps = CLOSED_LOOP_RAMPS_CONFIGS;

@@ -22,6 +22,7 @@ public class SimulationElbow implements IElbow {
 
     private PIDController controller;
 
+    private ElbowInputsAutoLogged lastInputs;
 
     public SimulationElbow() {
         elbowSimulation = new SingleJointedArmSim(
@@ -65,7 +66,12 @@ public class SimulationElbow implements IElbow {
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
         controller.setSetpoint(targetAngle.getRadians());
-        setVoltage(controller.calculate(elbowSimulation.getAngleRads()));
+        setVoltage(controller.calculate(lastInputs.position.getRadians()));
+    }
+
+    @Override
+    public void standInPlace(Rotation2d targetAngle) {
+        moveToAngle(targetAngle);
     }
 
     @Override
@@ -74,11 +80,13 @@ public class SimulationElbow implements IElbow {
 
         inputs.appliedOutput = appliedVoltage;
         inputs.outputCurrent = elbowSimulation.getCurrentDrawAmps();
-        inputs.position = elbowSimulation.getAngleRads();
+        inputs.position = Rotation2d.fromRadians(elbowSimulation.getAngleRads());
         inputs.velocity = elbowSimulation.getVelocityRadPerSec();
         inputs.absoluteEncoderPosition = elbowSimulation.getAngleRads();
         inputs.temperature = 0;
         inputs.hasReachedForwardLimit = elbowSimulation.hasHitLowerLimit();
         inputs.hasReachedBackwardLimit = elbowSimulation.hasHitLowerLimit();
+        
+        lastInputs = inputs;
     }
 }

@@ -6,39 +6,20 @@ import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
 import edu.greenblitz.robotName.utils.GBCommand;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ProxyCommand;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 
-public class MoveToPosition extends GBCommand {
-
-    private Command moveToFoundPose;
+public class MoveToPosition extends ProxyCommand {
 
     public MoveToPosition(Pose2d endPoint) {
         this(endPoint, ChassisConstants.CONSTRAINTS);
     }
 
     public MoveToPosition(Pose2d endPoint, PathConstraints constraints) {
-        moveToFoundPose = AutoBuilder.pathfindToPose(
+        super(() -> AutoBuilder.pathfindToPose(
                 endPoint,
                 constraints
-        );
+        ));
     }
 
-    @Override
-    public void initialize() {
-        moveToFoundPose.initialize();
-    }
-
-    @Override
-    public void execute() {
-        moveToFoundPose.execute();
-    }
-
-    @Override
-    public boolean isFinished() {
-        return moveToFoundPose.isFinished();
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        moveToFoundPose.end(interrupted);
-    }
 }

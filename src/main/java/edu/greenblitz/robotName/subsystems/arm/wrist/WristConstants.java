@@ -28,23 +28,9 @@ public class WristConstants {
 
     public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(200);
 
-    public static final double RELATIVE_POSITION_CONVERSION_FACTOR = 0.0328;
+    public static final double CONVERSION_FACTOR = 0.0328;
 
-    public static final double RELATIVE_VELOCITY_CONVERSION_FACTOR = 0.0030332432;
-
-    public static final double ABSOLUTE_POSITION_CONVERSION_FACTOR = 0.00302;
-
-    public static final double ABSOLUTE_VELOCITY_CONVERSION_FACTOR = 0.00302;
-
-    public static final double kS = 1;
-
-    public static final double kV = 1;
-
-    public static final double kG = 1;
-
-    public static final double kA = 1;
-
-    public static final double TOLERANCE = Units.degreesToRadians(0.5);
+    public static final Rotation2d TOLERANCE = Rotation2d.fromDegrees(0.5);
 
     public static final int CURRENT_LIMIT = 40;
 

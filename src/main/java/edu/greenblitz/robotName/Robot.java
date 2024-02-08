@@ -6,7 +6,6 @@ import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
 import edu.greenblitz.robotName.subsystems.Intake.Intake;
 import edu.greenblitz.robotName.subsystems.Lifter.Lifter;
-import edu.greenblitz.robotName.subsystems.ArmShooterMechanism.ArmShooterMechanism;
 import edu.greenblitz.robotName.subsystems.Limelight.ObjectDetectionLimelight;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
@@ -48,30 +47,27 @@ public class Robot extends LoggedRobot {
         Pathfinding.setPathfinder(new LocalADStar());
         CommandScheduler.getInstance().enable();
         initializeLogger();
-        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
-        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
         initializeSubsystems();
         SwerveChassis.getInstance().resetAllEncoders();
         initializeAutonomousBuilder();
-        OI.getInstance();
+        OI.init();
     }
 
     public void initializeSubsystems() {
         MultiLimelight.init();
         ObjectDetectionLimelight.init();
-//        SwerveChassis.init();
-//
-//        Pivot.init();
-//        Funnel.init();
-//        FlyWheel.init();
-//
-//        Elbow.init();
-//        Wrist.init();
-//        Roller.init();
-//        ArmShooterMechanism.init();
-//
-//        Lifter.init();
-//        Intake.init();
+        SwerveChassis.init();
+
+        Pivot.init();
+        Funnel.init();
+        FlyWheel.init();
+
+        Elbow.init();
+        Wrist.init();
+        Roller.init();
+
+        Lifter.init();
+        Intake.init();
     }
 
     @Override
@@ -83,7 +79,6 @@ public class Robot extends LoggedRobot {
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
         RoborioUtils.updateCurrentCycleTime();
-        ArmShooterMechanism.getInstance().periodic();
     }
 
     private void initializeAutonomousBuilder() {
@@ -98,7 +93,7 @@ public class Robot extends LoggedRobot {
         );
     }
 
-    private void initializeLogger(){
+    private void initializeLogger() {
         NetworkTableInstance.getDefault()
                 .getStructTopic("RobotPose", Pose2d.struct).publish();
 
@@ -133,6 +128,4 @@ public class Robot extends LoggedRobot {
         }
         Logger.start();
     }
-
-
 }
