@@ -59,13 +59,13 @@ public class OI {
     }
 
     public void initButtons() {
-        secondJoystick.START.onTrue(new PanicMode());
-        secondJoystick.BACK.onTrue(new ToggleScoringMode());
-        secondJoystick.A.onTrue(new MoveElbowAndWrist(ElbowConstants.PresetPositions.SCORE.ANGLE, WristConstants.PresetPositions.SCORE.ANGLE));
-        secondJoystick.B.onTrue(new MoveElbowAndWristToSafe());
-        secondJoystick.X.onTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE));
-        secondJoystick.Y.onTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
-        secondJoystick.POV_DOWN.onTrue(new CollectNoteToScoringMode());
+        secondJoystick.START.whileTrue(new PanicMode());
+        secondJoystick.BACK.whileTrue(new ToggleScoringMode());
+        secondJoystick.A.whileTrue(new MoveElbowAndWrist(ElbowConstants.PresetPositions.SCORE.ANGLE, WristConstants.PresetPositions.SCORE.ANGLE));
+        secondJoystick.B.whileTrue(new MoveElbowAndWristToSafe());
+        secondJoystick.X.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE));
+        secondJoystick.Y.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
+        secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
     }
 
     public void initializeDefaultCommands() {
