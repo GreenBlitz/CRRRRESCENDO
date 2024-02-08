@@ -22,13 +22,13 @@ public class WristConstants {
 
     public static final double LENGTH_OF_ENDEFFECTOR = 0.1;
 
-    public static final double WRIST_MASS_KG = 10;
+    public static final double WRIST_MASS_KG = 0.5;
 
     public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(-50);
 
     public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(200);
 
-    public static final double CONVERSION_FACTOR = 0.0328;
+    public static final double CONVERSION_FACTOR = 1;
 
     public static final Rotation2d TOLERANCE = Rotation2d.fromDegrees(0.5);
 

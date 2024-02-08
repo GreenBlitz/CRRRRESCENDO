@@ -1,17 +1,24 @@
 package edu.greenblitz.robotName;
 
-import edu.greenblitz.robotName.commands.shooter.ShootByPower;
-import edu.greenblitz.robotName.commands.shooter.ShootByVelocity;
+import edu.greenblitz.robotName.commands.PanicMode;
+import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
+import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
+import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
+import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
+import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
 import edu.greenblitz.robotName.commands.swerve.RotateToObject;
 import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
+import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.Battery;
 
+import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
+import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
@@ -61,9 +68,9 @@ public class OI {
     public void initializeDefaultCommands() {
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
         Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-        Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
         Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
         Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
+        Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
     }
 
 
