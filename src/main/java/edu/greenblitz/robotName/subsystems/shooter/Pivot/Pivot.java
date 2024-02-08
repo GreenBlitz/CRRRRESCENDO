@@ -66,9 +66,8 @@ public class Pivot extends GBSubsystem {
 		pivot.moveToAngle(targetAngle);
 	}
 
-	public void standInPlaceWithSet() {
+	public void setCurrentAngle() {
 		currentAngle = getAngle();
-		pivot.standInPlace(currentAngle);
 	}
 
 	public void standInPlace() {

@@ -13,6 +13,7 @@ public class WristCommand extends GBCommand {
     }
 
     public void end(boolean interrupted) {
-        wrist.standInPlaceWithSet();
+        wrist.setCurrentAngle();
+        wrist.standInPlace();
     }
 }

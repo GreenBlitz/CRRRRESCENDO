@@ -76,9 +76,8 @@ public class Wrist extends GBSubsystem {
 		wrist.moveToAngle(Rotation2d.fromRadians(targetAngle.getRadians() % (2 * Math.PI)));
 	}
 
-	public void standInPlaceWithSet() {
+	public void setCurrentAngle(){
 		currentAngle = getAngle();
-		wrist.moveToAngle(currentAngle);
 	}
 
 	public void standInPlace() {

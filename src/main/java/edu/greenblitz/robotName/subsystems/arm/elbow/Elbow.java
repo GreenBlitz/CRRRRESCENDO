@@ -40,6 +40,7 @@ public class Elbow extends GBSubsystem {
         super.periodic();
 
         elbow.updateInputs(elbowInputs);
+        System.out.println(elbowInputs.position);
         Logger.processInputs("Elbow", elbowInputs);
         Logger.recordOutput("Elbow", getPose3D());
     }
@@ -64,11 +65,6 @@ public class Elbow extends GBSubsystem {
 
     public void moveToAngle(Rotation2d targetAngle) {
         elbow.moveToAngle(targetAngle);
-    }
-
-    public void standInPlaceWithSet() {
-        currentAngle = getAngle();
-        elbow.standInPlace(currentAngle);
     }
 
     public void standInPlace() {
