@@ -14,11 +14,9 @@ public class MoveShooterToAngle extends ProxyCommand{
 
 	private static Command getCommand(Rotation2d targetAngle) {
 		if (Elbow.getInstance().isInShooterCollisionRange()){
-			System.out.println("aaaaaaaaaaaaaa");
 			return new MovePivotIfInDangerZone(targetAngle);
 		}
 		else {
-			System.out.println("bbbbbbbbbbbbbb");
 			return new MovePivotToAngle(targetAngle);
 		}
 	}
