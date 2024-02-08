@@ -1,13 +1,14 @@
 package edu.greenblitz.robotName.commands.arm.roller;
 
-public class RunRollerUntilObjectOut extends RollerCommand{
+public class RunRollerUntilNoteIsInside extends RollerCommand{
     @Override
     public void initialize() {
-        roller.rollIn();
+        roller.rollOut();
     }
 
     @Override
     public boolean isFinished() {
-        return !roller.isObjectInside();
+        return roller.isObjectInside();
     }
+
 }
