@@ -91,7 +91,7 @@ public class Robot extends LoggedRobot {
         );
     }
 
-    private void initializeLogger(){
+    private void initializeLogger() {
         NetworkTableInstance.getDefault()
                 .getStructTopic("RobotPose", Pose2d.struct).publish();
 
@@ -126,6 +126,4 @@ public class Robot extends LoggedRobot {
         }
         Logger.start();
     }
-
-
 }
