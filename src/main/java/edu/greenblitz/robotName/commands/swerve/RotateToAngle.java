@@ -6,37 +6,37 @@ import edu.wpi.first.math.geometry.Rotation2d;
 
 import java.util.function.Supplier;
 
-public class RotateToAngle extends SwerveCommand{
+public class RotateToAngle extends SwerveCommand {
+
     private Supplier<Rotation2d> angleSetPoint;
 
-        public RotateToAngle(Supplier<Rotation2d> angleSetPoint){
-            super();
-            this.angleSetPoint = angleSetPoint;
-        }
+    public RotateToAngle(Rotation2d angleSetPoint) {
+        super();
+        this.angleSetPoint = () -> angleSetPoint;
+    }
 
-        @Override
-        public void initialize(){
-            ChassisConstants.ROTATION_PID_CONTROLLER.setSetpoint(angleSetPoint.get().getRadians());
-        }
+    public RotateToAngle(Supplier<Rotation2d> angleSetPoint) {
+        super();
+        this.angleSetPoint = angleSetPoint;
+    }
 
-        @Override
-        public void execute(){
-            SwerveChassis.getInstance().moveByChassisSpeeds(
-                    0,
-                    0,
-                    ChassisConstants.ROTATION_PID_CONTROLLER.calculate(
-                            SwerveChassis.getInstance().getChassisAngle().getRadians()),
-                    SwerveChassis.getInstance().getChassisAngle()
-            );
-        }
+    @Override
+    public void initialize() {
+        ChassisConstants.ROTATION_PID_CONTROLLER.setSetpoint(angleSetPoint.get().getRadians());
+    }
 
-        @Override
-        public boolean isFinished() {
-            return SwerveChassis.getInstance().isAtAngle(angleSetPoint.get());
-        }
+    @Override
+    public void execute() {
+        SwerveChassis.getInstance().rotateToAngle();
+    }
+
+    @Override
+    public boolean isFinished() {
+        return SwerveChassis.getInstance().isAtAngle(angleSetPoint.get());
+    }
 
     @Override
     public void end(boolean interrupted) {
         SwerveChassis.getInstance().stop();
     }
-    }
+}

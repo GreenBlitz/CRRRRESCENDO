@@ -24,33 +24,11 @@ public class ShootingZone extends GBCircle {
     }
 
     public void addBound(Bound bound) {
-
         restrictedBounds.add(bound);
     }
 
     public void setRestrictedBounds(List<Bound> restrictedBounds) {
         this.restrictedBounds = restrictedBounds;
-    }
-
-    public Translation2d getClosestLimitToPosition(Translation2d upperLimit, Translation2d lowerLimit, Translation2d targetPosition) {
-        double upperLimitTargetDelta = upperLimit.getY() - targetPosition.getY();
-        double lowerLimitTargetDelta = targetPosition.getY() - lowerLimit.getY();
-        return upperLimitTargetDelta > lowerLimitTargetDelta ? lowerLimit : upperLimit;
-    }
-
-    public boolean isInXBound(Translation2d position, Translation2d lowerLimit, Translation2d upperLimit) {
-        return position.getX() > lowerLimit.getX() && position.getX() < upperLimit.getX();
-    }
-
-    public boolean isInYBound(Translation2d position, Translation2d lowerLimit, Translation2d upperLimit) {
-        return position.getY() > lowerLimit.getY() && position.getY() < upperLimit.getY();
-    }
-
-    public boolean isPositionInBound(Translation2d position, Translation2d lowerLimit, Translation2d upperLimit) {
-        boolean isInXBound = lowerLimit.getX() > upperLimit.getX() ?
-                isInXBound(position, upperLimit, lowerLimit) :
-                isInXBound(position, lowerLimit, upperLimit);
-        return isInXBound && isInYBound(position, lowerLimit, upperLimit);
     }
 
     @Override
@@ -59,8 +37,8 @@ public class ShootingZone extends GBCircle {
         for (Bound bound : restrictedBounds) {
             Translation2d upperLimit = bound.getUpperLimit();
             Translation2d lowerLimit = bound.getLowerLimit();
-            if (isPositionInBound(targetPosition, lowerLimit, upperLimit)) {
-                return getClosestLimitToPosition(upperLimit, lowerLimit, targetPosition);
+            if (bound.isPositionInBound(targetPosition)) {
+                return bound.getClosestLimitToPosition(targetPosition);
             }
         }
         return targetPosition;

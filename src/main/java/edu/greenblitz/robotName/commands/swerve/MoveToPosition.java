@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.commands.auto;
+package edu.greenblitz.robotName.commands.swerve;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.path.PathConstraints;

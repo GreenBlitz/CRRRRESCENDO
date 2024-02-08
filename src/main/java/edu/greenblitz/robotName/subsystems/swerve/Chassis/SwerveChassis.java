@@ -256,6 +256,17 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         );
     }
 
+    public void rotateToAngle() {
+        moveByChassisSpeeds(
+                0,
+                0,
+                ChassisConstants.ROTATION_PID_CONTROLLER.calculate(
+                        getChassisAngle().getRadians()
+                ),
+                getChassisAngle()
+        );
+    }
+
     /**
      * makes sure no module is requested to move faster than possible by linearly scaling all module velocities to comply with the constraint
      *
