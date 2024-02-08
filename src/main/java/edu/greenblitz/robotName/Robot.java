@@ -26,6 +26,8 @@ import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
@@ -46,30 +48,31 @@ public class Robot extends LoggedRobot {
     public void robotInit() {
         Pathfinding.setPathfinder(new LocalADStar());
         CommandScheduler.getInstance().enable();
-        initializeLogger();
+//        initializeLogger();
         SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
-        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+//        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
         initializeSubsystems();
         SwerveChassis.getInstance().resetAllEncoders();
         initializeAutonomousBuilder();
         OI.getInstance();
+        dutyCycleEncoder = new DutyCycleEncoder(0);
     }
 
     public void initializeSubsystems() {
         MultiLimelight.init();
         SwerveChassis.init();
 
-        Pivot.init();
-        Funnel.init();
-        FlyWheel.init();
-
-        Elbow.init();
-        Wrist.init();
-        Roller.init();
-        ArmShooterMechanism.init();
-
-        Lifter.init();
-        Intake.init();
+//        Pivot.init();
+//        Funnel.init();
+//        FlyWheel.init();
+//
+//        Elbow.init();
+//        Wrist.init();
+//        Roller.init();
+//        ArmShooterMechanism.init();
+//
+//        Lifter.init();
+//        Intake.init();
     }
 
     @Override
@@ -77,11 +80,14 @@ public class Robot extends LoggedRobot {
         Dashboard.getInstance().activateDriversDashboard();
     }
 
+    private DutyCycleEncoder dutyCycleEncoder;
     @Override
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
         RoborioUtils.updateCurrentCycleTime();
         ArmShooterMechanism.getInstance().periodic();
+        SmartDashboard.putString("Rotationss",String.valueOf(dutyCycleEncoder.get()));
+        SmartDashboard.putBoolean("IsItConnecteddd?",dutyCycleEncoder.isConnected());
     }
 
     private void initializeAutonomousBuilder() {
