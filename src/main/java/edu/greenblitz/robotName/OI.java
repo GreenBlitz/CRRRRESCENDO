@@ -3,6 +3,8 @@ package edu.greenblitz.robotName;
 import edu.greenblitz.robotName.commands.PanicMode;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
+import edu.greenblitz.robotName.commands.arm.ScoreToAmp;
+import edu.greenblitz.robotName.commands.arm.roller.RollClockWise;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
@@ -59,13 +61,8 @@ public class OI {
     }
 
     public void initButtons() {
-        secondJoystick.START.whileTrue(new PanicMode());
-        secondJoystick.BACK.whileTrue(new ToggleScoringMode());
-        secondJoystick.A.whileTrue(new MoveElbowAndWrist(ElbowConstants.PresetPositions.SCORE.ANGLE, WristConstants.PresetPositions.SCORE.ANGLE));
-        secondJoystick.B.whileTrue(new MoveElbowAndWristToSafe());
-        secondJoystick.X.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE));
-        secondJoystick.Y.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
-        secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
+        secondJoystick.A.onTrue(new RollClockWise());
+        secondJoystick.B.onTrue(new MoveElbowAndWristToSafe());
     }
 
     public void initializeDefaultCommands() {

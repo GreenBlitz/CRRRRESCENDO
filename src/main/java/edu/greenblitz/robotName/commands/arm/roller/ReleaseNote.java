@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 public class ReleaseNote extends SequentialCommandGroup {
     public ReleaseNote(){
         super(
-                new RunRollerUntilObjectIsOut(),
-                new RollInForAGivenTime(RollerConstants.SAFETY_TIME_AFTER_NOTE_IS_RELEASED)
+                new RunRollerClockWiseUntilObjectIsOut(),
+                new RollClockWiseForAGivenTime(RollerConstants.SAFETY_TIME_AFTER_NOTE_IS_RELEASED)
         );
     }
 }

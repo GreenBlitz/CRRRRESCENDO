@@ -1,6 +1,6 @@
 package edu.greenblitz.robotName.commands.arm.roller;
 
-public class RunRollerUntilNoteIsInside extends RollerCommand{
+public class RunRollerCounterClockWiseUntilNoteIsInside extends RollerCommand{
     @Override
     public void initialize() {
         roller.rollCounterClockWise();
