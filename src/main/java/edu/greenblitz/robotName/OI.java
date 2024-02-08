@@ -58,7 +58,7 @@ public class OI {
     }
 
     public void initButtons() {
-        secondJoystick.A.whileTrue(new ShootByVelocity(3000));
+        secondJoystick.A.whileTrue(new GoToShootingStateAndShoot());
     }
 
     public void initializeDefaultCommands() {
