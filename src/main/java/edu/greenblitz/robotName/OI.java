@@ -62,7 +62,13 @@ public class OI {
     }
 
     public void initButtons() {
-
+        secondJoystick.START.whileTrue(new PanicMode());
+        secondJoystick.BACK.whileTrue(new ToggleScoringMode());
+        secondJoystick.A.whileTrue(new MoveElbowAndWrist(ElbowConstants.PresetPositions.SCORE.ANGLE, WristConstants.PresetPositions.SCORE.ANGLE));
+        secondJoystick.B.whileTrue(new MoveElbowAndWristToSafe());
+        secondJoystick.X.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE));
+        secondJoystick.Y.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
+        secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
     }
 
     public void initializeDefaultCommands() {
