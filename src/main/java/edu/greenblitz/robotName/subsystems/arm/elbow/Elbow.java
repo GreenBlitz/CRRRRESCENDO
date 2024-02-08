@@ -74,6 +74,11 @@ public class Elbow extends GBSubsystem {
         currentAngle = getAngle();
     }
 
+    public void setCurrentAngle(Rotation2d angle){
+        currentAngle = angle;
+    }
+
+
     public double getVoltage() {
         return elbowInputs.appliedOutput;
     }
