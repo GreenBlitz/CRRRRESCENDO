@@ -91,8 +91,8 @@ public class Elbow extends GBSubsystem {
     }
 
     public boolean isInShooterCollisionRange() {
-        return elbowInputs.position.getRadians() > ElbowConstants.SHOOTER_COLLISION_RANGE.getFirst().getRadians() &&
-                elbowInputs.position.getRadians() < ElbowConstants.SHOOTER_COLLISION_RANGE.getSecond().getRadians();
+        return elbowInputs.position.getRadians() >= ElbowConstants.SHOOTER_COLLISION_RANGE.getFirst().getRadians() &&
+                elbowInputs.position.getRadians() <= ElbowConstants.SHOOTER_COLLISION_RANGE.getSecond().getRadians();
     }
 
     public Pose3d getPose3D (){

@@ -73,7 +73,7 @@ public class SimulationPivot implements IPivot {
 
     @Override
     public void standInPlace(Rotation2d targetAngle) {
-        setPower(0);
+        moveToAngle(targetAngle);
     }
 
     @Override
