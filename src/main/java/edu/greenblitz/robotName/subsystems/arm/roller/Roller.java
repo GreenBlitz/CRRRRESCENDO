@@ -40,11 +40,11 @@ public class Roller extends GBSubsystem {
 		roller.setPower(power);
 	}
 
-	public void rollClockWise(){
+	public void rollClockwise(){
 		setPower(ROLL_FORWARD_POWER);
 	}
 
-	public void rollCounterClockWise(){
+	public void rollCounterClockwise(){
 		setPower(ROLL_BACKWARD_POWER);
 	}
 

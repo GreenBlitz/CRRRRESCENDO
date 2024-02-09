@@ -1,10 +1,10 @@
 package edu.greenblitz.robotName.commands.arm.roller;
 
-public class RollCounterClockWise extends RollerCommand{
+public class RollCounterClockwise extends RollerCommand{
 
     @Override
     public void execute() {
-        roller.rollCounterClockWise();
+        roller.rollCounterClockwise();
     }
 
 }
