@@ -68,8 +68,6 @@ public class OI {
         secondJoystick.X.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE));
         secondJoystick.Y.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
         secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
-
-        mainJoystick.B.whileTrue(new GoToShootingStateAndShoot());
     }
 
     public void initializeDefaultCommands() {
