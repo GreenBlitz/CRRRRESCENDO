@@ -35,6 +35,7 @@ public class Robot extends LoggedRobot {
     public enum RobotType {
         ROBOT_NAME,
         SIMULATION,
+        PEGA_SWERVE,
         REPLAY
     }
 
@@ -122,5 +123,19 @@ public class Robot extends LoggedRobot {
                 break;
         }
         Logger.start();
+    }
+    public static RobotType getRobotType (){
+        RobotType robotType = RobotConstants.ROBOT_TYPE;
+        if(isReal()){
+            if(robotType.equals(RobotType.PEGA_SWERVE)){
+                return RobotType.PEGA_SWERVE;
+            }
+            return RobotType.ROBOT_NAME;
+        }else{
+            if(robotType.equals(RobotType.REPLAY)){
+                return RobotType.REPLAY;
+            }
+            return RobotType.SIMULATION;
+        }
     }
 }

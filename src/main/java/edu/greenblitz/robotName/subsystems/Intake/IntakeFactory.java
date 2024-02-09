@@ -7,8 +7,8 @@ import edu.greenblitz.robotName.subsystems.Intake.simulationIntake.SimulationInt
 public class IntakeFactory {
 	public static IIntake create() {
         return switch (RobotConstants.ROBOT_TYPE) {
-            case ROBOT_NAME -> new NeoIntake();
-            case REPLAY -> new ReplayIntake();
+            case ROBOT_NAME, PEGA_SWERVE -> new NeoIntake();
+			case REPLAY -> new ReplayIntake();
 			case SIMULATION -> new SimulationIntake();
         };
 		
