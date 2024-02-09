@@ -1,7 +1,7 @@
 package edu.greenblitz.robotName.subsystems.swerve.Modules.kazaSwerveModule;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.CANSparkLowLevel;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.ISwerveModule;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModuleInputsAutoLogged;
@@ -44,13 +44,13 @@ public class KazaSwerveModule implements ISwerveModule {
         lampreyID = configObject.AbsoluteEncoderID;
         linInverted = configObject.linInverted;
 
-        angleMotor = new GBSparkMax(angleMotorID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        angleMotor = new GBSparkMax(angleMotorID, CANSparkLowLevel.MotorType.kBrushless);
         angleMotor.config(KazaSwerveConstants.BASE_ANGULAR_MOTOR_CONFIG_OBJECT);
         angleMotor.getPIDController().setPositionPIDWrappingEnabled(true);
         angleMotor.getPIDController().setPositionPIDWrappingMaxInput(2* Math.PI);
         angleMotor.getPIDController().setPositionPIDWrappingMinInput(0);
 
-        linearMotor = new GBSparkMax(linearMotorID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        linearMotor = new GBSparkMax(linearMotorID, CANSparkLowLevel.MotorType.kBrushless);
         linearMotor.config(KazaSwerveConstants.BASE_LINEAR_CONFIG_OBJECT.withInverted(linInverted));
 
         lamprey = new AnalogInput(lampreyID);

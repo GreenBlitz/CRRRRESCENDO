@@ -16,7 +16,7 @@ public class NeoElbow implements IElbow {
     private GBSparkMax motor;
 
     public NeoElbow(){
-        motor = new GBSparkMax(NeoElbowConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        motor = new GBSparkMax(NeoElbowConstants.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
         motor.config(NeoElbowConstants.ELBOW_CONFIG_OBJECT);
 
         motor.getPIDController().setFeedbackDevice(motor.getEncoder());
