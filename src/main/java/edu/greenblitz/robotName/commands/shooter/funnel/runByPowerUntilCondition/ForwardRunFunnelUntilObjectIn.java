@@ -6,7 +6,7 @@ import edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants;
 public class ForwardRunFunnelUntilObjectIn extends RunFunnelByPowerUntilCondition {
 
     public ForwardRunFunnelUntilObjectIn() {
-        super(FunnelConstants.ROLL_POWER, () -> Funnel.getInstance().isObjectIn());
+        super(FunnelConstants.ROLL_POWER, () -> funnel.isObjectIn());
     }
 
 }
