@@ -11,7 +11,7 @@ public class GoToShootingState extends ParallelCommandGroup {
     public GoToShootingState() {
         super(
                 new MoveRobotToShootingPosition(),
-                new GoToShooterAngle(),
+                new MoveShooterToAngle(ShootingStateCalculations::getTargetShooterAngle),
                 new RunFlyWheelByPowerConstant()
         );
     }

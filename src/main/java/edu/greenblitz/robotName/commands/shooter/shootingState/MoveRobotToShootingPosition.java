@@ -3,9 +3,9 @@ package edu.greenblitz.robotName.commands.shooter.shootingState;
 import edu.greenblitz.robotName.commands.swerve.MoveToPosition;
 import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
 import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
-import edu.greenblitz.robotName.utils.GBConditionalProxyCommand;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 
-public class MoveRobotToShootingPosition extends GBConditionalProxyCommand {
+public class MoveRobotToShootingPosition extends ConditionalCommand {
 
     public MoveRobotToShootingPosition() {
         super(

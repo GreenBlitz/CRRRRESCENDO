@@ -5,7 +5,12 @@ import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
+<<<<<<< Updated upstream
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
+=======
+import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingStateAndShoot;
+import edu.greenblitz.robotName.commands.swerve.*;
+>>>>>>> Stashed changes
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
@@ -66,6 +71,12 @@ public class OI {
         secondJoystick.X.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE));
         secondJoystick.Y.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
         secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
+<<<<<<< Updated upstream
+=======
+
+        mainJoystick.A.whileTrue(new MoveShooterToAngle(ShootingStateCalculations::getTargetShooterAngle));
+        mainJoystick.B.whileTrue(new GoToShootingStateAndShoot());
+>>>>>>> Stashed changes
     }
 
     public void initializeDefaultCommands() {
