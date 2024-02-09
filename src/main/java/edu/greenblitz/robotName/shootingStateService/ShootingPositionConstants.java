@@ -9,9 +9,9 @@ public class ShootingPositionConstants {
     
     public static final Translation2d CENTER_OF_SHOOTING_ZONE = FieldConstants.MIDDLE_OF_SPEAKER_POSITION.toTranslation2d();
 
-    public static final double SHOOTING_ZONE_RADIUS_IN_METERS = 3;
+    public static final double SHOOTING_ZONE_RADIUS_IN_METERS = 2.5;
 
-    public static final double WRAPPER_SHOOTING_ZONE_RADIUS_IN_METERS = 3.5;
+    public static final double WRAPPER_SHOOTING_ZONE_RADIUS_IN_METERS = 3;
 
     public static ShootingZone LEGAL_SHOOTING_ZONE = new ShootingZone(
             CENTER_OF_SHOOTING_ZONE,
