@@ -30,7 +30,6 @@ public class ShootingStateCalculations {
 
     public static Rotation2d getTargetRobotAngle() {
         double angle = LEGAL_SHOOTING_ZONE.getTargetRobotAngle().getRadians();
-        System.out.println(angle + "," + getRobotPose().getRotation());
         return new Rotation2d(angle);
     }
 
