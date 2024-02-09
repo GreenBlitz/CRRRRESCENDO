@@ -43,8 +43,8 @@ public class Robot extends LoggedRobot {
         Pathfinding.setPathfinder(new LocalADStar());
         CommandScheduler.getInstance().enable();
         initializeLogger();
-        initializeSubsystems();
-        SwerveChassis.getInstance().resetAllEncoders();
+        //initializeSubsystems();
+        //SwerveChassis.getInstance().resetAllEncoders();
         initializeAutonomousBuilder();
         OI.init();
     }
