@@ -35,9 +35,4 @@ public class MovePivotToAngle extends PivotCommand {
 	public boolean isFinished() {
 		return pivot.isAtAngle(supplliedTargetAngle);
 	}
-
-	@Override
-	public void end(boolean interrupted) {
-		super.end(interrupted);
-	}
 }

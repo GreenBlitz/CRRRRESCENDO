@@ -1,8 +1,6 @@
-package edu.greenblitz.robotName.commands.shooter.funnel.runByPowerAndCondition;
+package edu.greenblitz.robotName.commands.shooter.funnel.runByPowerUntilCondition;
 
 import edu.greenblitz.robotName.commands.shooter.funnel.FunnelCommand;
-import edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public class RunFunnelByPower extends FunnelCommand {
 

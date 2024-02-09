@@ -27,21 +27,21 @@ public class RotateToAngle extends SwerveCommand {
     @Override
     public void initialize() {
         angleSetPoint = angleSetPointSupplier.get();
-        SwerveChassis.getInstance().setGoalAngle(angleSetPoint);
+        swerveChassis.setGoalAngle(angleSetPoint);
     }
 
     @Override
     public void execute() {
-        SwerveChassis.getInstance().rotateToAngle();
+        swerveChassis.rotateToAngle();
     }
 
     @Override
     public boolean isFinished() {
-        return SwerveChassis.getInstance().isAtAngle(angleSetPoint);
+        return swerveChassis.isAtAngle(angleSetPoint);
     }
 
     @Override
     public void end(boolean interrupted) {
-        SwerveChassis.getInstance().stop();
+        swerveChassis.stop();
     }
 }

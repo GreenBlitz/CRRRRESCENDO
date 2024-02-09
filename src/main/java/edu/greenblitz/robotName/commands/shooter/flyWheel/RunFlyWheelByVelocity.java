@@ -13,6 +13,10 @@ public class RunFlyWheelByVelocity extends FlyWheelCommand {
         this.velocity = velocity;
     }
 
+    protected void changeVelocity(double velocity) {
+        this.velocity = velocity;
+    }
+
     @Override
     public void initialize() {
         timeInShootingSpeed = 0;
