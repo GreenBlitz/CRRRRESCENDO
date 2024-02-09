@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot;
 
+import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -10,6 +11,7 @@ import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotInputsAutoLogged;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 import static edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot.FalconPivotConstants.*;
+import static edu.greenblitz.robotName.utils.SysId.FalconSysId.SysIdFalconConstants.SIGNAL_SPEED;
 
 public class FalconPivot implements IPivot {
 
@@ -19,7 +21,8 @@ public class FalconPivot implements IPivot {
         motor = new TalonFX(MOTOR_ID);
         motor.getConfigurator().apply(TALON_FX_CONFIGURATION);
         motor.setNeutralMode(NEUTRAL_MODE_VALUE);
-        motor.optimizeBusUtilization();
+        //TODO - cancel the comment underneath and use setUpdateFrequencyForAll the inputs
+        //motor.optimizeBusUtilization();
     }
 
 
@@ -49,7 +52,7 @@ public class FalconPivot implements IPivot {
                 new MotionMagicDutyCycle(
                     targetAngle.getRotations() / PivotConstants.RELATIVE_POSITION_CONVERSION_FACTOR,
                     true,
-                    PIVOT_FEED_FORWARD.calculate(targetAngle.getRadians(), 0),
+                    0,
                     MOTION_MAGIC_PID_SLOT,
                     true,
                     true,
@@ -61,10 +64,10 @@ public class FalconPivot implements IPivot {
     public void standInPlace(Rotation2d targetAngle) {
         motor.setControl(
                 new PositionVoltage(
-                        targetAngle.getRotations(),
+                        targetAngle.getRotations() / PivotConstants.RELATIVE_POSITION_CONVERSION_FACTOR,
                         0.0,
                         true,
-                        PIVOT_FEED_FORWARD.calculate(targetAngle.getRadians(), 0),
+                        0,
                         STAND_IN_PLACE_PID_SLOT,
                         true,
                         true,
