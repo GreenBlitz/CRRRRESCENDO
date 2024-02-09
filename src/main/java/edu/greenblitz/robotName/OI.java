@@ -36,7 +36,7 @@ public class OI {
         mainJoystick = new SmartJoystick(RobotConstants.Joystick.MAIN);
         secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
         initButtons();
-        //initializeDefaultCommands();
+        initializeDefaultCommands();
     }
 
     public static void init(){
