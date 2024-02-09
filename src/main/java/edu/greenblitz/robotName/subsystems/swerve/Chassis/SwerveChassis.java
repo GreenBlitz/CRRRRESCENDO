@@ -421,6 +421,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), pose);
     }
 
+    public void setGoalAngle(Rotation2d goalAngle){
+        ChassisConstants.ROTATION_PID_CONTROLLER.setSetpoint(goalAngle.getRadians());
+    }
+
     public void moveByChassisSpeeds(ChassisSpeeds chassisSpeeds) {
         moveByChassisSpeeds(chassisSpeeds.vxMetersPerSecond,
                 chassisSpeeds.vyMetersPerSecond,
