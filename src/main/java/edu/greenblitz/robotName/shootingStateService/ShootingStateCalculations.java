@@ -4,17 +4,23 @@ import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.shootingCalculations.ShootingAngleCalculations;
+import edu.greenblitz.robotName.utils.shootingCalculations.ShootingZone;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
 
 import static edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants.LEGAL_SHOOTING_ZONE;
+import static edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants.WRAPPER_SHOOTING_ZONE;
 
 public class ShootingStateCalculations {
 
     public static boolean isRobotInShootingPosition() {
         return LEGAL_SHOOTING_ZONE.isInCircle(getRobotPose().getTranslation());
+    }
+
+    public static boolean isRobotNearShootingPosition() {
+        return WRAPPER_SHOOTING_ZONE.isInCircle(getRobotPose().getTranslation());
     }
 
     private static Pose2d getRobotPose() {

@@ -11,7 +11,7 @@ public class MoveRobotToShootingPosition extends ConditionalCommand {
         super(
                 new RotateToAngle(ShootingStateCalculations::getTargetRobotAngle),
                 new MoveToPosition(ShootingStateCalculations::getTargetRobotPosition),
-                () -> ShootingStateCalculations.isRobotInShootingPosition()
+                () -> ShootingStateCalculations.isRobotNearShootingPosition()
         );
     }
 }

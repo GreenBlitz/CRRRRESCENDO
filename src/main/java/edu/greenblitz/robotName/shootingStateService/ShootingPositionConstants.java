@@ -11,9 +11,17 @@ public class ShootingPositionConstants {
 
     public static final double SHOOTING_ZONE_RADIUS_IN_METERS = 3;
 
+    public static final double WRAPPER_SHOOTING_ZONE_RADIUS_IN_METERS = 3.5;
+
     public static ShootingZone LEGAL_SHOOTING_ZONE = new ShootingZone(
             CENTER_OF_SHOOTING_ZONE,
             SHOOTING_ZONE_RADIUS_IN_METERS,
+            FieldConstants.FieldZones.RESTRICTED_BOUNDS
+    );
+
+    public static ShootingZone WRAPPER_SHOOTING_ZONE = new ShootingZone(
+            CENTER_OF_SHOOTING_ZONE,
+            WRAPPER_SHOOTING_ZONE_RADIUS_IN_METERS,
             FieldConstants.FieldZones.RESTRICTED_BOUNDS
     );
 }
