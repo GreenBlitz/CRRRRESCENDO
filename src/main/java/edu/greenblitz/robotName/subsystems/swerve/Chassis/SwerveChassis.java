@@ -30,9 +30,7 @@ import org.littletonrobotics.junction.Logger;
 import org.photonvision.EstimatedRobotPose;
 import java.util.Optional;
 import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.TIME_STEP;
-import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
-import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.FAST_DISCRETION_CONSTANT;
-import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.SLOW_DISCRETION_CONSTANT;
+import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.*;
 
 
 public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
@@ -257,7 +255,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         );
     }
 
-    public void rotateToAngle() {
+    public void rotateToAngle(Rotation2d targetAngle) {
+        ROTATION_PID_CONTROLLER.setSetpoint(targetAngle.getRadians());
         moveByChassisSpeeds(
                 0,
                 0,
@@ -420,10 +419,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
     public void resetChassisPose(Pose2d pose) {
         poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), pose);
-    }
-
-    public void setGoalAngle(Rotation2d goalAngle){
-        ChassisConstants.ROTATION_PID_CONTROLLER.setSetpoint(goalAngle.getRadians());
     }
 
     public void moveByChassisSpeeds(ChassisSpeeds chassisSpeeds) {

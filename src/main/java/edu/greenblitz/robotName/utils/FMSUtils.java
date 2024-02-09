@@ -19,4 +19,8 @@ public class FMSUtils {
     public static boolean isRedAlliance() {
         return getAlliance() == DriverStation.Alliance.Red;
     }
+
+    public static boolean isBlueAlliance() {
+        return getAlliance() == DriverStation.Alliance.Blue;
+    }
 }

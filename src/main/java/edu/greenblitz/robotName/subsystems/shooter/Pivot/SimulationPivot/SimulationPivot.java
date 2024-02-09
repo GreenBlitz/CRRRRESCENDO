@@ -28,7 +28,7 @@ public class SimulationPivot implements IPivot {
 
     public SimulationPivot() {
         pivotSimulation = new SingleJointedArmSim(
-                DCMotor.getFalcon500(SimulationPivotConstants.NUMBER_OF_MOTORS),
+                DCMotor.getFalcon500Foc(SimulationPivotConstants.NUMBER_OF_MOTORS),
                 SimulationPivotConstants.GEAR_RATIO,
                 SingleJointedArmSim.estimateMOI(
                         PivotConstants.LENGTH_OF_SHOOTER,
