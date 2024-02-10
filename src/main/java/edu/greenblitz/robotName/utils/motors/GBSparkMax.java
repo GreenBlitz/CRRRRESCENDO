@@ -2,7 +2,7 @@ package edu.greenblitz.robotName.utils.motors;
 
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import com.revrobotics.*;
+import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import edu.greenblitz.robotName.utils.PIDObject;
 

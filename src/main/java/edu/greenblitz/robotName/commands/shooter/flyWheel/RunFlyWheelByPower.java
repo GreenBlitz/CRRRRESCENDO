@@ -1,12 +1,12 @@
-package edu.greenblitz.robotName.commands.shooter;
+package edu.greenblitz.robotName.commands.shooter.flyWheel;
 
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 
-public class ShootByPower extends FlyWheelCommand {
+public class RunFlyWheelByPower extends FlyWheelCommand {
 
     private double power;
 
-    public ShootByPower(double power) {
+    public RunFlyWheelByPower(double power) {
         this.power = power;
     }
 
