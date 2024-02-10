@@ -130,13 +130,14 @@ public class Robot extends LoggedRobot {
     }
     public static RobotType getRobotType (){
         RobotType robotType = RobotConstants.ROBOT_TYPE;
-        if(isSimulation()){
-            if(robotType.equals(RobotType.REPLAY)){
+        if (isSimulation()) {
+            if (robotType.equals(RobotType.REPLAY)) {
                 return RobotType.REPLAY;
             }
             return RobotType.SIMULATION;
-        }else{
-            if(robotType.equals(RobotType.ROBOT_NAME)){
+        }
+		else {
+            if (robotType.equals(RobotType.ROBOT_NAME)) {
                 return RobotType.ROBOT_NAME;
             }
             return RobotType.PEGA_SWERVE;
