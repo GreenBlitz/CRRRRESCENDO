@@ -24,6 +24,8 @@ public class SimulationGyro implements IAngleMeasurementGyro {
         lastInputs.roll = roll.getRadians();
     }
 
+
+
     @Override
     public void updateInputs(GyroInputsAutoLogged inputs) {
         inputs.roll = 0;
