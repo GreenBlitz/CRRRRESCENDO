@@ -59,7 +59,6 @@ public class FalconPivotConstants {
     }
     public static final TalonFXConfiguration TALON_FX_CONFIGURATION = new TalonFXConfiguration();
     static{
-        TALON_FX_CONFIGURATION.MotionMagic = MOTION_MAGIC_CONFIGS;
         TALON_FX_CONFIGURATION.CurrentLimits = CURRENT_LIMITS_CONFIGS;
         TALON_FX_CONFIGURATION.SoftwareLimitSwitch = SOFTWARE_LIMIT_SWITCH_CONFIGS;
         TALON_FX_CONFIGURATION.Slot0 = SLOT_0_CONFIGS;
