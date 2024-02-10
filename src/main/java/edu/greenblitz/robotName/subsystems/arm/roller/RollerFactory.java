@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.arm.roller;
 
+import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.arm.roller.BagRoller.BagRoller;
 import edu.greenblitz.robotName.subsystems.arm.roller.NeoRoller.NeoRoller;
@@ -7,10 +8,10 @@ import edu.greenblitz.robotName.subsystems.arm.roller.SimulationRoller.Simulatio
 
 public class RollerFactory {
 	public static IRoller create() {
-		return switch (RobotConstants.ROBOT_TYPE) {
+		return switch (Robot.getRobotType()) {
 			case ROBOT_NAME -> new NeoRoller();
 			case REPLAY -> new ReplayRoller();
-			case SIMULATION -> new SimulationRoller();
+			case SIMULATION, PEGA_SWERVE -> new SimulationRoller();
 		};
 	}
 }

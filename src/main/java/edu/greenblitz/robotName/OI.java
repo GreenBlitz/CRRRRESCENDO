@@ -1,7 +1,15 @@
 package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.Climb.CloseSolenoidAndExtendLifter;
-import edu.greenblitz.robotName.commands.Climb.lifter.ExtendLifter;
+import edu.greenblitz.robotName.commands.PanicMode;
+import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
+import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
+import edu.greenblitz.robotName.commands.arm.roller.RunRollerByJoystick;
+import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
+import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
+import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
+import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
@@ -24,9 +32,16 @@ public class OI {
 
     private final SmartJoystick secondJoystick;
 
+    private final SmartJoystick thirdJoystick;
+
+    private final SmartJoystick fourthJoystick;
+
     private OI() {
         mainJoystick = new SmartJoystick(RobotConstants.Joystick.MAIN);
         secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
+        thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
+        fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
+
         initButtons();
         //initializeDefaultCommands();
     }
@@ -50,9 +65,25 @@ public class OI {
         return secondJoystick;
     }
 
+    public SmartJoystick getThirdJoystick() {
+        return thirdJoystick;
+    }
+
+    public SmartJoystick getFourthJoystick() {
+        return fourthJoystick;
+    }
+
     public void initButtons() {
         mainJoystick.A.whileTrue(new CloseSolenoidAndExtendLifter());
 //        mainJoystick.B.whileTrue(new ReverseLifting());
+    }
+
+    public void thirdJoystickButtons(){
+        SmartJoystick usedJoystick = thirdJoystick;
+        usedJoystick.A.whileTrue(new RunRollerByJoystick(usedJoystick));
+        usedJoystick.A.whileTrue(new RunIntakeByJoystick(usedJoystick));
+        usedJoystick.B.whileTrue(new RunFunnelByJoystick(usedJoystick));
+        usedJoystick.B.whileTrue(new RunFlyWheelByJoystick(usedJoystick));
     }
 
     public void initializeDefaultCommands() {
