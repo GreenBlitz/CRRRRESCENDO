@@ -13,7 +13,8 @@ public class ElbowCommand extends GBCommand {
     }
 
     public void end(boolean interrupted) {
-        elbow.setCurrentAngle(elbow.getAngle());
+        elbow.setCurrentAngle();
+        elbow.standInPlace();
     }
 
 }

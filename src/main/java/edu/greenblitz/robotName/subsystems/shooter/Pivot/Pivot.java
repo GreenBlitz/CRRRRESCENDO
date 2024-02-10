@@ -2,7 +2,6 @@ package edu.greenblitz.robotName.subsystems.shooter.Pivot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.subsystems.Battery;
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.SimulationPivot.SimulationPivotConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.*;
@@ -24,6 +23,7 @@ public class Pivot extends GBSubsystem {
 		pivot = PivotFactory.create();
 		pivotInputs = new PivotInputsAutoLogged();
 		pivot.updateInputs(pivotInputs);
+		currentAngle = getAngle();
 	}
 
 	public static void init() {
@@ -46,10 +46,6 @@ public class Pivot extends GBSubsystem {
 		Logger.recordOutput("Shooter/Pivot", getSimulationPivotPosition3d());
 	}
 
-	public void setCurrentAngle(Rotation2d angle){
-		currentAngle = angle;
-	}
-
 	public void setPower(double power) {
 		pivot.setPower(power);
 	}
@@ -68,6 +64,10 @@ public class Pivot extends GBSubsystem {
 
 	public void moveToAngle(Rotation2d targetAngle) {
 		pivot.moveToAngle(targetAngle);
+	}
+
+	public void setCurrentAngle() {
+		currentAngle = getAngle();
 	}
 
 	public void standInPlace() {

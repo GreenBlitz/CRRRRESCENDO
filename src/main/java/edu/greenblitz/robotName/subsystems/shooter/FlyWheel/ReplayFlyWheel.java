@@ -2,18 +2,20 @@ package edu.greenblitz.robotName.subsystems.shooter.FlyWheel;
 
 
 public class ReplayFlyWheel implements IFlyWheel {
+
+
     @Override
-    public void setPower(double power) {
+    public void setPower(double rightPower, double leftPower) {
 
     }
 
     @Override
-    public void setVoltage(double voltage) {
+    public void setVoltage(double rightVoltage, double leftVoltage) {
 
     }
 
     @Override
-    public void setVelocity(double velocity) {
+    public void setVelocity(double rightVelocity, double leftVelocity) {
 
     }
 

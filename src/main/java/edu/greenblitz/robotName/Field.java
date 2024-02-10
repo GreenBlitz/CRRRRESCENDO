@@ -18,9 +18,9 @@ public class Field {
 
     public static Pose2d mirrorPositionToOtherSide(Pose2d pose){
         Pose2d mirroredPose = new Pose2d(
-                pose.getX(),
-                FieldConstants.fieldWidth - pose.getY(),
-                pose.getRotation());
+                FieldConstants.FIELD_LENGTH - pose.getX(),
+                pose.getY(),
+                Rotation2d.fromRadians(Math.PI).minus(pose.getRotation()));
         return mirroredPose;
     }
 
@@ -91,16 +91,22 @@ public class Field {
 
         public static final Pose2d OUT_PRE_BALANCE_BLUE = new Pose2d(5.40, 2.67, new Rotation2d(Math.PI));
     }
-    public static class FieldConstants{
-        public final static double fieldLength = 16.54175;
-        public final static double fieldWidth = 8.0137;
-    }
 
     public static class ScoringPositions{
-        public final static Pose2d SPEAKER_SCORE_POSITION = new Pose2d(new Translation2d(14.140,5.85),new Rotation2d());
-        public final static Pose2d AMP_SCORE_POSITION = new Pose2d(new Translation2d(14.85,7.5),new Rotation2d());
-        public final static Pose2d CLIMB_POSITION = new Pose2d(new Translation2d(12.733,3.602),new Rotation2d());
-        public final static Pose2d PRE_AMP_SCORE_POSITION = new Pose2d(new Translation2d(14.85,7.3),new Rotation2d());
+        public final static Pose2d RED_SPEAKER_SCORE_POSITION = new Pose2d(new Translation2d(14.140,5.85),new Rotation2d());
+        public final static Pose2d RED_SCORE_POSITION = new Pose2d(new Translation2d(14.85,7.5),new Rotation2d());
+        public final static Pose2d RED_UPPER_CLIMB_POSITION = new Pose2d(new Translation2d(12.2, 5), new Rotation2d());
+        public final static Pose2d RED_LOWER_CLIMB_POSITION = new Pose2d(new Translation2d(12.2, 3.2), new Rotation2d());
+        public final static Pose2d RED_MID_CLIMB_POSITION = new Pose2d(new Translation2d(10.6, 4), new Rotation2d());
+        public final static Pose2d RED_PRE_AMP_SCORE_POSITION = new Pose2d(new Translation2d(14.85,7.3),new Rotation2d());
+        public final static Pose2d RED_AMP_SCORE_POSITION = new Pose2d(new Translation2d(14.85, 7.5), new Rotation2d());
+        public final static Pose2d BLUE_SPEAKER_SCORE_POSITION = mirrorPositionToOtherSide(RED_SPEAKER_SCORE_POSITION);
+        public final static Pose2d BLUE_SCORE_POSITION = mirrorPositionToOtherSide(RED_SCORE_POSITION);
+        public final static Pose2d BLUE_UPPER_CLIMB_POSITION = mirrorPositionToOtherSide(RED_UPPER_CLIMB_POSITION);
+        public final static Pose2d BLUE_LOWER_CLIMB_POSITION = mirrorPositionToOtherSide(RED_LOWER_CLIMB_POSITION);
+        public final static Pose2d BLUE_MID_CLIMB_POSITION = mirrorPositionToOtherSide(RED_MID_CLIMB_POSITION);
+        public final static Pose2d BLUE_PRE_AMP_SCORE_POSITION = mirrorPositionToOtherSide(RED_PRE_AMP_SCORE_POSITION);
+        public final static Pose2d BLUE_AMP_SCORE_POSITION = mirrorPositionToOtherSide(RED_AMP_SCORE_POSITION);
     }
 
     public static class UpStairsFieldPositions{

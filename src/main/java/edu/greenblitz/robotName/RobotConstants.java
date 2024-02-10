@@ -7,9 +7,9 @@ public class RobotConstants {
   public static final Robot.RobotType ROBOT_TYPE = Robot.RobotType.ROBOT_NAME;
 
 	public static final String SIMULATION_LOG_PATH = System.getProperty("user.home") + "\\Desktop\\SimulationLogs";
-  public static final String USB_LOG_PATH = "/media/usb/";
+  public static final String USB_LOG_PATH = "/usb/";
 	public static final String SAFE_ROBORIO_LOG_PATH = "/logs/";
-  
+
 	public static class General {
 		public static final int POWER_DISTRIBUTION_CAN_ID = 20;
         public static final PowerDistribution.ModuleType POWER_DISTRIBUTION_TYPE = PowerDistribution.ModuleType.kRev;
@@ -17,7 +17,7 @@ public class RobotConstants {
 		public static final double SAFETY_POWER_CONVERSION_FACTOR = 0.5;
 		
 		public static class Motors {
-			
+
 			public final static double SPARKMAX_TICKS_PER_RADIAN = Math.PI * 2;
 			public final static double SPARKMAX_VELOCITY_UNITS_PER_RPM = 1;
 			public final static double NEO_TICKS_PER_ROTATION = 42;
@@ -25,7 +25,7 @@ public class RobotConstants {
 			public final static double FALCON_REVOLUTIONS_PER_RADIAN = 2 * Math.PI;
 		}
 	}
-	
+
 	public static class Frankenstein {
 		public static final double ROBOT_LENGTH_IN_METERS = 0.89;
 		public static final double BUMPER_LENGTH = 0.05;

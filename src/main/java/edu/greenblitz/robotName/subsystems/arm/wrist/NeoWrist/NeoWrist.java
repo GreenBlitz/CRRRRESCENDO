@@ -1,10 +1,8 @@
 package edu.greenblitz.robotName.subsystems.arm.wrist.NeoWrist;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
-import com.revrobotics.SparkMaxAbsoluteEncoder;
-import com.revrobotics.SparkMaxLimitSwitch;
+import com.revrobotics.*;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.greenblitz.robotName.subsystems.arm.wrist.IWrist;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristInputsAutoLogged;
@@ -15,10 +13,8 @@ public class NeoWrist implements IWrist {
 
     private GBSparkMax motor;
 
-    private WristInputsAutoLogged lastInputs;
-
     public NeoWrist() {
-        motor = new GBSparkMax(NeoWristConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        motor = new GBSparkMax(NeoWristConstants.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
         motor.config(NeoWristConstants.WRIST_CONFIG_OBJECT);
 
         motor.getPIDController().setFeedbackDevice(motor.getEncoder());
@@ -67,27 +63,20 @@ public class NeoWrist implements IWrist {
                 targetAngle.getRadians(),
                 CANSparkMax.ControlType.kPosition,
                 NeoWristConstants.PID_SLOT,
-                NeoWristConstants.WRIST_FEED_FORWARD.calculate(targetAngle.getRadians(), lastInputs.velocity)
+                NeoWristConstants.WRIST_FEED_FORWARD.calculate(Wrist.getAngleRelativeToGround(targetAngle).getRadians(), 0)
         );
-    }
-
-    @Override
-    public void standInPlace() {
-        setVoltage(NeoWristConstants.WRIST_FEED_FORWARD.calculate(lastInputs.position,0));
     }
 
     @Override
     public void updateInputs(WristInputsAutoLogged inputs) {
         inputs.appliedOutput = motor.getAppliedOutput() *  Battery.getInstance().getCurrentVoltage();
         inputs.outputCurrent = motor.getOutputCurrent();
-        inputs.position = motor.getEncoder().getPosition();
+        inputs.position = Rotation2d.fromRotations(motor.getEncoder().getPosition());
         inputs.velocity = motor.getEncoder().getVelocity();
         inputs.absoluteEncoderPosition = motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition();
         inputs.temperature = motor.getMotorTemperature();
-        inputs.hasReachedBackwardLimit = Math.abs(inputs.position - WristConstants.BACKWARD_ANGLE_LIMIT.getRadians()) <= WristConstants.TOLERANCE;
-        inputs.hasReachedForwardLimit = Math.abs(inputs.position - WristConstants.FORWARD_ANGLE_LIMIT.getRadians()) <= WristConstants.TOLERANCE;
-
-        lastInputs = inputs;
+        inputs.hasReachedBackwardLimit = Math.abs(inputs.position.getRadians() - WristConstants.BACKWARD_ANGLE_LIMIT.getRadians()) <= WristConstants.TOLERANCE.getRadians();
+        inputs.hasReachedForwardLimit = Math.abs(inputs.position.getRadians() - WristConstants.FORWARD_ANGLE_LIMIT.getRadians()) <= WristConstants.TOLERANCE.getRadians();
     }
 
 }

@@ -1,6 +1,9 @@
 package edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot;
 
 import com.ctre.phoenix6.configs.*;
+import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
+import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
 import edu.wpi.first.math.controller.ArmFeedforward;
