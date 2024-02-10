@@ -19,22 +19,22 @@ public class FalconPivot implements IPivot {
     
     private DutyCycleEncoder absoluteEncoder;
 
-    private PositionVoltage pidController;
+    private PositionVoltage positionVoltage;
     
     public FalconPivot() {
         motor = new TalonFX(MOTOR_ID);
         motor.getConfigurator().apply(TALON_FX_CONFIGURATION);
         motor.setNeutralMode(NEUTRAL_MODE_VALUE);
-        optimizeCanBus();
+        optimizeCanBusUtilization();
 
         absoluteEncoder = new DutyCycleEncoder(ABSOLUTE_ENCODER_CHANNEL);
 
         resetAngle(Rotation2d.fromRotations(absoluteEncoder.getAbsolutePosition()));
 
-        pidController = new PositionVoltage(motor.getPosition().getValue());
+        positionVoltage = new PositionVoltage(motor.getPosition().getValue());
     }
 
-    public void optimizeCanBus(){
+    public void optimizeCanBusUtilization(){
         BaseStatusSignal.setUpdateFrequencyForAll(
                 RobotConstants.General.Motors.SIGNAL_FREQUENCY_HERTZ,
                 motor.getPosition(),
@@ -72,7 +72,7 @@ public class FalconPivot implements IPivot {
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
         motor.setControl(
-                pidController
+                positionVoltage
                         .withPosition(targetAngle.getRotations())
                         .withSlot(PID_SLOT)
                         .withLimitForwardMotion(true)

@@ -37,12 +37,6 @@ public class FalconPivotConstants {
         SLOT_0_CONFIGS.kD = 0;
     }
 
-    public static final MotionMagicConfigs MOTION_MAGIC_CONFIGS = new MotionMagicConfigs();
-    static {
-        MOTION_MAGIC_CONFIGS.MotionMagicAcceleration = kA;
-        MOTION_MAGIC_CONFIGS.MotionMagicCruiseVelocity = kV;
-    }
-
     public static final CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();
     static {
         CURRENT_LIMITS_CONFIGS.StatorCurrentLimit = 40;
