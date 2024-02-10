@@ -14,11 +14,6 @@ public class RunRollerByJoystick extends RollerCommand{
 
     @Override
     public void execute() {
-        roller.setPower(joystick.getAxisValue(SmartJoystick.Axis.RIGHT_X) * RobotConstants.General.SAFETY_POWER_CONVERSION_FACTOR);
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        roller.setPower(0);
+        roller.setPower(joystick.getAxisValue(SmartJoystick.Axis.LEFT_X) * RobotConstants.General.SAFETY_POWER_CONVERSION_FACTOR);
     }
 }

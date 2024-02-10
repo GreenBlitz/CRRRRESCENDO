@@ -3,8 +3,12 @@ package edu.greenblitz.robotName;
 import edu.greenblitz.robotName.commands.PanicMode;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
+import edu.greenblitz.robotName.commands.arm.roller.RunRollerByJoystick;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
+import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
+import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingStateAndShoot;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
@@ -42,8 +46,10 @@ public class OI {
         secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
         thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
         fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
-        initButtons();
-        initializeDefaultCommands();
+        //initButtons();
+        thirdJoystickButtons();
+        fourthJoystickButtons();
+        //initializeDefaultCommands();
     }
 
     public static void init(){
@@ -81,6 +87,18 @@ public class OI {
         secondJoystick.X.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE));
         secondJoystick.Y.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
         secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
+    }
+
+    public void thirdJoystickButtons(){
+        SmartJoystick usedJoystick = thirdJoystick;
+        thirdJoystick.A.whileTrue(new RunRollerByJoystick(usedJoystick));
+        thirdJoystick.B.whileTrue(new RunFunnelByJoystick(usedJoystick));
+    }
+
+    public void fourthJoystickButtons(){
+        SmartJoystick usedJoystick = fourthJoystick;
+        thirdJoystick.A.whileTrue(new RunIntakeByJoystick(usedJoystick));
+        thirdJoystick.B.whileTrue(new RunFlyWheelByJoystick(usedJoystick));
     }
 
     public void initializeDefaultCommands() {
