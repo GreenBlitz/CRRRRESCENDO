@@ -45,4 +45,9 @@ public class SimulationLifterSolenoid implements ILifterSolenoid {
 		inputs.current = simulationMotor.getCurrentDrawAmps();
 		inputs.isOpen = inputs.voltage > 0;
 	}
+
+	@Override
+	public void setPower(double power) {
+		setVoltage(power * RobotConstants.SimulationConstants.BATTERY_VOLTAGE);
+	}
 }

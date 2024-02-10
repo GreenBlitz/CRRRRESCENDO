@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.commands.lifter;
+package edu.greenblitz.robotName.commands.Climb.lifter;
 
 import edu.greenblitz.robotName.subsystems.Lifter.Lifter;
 import edu.greenblitz.robotName.utils.GBCommand;

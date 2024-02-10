@@ -24,4 +24,9 @@ public class ReplayLifterSolenoid implements ILifterSolenoid {
 	public void updateInputs(LifterSolenoidInputsAutoLogged inputs) {
 
 	}
+
+	@Override
+	public void setPower(double power) {
+
+	}
 }

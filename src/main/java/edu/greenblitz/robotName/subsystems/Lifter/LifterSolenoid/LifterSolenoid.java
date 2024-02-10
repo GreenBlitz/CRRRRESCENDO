@@ -36,4 +36,8 @@ public class LifterSolenoid extends GBSubsystem {
 	public boolean isOpen(){
 		return lifterSolenoidInputs.isOpen;
 	}
+
+	public void setPower(double power){
+		lifterSolenoid.setPower(power);
+	}
 }

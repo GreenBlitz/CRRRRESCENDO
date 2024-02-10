@@ -1,11 +1,13 @@
-package edu.greenblitz.robotName.commands.lifter;
+package edu.greenblitz.robotName.commands.Climb.lifter;
 
+import edu.greenblitz.robotName.commands.Climb.LifterSolenoid.CloseThenHoldSolenoid;
 import edu.greenblitz.robotName.subsystems.Lifter.LifterConstants;
 
 public class LiftUp extends LifterCommand {
 
     @Override
     public void initialize() {
+        new CloseThenHoldSolenoid();
     }
 
     @Override

@@ -1,5 +1,6 @@
-package edu.greenblitz.robotName.commands.lifter;
+package edu.greenblitz.robotName.commands.Climb.lifter;
 
+import edu.greenblitz.robotName.commands.Climb.LifterSolenoid.OpenSolenoid;
 import edu.greenblitz.robotName.subsystems.Lifter.LifterConstants;
 
 public class ReverseLifting extends LifterCommand {
@@ -16,5 +17,6 @@ public class ReverseLifting extends LifterCommand {
     @Override
     public void end(boolean interrupted) {
         lifter.stopMotor();
+        new OpenSolenoid();
     }
 }

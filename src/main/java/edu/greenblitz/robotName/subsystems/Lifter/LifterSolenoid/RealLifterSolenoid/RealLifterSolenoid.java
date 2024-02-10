@@ -35,4 +35,9 @@ public class RealLifterSolenoid implements ILifterSolenoid {
 		inputs.voltage = solenoid.getMotorOutputVoltage();
 		inputs.isOpen = inputs.voltage > 0;
 	}
+
+	@Override
+	public void setPower(double power) {
+		solenoid.set(TalonSRXControlMode.PercentOutput, power);
+	}
 }

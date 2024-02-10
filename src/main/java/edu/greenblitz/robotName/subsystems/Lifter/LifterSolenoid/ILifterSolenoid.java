@@ -9,4 +9,6 @@ public interface ILifterSolenoid {
 	void holdSolenoid();
 
 	void updateInputs(LifterSolenoidInputsAutoLogged inputs);
+
+	void setPower(double power);
 }
