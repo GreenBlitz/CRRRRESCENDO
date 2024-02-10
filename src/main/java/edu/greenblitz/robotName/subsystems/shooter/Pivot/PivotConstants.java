@@ -8,7 +8,7 @@ import edu.wpi.first.math.util.Units;
 
 public class PivotConstants {
 
-    public static final double SHOOTER_MASS_KG = 10;
+    public static final double SHOOTER_MASS_KG = 3;
 
     public static final double LENGTH_OF_SHOOTER = 0.418;
 
@@ -31,7 +31,7 @@ public class PivotConstants {
 
     public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(62);
     
-    public static final double GEAR_RATIO = 1;
+    public static final double GEAR_RATIO = 80;
 
     public static final Translation3d ROBOT_RELATIVE_PIVOT_POSITION = new Translation3d(0,0.1,0.15);
 
