@@ -6,7 +6,7 @@ import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 
 public class NeoRollerConstants {
 
-	public static final int MOTOR_ID = 22;
+	public static final int MOTOR_ID = 9;
 
 	public static double DEBOUNCE_TIME_FOR_LIMIT_SWITCH = 0.1;
 

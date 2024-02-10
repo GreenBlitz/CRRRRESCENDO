@@ -46,10 +46,6 @@ public class OI {
         secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
         thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
         fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
-        //initButtons();
-        thirdJoystickButtons();
-        fourthJoystickButtons();
-        //initializeDefaultCommands();
     }
 
     public static void init(){
@@ -91,14 +87,10 @@ public class OI {
 
     public void thirdJoystickButtons(){
         SmartJoystick usedJoystick = thirdJoystick;
-        thirdJoystick.A.whileTrue(new RunRollerByJoystick(usedJoystick));
-        thirdJoystick.B.whileTrue(new RunFunnelByJoystick(usedJoystick));
-    }
-
-    public void fourthJoystickButtons(){
-        SmartJoystick usedJoystick = fourthJoystick;
-        thirdJoystick.A.whileTrue(new RunIntakeByJoystick(usedJoystick));
-        thirdJoystick.B.whileTrue(new RunFlyWheelByJoystick(usedJoystick));
+        usedJoystick.A.whileTrue(new RunRollerByJoystick(usedJoystick));
+        usedJoystick.A.whileTrue(new RunIntakeByJoystick(usedJoystick));
+        usedJoystick.B.whileTrue(new RunFunnelByJoystick(usedJoystick));
+        usedJoystick.B.whileTrue(new RunFlyWheelByJoystick(usedJoystick));
     }
 
     public void initializeDefaultCommands() {
