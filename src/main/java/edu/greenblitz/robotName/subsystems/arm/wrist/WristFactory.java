@@ -10,7 +10,7 @@ public class WristFactory {
         return switch (Robot.getRobotType()) {
             case ROBOT_NAME -> new NeoWrist();
             case REPLAY -> new ReplayWrist();
-            default -> new SimulationWrist();
+            case SIMULATION, PEGA_SWERVE -> new SimulationWrist();
         };
     }
 }
