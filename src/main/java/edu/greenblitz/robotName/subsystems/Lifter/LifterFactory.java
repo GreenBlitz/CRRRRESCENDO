@@ -11,7 +11,7 @@ public class LifterFactory {
         return switch (Robot.getRobotType()) {
             case ROBOT_NAME -> new NeoLifter();
             case REPLAY -> new ReplayLifter();
-            default-> new SimulationLifter();
+            case SIMULATION, PEGA_SWERVE-> new SimulationLifter();
         };
     }
 }
