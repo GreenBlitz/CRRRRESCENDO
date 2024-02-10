@@ -8,6 +8,10 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 public class NeoLifterConstants {
 
     public static final int MOTOR_ID = 1;
+    public static final int SOLENOID_ID = 10;
+
+    public static final double HOLD_SOLENOID_POWER = 0.2;
+    public static final double CLOSE_SOLENOID_POWER = 0.9;
 
     public static final GBSparkMax.SparkMaxConfObject CONFIG = new GBSparkMax.SparkMaxConfObject()
             .withPID(new PIDObject(3.6, 1, 0));

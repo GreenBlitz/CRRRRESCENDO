@@ -37,6 +37,21 @@ public class ReplayLifter implements ILifter {
     }
 
     @Override
+    public void closeSolenoid() {
+
+    }
+
+    @Override
+    public void openSolenoid() {
+
+    }
+
+    @Override
+    public void holdSolenoid() {
+
+    }
+
+    @Override
     public void updateInputs(LifterInputsAutoLogged lastInputs) {
 
     }

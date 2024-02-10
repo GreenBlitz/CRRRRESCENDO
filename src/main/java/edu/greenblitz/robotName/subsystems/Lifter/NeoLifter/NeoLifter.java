@@ -1,5 +1,7 @@
 package edu.greenblitz.robotName.subsystems.Lifter.NeoLifter;
 
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel;
@@ -12,6 +14,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 public class NeoLifter implements ILifter {
 
     private GBSparkMax motor;
+    private TalonSRX solenoid;
 
     public NeoLifter() {
         motor = new GBSparkMax(NeoLifterConstants.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
@@ -23,6 +26,8 @@ public class NeoLifter implements ILifter {
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, LifterConstants.BACKWARD_LIMIT.getRadians());
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, LifterConstants.FORWARD_LIMIT.getRadians());
         motor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+
+        solenoid = new TalonSRX(NeoLifterConstants.SOLENOID_ID);
     }
     
     @Override
@@ -53,6 +58,21 @@ public class NeoLifter implements ILifter {
     @Override
     public void goToPosition(Rotation2d position) {
         motor.getPIDController().setReference(position.getRadians(), CANSparkMax.ControlType.kPosition, NeoLifterConstants.PID_SLOT , NeoLifterConstants.FEED_FORWARD.calculate(position.getRadians()));
+    }
+
+    @Override
+    public void closeSolenoid() {
+        solenoid.set(TalonSRXControlMode.PercentOutput, NeoLifterConstants.CLOSE_SOLENOID_POWER);
+    }
+
+    @Override
+    public void openSolenoid() {
+        solenoid.set(TalonSRXControlMode.PercentOutput, 0);
+    }
+
+    @Override
+    public void holdSolenoid() {
+        solenoid.set(TalonSRXControlMode.PercentOutput, NeoLifterConstants.HOLD_SOLENOID_POWER);
     }
 
     @Override
