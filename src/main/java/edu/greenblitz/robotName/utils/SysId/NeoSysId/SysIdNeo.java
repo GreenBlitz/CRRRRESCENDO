@@ -1,7 +1,7 @@
 package edu.greenblitz.robotName.utils.SysId.NeoSysId;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.CANSparkLowLevel;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
@@ -25,7 +25,7 @@ public class SysIdNeo extends GBSubsystem {
 
 
     private SysIdNeo() {
-        motor = new GBSparkMax(MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        motor = new GBSparkMax(MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
         motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, SysIdNeoConstants.ENABLE_FORWARD_LIMIT);
         motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, SysIdNeoConstants.ENABLE_BACKWARD_LIMIT);
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, SysIdNeoConstants.FORWARD_LIMIT);

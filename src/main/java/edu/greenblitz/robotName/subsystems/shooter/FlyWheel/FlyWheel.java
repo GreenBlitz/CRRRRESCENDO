@@ -13,6 +13,7 @@ public class FlyWheel extends GBSubsystem {
         flyWheel = FlyWheelFactory.create();
         flyWheelInputs = new FlyWheelInputsAutoLogged();
         flyWheel.updateInputs(flyWheelInputs);
+        isPreparedToShoot = false;
     }
 
     public static void init() {
@@ -57,9 +58,7 @@ public class FlyWheel extends GBSubsystem {
     public double getRightSideVoltage() {
         return flyWheelInputs.rightFlywheelVoltage;
     }
-    
-    
-    
+
     public double getLeftSideVelocity() {
         return flyWheelInputs.leftFlywheelVelocity;
     }
@@ -70,6 +69,10 @@ public class FlyWheel extends GBSubsystem {
     
     public double getLeftSideVoltage() {
         return flyWheelInputs.leftFlywheelVoltage;
+    }
+
+    public boolean getPreparedToShoot() {
+        return isPreparedToShoot;
     }
     
     

@@ -13,6 +13,8 @@ public class NeoFlyWheelConstants {
 
         public static final SimpleMotorFeedforward FEEDFORWARD = new SimpleMotorFeedforward(0.5, 0.0022425, 0.00019209);
 
+        public static final double GEAR_RATIO = 8.0;
+
         public static final int PID_SLOT = 0;
 
         public static GBSparkMax.SparkMaxConfObject CONFIG = new GBSparkMax.SparkMaxConfObject()
@@ -26,6 +28,8 @@ public class NeoFlyWheelConstants {
         public static final int MOTOR_ID = 22;
 
         public static final SimpleMotorFeedforward FEEDFORWARD = new SimpleMotorFeedforward(0.5, 0.0022425, 0.00019209);
+
+        public static final double GEAR_RATIO = 8.0;
 
         public static final int PID_SLOT = 0;
 

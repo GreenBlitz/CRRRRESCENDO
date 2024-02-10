@@ -1,7 +1,8 @@
 package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.NeoFlyWheel;
 
+import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.CANSparkLowLevel;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.IFlyWheel;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
@@ -12,9 +13,9 @@ public class NeoFlyWheel implements IFlyWheel {
     private GBSparkMax rightMotor;
 
     public NeoFlyWheel() {
-        rightMotor = new GBSparkMax(NeoFlyWheelConstants.RightMotor.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        rightMotor = new GBSparkMax(NeoFlyWheelConstants.RightMotor.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
         rightMotor.config(NeoFlyWheelConstants.RightMotor.CONFIG);
-        leftMotor = new GBSparkMax(NeoFlyWheelConstants.LeftMotor.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        leftMotor = new GBSparkMax(NeoFlyWheelConstants.LeftMotor.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
         leftMotor.config(NeoFlyWheelConstants.LeftMotor.CONFIG);
     }
 
