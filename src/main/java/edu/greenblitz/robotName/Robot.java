@@ -100,9 +100,6 @@ public class Robot extends LoggedRobot {
 
         NetworkTableInstance.getDefault()
                 .getStructTopic("MechanismPoses", Pose3d.struct).publish();
-        
-        
-        System.out.println(getRobotType().name());
         switch (getRobotType()) {
             // Running on a real robot, log to a USB stick
             case ROBOT_NAME:
