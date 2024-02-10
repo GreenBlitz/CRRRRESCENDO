@@ -67,18 +67,6 @@ public class SimulationLifter implements ILifter {
     }
 
     @Override
-    public void closeSolenoid() {
-    }
-
-    @Override
-    public void openSolenoid() {
-    }
-
-    @Override
-    public void holdSolenoid() {
-    }
-
-    @Override
     public void updateInputs(LifterInputsAutoLogged inputs) {
         lifterSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
         inputs.appliedOutput = appliedOutput;

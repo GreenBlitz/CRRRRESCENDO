@@ -17,12 +17,6 @@ public interface ILifter {
 
 	void goToPosition(Rotation2d position);
 
-	void closeSolenoid();
-
-	void openSolenoid();
-
-	void holdSolenoid();
-
 	void updateInputs(LifterInputsAutoLogged inputs);
 }
 

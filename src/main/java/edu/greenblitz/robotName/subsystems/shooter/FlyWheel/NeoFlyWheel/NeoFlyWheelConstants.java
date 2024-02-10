@@ -25,7 +25,7 @@ public class NeoFlyWheelConstants {
 
     public static class LeftMotor {
 
-        public static final int MOTOR_ID = 22;
+        public static final int MOTOR_ID = 16;
 
         public static final SimpleMotorFeedforward FEEDFORWARD = new SimpleMotorFeedforward(0.5, 0.0022425, 0.00019209);
 

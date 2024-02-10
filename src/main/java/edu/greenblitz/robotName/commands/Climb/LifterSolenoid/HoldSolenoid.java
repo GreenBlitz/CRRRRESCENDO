@@ -9,6 +9,8 @@ public class HoldSolenoid extends LifterSolenoidCommand{
 		lifterSolenoid.setPower(LifterSolenoidConstants.POWER_TO_HOLD);
 	}
 
+
+
 	@Override
 	public void end(boolean interrupted) {
 		lifterSolenoid.setPower(0);

@@ -7,7 +7,7 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 
 public class NeoLifterConstants {
 
-    public static final int MOTOR_ID = 1;
+    public static final int MOTOR_ID = 22;
     public static final int SOLENOID_ID = 10;
 
     public static final double HOLD_SOLENOID_POWER = 0.2;
@@ -26,9 +26,9 @@ public class NeoLifterConstants {
 
     public static final SparkMaxLimitSwitch.Type BACKWARD_LIMIT_SWITCH_TYPE = SparkMaxLimitSwitch.Type.kNormallyClosed;
 
-    public static final boolean IS_BACKWARD_LIMIT_SWITCH_ENABLED = true;
+    public static final boolean IS_BACKWARD_LIMIT_SWITCH_ENABLED = false;
 
-    public static final boolean IS_FORWARD_LIMIT_SWITCH_ENABLED = true;
+    public static final boolean IS_FORWARD_LIMIT_SWITCH_ENABLED = false;
 
     public static final int PID_SLOT = 0;
 }

@@ -2,6 +2,6 @@ package edu.greenblitz.robotName.subsystems.Lifter.LifterSolenoid.RealLifterSole
 
 public class RealLifterSolenoidConstants {
 
-	public static final int SOLENOID_ID = 10;
+	public static final int SOLENOID_ID = 6;
 
 }

@@ -6,7 +6,7 @@ public class CloseThenHoldSolenoid extends SequentialCommandGroup {
 
 	public CloseThenHoldSolenoid(){
 		super(
-				new CloseSolenoid(),
+				new CloseSolenoid().withTimeout(0.3),
 				new HoldSolenoid()
 		);
 	}

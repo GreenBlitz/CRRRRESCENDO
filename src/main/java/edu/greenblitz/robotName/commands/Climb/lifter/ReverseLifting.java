@@ -17,6 +17,6 @@ public class ReverseLifting extends LifterCommand {
     @Override
     public void end(boolean interrupted) {
         lifter.stopMotor();
-        new OpenSolenoid();
+        new OpenSolenoid().schedule();
     }
 }
