@@ -100,8 +100,7 @@ public class Robot extends LoggedRobot {
 
         NetworkTableInstance.getDefault()
                 .getStructTopic("MechanismPoses", Pose3d.struct).publish();
-
-        switch (RobotConstants.ROBOT_TYPE) {
+        switch (getRobotType()) {
             // Running on a real robot, log to a USB stick
             case ROBOT_NAME:
                 try {
@@ -131,16 +130,17 @@ public class Robot extends LoggedRobot {
     }
     public static RobotType getRobotType (){
         RobotType robotType = RobotConstants.ROBOT_TYPE;
-        if(isReal()){
-            if(robotType.equals(RobotType.PEGA_SWERVE)){
-                return RobotType.PEGA_SWERVE;
-            }
-            return RobotType.ROBOT_NAME;
-        }else{
-            if(robotType.equals(RobotType.REPLAY)){
+        if (isSimulation()) {
+            if (robotType.equals(RobotType.REPLAY)) {
                 return RobotType.REPLAY;
             }
             return RobotType.SIMULATION;
+        }
+		else {
+            if (robotType.equals(RobotType.ROBOT_NAME)) {
+                return RobotType.ROBOT_NAME;
+            }
+            return RobotType.PEGA_SWERVE;
         }
     }
 }
