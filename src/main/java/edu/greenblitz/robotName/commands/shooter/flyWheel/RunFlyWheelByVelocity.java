@@ -1,14 +1,19 @@
-package edu.greenblitz.robotName.commands.shooter;
+package edu.greenblitz.robotName.commands.shooter.flyWheel;
 
+import edu.greenblitz.robotName.commands.shooter.flyWheel.FlyWheelCommand;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 
-public class ShootByVelocity extends FlyWheelCommand {
+public class RunFlyWheelByVelocity extends FlyWheelCommand {
 
     private int timeInShootingSpeed;
 
     private double velocity;
 
-    public ShootByVelocity(double velocity) {
+    public RunFlyWheelByVelocity(double velocity) {
+        this.velocity = velocity;
+    }
+
+    protected void changeVelocity(double velocity) {
         this.velocity = velocity;
     }
 
@@ -31,7 +36,7 @@ public class ShootByVelocity extends FlyWheelCommand {
     }
 
     @Override
-    public void end(boolean interrupted) {
-        flyWheel.stop();
+    public boolean isFinished() {
+        return flyWheel.getPreparedToShoot();
     }
 }

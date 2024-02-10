@@ -1,9 +1,10 @@
 package edu.greenblitz.robotName.commands.arm.roller;
 
-public class RunRollerClockWiseUntilObjectIsOut extends RollerCommand{
+public class RunRollerClockwiseUntilObjectIsOut extends RollerCommand{
+
     @Override
-    public void initialize() {
-        roller.rollClockWise();
+    public void execute() {
+        roller.rollClockwise();
     }
 
     @Override
