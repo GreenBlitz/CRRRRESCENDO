@@ -21,12 +21,7 @@ import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.AutonomousSelector;
 import edu.greenblitz.robotName.utils.FMSUtils;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.greenblitz.robotName.subsystems.Dashboard;
-import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
-import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
-import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -88,7 +83,7 @@ public class Robot extends LoggedRobot {
     }
 
     private void initializeAutonomousBuilder() {
-        NamedCommands.registerCommand("run flywheel", RunFlyWheelByPowerConstant());
+        NamedCommands.registerCommand("run flywheel", new RunFlyWheelByPowerConstant());
         NamedCommands.registerCommand("shoot", new GoToShootingStateAndShoot());
         NamedCommands.registerCommand("grip", new NoteToShooter());
         AutoBuilder.configureHolonomic(
