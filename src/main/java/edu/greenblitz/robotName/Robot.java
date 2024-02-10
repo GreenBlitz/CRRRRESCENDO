@@ -80,7 +80,6 @@ public class Robot extends LoggedRobot {
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
         RoborioUtils.updateCurrentCycleTime();
-        System.out.println(getRobotType().name());
     }
 
     private void initializeAutonomousBuilder() {
@@ -127,7 +126,7 @@ public class Robot extends LoggedRobot {
             case SIMULATION:
             default:
                 Logger.addDataReceiver(new NT4Publisher());
-//                Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SIMULATION_LOG_PATH));
+                Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SIMULATION_LOG_PATH));
                 break;
         }
         Logger.start();
