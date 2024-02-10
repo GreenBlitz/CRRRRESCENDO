@@ -33,9 +33,15 @@ public class OI {
 
     private final SmartJoystick secondJoystick;
 
+    private final SmartJoystick thirdJoystick;
+
+    private final SmartJoystick fourthJoystick;
+
     private OI() {
         mainJoystick = new SmartJoystick(RobotConstants.Joystick.MAIN);
         secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
+        thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
+        fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
         initButtons();
         initializeDefaultCommands();
     }
@@ -57,6 +63,14 @@ public class OI {
 
     public SmartJoystick getSecondJoystick() {
         return secondJoystick;
+    }
+
+    public SmartJoystick getThirdJoystick() {
+        return thirdJoystick;
+    }
+
+    public SmartJoystick getFourthJoystick() {
+        return fourthJoystick;
     }
 
     public void initButtons() {
