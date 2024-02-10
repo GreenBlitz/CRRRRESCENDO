@@ -9,13 +9,12 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
 
-import static edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE;
 import static edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants.LEGAL_SHOOTING_ZONE;
 
 public class ShootingStateCalculations {
 
     public static boolean isRobotInShootingPosition() {
-        return OPTIMAL_SHOOTING_ZONE.isInCircle(getRobotPose().getTranslation());
+        return LEGAL_SHOOTING_ZONE.isInCircle(getRobotPose().getTranslation());
     }
 
     public static boolean isRobotNearShootingPosition() {
@@ -28,13 +27,13 @@ public class ShootingStateCalculations {
 
     public static Translation2d getRobotTargetTranslation() {
         Translation2d robotPosition = getRobotPose().getTranslation();
-        if (OPTIMAL_SHOOTING_ZONE.isInCircle(robotPosition))
+        if (LEGAL_SHOOTING_ZONE.isInCircle(robotPosition))
             return robotPosition;
-        return OPTIMAL_SHOOTING_ZONE.getClosestCircleRimPosition(robotPosition);
+        return LEGAL_SHOOTING_ZONE.getClosestCircleRimPosition(robotPosition);
     }
 
     public static Rotation2d getTargetRobotAngle() {
-        double angle = OPTIMAL_SHOOTING_ZONE.getTargetRobotAngle().getRadians();
+        double angle = LEGAL_SHOOTING_ZONE.getTargetRobotAngle().getRadians();
         return new Rotation2d(angle);
     }
 
