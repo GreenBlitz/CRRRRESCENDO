@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.swerve.Modules;
 
+import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.subsystems.swerve.Modules.kazaSwerveModule.KazaSwerveModule;
@@ -10,10 +11,11 @@ import edu.greenblitz.robotName.subsystems.swerve.Modules.simulationSwerveModule
 public class SwerveModuleFactory {
 
     public static ISwerveModule create(SwerveChassis.Module module) {
-        return switch (RobotConstants.ROBOT_TYPE) {
+        return switch (Robot.getRobotType()) {
             case REPLAY -> new ReplaySwerveModule();
             case ROBOT_NAME -> new MK4ISwerveModule(module);
-            case SIMULATION -> new SimulationSwerveModule(module);
+            case PEGA_SWERVE -> new KazaSwerveModule(module);
+			case SIMULATION -> new SimulationSwerveModule(module);
         };
     }
 }

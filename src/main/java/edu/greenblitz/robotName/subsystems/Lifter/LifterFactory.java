@@ -8,10 +8,10 @@ import edu.greenblitz.robotName.subsystems.Lifter.SimulationLifter.SimulationLif
 
 public class LifterFactory {
     public static ILifter create() {
-        return switch (RobotConstants.ROBOT_TYPE) {
+        return switch (Robot.getRobotType()) {
             case ROBOT_NAME -> new NeoLifter();
             case REPLAY -> new ReplayLifter();
-            case SIMULATION -> new SimulationLifter();
+            case SIMULATION, PEGA_SWERVE-> new SimulationLifter();
         };
     }
 }
