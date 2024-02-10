@@ -1,6 +1,6 @@
 package edu.greenblitz.robotName.subsystems.Lifter.NeoLifter;
 
-import com.revrobotics.SparkMaxLimitSwitch;
+import com.revrobotics.SparkLimitSwitch;
 import edu.greenblitz.robotName.utils.PIDObject;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -18,9 +18,9 @@ public class NeoLifterConstants {
 
     public static final SimpleMotorFeedforward FEED_FORWARD = new SimpleMotorFeedforward(0,0,0);
     
-    public static final SparkMaxLimitSwitch.Type FORWARD_LIMIT_SWITCH_TYPE = SparkMaxLimitSwitch.Type.kNormallyClosed;
+    public static final SparkLimitSwitch.Type FORWARD_LIMIT_SWITCH_TYPE = SparkLimitSwitch.Type.kNormallyClosed;
 
-    public static final SparkMaxLimitSwitch.Type BACKWARD_LIMIT_SWITCH_TYPE = SparkMaxLimitSwitch.Type.kNormallyClosed;
+    public static final SparkLimitSwitch.Type BACKWARD_LIMIT_SWITCH_TYPE = SparkLimitSwitch.Type.kNormallyClosed;
 
     public static final boolean IS_BACKWARD_LIMIT_SWITCH_ENABLED = true;
 

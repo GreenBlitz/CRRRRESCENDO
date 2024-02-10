@@ -3,7 +3,7 @@ package edu.greenblitz.robotName.subsystems.Intake.neoIntake;
 import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel;
-import com.revrobotics.SparkMaxLimitSwitch;
+import com.revrobotics.SparkLimitSwitch;
 import edu.greenblitz.robotName.subsystems.Intake.IIntake;
 import edu.greenblitz.robotName.subsystems.Intake.IntakeConstants;
 import edu.greenblitz.robotName.subsystems.Intake.IntakeInputsAutoLogged;

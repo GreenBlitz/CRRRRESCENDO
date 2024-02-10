@@ -24,10 +24,10 @@ public class NeoElbow implements IElbow {
         motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, ElbowConstants.BACKWARD_ANGLE_LIMIT.getRadians());
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, ElbowConstants.FORWARD_ANGLE_LIMIT.getRadians());
-        motor.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoElbowConstants.ENABLE_REVERSE_LIMIT_SWITCH);
-        motor.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoElbowConstants.ENABLE_FORWARD_LIMIT_SWITCH);
+        motor.getReverseLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoElbowConstants.ENABLE_REVERSE_LIMIT_SWITCH);
+        motor.getForwardLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoElbowConstants.ENABLE_FORWARD_LIMIT_SWITCH);
 
-        resetAngle(Rotation2d.fromRotations(motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition()));
+        resetAngle(Rotation2d.fromRotations(motor.getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle).getPosition()));
     }
 
     @Override
@@ -71,7 +71,7 @@ public class NeoElbow implements IElbow {
         inputs.outputCurrent = motor.getOutputCurrent();
         inputs.position = Rotation2d.fromRotations(motor.getEncoder().getPosition());
         inputs.velocity = motor.getEncoder().getVelocity();
-        inputs.absoluteEncoderPosition = motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition();
+        inputs.absoluteEncoderPosition = motor.getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle).getPosition();
         inputs.temperature = motor.getMotorTemperature();
         inputs.hasReachedBackwardLimit = Math.abs(inputs.position.getRadians() - ElbowConstants.BACKWARD_ANGLE_LIMIT.getRadians()) <= ElbowConstants.TOLERANCE.getRadians();
         inputs.hasReachedForwardLimit = Math.abs(inputs.position.getRadians() - ElbowConstants.FORWARD_ANGLE_LIMIT.getRadians()) <= ElbowConstants.TOLERANCE.getRadians();

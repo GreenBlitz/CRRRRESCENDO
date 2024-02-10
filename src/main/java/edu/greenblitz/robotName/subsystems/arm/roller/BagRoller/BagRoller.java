@@ -17,7 +17,6 @@ public class BagRoller implements IRoller {
 
 	public BagRoller(){
 		motor = new TalonSRX(BagRollerConstants.ROLLER_ID);
-
 		debouncer = new Debouncer(BagRollerConstants.DEBOUNCE_TIME_FOR_LIMIT_SWITCH);
 		beamBreaker = new DigitalInput(BagRollerConstants.BEAM_BREAKER_CHANNEL);
 	}
@@ -29,7 +28,7 @@ public class BagRoller implements IRoller {
 
 	@Override
 	public void updateInputs(RollerInputsAutoLogged rollerInputs) {
-		rollerInputs.outputCurrent = motor.getOutputCurrent();
+		rollerInputs.outputCurrent = motor.getStatorCurrent();
 		rollerInputs.appliedOutput = motor.getMotorOutputVoltage();
 		rollerInputs.isObjectInArm = debouncer.calculate(beamBreaker.get());
 	}
