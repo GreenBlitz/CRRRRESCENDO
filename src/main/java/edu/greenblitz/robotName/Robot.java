@@ -67,7 +67,7 @@ public class Robot extends LoggedRobot {
 
     @Override
     public void teleopInit() {
-        Dashboard.getInstance().activateDriversDashboard();
+        //Dashboard.getInstance().activateDriversDashboard();
     }
 
     @Override

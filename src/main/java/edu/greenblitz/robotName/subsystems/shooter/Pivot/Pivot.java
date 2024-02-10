@@ -71,7 +71,7 @@ public class Pivot extends GBSubsystem {
 	}
 
 	public void standInPlace() {
-		pivot.standInPlace(currentAngle);
+		pivot.moveToAngle(currentAngle);
 	}
 
 	public double getVoltage() {

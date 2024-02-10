@@ -13,6 +13,8 @@ public class PivotInputs {
     public Rotation2d position;
 
     public double velocity;
+    
+    public double acceleration;
 
     public double absoluteEncoderPosition;
 

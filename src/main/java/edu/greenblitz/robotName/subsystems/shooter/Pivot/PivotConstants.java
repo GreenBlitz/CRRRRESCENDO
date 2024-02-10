@@ -30,10 +30,8 @@ public class PivotConstants {
     public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(0);
 
     public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(62);
-
-    public static final double RELATIVE_POSITION_CONVERSION_FACTOR = 0.0328;
-
-    public static final double RELATIVE_VELOCITY_CONVERSION_FACTOR = 0.0030332432;
+    
+    public static final double GEAR_RATIO = 1;
 
     public static final Translation3d ROBOT_RELATIVE_PIVOT_POSITION = new Translation3d(0,0.1,0.15);
 

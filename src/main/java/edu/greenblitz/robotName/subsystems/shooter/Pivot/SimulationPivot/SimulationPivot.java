@@ -73,16 +73,12 @@ public class SimulationPivot implements IPivot {
     }
 
     @Override
-    public void standInPlace(Rotation2d targetAngle) {
-        moveToAngle(targetAngle);
-    }
-
-    @Override
     public void updateInputs(PivotInputsAutoLogged inputs) {
         pivotSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
 
         inputs.appliedOutput = appliedVoltage;
         inputs.outputCurrent = pivotSimulation.getCurrentDrawAmps();
+        inputs.acceleration = (pivotSimulation.getVelocityRadPerSec() - inputs.velocity) / RobotConstants.SimulationConstants.TIME_STEP;
         inputs.position = Rotation2d.fromRadians(pivotSimulation.getAngleRads());
         inputs.velocity = pivotSimulation.getVelocityRadPerSec();
         inputs.absoluteEncoderPosition = pivotSimulation.getAngleRads();
