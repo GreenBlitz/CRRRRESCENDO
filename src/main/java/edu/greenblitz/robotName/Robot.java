@@ -80,6 +80,7 @@ public class Robot extends LoggedRobot {
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
         RoborioUtils.updateCurrentCycleTime();
+        System.out.println(getRobotType().name());
     }
 
     private void initializeAutonomousBuilder() {
@@ -100,8 +101,10 @@ public class Robot extends LoggedRobot {
 
         NetworkTableInstance.getDefault()
                 .getStructTopic("MechanismPoses", Pose3d.struct).publish();
-
-        switch (RobotConstants.ROBOT_TYPE) {
+        
+        
+        System.out.println(getRobotType().name());
+        switch (getRobotType()) {
             // Running on a real robot, log to a USB stick
             case ROBOT_NAME:
                 try {
@@ -124,23 +127,23 @@ public class Robot extends LoggedRobot {
             case SIMULATION:
             default:
                 Logger.addDataReceiver(new NT4Publisher());
-                Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SIMULATION_LOG_PATH));
+//                Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SIMULATION_LOG_PATH));
                 break;
         }
         Logger.start();
     }
     public static RobotType getRobotType (){
         RobotType robotType = RobotConstants.ROBOT_TYPE;
-        if(isReal()){
-            if(robotType.equals(RobotType.PEGA_SWERVE)){
-                return RobotType.PEGA_SWERVE;
-            }
-            return RobotType.ROBOT_NAME;
-        }else{
+        if(isSimulation()){
             if(robotType.equals(RobotType.REPLAY)){
                 return RobotType.REPLAY;
             }
             return RobotType.SIMULATION;
+        }else{
+            if(robotType.equals(RobotType.ROBOT_NAME)){
+                return RobotType.ROBOT_NAME;
+            }
+            return RobotType.PEGA_SWERVE;
         }
     }
 }
