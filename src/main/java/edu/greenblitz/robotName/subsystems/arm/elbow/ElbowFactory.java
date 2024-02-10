@@ -10,7 +10,7 @@ public class ElbowFactory {
         return switch (Robot.getRobotType()) {
             case ROBOT_NAME -> new NeoElbow();
             case REPLAY -> new ReplayElbow();
-            default -> new SimulationElbow();
+            case SIMULATION, PEGA_SWERVE -> new SimulationElbow();
         };
     }
 }
