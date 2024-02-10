@@ -1,18 +1,16 @@
 package edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot;
 
 import com.ctre.phoenix6.BaseStatusSignal;
-import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.IPivot;
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotInputsAutoLogged;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 
-import static edu.greenblitz.robotName.RobotConstants.General.Motors.REACHED_SWITCH_LIMIT;
+import static edu.greenblitz.robotName.RobotConstants.General.Motors.IS_SWITCH_CLOSED;
 import static edu.greenblitz.robotName.subsystems.shooter.Pivot.FalconPivot.FalconPivotConstants.*;
 
 public class FalconPivot implements IPivot {
@@ -20,11 +18,23 @@ public class FalconPivot implements IPivot {
     private TalonFX motor;
     
     private DutyCycleEncoder absoluteEncoder;
+
+    private PositionVoltage pidController;
     
     public FalconPivot() {
         motor = new TalonFX(MOTOR_ID);
         motor.getConfigurator().apply(TALON_FX_CONFIGURATION);
         motor.setNeutralMode(NEUTRAL_MODE_VALUE);
+        optimizeCanBus();
+
+        absoluteEncoder = new DutyCycleEncoder(ABSOLUTE_ENCODER_CHANNEL);
+
+        resetAngle(Rotation2d.fromRotations(absoluteEncoder.getAbsolutePosition()));
+
+        pidController = new PositionVoltage(motor.getPosition().getValue());
+    }
+
+    public void optimizeCanBus(){
         BaseStatusSignal.setUpdateFrequencyForAll(
                 RobotConstants.General.Motors.SIGNAL_FREQUENCY_HERTZ,
                 motor.getPosition(),
@@ -37,12 +47,7 @@ public class FalconPivot implements IPivot {
                 motor.getReverseLimit()
         );
         motor.optimizeBusUtilization();
-        
-        absoluteEncoder = new DutyCycleEncoder(ABSOLUTE_ENCODER_CHANNEL);
-        
-        resetAngle(Rotation2d.fromRotations(absoluteEncoder.getAbsolutePosition()));
     }
-
 
     @Override
     public void setPower(double power) {
@@ -67,8 +72,9 @@ public class FalconPivot implements IPivot {
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
         motor.setControl(
-                new PositionVoltage(targetAngle.getRotations())
-                        .withSlot(PID_MOTION_SLOT)
+                pidController
+                        .withPosition(targetAngle.getRotations())
+                        .withSlot(PID_SLOT)
                         .withLimitForwardMotion(true)
                         .withLimitReverseMotion(true)
                         .withEnableFOC(true)
@@ -84,7 +90,7 @@ public class FalconPivot implements IPivot {
         inputs.acceleration = motor.getAcceleration().getValue();
         inputs.absoluteEncoderPosition = absoluteEncoder.getAbsolutePosition();
         inputs.temperature = motor.getDeviceTemp().getValue();
-        inputs.hasHitForwardLimit = motor.getForwardLimit().getValue().value == REACHED_SWITCH_LIMIT;
-        inputs.hasHitBackwardsLimit = motor.getReverseLimit().getValue().value == REACHED_SWITCH_LIMIT;
+        inputs.hasHitForwardLimit = motor.getForwardLimit().getValue().value == IS_SWITCH_CLOSED;
+        inputs.hasHitBackwardsLimit = motor.getReverseLimit().getValue().value == IS_SWITCH_CLOSED;
     }
 }

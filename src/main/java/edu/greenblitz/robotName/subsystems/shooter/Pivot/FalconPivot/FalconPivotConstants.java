@@ -23,9 +23,7 @@ public class FalconPivotConstants {
 
     public static final NeutralModeValue NEUTRAL_MODE_VALUE = NeutralModeValue.Brake;
 
-    public static final int MOTION_MAGIC_PID_SLOT = 1;
-
-    public static final int PID_MOTION_SLOT = 0;
+    public static final int PID_SLOT = 0;
 
     public static final Slot0Configs SLOT_0_CONFIGS = new Slot0Configs();
     static{
@@ -55,9 +53,9 @@ public class FalconPivotConstants {
 
     public static final SoftwareLimitSwitchConfigs SOFTWARE_LIMIT_SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();
     static {
-        SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitEnable = false;
+        SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitEnable = true;
         SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitThreshold = PivotConstants.FORWARD_ANGLE_LIMIT.getRotations();
-        SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitEnable = false;
+        SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitEnable = true;
         SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitThreshold = PivotConstants.BACKWARD_ANGLE_LIMIT.getRotations();
     }
 
