@@ -18,7 +18,7 @@ public class Field {
 
     public static Pose2d mirrorPositionToOtherSide(Pose2d pose){
         Pose2d mirroredPose = new Pose2d(
-                FieldConstants.fieldLength - pose.getX(),
+                FieldConstants.FIELD_LENGTH - pose.getX(),
                 pose.getY(),
                 Rotation2d.fromRadians(Math.PI).minus(pose.getRotation()));
         return mirroredPose;
@@ -90,10 +90,6 @@ public class Field {
         }
 
         public static final Pose2d OUT_PRE_BALANCE_BLUE = new Pose2d(5.40, 2.67, new Rotation2d(Math.PI));
-    }
-    public static class FieldConstants{
-        public final static double fieldLength = 16.54175;
-        public final static double fieldWidth = 8.0137;
     }
 
     public static class ScoringPositions{

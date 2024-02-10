@@ -29,11 +29,11 @@ public class MoveNoteBetweenShooterAndArm extends GBCommand {
     public void execute() {
         if (isTargetModeSpeaker){
             funnel.rollIn();
-            roller.rollCounterClockWise();
+            roller.rollCounterClockwise();
         }
         else {
             funnel.rollOut();
-            roller.rollClockWise();
+            roller.rollClockwise();
         }
     }
 

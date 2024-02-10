@@ -1,12 +1,9 @@
 package edu.greenblitz.robotName.commands.swerve;
 
 import edu.greenblitz.robotName.Field;
-import edu.greenblitz.robotName.commands.auto.MoveToPosition;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.FMSUtils;
-import edu.greenblitz.robotName.utils.GBMath;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 
 public class MoveToClimbPosition extends MoveToPosition {
