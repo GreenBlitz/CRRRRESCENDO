@@ -26,13 +26,11 @@ class Limelight {
         limelightSettingsEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("pipeline");
     }
 
-
     public Optional<Pair<Pose2d, Double>> getUpdatedPose2DEstimation() {
         double[] poseArray = robotPoseEntry.getDoubleArray(new double[VisionConstants.LIMELIGHT_ENTRY_ARRAY_LENGTH]);
         double processingLatency = poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.TOTAL_LATENCY)] / 1000;
         double timestamp = Timer.getFPGATimestamp() - processingLatency;
         int id = (int) idEntry.getInteger(-1);
-
         if (id == -1) {
             return Optional.empty();
         }
@@ -61,8 +59,6 @@ class Limelight {
     public int getPipeline() {
         return (int) limelightSettingsEntry.getInteger(-1);
     }
-
-
 }
 
 

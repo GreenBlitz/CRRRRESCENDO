@@ -6,8 +6,12 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 
 public class RotateToObjectByConfidence extends ConditionalCommand {
-
+	
 	public RotateToObjectByConfidence() {
-		super(new RotateToObject(), new WaitCommand(0), () -> ObjectDetectionLimelight.getInstance().getTargetConfidence());
+		super(
+				new RotateToObject(),
+				new WaitCommand(0),
+				() -> ObjectDetectionLimelight.getInstance().getTargetConfidence()
+		);
 	}
 }
