@@ -10,22 +10,7 @@ public class ReplayFunnel implements IFunnel{
 	}
 	
 	@Override
-	public void setVoltage(double voltage) {
-	
-	}
-	
-	@Override
 	public void updateInputs(FunnelInputsAutoLogged funnelInputs) {
-
-	}
-
-	@Override
-	public void resetEncoder(Rotation2d position) {
-
-	}
-
-	@Override
-	public void moveToPosition(Rotation2d position) {
 
 	}
 
