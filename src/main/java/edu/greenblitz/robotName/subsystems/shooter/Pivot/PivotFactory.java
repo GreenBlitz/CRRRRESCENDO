@@ -11,7 +11,7 @@ public class PivotFactory {
         return switch (Robot.getRobotType()) {
             case ROBOT_NAME -> new FalconPivot();
             case REPLAY -> new ReplayPivot();
-            default -> new SimulationPivot();
+             case SIMULATION, PEGA_SWERVE-> new SimulationPivot();
         };
     }
 }
