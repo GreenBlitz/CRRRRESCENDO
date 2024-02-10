@@ -11,8 +11,6 @@ public class SimulationWristConstants {
 
     public static final double GEAR_RATIO = 1 / WristConstants.CONVERSION_FACTOR;
 
-    public static final PIDObject SIMULATION_PID = new PIDObject().withKp(0.5).withKd(0).withMaxPower(1);
-
-    public static final ArmFeedforward SIMULATION_FEED_FORWARD = new ArmFeedforward(0,0,0,0);
+    public static final PIDObject SIMULATION_PID = new PIDObject().withKp(0.015).withKd(0).withMaxPower(1);
 
 }

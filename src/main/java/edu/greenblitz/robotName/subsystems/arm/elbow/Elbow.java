@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName.subsystems.arm.elbow;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.greenblitz.robotName.subsystems.arm.elbow.SimulationElbow.SimulationElbowConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -68,12 +67,17 @@ public class Elbow extends GBSubsystem {
     }
 
     public void standInPlace() {
-        elbow.moveToAngle(currentAngle);
+        elbow.standInPlace(currentAngle);
+    }
+
+    public void setCurrentAngle(){
+        currentAngle = getAngle();
     }
 
     public void setCurrentAngle(Rotation2d angle){
         currentAngle = angle;
     }
+
 
     public double getVoltage() {
         return elbowInputs.appliedOutput;
@@ -87,21 +91,20 @@ public class Elbow extends GBSubsystem {
         return elbowInputs.position;
     }
 
-    public boolean isAtAngle(Rotation2d targetHeight) {
-        return Math.abs(targetHeight.getRadians() - getAngle().getRadians()) <= ElbowConstants.TOLERANCE;
+    public boolean isAtAngle(Rotation2d targetAngle) {
+        return Math.abs(targetAngle.getRadians() - getAngle().getRadians()) <= ElbowConstants.TOLERANCE.getRadians();
     }
 
     public boolean isInShooterCollisionRange() {
-        return elbowInputs.position.getRadians() > ElbowConstants.SHOOTER_COLLISION_RANGE.getFirst().getRadians() &&
-                elbowInputs.position.getRadians() < ElbowConstants.SHOOTER_COLLISION_RANGE.getSecond().getRadians();
+        return elbowInputs.position.getRadians() >= ElbowConstants.SHOOTER_COLLISION_RANGE.getFirst().getRadians() &&
+                elbowInputs.position.getRadians() <= ElbowConstants.SHOOTER_COLLISION_RANGE.getSecond().getRadians();
     }
 
     public Pose3d getPose3D (){
         return new Pose3d(
                 ElbowConstants.ELBOW_POSITION_RELATIVE_TO_ROBOT,
-                new Rotation3d(elbowInputs.position.getRadians() + SimulationElbowConstants.MECHANISM_NAME_TO_ROBOT_TRANSLATION,0, 0)
+                new Rotation3d(elbowInputs.position.getRadians() ,0, 0)
         );
     }
-
 
 }

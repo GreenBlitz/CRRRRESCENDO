@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.BATTERY_VOLTAGE;
-import static edu.greenblitz.robotName.subsystems.shooter.Pivot.SimulationPivot.SimulationPivotConstants.*;
 
 
 public class SimulationPivot implements IPivot {
@@ -29,8 +28,8 @@ public class SimulationPivot implements IPivot {
 
     public SimulationPivot() {
         pivotSimulation = new SingleJointedArmSim(
-                DCMotor.getFalcon500(NUMBER_OF_MOTORS),
-                GEAR_RATIO,
+                DCMotor.getFalcon500Foc(SimulationPivotConstants.NUMBER_OF_MOTORS),
+                SimulationPivotConstants.GEAR_RATIO,
                 SingleJointedArmSim.estimateMOI(
                         PivotConstants.LENGTH_OF_SHOOTER,
                         PivotConstants.SHOOTER_MASS_KG
@@ -41,7 +40,7 @@ public class SimulationPivot implements IPivot {
                 false,
                 PivotConstants.PresetPositions.STARTING.ANGLE.getRadians()
         );
-        controller = SIMULATION_PID.getPIDController();
+        controller = SimulationPivotConstants.SIMULATION_PID.getPIDController();
     }
 
 
@@ -74,7 +73,7 @@ public class SimulationPivot implements IPivot {
 
     @Override
     public void standInPlace(Rotation2d targetAngle) {
-        setPower(0);
+        moveToAngle(targetAngle);
     }
 
     @Override

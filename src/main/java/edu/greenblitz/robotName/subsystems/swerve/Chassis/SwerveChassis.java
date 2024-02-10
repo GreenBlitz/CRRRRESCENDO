@@ -1,4 +1,5 @@
 package edu.greenblitz.robotName.subsystems.swerve.Chassis;
+import edu.greenblitz.robotName.FieldConstants;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.VisionConstants;
@@ -29,9 +30,7 @@ import org.littletonrobotics.junction.Logger;
 import org.photonvision.EstimatedRobotPose;
 import java.util.Optional;
 import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.TIME_STEP;
-import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
-import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.FAST_DISCRETION_CONSTANT;
-import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.SLOW_DISCRETION_CONSTANT;
+import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.*;
 
 
 public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
@@ -50,7 +49,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     private SwerveDrivePoseEstimator poseEstimator;
     private Field2d field = new Field2d();
     public static final double TRANSLATION_TOLERANCE = 0.05;
-    public static final double ROTATION_TOLERANCE = 2;
+    public static final Rotation2d ROTATION_TOLERANCE = Rotation2d.fromDegrees(5);
     private boolean doVision;
     public final double CURRENT_TOLERANCE = 0.5;
 
@@ -170,6 +169,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         return getModule(module).isAtAngle(angle, errorAngleTolerance);
     }
 
+    public boolean isAtAngle(Rotation2d angle) {
+        return Math.abs(getChassisAngle().getRadians() - angle.getRadians()) <= ROTATION_TOLERANCE.getRadians();
+    }
+
     public void resetChassisPose() {
         gyro.updateYaw(Rotation2d.fromRadians(0));
         poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), new Pose2d());
@@ -249,6 +252,18 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
                 fieldRelativeSpeeds.vyMetersPerSecond,
                 fieldRelativeSpeeds.omegaRadiansPerSecond,
                 currentAng
+        );
+    }
+
+    public void rotateToAngle(Rotation2d targetAngle) {
+        ROTATION_PID_CONTROLLER.setSetpoint(targetAngle.getRadians());
+        moveByChassisSpeeds(
+                0,
+                0,
+                ChassisConstants.ROTATION_PID_CONTROLLER.calculate(
+                        getChassisAngle().getRadians()
+                ),
+                getChassisAngle()
         );
     }
 
@@ -384,8 +399,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         boolean isAtY = Math.abs(goalPose.getY() - robotPose.getY()) <= TRANSLATION_TOLERANCE;
 
         Rotation2d angDifference = (goalPose.getRotation().minus(robotPose.getRotation()));
-        boolean isAtAngle = angDifference.getRadians() <= ROTATION_TOLERANCE
-                || (Math.PI * 2) - angDifference.getRadians() <= ROTATION_TOLERANCE;
+        boolean isAtAngle = angDifference.getRadians() <= ROTATION_TOLERANCE.getRadians()
+                || (Math.PI * 2) - angDifference.getRadians() <= ROTATION_TOLERANCE.getRadians();
 
         return isAtAngle && isAtX && isAtY;
     }

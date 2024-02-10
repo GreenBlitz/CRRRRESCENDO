@@ -61,7 +61,7 @@ public class GBSparkMax extends CANSparkMax {
 	/**
 	 * inner conf class
 	 * usage example:
-	 * this.motor = new GBSparkMax(id, CANSparkMaxLowLevel.MotorType.kBrushless);
+	 * this.motor = new GBSparkMax(id, CANSparkLowLevel.MotorType.kBrushless);
 	 * motor.config(new GBSparkMax.SparkMaxConfObject()
 	 * .withInverted(true) //whether the motor should be flipped
 	 * .withCurrentLimit(40) // the max current to allow should be inline with the fuse
