@@ -15,7 +15,7 @@ public class SwerveModuleFactory {
             case REPLAY -> new ReplaySwerveModule();
             case ROBOT_NAME -> new MK4ISwerveModule(module);
             case PEGA_SWERVE -> new KazaSwerveModule(module);
-			default -> new SimulationSwerveModule(module);
+			case SIMULATION -> new SimulationSwerveModule(module);
         };
     }
 }
