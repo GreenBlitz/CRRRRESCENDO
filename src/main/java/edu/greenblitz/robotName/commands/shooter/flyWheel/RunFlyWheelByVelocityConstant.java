@@ -6,6 +6,6 @@ import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 public class RunFlyWheelByVelocityConstant extends RunFlyWheelByVelocity{
 
     public RunFlyWheelByVelocityConstant() {
-        super(FlyWheelConstants.SHOOTING_POWER * RobotConstants.SimulationConstants.BATTERY_VOLTAGE);
+        super(FlyWheelConstants.SHOOTING_VELOCITY);
     }
 }
