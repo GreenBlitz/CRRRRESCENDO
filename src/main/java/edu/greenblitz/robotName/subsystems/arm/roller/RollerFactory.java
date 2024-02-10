@@ -10,7 +10,7 @@ public class RollerFactory {
 		return switch (Robot.getRobotType()) {
 			case ROBOT_NAME -> new BagRoller();
 			case REPLAY -> new ReplayRoller();
-			default -> new SimulationRoller();
+			case SIMULATION, PEGA_SWERVE -> new SimulationRoller();
 		};
 	}
 }
