@@ -35,7 +35,7 @@ public class GBPathFindHolonomic extends GBPathfindingCommand {
             Consumer<ChassisSpeeds> output,
             HolonomicPathFollowerConfig config,
             BooleanSupplier shouldFlipPath,
-            double translationalTolerance,
+            
             Subsystem... requirements) {
         this(
                 targetPath,
@@ -46,7 +46,6 @@ public class GBPathFindHolonomic extends GBPathfindingCommand {
                 config,
                 0.0,
                 shouldFlipPath,
-                translationalTolerance,
                 requirements);
     }
 
@@ -72,7 +71,7 @@ public class GBPathFindHolonomic extends GBPathfindingCommand {
             Supplier<ChassisSpeeds> currentRobotRelativeSpeeds,
             Consumer<ChassisSpeeds> output,
             HolonomicPathFollowerConfig config,
-            double translationalTolerance,
+            
             Subsystem... requirements) {
         this(
                 targetPose,
@@ -83,7 +82,6 @@ public class GBPathFindHolonomic extends GBPathfindingCommand {
                 output,
                 config,
                 0.0,
-                translationalTolerance,
                 requirements);
     }
 
@@ -108,7 +106,7 @@ public class GBPathFindHolonomic extends GBPathfindingCommand {
             Supplier<ChassisSpeeds> currentRobotRelativeSpeeds,
             Consumer<ChassisSpeeds> output,
             HolonomicPathFollowerConfig config,
-            double translationalTolerance,
+            
             Subsystem... requirements) {
         this(
                 targetPose,
@@ -118,7 +116,6 @@ public class GBPathFindHolonomic extends GBPathfindingCommand {
                 currentRobotRelativeSpeeds,
                 output,
                 config,
-                translationalTolerance,
                 requirements);
     }
 
@@ -148,7 +145,7 @@ public class GBPathFindHolonomic extends GBPathfindingCommand {
             HolonomicPathFollowerConfig config,
             double rotationDelayDistance,
             BooleanSupplier shouldFlipPath,
-            double translationalTolerance,
+            
             Subsystem... requirements) {
         super(
                 targetPath,
@@ -165,7 +162,6 @@ public class GBPathFindHolonomic extends GBPathfindingCommand {
                 rotationDelayDistance,
                 config.replanningConfig,
                 shouldFlipPath,
-                translationalTolerance,
                 requirements);
     }
 
@@ -195,7 +191,7 @@ public class GBPathFindHolonomic extends GBPathfindingCommand {
             Consumer<ChassisSpeeds> output,
             HolonomicPathFollowerConfig config,
             double rotationDelayDistance,
-            double translationalTolerance,
+            
             Subsystem... requirements) {
         super(
                 targetPose,
@@ -211,7 +207,6 @@ public class GBPathFindHolonomic extends GBPathfindingCommand {
                         config.maxModuleSpeed,
                         config.driveBaseRadius),
                 rotationDelayDistance,
-                translationalTolerance,
                 config.replanningConfig,
                 requirements);
     }
@@ -241,7 +236,7 @@ public class GBPathFindHolonomic extends GBPathfindingCommand {
             Consumer<ChassisSpeeds> output,
             HolonomicPathFollowerConfig config,
             double rotationDelayDistance,
-            double translationalTolerance,
+            
             Subsystem... requirements) {
         this(
                 targetPose,
@@ -252,7 +247,6 @@ public class GBPathFindHolonomic extends GBPathfindingCommand {
                 output,
                 config,
                 rotationDelayDistance,
-                translationalTolerance,
                 requirements);
     }
 }

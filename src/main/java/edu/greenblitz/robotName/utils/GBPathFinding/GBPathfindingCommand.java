@@ -7,6 +7,7 @@ import com.pathplanner.lib.util.GeometryUtil;
 import com.pathplanner.lib.util.PPLibTelemetry;
 import com.pathplanner.lib.util.PathPlannerLogging;
 import com.pathplanner.lib.util.ReplanningConfig;
+import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.math.MathUtil;
@@ -40,7 +41,6 @@ public class GBPathfindingCommand extends Command {
     private PathPlannerPath currentPath;
     private PathPlannerTrajectory currentTrajectory;
     private Pose2d startingPose;
-    private double translationalTolerance;
 
     private double timeOffset = 0;
 
@@ -70,7 +70,7 @@ public class GBPathfindingCommand extends Command {
             double rotationDelayDistance,
             ReplanningConfig replanningConfig,
             BooleanSupplier shouldFlipPath,
-            double translationalTolerance,
+            
             Subsystem... requirements) {
         addRequirements(requirements);
 
@@ -105,7 +105,6 @@ public class GBPathfindingCommand extends Command {
         this.rotationDelayDistance = rotationDelayDistance;
         this.replanningConfig = replanningConfig;
         this.shouldFlipPath = shouldFlipPath;
-        this.translationalTolerance = translationalTolerance;
         instances++;
         HAL.report(tResourceType.kResourceType_PathFindingCommand, instances);
     }
@@ -135,7 +134,7 @@ public class GBPathfindingCommand extends Command {
             Consumer<ChassisSpeeds> outputRobotRelative,
             PathFollowingController controller,
             double rotationDelayDistance,
-            double translationalTolerance,
+            
             ReplanningConfig replanningConfig,
             Subsystem... requirements) {
         addRequirements(requirements);
@@ -153,7 +152,6 @@ public class GBPathfindingCommand extends Command {
         this.rotationDelayDistance = rotationDelayDistance;
         this.replanningConfig = replanningConfig;
         this.shouldFlipPath = () -> false;
-        this.translationalTolerance = translationalTolerance;
 
         instances++;
         HAL.report(tResourceType.kResourceType_PathFindingCommand, instances);
@@ -175,7 +173,7 @@ public class GBPathfindingCommand extends Command {
             }
         }
 
-        if (currentPose.getTranslation().getDistance(targetPose.getTranslation()) < translationalTolerance) {
+        if (currentPose.getTranslation().getDistance(targetPose.getTranslation()) < ChassisConstants.TRANSLATIONAL_TOLERANCE) {
             output.accept(new ChassisSpeeds());
             this.cancel();
         } else {
