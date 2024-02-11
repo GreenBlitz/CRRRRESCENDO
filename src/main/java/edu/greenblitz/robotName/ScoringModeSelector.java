@@ -14,7 +14,6 @@ public class ScoringModeSelector {
     }
 
     public static void setScoringMode(ScoringMode scoringMode) {
-        System.out.println(scoringMode);
         currentMode = scoringMode;
     }
 
