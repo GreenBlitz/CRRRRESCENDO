@@ -2,7 +2,6 @@ package edu.greenblitz.robotName.subsystems.shooter.Funnel.BagFunnel;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.greenblitz.robotName.subsystems.arm.roller.BagRoller.BagRollerConstants;
 import edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.shooter.Funnel.IFunnel;
 import edu.wpi.first.math.filter.Debouncer;
@@ -19,8 +18,8 @@ public class BagFunnel implements IFunnel {
 	public BagFunnel(){
 		motor = new TalonSRX(BagFunnelConstants.MOTOR_ID);
 
-		debouncer = new Debouncer(BagRollerConstants.DEBOUNCE_TIME_FOR_LIMIT_SWITCH);
-		beamBreaker = new DigitalInput(BagRollerConstants.BEAM_BREAKER_CHANNEL);
+		debouncer = new Debouncer(BagFunnelConstants.DEBOUNCE_TIME_FOR_LIMIT_SWITCH_IN_SECONDS);
+		beamBreaker = new DigitalInput(BagFunnelConstants.BEAM_BREAKER_CHANNEL);
 	}
 
 	@Override
