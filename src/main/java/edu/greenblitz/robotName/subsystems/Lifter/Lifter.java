@@ -82,7 +82,7 @@ public class Lifter extends GBSubsystem {
     public Pose3d getLifterPose3d() {
         return new Pose3d(
                 LifterConstants.ROBOT_RELATIVE_LIFTER_POSITION,
-                new Rotation3d(0,lifterInputs.position,0).plus(LifterConstants.ROBOT_RELATIVE_LIFTER_ROTATION)
+                new Rotation3d(-lifterInputs.position,0,0).plus(LifterConstants.ROBOT_RELATIVE_LIFTER_ROTATION)
         );
     }
 }

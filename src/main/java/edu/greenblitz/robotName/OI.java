@@ -7,6 +7,8 @@ import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
 import edu.greenblitz.robotName.commands.arm.roller.RunRollerByJoystick;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
+import edu.greenblitz.robotName.commands.lifter.LiftUp;
+import edu.greenblitz.robotName.commands.lifter.ReverseLifting;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
@@ -92,9 +94,6 @@ public class OI {
         secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
 
         mainJoystick.A.whileTrue(new GoToShootingState());
-
-        thirdJoystick.A.whileTrue(new MoveElbowToAngle(Rotation2d.fromRadians(0)));
-        thirdJoystick.B.whileTrue(new MoveElbowToAngle(Rotation2d.fromRadians(45)));
     }
 
     public void thirdJoystickButtons(){

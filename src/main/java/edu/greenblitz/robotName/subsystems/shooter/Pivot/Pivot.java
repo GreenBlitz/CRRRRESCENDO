@@ -43,7 +43,7 @@ public class Pivot extends GBSubsystem {
 
 		pivot.updateInputs(pivotInputs);
 		Logger.processInputs("Shooter/Pivot", pivotInputs);
-		Logger.recordOutput("Shooter/Pivot", getSimulationPivotPosition3d());
+		Logger.recordOutput("Shooter", getSimulationPivotPosition3d());
 	}
 
 	public void setPower(double power) {
