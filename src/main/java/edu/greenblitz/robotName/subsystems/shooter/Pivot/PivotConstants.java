@@ -28,6 +28,7 @@ public class PivotConstants {
     }
 
     public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(0);
+    public static final Rotation2d CLOSE_RANGE_SHOOTING_ANGLE = Rotation2d.fromDegrees(113.8);
 
     public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(62);
     
