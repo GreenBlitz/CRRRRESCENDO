@@ -18,10 +18,11 @@ import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
+import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.greenblitz.robotName.utils.AutonomousSelector;
 import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
@@ -56,6 +57,7 @@ public class Robot extends LoggedRobot {
     }
 
     public void initializeSubsystems() {
+        AutonomousSelector.getInstance();
         MultiLimelight.init();
         SwerveChassis.init();
 
@@ -87,7 +89,7 @@ public class Robot extends LoggedRobot {
         NamedCommands.registerCommand("grip", new NoteToShooter().raceWith(new WaitCommand(1)));
         AutoBuilder.configureHolonomic(
                 SwerveChassis.getInstance()::getRobotPose,
-                SwerveChassis.getInstance()::resetChassisPose,
+                SwerveChassis.getInstance()::resetChassisPosition,
                 SwerveChassis.getInstance()::getRobotRelativeChassisSpeeds,
                 SwerveChassis.getInstance()::moveByRobotRelativeSpeeds,
                 ChassisConstants.PATH_FOLLOWER_CONFIG,
@@ -130,6 +132,12 @@ public class Robot extends LoggedRobot {
         }
         Logger.start();
     }
+
+    @Override
+    public void autonomousInit() {
+        AutonomousSelector.getInstance().getChosenValue().schedule();
+    }
+
     public static RobotType getRobotType (){
         RobotType robotType = RobotConstants.ROBOT_TYPE;
         if (isSimulation()) {
