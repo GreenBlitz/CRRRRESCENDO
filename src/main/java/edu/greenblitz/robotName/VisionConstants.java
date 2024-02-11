@@ -14,6 +14,7 @@ public class VisionConstants {
 	public static double STANDARD_DEVIATION_VISION2D = 0.5;
 	public static double STANDARD_DEVIATION_VISION_ANGLE = 0.6;
 	public static final int[] PORT_NUMBERS = {5800, 5801, 5802, 5803, 5804, 5805};
+	public static final int TIMESTAMP_FACTOR = 1000;
 	public static final Transform3d ROBOT_TO_CAMERA = new Transform3d(new Translation3d(), new Rotation3d());
 	public final static double MIN_DISTANCE_TO_FILTER_OUT = 5;//meters
 	public final static double VISION_TO_STANDARD_DEVIATION = 10;

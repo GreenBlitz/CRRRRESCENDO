@@ -28,14 +28,14 @@ class Limelight {
 
     public Optional<Pair<Pose2d, Double>> getUpdatedPose2DEstimation() {
         double[] poseArray = robotPoseEntry.getDoubleArray(new double[VisionConstants.LIMELIGHT_ENTRY_ARRAY_LENGTH]);
-        double processingLatency = poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.TOTAL_LATENCY)] / 1000;
-        double timestamp = Timer.getFPGATimestamp() - processingLatency;
+        double processingLatency = poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.TOTAL_LATENCY)] / VisionConstants.TIMESTAMP_FACTOR;
+        double timestampSeconds = Timer.getFPGATimestamp() - processingLatency;
         int id = (int) idEntry.getInteger(-1);
         if (id == -1) {
             return Optional.empty();
         }
         Pose2d robotPose = new Pose2d(poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.X_AXIS)], poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.Y_AXIS)], Rotation2d.fromDegrees(poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.YAW_ANGLE)]));
-        return Optional.of(new Pair<>(robotPose, timestamp));
+        return Optional.of(new Pair<>(robotPose, timestampSeconds));
     }
 
     public double getTagHeight() {
