@@ -31,6 +31,7 @@ import org.photonvision.EstimatedRobotPose;
 import java.util.Optional;
 import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.TIME_STEP;
 import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.*;
+import static edu.wpi.first.math.VecBuilder.fill;
 
 
 public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
@@ -69,12 +70,22 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         this.kinematics = new SwerveDriveKinematics(
                 ChassisConstants.SWERVE_LOCATIONS_IN_SWERVE_KINEMATICS_COORDINATES
         );
-        this.poseEstimator = new SwerveDrivePoseEstimator(this.kinematics,
+        this.poseEstimator = new SwerveDrivePoseEstimator(
+                this.kinematics,
                 getGyroAngle(),
                 getSwerveModulePositions(),
                 visionPoseStartMatch(),
-                new MatBuilder<>(Nat.N3(), Nat.N1()).fill(VisionConstants.STANDARD_DEVIATION_ODOMETRY, VisionConstants.STANDARD_DEVIATION_ODOMETRY, VisionConstants.STANDARD_DEVIATION_ODOMETRY_ANGLE),
-                new MatBuilder<>(Nat.N3(), Nat.N1()).fill(VisionConstants.STANDARD_DEVIATION_VISION2D, VisionConstants.STANDARD_DEVIATION_VISION2D, VisionConstants.STANDARD_DEVIATION_VISION_ANGLE));
+                fill(
+                        VisionConstants.STANDARD_DEVIATION_ODOMETRY,
+                        VisionConstants.STANDARD_DEVIATION_ODOMETRY,
+                        VisionConstants.STANDARD_DEVIATION_ODOMETRY_ANGLE
+                ),
+                fill(
+                        VisionConstants.STANDARD_DEVIATION_VISION2D,
+                        VisionConstants.STANDARD_DEVIATION_VISION2D,
+                        VisionConstants.STANDARD_DEVIATION_VISION_ANGLE
+                )
+        );
         SmartDashboard.putData("field", getField());
     }
 
@@ -386,7 +397,13 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         int counter = 0;
         for (Optional<Pair<Pose2d, Double>> pose :
                 MultiLimelight.getInstance().getAll2DEstimates()) {
-            poseEstimator.setVisionMeasurementStdDevs(new MatBuilder<>(Nat.N3(), Nat.N1()).fill(MultiLimelight.getInstance().getDynamicStdDevs(counter), MultiLimelight.getInstance().getDynamicStdDevs(counter), VisionConstants.STANDARD_DEVIATION_VISION_ANGLE));
+            poseEstimator.setVisionMeasurementStdDevs(
+                    fill(
+                            MultiLimelight.getInstance().getDynamicStdDevs(counter),
+                            MultiLimelight.getInstance().getDynamicStdDevs(counter),
+                            VisionConstants.STANDARD_DEVIATION_VISION_ANGLE
+                    )
+            );
             pose.ifPresent((pose2dDoublePair) -> resetChassisPose(pose2dDoublePair.getFirst()));
             counter++;
         }

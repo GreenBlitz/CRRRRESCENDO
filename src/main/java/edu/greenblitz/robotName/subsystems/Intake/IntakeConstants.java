@@ -1,6 +1,6 @@
 package edu.greenblitz.robotName.subsystems.Intake;
 
-import com.revrobotics.SparkMaxLimitSwitch;
+import com.revrobotics.SparkLimitSwitch;
 
 public class IntakeConstants {
 
