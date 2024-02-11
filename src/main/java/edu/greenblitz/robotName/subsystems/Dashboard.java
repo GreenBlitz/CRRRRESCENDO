@@ -57,7 +57,6 @@ public class Dashboard extends GBSubsystem {
         driversTab.addDouble("Battery", () -> Battery.getInstance().getCurrentVoltage())
                 .withPosition(9, 3);
         driversTab.addDouble("note angle", GetObjectAngleRelativeToRobot::getObjectAngle);
-        driversTab.addDouble("note pos", () -> ObjectDetectionLimelight.getInstance().isX());
         //field
         driversTab.add("Field", SwerveChassis.getInstance().getField()).withPosition(5, 2).withSize(3, 2);
         driversTab.addDouble("std devs",()->MultiLimelight.getInstance().getDynamicStdDevs(0));

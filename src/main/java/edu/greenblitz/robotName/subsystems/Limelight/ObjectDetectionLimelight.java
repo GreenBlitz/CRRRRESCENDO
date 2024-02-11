@@ -1,9 +1,7 @@
 package edu.greenblitz.robotName.subsystems.Limelight;
 
 import edu.greenblitz.robotName.VisionConstants;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.Pair;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
@@ -17,7 +15,7 @@ public class ObjectDetectionLimelight {
 
 		xNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("json").getInstance().getEntry("Detector").getInstance().getEntry("tx");
 		yNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("json").getInstance().getEntry("Results").getInstance().getEntry("ty");
-		confidenceNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("json").getInstance().getEntry("tx");
+		confidenceNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("json").getInstance().getEntry("ta");
 	}
 
 	public static ObjectDetectionLimelight getInstance() {
@@ -30,29 +28,33 @@ public class ObjectDetectionLimelight {
 		}
 	}
 
-	public boolean isNT(){
-		return xNotePositionEntry.exists();
-	}
-
-	public double isX(){
-		return xNotePositionEntry.getDouble(-1);
-	}
-
-	public Pose2d getObjectPosition(){
+	public Pair<Double, Double> getObjectPosition(){
 		MultiLimelight.getInstance().changePipeline(true);
 
+		double xPosition = getNoteAbsoluteAngle();
 
-		double xPosition = xNotePositionEntry.getDouble(-1);
-		double yPosition = yNotePositionEntry.getDouble(-1);
+		double yPosition = Math.abs(yNotePositionEntry.getDouble(VisionConstants.DEFAULT_NETWORKTABLE_VALUE));
 
 		MultiLimelight.getInstance().initializeLimelightPipeline();
 
-		return new Pose2d(new Translation2d(xPosition,yPosition), new Rotation2d());
+		return new Pair<>(xPosition,yPosition);
+	}
+
+	public double getNoteAbsoluteAngle(){
+		double xPosition = xNotePositionEntry.getDouble(VisionConstants.DEFAULT_NETWORKTABLE_VALUE);
+
+		if(Math.signum(xPosition) == -1){
+
+			xPosition = 360 - xPosition;
+
+		}
+
+		return xPosition;
 	}
 
 	public boolean getTargetConfidence(){
 
-		double targetConfidence = confidenceNotePositionEntry.getDouble(-1);
+		double targetConfidence = confidenceNotePositionEntry.getDouble(VisionConstants.DEFAULT_NETWORKTABLE_VALUE);
 
 		return targetConfidence >= VisionConstants.OBJECT_DETECTION_THRESHOLD;
 	}
