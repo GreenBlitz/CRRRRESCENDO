@@ -26,10 +26,7 @@ public class ShootingStateCalculations {
     }
 
     public static Translation2d getRobotTargetTranslation() {
-        Translation2d robotPosition = getRobotPose().getTranslation();
-        if (SHOOTING_ZONE.isInCircle(robotPosition))
-            return robotPosition;
-        return SHOOTING_ZONE.getClosestCircleRimPosition(robotPosition);
+        return SHOOTING_ZONE.getClosestCirclePosition(getRobotPose().getTranslation());
     }
 
     public static Rotation2d getTargetRobotAngle() {

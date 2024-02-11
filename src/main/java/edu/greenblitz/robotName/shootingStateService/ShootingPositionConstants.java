@@ -10,9 +10,9 @@ public class ShootingPositionConstants {
     
     public static final Translation2d CENTER_OF_SHOOTING_ZONE = FieldConstants.MIDDLE_OF_SPEAKER_POSITION.toTranslation2d();
 
-    public static final double SHOOTING_ZONE_RADIUS_IN_METERS = 2;
+    public static final double SHOOTING_ZONE_RADIUS_IN_METERS = 4;
 
-    public static final Rotation2d LOWER_ANGLE_LIMIT = Rotation2d.fromDegrees(-60);
+    public static final Rotation2d LOWER_ANGLE_LIMIT = Rotation2d.fromDegrees(0);
 
     public static final Rotation2d UPPER_ANGLE_LIMIT = Rotation2d.fromDegrees(60);
 

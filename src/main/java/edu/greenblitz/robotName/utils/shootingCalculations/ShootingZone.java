@@ -46,6 +46,17 @@ public class ShootingZone extends GBCircle {
         return targetPosition;
     }
 
+    @Override
+    public Translation2d getClosestCirclePosition(Translation2d position) {
+        Translation2d targetPosition = super.getClosestCirclePosition(position);
+        for (Bound bound : restrictedBounds) {
+            if (bound.isPositionInBound(targetPosition)) {
+                return bound.getClosestLimitToPosition(targetPosition);
+            }
+        }
+        return targetPosition;
+    }
+
     public Rotation2d getTargetRobotAngle() {
         Translation2d relativePosition = ShootingStateCalculations.getRobotTargetTranslation().minus(getCenterPosition());
         Rotation2d angle = new Rotation2d(Math.atan2(relativePosition.getY(), relativePosition.getX()));

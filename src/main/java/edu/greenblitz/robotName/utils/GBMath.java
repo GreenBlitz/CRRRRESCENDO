@@ -19,17 +19,18 @@ public class GBMath {
 		return ((x % y) + y) % y;
 	}
 
-
 	/**
-	 * Gets a line and a target point and returns the distance between that point and the line.
+	 * Gets a line and a target point and returns the closest point to that given point that lies on the line.
 	 *
 	 * @param startPoint  The first point defining the line.
 	 * @param endPoint    The second point defining the line.
 	 * @param targetPoint The point that is distancing the line.
-	 * @return The minimum distance between the target point and the line between the first two points.
+	 * @return The point that is closest to the point and lies on the line.
 	 */
-	public static double getDistanceBetweenPointAndLine(Translation2d startPoint, Translation2d endPoint, Translation2d targetPoint) {
+	public static Translation2d getClosestPointBetweenPointAndLine(Translation2d targetPoint, Translation2d startPoint, Translation2d endPoint) {
 		double slope = (startPoint.getY() - endPoint.getY()) / (startPoint.getX() - endPoint.getX());
+		if (slope == 0)
+			return new Translation2d(targetPoint.getX(),startPoint.getY());
 		double perpendicularSlope = -1 / slope;
 
 		double yIntercept1 = targetPoint.getY() - (targetPoint.getX() * perpendicularSlope);
@@ -38,7 +39,7 @@ public class GBMath {
 		double xClosest = (slope - perpendicularSlope) / (yIntercept2 - yIntercept1);
 		double yClosest = xClosest * slope + yIntercept2;
 
-		return targetPoint.getDistance(new Translation2d(xClosest, yClosest));
+		return new Translation2d(xClosest, yClosest);
 	}
 
 	/**
