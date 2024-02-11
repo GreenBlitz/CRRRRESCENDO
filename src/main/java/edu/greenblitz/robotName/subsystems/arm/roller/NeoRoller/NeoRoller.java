@@ -51,7 +51,6 @@ public class NeoRoller implements IRoller {
 	public void updateInputs(RollerInputsAutoLogged inputs) {
 		inputs.outputCurrent = motor.getOutputCurrent();
 		inputs.appliedOutput = motor.getAppliedOutput();
-		inputs.temperature = motor.getMotorTemperature();
 		inputs.isObjectIn = debouncer.calculate(beamBreaker.get());
 		inputs.position = Rotation2d.fromRotations(motor.getEncoder().getPosition());
 	}

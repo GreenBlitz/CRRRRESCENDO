@@ -10,8 +10,6 @@ public class RollerInputs {
 
 	public double outputCurrent;
 
-	public double temperature;
-
 	public boolean isObjectIn;
 
 	public Rotation2d position;
