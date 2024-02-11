@@ -7,14 +7,14 @@ public class ExtendLifter extends LifterCommand {
 
     @Override
     public void initialize() {
-        lifterSolenoid.setPower(LifterSolenoidConstants.POWER_TO_CLOSE);
+        lifterSolenoid.closeSolenoid();
         timer.start();
     }
 
     @Override
     public void execute() {
         if (timer.hasElapsed(LifterSolenoidConstants.SECONDS_TO_CLOSE)){
-            lifterSolenoid.setPower(LifterSolenoidConstants.POWER_TO_HOLD);
+            lifterSolenoid.holdSolenoid();
             lifter.goToPosition(LifterConstants.LIFTER_EXTENDED_POSITION);
         }
     }
@@ -27,6 +27,6 @@ public class ExtendLifter extends LifterCommand {
     @Override
     public void end(boolean interrupted) {
         lifter.stopMotor();
-        lifterSolenoid.setPower(LifterSolenoidConstants.POWER_TO_OPEN);
+        lifterSolenoid.openSolenoid();
     }
 }

@@ -33,8 +33,16 @@ public class LifterSolenoid extends GBSubsystem {
 		Logger.processInputs("Lifter/Solenoid",lifterSolenoidInputs);
 	}
 
-	public boolean isOpen(){
-		return lifterSolenoidInputs.isOpen;
+	public void openSolenoid(){
+		lifterSolenoid.openSolenoid();
+	}
+
+	public void closeSolenoid(){
+		lifterSolenoid.closeSolenoid();
+	}
+
+	public void holdSolenoid(){
+		lifterSolenoid.holdSolenoid();
 	}
 
 	public void setPower(double power){

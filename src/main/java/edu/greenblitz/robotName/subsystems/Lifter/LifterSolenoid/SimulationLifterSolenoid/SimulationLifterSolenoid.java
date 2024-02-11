@@ -13,9 +13,9 @@ public class SimulationLifterSolenoid implements ILifterSolenoid {
 	double appliedOutputs;
 	public SimulationLifterSolenoid(){
 		simulationMotor = new DCMotorSim(
-				DCMotor.getCIM(SimulationLifterSolenoidConstants.MOTOR_NUM),
-				1,
-				0.005
+				DCMotor.getCIM(SimulationLifterSolenoidConstants.NUMBER_OF_MOTORS),
+				SimulationLifterSolenoidConstants.MOTOR_GEARING,
+				SimulationLifterSolenoidConstants.MOTOR_JKG_METERS_SQUARED
 		);
 	}
 
@@ -38,6 +38,7 @@ public class SimulationLifterSolenoid implements ILifterSolenoid {
 		appliedOutputs = voltage;
 		simulationMotor.setInputVoltage(voltage);
 	}
+
 	@Override
 	public void updateInputs(LifterSolenoidInputsAutoLogged inputs) {
 		simulationMotor.update(RobotConstants.SimulationConstants.TIME_STEP);

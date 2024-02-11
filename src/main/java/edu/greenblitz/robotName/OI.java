@@ -1,13 +1,7 @@
 package edu.greenblitz.robotName;
 
-import edu.greenblitz.robotName.commands.Climb.CloseSolenoidAndExtendLifter;
-import edu.greenblitz.robotName.commands.PanicMode;
-import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
-import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
 import edu.greenblitz.robotName.commands.arm.roller.RunRollerByJoystick;
-import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
-import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
@@ -74,8 +68,6 @@ public class OI {
     }
 
     public void initButtons() {
-        mainJoystick.A.whileTrue(new CloseSolenoidAndExtendLifter());
-//        mainJoystick.B.whileTrue(new ReverseLifting());
     }
 
     public void thirdJoystickButtons(){
