@@ -60,16 +60,16 @@ public class Robot extends LoggedRobot {
         ObjectDetectionLimelight.init();
         SwerveChassis.init();
 
-        Pivot.init();
-        Funnel.init();
-        FlyWheel.init();
-
-        Elbow.init();
-        Wrist.init();
-        Roller.init();
-
-        Lifter.init();
-        Intake.init();
+//        Pivot.init();
+//        Funnel.init();
+//        FlyWheel.init();
+//
+//        Elbow.init();
+//        Wrist.init();
+//        Roller.init();
+//
+//        Lifter.init();
+//        Intake.init();
     }
 
     @Override

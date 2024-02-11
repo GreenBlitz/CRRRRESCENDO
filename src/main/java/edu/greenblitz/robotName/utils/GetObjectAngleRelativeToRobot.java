@@ -10,6 +10,6 @@ import java.util.function.DoubleSupplier;
 public class GetObjectAngleRelativeToRobot{
 	public static double getObjectAngle() {
 		Pair<Double,Double> objectPosition = ObjectDetectionLimelight.getInstance().getObjectPosition();
-		return Math.atan2(objectPosition.getFirst(),objectPosition.getSecond());
+		return Math.atan2(objectPosition.getSecond(),objectPosition.getFirst());
 	}
 }

@@ -13,8 +13,8 @@ public class ObjectDetectionLimelight {
 	public ObjectDetectionLimelight(){
 		String name = VisionConstants.OBJECT_DETECTION_LIMELIGHT_NAME;
 
-		xNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("json").getInstance().getEntry("Detector").getInstance().getEntry("tx");
-		yNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("json").getInstance().getEntry("Results").getInstance().getEntry("ty");
+		xNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("tx");
+		yNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("ty");
 		confidenceNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("json").getInstance().getEntry("ta");
 	}
 
