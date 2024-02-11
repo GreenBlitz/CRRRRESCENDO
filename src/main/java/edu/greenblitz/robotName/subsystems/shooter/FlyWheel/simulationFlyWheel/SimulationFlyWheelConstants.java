@@ -16,7 +16,7 @@ public class SimulationFlyWheelConstants extends FlyWheelConstants {
 
         public static final double POWER_TO_VELOCITY_FACTOR = 0.1;
 
-        public static final PIDController SIMULATION_PID = new PIDController(0.3,0,0.3);
+        public static final PIDController SIMULATION_PID = new PIDController(2, 0.8, 0);
 
     }
     public static class LeftMotor{

@@ -4,10 +4,11 @@ import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.wpilibj.PowerDistribution;
 
 public class RobotConstants {
-  public static final Robot.RobotType ROBOT_TYPE = Robot.RobotType.ROBOT_NAME;
+
+ 	 public static final Robot.RobotType ROBOT_TYPE = Robot.RobotType.SIMULATION;
 
 	public static final String SIMULATION_LOG_PATH = System.getProperty("user.home") + "\\Desktop\\SimulationLogs";
-  public static final String USB_LOG_PATH = "/usb/";
+  	public static final String USB_LOG_PATH = "/usb/";
 	public static final String SAFE_ROBORIO_LOG_PATH = "/logs/";
 
 	public static class General {
@@ -23,6 +24,8 @@ public class RobotConstants {
 			public final static double NEO_TICKS_PER_ROTATION = 42;
 			public static final double NEO_PHYSICAL_TICKS_TO_RADIANS = SPARKMAX_TICKS_PER_RADIAN / NEO_TICKS_PER_ROTATION; //do not use unless you understand the meaning
 			public final static double FALCON_REVOLUTIONS_PER_RADIAN = 2 * Math.PI;
+			public final static double SIGNAL_FREQUENCY_HERTZ = 100;
+			public final static double IS_SWITCH_CLOSED = 0;
 		}
 	}
 
@@ -42,6 +45,8 @@ public class RobotConstants {
 	public static class Joystick{
 		public static final int MAIN = 0;
 		public static final int SECOND = 1;
+		public static final int THIRD = 2;
+		public static final int FOURTH = 3;
 	}
     public static class Pneumatics {
         public static final int PCM_ID = 20;

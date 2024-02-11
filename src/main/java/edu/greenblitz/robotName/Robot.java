@@ -40,6 +40,7 @@ public class Robot extends LoggedRobot {
     public enum RobotType {
         ROBOT_NAME,
         SIMULATION,
+        PEGA_SWERVE,
         REPLAY
     }
 
@@ -103,8 +104,7 @@ public class Robot extends LoggedRobot {
 
         NetworkTableInstance.getDefault()
                 .getStructTopic("MechanismPoses", Pose3d.struct).publish();
-
-        switch (RobotConstants.ROBOT_TYPE) {
+        switch (getRobotType()) {
             // Running on a real robot, log to a USB stick
             case ROBOT_NAME:
                 try {
@@ -136,5 +136,21 @@ public class Robot extends LoggedRobot {
     @Override
     public void autonomousInit() {
         AutonomousSelector.getInstance().getChosenValue().schedule();
+    }
+
+    public static RobotType getRobotType (){
+        RobotType robotType = RobotConstants.ROBOT_TYPE;
+        if (isSimulation()) {
+            if (robotType.equals(RobotType.REPLAY)) {
+                return RobotType.REPLAY;
+            }
+            return RobotType.SIMULATION;
+        }
+		else {
+            if (robotType.equals(RobotType.ROBOT_NAME)) {
+                return RobotType.ROBOT_NAME;
+            }
+            return RobotType.PEGA_SWERVE;
+        }
     }
 }
