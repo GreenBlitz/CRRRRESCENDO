@@ -7,7 +7,7 @@ public class TransferNote extends SequentialCommandGroup {
     public TransferNote() {
         super(
                 new MoveToTransferNotePosition(),
-                new MoveNoteBetweenShooterAndArmWithSafeRotations()
+                new SafeMoveNoteBetweenShooterAndArm()
         );
     }
 }
