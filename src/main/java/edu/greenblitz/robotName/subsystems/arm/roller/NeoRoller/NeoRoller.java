@@ -24,7 +24,7 @@ public class NeoRoller implements IRoller {
 		motor.getPIDController().setFeedbackDevice(motor.getEncoder());
 
 		beamBreaker = new DigitalInput(NeoRollerConstants.BEAM_BREAKER_CHANNEL);
-		debouncer = new Debouncer(NeoRollerConstants.DEBOUNCE_TIME_FOR_LIMIT_SWITCH);
+		debouncer = new Debouncer(NeoRollerConstants.DEBOUNCE_TIME_FOR_LIMIT_SWITCH_IN_SECONDS);
 	}
 
 	@Override
