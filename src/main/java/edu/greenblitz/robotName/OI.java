@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.Climb.lifter.ExtendLifter;
 import edu.greenblitz.robotName.commands.arm.roller.RunRollerByJoystick;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
@@ -8,6 +9,7 @@ import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
+import edu.greenblitz.robotName.subsystems.Lifter.LifterSolenoid.LifterSolenoid;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.Battery;
@@ -15,6 +17,7 @@ import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
 
@@ -66,8 +69,9 @@ public class OI {
     public SmartJoystick getFourthJoystick() {
         return fourthJoystick;
     }
-
+    
     public void initButtons() {
+        mainJoystick.A.whileTrue(new ExtendLifter());
     }
 
     public void thirdJoystickButtons(){

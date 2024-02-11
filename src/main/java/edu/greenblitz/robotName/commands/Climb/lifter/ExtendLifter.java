@@ -15,18 +15,23 @@ public class ExtendLifter extends LifterCommand {
     public void execute() {
         if (timer.hasElapsed(LifterSolenoidConstants.SECONDS_TO_CLOSE)){
             lifterSolenoid.holdSolenoid();
-            lifter.goToPosition(LifterConstants.LIFTER_EXTENDED_POSITION);
+//            lifter.goToPosition(LifterConstants.LIFTER_EXTENDED_POSITION);
+            lifter.setPower(0.1);
         }
     }
 
     @Override
     public boolean isFinished() {
-        return lifter.isAtPosition(LifterConstants.LIFTER_EXTENDED_POSITION);
+//        return lifter.isAtPosition(LifterConstants.LIFTER_EXTENDED_POSITION);
+//        return timer.hasElapsed(3);
+        return false;
     }
 
     @Override
     public void end(boolean interrupted) {
         lifter.stopMotor();
         lifterSolenoid.openSolenoid();
+        timer.stop();
+        timer.reset();
     }
 }

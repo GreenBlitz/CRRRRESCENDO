@@ -22,8 +22,8 @@ public class NeoLifter implements ILifter {
 
         motor.getReverseLimitSwitch(NeoLifterConstants.BACKWARD_LIMIT_SWITCH_TYPE).enableLimitSwitch(NeoLifterConstants.IS_BACKWARD_LIMIT_SWITCH_ENABLED);
         motor.getForwardLimitSwitch(NeoLifterConstants.FORWARD_LIMIT_SWITCH_TYPE).enableLimitSwitch(NeoLifterConstants.IS_FORWARD_LIMIT_SWITCH_ENABLED);
-        motor.enableSoftLimit(CANSparkBase.SoftLimitDirection.kReverse, false);
-        motor.enableSoftLimit(CANSparkBase.SoftLimitDirection.kForward, false);
+        motor.enableSoftLimit(CANSparkBase.SoftLimitDirection.kReverse, true);
+        motor.enableSoftLimit(CANSparkBase.SoftLimitDirection.kForward, true);
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, LifterConstants.BACKWARD_LIMIT.getRadians());
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, LifterConstants.FORWARD_LIMIT.getRadians());
         motor.setIdleMode(CANSparkMax.IdleMode.kBrake);

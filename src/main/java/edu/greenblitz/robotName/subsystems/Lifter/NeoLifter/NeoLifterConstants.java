@@ -22,13 +22,13 @@ public class NeoLifterConstants {
 
     public static final SimpleMotorFeedforward FEED_FORWARD = new SimpleMotorFeedforward(0,0,0);
     
-    public static final SparkMaxLimitSwitch.Type FORWARD_LIMIT_SWITCH_TYPE = SparkMaxLimitSwitch.Type.kNormallyClosed;
+    public static final SparkMaxLimitSwitch.Type FORWARD_LIMIT_SWITCH_TYPE = SparkMaxLimitSwitch.Type.kNormallyOpen;
 
-    public static final SparkMaxLimitSwitch.Type BACKWARD_LIMIT_SWITCH_TYPE = SparkMaxLimitSwitch.Type.kNormallyClosed;
+    public static final SparkMaxLimitSwitch.Type BACKWARD_LIMIT_SWITCH_TYPE = SparkMaxLimitSwitch.Type.kNormallyOpen;
 
-    public static final boolean IS_BACKWARD_LIMIT_SWITCH_ENABLED = false;
+    public static final boolean IS_BACKWARD_LIMIT_SWITCH_ENABLED = true;
 
-    public static final boolean IS_FORWARD_LIMIT_SWITCH_ENABLED = false;
+    public static final boolean IS_FORWARD_LIMIT_SWITCH_ENABLED = true;
 
     public static final int PID_SLOT = 0;
 }

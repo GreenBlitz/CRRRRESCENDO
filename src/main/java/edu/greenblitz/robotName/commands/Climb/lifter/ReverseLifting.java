@@ -1,6 +1,5 @@
 package edu.greenblitz.robotName.commands.Climb.lifter;
 
-import edu.greenblitz.robotName.commands.Climb.LifterSolenoid.OpenSolenoid;
 import edu.greenblitz.robotName.subsystems.Lifter.LifterConstants;
 import edu.greenblitz.robotName.subsystems.Lifter.LifterSolenoid.LifterSolenoidConstants;
 
