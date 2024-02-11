@@ -8,5 +8,5 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RotateToObject extends RotateToAngle {
 
 	public RotateToObject() {
-		super(new Rotation2d(GetObjectAngleRelativeToRobot.getObjectAngle()));
+		super(GetObjectAngleRelativeToRobot.getObjectAngle());
 	}}
