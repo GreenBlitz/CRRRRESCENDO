@@ -29,28 +29,11 @@ public class NeoFunnel implements IFunnel {
 	public void setPower(double power) {
 		motor.set(power);
 	}
-	
-	@Override
-	public void setVoltage(double voltage) {
-		motor.setVoltage(voltage);
-	}
-
-	@Override
-	public void resetEncoder(Rotation2d position) {
-		motor.getEncoder().setPosition(position.getRadians());
-	}
-
-	@Override
-	public void moveToPosition(Rotation2d position) {
-		motor.getPIDController().setReference(position.getRotations(), CANSparkMax.ControlType.kPosition);
-	}
 
 	@Override
 	public void updateInputs(FunnelInputsAutoLogged inputs) {
 		inputs.outputCurrent = motor.getOutputCurrent();
 		inputs.appliedOutput = motor.getAppliedOutput();
-		inputs.temperature = motor.getMotorTemperature();
 		inputs.isObjectIn = debouncer.calculate(beamBreaker.get());
-		inputs.position = Rotation2d.fromRotations(motor.getEncoder().getPosition());
 	}
 }
