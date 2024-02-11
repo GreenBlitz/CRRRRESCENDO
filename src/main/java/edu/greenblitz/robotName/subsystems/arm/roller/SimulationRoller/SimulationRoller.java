@@ -3,7 +3,6 @@ package edu.greenblitz.robotName.subsystems.arm.roller.SimulationRoller;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.arm.roller.IRoller;
 import edu.greenblitz.robotName.subsystems.arm.roller.RollerInputsAutoLogged;
-import edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelInputsAutoLogged;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -67,11 +66,13 @@ public class SimulationRoller implements IRoller {
 
 	@Override
 	public void updateInputs(RollerInputsAutoLogged inputs) {
+		rollerSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
+
 		inputs.appliedOutput = appliedOutput;
 		inputs.outputCurrent = rollerSimulation.getCurrentDrawAmps();
 		inputs.temperature = 0;
 		inputs.isObjectIn = isObjectInArm.getSelected();
-		inputs.position = Rotation2d.fromRotations(rollerSimulation.getAngularPositionRotations());
+		inputs.position = Rotation2d.fromRadians(rollerSimulation.getAngularPositionRad());
 
 		lastInputs = inputs;
 	}

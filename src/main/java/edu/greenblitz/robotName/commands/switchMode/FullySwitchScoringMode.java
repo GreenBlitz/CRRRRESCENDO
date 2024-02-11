@@ -12,7 +12,7 @@ public class FullySwitchScoringMode extends ProxyCommand {
         super(
                 () -> new ConditionalCommand(
                         SwitchingScoringModeMovement.getCommand(ScoringMode.AMP, () -> Funnel.getInstance().isObjectIn()),
-                        SwitchingScoringModeMovement.getCommand(ScoringMode.SPEAKER, () -> Roller.getInstance().isObjectInside()),
+                        SwitchingScoringModeMovement.getCommand(ScoringMode.SPEAKER, () -> Roller.getInstance().isObjectIn()),
                         ScoringModeSelector::isSpeakerMode
                 )
         );

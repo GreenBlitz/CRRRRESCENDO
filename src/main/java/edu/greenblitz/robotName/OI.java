@@ -3,6 +3,8 @@ package edu.greenblitz.robotName;
 import edu.greenblitz.robotName.commands.PanicMode;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
+import edu.greenblitz.robotName.commands.arm.roller.MoveNoteToMiddleOfRoller;
+import edu.greenblitz.robotName.commands.arm.roller.RunByPower.RunRollerCounterClockwiseUntilNoteIsInside;
 import edu.greenblitz.robotName.commands.arm.roller.RunRollerByJoystick;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
@@ -80,15 +82,17 @@ public class OI {
     }
 
     public void initButtons() {
-        secondJoystick.START.whileTrue(new PanicMode());
-        secondJoystick.BACK.whileTrue(new ToggleScoringMode());
-        secondJoystick.A.whileTrue(new MoveElbowAndWrist(ElbowConstants.PresetPositions.SCORE.ANGLE, WristConstants.PresetPositions.SCORE.ANGLE));
-        secondJoystick.B.whileTrue(new MoveElbowAndWristToSafe());
-        secondJoystick.X.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE));
-        secondJoystick.Y.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
-        secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
+//        secondJoystick.START.whileTrue(new PanicMode());
+//        secondJoystick.BACK.whileTrue(new ToggleScoringMode());
+//        secondJoystick.A.whileTrue(new MoveElbowAndWrist(ElbowConstants.PresetPositions.SCORE.ANGLE, WristConstants.PresetPositions.SCORE.ANGLE));
+//        secondJoystick.B.whileTrue(new MoveElbowAndWristToSafe());
+//        secondJoystick.X.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE));
+//        secondJoystick.Y.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
+//        secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
+//
+//        mainJoystick.A.whileTrue(new GoToShootingState());
 
-        mainJoystick.A.whileTrue(new GoToShootingState());
+        secondJoystick.B.onTrue(new MoveNoteToMiddleOfRoller());
     }
 
     public void thirdJoystickButtons(){
