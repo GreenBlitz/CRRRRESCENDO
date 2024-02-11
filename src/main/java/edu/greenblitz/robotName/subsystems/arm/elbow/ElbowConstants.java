@@ -28,7 +28,7 @@ public class ElbowConstants {
 
     public static final Pair<Rotation2d,Rotation2d> SHOOTER_COLLISION_RANGE = new Pair<>(BACKWARD_ANGLE_LIMIT,PresetPositions.SAFE.ANGLE);
 
-    public static final Translation3d ELBOW_POSITION_RELATIVE_TO_ROBOT = new Translation3d(0,0.1,0.6);
+    public static final Translation3d ELBOW_POSITION_RELATIVE_TO_ROBOT = new Translation3d(-0.1,0,0.6);
 
     public static final double GEAR_RATIO = 1;
 

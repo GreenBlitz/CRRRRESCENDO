@@ -33,7 +33,7 @@ public class PivotConstants {
     
     public static final double GEAR_RATIO = 80;
 
-    public static final Translation3d ROBOT_RELATIVE_PIVOT_POSITION = new Translation3d(0,0.1,0.15);
+    public static final Translation3d ROBOT_RELATIVE_PIVOT_POSITION = new Translation3d(-0.1,0,0.15);
 
     public static final Rotation2d TOLERANCE = Rotation2d.fromDegrees(0.5);
 
