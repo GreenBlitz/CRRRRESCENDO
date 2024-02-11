@@ -13,25 +13,20 @@ public class RunRollerByRotations extends RollerCommand{
 
     @Override
     public void initialize() {
-        roller.resetEncoder(new Rotation2d(0));
+        roller.resetEncoder(Rotation2d.fromRadians(0));
         roller.moveToPosition(rotations);
     }
 
     @Override
     public void execute() {
-        System.out.println("Aaaaaaaaaaaaaa");
         if (Robot.isSimulation()){
             roller.moveToPosition(rotations);
         }
     }
 
-//    @Override
-//    public boolean isFinished() {
-//        return roller.isAtAngle(rotations);
-//    }
-
     @Override
-    public void end(boolean interrupted) {
-        super.end(interrupted);
+    public boolean isFinished() {
+        return roller.isAtAngle(rotations);
     }
+
 }

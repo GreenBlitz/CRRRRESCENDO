@@ -96,9 +96,6 @@ public class OI {
 //        mainJoystick.A.whileTrue(new GoToShootingState());
 
         secondJoystick.B.onTrue(new MoveNoteToMiddleOfRoller());
-        secondJoystick.POV_LEFT.onTrue(new TransferNote());
-        secondJoystick.Y.onTrue(new SetScoringMode(ScoringMode.AMP));
-        secondJoystick.X.onTrue(new SetScoringMode(ScoringMode.SPEAKER));
     }
 
     public void thirdJoystickButtons(){

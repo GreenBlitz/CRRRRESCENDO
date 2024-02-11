@@ -27,7 +27,6 @@ public class MoveNoteBetweenShooterAndArm extends GBCommand {
 
     @Override
     public void execute() {
-        System.out.println("bbbbbbbbbbbbbbbbbb");
         if (isTargetModeSpeaker){
             funnel.rollIn();
             roller.rollCounterClockwise();
