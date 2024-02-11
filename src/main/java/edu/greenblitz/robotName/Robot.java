@@ -3,8 +3,12 @@ package edu.greenblitz.robotName;
 import edu.greenblitz.robotName.subsystems.Dashboard;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByPowerConstant;
+import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingStateAndShoot;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
+import edu.greenblitz.robotName.commands.intake.NoteToShooter;
 import edu.greenblitz.robotName.subsystems.Intake.Intake;
 import edu.greenblitz.robotName.subsystems.Lifter.Lifter;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
@@ -14,20 +18,17 @@ import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
-import edu.greenblitz.robotName.utils.FMSUtils;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.greenblitz.robotName.subsystems.Dashboard;
-import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
-import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
-import edu.greenblitz.robotName.subsystems.Battery;
-import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.greenblitz.robotName.utils.AutonomousSelector;
+import edu.greenblitz.robotName.utils.FMSUtils;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
 import org.littletonrobotics.junction.Logger;
@@ -49,19 +50,16 @@ public class Robot extends LoggedRobot {
 //        Pathfinding.setPathfinder(new LocalADStar());
         CommandScheduler.getInstance().enable();
 //        initializeLogger();
+//        initializeAutonomousBuilder();
         initializeSubsystems();
 //        SwerveChassis.getInstance().resetAllEncoders();
-//        initializeAutonomousBuilder();
         OI.init();
     }
 
     public void initializeSubsystems() {
+//        AutonomousSelector.getInstance();
 //        MultiLimelight.init();
 //        SwerveChassis.init();
-//
-//        Pivot.init();
-//        Funnel.init();
-//        FlyWheel.init();
 
 //        Elbow.init();
 //        Wrist.init();
@@ -83,9 +81,11 @@ public class Robot extends LoggedRobot {
     }
 
     private void initializeAutonomousBuilder() {
+        NamedCommands.registerCommand("shoot", new GoToShootingStateAndShoot());
+        NamedCommands.registerCommand("grip", new NoteToShooter().raceWith(new WaitCommand(1)));
         AutoBuilder.configureHolonomic(
                 SwerveChassis.getInstance()::getRobotPose,
-                SwerveChassis.getInstance()::resetChassisPose,
+                SwerveChassis.getInstance()::resetChassisPosition,
                 SwerveChassis.getInstance()::getRobotRelativeChassisSpeeds,
                 SwerveChassis.getInstance()::moveByRobotRelativeSpeeds,
                 ChassisConstants.PATH_FOLLOWER_CONFIG,
@@ -128,6 +128,12 @@ public class Robot extends LoggedRobot {
         }
         Logger.start();
     }
+
+    @Override
+    public void autonomousInit() {
+        AutonomousSelector.getInstance().getChosenValue().schedule();
+    }
+
     public static RobotType getRobotType (){
         RobotType robotType = RobotConstants.ROBOT_TYPE;
         if (isSimulation()) {

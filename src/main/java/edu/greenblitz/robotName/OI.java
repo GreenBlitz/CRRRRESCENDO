@@ -1,18 +1,27 @@
 package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.Climb.lifter.ExtendLifter;
+import edu.greenblitz.robotName.commands.arm.roller.MoveNoteToMiddleOfRoller;
+import edu.greenblitz.robotName.commands.arm.roller.RunByPower.RunRollerCounterClockwiseUntilNoteIsInside;
 import edu.greenblitz.robotName.commands.arm.roller.RunRollerByJoystick;
+import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
+import edu.greenblitz.robotName.commands.getNoteToSystem.TransferNote;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
+import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingState;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
+import edu.greenblitz.robotName.commands.switchMode.SetScoringMode;
 import edu.greenblitz.robotName.subsystems.Lifter.LifterSolenoid.LifterSolenoid;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
+import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
+import edu.greenblitz.robotName.utils.ScoringMode;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
@@ -72,6 +81,8 @@ public class OI {
     
     public void initButtons() {
         mainJoystick.A.whileTrue(new ExtendLifter());
+
+        mainJoystick.A.whileTrue(new GoToShootingState());
     }
 
     public void thirdJoystickButtons(){

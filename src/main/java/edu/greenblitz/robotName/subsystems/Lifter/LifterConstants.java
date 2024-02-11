@@ -6,10 +6,9 @@ import edu.wpi.first.math.geometry.Translation3d;
 
 public class LifterConstants {
 
-    public static final Translation3d ROBOT_RELATIVE_LIFTER_POSITION = new Translation3d(0,0.24,0.35);
+    public static final Translation3d ROBOT_RELATIVE_LIFTER_POSITION = new Translation3d(-0.24,0,0.35);
 
-
-    public static final Rotation3d ROBOT_RELATIVE_LIFTER_ROTATION = new Rotation3d(Math.PI,0,-Math.PI/2);
+    public static final Rotation3d ROBOT_RELATIVE_LIFTER_ROTATION = new Rotation3d(0,Math.PI,-Math.PI/2);
 
     public static final Rotation2d ENCODER_POSITION_WHEN_RESET = Rotation2d.fromRotations(0);
 

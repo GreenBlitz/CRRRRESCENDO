@@ -1,10 +1,9 @@
 package edu.greenblitz.robotName.subsystems.swerve.Chassis;
 
-
-import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.ReplanningConfig;
+import com.pathplanner.lib.path.PathConstraints;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -18,6 +17,7 @@ public class ChassisConstants {
     public static final double ROBOT_LENGTH_IN_METERS = 0.82;
 
     public static final double BUMPER_WIDTH = 0.13;
+    public static final Rotation2d CLOSE_RANGE_SHOOTING_ANGLE = Rotation2d.fromDegrees(180);
 
     public static final double ROBOT_WIDTH_WITH_BUMPER = ROBOT_WIDTH_IN_METERS + BUMPER_WIDTH;
 

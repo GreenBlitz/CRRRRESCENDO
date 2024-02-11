@@ -27,8 +27,8 @@ public class NeoWrist implements IWrist {
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, WristConstants.BACKWARD_ANGLE_LIMIT.getRadians());
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, WristConstants.FORWARD_ANGLE_LIMIT.getRadians());
 
-        motor.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoWristConstants.IS_BACKWARD_LIMIT_SWITCH_ENABLED);
-        motor.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoWristConstants.IS_FORWARD_LIMIT_SWITCH_ENABLED);
+        motor.getReverseLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoWristConstants.IS_BACKWARD_LIMIT_SWITCH_ENABLED);
+        motor.getForwardLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoWristConstants.IS_FORWARD_LIMIT_SWITCH_ENABLED);
 
     }
 
@@ -54,7 +54,7 @@ public class NeoWrist implements IWrist {
 
     @Override
     public void resetEncoder() {
-        resetAngle(Rotation2d.fromRotations(motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition()));
+        resetAngle(Rotation2d.fromRotations(motor.getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle).getPosition()));
     }
 
     @Override
@@ -73,7 +73,7 @@ public class NeoWrist implements IWrist {
         inputs.outputCurrent = motor.getOutputCurrent();
         inputs.position = Rotation2d.fromRotations(motor.getEncoder().getPosition());
         inputs.velocity = motor.getEncoder().getVelocity();
-        inputs.absoluteEncoderPosition = motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition();
+        inputs.absoluteEncoderPosition = motor.getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle).getPosition();
         inputs.temperature = motor.getMotorTemperature();
         inputs.hasReachedBackwardLimit = Math.abs(inputs.position.getRadians() - WristConstants.BACKWARD_ANGLE_LIMIT.getRadians()) <= WristConstants.TOLERANCE.getRadians();
         inputs.hasReachedForwardLimit = Math.abs(inputs.position.getRadians() - WristConstants.FORWARD_ANGLE_LIMIT.getRadians()) <= WristConstants.TOLERANCE.getRadians();
