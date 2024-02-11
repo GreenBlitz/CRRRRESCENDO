@@ -40,11 +40,6 @@ public class Funnel extends GBSubsystem {
 		funnel.setPower(power);
 	}
 
-	public void setVoltage(double voltage) {
-		funnel.setVoltage(voltage);
-	}
-
-
 	public void rollIn(){
 		setPower(ROLL_POWER);
 	}
@@ -57,11 +52,6 @@ public class Funnel extends GBSubsystem {
 		setPower(0);
 	}
 
-	public void resetEncoder(Rotation2d position) {
-		funnel.resetEncoder(position);
-	}
-
-
 	public double getVoltage() {
 		return funnelInputs.appliedOutput;
 	}
@@ -70,15 +60,4 @@ public class Funnel extends GBSubsystem {
 		return funnelInputs.isObjectIn;
 	}
 
-	public Rotation2d getAngle() {
-		return funnelInputs.position;
-	}
-
-	public boolean isAtAngle(Rotation2d targetAngle){
-		return Math.abs(targetAngle.getRadians() - getAngle().getRadians()) <= FunnelConstants.TOLERANCE.getRadians();
-	}
-
-	public void moveToPosition (Rotation2d position){
-		funnel.moveToPosition(position);
-	}
 }

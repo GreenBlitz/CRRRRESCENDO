@@ -10,10 +10,6 @@ public class FunnelInputs {
 
 	public double outputCurrent;
 
-	public double temperature;
-
 	public boolean isObjectIn;
-
-	public Rotation2d position;
 	
 }

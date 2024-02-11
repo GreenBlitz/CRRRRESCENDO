@@ -11,6 +11,5 @@ public class SimulationFunnelConstants {
 
     public static final double MOMENT_OF_INERTIA = 1;
 
-    public static final PIDObject SIMULATION_PID = new PIDObject().withKp(0.3).withKd(0).withMaxPower(1);
 
 }
