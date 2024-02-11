@@ -4,10 +4,13 @@ import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.arm.roller.IRoller;
 import edu.greenblitz.robotName.subsystems.arm.roller.RollerInputsAutoLogged;
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.littletonrobotics.junction.Logger;
 
 public class SimulationRoller implements IRoller {
 	
@@ -17,9 +20,13 @@ public class SimulationRoller implements IRoller {
 
 	private SendableChooser<Boolean> isObjectInArm;
 
+	private PIDController pidController;
+
+	private RollerInputsAutoLogged lastInputs;
+
 	public SimulationRoller() {
 		rollerSimulation = new DCMotorSim(
-				DCMotor.getBag(SimulationRollerConstants.NUMBER_OF_MOTORS),
+				DCMotor.getNEO(SimulationRollerConstants.NUMBER_OF_MOTORS),
 				SimulationRollerConstants.GEAR_RATIO,
 				SimulationRollerConstants.MOMENT_OF_INERTIA
 		);
@@ -28,19 +35,45 @@ public class SimulationRoller implements IRoller {
 		isObjectInArm.setDefaultOption("False", false);
 		isObjectInArm.addOption("True", true);
 		SmartDashboard.putData("Is Object In Arm?", isObjectInArm);
+
+
+		pidController = SimulationRollerConstants.SIMULATION_PID.getPIDController();
+
+		lastInputs = new RollerInputsAutoLogged();
 	}
 	
 	@Override
 	public void setPower(double power) {
-		double voltage = power * RobotConstants.SimulationConstants.BATTERY_VOLTAGE;
+		setVoltage(power * RobotConstants.SimulationConstants.BATTERY_VOLTAGE);
+	}
+
+	@Override
+	public void setVoltage(double voltage) {
 		appliedOutput = MathUtil.clamp(voltage, -RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE, RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE);
 		rollerSimulation.setInputVoltage(appliedOutput);
 	}
-	
+
 	@Override
-	public void updateInputs(RollerInputsAutoLogged rollerInputs) {
-		rollerInputs.appliedOutput = appliedOutput;
-		rollerInputs.outputCurrent = rollerSimulation.getCurrentDrawAmps();
-		rollerInputs.isObjectInArm = isObjectInArm.getSelected();
+	public void resetEncoder(Rotation2d position) {
+		Logger.recordOutput("Roller", "tried to reset the position to " + position);
 	}
+
+	@Override
+	public void moveToPosition(Rotation2d position) {
+		pidController.setSetpoint(position.getRadians());
+		setVoltage(pidController.calculate(lastInputs.position.getRadians()));
+	}
+
+	@Override
+	public void updateInputs(RollerInputsAutoLogged inputs) {
+		rollerSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
+
+		inputs.appliedOutput = appliedOutput;
+		inputs.outputCurrent = rollerSimulation.getCurrentDrawAmps();
+		inputs.isObjectIn = isObjectInArm.getSelected();
+		inputs.position = Rotation2d.fromRadians(rollerSimulation.getAngularPositionRad());
+
+		lastInputs = inputs;
+	}
+
 }

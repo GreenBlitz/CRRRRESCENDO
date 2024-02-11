@@ -67,6 +67,8 @@ public class SimulationFunnel implements IFunnel {
 
 	@Override
 	public void updateInputs(FunnelInputsAutoLogged inputs) {
+		motorSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
+
 		inputs.appliedOutput = appliedOutput;
 		inputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
 		inputs.temperature = 0;
