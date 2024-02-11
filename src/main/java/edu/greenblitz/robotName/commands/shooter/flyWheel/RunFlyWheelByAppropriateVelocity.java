@@ -4,9 +4,9 @@ import edu.greenblitz.robotName.FieldConstants;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 
-public class RunFlyWheelByApropriateVelocity extends RunFlyWheelByVelocity{
+public class RunFlyWheelByAppropriateVelocity extends RunFlyWheelByVelocity{
 
-    public RunFlyWheelByApropriateVelocity() {
+    public RunFlyWheelByAppropriateVelocity() {
         super(0);
     }
 

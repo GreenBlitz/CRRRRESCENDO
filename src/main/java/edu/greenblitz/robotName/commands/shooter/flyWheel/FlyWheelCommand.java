@@ -13,8 +13,4 @@ public abstract class FlyWheelCommand extends GBCommand {
         require(flyWheel);
     }
 
-    @Override
-    public void end(boolean interrupted) {
-        flyWheel.stop();
-    }
 }
