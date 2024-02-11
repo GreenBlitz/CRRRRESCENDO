@@ -3,12 +3,14 @@ package edu.greenblitz.robotName;
 import edu.greenblitz.robotName.commands.PanicMode;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
+import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
 import edu.greenblitz.robotName.commands.arm.roller.RunRollerByJoystick;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
+import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingState;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingStateAndShoot;
@@ -27,6 +29,7 @@ import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.wpi.first.math.geometry.Rotation2d;
 
 import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
 
@@ -89,6 +92,9 @@ public class OI {
         secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
 
         mainJoystick.A.whileTrue(new GoToShootingState());
+
+        thirdJoystick.A.whileTrue(new MoveElbowToAngle(Rotation2d.fromRadians(0)));
+        thirdJoystick.B.whileTrue(new MoveElbowToAngle(Rotation2d.fromRadians(45)));
     }
 
     public void thirdJoystickButtons(){
