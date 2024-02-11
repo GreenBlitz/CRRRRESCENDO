@@ -2,8 +2,10 @@ package edu.greenblitz.robotName.commands.Climb.lifter;
 
 import edu.greenblitz.robotName.commands.Climb.LifterSolenoid.OpenSolenoid;
 import edu.greenblitz.robotName.subsystems.Lifter.LifterConstants;
+import edu.greenblitz.robotName.subsystems.Lifter.LifterSolenoid.LifterSolenoidConstants;
 
 public class ReverseLifting extends LifterCommand {
+
     @Override
     public void execute() {
         lifter.goToPosition(LifterConstants.LIFTER_RETRACTED_POSITION);
@@ -17,6 +19,5 @@ public class ReverseLifting extends LifterCommand {
     @Override
     public void end(boolean interrupted) {
         lifter.stopMotor();
-        new OpenSolenoid().schedule();
     }
 }
