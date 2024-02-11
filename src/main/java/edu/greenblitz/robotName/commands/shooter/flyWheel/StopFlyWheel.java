@@ -7,4 +7,9 @@ public class StopFlyWheel extends FlyWheelCommand {
     public void initialize() {
         flyWheel.stop();
     }
+
+    @Override
+    public boolean isFinished(){
+        return true;
+    }
 }
