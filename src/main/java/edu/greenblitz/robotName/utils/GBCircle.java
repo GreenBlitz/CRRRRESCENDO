@@ -1,14 +1,19 @@
 package edu.greenblitz.robotName.utils;
 
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 
 /**
  * A circle.
- * A radius and center position, EPSILON for when the given point is right below the center (Cx == Px)
+ * A radius and center position, EPSILON for when the given point is right below the center (Cx == Px),
+ * and an upper and lower angle limits to set partial circles i.e. half circles, quarter circles...
  */
 public class GBCircle {
     private Translation2d centerPosition;
     private double radius;
+    private Rotation2d lowerAngleLimit;
+    private Rotation2d upperAngleLimit;
     private final static double EPSILON = 0.1;
 
     /**
@@ -18,8 +23,42 @@ public class GBCircle {
      * @param radius   The radius of the circle.
      */
     public GBCircle(Translation2d position, double radius) {
+        this(position, radius, Rotation2d.fromRotations(0), Rotation2d.fromRotations(1));
+    }
+
+    /**
+     * Constructor using the center, radius, the lower angle limit and the upper angle limit.
+     * Example for using the angle limits to get a half circle:
+     * GBCircle halfCircle = new GBCircle(new Translation2d(0,0),1,Rotation.fromDegrees(0),Rotation.fromDegrees(180));
+     *
+     * @param position        The position of the center of the circle.
+     * @param radius          The radius of the circle.
+     * @param lowerAngleLimit The lower angle limit of the circle.
+     * @param upperAngleLimit The upper angle limit of the circle.
+     */
+    public GBCircle(Translation2d position, double radius, Rotation2d lowerAngleLimit, Rotation2d upperAngleLimit) {
         this.centerPosition = position;
         this.radius = radius;
+        this.lowerAngleLimit = lowerAngleLimit;
+        this.upperAngleLimit = upperAngleLimit;
+    }
+
+    /**
+     * Setter for the circle uppwer angle limit.
+     *
+     * @param upperAngleLimit The upper angle limit of the circle.
+     */
+    public void setUpperAngleLimit(Rotation2d upperAngleLimit) {
+        this.upperAngleLimit = upperAngleLimit;
+    }
+
+    /**
+     * Setter for the circle lower angle limit.
+     *
+     * @param lowerAngleLimit The lower angle limit of the circle.
+     */
+    public void setLowerAngleLimit(Rotation2d lowerAngleLimit) {
+        this.lowerAngleLimit = lowerAngleLimit;
     }
 
     /**
@@ -38,6 +77,24 @@ public class GBCircle {
      */
     public void setRadius(double radius) {
         this.radius = radius;
+    }
+
+    /**
+     * Getter for the circle upper angle limit.
+     *
+     * @return The upper angle limit.
+     */
+    public Rotation2d getUpperAngleLimit() {
+        return upperAngleLimit;
+    }
+
+    /**
+     * Getter for the circle lower angle limit.
+     *
+     * @return The lower angle limit.
+     */
+    public Rotation2d getLowerAngleLimit() {
+        return lowerAngleLimit;
     }
 
     /**
@@ -89,6 +146,7 @@ public class GBCircle {
 
         double slope = deltaY / deltaX;
         double angleOfSlope = Math.atan(slope);
+        angleOfSlope = MathUtil.clamp(angleOfSlope, lowerAngleLimit.getRadians(), upperAngleLimit.getRadians());
 
         double targetX = radius * Math.cos(angleOfSlope) * Math.signum(deltaX) + centerPosition.getX();
         double targetY = radius * Math.sin(angleOfSlope) * Math.signum(deltaX) + centerPosition.getY();

@@ -14,12 +14,16 @@ public class ShootingZone extends GBCircle {
     private List<Bound> restrictedBounds;
 
     public ShootingZone(Translation2d position, double radius) {
-        super(position, radius);
-        restrictedBounds = new ArrayList<>();
+        this(position,radius,new ArrayList<>());
     }
 
     public ShootingZone(Translation2d position, double radius, List<Bound> restrictedBounds) {
         super(position, radius);
+        this.restrictedBounds = restrictedBounds;
+    }
+
+    public ShootingZone(Translation2d position, double radius, List<Bound> restrictedBounds, Rotation2d lowerAngleLimit, Rotation2d upperAngleLimit) {
+        super(position, radius, lowerAngleLimit, upperAngleLimit);
         this.restrictedBounds = restrictedBounds;
     }
 
