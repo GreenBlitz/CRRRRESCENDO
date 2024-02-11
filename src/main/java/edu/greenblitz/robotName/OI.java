@@ -26,6 +26,7 @@ import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
@@ -81,8 +82,7 @@ public class OI {
     
     public void initButtons() {
         mainJoystick.A.whileTrue(new ExtendLifter());
-
-        mainJoystick.A.whileTrue(new GoToShootingState());
+//        mainJoystick.A.whileTrue(new GoToShootingState());
     }
 
     public void thirdJoystickButtons(){
@@ -94,11 +94,11 @@ public class OI {
     }
 
     public void initializeDefaultCommands() {
-        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
+//        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
         Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-        Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
-        Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
-        Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
+//        Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
+//        Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
+//        Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
     }
 
 

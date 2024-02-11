@@ -2,9 +2,16 @@ package edu.greenblitz.robotName.commands.Climb.lifter;
 
 import edu.greenblitz.robotName.subsystems.Lifter.LifterConstants;
 import edu.greenblitz.robotName.subsystems.Lifter.LifterSolenoid.LifterSolenoidConstants;
+import edu.wpi.first.wpilibj.Timer;
 
 public class ExtendLifter extends LifterCommand {
+    
+    protected Timer timer;
 
+    public ExtendLifter(){
+        timer = new Timer();
+    }
+    
     @Override
     public void initialize() {
         lifterSolenoid.closeSolenoid();

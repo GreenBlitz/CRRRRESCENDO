@@ -10,12 +10,10 @@ import edu.wpi.first.wpilibj.Timer;
 public abstract class LifterCommand extends GBCommand {
     protected Lifter lifter;
     protected LifterSolenoid lifterSolenoid;
-    protected Timer timer;
 
     public LifterCommand() {
         lifter = Lifter.getInstance();
         lifterSolenoid = LifterSolenoid.getInstance();
-        timer = new Timer();
         require(lifter);
         require(lifterSolenoid);
     }
