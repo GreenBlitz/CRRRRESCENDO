@@ -85,12 +85,10 @@ public class SimulationFlyWheel implements IFlyWheel {
         inputs.leftFlywheelCurrent = leftMotorFlywheel.getCurrentDrawAmps();
         inputs.leftFlywheelVoltage = leftMotorAppliedOutput;
         inputs.leftWheelAcceleration = 0;
-        inputs.leftFlywheelTemperature = 0;
 
         inputs.rightFlywheelVelocity = rightMotorFlywheel.getAngularVelocityRPM();
         inputs.rightFlywheelCurrent = rightMotorFlywheel.getCurrentDrawAmps();
         inputs.rightFlywheelVoltage = rightMotorAppliedOutput;
         inputs.rightWheelAcceleration = 0;
-        inputs.rightFlywheelTemperature = 0;
     }
 }
