@@ -3,6 +3,7 @@ package edu.greenblitz.robotName.utils;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import org.littletonrobotics.junction.Logger;
 
 import java.util.List;
 
@@ -224,6 +225,7 @@ public class GBCircle {
             return getClosestCircleRimPosition(position);
         }
         Translation2d closestEdge = position.nearest(List.of(getLowerAngleLimitPosition(),getUpperAngleLimitPosition()));
+        Logger.recordOutput("upper",getUpperAngleLimitPosition());
         return GBMath.getClosestPointBetweenPointAndLine(position,centerPosition,closestEdge);
     }
 }

@@ -3,6 +3,7 @@ package edu.greenblitz.robotName.utils;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.geometry.Translation2d;
+import org.littletonrobotics.junction.Logger;
 
 public class GBMath {
 	/**
@@ -36,9 +37,9 @@ public class GBMath {
 		double yIntercept1 = targetPoint.getY() - (targetPoint.getX() * perpendicularSlope);
 		double yIntercept2 = startPoint.getY() - (startPoint.getX() * slope);
 
-		double xClosest = (slope - perpendicularSlope) / (yIntercept2 - yIntercept1);
+		double xClosest = (slope - perpendicularSlope) / (yIntercept1 - yIntercept2);
 		double yClosest = xClosest * slope + yIntercept2;
-
+		Logger.recordOutput("Target",new Translation2d(xClosest,yClosest));
 		return new Translation2d(xClosest, yClosest);
 	}
 
