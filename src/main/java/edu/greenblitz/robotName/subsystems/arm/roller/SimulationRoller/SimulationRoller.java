@@ -60,8 +60,8 @@ public class SimulationRoller implements IRoller {
 
 	@Override
 	public void moveToPosition(Rotation2d position) {
-		pidController.setSetpoint(position.getRotations());
-		setVoltage(pidController.calculate(lastInputs.position.getRotations()));
+		pidController.setSetpoint(position.getRadians());
+		setVoltage(pidController.calculate(lastInputs.position.getRadians()));
 	}
 
 	@Override

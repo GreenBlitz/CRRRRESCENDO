@@ -19,15 +19,16 @@ public class RunRollerByRotations extends RollerCommand{
 
     @Override
     public void execute() {
+        System.out.println("Aaaaaaaaaaaaaa");
         if (Robot.isSimulation()){
             roller.moveToPosition(rotations);
         }
     }
 
-    @Override
-    public boolean isFinished() {
-        return roller.isAtAngle(rotations);
-    }
+//    @Override
+//    public boolean isFinished() {
+//        return roller.isAtAngle(rotations);
+//    }
 
     @Override
     public void end(boolean interrupted) {

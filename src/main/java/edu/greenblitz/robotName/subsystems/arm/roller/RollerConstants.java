@@ -10,7 +10,7 @@ public class RollerConstants {
 
 	public static final double SAFETY_TIME_AFTER_NOTE_IS_RELEASED = 0.5;
 
-	public static final Rotation2d SAFETY_ROTATIONS_TILL_OBJECT_ENTERED = Rotation2d.fromRotations(50);
+	public static final Rotation2d SAFETY_ROTATIONS_TILL_OBJECT_ENTERED = Rotation2d.fromRotations(5);
 
 	public static final Rotation2d TOLERANCE = Rotation2d.fromRotations(0.5);
 
