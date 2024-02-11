@@ -11,11 +11,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 public class AutonomousSelector {
-	static private AutonomousSelector instance; //i did some shenanigan with the static private hehe
+	private static AutonomousSelector instance;
 	private final SendableChooser<Command> chooser;
 	
 	private AutonomousSelector(){
-//      chooser.addOption("auto name", new PathPlannerAuto("auto name");
 		chooser = AutoBuilder.buildAutoChooser();
 		ShuffleboardTab tab = Shuffleboard.getTab("auto");
 		tab.add("autonomous chooser", chooser);
