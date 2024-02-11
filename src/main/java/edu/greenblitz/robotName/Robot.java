@@ -2,9 +2,7 @@ package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.subsystems.Dashboard;
 
-import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByPowerConstant;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingStateAndShoot;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
@@ -19,6 +17,7 @@ import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
 import edu.greenblitz.robotName.utils.FMSUtils;
+import edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
@@ -85,7 +84,7 @@ public class Robot extends LoggedRobot {
     private void initializeAutonomousBuilder() {
         NamedCommands.registerCommand("shoot", new GoToShootingStateAndShoot());
         NamedCommands.registerCommand("grip", new NoteToShooter().raceWith(new WaitCommand(1)));
-        AutoBuilder.configureHolonomic(
+        GBAutoBuilder.configureHolonomic(
                 SwerveChassis.getInstance()::getRobotPose,
                 SwerveChassis.getInstance()::resetChassisPose,
                 SwerveChassis.getInstance()::getRobotRelativeChassisSpeeds,
