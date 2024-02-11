@@ -71,6 +71,7 @@ public class GBAutoBuilder {
             Consumer<ChassisSpeeds> robotRelativeOutput,
             HolonomicPathFollowerConfig config,
             BooleanSupplier shouldFlipPath,
+            double translationalTolerance,
             Subsystem driveSubsystem) {
         if (configured) {
             throw new AutoBuilderException(
@@ -94,7 +95,7 @@ public class GBAutoBuilder {
 
         edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathfindToPoseCommandBuilder =
                 (pose, constraints, goalEndVel, rotationDelayDistance) ->
-                        new PathfindHolonomic(
+                        new GBPathFindHolonomic(
                                 pose,
                                 constraints,
                                 goalEndVel,
@@ -103,6 +104,7 @@ public class GBAutoBuilder {
                                 robotRelativeOutput,
                                 config,
                                 rotationDelayDistance,
+                                translationalTolerance,
                                 driveSubsystem);
         edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathfindThenFollowPathCommandBuilder =
                 (path, constraints, rotationDelayDistance) ->
