@@ -8,13 +8,11 @@ public class FlyWheelInputs {
     public double rightFlywheelVoltage;
     public double rightFlywheelVelocity;
     public double rightFlywheelCurrent;
-    public double rightFlywheelTemperature;
     public double rightWheelAcceleration;
     
     public double leftFlywheelVoltage;
     public double leftFlywheelVelocity;
     public double leftFlywheelCurrent;
-    public double leftFlywheelTemperature;
     public double leftWheelAcceleration;
     
 }
