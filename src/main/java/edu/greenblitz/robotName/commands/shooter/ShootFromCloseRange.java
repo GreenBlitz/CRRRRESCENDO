@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 public class ShootFromCloseRange extends GoToShootingStateAndShoot {
     public ShootFromCloseRange(){
         super(
-                ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE,
                 ShootingPositionConstants.CLOSE_SHOOTING_ZONE
         );
     }
