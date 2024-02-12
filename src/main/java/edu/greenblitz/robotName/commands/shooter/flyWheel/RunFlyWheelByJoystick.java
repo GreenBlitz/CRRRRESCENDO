@@ -3,11 +3,11 @@ package edu.greenblitz.robotName.commands.shooter.flyWheel;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 
-public class RunFlyWheelByJoystick extends FlyWheelCommand{
+public class RunFlyWheelByJoystick extends FlyWheelCommand {
 
     private SmartJoystick joystick;
 
-    public RunFlyWheelByJoystick(SmartJoystick joystick){
+    public RunFlyWheelByJoystick(SmartJoystick joystick) {
         super();
         this.joystick = joystick;
     }
@@ -21,7 +21,4 @@ public class RunFlyWheelByJoystick extends FlyWheelCommand{
     public void end(boolean interrupted) {
         flyWheel.stop();
     }
-
-
-
 }

@@ -5,8 +5,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public class ToggleScoringMode extends SequentialCommandGroup {
 
-    public ToggleScoringMode(){
+    public ToggleScoringMode() {
         super(new InterruptPivot(), new FullySwitchScoringMode());
     }
-
 }

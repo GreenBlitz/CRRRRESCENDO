@@ -5,9 +5,13 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.SerialPort;
 
 public class NavXGyro implements IAngleMeasurementGyro {
+
     private AHRS gyro;
+
     private Rotation2d yawOffset;
+
     private Rotation2d pitchOffset;
+
     private Rotation2d rollOffset;
 
     private GyroInputsAutoLogged lastInputs = new GyroInputsAutoLogged();

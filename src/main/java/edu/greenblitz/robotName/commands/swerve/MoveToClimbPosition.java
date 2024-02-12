@@ -12,7 +12,7 @@ public class MoveToClimbPosition extends MoveToPosition {
         super(FMSUtils.getAlliance() == DriverStation.Alliance.Red ? getClosestRedClimbPosition() : getClosestBlueClimbPosition());
     }
 
-    public static Pose2d getClosestRedClimbPosition(){
+    public static Pose2d getClosestRedClimbPosition() {
         Pose2d robotPose = SwerveChassis.getInstance().getRobotPose();
         double distanceToLower = robotPose.getTranslation().getDistance(Field.ScoringPositions.RED_LOWER_CLIMB_POSITION.getTranslation());
         double distanceToUpper = robotPose.getTranslation().getDistance(Field.ScoringPositions.RED_UPPER_CLIMB_POSITION.getTranslation());

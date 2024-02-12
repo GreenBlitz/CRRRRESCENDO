@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.commands.arm.roller.RunByPower;
+package edu.greenblitz.robotName.commands.arm.roller.runByPower;
 
 import edu.greenblitz.robotName.commands.arm.roller.RollerCommand;
 

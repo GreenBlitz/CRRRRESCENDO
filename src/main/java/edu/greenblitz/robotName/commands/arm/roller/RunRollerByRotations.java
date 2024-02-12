@@ -2,9 +2,8 @@ package edu.greenblitz.robotName.commands.arm.roller;
 
 import edu.greenblitz.robotName.Robot;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class RunRollerByRotations extends RollerCommand{
+public class RunRollerByRotations extends RollerCommand {
 
     private Rotation2d rotations;
 
@@ -20,7 +19,7 @@ public class RunRollerByRotations extends RollerCommand{
 
     @Override
     public void execute() {
-        if (Robot.isSimulation()){
+        if (Robot.isSimulation()) {
             roller.moveToPosition(rotations);
         }
     }

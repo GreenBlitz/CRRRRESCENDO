@@ -3,11 +3,11 @@ package edu.greenblitz.robotName.commands.arm.wrist;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 
-public class MoveWristByJoystick extends WristCommand{
+public class MoveWristByJoystick extends WristCommand {
 
     private SmartJoystick joystick;
 
-    public MoveWristByJoystick(SmartJoystick joystick){
+    public MoveWristByJoystick(SmartJoystick joystick) {
         super();
         this.joystick = joystick;
     }

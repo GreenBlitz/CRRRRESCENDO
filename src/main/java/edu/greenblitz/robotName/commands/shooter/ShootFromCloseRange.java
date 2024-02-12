@@ -7,7 +7,8 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public class ShootFromCloseRange extends SequentialCommandGroup {
-    public ShootFromCloseRange(){
+
+    public ShootFromCloseRange() {
         super(
                 new ParallelCommandGroup(
                         new RotateToAngle(ChassisConstants.CLOSE_RANGE_SHOOTING_ANGLE),

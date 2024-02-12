@@ -4,7 +4,7 @@ import edu.greenblitz.robotName.FieldConstants;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 
-public class RunFlyWheelBySpeakerInterpolationVelocity extends RunFlyWheelByVelocity{
+public class RunFlyWheelBySpeakerInterpolationVelocity extends RunFlyWheelByVelocity {
 
     public RunFlyWheelBySpeakerInterpolationVelocity() {
         super(0);

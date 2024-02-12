@@ -16,5 +16,4 @@ public class SetScoringMode extends InstantCommand {
     public void initialize() {
         ScoringModeSelector.setScoringMode(scoringMode);
     }
-
 }

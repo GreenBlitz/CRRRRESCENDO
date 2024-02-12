@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.arm.elbow.FalconElbow;
+package edu.greenblitz.robotName.subsystems.arm.elbow.falconElbow;
 
 import com.ctre.phoenix6.configs.*;
 import com.ctre.phoenix6.signals.ForwardLimitTypeValue;
@@ -6,7 +6,8 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.ReverseLimitTypeValue;
 import edu.wpi.first.math.controller.ArmFeedforward;
 
-import static edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants.*;
+import static edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants.BACKWARD_ANGLE_LIMIT;
+import static edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants.FORWARD_ANGLE_LIMIT;
 
 public class FalconElbowConstants {
 
@@ -59,6 +60,7 @@ public class FalconElbowConstants {
     }
 
     public static final SoftwareLimitSwitchConfigs SOFTWARE_LIMIT_SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();
+
     static {
         SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitEnable = true;
         SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitThreshold = FORWARD_ANGLE_LIMIT.getRotations();
@@ -67,7 +69,8 @@ public class FalconElbowConstants {
     }
 
     public static final HardwareLimitSwitchConfigs HARDWARE_LIMIT_SWITCH_CONFIGS = new HardwareLimitSwitchConfigs();
-    static{
+
+    static {
         HARDWARE_LIMIT_SWITCH_CONFIGS.ForwardLimitAutosetPositionEnable = true;
         HARDWARE_LIMIT_SWITCH_CONFIGS.ForwardLimitAutosetPositionValue = FORWARD_ANGLE_LIMIT.getRotations();
         HARDWARE_LIMIT_SWITCH_CONFIGS.ForwardLimitEnable = true;
@@ -82,14 +85,11 @@ public class FalconElbowConstants {
 
     public static final TalonFXConfiguration TALON_FX_CONFIGURATION = new TalonFXConfiguration();
 
-    static{
+    static {
         TALON_FX_CONFIGURATION.MotionMagic = MOTION_MAGIC_CONFIGS;
         TALON_FX_CONFIGURATION.ClosedLoopRamps = CLOSED_LOOP_RAMPS_CONFIGS;
         TALON_FX_CONFIGURATION.CurrentLimits = CURRENT_LIMITS_CONFIGS;
         TALON_FX_CONFIGURATION.SoftwareLimitSwitch = SOFTWARE_LIMIT_SWITCH_CONFIGS;
         TALON_FX_CONFIGURATION.HardwareLimitSwitch = HARDWARE_LIMIT_SWITCH_CONFIGS;
     }
-
-
-
 }

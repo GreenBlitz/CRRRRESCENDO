@@ -3,7 +3,7 @@ package edu.greenblitz.robotName;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
-import edu.greenblitz.robotName.commands.intake.NoteToShooter;
+import edu.greenblitz.robotName.commands.NoteToShooter;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingStateAndShoot;
 import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.intake.Intake;

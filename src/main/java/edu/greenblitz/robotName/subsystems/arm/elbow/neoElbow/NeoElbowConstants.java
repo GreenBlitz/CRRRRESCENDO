@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.arm.elbow.NeoElbow;
+package edu.greenblitz.robotName.subsystems.arm.elbow.neoElbow;
 
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.RobotConstants;
@@ -36,6 +36,4 @@ public class NeoElbowConstants {
             .withPositionConversionFactor(ElbowConstants.GEAR_RATIO)
             .withVelocityConversionFactor(ElbowConstants.GEAR_RATIO)
             .withCurrentLimit(ElbowConstants.CURRENT_LIMIT);
-
-
 }

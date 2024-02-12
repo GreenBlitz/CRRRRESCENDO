@@ -6,6 +6,9 @@ import edu.greenblitz.robotName.subsystems.shooter.funnel.FunnelConstants;
 public class ReverseRunFunnelUntilObjectOut extends RunFunnelByPowerUntilCondition {
 
     public ReverseRunFunnelUntilObjectOut() {
-        super(FunnelConstants.EJECT_POWER, () -> !Funnel.getInstance().isObjectIn());
+        super(
+                FunnelConstants.EJECT_POWER,
+                () -> !Funnel.getInstance().isObjectIn()
+        );
     }
 }

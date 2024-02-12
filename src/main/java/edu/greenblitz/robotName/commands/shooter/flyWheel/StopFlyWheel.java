@@ -9,7 +9,7 @@ public class StopFlyWheel extends FlyWheelCommand {
     }
 
     @Override
-    public boolean isFinished(){
+    public boolean isFinished() {
         return true;
     }
 }

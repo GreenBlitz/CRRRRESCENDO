@@ -6,11 +6,11 @@ import org.littletonrobotics.junction.AutoLog;
 @AutoLog
 public class RollerInputs {
 
-	public double appliedOutput;
+    public double appliedOutput;
 
-	public double outputCurrent;
+    public double outputCurrent;
 
-	public boolean isObjectIn;
+    public boolean isObjectIn;
 
-	public Rotation2d position;
+    public Rotation2d position;
 }

@@ -7,7 +7,7 @@ public class ElbowCommand extends GBCommand {
 
     protected Elbow elbow;
 
-    public ElbowCommand(){
+    public ElbowCommand() {
         elbow = Elbow.getInstance();
         require(elbow);
     }
@@ -16,5 +16,4 @@ public class ElbowCommand extends GBCommand {
         elbow.setCurrentAngle();
         elbow.standInPlace();
     }
-
 }

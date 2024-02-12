@@ -10,15 +10,15 @@ import java.util.function.Supplier;
 
 public class MoveShooterToAngle extends ConditionalCommand {
 
-	public MoveShooterToAngle(Supplier<Rotation2d> targetAngle) {
-		super(
-				new MovePivotIfInDangerZone(targetAngle).asProxy(),
-				new MovePivotToAngle(targetAngle),
-				() -> Elbow.getInstance().isInShooterCollisionRange()
-		);
-	}
+    public MoveShooterToAngle(Supplier<Rotation2d> targetAngle) {
+        super(
+                new MovePivotIfInDangerZone(targetAngle).asProxy(),
+                new MovePivotToAngle(targetAngle),
+                () -> Elbow.getInstance().isInShooterCollisionRange()
+        );
+    }
 
-	public MoveShooterToAngle(Rotation2d targetAngle) {
-		this(() -> targetAngle);
-	}
+    public MoveShooterToAngle(Rotation2d targetAngle) {
+        this(() -> targetAngle);
+    }
 }

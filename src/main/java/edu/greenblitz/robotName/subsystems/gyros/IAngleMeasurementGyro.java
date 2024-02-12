@@ -1,6 +1,5 @@
 package edu.greenblitz.robotName.subsystems.gyros;
 
-
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public interface IAngleMeasurementGyro {
@@ -11,8 +10,5 @@ public interface IAngleMeasurementGyro {
 
     void updateRoll(Rotation2d roll);
 
-
     void updateInputs(GyroInputsAutoLogged inputs);
-
-
 }

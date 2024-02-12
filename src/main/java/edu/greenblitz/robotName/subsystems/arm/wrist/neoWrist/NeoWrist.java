@@ -1,10 +1,13 @@
-package edu.greenblitz.robotName.subsystems.arm.wrist.NeoWrist;
+package edu.greenblitz.robotName.subsystems.arm.wrist.neoWrist;
 
-import com.revrobotics.*;
+import com.revrobotics.CANSparkLowLevel;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkAbsoluteEncoder;
+import com.revrobotics.SparkLimitSwitch;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.arm.wrist.IWrist;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
-import edu.greenblitz.robotName.subsystems.arm.wrist.IWrist;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristInputsAutoLogged;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -69,7 +72,7 @@ public class NeoWrist implements IWrist {
 
     @Override
     public void updateInputs(WristInputsAutoLogged inputs) {
-        inputs.appliedOutput = motor.getAppliedOutput() *  Battery.getInstance().getCurrentVoltage();
+        inputs.appliedOutput = motor.getAppliedOutput() * Battery.getInstance().getCurrentVoltage();
         inputs.outputCurrent = motor.getOutputCurrent();
         inputs.position = Rotation2d.fromRotations(motor.getEncoder().getPosition());
         inputs.velocity = motor.getEncoder().getVelocity();
@@ -78,5 +81,4 @@ public class NeoWrist implements IWrist {
         inputs.hasReachedBackwardLimit = Math.abs(inputs.position.getRadians() - WristConstants.BACKWARD_ANGLE_LIMIT.getRadians()) <= WristConstants.TOLERANCE.getRadians();
         inputs.hasReachedForwardLimit = Math.abs(inputs.position.getRadians() - WristConstants.FORWARD_ANGLE_LIMIT.getRadians()) <= WristConstants.TOLERANCE.getRadians();
     }
-
 }

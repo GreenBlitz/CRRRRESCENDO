@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.commands.swerve.Battery;
+package edu.greenblitz.robotName.commands.swerve.battery;
 
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.utils.GBCommand;
@@ -8,9 +8,10 @@ import edu.wpi.first.wpilibj.DriverStation;
 public class BatteryLimiter extends GBCommand {
 
     private static final int WINDOW_SIZE = 50;
-    private Battery battery;
-    private LinearFilter voltageFilter;
 
+    private Battery battery;
+
+    private LinearFilter voltageFilter;
 
     public BatteryLimiter() {
         battery = Battery.getInstance();

@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.arm.elbow.SimulationElbow;
+package edu.greenblitz.robotName.subsystems.arm.elbow.simulationElbow;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.RobotConstants;
@@ -12,7 +12,8 @@ import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.*;
+import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.BATTERY_VOLTAGE;
+import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE;
 
 public class SimulationElbow implements IElbow {
 
@@ -40,7 +41,6 @@ public class SimulationElbow implements IElbow {
         );
         controller = SimulationElbowConstants.SIMULATION_PID.getPIDController();
     }
-
 
     @Override
     public void setPower(double power) {
@@ -86,7 +86,7 @@ public class SimulationElbow implements IElbow {
         inputs.temperature = 0;
         inputs.hasReachedForwardLimit = elbowSimulation.hasHitLowerLimit();
         inputs.hasReachedBackwardLimit = elbowSimulation.hasHitLowerLimit();
-        
+
         lastInputs = inputs;
     }
 }

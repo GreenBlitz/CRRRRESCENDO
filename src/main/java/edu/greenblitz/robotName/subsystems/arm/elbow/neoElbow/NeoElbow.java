@@ -1,7 +1,10 @@
-package edu.greenblitz.robotName.subsystems.arm.elbow.NeoElbow;
+package edu.greenblitz.robotName.subsystems.arm.elbow.neoElbow;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import com.revrobotics.*;
+import com.revrobotics.CANSparkLowLevel;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkAbsoluteEncoder;
+import com.revrobotics.SparkLimitSwitch;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowInputsAutoLogged;
@@ -9,13 +12,13 @@ import edu.greenblitz.robotName.subsystems.arm.elbow.IElbow;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.geometry.Rotation2d;
 
-import static edu.greenblitz.robotName.subsystems.arm.elbow.NeoElbow.NeoElbowConstants.ELBOW_FEEDFORWARD;
+import static edu.greenblitz.robotName.subsystems.arm.elbow.neoElbow.NeoElbowConstants.ELBOW_FEEDFORWARD;
 
 public class NeoElbow implements IElbow {
 
     private GBSparkMax motor;
 
-    public NeoElbow(){
+    public NeoElbow() {
         motor = new GBSparkMax(NeoElbowConstants.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
         motor.config(NeoElbowConstants.ELBOW_CONFIG_OBJECT);
 
@@ -32,7 +35,7 @@ public class NeoElbow implements IElbow {
 
     @Override
     public void setPower(double power) {
-       motor.set(power);
+        motor.set(power);
     }
 
     @Override
@@ -67,7 +70,7 @@ public class NeoElbow implements IElbow {
 
     @Override
     public void updateInputs(ElbowInputsAutoLogged inputs) {
-        inputs.appliedOutput = motor.getAppliedOutput() *  Battery.getInstance().getCurrentVoltage();
+        inputs.appliedOutput = motor.getAppliedOutput() * Battery.getInstance().getCurrentVoltage();
         inputs.outputCurrent = motor.getOutputCurrent();
         inputs.position = Rotation2d.fromRotations(motor.getEncoder().getPosition());
         inputs.velocity = motor.getEncoder().getVelocity();

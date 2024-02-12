@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.arm.wrist.SimulationWrist;
+package edu.greenblitz.robotName.subsystems.arm.wrist.simulationWrist;
 
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.RobotConstants;

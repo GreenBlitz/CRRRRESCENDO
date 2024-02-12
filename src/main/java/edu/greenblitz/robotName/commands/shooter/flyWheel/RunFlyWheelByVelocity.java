@@ -29,7 +29,7 @@ public class RunFlyWheelByVelocity extends FlyWheelCommand {
 
     @Override
     public void execute() {
-        if(Robot.isSimulation()){
+        if (Robot.isSimulation()) {
             flyWheel.setVelocity(leftWheelVelocity, rightWheelVelocity);
         }
         if (flyWheel.isRightWheelAtVelocity(rightWheelVelocity) && flyWheel.isLeftWheelAtVelocity(leftWheelVelocity)) {

@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.ProxyCommand;
 
 public class FullySwitchScoringMode extends ProxyCommand {
+
     public FullySwitchScoringMode() {
         super(
                 () -> new ConditionalCommand(

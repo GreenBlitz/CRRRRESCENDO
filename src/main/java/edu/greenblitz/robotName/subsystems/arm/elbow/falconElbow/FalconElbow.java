@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.arm.elbow.FalconElbow;
+package edu.greenblitz.robotName.subsystems.arm.elbow.falconElbow;
 
 import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
 import com.ctre.phoenix6.controls.PositionVoltage;

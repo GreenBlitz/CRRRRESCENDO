@@ -15,20 +15,21 @@ public class MoveByJoysticks extends SwerveCommand {
     }
 
     private double angularSpeedFactor;
-    private double linearSpeedFactor;
-    private DoubleSupplier angularVelocitySupplier;
-    private DriveMode driveMode;
 
+    private double linearSpeedFactor;
+
+    private DoubleSupplier angularVelocitySupplier;
+
+    private DriveMode driveMode;
 
     public MoveByJoysticks(DriveMode driveMode, DoubleSupplier angularVelocitySupplier) {
         this.driveMode = driveMode;
         this.angularVelocitySupplier = angularVelocitySupplier;
     }
+
     public MoveByJoysticks(DriveMode driveMode) {
         this(driveMode, () -> OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.RIGHT_X));
     }
-
-
 
     @Override
     public void initialize() {
@@ -81,5 +82,4 @@ public class MoveByJoysticks extends SwerveCommand {
         super.end(interrupted);
         swerveChassis.stop();
     }
-
 }
