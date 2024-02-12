@@ -1,7 +1,7 @@
 package edu.greenblitz.robotName.commands.intake;
 
-import edu.greenblitz.robotName.subsystems.Intake.Intake;
-import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
+import edu.greenblitz.robotName.subsystems.intake.Intake;
+import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.greenblitz.robotName.utils.GBCommand;
 
 public class NoteToShooter extends GBCommand {

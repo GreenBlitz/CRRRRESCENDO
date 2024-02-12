@@ -1,7 +1,7 @@
 package edu.greenblitz.robotName.commands.shooter.funnel.runByPowerUntilCondition;
 
-import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
-import edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants;
+import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
+import edu.greenblitz.robotName.subsystems.shooter.funnel.FunnelConstants;
 
 public class ForwardRunFunnelUntilObjectIn extends RunFunnelByPowerUntilCondition {
 

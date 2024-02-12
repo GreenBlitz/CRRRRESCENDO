@@ -1,14 +1,11 @@
 package edu.greenblitz.robotName.subsystems.arm.roller;
 
-import edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Rotation2d;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.subsystems.arm.roller.RollerConstants.ROLL_BACKWARD_POWER;
 import static edu.greenblitz.robotName.subsystems.arm.roller.RollerConstants.ROLL_FORWARD_POWER;
-import static edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants.EJECT_POWER;
-import static edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelConstants.ROLL_POWER;
 
 public class Roller extends GBSubsystem {
 	

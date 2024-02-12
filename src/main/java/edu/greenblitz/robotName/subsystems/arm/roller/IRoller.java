@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName.subsystems.arm.roller;
 
 
-import edu.greenblitz.robotName.subsystems.shooter.Funnel.FunnelInputsAutoLogged;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public interface IRoller {
