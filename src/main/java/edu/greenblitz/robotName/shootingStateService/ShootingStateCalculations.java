@@ -1,8 +1,8 @@
 package edu.greenblitz.robotName.shootingStateService;
 
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
+import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.shootingCalculations.ShootingAngleCalculations;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;

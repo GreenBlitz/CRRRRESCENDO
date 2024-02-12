@@ -2,7 +2,7 @@ package edu.greenblitz.robotName.subsystems.Gyros;
 
 
 import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public class SimulationGyro implements IAngleMeasurementGyro {

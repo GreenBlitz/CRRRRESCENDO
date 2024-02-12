@@ -1,8 +1,8 @@
 package edu.greenblitz.robotName.commands.intake;
 
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
+import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
+import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 
 public class CollectNote extends ConditionalCommand {

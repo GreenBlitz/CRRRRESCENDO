@@ -1,7 +1,7 @@
 package edu.greenblitz.robotName.subsystems.shooter.Mechanism;
 
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.Pivot;
-import edu.greenblitz.robotName.subsystems.shooter.Pivot.PivotConstants;
+import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
+import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;

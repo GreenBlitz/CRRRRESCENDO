@@ -8,7 +8,6 @@ import edu.greenblitz.robotName.utils.PIDObject;
 
 public class GBSparkMax extends CANSparkMax {
 	
-	
 	/**
 	 * Create a new object to control a SPARK MAX motor Controller
 	 *
@@ -20,7 +19,6 @@ public class GBSparkMax extends CANSparkMax {
 	public GBSparkMax(int deviceId, MotorType type) {
 		super(deviceId, type);
 	}
-	
 	
 	/**
 	 * configs the motor settings using SparkMaxConfObject
@@ -40,7 +38,6 @@ public class GBSparkMax extends CANSparkMax {
 		
 	}
 	
-	
 	public void configPID(PIDObject pidObject) {
 		super.getPIDController().setP(pidObject.getKp());
 		super.getPIDController().setI(pidObject.getKi());
@@ -49,11 +46,12 @@ public class GBSparkMax extends CANSparkMax {
 		super.getPIDController().setIZone(pidObject.getIZone());
 		super.getPIDController().setOutputRange(-pidObject.getMaxPower(), pidObject.getMaxPower());
 	}
+	
 	public REVLibError setSoftLimit(SoftLimitDirection direction, double limit) {
-		return super.setSoftLimit(direction,(float) limit);
+		return super.setSoftLimit(direction, (float) limit);
 	}
 	
-	public void setIdleModeByNeutralMode(NeutralModeValue idleMode){
+	public void setIdleModeByNeutralMode(NeutralModeValue idleMode) {
 		CANSparkMax.IdleMode neoIdleMode = (idleMode == NeutralModeValue.Brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
 		super.setIdleMode(neoIdleMode);
 	}
@@ -73,23 +71,22 @@ public class GBSparkMax extends CANSparkMax {
 	 * .withPID(new PIDObject(0.0003, 0.0000003, 0).withIZone(300)
 	 * );
 	 */
-
-
-
 	
 	public static class SparkMaxConfObject {
 		
 		private PIDObject pidObject = new PIDObject(0, 0, 0);
 		
 		private int currentLimit = 0;
+		
 		private double rampRate = 0;
+		
 		private boolean inverted = false;
+		
 		private IdleMode idleMode = IdleMode.kBrake;
 		
 		private double positionConversionFactor = 1;
 		
 		private double velocityConversionFactor = 1;
-		
 		
 		//no parameters, usage for external config functions
 		public SparkMaxConfObject() {
@@ -130,7 +127,6 @@ public class GBSparkMax extends CANSparkMax {
 			return velocityConversionFactor;
 		}
 		
-		
 		public SparkMaxConfObject withVelocityConversionFactor(double velocityConversionFactor) {
 			this.velocityConversionFactor = velocityConversionFactor;
 			return this;
@@ -169,8 +165,5 @@ public class GBSparkMax extends CANSparkMax {
 		public PIDObject getPidObject() {
 			return pidObject;
 		}
-
-
 	}
-	
 }

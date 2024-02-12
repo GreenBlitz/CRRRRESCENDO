@@ -1,7 +1,7 @@
 package edu.greenblitz.robotName.commands.swerve;
 
 import edu.greenblitz.robotName.Field;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.DriverStation;

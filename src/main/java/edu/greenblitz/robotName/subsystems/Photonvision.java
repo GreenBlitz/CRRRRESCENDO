@@ -12,14 +12,17 @@ import java.util.Optional;
 
 
 public class Photonvision extends GBSubsystem {
+	
 	private static Photonvision instance;
+	
 	private PhotonCamera camera;
+	
 	private PhotonPoseEstimator poseEstimator;
 	
 	private Photonvision() {
 		camera = new PhotonCamera("photonvision");
 		poseEstimator = new PhotonPoseEstimator(
-				Field.Apriltags.aprilTagFieldLayout,
+				Field.Apriltags.APRIL_TAG_FIELD_LAYOUT,
 				PhotonPoseEstimator.PoseStrategy.AVERAGE_BEST_TARGETS,
 				camera,
 				VisionConstants.ROBOT_TO_CAMERA
@@ -30,12 +33,10 @@ public class Photonvision extends GBSubsystem {
 		init();
 		return instance;
 	}
-
-	public static void init(){
+	
+	public static void init() {
 		instance = new Photonvision();
 	}
-	
-	
 	
 	/**
 	 * @return an array of three dimensions [x - forward , y - left, z - up]
@@ -56,6 +57,7 @@ public class Photonvision extends GBSubsystem {
 		var result = camera.getLatestResult();
 		return result.getTimestampSeconds();
 	}
+	
 	public Optional<EstimatedRobotPose> getUpdatedPoseEstimator() {
 		return poseEstimator.update();
 	}
@@ -74,7 +76,6 @@ public class Photonvision extends GBSubsystem {
 			return 0;
 		}
 	}
-	
 }
 
 
