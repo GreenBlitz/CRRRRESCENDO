@@ -37,9 +37,8 @@ public class GBMath {
 		double yIntercept1 = targetPoint.getY() - (targetPoint.getX() * perpendicularSlope);
 		double yIntercept2 = startPoint.getY() - (startPoint.getX() * slope);
 
-		double xClosest = (slope - perpendicularSlope) / (yIntercept1 - yIntercept2);
+		double xClosest = (yIntercept1 - yIntercept2) / (slope - perpendicularSlope);
 		double yClosest = xClosest * slope + yIntercept2;
-		Logger.recordOutput("Target",new Translation2d(xClosest,yClosest));
 		return new Translation2d(xClosest, yClosest);
 	}
 

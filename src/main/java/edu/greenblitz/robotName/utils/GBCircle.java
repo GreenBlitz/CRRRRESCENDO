@@ -225,7 +225,6 @@ public class GBCircle {
             return getClosestCircleRimPosition(position);
         }
         Translation2d closestEdge = position.nearest(List.of(getLowerAngleLimitPosition(),getUpperAngleLimitPosition()));
-        Logger.recordOutput("upper",getUpperAngleLimitPosition());
         return GBMath.getClosestPointBetweenPointAndLine(position,centerPosition,closestEdge);
     }
 }

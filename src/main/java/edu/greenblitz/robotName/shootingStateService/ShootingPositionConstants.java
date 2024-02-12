@@ -12,9 +12,9 @@ public class ShootingPositionConstants {
 
     public static final double SHOOTING_ZONE_RADIUS_IN_METERS = 4;
 
-    public static final Rotation2d LOWER_ANGLE_LIMIT = Rotation2d.fromDegrees(-40);
+    public static final Rotation2d LOWER_ANGLE_LIMIT = Rotation2d.fromDegrees(-50);
 
-    public static final Rotation2d UPPER_ANGLE_LIMIT = Rotation2d.fromDegrees(40);
+    public static final Rotation2d UPPER_ANGLE_LIMIT = Rotation2d.fromDegrees(30);
 
     public static ShootingZone SHOOTING_ZONE = new ShootingZone(
             CENTER_OF_SHOOTING_ZONE,
