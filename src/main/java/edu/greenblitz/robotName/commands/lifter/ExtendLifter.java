@@ -21,15 +21,15 @@ public class ExtendLifter extends LifterCommand {
     public void execute() {
         if (timer.hasElapsed(LifterConstants.SECONDS_TO_CLOSE_SOLENOID)){
             lifter.holdSolenoid();
-//            lifter.goToPosition(LifterConstants.LIFTER_EXTENDED_POSITION);
-            lifter.setPower(0.1);
+            lifter.goToPosition(LifterConstants.LIFTER_EXTENDED_POSITION);
+//            lifter.setPower(0.1);
         }
     }
 
     @Override
     public boolean isFinished() {
-//        return lifter.isAtPosition(LifterConstants.LIFTER_EXTENDED_POSITION);
-        return false;
+        return lifter.isAtPosition(LifterConstants.LIFTER_EXTENDED_POSITION);
+//        return false;
     }
 
     @Override
