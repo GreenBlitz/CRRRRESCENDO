@@ -14,12 +14,16 @@ public class ShootingZone extends GBCircle {
     private List<Bound> restrictedBounds;
 
     public ShootingZone(Translation2d position, double radius) {
-        super(position, radius);
-        restrictedBounds = new ArrayList<>();
+        this(position,radius,new ArrayList<>());
     }
 
     public ShootingZone(Translation2d position, double radius, List<Bound> restrictedBounds) {
         super(position, radius);
+        this.restrictedBounds = restrictedBounds;
+    }
+
+    public ShootingZone(Translation2d position, double radius, List<Bound> restrictedBounds, Rotation2d lowerAngleLimit, Rotation2d upperAngleLimit) {
+        super(position, radius, lowerAngleLimit, upperAngleLimit);
         this.restrictedBounds = restrictedBounds;
     }
 
@@ -34,6 +38,17 @@ public class ShootingZone extends GBCircle {
     @Override
     public Translation2d getClosestCircleRimPosition(Translation2d position) {
         Translation2d targetPosition = super.getClosestCircleRimPosition(position);
+        for (Bound bound : restrictedBounds) {
+            if (bound.isPositionInBound(targetPosition)) {
+                return bound.getClosestLimitToPosition(targetPosition);
+            }
+        }
+        return targetPosition;
+    }
+
+    @Override
+    public Translation2d getClosestCirclePosition(Translation2d position) {
+        Translation2d targetPosition = super.getClosestCirclePosition(position);
         for (Bound bound : restrictedBounds) {
             if (bound.isPositionInBound(targetPosition)) {
                 return bound.getClosestLimitToPosition(targetPosition);
