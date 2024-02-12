@@ -18,8 +18,9 @@ public class SimulationLifter implements ILifter {
     private SingleJointedArmSim lifterSimulation;
     private double appliedOutput;
     private ProfiledPIDController pidController;
-    DCMotorSim simulationMotor;
+    DCMotorSim simulationSolenoidMotor;
     double appliedOutputsSolenoid;
+    double appliedSolenoidOutputs;
 
     public SimulationLifter() {
         lifterSimulation = new SingleJointedArmSim(
@@ -36,6 +37,12 @@ public class SimulationLifter implements ILifter {
                 LifterConstants.STARTING_ANGLE.getRadians()
         );
         pidController = SimulationLifterConstants.SIMULATION_PID;
+
+        simulationSolenoidMotor = new DCMotorSim(
+                DCMotor.getCIM(SimulationLifterConstants.NUMBER_OF_SOLENOID_MOTORS),
+                SimulationLifterConstants.MOTOR_GEARING,
+                SimulationLifterConstants.MOTOR_JKG_METERS_SQUARED
+        );
     }
 
     @Override
@@ -68,6 +75,31 @@ public class SimulationLifter implements ILifter {
     public void goToPosition(Rotation2d position) {
         setVoltage(pidController.calculate(lifterSimulation.getAngleRads(), position.getRadians()));
     }
+
+    @Override
+    public void openSolenoid() {
+        setPowerSolenoid(LifterConstants.POWER_TO_OPEN_SOLENOID);
+    }
+
+    @Override
+    public void closeSolenoid() {
+        setPowerSolenoid(LifterConstants.POWER_TO_CLOSE_SOLENOID);
+    }
+
+    @Override
+    public void holdSolenoid() {
+        setPowerSolenoid(LifterConstants.POWER_TO_HOLD_SOLENOID);
+    }
+
+    @Override
+    public void setPowerSolenoid(double power) {
+        setVoltageSolenoid(power * RobotConstants.SimulationConstants.BATTERY_VOLTAGE);
+    }
+    public void setVoltageSolenoid(double voltage){
+        appliedSolenoidOutputs = voltage;
+        simulationSolenoidMotor.setInputVoltage(voltage);
+    }
+
     @Override
     public void updateInputs(LifterInputsAutoLogged inputs) {
         lifterSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
@@ -75,5 +107,9 @@ public class SimulationLifter implements ILifter {
         inputs.outputCurrent = lifterSimulation.getCurrentDrawAmps();
         inputs.position = lifterSimulation.getAngleRads();
         inputs.velocity = lifterSimulation.getVelocityRadPerSec();
+
+        inputs.voltageSolenoid = appliedOutputsSolenoid;
+        inputs.currentSolenoid = simulationSolenoidMotor.getCurrentDrawAmps();
+        inputs.isOpenSolenoid = inputs.voltageSolenoid > 0;
     }
 }

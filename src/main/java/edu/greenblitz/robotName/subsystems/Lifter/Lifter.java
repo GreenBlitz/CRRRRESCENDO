@@ -78,6 +78,15 @@ public class Lifter extends GBSubsystem {
     public Rotation2d getPosition(){
         return Rotation2d.fromRadians(lifterInputs.position);
     }
+    public void holdSolenoid(){
+        lifter.holdSolenoid();
+    }
+    public void openSolenoid(){
+        lifter.openSolenoid();
+    }
+    public void closeSolenoid(){
+        lifter.closeSolenoid();
+    }
 
     public Pose3d getLifterPose3d() {
         return new Pose3d(

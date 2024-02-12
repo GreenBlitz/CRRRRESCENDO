@@ -90,7 +90,7 @@ public class NeoLifter implements ILifter {
         inputs.isBackwardSwitchPressed = motor.getReverseLimitSwitch(NeoLifterConstants.BACKWARD_LIMIT_SWITCH_TYPE).isPressed();
         inputs.currentSolenoid = solenoid.getStatorCurrent();
         inputs.voltageSolenoid = solenoid.getMotorOutputVoltage();
-        inputs.isOpenSolenoid = inputs.voltage > 0;
+        inputs.isOpenSolenoid = inputs.voltageSolenoid > 0;
 
     }
 }

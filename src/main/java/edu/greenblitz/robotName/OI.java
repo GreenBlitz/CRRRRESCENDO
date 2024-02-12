@@ -9,6 +9,7 @@ import edu.greenblitz.robotName.commands.arm.roller.RunRollerByJoystick;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
 import edu.greenblitz.robotName.commands.getNoteToSystem.TransferNote;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
+import edu.greenblitz.robotName.commands.lifter.ExtendLifter;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
@@ -98,10 +99,11 @@ public class OI {
 
     public void thirdJoystickButtons(){
         SmartJoystick usedJoystick = thirdJoystick;
-        usedJoystick.A.whileTrue(new RunRollerByJoystick(usedJoystick));
-        usedJoystick.A.whileTrue(new RunIntakeByJoystick(usedJoystick));
-        usedJoystick.B.whileTrue(new RunFunnelByJoystick(usedJoystick));
-        usedJoystick.B.whileTrue(new RunFlyWheelByJoystick(usedJoystick));
+//        usedJoystick.A.whileTrue(new RunRollerByJoystick(usedJoystick));
+//        usedJoystick.A.whileTrue(new RunIntakeByJoystick(usedJoystick));
+//        usedJoystick.B.whileTrue(new RunFunnelByJoystick(usedJoystick));
+//        usedJoystick.B.whileTrue(new RunFlyWheelByJoystick(usedJoystick));
+        usedJoystick.A.whileTrue(new ExtendLifter());
     }
 
     public void initializeDefaultCommands() {
