@@ -1,6 +1,8 @@
 package edu.greenblitz.robotName;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
+import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 import edu.greenblitz.robotName.subsystems.Dashboard;
 
 import com.pathplanner.lib.auto.NamedCommands;
@@ -84,7 +86,7 @@ public class Robot extends LoggedRobot {
     }
 
     private void initializeAutonomousBuilder() {
-        NamedCommands.registerCommand("shoot", new GoToShootingStateAndShoot());
+        NamedCommands.registerCommand("shoot", new GoToShootingStateAndShoot(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
         NamedCommands.registerCommand("grip", new NoteToShooter().raceWith(new WaitCommand(1)));
         AutoBuilder.configureHolonomic(
                 SwerveChassis.getInstance()::getRobotPose,

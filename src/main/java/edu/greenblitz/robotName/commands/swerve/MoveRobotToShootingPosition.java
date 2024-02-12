@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 
 public class MoveRobotToShootingPosition extends ConditionalCommand {
 
-    public MoveRobotToShootingPosition(ShootingZone bigZone, ShootingZone smallZone) {
+    public MoveRobotToShootingPosition(ShootingZone zone) {
         super(
-                new RotateToAngle( () -> ShootingStateCalculations.getTargetRobotAngle(smallZone)),
-                new MoveToPosition( () -> ShootingStateCalculations.getTargetRobotPosition(smallZone)),
-                () -> ShootingStateCalculations.isRobotInShootingZone(bigZone)
+                new RotateToAngle( () -> ShootingStateCalculations.getTargetRobotAngle(zone)),
+                new MoveToPosition( () -> ShootingStateCalculations.getTargetRobotPosition(zone)),
+                () -> ShootingStateCalculations.isRobotInShootingZone(zone.getWrapperZone())
         );
     }
 }

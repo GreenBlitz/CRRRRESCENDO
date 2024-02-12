@@ -7,14 +7,11 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public class GoToShootingStateAndShoot extends SequentialCommandGroup {
 
-    public GoToShootingStateAndShoot(ShootingZone bigZone, ShootingZone smallZone) {
+    public GoToShootingStateAndShoot(ShootingZone zone) {
         super(
-                new GoToShootingState(bigZone,smallZone),
+                new GoToShootingState(zone),
                 new PushNoteToFlyWheel()
         );
     }
 
-    public GoToShootingStateAndShoot() {
-        this(ShootingPositionConstants.LEGAL_SHOOTING_ZONE,ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE);
-    }
 }

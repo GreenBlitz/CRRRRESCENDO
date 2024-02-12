@@ -6,19 +6,16 @@ import edu.greenblitz.robotName.commands.swerve.MoveRobotToShootingPosition;
 import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
 import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 import edu.greenblitz.robotName.utils.shootingCalculations.ShootingZone;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 
 public class GoToShootingState extends ParallelCommandGroup {
 
-    public GoToShootingState(ShootingZone bigZone, ShootingZone smallZone) {
+    public GoToShootingState(ShootingZone zone) {
         super(
-                new MoveRobotToShootingPosition(bigZone, smallZone),
-                new MoveShooterToAngle(ShootingStateCalculations.getTargetShooterAngle(bigZone)),
+                new MoveRobotToShootingPosition(zone),
+                new MoveShooterToShootingAngle(zone),
                 new RunFlyWheelByVelocityConstant()
         );
-    }
-
-    public GoToShootingState() {
-        this(ShootingPositionConstants.LEGAL_SHOOTING_ZONE,ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE);
     }
 }

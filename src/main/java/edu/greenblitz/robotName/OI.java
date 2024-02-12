@@ -20,6 +20,7 @@ import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.Battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.switchMode.SetScoringMode;
 import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
+import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
 import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
@@ -93,7 +94,7 @@ public class OI {
         secondJoystick.Y.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
         secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
 
-        mainJoystick.A.whileTrue(new GoToShootingState());
+        mainJoystick.A.whileTrue(new GoToShootingState(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
     }
 
     public void thirdJoystickButtons(){

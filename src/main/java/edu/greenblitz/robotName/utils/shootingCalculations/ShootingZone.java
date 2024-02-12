@@ -13,18 +13,22 @@ public class ShootingZone extends GBCircle {
 
     private List<Bound> restrictedBounds;
 
-    public ShootingZone(Translation2d position, double radius) {
-        this(position,radius,new ArrayList<>());
+    private final ShootingZone wrapperZone;
+
+    public ShootingZone(Translation2d position, double radius, ShootingZone wrapperZone) {
+        this(position,radius,new ArrayList<>(), wrapperZone);
     }
 
-    public ShootingZone(Translation2d position, double radius, List<Bound> restrictedBounds) {
+    public ShootingZone(Translation2d position, double radius, List<Bound> restrictedBounds, ShootingZone wrapperZone) {
         super(position, radius);
         this.restrictedBounds = restrictedBounds;
+        this.wrapperZone = wrapperZone;
     }
 
-    public ShootingZone(Translation2d position, double radius, List<Bound> restrictedBounds, Rotation2d lowerAngleLimit, Rotation2d upperAngleLimit) {
+    public ShootingZone(Translation2d position, double radius, List<Bound> restrictedBounds, Rotation2d lowerAngleLimit, Rotation2d upperAngleLimit, ShootingZone wrapperZone) {
         super(position, radius, lowerAngleLimit, upperAngleLimit);
         this.restrictedBounds = restrictedBounds;
+        this.wrapperZone = wrapperZone;
     }
 
     public void addBound(Bound bound) {
@@ -33,6 +37,10 @@ public class ShootingZone extends GBCircle {
 
     public void setRestrictedBounds(List<Bound> restrictedBounds) {
         this.restrictedBounds = restrictedBounds;
+    }
+
+    public ShootingZone getWrapperZone() {
+        return wrapperZone;
     }
 
     @Override
