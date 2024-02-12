@@ -384,11 +384,11 @@ public class GBAutoBuilder {
         SendableChooser<Command> chooser = new SendableChooser<>();
         List<String> autoNames = getAllAutoNames();
 
-        PathPlannerAuto defaultOption = null;
-        List<PathPlannerAuto> options = new ArrayList<>();
+        GBPathPlannerAuto defaultOption = null;
+        List<GBPathPlannerAuto> options = new ArrayList<>();
 
         for (String autoName : autoNames) {
-            PathPlannerAuto auto = new PathPlannerAuto(autoName);
+            GBPathPlannerAuto auto = new GBPathPlannerAuto(autoName);
 
             if (!defaultAutoName.isEmpty() && defaultAutoName.equals(autoName)) {
                 defaultOption = auto;
@@ -472,7 +472,7 @@ public class GBAutoBuilder {
         JSONObject commandJson = (JSONObject) autoJson.get("command");
         boolean choreoAuto = autoJson.get("choreoAuto") != null && (boolean) autoJson.get("choreoAuto");
 
-        Command autoCommand = CommandUtil.commandFromJson(commandJson, choreoAuto);
+        Command autoCommand = GBCommandUtil.commandFromJson(commandJson, choreoAuto);
         if (autoJson.get("startingPose") != null) {
             Pose2d startPose = getStartingPoseFromJson((JSONObject) autoJson.get("startingPose"));
             return Commands.sequence(Commands.runOnce(() -> {
