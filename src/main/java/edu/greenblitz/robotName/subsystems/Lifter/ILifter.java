@@ -16,7 +16,10 @@ public interface ILifter {
 	void setIdleMode(CANSparkMax.IdleMode idleMode);
 
 	void goToPosition(Rotation2d position);
-
+	void openSolenoid();
+	void closeSolenoid();
+	void holdSolenoid();
+	void setPowerSolenoid(double powerSolenoid);
 	void updateInputs(LifterInputsAutoLogged inputs);
 }
 

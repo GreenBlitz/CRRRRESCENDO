@@ -9,6 +9,7 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.system.plant.DCMotor;
+import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import org.littletonrobotics.junction.Logger;
 
@@ -17,6 +18,8 @@ public class SimulationLifter implements ILifter {
     private SingleJointedArmSim lifterSimulation;
     private double appliedOutput;
     private ProfiledPIDController pidController;
+    DCMotorSim simulationMotor;
+    double appliedOutputsSolenoid;
 
     public SimulationLifter() {
         lifterSimulation = new SingleJointedArmSim(
@@ -65,7 +68,6 @@ public class SimulationLifter implements ILifter {
     public void goToPosition(Rotation2d position) {
         setVoltage(pidController.calculate(lifterSimulation.getAngleRads(), position.getRadians()));
     }
-
     @Override
     public void updateInputs(LifterInputsAutoLogged inputs) {
         lifterSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
