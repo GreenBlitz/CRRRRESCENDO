@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.commands.shooter.shootingState;
+package edu.greenblitz.robotName.commands.swerve;
 
 import edu.greenblitz.robotName.commands.swerve.MoveToPosition;
 import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
