@@ -27,5 +27,4 @@ public class MoveElbowToAngle extends ElbowCommand {
     public boolean isFinished() {
         return elbow.isAtAngle(targetAngle);
     }
-
 }

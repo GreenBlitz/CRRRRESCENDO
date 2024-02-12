@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName.utils.GBPathFinding;
 
 import com.pathplanner.lib.auto.AutoBuilderException;
-import com.pathplanner.lib.auto.CommandUtil;
 import com.pathplanner.lib.commands.*;
 import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.path.PathPlannerPath;
@@ -9,8 +8,8 @@ import com.pathplanner.lib.util.GeometryUtil;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.ReplanningConfig;
 import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.wpi.first.math.Vector;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -22,6 +21,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -35,24 +36,27 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
 /**
  * Utility class used to build auto routines
  */
 public class GBAutoBuilder {
+
     private static boolean configured = false;
 
     private static Function<PathPlannerPath, Command> pathFollowingCommandBuilder;
+
     private static Supplier<Pose2d> getPose;
+
     private static Consumer<Pose2d> resetPose;
+
     private static BooleanSupplier shouldFlipPath;
 
     // Pathfinding builders
     private static boolean pathfindingConfigured = false;
-    private static edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.QuadFunction<Pose2d, PathConstraints, Double, Double, Command> pathfindToPoseCommandBuilder;
-    private static edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.TriFunction<PathPlannerPath, PathConstraints, Double, Command> pathfindThenFollowPathCommandBuilder;
+
+    private static QuadFunction<Pose2d, PathConstraints, Double, Double, Command> pathfindToPoseCommandBuilder;
+
+    private static TriFunction<PathPlannerPath, PathConstraints, Double, Command> pathfindThenFollowPathCommandBuilder;
 
     /**
      * Configures the GBAutoBuilder for a holonomic drivetrain.
@@ -74,15 +78,15 @@ public class GBAutoBuilder {
             throw new AutoBuilderException("Auto builder has already been configured. Please only configure auto builder once");
         }
 
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathFollowingCommandBuilder = (path) -> new FollowPathHolonomic(path, poseSupplier, robotRelativeSpeedsSupplier, robotRelativeOutput, config, shouldFlipPath, driveSubsystem);
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.getPose = poseSupplier;
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.resetPose = resetPose;
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.configured = true;
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.shouldFlipPath = shouldFlipPath;
+        GBAutoBuilder.pathFollowingCommandBuilder = (path) -> new FollowPathHolonomic(path, poseSupplier, robotRelativeSpeedsSupplier, robotRelativeOutput, config, shouldFlipPath, driveSubsystem);
+        GBAutoBuilder.getPose = poseSupplier;
+        GBAutoBuilder.resetPose = resetPose;
+        GBAutoBuilder.configured = true;
+        GBAutoBuilder.shouldFlipPath = shouldFlipPath;
 
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathfindToPoseCommandBuilder = (pose, constraints, goalEndVel, rotationDelayDistance) -> new GBPathFindHolonomic(pose, constraints, goalEndVel, poseSupplier, robotRelativeSpeedsSupplier, robotRelativeOutput, config, rotationDelayDistance, driveSubsystem);
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathfindThenFollowPathCommandBuilder = (path, constraints, rotationDelayDistance) -> new PathfindThenFollowPathHolonomic(path, constraints, poseSupplier, robotRelativeSpeedsSupplier, robotRelativeOutput, config, rotationDelayDistance, shouldFlipPath, driveSubsystem);
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathfindingConfigured = true;
+        GBAutoBuilder.pathfindToPoseCommandBuilder = (pose, constraints, goalEndVel, rotationDelayDistance) -> new GBPathFindHolonomic(pose, constraints, goalEndVel, poseSupplier, robotRelativeSpeedsSupplier, robotRelativeOutput, config, rotationDelayDistance, driveSubsystem);
+        GBAutoBuilder.pathfindThenFollowPathCommandBuilder = (path, constraints, rotationDelayDistance) -> new PathfindThenFollowPathHolonomic(path, constraints, poseSupplier, robotRelativeSpeedsSupplier, robotRelativeOutput, config, rotationDelayDistance, shouldFlipPath, driveSubsystem);
+        GBAutoBuilder.pathfindingConfigured = true;
     }
 
     /**
@@ -92,7 +96,7 @@ public class GBAutoBuilder {
      * @param resetPose        a consumer for resetting the robot's pose
      * @param speedsSupplier   a supplier for the robot's current chassis speeds
      * @param output           a consumer for setting the robot's chassis speeds
-     * @param replanningConfig Path replanning configuration
+     * @param replanningConfig Path re-planning configuration
      * @param shouldFlipPath   Supplier that determines if paths should be flipped to the other side of
      *                         the field. This will maintain a global blue alliance origin.
      * @param driveSubsystem   the subsystem for the robot's drive
@@ -103,15 +107,15 @@ public class GBAutoBuilder {
             throw new AutoBuilderException("Auto builder has already been configured. Please only configure auto builder once");
         }
 
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathFollowingCommandBuilder = (path) -> new FollowPathRamsete(path, poseSupplier, speedsSupplier, output, replanningConfig, shouldFlipPath, driveSubsystem);
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.getPose = poseSupplier;
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.resetPose = resetPose;
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.configured = true;
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.shouldFlipPath = shouldFlipPath;
+        GBAutoBuilder.pathFollowingCommandBuilder = (path) -> new FollowPathRamsete(path, poseSupplier, speedsSupplier, output, replanningConfig, shouldFlipPath, driveSubsystem);
+        GBAutoBuilder.getPose = poseSupplier;
+        GBAutoBuilder.resetPose = resetPose;
+        GBAutoBuilder.configured = true;
+        GBAutoBuilder.shouldFlipPath = shouldFlipPath;
 
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathfindToPoseCommandBuilder = (pose, constraints, goalEndVel, rotationDelayDistance) -> new PathfindRamsete(pose.getTranslation(), constraints, goalEndVel, poseSupplier, speedsSupplier, output, replanningConfig, driveSubsystem);
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathfindThenFollowPathCommandBuilder = (path, constraints, rotationDelayDistance) -> new PathfindThenFollowPathRamsete(path, constraints, poseSupplier, speedsSupplier, output, replanningConfig, shouldFlipPath, driveSubsystem);
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathfindingConfigured = true;
+        GBAutoBuilder.pathfindToPoseCommandBuilder = (pose, constraints, goalEndVel, rotationDelayDistance) -> new PathfindRamsete(pose.getTranslation(), constraints, goalEndVel, poseSupplier, speedsSupplier, output, replanningConfig, driveSubsystem);
+        GBAutoBuilder.pathfindThenFollowPathCommandBuilder = (path, constraints, rotationDelayDistance) -> new PathfindThenFollowPathRamsete(path, constraints, poseSupplier, speedsSupplier, output, replanningConfig, shouldFlipPath, driveSubsystem);
+        GBAutoBuilder.pathfindingConfigured = true;
     }
 
     /**
@@ -125,7 +129,7 @@ public class GBAutoBuilder {
      *                         aggressive like a proportional term.
      * @param zeta             Tuning parameter (0 rad^-1 &lt; zeta &lt; 1 rad^-1) for which larger values provide
      *                         more damping in response.
-     * @param replanningConfig Path replanning configuration
+     * @param replanningConfig Path re-planning configuration
      * @param shouldFlipPath   Supplier that determines if paths should be flipped to the other side of
      *                         the field. This will maintain a global blue alliance origin.
      * @param driveSubsystem   the subsystem for the robot's drive
@@ -136,15 +140,15 @@ public class GBAutoBuilder {
             throw new AutoBuilderException("Auto builder has already been configured. Please only configure auto builder once");
         }
 
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathFollowingCommandBuilder = (path) -> new FollowPathRamsete(path, poseSupplier, speedsSupplier, output, b, zeta, replanningConfig, shouldFlipPath, driveSubsystem);
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.getPose = poseSupplier;
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.resetPose = resetPose;
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.configured = true;
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.shouldFlipPath = shouldFlipPath;
+        GBAutoBuilder.pathFollowingCommandBuilder = (path) -> new FollowPathRamsete(path, poseSupplier, speedsSupplier, output, b, zeta, replanningConfig, shouldFlipPath, driveSubsystem);
+        GBAutoBuilder.getPose = poseSupplier;
+        GBAutoBuilder.resetPose = resetPose;
+        GBAutoBuilder.configured = true;
+        GBAutoBuilder.shouldFlipPath = shouldFlipPath;
 
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathfindToPoseCommandBuilder = (pose, constraints, goalEndVel, rotationDelayDistance) -> new PathfindRamsete(pose.getTranslation(), constraints, goalEndVel, poseSupplier, speedsSupplier, output, b, zeta, replanningConfig, driveSubsystem);
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathfindThenFollowPathCommandBuilder = (path, constraints, rotationDelayDistance) -> new PathfindThenFollowPathRamsete(path, constraints, poseSupplier, speedsSupplier, output, b, zeta, replanningConfig, shouldFlipPath, driveSubsystem);
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathfindingConfigured = true;
+        GBAutoBuilder.pathfindToPoseCommandBuilder = (pose, constraints, goalEndVel, rotationDelayDistance) -> new PathfindRamsete(pose.getTranslation(), constraints, goalEndVel, poseSupplier, speedsSupplier, output, b, zeta, replanningConfig, driveSubsystem);
+        GBAutoBuilder.pathfindThenFollowPathCommandBuilder = (path, constraints, rotationDelayDistance) -> new PathfindThenFollowPathRamsete(path, constraints, poseSupplier, speedsSupplier, output, b, zeta, replanningConfig, shouldFlipPath, driveSubsystem);
+        GBAutoBuilder.pathfindingConfigured = true;
     }
 
     /**
@@ -156,7 +160,7 @@ public class GBAutoBuilder {
      * @param speedsSupplier   a supplier for the robot's current chassis speeds
      * @param output           a consumer for setting the robot's chassis speeds
      * @param dt               Period of the robot control loop in seconds (default 0.02)
-     * @param replanningConfig Path replanning configuration
+     * @param replanningConfig Path re-planning configuration
      * @param shouldFlipPath   Supplier that determines if paths should be flipped to the other side of
      *                         the field. This will maintain a global blue alliance origin.
      * @param driveSubsystem   the subsystem for the robot's drive
@@ -167,15 +171,15 @@ public class GBAutoBuilder {
             throw new AutoBuilderException("Auto builder has already been configured. Please only configure auto builder once");
         }
 
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathFollowingCommandBuilder = (path) -> new FollowPathLTV(path, poseSupplier, speedsSupplier, output, dt, replanningConfig, shouldFlipPath, driveSubsystem);
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.getPose = poseSupplier;
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.resetPose = resetPose;
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.configured = true;
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.shouldFlipPath = shouldFlipPath;
+        GBAutoBuilder.pathFollowingCommandBuilder = (path) -> new FollowPathLTV(path, poseSupplier, speedsSupplier, output, dt, replanningConfig, shouldFlipPath, driveSubsystem);
+        GBAutoBuilder.getPose = poseSupplier;
+        GBAutoBuilder.resetPose = resetPose;
+        GBAutoBuilder.configured = true;
+        GBAutoBuilder.shouldFlipPath = shouldFlipPath;
 
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathfindToPoseCommandBuilder = (pose, constraints, goalEndVel, rotationDelayDistance) -> new PathfindLTV(pose.getTranslation(), constraints, goalEndVel, poseSupplier, speedsSupplier, output, dt, replanningConfig, driveSubsystem);
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathfindThenFollowPathCommandBuilder = (path, constraints, rotationDelayDistance) -> new PathfindThenFollowPathLTV(path, constraints, poseSupplier, speedsSupplier, output, dt, replanningConfig, shouldFlipPath, driveSubsystem);
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathfindingConfigured = true;
+        GBAutoBuilder.pathfindToPoseCommandBuilder = (pose, constraints, goalEndVel, rotationDelayDistance) -> new PathfindLTV(pose.getTranslation(), constraints, goalEndVel, poseSupplier, speedsSupplier, output, dt, replanningConfig, driveSubsystem);
+        GBAutoBuilder.pathfindThenFollowPathCommandBuilder = (path, constraints, rotationDelayDistance) -> new PathfindThenFollowPathLTV(path, constraints, poseSupplier, speedsSupplier, output, dt, replanningConfig, shouldFlipPath, driveSubsystem);
+        GBAutoBuilder.pathfindingConfigured = true;
     }
 
     /**
@@ -189,7 +193,7 @@ public class GBAutoBuilder {
      * @param qelems           The maximum desired error tolerance for each state.
      * @param relems           The maximum desired control effort for each input.
      * @param dt               Period of the robot control loop in seconds (default 0.02)
-     * @param replanningConfig Path replanning configuration
+     * @param replanningConfig Path re-planning configuration
      * @param shouldFlipPath   Supplier that determines if paths should be flipped to the other side of
      *                         the field. This will maintain a global blue alliance origin.
      * @param driveSubsystem   the subsystem for the robot's drive
@@ -200,15 +204,15 @@ public class GBAutoBuilder {
             throw new AutoBuilderException("Auto builder has already been configured. Please only configure auto builder once");
         }
 
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathFollowingCommandBuilder = (path) -> new FollowPathLTV(path, poseSupplier, speedsSupplier, output, qelems, relems, dt, replanningConfig, shouldFlipPath, driveSubsystem);
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.getPose = poseSupplier;
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.resetPose = resetPose;
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.configured = true;
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.shouldFlipPath = shouldFlipPath;
+        GBAutoBuilder.pathFollowingCommandBuilder = (path) -> new FollowPathLTV(path, poseSupplier, speedsSupplier, output, qelems, relems, dt, replanningConfig, shouldFlipPath, driveSubsystem);
+        GBAutoBuilder.getPose = poseSupplier;
+        GBAutoBuilder.resetPose = resetPose;
+        GBAutoBuilder.configured = true;
+        GBAutoBuilder.shouldFlipPath = shouldFlipPath;
 
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathfindToPoseCommandBuilder = (pose, constraints, goalEndVel, rotationDelayDistance) -> new PathfindLTV(pose.getTranslation(), constraints, goalEndVel, poseSupplier, speedsSupplier, output, qelems, relems, dt, replanningConfig, driveSubsystem);
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathfindThenFollowPathCommandBuilder = (path, constraints, rotationDelayDistance) -> new PathfindThenFollowPathLTV(path, constraints, poseSupplier, speedsSupplier, output, qelems, relems, dt, replanningConfig, shouldFlipPath, driveSubsystem);
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathfindingConfigured = true;
+        GBAutoBuilder.pathfindToPoseCommandBuilder = (pose, constraints, goalEndVel, rotationDelayDistance) -> new PathfindLTV(pose.getTranslation(), constraints, goalEndVel, poseSupplier, speedsSupplier, output, qelems, relems, dt, replanningConfig, driveSubsystem);
+        GBAutoBuilder.pathfindThenFollowPathCommandBuilder = (path, constraints, rotationDelayDistance) -> new PathfindThenFollowPathLTV(path, constraints, poseSupplier, speedsSupplier, output, qelems, relems, dt, replanningConfig, shouldFlipPath, driveSubsystem);
+        GBAutoBuilder.pathfindingConfigured = true;
     }
 
     /**
@@ -226,13 +230,13 @@ public class GBAutoBuilder {
             throw new AutoBuilderException("Auto builder has already been configured. Please only configure auto builder once");
         }
 
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathFollowingCommandBuilder = pathFollowingCommandBuilder;
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.getPose = poseSupplier;
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.resetPose = resetPose;
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.configured = true;
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.shouldFlipPath = () -> false;
+        GBAutoBuilder.pathFollowingCommandBuilder = pathFollowingCommandBuilder;
+        GBAutoBuilder.getPose = poseSupplier;
+        GBAutoBuilder.resetPose = resetPose;
+        GBAutoBuilder.configured = true;
+        GBAutoBuilder.shouldFlipPath = () -> false;
 
-        edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.pathfindingConfigured = false;
+        GBAutoBuilder.pathfindingConfigured = false;
     }
 
     /**
@@ -311,7 +315,12 @@ public class GBAutoBuilder {
      * @return A command to pathfind to a given pose
      */
     public static Command pathfindToPose(Pose2d pose, PathConstraints constraints, double goalEndVelocity) {
-        return pathfindToPose(pose, constraints, goalEndVelocity, 0);
+        return pathfindToPose(
+                pose,
+                constraints,
+                goalEndVelocity,
+                0
+        );
     }
 
     /**
@@ -343,8 +352,11 @@ public class GBAutoBuilder {
         if (!isPathfindingConfigured()) {
             throw new AutoBuilderException("Auto builder was used to build a pathfinding command before being configured");
         }
-
-        return pathfindThenFollowPathCommandBuilder.apply(goalPath, pathfindingConstraints, rotationDelayDistance);
+        return pathfindThenFollowPathCommandBuilder.apply(
+                goalPath,
+                pathfindingConstraints,
+                rotationDelayDistance
+        );
     }
 
     /**
@@ -355,7 +367,11 @@ public class GBAutoBuilder {
      * @return A command to pathfind to a given path, then follow the path
      */
     public static Command pathfindThenFollowPath(PathPlannerPath goalPath, PathConstraints pathfindingConstraints) {
-        return pathfindThenFollowPath(goalPath, pathfindingConstraints, 0);
+        return pathfindThenFollowPath(
+                goalPath,
+                pathfindingConstraints,
+                0
+        );
     }
 
     /**
@@ -377,7 +393,7 @@ public class GBAutoBuilder {
      * @return SendableChooser populated with all autos
      */
     public static SendableChooser<Command> buildAutoChooser(String defaultAutoName) {
-        if (!edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder.isConfigured()) {
+        if (!GBAutoBuilder.isConfigured()) {
             throw new RuntimeException("GBAutoBuilder was not configured before attempting to build an auto chooser");
         }
 
@@ -445,7 +461,11 @@ public class GBAutoBuilder {
      * @return an auto command for the given auto name
      */
     public static Command buildAuto(String autoName) {
-        try (BufferedReader br = new BufferedReader(new FileReader(new File(Filesystem.getDeployDirectory(), "pathplanner/autos/" + autoName + ".auto")))) {
+        try (BufferedReader br = new BufferedReader(
+                new FileReader(
+                        new File(
+                                Filesystem.getDeployDirectory(),
+                                "pathplanner/autos/" + autoName + ".auto")))) {
             StringBuilder fileContentBuilder = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
@@ -521,4 +541,3 @@ public class GBAutoBuilder {
         Out apply(In1 in1, In2 in2, In3 in3, In4 in4);
     }
 }
-

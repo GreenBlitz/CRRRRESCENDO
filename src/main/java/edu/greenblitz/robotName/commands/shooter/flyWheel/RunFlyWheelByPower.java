@@ -12,7 +12,10 @@ public class RunFlyWheelByPower extends FlyWheelCommand {
 
     @Override
     public void execute() {
-        flyWheel.setPower(power, power * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR);
+        flyWheel.setPower(
+                power,
+                power * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR
+        );
     }
 
     @Override

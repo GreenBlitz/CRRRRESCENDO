@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 
 public abstract class GBSubsystem implements Subsystem {
 	
-	
 	public GBSubsystem() {
 		CommandScheduler.getInstance().registerSubsystem(this);
 	}
@@ -14,7 +13,7 @@ public abstract class GBSubsystem implements Subsystem {
 	@Override
 	public void periodic() {
 		Subsystem.super.periodic();
-		if(getCurrentCommand() != null) {
+		if (getCurrentCommand() != null) {
 			SmartDashboard.putString(getClass().getName(), getCurrentCommand().getName());
 		}
 	}

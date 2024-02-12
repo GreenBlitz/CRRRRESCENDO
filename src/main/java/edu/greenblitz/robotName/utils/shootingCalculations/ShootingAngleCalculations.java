@@ -18,7 +18,14 @@ public class ShootingAngleCalculations {
     public static Translation2d getPositionOfSpeakerRelativeToShooter(Translation3d shooterPosition) {
         Translation3d speaker = FieldConstants.MIDDLE_OF_SPEAKER_POSITION;
 
-        double distanceInMeters = GBMath.distance(shooterPosition, new Translation3d(speaker.getX(), speaker.getY(), shooterPosition.getZ()));
+        double distanceInMeters = GBMath.distance(
+                shooterPosition,
+                new Translation3d(
+                        speaker.getX(),
+                        speaker.getY(),
+                        shooterPosition.getZ()
+                )
+        );
         double differenceHeightInMeters = speaker.getZ() - shooterPosition.getZ();
 
         Translation2d relativeSpeakerPosition = new Translation2d(distanceInMeters, differenceHeightInMeters);

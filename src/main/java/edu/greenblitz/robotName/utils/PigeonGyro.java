@@ -6,8 +6,11 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 public class PigeonGyro extends PigeonIMU {
 	
 	double yawOffset = 0.0;
+	
 	double pitchOffset = 0.0;
+	
 	double rollOffset = 0.0;
+	
 	public PigeonGyro(int id) {
 		super(id);
 	}
@@ -18,7 +21,6 @@ public class PigeonGyro extends PigeonIMU {
 	 * <p>
 	 * ALL IN RADIANS
 	 */
-	
 	
 	@Override
 	public ErrorCode setYaw(double yaw) {
@@ -45,13 +47,11 @@ public class PigeonGyro extends PigeonIMU {
 	
 	@Override
 	public double getPitch() {
-		return ((Math.toRadians(super.getPitch()) - pitchOffset)%( 2 * Math.PI));
+		return ((Math.toRadians(super.getPitch()) - pitchOffset) % (2 * Math.PI));
 	}
 	
 	@Override
 	public double getRoll() {
-		return ((Math.toRadians(super.getRoll()) - rollOffset)%(2* Math.PI));
+		return ((Math.toRadians(super.getRoll()) - rollOffset) % (2 * Math.PI));
 	}
-	
-	
 }

@@ -1,6 +1,5 @@
 package edu.greenblitz.robotName.utils.GBPathFinding;
 
-import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.path.PathPoint;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -9,34 +8,47 @@ import edu.wpi.first.networktables.*;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
-/** Utility class for sending data to the PathPlanner app via NT4 */
+/**
+ * Utility class for sending data to the PathPlanner app via NT4
+ */
 public class GBPPLibTelemetry {
+
     private static boolean compMode = false;
 
     private static final DoubleArrayPublisher velPub =
             NetworkTableInstance.getDefault().getDoubleArrayTopic("/PathPlanner/vel").publish();
+
     private static final DoublePublisher inaccuracyPub =
             NetworkTableInstance.getDefault().getDoubleTopic("/PathPlanner/inaccuracy").publish();
+
     private static final DoubleArrayPublisher posePub =
             NetworkTableInstance.getDefault().getDoubleArrayTopic("/PathPlanner/currentPose").publish();
+
     private static final DoubleArrayPublisher pathPub =
             NetworkTableInstance.getDefault().getDoubleArrayTopic("/PathPlanner/activePath").publish();
+
     private static final DoubleArrayPublisher targetPosePub =
             NetworkTableInstance.getDefault().getDoubleArrayTopic("/PathPlanner/targetPose").publish();
 
     private static final Map<String, List<PathPlannerPath>> hotReloadPaths = new HashMap<>();
+
     private static final Map<String, List<GBPathPlannerAuto>> hotReloadAutos = new HashMap<>();
+
     private static NetworkTableListener hotReloadPathListener = null;
+
     private static NetworkTableListener hotReloadAutoListener = null;
 
-    /** Enable competition mode. This will disable hot reload. */
+    /**
+     * Enable competition mode. This will disable hot reload.
+     */
     public static void enableCompetitionMode() {
         compMode = true;
     }
@@ -44,14 +56,14 @@ public class GBPPLibTelemetry {
     /**
      * Set the path following actual/target velocities
      *
-     * @param actualVel Actual robot velocity in m/s
-     * @param commandedVel Target robot velocity in m/s
-     * @param actualAngVel Actual angular velocity in rad/s
+     * @param actualVel       Actual robot velocity in m/s
+     * @param commandedVel    Target robot velocity in m/s
+     * @param actualAngVel    Actual angular velocity in rad/s
      * @param commandedAngVel Target angular velocity in rad/s
      */
     public static void setVelocities(
             double actualVel, double commandedVel, double actualAngVel, double commandedAngVel) {
-        velPub.set(new double[] {actualVel, commandedVel, actualAngVel, commandedAngVel});
+        velPub.set(new double[]{actualVel, commandedVel, actualAngVel, commandedAngVel});
     }
 
     /**
@@ -69,7 +81,7 @@ public class GBPPLibTelemetry {
      * @param pose Current robot pose
      */
     public static void setCurrentPose(Pose2d pose) {
-        posePub.set(new double[] {pose.getX(), pose.getY(), pose.getRotation().getRadians()});
+        posePub.set(new double[]{pose.getX(), pose.getY(), pose.getRotation().getRadians()});
     }
 
     /**
@@ -100,14 +112,14 @@ public class GBPPLibTelemetry {
      */
     public static void setTargetPose(Pose2d targetPose) {
         targetPosePub.set(
-                new double[] {targetPose.getX(), targetPose.getY(), targetPose.getRotation().getRadians()});
+                new double[]{targetPose.getX(), targetPose.getY(), targetPose.getRotation().getRadians()});
     }
 
     /**
      * Register a path for hot reload. This is used internally.
      *
      * @param pathName Name of the path
-     * @param path Reference to the path
+     * @param path     Reference to the path
      */
     public static void registerHotReloadPath(String pathName, PathPlannerPath path) {
         if (!compMode) {
@@ -124,7 +136,7 @@ public class GBPPLibTelemetry {
      * Register an auto for hot reload. This is used internally.
      *
      * @param autoName Name of the auto
-     * @param auto Reference to the auto
+     * @param auto     Reference to the auto
      */
     public static void registerHotReloadAuto(String autoName, GBPathPlannerAuto auto) {
         if (!compMode) {

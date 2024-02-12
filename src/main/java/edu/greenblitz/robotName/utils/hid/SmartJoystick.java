@@ -13,8 +13,11 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
  * @see JoystickButton
  */
 public class SmartJoystick {
+	
 	private static final double DEADZONE = 0.05;
-	public final JoystickButton A,
+	
+	public final JoystickButton
+			A,
 			B,
 			X,
 			Y,
@@ -24,11 +27,14 @@ public class SmartJoystick {
 			BACK,
 			L3,
 			R3;
+	
 	public final POVButton POV_UP,
 			POV_RIGHT,
 			POV_DOWN,
 			POV_LEFT;
+	
 	private final double deadzone;
+	
 	private Joystick joystick;
 	
 	/**
@@ -147,6 +153,7 @@ public class SmartJoystick {
 		RIGHT_Y(5, true);
 		
 		private final int axis;
+		
 		private int inverted;
 		
 		Axis(int axis, boolean isInverted) {

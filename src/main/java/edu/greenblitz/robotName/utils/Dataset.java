@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * This class represents a function from R to R^n. You can supply any number of known points and then later
  * use linear interpolation to get any point of the desired graph.
+ *
  * @author alexey
  */
 public class Dataset {
@@ -17,22 +18,21 @@ public class Dataset {
 	 * dimensional curve.
 	 */
 	private int dimension;
+	
 	/**
 	 * The data, ordered by x the function input. The second element in the tuple is the function output.
 	 */
 	private List<TwoTuple<Double, double[]>> data;
 	
 	/**
-	 *
 	 * @param dim The dimension of the function. (output size + 1)
 	 */
-	public Dataset(int dim){
+	public Dataset(int dim) {
 		dimension = dim;
 		data = new ArrayList<>();
 	}
 	
 	/**
-	 *
 	 * Adds a new datapoint to the list of known points of the function. If a point of the same x exists
 	 * in the dataset it updates it.
 	 *
@@ -41,7 +41,7 @@ public class Dataset {
 	 * @throws RuntimeException if the output size isn't equal (dimension - 1)
 	 */
 	public void addDatapoint(double x, double[] y) {
-		if (y.length != dimension - 1){
+		if (y.length != dimension - 1) {
 			throw new RuntimeException("The dimension of this dataset is " + dimension + " but " + (y.length + 1)
 					+ " was given.");
 		}
@@ -64,8 +64,8 @@ public class Dataset {
 		addAt(index, new TwoTuple<>(x, y));
 	}
 	
-	private void addAt(int index, TwoTuple<Double, double[]> newData){
-		if (index == data.size()){
+	private void addAt(int index, TwoTuple<Double, double[]> newData) {
+		if (index == data.size()) {
 			data.add(newData);
 			return;
 		}
@@ -75,7 +75,6 @@ public class Dataset {
 	}
 	
 	/**
-	 *
 	 * @param x An input for the function
 	 * @return A tuple where the first element is the largest point who's x is smaller than the input x
 	 * adn the second element is the smallest point who's x is larger than the input x
@@ -98,22 +97,20 @@ public class Dataset {
 	}
 	
 	/**
-	 *
 	 * @param x A function input
 	 * @return The output of the function, calculated using linear interpolation.
 	 * @throws RuntimeException If the given input is smaller than the smallest known sample or larger than the largest
-	 * known sample.
+	 *                          known sample.
 	 */
-	public double[] linearlyInterpolate(double x){
-		if(Double.isNaN(x)){
+	public double[] linearlyInterpolate(double x) {
+		if (Double.isNaN(x)) {
 			throw new RuntimeException("x is NaN");
 		}
 		TwoTuple<TwoTuple<Double, double[]>, TwoTuple<Double, double[]>> data = getAdjesent(x);
 		double weight;
-		if(x == data.getFirst().getFirst()){
+		if (x == data.getFirst().getFirst()) {
 			weight = 0;
-		}
-		else {
+		} else {
 			double denom = data.getSecond().getFirst() - data.getFirst().getFirst();
 			if (denom == 0) {
 				throw new RuntimeException("denom is 0" + x + " : " + data.getFirst().getFirst() + " : " + data.getSecond().getFirst());
@@ -124,7 +121,7 @@ public class Dataset {
 			}
 		}
 		double[] ret = new double[dimension];
-		for (int i = 0; i < dimension - 1; i++){
+		for (int i = 0; i < dimension - 1; i++) {
 			ret[i] = data.getFirst().getSecond()[i] +
 					(data.getSecond().getSecond()[i] - data.getFirst().getSecond()[i]) * weight;
 		}
@@ -134,9 +131,9 @@ public class Dataset {
 	@Override
 	public String toString() {
 		StringBuilder ret = new StringBuilder("Dataset dataset = new Dataset(" + dimension + ");\n");
-		for (TwoTuple<Double, double[]> val : data){
+		for (TwoTuple<Double, double[]> val : data) {
 			ret.append("dataset.addDatapoint(").append(val.getFirst()).append(", new double[]{");
-			for (double d : val.getSecond()){
+			for (double d : val.getSecond()) {
 				ret.append(d).append(", ");
 			}
 			ret.append("});\n");
@@ -144,7 +141,7 @@ public class Dataset {
 		return ret.toString();
 	}
 	
-	public boolean containsKey(double x){
+	public boolean containsKey(double x) {
 		for (TwoTuple<Double, double[]> point : data) {
 			if (point.getFirst() >= x) {
 				if (point.getFirst() == x) {
@@ -156,7 +153,7 @@ public class Dataset {
 		return false;
 	}
 	
-	public boolean containsValue(double[] y){
+	public boolean containsValue(double[] y) {
 		for (TwoTuple<Double, double[]> point : data) {
 			if (Arrays.equals(point.getSecond(), y)) {
 				return true;
@@ -164,6 +161,4 @@ public class Dataset {
 		}
 		return false;
 	}
-	
-	
 }

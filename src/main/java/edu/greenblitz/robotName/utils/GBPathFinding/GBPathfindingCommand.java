@@ -7,8 +7,8 @@ import com.pathplanner.lib.util.GeometryUtil;
 import com.pathplanner.lib.util.PPLibTelemetry;
 import com.pathplanner.lib.util.PathPlannerLogging;
 import com.pathplanner.lib.util.ReplanningConfig;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.math.MathUtil;
@@ -18,29 +18,46 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/** GB PathFinding because we need to control the translational tolerance of the chassis. */
+/**
+ * GB PathFinding because we need to control the translational tolerance of the chassis.
+ */
 public class GBPathfindingCommand extends Command {
+
     private static int instances = 0;
 
     private final Timer timer = new Timer();
+
     private final PathPlannerPath targetPath;
+
     private Pose2d targetPose;
+
     private final GoalEndState goalEndState;
+
     private final PathConstraints constraints;
+
     private final Supplier<Pose2d> poseSupplier;
+
     private final Supplier<ChassisSpeeds> speedsSupplier;
+
     private final Consumer<ChassisSpeeds> output;
+
     private final PathFollowingController controller;
+
     private final double rotationDelayDistance;
+
     private final ReplanningConfig replanningConfig;
+
     private final BooleanSupplier shouldFlipPath;
 
     private PathPlannerPath currentPath;
+
     private PathPlannerTrajectory currentTrajectory;
+
     private Pose2d startingPose;
 
     private double timeOffset = 0;
@@ -48,18 +65,18 @@ public class GBPathfindingCommand extends Command {
     /**
      * Constructs a new base pathfinding command that will generate a path towards the given path.
      *
-     * @param targetPath the path to pathfind to
-     * @param constraints the path constraints to use while pathfinding
-     * @param poseSupplier a supplier for the robot's current pose
-     * @param speedsSupplier a supplier for the robot's current robot relative speeds
-     * @param outputRobotRelative a consumer for the output speeds (robot relative)
-     * @param controller Path following controller that will be used to follow the path
+     * @param targetPath            the path to pathfind to
+     * @param constraints           the path constraints to use while pathfinding
+     * @param poseSupplier          a supplier for the robot's current pose
+     * @param speedsSupplier        a supplier for the robot's current robot relative speeds
+     * @param outputRobotRelative   a consumer for the output speeds (robot relative)
+     * @param controller            Path following controller that will be used to follow the path
      * @param rotationDelayDistance How far the robot should travel before attempting to rotate to the
-     *     final rotation
-     * @param replanningConfig Path replanning configuration
-     * @param shouldFlipPath Should the target path be flipped to the other side of the field? This
-     *     will maintain a global blue alliance origin.
-     * @param requirements the subsystems required by this command
+     *                              final rotation
+     * @param replanningConfig      Path re-planning configuration
+     * @param shouldFlipPath        Should the target path be flipped to the other side of the field? This
+     *                              will maintain a global blue alliance origin.
+     * @param requirements          the subsystems required by this command
      */
     public GBPathfindingCommand(
             PathPlannerPath targetPath,
@@ -71,8 +88,9 @@ public class GBPathfindingCommand extends Command {
             double rotationDelayDistance,
             ReplanningConfig replanningConfig,
             BooleanSupplier shouldFlipPath,
-            
-            Subsystem... requirements) {
+
+            Subsystem... requirements
+    ) {
         addRequirements(requirements);
 
         Pathfinding.ensureInitialized();
@@ -113,18 +131,18 @@ public class GBPathfindingCommand extends Command {
     /**
      * Constructs a new base pathfinding command that will generate a path towards the given pose.
      *
-     * @param targetPose the pose to pathfind to, the rotation component is only relevant for
-     *     holonomic drive trains
-     * @param constraints the path constraints to use while pathfinding
-     * @param goalEndVel The goal end velocity when reaching the target pose
-     * @param poseSupplier a supplier for the robot's current pose
-     * @param speedsSupplier a supplier for the robot's current robot relative speeds
-     * @param outputRobotRelative a consumer for the output speeds (robot relative)
-     * @param controller Path following controller that will be used to follow the path
+     * @param targetPose            the pose to pathfind to, the rotation component is only relevant for
+     *                              holonomic drive trains
+     * @param constraints           the path constraints to use while pathfinding
+     * @param goalEndVel            The goal end velocity when reaching the target pose
+     * @param poseSupplier          a supplier for the robot's current pose
+     * @param speedsSupplier        a supplier for the robot's current robot relative speeds
+     * @param outputRobotRelative   a consumer for the output speeds (robot relative)
+     * @param controller            Path following controller that will be used to follow the path
      * @param rotationDelayDistance How far the robot should travel before attempting to rotate to the
-     *     final rotation
-     * @param replanningConfig Path replanning configuration
-     * @param requirements the subsystems required by this command
+     *                              final rotation
+     * @param replanningConfig      Path re-planning configuration
+     * @param requirements          the subsystems required by this command
      */
     public GBPathfindingCommand(
             Pose2d targetPose,
@@ -135,9 +153,10 @@ public class GBPathfindingCommand extends Command {
             Consumer<ChassisSpeeds> outputRobotRelative,
             PathFollowingController controller,
             double rotationDelayDistance,
-            
+
             ReplanningConfig replanningConfig,
-            Subsystem... requirements) {
+            Subsystem... requirements
+    ) {
         addRequirements(requirements);
 
         Pathfinding.ensureInitialized();
@@ -324,7 +343,8 @@ public class GBPathfindingCommand extends Command {
                     currentVel,
                     targetState.velocityMps,
                     currentSpeeds.omegaRadiansPerSecond,
-                    targetSpeeds.omegaRadiansPerSecond);
+                    targetSpeeds.omegaRadiansPerSecond
+			);
             PPLibTelemetry.setPathInaccuracy(controller.getPositionalError());
 
             output.accept(targetSpeeds);

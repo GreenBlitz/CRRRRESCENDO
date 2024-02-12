@@ -3,11 +3,11 @@ package edu.greenblitz.robotName.commands.intake;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 
-public class RunIntakeByJoystick extends IntakeCommand{
+public class RunIntakeByJoystick extends IntakeCommand {
 
     private SmartJoystick joystick;
 
-    public RunIntakeByJoystick(SmartJoystick joystick){
+    public RunIntakeByJoystick(SmartJoystick joystick) {
         super();
         this.joystick = joystick;
     }
@@ -19,7 +19,6 @@ public class RunIntakeByJoystick extends IntakeCommand{
 
     @Override
     public void end(boolean interrupted) {
-        intake.setPower(0);
+        intake.stop();
     }
-
 }

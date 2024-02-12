@@ -2,23 +2,26 @@ package edu.greenblitz.robotName.utils.GBPathFinding;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.path.PathPlannerPath;
-import com.pathplanner.lib.util.PPLibTelemetry;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
-/** A command that loads and runs an autonomous routine built using PathPlanner. */
+/**
+ * A command that loads and runs an autonomous routine built using PathPlanner.
+ */
 public class GBPathPlannerAuto extends Command {
+
     private static int instances = 0;
 
     private Command autoCommand;
@@ -28,7 +31,7 @@ public class GBPathPlannerAuto extends Command {
      *
      * @param autoName the name of the autonomous routine to load and run
      * @throws RuntimeException if AutoBuilder is not configured before attempting to load the
-     *     autonomous routine
+     *                          autonomous routine
      */
     public GBPathPlannerAuto(String autoName) {
         if (!GBAutoBuilder.isConfigured()) {
