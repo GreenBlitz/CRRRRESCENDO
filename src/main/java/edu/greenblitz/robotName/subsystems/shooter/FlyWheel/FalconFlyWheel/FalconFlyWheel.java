@@ -2,19 +2,15 @@ package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FalconFlyWheel;
 
 
 import com.ctre.phoenix6.BaseStatusSignal;
-import com.ctre.phoenix6.controls.MotionMagicVelocityDutyCycle;
-import com.ctre.phoenix6.controls.VelocityDutyCycle;
-import com.ctre.phoenix6.controls.VelocityVoltage;
+import com.ctre.phoenix6.controls.MotionMagicVelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.IFlyWheel;
-import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.NeoFlyWheel.NeoFlyWheelConstants;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.IFlyWheel;
 import edu.greenblitz.robotName.utils.motors.GBTalonFXPro;
 
-
-import static edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FalconFlyWheel.FalconFlyWheelConstants.*;
+import static edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FalconFlyWheel.FalconFlyWheelConstants.leftMotorConstants;
+import static edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FalconFlyWheel.FalconFlyWheelConstants.rightMotorConstants;
 
 
 public class FalconFlyWheel implements IFlyWheel {
@@ -23,21 +19,28 @@ public class FalconFlyWheel implements IFlyWheel {
 
     private GBTalonFXPro leftMotor;
 
-    private MotionMagicVelocityDutyCycle rightMotorVelocityVoltage = new MotionMagicVelocityDutyCycle(0).withSlot(rightMotorConstants.PID_SLOT).withEnableFOC(false),
-            leftMotorVelocityVoltage = new MotionMagicVelocityDutyCycle(0).withSlot(rightMotorConstants.PID_SLOT).withEnableFOC(false);
+    private MotionMagicVelocityVoltage
+            rightMotorVelocityVoltage = new MotionMagicVelocityVoltage(0)
+                .withSlot(rightMotorConstants.PID_SLOT)
+                .withEnableFOC(rightMotorConstants.ENABLE_FOC),
+            leftMotorVelocityVoltage = new MotionMagicVelocityVoltage(0)
+                    .withSlot(leftMotorConstants.PID_SLOT)
+                    .withEnableFOC(leftMotorConstants.ENABLE_FOC);
 
     public FalconFlyWheel() {
         rightMotor = new GBTalonFXPro(rightMotorConstants.ID);
         rightMotor.getConfigurator().apply(rightMotorConstants.CONFIGURATION);
+        rightMotor.setNeutralMode(rightMotorConstants.NEUTRAL_MODE_VALUE);
         optimizeCanBusUtilization(rightMotor);
 
         leftMotor = new GBTalonFXPro(leftMotorConstants.ID);
         leftMotor.getConfigurator().apply(leftMotorConstants.CONFIGURATION);
+        leftMotor.setNeutralMode(leftMotorConstants.NEUTRAL_MODE_VALUE);
         optimizeCanBusUtilization(leftMotor);
 
     }
 
-    public void optimizeCanBusUtilization(TalonFX motor){
+    public void optimizeCanBusUtilization(TalonFX motor) {
         BaseStatusSignal.setUpdateFrequencyForAll(
                 RobotConstants.General.Motors.SIGNAL_FREQUENCY_HERTZ,
                 motor.getVelocity(),
