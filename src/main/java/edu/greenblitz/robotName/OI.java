@@ -10,6 +10,7 @@ import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMod
 import edu.greenblitz.robotName.commands.getNoteToSystem.TransferNote;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
 import edu.greenblitz.robotName.commands.lifter.ExtendLifter;
+import edu.greenblitz.robotName.commands.lifter.ReverseLifting;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
@@ -94,16 +95,17 @@ public class OI {
         secondJoystick.Y.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
         secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
 
-        mainJoystick.A.whileTrue(new GoToShootingState());
+//        mainJoystick.A.whileTrue(new GoToShootingState());
+        mainJoystick.A.whileTrue(new ExtendLifter());
+        mainJoystick.B.whileTrue(new ReverseLifting());
     }
 
     public void thirdJoystickButtons(){
         SmartJoystick usedJoystick = thirdJoystick;
-//        usedJoystick.A.whileTrue(new RunRollerByJoystick(usedJoystick));
-//        usedJoystick.A.whileTrue(new RunIntakeByJoystick(usedJoystick));
-//        usedJoystick.B.whileTrue(new RunFunnelByJoystick(usedJoystick));
-//        usedJoystick.B.whileTrue(new RunFlyWheelByJoystick(usedJoystick));
-        usedJoystick.A.whileTrue(new ExtendLifter());
+        usedJoystick.A.whileTrue(new RunRollerByJoystick(usedJoystick));
+        usedJoystick.A.whileTrue(new RunIntakeByJoystick(usedJoystick));
+        usedJoystick.B.whileTrue(new RunFunnelByJoystick(usedJoystick));
+        usedJoystick.B.whileTrue(new RunFlyWheelByJoystick(usedJoystick));
     }
 
     public void initializeDefaultCommands() {
