@@ -23,8 +23,8 @@ public class FalconFlyWheelConstants {
             SLOT_0_CONFIGS.kS = 0;
             SLOT_0_CONFIGS.kV = 0;
             SLOT_0_CONFIGS.kA = 0;
-            SLOT_0_CONFIGS.kP = 1.5;
-            SLOT_0_CONFIGS.kI = 1;
+            SLOT_0_CONFIGS.kP = 1;
+            SLOT_0_CONFIGS.kI = 0;
             SLOT_0_CONFIGS.kD = 0;
         }
         public static final MotionMagicConfigs MOTION_MAGIC_CONFIGS = new MotionMagicConfigs();
