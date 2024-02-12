@@ -8,6 +8,7 @@ import com.pathplanner.lib.util.PPLibTelemetry;
 import com.pathplanner.lib.util.PathPlannerLogging;
 import com.pathplanner.lib.util.ReplanningConfig;
 import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
+import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.math.MathUtil;
@@ -346,7 +347,8 @@ public class GBPathfindingCommand extends Command {
         }
 
         if (currentTrajectory != null) {
-            return timer.hasElapsed(currentTrajectory.getTotalTimeSeconds() - timeOffset);
+            return timer.hasElapsed(currentTrajectory.getTotalTimeSeconds() - timeOffset) &&
+                    Math.abs(poseSupplier.get().getRotation().minus(targetPose.getRotation()).getRadians()) <= SwerveChassis.ROTATION_TOLERANCE.getRadians();
         }
 
         return false;
