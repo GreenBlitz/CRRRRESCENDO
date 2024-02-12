@@ -37,7 +37,11 @@ public class SimulationFunnel implements IFunnel {
 	}
 	
 	public void setVoltage(double voltage) {
-		appliedOutput = MathUtil.clamp(voltage, -RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE, RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE);
+		appliedOutput = MathUtil.clamp(
+				voltage,
+				-RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE,
+				RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE
+		);
 		motorSimulation.setInputVoltage(appliedOutput);
 	}
 	

@@ -127,7 +127,6 @@ public class SwerveModule {
 	
 	public void setAngularIdleModeBrake() {
 		swerveModule.setAngularIdleModeBrake(true);
-		
 	}
 	
 	public void setRotIdleModeCoast() {

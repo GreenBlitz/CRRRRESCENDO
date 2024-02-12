@@ -36,7 +36,13 @@ public class ShootingStateCalculations {
 
     public static Rotation2d getTargetShooterAngle() {
         Pose2d robotPose = isRobotInShootingPosition() ? getRobotPose() : getTargetRobotPosition();
-        return ShootingAngleCalculations.getShootingAngle(new Translation3d(robotPose.getX(), robotPose.getY(), PivotConstants.ROBOT_RELATIVE_PIVOT_POSITION.getZ()));
+        return ShootingAngleCalculations.getShootingAngle(
+                new Translation3d(
+                        robotPose.getX(),
+                        robotPose.getY(),
+                        PivotConstants.ROBOT_RELATIVE_PIVOT_POSITION.getZ()
+                )
+        );
     }
 
     public static Pose2d getTargetRobotPosition() {

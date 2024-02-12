@@ -50,7 +50,11 @@ public class SimulationWrist implements IWrist {
 
     @Override
     public void setVoltage(double voltage) {
-        appliedVoltage = MathUtil.clamp(voltage, -RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE, RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE);
+        appliedVoltage = MathUtil.clamp(
+                voltage,
+                -RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE,
+                RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE
+        );
         wristSimulation.setInputVoltage(appliedVoltage);
     }
 

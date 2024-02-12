@@ -19,6 +19,6 @@ public class RunIntakeByJoystick extends IntakeCommand {
 
     @Override
     public void end(boolean interrupted) {
-        intake.setPower(0);
+        intake.stop();
     }
 }

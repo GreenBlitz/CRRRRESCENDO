@@ -8,5 +8,4 @@ public class RollCounterClockwise extends RollerCommand {
     public void execute() {
         roller.rollCounterClockwise();
     }
-
 }

@@ -80,32 +80,8 @@ public class SimulationSwerveModule implements ISwerveModule {
 	}
 	
 	@Override
-	public void updateInputs(SwerveModuleInputsAutoLogged inputs) {
-		linearMotor.update(RobotConstants.SimulationConstants.TIME_STEP);
-		angularMotor.update(RobotConstants.SimulationConstants.TIME_STEP);
-		
-		inputs.linearVelocity = Conversions.MK4IConversions.convertRPMToMeterPerSecond(linearMotor.getAngularVelocityRPM()); // [m/s]
-		inputs.angularVelocity = angularMotor.getAngularVelocityRadPerSec(); // [Rad/s]
-		
-		inputs.linearVoltage = linearAppliedVoltage;
-		inputs.angularVoltage = angularAppliedVoltage;
-		
-		inputs.linearCurrent = linearMotor.getCurrentDrawAmps();
-		inputs.angularCurrent = angularMotor.getCurrentDrawAmps();
-		
-		inputs.linearMetersPassed = linearMotor.getAngularPositionRad() * MK4iSwerveConstants.WHEEL_RADIUS;
-		inputs.angularPositionRadians = Math.IEEEremainder(angularMotor.getAngularPositionRad(), 2 * Math.PI);
-		
-		inputs.absoluteEncoderPosition = inputs.angularPositionRadians;
-		inputs.isAbsoluteEncoderConnected = true;
-		
-		lastInputs = inputs;
-	}
-	
-	@Override
 	public void setLinearIdleModeBrake(boolean isBrake) {
 		Logger.recordOutput("DriveTrain/Module" + module.name(), "tried setting linear idleMode to " + (isBrake ? "Brake" : "Coast"));
-		
 	}
 	
 	@Override
@@ -116,5 +92,28 @@ public class SimulationSwerveModule implements ISwerveModule {
 	@Override
 	public void resetAngle(Rotation2d angle) {
 		Logger.recordOutput("DriveTrain/Module" + module.name(), "tried setting the module angle to " + angle.getDegrees());
+	}
+
+	@Override
+	public void updateInputs(SwerveModuleInputsAutoLogged inputs) {
+		linearMotor.update(RobotConstants.SimulationConstants.TIME_STEP);
+		angularMotor.update(RobotConstants.SimulationConstants.TIME_STEP);
+
+		inputs.linearVelocity = Conversions.MK4IConversions.convertRPMToMeterPerSecond(linearMotor.getAngularVelocityRPM()); // [m/s]
+		inputs.angularVelocity = angularMotor.getAngularVelocityRadPerSec(); // [Rad/s]
+
+		inputs.linearVoltage = linearAppliedVoltage;
+		inputs.angularVoltage = angularAppliedVoltage;
+
+		inputs.linearCurrent = linearMotor.getCurrentDrawAmps();
+		inputs.angularCurrent = angularMotor.getCurrentDrawAmps();
+
+		inputs.linearMetersPassed = linearMotor.getAngularPositionRad() * MK4iSwerveConstants.WHEEL_RADIUS;
+		inputs.angularPositionRadians = Math.IEEEremainder(angularMotor.getAngularPositionRad(), 2 * Math.PI);
+
+		inputs.absoluteEncoderPosition = inputs.angularPositionRadians;
+		inputs.isAbsoluteEncoderConnected = true;
+
+		lastInputs = inputs;
 	}
 }

@@ -46,8 +46,7 @@ public class Photonvision extends GBSubsystem {
 		if (!result.hasTargets()) {
 			return new Transform3d();
 		}
-		Transform3d target = result.getBestTarget().getBestCameraToTarget();
-		return target;
+		return result.getBestTarget().getBestCameraToTarget();
 	}
 	
 	/**

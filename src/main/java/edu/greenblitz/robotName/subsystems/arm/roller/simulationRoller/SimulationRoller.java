@@ -49,7 +49,11 @@ public class SimulationRoller implements IRoller {
 
     @Override
     public void setVoltage(double voltage) {
-        appliedOutput = MathUtil.clamp(voltage, -RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE, RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE);
+        appliedOutput = MathUtil.clamp(
+                voltage,
+                -RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE,
+                RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE
+        );
         rollerSimulation.setInputVoltage(appliedOutput);
     }
 

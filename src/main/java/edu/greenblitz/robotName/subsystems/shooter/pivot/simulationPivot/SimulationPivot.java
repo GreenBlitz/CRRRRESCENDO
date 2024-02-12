@@ -50,7 +50,11 @@ public class SimulationPivot implements IPivot {
 	
 	@Override
 	public void setVoltage(double voltage) {
-		appliedVoltage = MathUtil.clamp(voltage, -RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE, RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE);
+		appliedVoltage = MathUtil.clamp(
+				voltage,
+				-RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE,
+				RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE
+		);
 		pivotSimulation.setInputVoltage(appliedVoltage);
 	}
 	

@@ -14,7 +14,8 @@ public class RunFlyWheelBySpeakerInterpolationVelocity extends RunFlyWheelByVelo
     public void initialize() {
         changeVelocity(
                 FlyWheelConstants.SHOOTING_VELOCITY_INTERPOLATOR.get(
-                        SwerveChassis.getInstance().getRobotPose().getTranslation().getDistance(FieldConstants.MIDDLE_OF_SPEAKER_POSITION.toTranslation2d())
+                        SwerveChassis.getInstance().getRobotPose().getTranslation()
+                                .getDistance(FieldConstants.MIDDLE_OF_SPEAKER_POSITION.toTranslation2d())
                 )
         );
         super.initialize();

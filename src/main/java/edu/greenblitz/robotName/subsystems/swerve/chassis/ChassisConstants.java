@@ -101,7 +101,7 @@ public class ChassisConstants {
 	
 	public static final MoveByJoysticks.DriveMode DRIVE_MODE = MoveByJoysticks.DriveMode.NORMAL;
 	
-	public static final boolean IS_JOYSTICK_FORWAR_VALUE_INVERTED = false;
+	public static final boolean IS_JOYSTICK_FORWARD_VALUE_INVERTED = false;
 	
 	public static final boolean IS_JOYSTICK_LEFTWARD_VALUE_INVERTED = true;
 }

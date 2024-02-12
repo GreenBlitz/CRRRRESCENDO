@@ -22,7 +22,10 @@ public class FlyWheelConstants {
 	
 	public static final double FAST_SHOOTING_DISTANCE_METERS = 3;
 	
-	public static final InterpolatingTreeMap<Double, Double> SHOOTING_VELOCITY_INTERPOLATOR = new InterpolatingTreeMap<>(InverseInterpolator.forDouble(), Interpolator.forDouble());
+	public static final InterpolatingTreeMap<Double, Double> SHOOTING_VELOCITY_INTERPOLATOR = new InterpolatingTreeMap<>(
+			InverseInterpolator.forDouble(),
+			Interpolator.forDouble()
+	);
 	
 	static {
 		SHOOTING_VELOCITY_INTERPOLATOR.put(SLOW_SHOOTING_DISTANCE_METERS, SLOW_SHOOTING_VELOCITY);

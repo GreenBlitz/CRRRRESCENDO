@@ -54,6 +54,5 @@ public class NeoFlyWheel implements IFlyWheel {
 		
 		inputs.rightFlywheelCurrent = rightMotor.getOutputCurrent();
 		inputs.rightFlywheelVelocity = rightMotor.getEncoder().getVelocity();
-		
 	}
 }

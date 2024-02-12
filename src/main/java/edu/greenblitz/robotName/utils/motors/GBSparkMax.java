@@ -35,7 +35,6 @@ public class GBSparkMax extends CANSparkMax {
 		super.setOpenLoopRampRate(conf.getRampRate());
 		super.setInverted(conf.isInverted());
 		super.setIdleMode(conf.getIdleMode());
-		
 	}
 	
 	public void configPID(PIDObject pidObject) {
@@ -64,7 +63,7 @@ public class GBSparkMax extends CANSparkMax {
 	 * .withInverted(true) //whether the motor should be flipped
 	 * .withCurrentLimit(40) // the max current to allow should be inline with the fuse
 	 * .withIdleMode(CANSparkMax.IdleMode.kCoast) // trying to force brake is harmful for the motor
-	 * .withRampRate(General.RAMP_RATE_VAL) // prevents the motor from drawing to much when rapidly changing speeds
+	 * .withRampRate(General.RAMP_RATE_VAL) // prevents the motor from drawing too much when rapidly changing speeds
 	 * .withVoltageComp(General.VOLTAGE_COMP_VAL) // makes for more reproducible results
 	 * .withPositionConversionFactor(1)
 	 * .withVelocityConversionFactor(1)

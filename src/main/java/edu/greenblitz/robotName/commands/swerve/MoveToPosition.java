@@ -18,11 +18,17 @@ public class MoveToPosition extends DeferredCommand {
     }
 
     public MoveToPosition(Supplier<Pose2d> endPoint, PathConstraints constraints) {
-        super(getPoseFinding(endPoint, constraints), Set.of(SwerveChassis.getInstance()));
+        super(
+                getPoseFinding(endPoint, constraints),
+                Set.of(SwerveChassis.getInstance())
+        );
     }
 
     public MoveToPosition(Supplier<Pose2d> endPoint) {
-        super(getPoseFinding(endPoint, ChassisConstants.CONSTRAINTS), Set.of(SwerveChassis.getInstance()));
+        super(
+                getPoseFinding(endPoint, ChassisConstants.CONSTRAINTS),
+                Set.of(SwerveChassis.getInstance())
+        );
     }
 
     public MoveToPosition(Pose2d endPoint, PathConstraints constraints) {

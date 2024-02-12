@@ -16,8 +16,10 @@ public class NeoLifter implements ILifter {
 		motor = new GBSparkMax(NeoLifterConstants.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
 		motor.config(NeoLifterConstants.CONFIG);
 		
-		motor.getReverseLimitSwitch(NeoLifterConstants.BACKWARD_LIMIT_SWITCH_TYPE).enableLimitSwitch(NeoLifterConstants.IS_BACKWARD_LIMIT_SWITCH_ENABLED);
-		motor.getForwardLimitSwitch(NeoLifterConstants.FORWARD_LIMIT_SWITCH_TYPE).enableLimitSwitch(NeoLifterConstants.IS_FORWARD_LIMIT_SWITCH_ENABLED);
+		motor.getReverseLimitSwitch(NeoLifterConstants.BACKWARD_LIMIT_SWITCH_TYPE)
+				.enableLimitSwitch(NeoLifterConstants.IS_BACKWARD_LIMIT_SWITCH_ENABLED);
+		motor.getForwardLimitSwitch(NeoLifterConstants.FORWARD_LIMIT_SWITCH_TYPE)
+				.enableLimitSwitch(NeoLifterConstants.IS_FORWARD_LIMIT_SWITCH_ENABLED);
 		
 		motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, LifterConstants.BACKWARD_LIMIT.getRadians());
 		motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, LifterConstants.FORWARD_LIMIT.getRadians());
@@ -51,7 +53,12 @@ public class NeoLifter implements ILifter {
 	
 	@Override
 	public void goToPosition(Rotation2d position) {
-		motor.getPIDController().setReference(position.getRadians(), CANSparkMax.ControlType.kPosition, NeoLifterConstants.PID_SLOT, NeoLifterConstants.FEED_FORWARD.calculate(position.getRadians()));
+		motor.getPIDController().setReference(
+				position.getRadians(),
+				CANSparkMax.ControlType.kPosition,
+				NeoLifterConstants.PID_SLOT,
+				NeoLifterConstants.FEED_FORWARD.calculate(position.getRadians())
+		);
 	}
 	
 	@Override

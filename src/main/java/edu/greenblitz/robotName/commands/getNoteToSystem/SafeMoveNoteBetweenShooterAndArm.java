@@ -15,7 +15,6 @@ public class SafeMoveNoteBetweenShooterAndArm extends ConditionalCommand {
                         new MoveNoteToMiddleOfRoller()
                 ),
                 ScoringModeSelector::isSpeakerMode
-
         );
     }
 }

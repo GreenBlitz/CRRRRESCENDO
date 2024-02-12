@@ -48,7 +48,8 @@ public class TunableNumber {
 	}
 	
 	public void periodic() {
-		if (hasChanged())
+		if (hasChanged()) {
 			setValueByDashboard();
+		}
 	}
 }

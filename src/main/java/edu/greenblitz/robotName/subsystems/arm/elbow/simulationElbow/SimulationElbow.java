@@ -49,7 +49,11 @@ public class SimulationElbow implements IElbow {
 
     @Override
     public void setVoltage(double voltage) {
-        appliedVoltage = MathUtil.clamp(voltage, -MAX_MOTOR_VOLTAGE, MAX_MOTOR_VOLTAGE);
+        appliedVoltage = MathUtil.clamp(
+                voltage,
+                -MAX_MOTOR_VOLTAGE,
+                MAX_MOTOR_VOLTAGE
+        );
         elbowSimulation.setInputVoltage(appliedVoltage);
     }
 

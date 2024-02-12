@@ -30,9 +30,10 @@ public class NeoWrist implements IWrist {
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, WristConstants.BACKWARD_ANGLE_LIMIT.getRadians());
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, WristConstants.FORWARD_ANGLE_LIMIT.getRadians());
 
-        motor.getReverseLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoWristConstants.IS_BACKWARD_LIMIT_SWITCH_ENABLED);
-        motor.getForwardLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen).enableLimitSwitch(NeoWristConstants.IS_FORWARD_LIMIT_SWITCH_ENABLED);
-
+        motor.getReverseLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen)
+                .enableLimitSwitch(NeoWristConstants.IS_BACKWARD_LIMIT_SWITCH_ENABLED);
+        motor.getForwardLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen)
+                .enableLimitSwitch(NeoWristConstants.IS_FORWARD_LIMIT_SWITCH_ENABLED);
     }
 
     @Override

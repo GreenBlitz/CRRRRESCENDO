@@ -20,7 +20,8 @@ public class Field {
 		Pose2d mirroredPose = new Pose2d(
 				FieldConstants.FIELD_LENGTH - pose.getX(),
 				pose.getY(),
-				Rotation2d.fromRadians(Math.PI).minus(pose.getRotation()));
+				Rotation2d.fromRadians(Math.PI).minus(pose.getRotation())
+		);
 		return mirroredPose;
 	}
 	

@@ -44,8 +44,7 @@ public class MultiLimelight extends GBSubsystem {
 	}
 	
 	public double getDynamicStdDevs(int limelightId) {
-		double stdDevsSum = limelights.get(limelightId).getDistanceFromTag() / VisionConstants.VISION_TO_STANDARD_DEVIATION;
-		return stdDevsSum;
+		return limelights.get(limelightId).getDistanceFromTag() / VisionConstants.VISION_TO_STANDARD_DEVIATION;
 	}
 	
 	public boolean hasTarget(int limelightId) {

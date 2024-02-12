@@ -51,7 +51,7 @@ public class GBCircle {
 	}
 	
 	/**
-	 * Setter for the circle uppwer angle limit.
+	 * Setter for the circle upper angle limit.
 	 *
 	 * @param upperAngleLimit The upper angle limit of the circle.
 	 */
@@ -204,7 +204,13 @@ public class GBCircle {
 			deltaX = EPSILON;
 		}
 		Rotation2d angleOfClosestRimPosition = getAngleBetweenCenterAndPoint(position);
-		angleOfClosestRimPosition = Rotation2d.fromRadians(MathUtil.clamp(angleOfClosestRimPosition.getRadians(), lowerAngleLimit.getRadians(), upperAngleLimit.getRadians()));
+		angleOfClosestRimPosition = Rotation2d.fromRadians(
+				MathUtil.clamp(
+						angleOfClosestRimPosition.getRadians(),
+						lowerAngleLimit.getRadians(),
+						upperAngleLimit.getRadians()
+				)
+		);
 		
 		double targetX = radius * angleOfClosestRimPosition.getCos() * Math.signum(deltaX) + centerPosition.getX();
 		double targetY = radius * angleOfClosestRimPosition.getSin() * Math.signum(deltaX) + centerPosition.getY();
@@ -225,7 +231,12 @@ public class GBCircle {
 		if (!isInFullCircle(position)) {
 			return getClosestCircleRimPosition(position);
 		}
-		Translation2d closestEdge = position.nearest(List.of(getLowerAngleLimitPosition(), getUpperAngleLimitPosition()));
+		Translation2d closestEdge = position.nearest(
+				List.of(
+						getLowerAngleLimitPosition(),
+						getUpperAngleLimitPosition()
+				)
+		);
 		return GBMath.getClosestPointBetweenPointAndLine(position, centerPosition, closestEdge);
 	}
 }

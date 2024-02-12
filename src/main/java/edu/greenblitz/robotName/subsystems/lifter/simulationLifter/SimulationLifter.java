@@ -44,7 +44,11 @@ public class SimulationLifter implements ILifter {
 	
 	@Override
 	public void setVoltage(double voltage) {
-		appliedOutput = MathUtil.clamp(voltage, RobotConstants.SimulationConstants.MIN_MOTOR_VOLTAGE, RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE);
+		appliedOutput = MathUtil.clamp(
+				voltage,
+				RobotConstants.SimulationConstants.MIN_MOTOR_VOLTAGE,
+				RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE
+		);
 		lifterSimulation.setInputVoltage(appliedOutput);
 	}
 	

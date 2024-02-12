@@ -44,7 +44,10 @@ public class NeoRoller implements IRoller {
 
     @Override
     public void moveToPosition(Rotation2d position) {
-        motor.getPIDController().setReference(position.getRotations(), CANSparkMax.ControlType.kPosition);
+        motor.getPIDController().setReference(
+                position.getRotations(),
+                CANSparkMax.ControlType.kPosition
+        );
     }
 
     @Override

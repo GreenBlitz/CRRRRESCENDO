@@ -9,7 +9,11 @@ import edu.wpi.first.wpilibj.DriverStation;
 public class MoveToClimbPosition extends MoveToPosition {
 
     public MoveToClimbPosition() {
-        super(FMSUtils.getAlliance() == DriverStation.Alliance.Red ? getClosestRedClimbPosition() : getClosestBlueClimbPosition());
+        super(
+                FMSUtils.getAlliance() == DriverStation.Alliance.Red ?
+                        getClosestRedClimbPosition() :
+                        getClosestBlueClimbPosition()
+        );
     }
 
     public static Pose2d getClosestRedClimbPosition() {
@@ -18,12 +22,15 @@ public class MoveToClimbPosition extends MoveToPosition {
         double distanceToUpper = robotPose.getTranslation().getDistance(Field.ScoringPositions.RED_UPPER_CLIMB_POSITION.getTranslation());
         double distanceToMid = robotPose.getTranslation().getDistance(Field.ScoringPositions.RED_MID_CLIMB_POSITION.getTranslation());
         double closestDistance = Math.min(distanceToMid, Math.min(distanceToLower, distanceToUpper));
-        if (closestDistance == distanceToLower)
+        if (closestDistance == distanceToLower) {
             return Field.ScoringPositions.RED_LOWER_CLIMB_POSITION;
-        if (closestDistance == distanceToUpper)
+        }
+        if (closestDistance == distanceToUpper) {
             return Field.ScoringPositions.RED_UPPER_CLIMB_POSITION;
-        else
+
+        } else {
             return Field.ScoringPositions.RED_MID_CLIMB_POSITION;
+        }
     }
 
     public static Pose2d getClosestBlueClimbPosition() {
@@ -32,11 +39,13 @@ public class MoveToClimbPosition extends MoveToPosition {
         double distanceToUpper = robotPose.getTranslation().getDistance(Field.ScoringPositions.BLUE_UPPER_CLIMB_POSITION.getTranslation());
         double distanceToMid = robotPose.getTranslation().getDistance(Field.ScoringPositions.BLUE_MID_CLIMB_POSITION.getTranslation());
         double closestDistance = Math.min(distanceToMid, Math.min(distanceToLower, distanceToUpper));
-        if (closestDistance == distanceToLower)
+        if (closestDistance == distanceToLower) {
             return Field.ScoringPositions.BLUE_LOWER_CLIMB_POSITION;
-        if (closestDistance == distanceToUpper)
+        }
+        if (closestDistance == distanceToUpper) {
             return Field.ScoringPositions.BLUE_UPPER_CLIMB_POSITION;
-        else
+        } else {
             return Field.ScoringPositions.BLUE_MID_CLIMB_POSITION;
+        }
     }
 }

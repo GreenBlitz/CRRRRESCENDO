@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName.utils.GBPathFinding;
 
 import com.pathplanner.lib.auto.AutoBuilderException;
-import com.pathplanner.lib.auto.CommandUtil;
 import com.pathplanner.lib.commands.*;
 import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.path.PathPlannerPath;
@@ -22,6 +21,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -35,29 +36,26 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
 /**
  * Utility class used to build auto routines
  */
 public class GBAutoBuilder {
-    
+
     private static boolean configured = false;
 
     private static Function<PathPlannerPath, Command> pathFollowingCommandBuilder;
-    
+
     private static Supplier<Pose2d> getPose;
-    
+
     private static Consumer<Pose2d> resetPose;
-    
+
     private static BooleanSupplier shouldFlipPath;
 
     // Pathfinding builders
     private static boolean pathfindingConfigured = false;
-  
+
     private static QuadFunction<Pose2d, PathConstraints, Double, Double, Command> pathfindToPoseCommandBuilder;
-  
+
     private static TriFunction<PathPlannerPath, PathConstraints, Double, Command> pathfindThenFollowPathCommandBuilder;
 
     /**
@@ -79,7 +77,7 @@ public class GBAutoBuilder {
         if (configured) {
             throw new AutoBuilderException("Auto builder has already been configured. Please only configure auto builder once");
         }
-        
+
         GBAutoBuilder.pathFollowingCommandBuilder = (path) -> new FollowPathHolonomic(path, poseSupplier, robotRelativeSpeedsSupplier, robotRelativeOutput, config, shouldFlipPath, driveSubsystem);
         GBAutoBuilder.getPose = poseSupplier;
         GBAutoBuilder.resetPose = resetPose;
@@ -98,7 +96,7 @@ public class GBAutoBuilder {
      * @param resetPose        a consumer for resetting the robot's pose
      * @param speedsSupplier   a supplier for the robot's current chassis speeds
      * @param output           a consumer for setting the robot's chassis speeds
-     * @param replanningConfig Path replanning configuration
+     * @param replanningConfig Path re-planning configuration
      * @param shouldFlipPath   Supplier that determines if paths should be flipped to the other side of
      *                         the field. This will maintain a global blue alliance origin.
      * @param driveSubsystem   the subsystem for the robot's drive
@@ -131,7 +129,7 @@ public class GBAutoBuilder {
      *                         aggressive like a proportional term.
      * @param zeta             Tuning parameter (0 rad^-1 &lt; zeta &lt; 1 rad^-1) for which larger values provide
      *                         more damping in response.
-     * @param replanningConfig Path replanning configuration
+     * @param replanningConfig Path re-planning configuration
      * @param shouldFlipPath   Supplier that determines if paths should be flipped to the other side of
      *                         the field. This will maintain a global blue alliance origin.
      * @param driveSubsystem   the subsystem for the robot's drive
@@ -162,7 +160,7 @@ public class GBAutoBuilder {
      * @param speedsSupplier   a supplier for the robot's current chassis speeds
      * @param output           a consumer for setting the robot's chassis speeds
      * @param dt               Period of the robot control loop in seconds (default 0.02)
-     * @param replanningConfig Path replanning configuration
+     * @param replanningConfig Path re-planning configuration
      * @param shouldFlipPath   Supplier that determines if paths should be flipped to the other side of
      *                         the field. This will maintain a global blue alliance origin.
      * @param driveSubsystem   the subsystem for the robot's drive
@@ -195,7 +193,7 @@ public class GBAutoBuilder {
      * @param qelems           The maximum desired error tolerance for each state.
      * @param relems           The maximum desired control effort for each input.
      * @param dt               Period of the robot control loop in seconds (default 0.02)
-     * @param replanningConfig Path replanning configuration
+     * @param replanningConfig Path re-planning configuration
      * @param shouldFlipPath   Supplier that determines if paths should be flipped to the other side of
      *                         the field. This will maintain a global blue alliance origin.
      * @param driveSubsystem   the subsystem for the robot's drive
@@ -317,7 +315,12 @@ public class GBAutoBuilder {
      * @return A command to pathfind to a given pose
      */
     public static Command pathfindToPose(Pose2d pose, PathConstraints constraints, double goalEndVelocity) {
-        return pathfindToPose(pose, constraints, goalEndVelocity, 0);
+        return pathfindToPose(
+                pose,
+                constraints,
+                goalEndVelocity,
+                0
+        );
     }
 
     /**
@@ -349,7 +352,11 @@ public class GBAutoBuilder {
         if (!isPathfindingConfigured()) {
             throw new AutoBuilderException("Auto builder was used to build a pathfinding command before being configured");
         }
-        return pathfindThenFollowPathCommandBuilder.apply(goalPath, pathfindingConstraints, rotationDelayDistance);
+        return pathfindThenFollowPathCommandBuilder.apply(
+                goalPath,
+                pathfindingConstraints,
+                rotationDelayDistance
+        );
     }
 
     /**
@@ -360,7 +367,11 @@ public class GBAutoBuilder {
      * @return A command to pathfind to a given path, then follow the path
      */
     public static Command pathfindThenFollowPath(PathPlannerPath goalPath, PathConstraints pathfindingConstraints) {
-        return pathfindThenFollowPath(goalPath, pathfindingConstraints, 0);
+        return pathfindThenFollowPath(
+                goalPath,
+                pathfindingConstraints,
+                0
+        );
     }
 
     /**
@@ -450,7 +461,11 @@ public class GBAutoBuilder {
      * @return an auto command for the given auto name
      */
     public static Command buildAuto(String autoName) {
-        try (BufferedReader br = new BufferedReader(new FileReader(new File(Filesystem.getDeployDirectory(), "pathplanner/autos/" + autoName + ".auto")))) {
+        try (BufferedReader br = new BufferedReader(
+                new FileReader(
+                        new File(
+                                Filesystem.getDeployDirectory(),
+                                "pathplanner/autos/" + autoName + ".auto")))) {
             StringBuilder fileContentBuilder = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
