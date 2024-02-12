@@ -37,7 +37,7 @@ public class MoveToPosition extends DeferredCommand {
         return () -> GBAutoBuilder.pathfindToPose(
                     endPoint.get(),
                     constraints
-                );
+        );
     }
 
 }

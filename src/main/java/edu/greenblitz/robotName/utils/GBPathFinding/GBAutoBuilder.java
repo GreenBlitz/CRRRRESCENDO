@@ -8,6 +8,9 @@ import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.util.GeometryUtil;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.ReplanningConfig;
+import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
+import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
+import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
 import edu.wpi.first.math.Vector;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -320,6 +323,9 @@ public class GBAutoBuilder {
      * @return A command to pathfind to a given pose
      */
     public static Command pathfindToPose(Pose2d pose, PathConstraints constraints) {
+        if (Math.abs(pose.getTranslation().getDistance(SwerveChassis.getInstance().getRobotPose().getTranslation())) <= ChassisConstants.TRANSLATIONAL_TOLERANCE) {
+            return new RotateToAngle(pose.getRotation());
+        }
         return pathfindToPose(pose, constraints, 0);
     }
 
