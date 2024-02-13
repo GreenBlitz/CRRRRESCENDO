@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.subsystems.lifter.neoLifter;
 
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.subsystems.lifter.ILifter;
@@ -23,6 +24,9 @@ public class NeoLifter implements ILifter {
         motor.getReverseLimitSwitch(NeoLifterConstants.BACKWARD_LIMIT_SWITCH_TYPE).enableLimitSwitch(NeoLifterConstants.IS_BACKWARD_LIMIT_SWITCH_ENABLED);
         motor.getForwardLimitSwitch(NeoLifterConstants.FORWARD_LIMIT_SWITCH_TYPE).enableLimitSwitch(NeoLifterConstants.IS_FORWARD_LIMIT_SWITCH_ENABLED);
 
+        motor.enableSoftLimit(CANSparkBase.SoftLimitDirection.kForward, false);
+        motor.enableSoftLimit(CANSparkBase.SoftLimitDirection.kReverse, false);
+        
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, LifterConstants.BACKWARD_LIMIT.getRadians());
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, LifterConstants.FORWARD_LIMIT.getRadians());
         motor.setIdleMode(CANSparkMax.IdleMode.kBrake);

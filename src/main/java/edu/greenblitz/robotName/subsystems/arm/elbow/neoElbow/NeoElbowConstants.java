@@ -9,7 +9,7 @@ import edu.wpi.first.math.controller.ArmFeedforward;
 
 public class NeoElbowConstants {
 
-    public static final int MOTOR_ID = 1;
+    public static final int MOTOR_ID = 9;
 
     public static final double kS = 1;
 
