@@ -5,7 +5,6 @@ import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.lifter.ILifter;
 import edu.greenblitz.robotName.subsystems.lifter.LifterConstants;
 import edu.greenblitz.robotName.subsystems.lifter.LifterInputsAutoLogged;
-import edu.greenblitz.robotName.subsystems.lifter.simulationLifter.SimulationLifterConstants;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
