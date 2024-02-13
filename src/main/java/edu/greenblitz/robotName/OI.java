@@ -87,7 +87,7 @@ public class OI {
 		secondJoystick.Y.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
 		secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
 
-		mainJoystick.A.whileTrue(new GoToShootingState(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
+		mainJoystick.A.whileTrue(new GoToShootingState(ShootingPositionConstants.LEGAL_SHOOTING_ZONE));
 	}
 
 	public void thirdJoystickButtons() {
