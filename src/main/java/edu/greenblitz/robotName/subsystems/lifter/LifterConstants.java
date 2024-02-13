@@ -11,7 +11,15 @@ public class LifterConstants {
     public static final Rotation3d ROBOT_RELATIVE_LIFTER_ROTATION = new Rotation3d(0, Math.PI, -Math.PI / 2);
     
     public static final Rotation2d ENCODER_POSITION_WHEN_RESET = Rotation2d.fromRotations(0);
-    
+
+    public static final double POWER_TO_OPEN_SOLENOID = 0;
+
+    public static final double POWER_TO_CLOSE_SOLENOID = 0.95;
+
+    public static final double POWER_TO_HOLD_SOLENOID = 0.2;
+
+    public static final double SECONDS_TO_CLOSE_SOLENOID = 0.7;
+
     public static final Rotation2d TOLERANCE = Rotation2d.fromDegrees(4);
     
     public static final Rotation2d LIFTER_RETRACTED_POSITION = Rotation2d.fromDegrees(0);

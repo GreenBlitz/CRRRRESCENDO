@@ -92,4 +92,16 @@ public class Lifter extends GBSubsystem {
 				).plus(LifterConstants.ROBOT_RELATIVE_LIFTER_ROTATION)
 		);
 	}
+
+	public void holdSolenoid(){
+		lifter.holdSolenoid();
+	}
+
+	public void openSolenoid(){
+		lifter.openSolenoid();
+	}
+
+	public void closeSolenoid(){
+		lifter.closeSolenoid();
+	}
 }
