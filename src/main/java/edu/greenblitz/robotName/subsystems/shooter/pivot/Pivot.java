@@ -9,8 +9,6 @@ import edu.wpi.first.math.geometry.Rotation3d;
 import org.littletonrobotics.junction.Logger;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 
-import static edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants.TOLERANCE;
-
 public class Pivot extends GBSubsystem {
 	
 	private static Pivot instance;
@@ -89,7 +87,7 @@ public class Pivot extends GBSubsystem {
 	}
 	
 	public boolean isAtAngle(Rotation2d angle) {
-		return Math.abs(angle.getRadians() - getAngle().getRadians()) <= TOLERANCE.getRadians();
+		return Math.abs(angle.getRadians() - getAngle().getRadians()) <= PivotConstants.TOLERANCE.getRadians();
 	}
 	
 	public Pose3d getSimulationPivotPosition3d() {
