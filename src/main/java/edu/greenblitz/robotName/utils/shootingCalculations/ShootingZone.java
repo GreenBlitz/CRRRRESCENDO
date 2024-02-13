@@ -62,7 +62,6 @@ public class ShootingZone extends GBCircle {
 		double targetX = getRadius() * middleAngle.getCos() / 2 + getCenterPosition().getX();
 		double targetY = getRadius() * middleAngle.getSin() / 2 + getCenterPosition().getY();
 
-		System.out.println(targetX +","+targetY);
 		return new Translation2d(targetX,targetY);
 	}
 
