@@ -18,6 +18,8 @@ public class ShootSimulationNote extends GBCommand {
 
     private Pose3d shooterPose3D;
 
+    private Rotation2d chassisAngle;
+
     @Override
     public void initialize() {
         timer = new Timer();
@@ -28,12 +30,12 @@ public class ShootSimulationNote extends GBCommand {
         );
 
         duration = FlyWheelConstants.SIMULATION_SHOOTING_TIME_SECOND;
+        chassisAngle = SwerveChassis.getInstance().getChassisAngle();
     }
 
     @Override
     public void execute() {
         Rotation2d shooterAngle = Pivot.getInstance().getAngle();
-        Rotation2d chassisAngle = SwerveChassis.getInstance().getChassisAngle();
 
         Translation3d notePosition = new Translation3d(
                 chassisAngle.getCos() * shooterAngle.getCos(),

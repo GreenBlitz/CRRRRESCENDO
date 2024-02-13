@@ -9,7 +9,6 @@ import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
-import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
@@ -87,7 +86,7 @@ public class OI {
 		secondJoystick.X.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE));
 		secondJoystick.Y.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
 		secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
-		
+
 		mainJoystick.A.whileTrue(new GoToShootingState());
 	}
 	
