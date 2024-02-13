@@ -2,7 +2,9 @@ package edu.greenblitz.robotName.shootingStateService;
 
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
+import edu.greenblitz.robotName.utils.GBCircle;
 import edu.greenblitz.robotName.utils.shootingCalculations.ShootingAngleCalculations;
 import edu.greenblitz.robotName.utils.shootingCalculations.ShootingZone;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -21,7 +23,11 @@ public class ShootingStateCalculations {
     }
 
     public static Translation2d getRobotTargetTranslation(ShootingZone zone) {
-        return zone.getClosestCirclePosition(getRobotPose().getTranslation());
+        Translation2d closestPosition = zone.getClosestCirclePosition(getRobotPose().getTranslation());
+        if (closestPosition.getDistance(getRobotPose().getTranslation()) > SwerveChassis.TRANSLATION_TOLERANCE &&
+                closestPosition.getDistance(getRobotPose().getTranslation()) < ChassisConstants.PATHPLANNER_TRANSLATIONAL_TOLERANCE)
+            return zone.getCenterOfShootingZone();
+        return closestPosition;
     }
 
     public static Rotation2d getTargetRobotAngle(ShootingZone zone) {

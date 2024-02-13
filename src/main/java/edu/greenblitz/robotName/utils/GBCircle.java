@@ -21,7 +21,7 @@ public class GBCircle {
 	
 	private Rotation2d upperAngleLimit;
 	
-	private final static double EPSILON = 0.1;
+	public final static double EPSILON = 0.1;
 	
 	/**
 	 * Constructor using the center and radius.

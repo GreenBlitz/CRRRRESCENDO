@@ -28,8 +28,7 @@ public class ShootingPositionConstants {
                 LEGAL_SHOOTING_ZONE_RADIUS_IN_METERS,
                 FieldConstants.FieldZones.RESTRICTED_BOUNDS,
                 LEGAL_LOWER_ANGLE_LIMIT,
-                LEGAL_UPPER_ANGLE_LIMIT,
-                LEGAL_SHOOTING_ZONE
+                LEGAL_UPPER_ANGLE_LIMIT
         );
     }
 
@@ -40,8 +39,7 @@ public class ShootingPositionConstants {
             OPTIMAL_SHOOTING_ZONE_RADIUS_IN_METERS,
             FieldConstants.FieldZones.RESTRICTED_BOUNDS,
             OPTIMAL_LOWER_ANGLE_LIMIT,
-            OPTIMAL_UPPER_ANGLE_LIMIT,
-            LEGAL_SHOOTING_ZONE
+            OPTIMAL_UPPER_ANGLE_LIMIT
     );
 
     public static final double CLOSE_WRAPPER_SHOOTING_ZONE_RADIUS_IN_METERS = 2;
@@ -51,8 +49,7 @@ public class ShootingPositionConstants {
             CLOSE_WRAPPER_SHOOTING_ZONE_RADIUS_IN_METERS,
             FieldConstants.FieldZones.RESTRICTED_BOUNDS,
             LEGAL_LOWER_ANGLE_LIMIT,
-            LEGAL_UPPER_ANGLE_LIMIT,
-            OPTIMAL_SHOOTING_ZONE
+            LEGAL_UPPER_ANGLE_LIMIT
     );
 
     public static final double CLOSE_SHOOTING_ZONE_RADIUS_IN_METERS = 1.5;
@@ -62,7 +59,6 @@ public class ShootingPositionConstants {
             CLOSE_SHOOTING_ZONE_RADIUS_IN_METERS,
             FieldConstants.FieldZones.RESTRICTED_BOUNDS,
             OPTIMAL_LOWER_ANGLE_LIMIT,
-            OPTIMAL_UPPER_ANGLE_LIMIT,
-            CLOSE_WRAPPER_SHOOTING_ZONE
+            OPTIMAL_UPPER_ANGLE_LIMIT
     );
 }
