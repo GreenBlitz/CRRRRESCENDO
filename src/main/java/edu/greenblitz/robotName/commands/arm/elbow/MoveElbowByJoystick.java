@@ -7,7 +7,7 @@ public class MoveElbowByJoystick extends ElbowCommand {
 
     private SmartJoystick joystick;
 
-    public MoveElbowByJoystick(SmartJoystick joystick){
+    public MoveElbowByJoystick(SmartJoystick joystick) {
         super();
         this.joystick = joystick;
     }

@@ -16,5 +16,4 @@ public class ElbowDefaultCommand extends ElbowCommand {
             elbow.standInPlace();
         }
     }
-
 }

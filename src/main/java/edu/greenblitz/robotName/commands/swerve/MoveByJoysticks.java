@@ -2,7 +2,7 @@ package edu.greenblitz.robotName.commands.swerve;
 
 import edu.greenblitz.robotName.OI;
 import edu.greenblitz.robotName.subsystems.swerve.SwerveChassisUtils;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 
 import java.util.function.DoubleSupplier;
@@ -15,20 +15,24 @@ public class MoveByJoysticks extends SwerveCommand {
     }
 
     private double angularSpeedFactor;
-    private double linearSpeedFactor;
-    private DoubleSupplier angularVelocitySupplier;
-    private DriveMode driveMode;
 
+    private double linearSpeedFactor;
+
+    private DoubleSupplier angularVelocitySupplier;
+
+    private DriveMode driveMode;
 
     public MoveByJoysticks(DriveMode driveMode, DoubleSupplier angularVelocitySupplier) {
         this.driveMode = driveMode;
         this.angularVelocitySupplier = angularVelocitySupplier;
     }
+
     public MoveByJoysticks(DriveMode driveMode) {
-        this(driveMode, () -> OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.RIGHT_X));
+        this(
+                driveMode,
+                () -> OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.RIGHT_X)
+        );
     }
-
-
 
     @Override
     public void initialize() {
@@ -54,7 +58,7 @@ public class MoveByJoysticks extends SwerveCommand {
         double forwardSpeed = SwerveChassisUtils.joystickValueToOutputValue(
                 OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_Y),
                 linearSpeedFactor,
-                ChassisConstants.IS_JOYSTICK_FORWAR_VALUE_INVERTED
+                ChassisConstants.IS_JOYSTICK_FORWARD_VALUE_INVERTED
 
         );
         double angularSpeed = SwerveChassisUtils.joystickValueToOutputValue(
@@ -81,5 +85,4 @@ public class MoveByJoysticks extends SwerveCommand {
         super.end(interrupted);
         swerveChassis.stop();
     }
-
 }

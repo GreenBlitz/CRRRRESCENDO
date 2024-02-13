@@ -2,9 +2,9 @@ package edu.greenblitz.robotName.commands.shooter.flyWheel;
 
 import edu.greenblitz.robotName.FieldConstants;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 
-public class RunFlyWheelBySpeakerInterpolationVelocity extends RunFlyWheelByVelocity{
+public class RunFlyWheelBySpeakerInterpolationVelocity extends RunFlyWheelByVelocity {
 
     public RunFlyWheelBySpeakerInterpolationVelocity() {
         super(0);
@@ -14,7 +14,8 @@ public class RunFlyWheelBySpeakerInterpolationVelocity extends RunFlyWheelByVelo
     public void initialize() {
         changeVelocity(
                 FlyWheelConstants.SHOOTING_VELOCITY_INTERPOLATOR.get(
-                        SwerveChassis.getInstance().getRobotPose().getTranslation().getDistance(FieldConstants.MIDDLE_OF_SPEAKER_POSITION.toTranslation2d())
+                        SwerveChassis.getInstance().getRobotPose().getTranslation()
+                                .getDistance(FieldConstants.MIDDLE_OF_SPEAKER_POSITION.toTranslation2d())
                 )
         );
         super.initialize();

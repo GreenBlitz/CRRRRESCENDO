@@ -21,5 +21,4 @@ public class WristInputs {
     public boolean hasReachedForwardLimit;
 
     public boolean hasReachedBackwardLimit;
-
 }

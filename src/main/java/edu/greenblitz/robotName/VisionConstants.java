@@ -5,20 +5,36 @@ import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation3d;
 
 public class VisionConstants {
-	public static final String[] LIMELIGHT_NAMES = new String[]{"limelight-front","limelight-back","limelight-gb"};
-	public static double STANDARD_DEVIATION_ODOMETRY = 1;
-	public static int LIMELIGHT_ENTRY_ARRAY_LENGTH = 7;
-	public static double STANDARD_DEVIATION_ODOMETRY_ANGLE = 0.01;
-	public static double STANDARD_DEVIATION_VISION2D = 0.5;
-	public static double STANDARD_DEVIATION_VISION_ANGLE = 0.6;
-	public static final int[] PORT_NUMBERS = {5800, 5801, 5802, 5803, 5804, 5805};
-	public static final Transform3d ROBOT_TO_CAMERA = new Transform3d(new Translation3d(), new Rotation3d());
-	public final static double MIN_DISTANCE_TO_FILTER_OUT = 5;//meters
-	public final static double VISION_TO_STANDARD_DEVIATION = 10;
-	public final static double APRIL_TAG_HEIGHT = 0.18;//cm
-	public final static double APRIL_TAG_HEIGHT_TOLERANCE = 0.04;//cm
 	
-	public static enum LIMELIGHT_ARRAY_VALUES{
+	public static final String[] LIMELIGHT_NAMES = new String[]{
+			"limelight-front",
+			"limelight-back",
+			"limelight-gb"
+	};
+	
+	public static double STANDARD_DEVIATION_ODOMETRY = 1;
+	
+	public static int LIMELIGHT_ENTRY_ARRAY_LENGTH = 7;
+	
+	public static double STANDARD_DEVIATION_ODOMETRY_ANGLE = 0.01;
+	
+	public static double STANDARD_DEVIATION_VISION2D = 0.5;
+	
+	public static double STANDARD_DEVIATION_VISION_ANGLE = 0.6;
+	
+	public static final int[] PORT_NUMBERS = {5800, 5801, 5802, 5803, 5804, 5805};
+	
+	public static final Transform3d ROBOT_TO_CAMERA = new Transform3d(new Translation3d(), new Rotation3d());
+	
+	public final static double MIN_DISTANCE_TO_FILTER_OUT_METERS = 5;
+	
+	public final static double VISION_TO_STANDARD_DEVIATION = 10;
+	
+	public final static double APRIL_TAG_HEIGHT_METERS = 0.0018;
+	
+	public final static double APRIL_TAG_HEIGHT_TOLERANCE_METERS = 0.0004;
+	
+	public static enum LIMELIGHT_ARRAY_VALUES {
 		X_AXIS,
 		Y_AXIS,
 		Z_AXIS,
@@ -27,10 +43,10 @@ public class VisionConstants {
 		YAW_ANGLE,
 		TOTAL_LATENCY;
 	}
-
+	
 	public static int getValue(LIMELIGHT_ARRAY_VALUES value) {
 		int arrayValue = -1;
-		switch (value){
+		switch (value) {
 			case X_AXIS -> {
 				arrayValue = 0;
 			}

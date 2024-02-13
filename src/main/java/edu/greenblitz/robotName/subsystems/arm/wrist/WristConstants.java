@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName.subsystems.arm.wrist;
 
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.util.Units;
 
 public class WristConstants {
 
@@ -14,10 +13,9 @@ public class WristConstants {
 
         public final Rotation2d ANGLE;
 
-        PresetPositions(Rotation2d angle){
+        PresetPositions(Rotation2d angle) {
             this.ANGLE = angle;
         }
-
     }
 
     public static final double LENGTH_OF_ENDEFFECTOR = 0.1;
@@ -33,5 +31,4 @@ public class WristConstants {
     public static final Rotation2d TOLERANCE = Rotation2d.fromDegrees(0.5);
 
     public static final int CURRENT_LIMIT = 40;
-
 }

@@ -17,6 +17,13 @@ public class Elbow extends GBSubsystem {
 
     private Rotation2d currentAngle;
 
+    private Elbow() {
+        elbow = ElbowFactory.create();
+        elbowInputs = new ElbowInputsAutoLogged();
+        elbow.updateInputs(elbowInputs);
+        currentAngle = elbowInputs.position;
+    }
+
     public static void init() {
         if (instance == null) {
             instance = new Elbow();
@@ -28,13 +35,6 @@ public class Elbow extends GBSubsystem {
         return instance;
     }
 
-    private Elbow() {
-        elbow = ElbowFactory.create();
-        elbowInputs = new ElbowInputsAutoLogged();
-        elbow.updateInputs(elbowInputs);
-        currentAngle = elbowInputs.position;
-    }
-
     @Override
     public void periodic() {
         super.periodic();
@@ -43,7 +43,6 @@ public class Elbow extends GBSubsystem {
         Logger.processInputs("Elbow", elbowInputs);
         Logger.recordOutput("Elbow", getPose3D());
     }
-
 
     public void setPower(double power) {
         elbow.setPower(power);
@@ -57,7 +56,6 @@ public class Elbow extends GBSubsystem {
         elbow.setIdleMode(idleMode);
     }
 
-
     public void resetAngle(Rotation2d position) {
         elbow.resetAngle(position);
     }
@@ -70,14 +68,13 @@ public class Elbow extends GBSubsystem {
         elbow.standInPlace(currentAngle);
     }
 
-    public void setCurrentAngle(){
+    public void setCurrentAngle() {
         currentAngle = getAngle();
     }
 
-    public void setCurrentAngle(Rotation2d angle){
+    public void setCurrentAngle(Rotation2d angle) {
         currentAngle = angle;
     }
-
 
     public double getVoltage() {
         return elbowInputs.appliedOutput;
@@ -100,11 +97,10 @@ public class Elbow extends GBSubsystem {
                 elbowInputs.position.getRadians() <= ElbowConstants.SHOOTER_COLLISION_RANGE.getSecond().getRadians();
     }
 
-    public Pose3d getPose3D (){
+    public Pose3d getPose3D() {
         return new Pose3d(
                 ElbowConstants.ELBOW_POSITION_RELATIVE_TO_ROBOT,
-                new Rotation3d(0 ,elbowInputs.position.getRadians(), 0)
+                new Rotation3d(0, elbowInputs.position.getRadians(), 0)
         );
     }
-
 }

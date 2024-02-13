@@ -1,13 +1,14 @@
 package edu.greenblitz.robotName.commands.intake;
 
-public class ReverseRunIntake extends IntakeCommand{
+public class ReverseRunIntake extends IntakeCommand {
+
     @Override
-    public void execute(){
+    public void execute() {
         intake.rollOut();
     }
 
     @Override
-    public void end(boolean interrupted){
+    public void end(boolean interrupted) {
         intake.stop();
     }
 }

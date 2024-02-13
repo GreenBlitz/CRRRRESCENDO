@@ -4,7 +4,8 @@ import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityC
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public class ShootFromInFunnel extends SequentialCommandGroup {
-    public ShootFromInFunnel(){
+
+    public ShootFromInFunnel() {
         super(
                 new RunFlyWheelByVelocityConstant(),
                 new PushNoteToFlyWheel()

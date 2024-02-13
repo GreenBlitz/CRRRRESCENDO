@@ -21,5 +21,4 @@ public class ElbowInputs {
     public boolean hasReachedForwardLimit;
 
     public boolean hasReachedBackwardLimit;
-
 }

@@ -1,11 +1,11 @@
 package edu.greenblitz.robotName.subsystems.arm.elbow;
 
 import edu.greenblitz.robotName.Robot;
-import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.arm.elbow.NeoElbow.NeoElbow;
-import edu.greenblitz.robotName.subsystems.arm.elbow.SimulationElbow.SimulationElbow;
+import edu.greenblitz.robotName.subsystems.arm.elbow.neoElbow.NeoElbow;
+import edu.greenblitz.robotName.subsystems.arm.elbow.simulationElbow.SimulationElbow;
 
 public class ElbowFactory {
+
     public static IElbow create() {
         return switch (Robot.getRobotType()) {
             case ROBOT_NAME -> new NeoElbow();
