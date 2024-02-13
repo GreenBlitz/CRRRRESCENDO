@@ -8,7 +8,7 @@ public class FlyWheelFactory {
 	
 	public static IFlyWheel create() {
 		return switch (Robot.getRobotType()) {
-			case ROBOT_NAME, PEGA_SWERVE -> new FalconFlyWheel();
+			case SYNCOPA, PEGA_SWERVE -> new FalconFlyWheel();
 			case REPLAY -> new ReplayFlyWheel();
 			case SIMULATION -> new SimulationFlyWheel();
 		};

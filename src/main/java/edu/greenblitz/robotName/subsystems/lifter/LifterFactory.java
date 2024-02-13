@@ -9,7 +9,7 @@ public class LifterFactory {
  
 	public static ILifter create() {
 		return switch (Robot.getRobotType()) {
-			case ROBOT_NAME -> new NeoLifter();
+			case SYNCOPA -> new NeoLifter();
 			case REPLAY -> new ReplayLifter();
 			case SIMULATION, PEGA_SWERVE -> new SimulationLifter();
 		};
