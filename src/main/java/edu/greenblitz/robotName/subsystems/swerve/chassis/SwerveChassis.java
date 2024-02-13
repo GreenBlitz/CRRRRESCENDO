@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.subsystems.swerve.chassis;
 
 import edu.greenblitz.robotName.Robot;
+import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.VisionConstants;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.subsystems.Photonvision;
@@ -14,8 +15,7 @@ import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.*;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
@@ -116,12 +116,13 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         backLeft.periodic();
         backRight.periodic();
 
-        field.setRobotPose(getRobotPose());
+        field.setRobotPose(getRobotPose2d());
 
         gyro.updateInputs(gyroInputs);
         updateInputs(ChassisInputs);
 
-        Logger.recordOutput("DriveTrain/RobotPose", getRobotPose());
+        Logger.recordOutput("DriveTrain/RobotPose", getRobotPose2d());
+        Logger.recordOutput("DriveTrain/RobotPose3d", getRobotPose3d());
         Logger.recordOutput("DriveTrain/ModuleStates", getSwerveModuleStates());
         Logger.processInputs("DriveTrain/Chassis", ChassisInputs);
         Logger.processInputs("DriveTrain/Gyro", gyroInputs);
@@ -225,7 +226,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     }
 
     public Rotation2d getChassisAngle() {
-        return getRobotPose().getRotation();
+        return getRobotPose2d().getRotation();
     }
 
     /**
@@ -409,13 +410,21 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
     private void addVisionMeasurement(Pair<Pose2d, Double> poseTimestampPair) {
         Pose2d visionPose = poseTimestampPair.getFirst();
-        if (!(visionPose.getTranslation().getDistance(getRobotPose().getTranslation()) > VisionConstants.MIN_DISTANCE_TO_FILTER_OUT_METERS)) {
+        if (!(visionPose.getTranslation().getDistance(getRobotPose2d().getTranslation()) > VisionConstants.MIN_DISTANCE_TO_FILTER_OUT_METERS)) {
             resetToVision();
         }
     }
 
-    public Pose2d getRobotPose() {
+    public Pose2d getRobotPose2d() {
         return poseEstimator.getEstimatedPosition();
+    }
+
+    public Pose3d getRobotPose3d() {
+        Pose2d swervePose2d = getRobotPose2d();
+        return new Pose3d(
+                new Translation3d(swervePose2d.getX(), swervePose2d.getY(), RobotConstants.SimulationConstants.ROBOT_TRANSLATION.getZ()),
+                new Rotation3d(0,0,swervePose2d.getRotation().getRadians())
+        );
     }
 
     public void resetToVision() {
@@ -434,7 +443,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     }
 
     public boolean isAtPose(Pose2d goalPose) {
-        Pose2d robotPose = getRobotPose();
+        Pose2d robotPose = getRobotPose2d();
 
         boolean isAtX = Math.abs(goalPose.getX() - robotPose.getX()) <= TRANSLATION_TOLERANCE;
         boolean isAtY = Math.abs(goalPose.getY() - robotPose.getY()) <= TRANSLATION_TOLERANCE;

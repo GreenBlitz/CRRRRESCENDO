@@ -86,7 +86,7 @@ public class Robot extends LoggedRobot {
 		NamedCommands.registerCommand("shoot", new GoToShootingStateAndShoot());
 		NamedCommands.registerCommand("grip", new NoteToShooter().raceWith(new WaitCommand(1)));
 		GBAutoBuilder.configureHolonomic(
-				SwerveChassis.getInstance()::getRobotPose,
+				SwerveChassis.getInstance()::getRobotPose2d,
 				SwerveChassis.getInstance()::resetChassisPosition,
 				SwerveChassis.getInstance()::getRobotRelativeChassisSpeeds,
 				SwerveChassis.getInstance()::moveByRobotRelativeSpeeds,
