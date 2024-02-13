@@ -39,7 +39,7 @@ public class ShootSimulationNote extends GBCommand {
                 chassisAngle.getCos() * shooterAngle.getCos(),
                 chassisAngle.getSin() * shooterAngle.getCos(),
                 shooterAngle.getSin()
-                ).times(timer.get() * FlyWheelConstants.SIMULATION_SHOOTING_SPEED_METERS_PER_SECOND);
+        ).times(timer.get() * FlyWheelConstants.SIMULATION_SHOOTING_SPEED_METERS_PER_SECOND);
 
         Logger.recordOutput(
                 "NoteVisualizer",
