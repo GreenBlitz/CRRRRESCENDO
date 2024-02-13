@@ -1,9 +1,8 @@
 package edu.greenblitz.robotName.utils;
 
-import edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder;
 import com.pathplanner.lib.auto.AutoBuilder;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;

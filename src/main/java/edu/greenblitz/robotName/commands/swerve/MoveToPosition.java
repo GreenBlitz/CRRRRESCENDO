@@ -4,12 +4,12 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.path.PathConstraints;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
-import edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.DeferredCommand;
+
+import java.util.Set;
 import java.util.function.Supplier;
 
 public class MoveToPosition extends DeferredCommand {

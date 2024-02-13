@@ -7,6 +7,7 @@ import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import org.littletonrobotics.junction.Logger;
+import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 
 import static edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants.TOLERANCE;
 
