@@ -7,8 +7,8 @@ public class MoveElbowAndWristToSafe extends MoveElbowAndWrist {
 
     public MoveElbowAndWristToSafe() {
         super(
-                ElbowConstants.PresetPositions.SAFE.ANGLE,
-                WristConstants.PresetPositions.SAFE.ANGLE
+                ElbowConstants.PresetPositions.SAFE,
+                WristConstants.PresetPositions.SAFE
         );
     }
 }

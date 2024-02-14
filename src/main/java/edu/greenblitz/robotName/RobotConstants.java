@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.PowerDistribution;
 
 public class RobotConstants {
 	
-	public static final Robot.RobotType ROBOT_TYPE = Robot.RobotType.ROBOT_NAME;
+	public static final Robot.RobotType ROBOT_TYPE = Robot.RobotType.SYNCOPA;
 	
 	public static final String SIMULATION_LOG_PATH = System.getProperty("user.home") + "\\Desktop\\SimulationLogs";
 	
@@ -41,7 +41,7 @@ public class RobotConstants {
 		}
 	}
 	
-	public static class Frankenstein {
+	public static class Syncopa {
 		
 		public static final double ROBOT_LENGTH_IN_METERS = 0.89;
 		

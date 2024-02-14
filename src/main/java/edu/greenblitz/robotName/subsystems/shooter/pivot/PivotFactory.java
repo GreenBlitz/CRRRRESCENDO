@@ -8,7 +8,7 @@ public class PivotFactory {
 	
 	public static IPivot create() {
 		return switch (Robot.getRobotType()) {
-			case ROBOT_NAME -> new FalconPivot();
+			case SYNCOPA -> new FalconPivot();
 			case REPLAY -> new ReplayPivot();
 			case SIMULATION, PEGA_SWERVE -> new SimulationPivot();
 		};

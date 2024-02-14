@@ -248,7 +248,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 
 	private double getActualTimeStep() {
-		if (Robot.getRobotType().equals(Robot.RobotType.ROBOT_NAME))
+		if (Robot.getRobotType().equals(Robot.RobotType.SYNCOPA))
 			return RoborioUtils.getCurrentRoborioCycle();
 		return TIME_STEP;
 	}
