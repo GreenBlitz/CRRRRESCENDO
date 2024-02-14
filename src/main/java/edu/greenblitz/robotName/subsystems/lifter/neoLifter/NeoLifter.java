@@ -44,7 +44,7 @@ public class NeoLifter implements ILifter {
     }
 
     @Override
-    public void stopMotor() {
+    public void stop() {
         this.setPower(0);
     }
 
@@ -59,7 +59,8 @@ public class NeoLifter implements ILifter {
                 position.getRadians(),
                 CANSparkMax.ControlType.kPosition,
                 NeoLifterConstants.PID_SLOT,
-                NeoLifterConstants.FEED_FORWARD.calculate(position.getRadians()));
+                NeoLifterConstants.FEED_FORWARD.calculate(position.getRadians())
+        );
     }
 
     @Override

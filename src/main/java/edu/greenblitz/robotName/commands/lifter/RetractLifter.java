@@ -16,6 +16,6 @@ public class RetractLifter extends LifterCommand {
 
     @Override
     public void end(boolean interrupted) {
-        lifter.stopMotor();
+        lifter.stop();
     }
 }

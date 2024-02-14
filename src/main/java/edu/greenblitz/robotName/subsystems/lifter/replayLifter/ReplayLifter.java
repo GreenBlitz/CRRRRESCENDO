@@ -22,7 +22,7 @@ public class ReplayLifter implements ILifter {
     }
 
     @Override
-    public void stopMotor() {
+    public void stop() {
 
     }
 

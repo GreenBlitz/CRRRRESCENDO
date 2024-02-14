@@ -58,8 +58,8 @@ public class Lifter extends GBSubsystem {
         resetEncoder(LifterConstants.ENCODER_POSITION_WHEN_RESET);
     }
 
-    public void stopMotor() {
-        lifter.stopMotor();
+    public void stop() {
+        lifter.stop();
     }
 
     public void setIdleMode(CANSparkMax.IdleMode mode) {

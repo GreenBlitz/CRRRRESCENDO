@@ -32,7 +32,7 @@ public class ExtendLifter extends LifterCommand {
 
     @Override
     public void end(boolean interrupted) {
-        lifter.stopMotor();
+        lifter.stop();
         lifter.openSolenoid();
         timer.stop();
         timer.reset();

@@ -19,14 +19,28 @@ public class SimulationLifter implements ILifter {
     private double appliedOutput;
     private ProfiledPIDController pidController;
     DCMotorSim simulationSolenoidMotor;
-    double appliedOutputsSolenoid;
     double appliedSolenoidOutputs;
 
     public SimulationLifter() {
-        lifterSimulation = new SingleJointedArmSim(DCMotor.getNEO(SimulationLifterConstants.NUMBER_OF_MOTORS), SimulationLifterConstants.GEAR_RATIO, SingleJointedArmSim.estimateMOI(LifterConstants.LENGTH_OF_LIFTER, LifterConstants.LIFTER_MASS_KG), LifterConstants.LENGTH_OF_LIFTER, LifterConstants.BACKWARD_LIMIT.getRadians(), LifterConstants.FORWARD_LIMIT.getRadians(), false, LifterConstants.STARTING_ANGLE.getRadians());
+        lifterSimulation = new SingleJointedArmSim(
+                DCMotor.getNEO(SimulationLifterConstants.NUMBER_OF_MOTORS),
+                SimulationLifterConstants.GEAR_RATIO,
+                SingleJointedArmSim.estimateMOI(
+                        LifterConstants.LENGTH_OF_LIFTER,
+                        LifterConstants.LIFTER_MASS_KG
+                ),
+                LifterConstants.LENGTH_OF_LIFTER,
+                LifterConstants.BACKWARD_LIMIT.getRadians(),
+                LifterConstants.FORWARD_LIMIT.getRadians(),
+                false, LifterConstants.STARTING_ANGLE.getRadians()
+        );
         pidController = SimulationLifterConstants.SIMULATION_PID;
 
-        simulationSolenoidMotor = new DCMotorSim(DCMotor.getCIM(SimulationLifterConstants.NUMBER_OF_SOLENOID_MOTORS), SimulationLifterConstants.MOTOR_GEARING, SimulationLifterConstants.MOTOR_JKG_METERS_SQUARED);
+        simulationSolenoidMotor = new DCMotorSim(
+                DCMotor.getCIM(SimulationLifterConstants.NUMBER_OF_SOLENOID_MOTORS),
+                SimulationLifterConstants.MOTOR_GEARING,
+                SimulationLifterConstants.MOTOR_JKG_METERS_SQUARED
+        );
     }
 
     @Override
@@ -36,7 +50,11 @@ public class SimulationLifter implements ILifter {
 
     @Override
     public void setVoltage(double voltage) {
-        appliedOutput = MathUtil.clamp(voltage, RobotConstants.SimulationConstants.MIN_MOTOR_VOLTAGE, RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE);
+        appliedOutput = MathUtil.clamp(
+                voltage,
+                RobotConstants.SimulationConstants.MIN_MOTOR_VOLTAGE,
+                RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE
+        );
         lifterSimulation.setInputVoltage(appliedOutput);
     }
 
@@ -46,7 +64,7 @@ public class SimulationLifter implements ILifter {
     }
 
     @Override
-    public void stopMotor() {
+    public void stop() {
         this.setPower(0);
     }
 
@@ -93,7 +111,7 @@ public class SimulationLifter implements ILifter {
         inputs.position = lifterSimulation.getAngleRads();
         inputs.velocity = lifterSimulation.getVelocityRadPerSec();
 
-        inputs.voltageSolenoid = appliedOutputsSolenoid;
+        inputs.voltageSolenoid = appliedSolenoidOutputs;
         inputs.currentSolenoid = simulationSolenoidMotor.getCurrentDrawAmps();
         inputs.isOpenSolenoid = inputs.voltageSolenoid > 0;
     }

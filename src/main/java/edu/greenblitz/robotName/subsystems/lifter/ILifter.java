@@ -11,7 +11,7 @@ public interface ILifter {
 
     void resetEncoder(Rotation2d position);
 
-    void stopMotor();
+    void stop();
 
     void setIdleMode(CANSparkMax.IdleMode idleMode);
 
