@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName;
 
+import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 import edu.greenblitz.robotName.commands.PanicMode;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
@@ -94,6 +95,19 @@ public class OI {
         secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
 
         mainJoystick.A.whileTrue(new GoToShootingState());
+    }
+
+    public void romyButtons() {
+        mainJoystick.R1.whileTrue(new RunIntakeByJoystick(mainJoystick)); // Gripper
+        mainJoystick.L1.whileTrue(new GoToShootingState()); // Move2Pos
+//        mainJoystick.R2.whileTrue(new SwerveRequest.); // robot centric
+    }
+    public void schoriButtons() {
+//        secondJoystick.R1.whileTrue(new ScoreToSpeaker()); //doesn't exist yet
+//        secondJoystick.L1.whileTrue(new ScoreToAmp()); //does Schori want this function?
+//        secondJoystick.A.whileTrue(new Eject()); //doesn't exist yet
+        secondJoystick.B.whileTrue(new PanicMode());
+//        secondJoystick.POV_UP.whileTrue(new Climb()); //doesn't exist yet
     }
 
     public void thirdJoystickButtons(){
