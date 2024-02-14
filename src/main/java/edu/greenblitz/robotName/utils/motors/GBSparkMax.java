@@ -5,8 +5,9 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import edu.greenblitz.robotName.utils.PIDObject;
+import edu.greenblitz.robotName.utils.systemCheck.IPingable;
 
-public class GBSparkMax extends CANSparkMax {
+public class GBSparkMax extends CANSparkMax implements IPingable {
 	
 	/**
 	 * Create a new object to control a SPARK MAX motor Controller
@@ -54,7 +55,23 @@ public class GBSparkMax extends CANSparkMax {
 		CANSparkMax.IdleMode neoIdleMode = (idleMode == NeutralModeValue.Brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
 		super.setIdleMode(neoIdleMode);
 	}
-	
+
+	@Override
+	public boolean isConnected() {
+		try {
+			getDeviceId();
+			return true;
+		}
+		catch (Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public String deviceName() {
+		return "spark max " + getDeviceId();
+	}
+
 	/**
 	 * inner conf class
 	 * usage example:
