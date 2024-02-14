@@ -7,7 +7,7 @@ public class WristCommand extends GBCommand {
 
     protected Wrist wrist;
 
-    public WristCommand(){
+    public WristCommand() {
         wrist = Wrist.getInstance();
         require(wrist);
     }

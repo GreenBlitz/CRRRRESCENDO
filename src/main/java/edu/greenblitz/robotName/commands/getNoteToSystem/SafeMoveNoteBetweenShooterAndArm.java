@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public class SafeMoveNoteBetweenShooterAndArm extends ConditionalCommand {
 
-    public SafeMoveNoteBetweenShooterAndArm(){
+    public SafeMoveNoteBetweenShooterAndArm() {
         super(
                 new MoveNoteBetweenShooterAndArm(),
                 new SequentialCommandGroup(
@@ -15,9 +15,6 @@ public class SafeMoveNoteBetweenShooterAndArm extends ConditionalCommand {
                         new MoveNoteToMiddleOfRoller()
                 ),
                 ScoringModeSelector::isSpeakerMode
-
         );
     }
-
-
 }

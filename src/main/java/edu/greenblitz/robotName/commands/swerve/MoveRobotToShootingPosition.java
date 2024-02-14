@@ -1,17 +1,17 @@
 package edu.greenblitz.robotName.commands.swerve;
 
-import edu.greenblitz.robotName.commands.swerve.MoveToPosition;
-import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
+import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
 import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
+import edu.greenblitz.robotName.utils.shootingCalculations.ShootingZone;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 
 public class MoveRobotToShootingPosition extends ConditionalCommand {
 
-    public MoveRobotToShootingPosition() {
+    public MoveRobotToShootingPosition(ShootingZone zone) {
         super(
-                new RotateToAngle(ShootingStateCalculations::getTargetRobotAngle),
-                new MoveToPosition(ShootingStateCalculations::getTargetRobotPosition),
-                () -> ShootingStateCalculations.isRobotNearShootingPosition()
+                new RotateToAngle( () -> ShootingStateCalculations.getTargetRobotAngle(zone.getWrapperZone())),
+                new MoveToPosition( () -> ShootingStateCalculations.getTargetRobotPosition(zone)),
+                () -> ShootingStateCalculations.isRobotInShootingZone(zone.getWrapperZone())
         );
     }
 }

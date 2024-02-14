@@ -2,7 +2,6 @@ package edu.greenblitz.robotName.commands.intake;
 
 public class NoteToIntake extends IntakeCommand {
 
-
     @Override
     public void execute() {
         intake.rollIn();
@@ -17,6 +16,4 @@ public class NoteToIntake extends IntakeCommand {
     public void end(boolean interrupted) {
         intake.stop();
     }
-
 }
-

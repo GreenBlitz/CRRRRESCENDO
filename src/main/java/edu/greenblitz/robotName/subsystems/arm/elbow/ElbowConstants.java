@@ -13,7 +13,8 @@ public class ElbowConstants {
         TRANSFER(Rotation2d.fromDegrees(-75));
 
         public final Rotation2d ANGLE;
-        PresetPositions(Rotation2d angle){
+
+        PresetPositions(Rotation2d angle) {
             this.ANGLE = angle;
         }
     }
@@ -26,16 +27,13 @@ public class ElbowConstants {
 
     public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(90);
 
-    public static final Pair<Rotation2d,Rotation2d> SHOOTER_COLLISION_RANGE = new Pair<>(BACKWARD_ANGLE_LIMIT,PresetPositions.SAFE.ANGLE);
+    public static final Pair<Rotation2d, Rotation2d> SHOOTER_COLLISION_RANGE = new Pair<>(BACKWARD_ANGLE_LIMIT, PresetPositions.SAFE.ANGLE);
 
-    public static final Translation3d ELBOW_POSITION_RELATIVE_TO_ROBOT = new Translation3d(-0.1,0,0.6);
+    public static final Translation3d ELBOW_POSITION_RELATIVE_TO_ROBOT = new Translation3d(-0.1, 0, 0.6);
 
     public static final double GEAR_RATIO = 1;
 
     public static final Rotation2d TOLERANCE = Rotation2d.fromDegrees(0.5);
 
     public static final int CURRENT_LIMIT = 40;
-
-
-
 }

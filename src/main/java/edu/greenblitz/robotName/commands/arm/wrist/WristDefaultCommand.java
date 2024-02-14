@@ -3,7 +3,7 @@ package edu.greenblitz.robotName.commands.arm.wrist;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 
-public class WristDefaultCommand extends WristCommand{
+public class WristDefaultCommand extends WristCommand {
 
     @Override
     public void initialize() {
@@ -16,5 +16,4 @@ public class WristDefaultCommand extends WristCommand{
             wrist.standInPlace();
         }
     }
-
 }

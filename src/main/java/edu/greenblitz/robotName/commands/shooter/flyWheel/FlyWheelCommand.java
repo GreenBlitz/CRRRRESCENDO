@@ -12,5 +12,4 @@ public abstract class FlyWheelCommand extends GBCommand {
         flyWheel = FlyWheel.getInstance();
         require(flyWheel);
     }
-
 }

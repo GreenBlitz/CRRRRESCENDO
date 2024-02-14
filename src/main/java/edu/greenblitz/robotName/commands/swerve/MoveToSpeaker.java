@@ -7,6 +7,9 @@ import edu.wpi.first.wpilibj.DriverStation;
 public class MoveToSpeaker extends MoveToPosition {
 
     public MoveToSpeaker() {
-        super(FMSUtils.getAlliance() == DriverStation.Alliance.Red ? Field.ScoringPositions.RED_SPEAKER_SCORE_POSITION : Field.ScoringPositions.BLUE_SPEAKER_SCORE_POSITION);
+        super(FMSUtils.getAlliance() == DriverStation.Alliance.Red ?
+                Field.ScoringPositions.RED_SPEAKER_SCORE_POSITION :
+                Field.ScoringPositions.BLUE_SPEAKER_SCORE_POSITION
+        );
     }
 }
