@@ -423,7 +423,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         Pose2d swervePose2d = getRobotPose2d();
         return new Pose3d(
                 new Translation3d(swervePose2d.getX(), swervePose2d.getY(), RobotConstants.SimulationConstants.ROBOT_TRANSLATION.getZ()),
-                new Rotation3d(0,0,swervePose2d.getRotation().getRadians())
+                new Rotation3d(0, 0, swervePose2d.getRotation().getRadians())
         );
     }
 

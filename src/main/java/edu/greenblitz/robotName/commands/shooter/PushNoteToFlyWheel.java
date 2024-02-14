@@ -1,6 +1,5 @@
 package edu.greenblitz.robotName.commands.shooter;
 
-import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.StopFlyWheel;
 import edu.greenblitz.robotName.commands.shooter.funnel.runByPowerUntilCondition.ForwardRunFunnelUntilObjectOut;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
@@ -13,7 +12,7 @@ public class PushNoteToFlyWheel extends SequentialCommandGroup {
         super(
                 new ForwardRunFunnelUntilObjectOut(),
                 new WaitCommand(FlyWheelConstants.DELAY_SECONDS_UNTIL_EXIT),
-                new StopFlyWheel().alongWith(new ShootSimulationNote())
+                new StopFlyWheel()
         );
     }
 }

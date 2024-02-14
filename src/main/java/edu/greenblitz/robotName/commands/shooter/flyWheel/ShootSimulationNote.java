@@ -44,13 +44,14 @@ public class ShootSimulationNote extends GBCommand {
         ).times(timer.get() * FlyWheelConstants.SIMULATION_SHOOTING_SPEED_METERS_PER_SECOND);
 
         Logger.recordOutput(
-                "NoteVisualizer",
-                new Pose3d[]{
-                        new Pose3d(
-                                notePosition.plus(shooterPose3D.getTranslation()),
-                                Pivot.getInstance().getSimulationPivotPosition3d().getRotation().plus(shooterPose3D.getRotation())
-                        )
-                });
+            "NoteVisualizer",
+            new Pose3d[]{
+                    new Pose3d(
+                            notePosition.plus(shooterPose3D.getTranslation()),
+                            Pivot.getInstance().getSimulationPivotPosition3d().getRotation().plus(shooterPose3D.getRotation())
+                    )
+            }
+        );
     }
 
     @Override
