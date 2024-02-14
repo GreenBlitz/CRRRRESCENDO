@@ -34,6 +34,7 @@ public class ShootingPositionConstants {
     }
 
     public static final double OPTIMAL_SHOOTING_ZONE_RADIUS_IN_METERS = 2.5;
+
     public static ShootingZone OPTIMAL_SHOOTING_ZONE = new ShootingZone(
             CENTER_OF_SHOOTING_ZONE,
             OPTIMAL_SHOOTING_ZONE_RADIUS_IN_METERS,
@@ -44,6 +45,7 @@ public class ShootingPositionConstants {
     );
 
     public static final double CLOSE_WRAPPER_SHOOTING_ZONE_RADIUS_IN_METERS = 2;
+
     public static ShootingZone CLOSE_WRAPPER_SHOOTING_ZONE = new ShootingZone(
             CENTER_OF_SHOOTING_ZONE,
             CLOSE_WRAPPER_SHOOTING_ZONE_RADIUS_IN_METERS,
@@ -54,6 +56,7 @@ public class ShootingPositionConstants {
     );
 
     public static final double CLOSE_SHOOTING_ZONE_RADIUS_IN_METERS = 1.5;
+
     public static ShootingZone CLOSE_SHOOTING_ZONE = new ShootingZone(
             CENTER_OF_SHOOTING_ZONE,
             CLOSE_SHOOTING_ZONE_RADIUS_IN_METERS,

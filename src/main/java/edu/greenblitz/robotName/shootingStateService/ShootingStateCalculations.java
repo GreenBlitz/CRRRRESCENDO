@@ -25,8 +25,9 @@ public class ShootingStateCalculations {
     public static Translation2d getRobotTargetTranslation(ShootingZone zone) {
         Translation2d closestPosition = zone.getClosestCirclePosition(getRobotPose().getTranslation());
         if (closestPosition.getDistance(getRobotPose().getTranslation()) > SwerveChassis.TRANSLATION_TOLERANCE &&
-                closestPosition.getDistance(getRobotPose().getTranslation()) < ChassisConstants.PATHPLANNER_TRANSLATIONAL_TOLERANCE)
+                closestPosition.getDistance(getRobotPose().getTranslation()) < ChassisConstants.PATHPLANNER_TRANSLATIONAL_TOLERANCE) {
             return zone.getCenterOfShootingZone();
+        }
         return closestPosition;
     }
 
