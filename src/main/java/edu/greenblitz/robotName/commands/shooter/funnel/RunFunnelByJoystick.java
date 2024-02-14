@@ -14,6 +14,6 @@ public class RunFunnelByJoystick extends FunnelCommand {
 
     @Override
     public void execute() {
-        funnel.setPower(joystick.getAxisValue(SmartJoystick.Axis.LEFT_X) * RobotConstants.General.SAFETY_POWER_CONVERSION_FACTOR);
+        funnel.setPower(joystick.getAxisValue(SmartJoystick.Axis.LEFT_X) * -RobotConstants.General.SAFETY_POWER_CONVERSION_FACTOR);
     }
 }

@@ -16,7 +16,7 @@ public class RunFlyWheelByJoystick extends FlyWheelCommand {
     public void execute() {
         flyWheel.setPower(
                 joystick.getAxisValue(SmartJoystick.Axis.RIGHT_X) * RobotConstants.General.SAFETY_POWER_CONVERSION_FACTOR,
-                joystick.getAxisValue(SmartJoystick.Axis.RIGHT_X) * RobotConstants.General.SAFETY_POWER_CONVERSION_FACTOR
+                0.8* (joystick.getAxisValue(SmartJoystick.Axis.RIGHT_X) * RobotConstants.General.SAFETY_POWER_CONVERSION_FACTOR)
         );
     }
 

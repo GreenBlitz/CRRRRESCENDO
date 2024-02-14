@@ -95,9 +95,9 @@ public class OI {
 	
 	public void thirdJoystickButtons() {
 		SmartJoystick usedJoystick = thirdJoystick;
-		usedJoystick.A.whileTrue(new RollIntakeByPower(0.9));
-		usedJoystick.B.whileTrue(new RunFunnelByPower(0.8));
-		usedJoystick.X.whileTrue(new RunFlyWheelByPower(0.5));
+		usedJoystick.A.whileTrue(new RunIntakeByJoystick(usedJoystick));
+		usedJoystick.B.whileTrue(new RunFunnelByJoystick(usedJoystick));
+		usedJoystick.X.whileTrue(new RunFlyWheelByJoystick(usedJoystick));
 	}
 	
 	public void initializeDefaultCommands() {

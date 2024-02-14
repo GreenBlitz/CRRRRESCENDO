@@ -7,7 +7,7 @@ public class FalconFlyWheelConstants {
 	
 	public static class rightMotorConstants {
 		
-		public static final int ID = 12;
+		public static final int ID = 16;
 		
 		public static final NeutralModeValue NEUTRAL_MODE_VALUE = NeutralModeValue.Coast;
 		
@@ -15,7 +15,7 @@ public class FalconFlyWheelConstants {
 		
 		public static final double MAX_RPM = 4000;
 		
-		public static final double MAX_ACCELERATION = 50;
+		public static final double MAX_ACCELERATION = 100;
 		
 		public static final boolean ENABLE_FOC = true;
 		
