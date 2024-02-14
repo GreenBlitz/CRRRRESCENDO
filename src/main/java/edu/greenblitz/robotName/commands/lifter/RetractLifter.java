@@ -2,7 +2,7 @@ package edu.greenblitz.robotName.commands.lifter;
 
 import edu.greenblitz.robotName.subsystems.lifter.LifterConstants;
 
-public class ReverseLifting extends LifterCommand {
+public class RetractLifter extends LifterCommand {
 
     @Override
     public void execute() {
