@@ -7,10 +7,13 @@ import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.roller.RunRollerByJoystick;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
+import edu.greenblitz.robotName.commands.intake.RollIntakeByPower;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByPower;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
+import edu.greenblitz.robotName.commands.shooter.funnel.runByPowerUntilCondition.RunFunnelByPower;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingState;
 import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
@@ -46,8 +49,9 @@ public class OI {
 		thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
 		
-		initButtons();
-		initializeDefaultCommands();
+//		initButtons();
+//		initializeDefaultCommands();
+		thirdJoystickButtons();
 	}
 	
 	public static void init() {
@@ -91,10 +95,9 @@ public class OI {
 	
 	public void thirdJoystickButtons() {
 		SmartJoystick usedJoystick = thirdJoystick;
-		usedJoystick.A.whileTrue(new RunRollerByJoystick(usedJoystick));
-		usedJoystick.A.whileTrue(new RunIntakeByJoystick(usedJoystick));
-		usedJoystick.B.whileTrue(new RunFunnelByJoystick(usedJoystick));
-		usedJoystick.B.whileTrue(new RunFlyWheelByJoystick(usedJoystick));
+		usedJoystick.A.whileTrue(new RollIntakeByPower(0.9));
+		usedJoystick.B.whileTrue(new RunFunnelByPower(0.8));
+		usedJoystick.X.whileTrue(new RunFlyWheelByPower(0.5));
 	}
 	
 	public void initializeDefaultCommands() {
