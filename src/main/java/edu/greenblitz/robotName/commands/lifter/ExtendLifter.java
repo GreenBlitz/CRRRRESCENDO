@@ -7,7 +7,7 @@ public class ExtendLifter extends LifterCommand {
 
     protected Timer timer;
 
-    public ExtendLifter(){
+    public ExtendLifter() {
         timer = new Timer();
     }
 
@@ -19,7 +19,7 @@ public class ExtendLifter extends LifterCommand {
 
     @Override
     public void execute() {
-        if (timer.hasElapsed(LifterConstants.SECONDS_TO_CLOSE_SOLENOID)){
+        if (timer.hasElapsed(LifterConstants.SECONDS_TO_CLOSE_SOLENOID)) {
             lifter.holdSolenoid();
             lifter.goToPosition(LifterConstants.LIFTER_EXTENDED_POSITION);
         }

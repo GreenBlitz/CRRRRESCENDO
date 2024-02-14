@@ -5,25 +5,25 @@ import edu.wpi.first.math.geometry.Rotation2d;
 
 public interface ILifter {
 
-	void setPower(double power);
+    void setPower(double power);
 
-	void setVoltage(double voltage);
+    void setVoltage(double voltage);
 
-	void resetEncoder(Rotation2d position);
+    void resetEncoder(Rotation2d position);
 
-	void stopMotor();
+    void stopMotor();
 
-	void setIdleMode(CANSparkMax.IdleMode idleMode);
+    void setIdleMode(CANSparkMax.IdleMode idleMode);
 
-	void goToPosition(Rotation2d position);
+    void goToPosition(Rotation2d position);
 
-	void openSolenoid();
+    void openSolenoid();
 
-	void closeSolenoid();
+    void closeSolenoid();
 
-	void holdSolenoid();
+    void holdSolenoid();
 
-	void setPowerSolenoid(double powerSolenoid);
+    void setPowerToSolenoid(double powerSolenoid);
 
-	void updateInputs(LifterInputsAutoLogged inputs);
+    void updateInputs(LifterInputsAutoLogged inputs);
 }

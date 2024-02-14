@@ -6,58 +6,58 @@ import edu.greenblitz.robotName.subsystems.lifter.LifterInputsAutoLogged;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public class ReplayLifter implements ILifter {
-	@Override
-	public void setPower(double power) {
+    @Override
+    public void setPower(double power) {
 
-	}
+    }
 
-	@Override
-	public void setVoltage(double voltage) {
+    @Override
+    public void setVoltage(double voltage) {
 
-	}
+    }
 
-	@Override
-	public void resetEncoder(Rotation2d position) {
+    @Override
+    public void resetEncoder(Rotation2d position) {
 
-	}
+    }
 
-	@Override
-	public void stopMotor() {
+    @Override
+    public void stopMotor() {
 
-	}
+    }
 
-	@Override
-	public void setIdleMode(CANSparkMax.IdleMode idleMode) {
+    @Override
+    public void setIdleMode(CANSparkMax.IdleMode idleMode) {
 
-	}
+    }
 
-	@Override
-	public void goToPosition(Rotation2d position) {
+    @Override
+    public void goToPosition(Rotation2d position) {
 
-	}
+    }
 
-	@Override
-	public void openSolenoid() {
+    @Override
+    public void openSolenoid() {
 
-	}
+    }
 
-	@Override
-	public void closeSolenoid() {
+    @Override
+    public void closeSolenoid() {
 
-	}
+    }
 
-	@Override
-	public void holdSolenoid() {
+    @Override
+    public void holdSolenoid() {
 
-	}
+    }
 
-	@Override
-	public void setPowerSolenoid(double powerSolenoid) {
+    @Override
+    public void setPowerToSolenoid(double powerSolenoid) {
 
-	}
+    }
 
-	@Override
-	public void updateInputs(LifterInputsAutoLogged lastInputs) {
+    @Override
+    public void updateInputs(LifterInputsAutoLogged lastInputs) {
 
-	}
+    }
 }
