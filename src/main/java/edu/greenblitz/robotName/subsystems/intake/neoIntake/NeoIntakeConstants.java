@@ -7,7 +7,7 @@ import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 
 public class NeoIntakeConstants {
 	
-	public static final int INTAKE_ID = 62;
+	public static final int INTAKE_ID = 52;
 	
 	public static final int ENTRANCE_BEAM_BREAKER_CHANNEL = 0;
 	
