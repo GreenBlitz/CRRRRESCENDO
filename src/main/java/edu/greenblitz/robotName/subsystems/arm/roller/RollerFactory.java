@@ -8,7 +8,7 @@ public class RollerFactory {
 
     public static IRoller create() {
         return switch (Robot.getRobotType()) {
-            case ROBOT_NAME -> new NeoRoller();
+            case SYNCOPA -> new NeoRoller();
             case REPLAY -> new ReplayRoller();
             case SIMULATION, PEGA_SWERVE -> new SimulationRoller();
         };

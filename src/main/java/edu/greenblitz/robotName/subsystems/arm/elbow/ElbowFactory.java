@@ -8,7 +8,7 @@ public class ElbowFactory {
 
     public static IElbow create() {
         return switch (Robot.getRobotType()) {
-            case ROBOT_NAME -> new NeoElbow();
+            case SYNCOPA -> new NeoElbow();
             case REPLAY -> new ReplayElbow();
             case SIMULATION, PEGA_SWERVE -> new SimulationElbow();
         };

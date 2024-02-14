@@ -41,7 +41,7 @@ import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 public class Robot extends LoggedRobot {
 
 	public enum RobotType {
-		ROBOT_NAME,
+		SYNCOPA,
 		SIMULATION,
 		PEGA_SWERVE,
 		REPLAY
@@ -108,7 +108,7 @@ public class Robot extends LoggedRobot {
 				.getStructTopic("MechanismPoses", Pose3d.struct).publish();
 		switch (getRobotType()) {
 			// Running on a real robot, log to a USB stick
-			case ROBOT_NAME:
+			case SYNCOPA:
 				try {
 					Logger.addDataReceiver(new WPILOGWriter(RobotConstants.USB_LOG_PATH));
 					System.out.println("initialized Logger, USB");
@@ -148,8 +148,8 @@ public class Robot extends LoggedRobot {
 			}
 			return RobotType.SIMULATION;
 		} else {
-			if (robotType.equals(RobotType.ROBOT_NAME)) {
-				return RobotType.ROBOT_NAME;
+			if (robotType.equals(RobotType.SYNCOPA)) {
+				return RobotType.SYNCOPA;
 			}
 			return RobotType.PEGA_SWERVE;
 		}

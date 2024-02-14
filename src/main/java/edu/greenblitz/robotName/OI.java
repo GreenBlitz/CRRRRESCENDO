@@ -25,10 +25,9 @@ import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
-
-import static edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants.DRIVE_MODE;
 
 public class OI {
 
@@ -100,7 +99,7 @@ public class OI {
 	}
 
 	public void initializeDefaultCommands() {
-		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
+		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
 		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
 		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
 		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
