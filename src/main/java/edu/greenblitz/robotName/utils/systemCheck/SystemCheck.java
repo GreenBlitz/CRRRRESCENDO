@@ -197,8 +197,7 @@ public class SystemCheck extends GBSubsystem {
 
     public void add(SystemCheckCommand command, String checkName) {
         addToSeqCommand(command.raceWith(new WaitCommand(SystemCheckConstants.DEFAULT_COMMAND_TIME)));
-        Debouncer debouncer = new Debouncer(SystemCheckConstants.DEFAULT_DEBOUNCING_TIME, Debouncer.DebounceType.kBoth);
-        tab.addBoolean(checkName, () -> debouncer.calculate(command.hasFinished()));
+        tab.addBoolean(checkName, () -> command.hasFinished());
     }
 
     public Command getRunCommands() {
@@ -219,7 +218,7 @@ public class SystemCheck extends GBSubsystem {
     }
 
     public double getVoltageDrop() {
-        return SystemCheck.getInstance().getStartingVoltage() - Battery.getInstance().getCurrentVoltage();
+        return getStartingVoltage() - Battery.getInstance().getCurrentVoltage();
     }
 
 }
