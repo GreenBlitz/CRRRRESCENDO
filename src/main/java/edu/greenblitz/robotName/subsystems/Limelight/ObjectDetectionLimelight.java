@@ -7,55 +7,47 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 
 public class ObjectDetectionLimelight {
-	private NetworkTableEntry xNotePositionEntry, yNotePositionEntry, confidenceNotePositionEntry;
-	private static ObjectDetectionLimelight instance;
 
-	public ObjectDetectionLimelight(){
-		String name = VisionConstants.OBJECT_DETECTION_LIMELIGHT_NAME;
+    private static ObjectDetectionLimelight instance;
 
-		xNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("tx");
-		yNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("ty");
-		confidenceNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("json").getInstance().getEntry("ta");
-	}
+    private NetworkTableEntry xNotePositionEntry, yNotePositionEntry, confidenceNotePositionEntry;
 
-	public static ObjectDetectionLimelight getInstance() {
-		return instance;
-	}
+    public ObjectDetectionLimelight() {
+        String name = VisionConstants.OBJECT_DETECTION_LIMELIGHT_NAME;
 
-	public static void init(){
-		if (instance == null) {
-			instance = new ObjectDetectionLimelight();
-		}
-	}
+        xNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("tx");
+        yNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("ty");
+        confidenceNotePositionEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("json").getInstance().getEntry("ta");
+    }
 
-	public Pair<Double, Double> getObjectPosition(){
-		MultiLimelight.getInstance().changePipeline(true);
+    public static ObjectDetectionLimelight getInstance() {
+        return instance;
+    }
 
-		double xPosition = getNoteAbsoluteAngle();
+    public static void init() {
+        if (instance == null) {
+            instance = new ObjectDetectionLimelight();
+        }
+    }
 
-		double yPosition = Math.abs(yNotePositionEntry.getDouble(VisionConstants.DEFAULT_NETWORKTABLE_VALUE));
+    public Pair<Double, Double> getObjectPosition() {
+        MultiLimelight.getInstance().changePipeline(true);
+        double xPosition = getNoteAbsoluteAngle();
+        double yPosition = Math.abs(yNotePositionEntry.getDouble(VisionConstants.DEFAULT_NETWORKTABLE_VALUE));
+        MultiLimelight.getInstance().initializeLimelightPipeline();
+        return new Pair<>(xPosition, yPosition);
+    }
 
-		MultiLimelight.getInstance().initializeLimelightPipeline();
+    public double getNoteAbsoluteAngle() {
+        double xPosition = xNotePositionEntry.getDouble(VisionConstants.DEFAULT_NETWORKTABLE_VALUE);
+        if (Math.signum(xPosition) == -1) {
+            xPosition = 360 - xPosition;
+        }
+        return xPosition;
+    }
 
-		return new Pair<>(xPosition,yPosition);
-	}
-
-	public double getNoteAbsoluteAngle(){
-		double xPosition = xNotePositionEntry.getDouble(VisionConstants.DEFAULT_NETWORKTABLE_VALUE);
-
-		if(Math.signum(xPosition) == -1){
-
-			xPosition = 360 - xPosition;
-
-		}
-
-		return xPosition;
-	}
-
-	public boolean getTargetConfidence(){
-
-		double targetConfidence = confidenceNotePositionEntry.getDouble(VisionConstants.DEFAULT_NETWORKTABLE_VALUE);
-
-		return targetConfidence >= VisionConstants.OBJECT_DETECTION_THRESHOLD;
-	}
+    public boolean getTargetConfidence() {
+        double targetConfidence = confidenceNotePositionEntry.getDouble(VisionConstants.DEFAULT_NETWORKTABLE_VALUE);
+        return targetConfidence >= VisionConstants.OBJECT_DETECTION_THRESHOLD;
+    }
 }

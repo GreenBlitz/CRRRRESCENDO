@@ -14,7 +14,9 @@ import java.util.Optional;
 
 
 class Limelight {
+
     private NetworkTableEntry robotPoseEntry, idEntry, tagPoseEntry, limelightSettingsEntry;
+
     private String name;
 
     public Limelight(String limelightName) {
@@ -34,7 +36,11 @@ class Limelight {
         if (id == -1) {
             return Optional.empty();
         }
-        Pose2d robotPose = new Pose2d(poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.X_AXIS)], poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.Y_AXIS)], Rotation2d.fromDegrees(poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.YAW_ANGLE)]));
+        Pose2d robotPose = new Pose2d(
+                poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.X_AXIS)],
+                poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.Y_AXIS)],
+                Rotation2d.fromDegrees(poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.YAW_ANGLE)])
+        );
         return Optional.of(new Pair<>(robotPose, timestampSeconds));
     }
 
@@ -57,7 +63,7 @@ class Limelight {
     }
 
     public int getPipeline() {
-        return (int) limelightSettingsEntry.getInteger(-1);
+        return (int) limelightSettingsEntry.getInteger(VisionConstants.DEFAULT_NETWORKTABLE_VALUE);
     }
 }
 
