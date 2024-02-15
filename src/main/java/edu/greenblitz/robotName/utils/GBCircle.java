@@ -21,7 +21,7 @@ public class GBCircle {
 	
 	private Rotation2d upperAngleLimit;
 	
-	private final static double EPSILON = 0.1;
+	public final static double EPSILON = 0.1;
 	
 	/**
 	 * Constructor using the center and radius.
@@ -46,7 +46,12 @@ public class GBCircle {
 	public GBCircle(Translation2d position, double radius, Rotation2d lowerAngleLimit, Rotation2d upperAngleLimit) {
 		this.centerPosition = position;
 		this.radius = radius;
-		this.lowerAngleLimit = lowerAngleLimit;
+		if (lowerAngleLimit.getRotations() > upperAngleLimit.getRotations()) {
+			this.lowerAngleLimit = lowerAngleLimit.minus(Rotation2d.fromRotations(1));
+		}
+		else {
+			this.lowerAngleLimit = lowerAngleLimit;
+		}
 		this.upperAngleLimit = upperAngleLimit;
 	}
 	

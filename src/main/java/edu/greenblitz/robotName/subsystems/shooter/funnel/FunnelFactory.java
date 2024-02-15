@@ -9,7 +9,7 @@ public class FunnelFactory {
 	
 	public static IFunnel create() {
 		return switch (Robot.getRobotType()) {
-			case ROBOT_NAME, PEGA_SWERVE -> new NeoFunnel();
+			case SYNCOPA, PEGA_SWERVE -> new NeoFunnel();
 			case REPLAY -> new ReplayFunnel();
 			case SIMULATION -> new SimulationFunnel();
 		};

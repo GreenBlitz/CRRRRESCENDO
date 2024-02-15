@@ -1,9 +1,10 @@
 package edu.greenblitz.robotName.commands.swerve;
 
+import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.path.PathConstraints;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
-import edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.DeferredCommand;
@@ -36,7 +37,7 @@ public class MoveToPosition extends DeferredCommand {
     }
 
     private static Supplier<Command> getPoseFinding(Supplier<Pose2d> endPoint, PathConstraints constraints) {
-        return () -> GBAutoBuilder.pathfindToPose(
+        return () -> AutoBuilder.pathfindToPose(
                 endPoint.get(),
                 constraints
         );
