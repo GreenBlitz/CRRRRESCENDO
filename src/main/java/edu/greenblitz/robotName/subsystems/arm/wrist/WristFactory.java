@@ -8,7 +8,7 @@ public class WristFactory {
 
     public static IWrist create() {
         return switch (Robot.getRobotType()) {
-            case ROBOT_NAME -> new NeoWrist();
+            case SYNCOPA -> new NeoWrist();
             case REPLAY -> new ReplayWrist();
             case SIMULATION, PEGA_SWERVE -> new SimulationWrist();
         };

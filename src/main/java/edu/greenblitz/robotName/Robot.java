@@ -1,5 +1,10 @@
 package edu.greenblitz.robotName;
 
+import com.pathplanner.lib.auto.AutoBuilder;
+import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
+import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
+import edu.greenblitz.robotName.subsystems.Dashboard;
+
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
@@ -7,24 +12,23 @@ import edu.greenblitz.robotName.commands.NoteToShooter;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingStateAndShoot;
 import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.intake.Intake;
-import edu.greenblitz.robotName.subsystems.lifter.Lifter;
 import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
-import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
-import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
+import edu.greenblitz.robotName.subsystems.lifter.Lifter;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
+import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.greenblitz.robotName.utils.AutonomousSelector;
 import edu.greenblitz.robotName.utils.FMSUtils;
-import edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import org.littletonrobotics.junction.LogFileUtil;
@@ -35,14 +39,14 @@ import org.littletonrobotics.junction.wpilog.WPILOGReader;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 
 public class Robot extends LoggedRobot {
-	
+
 	public enum RobotType {
-		ROBOT_NAME,
+		SYNCOPA,
 		SIMULATION,
 		PEGA_SWERVE,
 		REPLAY
 	}
-	
+
 	@Override
 	public void robotInit() {
 		Pathfinding.setPathfinder(new LocalADStar());
@@ -53,39 +57,39 @@ public class Robot extends LoggedRobot {
 		SwerveChassis.getInstance().resetAllEncoders();
 		OI.init();
 	}
-	
+
 	public void initializeSubsystems() {
 		AutonomousSelector.getInstance();
 		MultiLimelight.init();
 		SwerveChassis.init();
-		
+
 		Pivot.init();
 		Funnel.init();
 		FlyWheel.init();
-		
+
 		Elbow.init();
 		Wrist.init();
 		Roller.init();
-		
+
 		Lifter.init();
 		Intake.init();
 	}
-	
+
 	@Override
 	public void teleopInit() {
 		Dashboard.getInstance().activateDriversDashboard();
 	}
-	
+
 	@Override
 	public void robotPeriodic() {
 		CommandScheduler.getInstance().run();
 		RoborioUtils.updateCurrentCycleTime();
 	}
-	
+
 	private void initializeAutonomousBuilder() {
-		NamedCommands.registerCommand("shoot", new GoToShootingStateAndShoot());
+		NamedCommands.registerCommand("shoot", new GoToShootingStateAndShoot(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
 		NamedCommands.registerCommand("grip", new NoteToShooter().raceWith(new WaitCommand(1)));
-		GBAutoBuilder.configureHolonomic(
+		AutoBuilder.configureHolonomic(
 				SwerveChassis.getInstance()::getRobotPose,
 				SwerveChassis.getInstance()::resetChassisPosition,
 				SwerveChassis.getInstance()::getRobotRelativeChassisSpeeds,
@@ -95,16 +99,16 @@ public class Robot extends LoggedRobot {
 				SwerveChassis.getInstance()
 		);
 	}
-	
+
 	private void initializeLogger() {
 		NetworkTableInstance.getDefault()
 				.getStructTopic("RobotPose", Pose2d.struct).publish();
-		
+
 		NetworkTableInstance.getDefault()
 				.getStructTopic("MechanismPoses", Pose3d.struct).publish();
 		switch (getRobotType()) {
 			// Running on a real robot, log to a USB stick
-			case ROBOT_NAME:
+			case SYNCOPA:
 				try {
 					Logger.addDataReceiver(new WPILOGWriter(RobotConstants.USB_LOG_PATH));
 					System.out.println("initialized Logger, USB");
@@ -130,12 +134,12 @@ public class Robot extends LoggedRobot {
 		}
 		Logger.start();
 	}
-	
+
 	@Override
 	public void autonomousInit() {
 		AutonomousSelector.getInstance().getChosenValue().schedule();
 	}
-	
+
 	public static RobotType getRobotType() {
 		RobotType robotType = RobotConstants.ROBOT_TYPE;
 		if (isSimulation()) {
@@ -144,8 +148,8 @@ public class Robot extends LoggedRobot {
 			}
 			return RobotType.SIMULATION;
 		} else {
-			if (robotType.equals(RobotType.ROBOT_NAME)) {
-				return RobotType.ROBOT_NAME;
+			if (robotType.equals(RobotType.SYNCOPA)) {
+				return RobotType.SYNCOPA;
 			}
 			return RobotType.PEGA_SWERVE;
 		}

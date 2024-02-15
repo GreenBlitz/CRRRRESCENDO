@@ -1,6 +1,9 @@
 package edu.greenblitz.robotName.utils;
 
-import edu.greenblitz.robotName.utils.GBPathFinding.GBAutoBuilder;
+import com.pathplanner.lib.auto.AutoBuilder;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -13,7 +16,7 @@ public class AutonomousSelector {
     private final SendableChooser<Command> chooser;
 
     private AutonomousSelector() {
-        chooser = GBAutoBuilder.buildAutoChooser();
+        chooser = AutoBuilder.buildAutoChooser();
         ShuffleboardTab tab = Shuffleboard.getTab("auto");
         tab.add("autonomous chooser", chooser);
     }
