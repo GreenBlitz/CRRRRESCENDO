@@ -1,22 +1,52 @@
 package edu.greenblitz.robotName.subsystems.arm.elbow.falconElbow;
 
+import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
 import com.ctre.phoenix6.controls.PositionVoltage;
-import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
+import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.arm.elbow.IElbow;
+import edu.greenblitz.robotName.utils.motors.GBTalonFXPro;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
+
+import static edu.greenblitz.robotName.RobotConstants.General.Motors.IS_SWITCH_CLOSED;
+import static edu.greenblitz.robotName.utils.sysId.falconSysId.SysIdFalconConstants.SIGNAL_SPEED;
 
 public class FalconElbow implements IElbow {
 
-    private TalonFX motor;
+    private GBTalonFXPro motor;
+
+    private DutyCycleEncoder absoluteEncoder;
+
+    private MotionMagicDutyCycle motionMagicDutyCycle;
+
+    private PositionVoltage positionVoltage;
 
     public FalconElbow() {
-        motor = new TalonFX(FalconElbowConstants.MOTOR_ID);
+        motor = new GBTalonFXPro(FalconElbowConstants.MOTOR_ID);
         motor.getConfigurator().apply(FalconElbowConstants.TALON_FX_CONFIGURATION);
         motor.setNeutralMode(FalconElbowConstants.NEUTRAL_MODE_VALUE);
+        optimizeCanBusUtilization(motor);
+
+        absoluteEncoder = new DutyCycleEncoder(FalconElbowConstants.ABSOLUTE_ENCODER_CHANNEL);
+
+        resetAngle(Rotation2d.fromRotations(absoluteEncoder.getAbsolutePosition()));
+
+        positionVoltage = new PositionVoltage(motor.getPosition().getValue());
+        motionMagicDutyCycle = new MotionMagicDutyCycle(motor.getPosition().getValue());
+    }
+
+    public void optimizeCanBusUtilization(GBTalonFXPro motor) {
+        BaseStatusSignal.setUpdateFrequencyForAll(
+                RobotConstants.General.Motors.SIGNAL_FREQUENCY_HERTZ,
+                motor.getPosition(),
+                motor.getVelocity(),
+                motor.getMotorVoltage(),
+                motor.getVelocity(),
+                motor.getAcceleration()
+        );
         motor.optimizeBusUtilization();
     }
 
@@ -44,31 +74,26 @@ public class FalconElbow implements IElbow {
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
         motor.setControl(
-                new MotionMagicDutyCycle(
-                        targetAngle.getRotations() / ElbowConstants.GEAR_RATIO,
-                        true,
-                        FalconElbowConstants.ELBOW_FEED_FORWARD.calculate(targetAngle.getRadians(), 0),
-                        FalconElbowConstants.MOTION_MAGIC_PID_SLOT,
-                        true,
-                        true,
-                        true
-                )
+                motionMagicDutyCycle
+                        .withPosition(targetAngle.getRotations())
+                        .withEnableFOC(true)
+                        .withSlot(FalconElbowConstants.MOTION_MAGIC_PID_SLOT)
+                        .withLimitForwardMotion(true)
+                        .withLimitReverseMotion(true)
+                        .withOverrideBrakeDurNeutral(true)
         );
     }
 
     @Override
     public void standInPlace(Rotation2d targetAngle) {
         motor.setControl(
-                new PositionVoltage(
-                        targetAngle.getRotations(),
-                        0.0,
-                        true,
-                        FalconElbowConstants.ELBOW_FEED_FORWARD.calculate(targetAngle.getRadians(), 0),
-                        FalconElbowConstants.STAND_IN_PLACE_PID_SLOT,
-                        true,
-                        true,
-                        true
-                )
+                positionVoltage
+                        .withPosition(targetAngle.getRotations())
+                        .withSlot(FalconElbowConstants.STAND_IN_PLACE_PID_SLOT)
+                        .withLimitForwardMotion(true)
+                        .withLimitReverseMotion(true)
+                        .withEnableFOC(true)
+                        .withOverrideBrakeDurNeutral(true)
         );
     }
 
@@ -76,11 +101,11 @@ public class FalconElbow implements IElbow {
     public void updateInputs(ElbowInputsAutoLogged inputs) {
         inputs.outputCurrent = motor.getSupplyCurrent().getValue();
         inputs.appliedOutput = motor.getMotorVoltage().getValue();
-        inputs.position = Rotation2d.fromRadians(motor.getPosition().getValue() * ElbowConstants.GEAR_RATIO);
-        inputs.velocity = motor.getVelocity().getValue() * ElbowConstants.GEAR_RATIO;
-        inputs.absoluteEncoderPosition = motor.getDutyCycle().getValue() * ElbowConstants.GEAR_RATIO;
-        inputs.temperature = motor.getDeviceTemp().getValue();
-        inputs.hasReachedForwardLimit = motor.getFault_ForwardSoftLimit().getValue();
-        inputs.hasReachedBackwardLimit = motor.getFault_ReverseSoftLimit().getValue();
+        inputs.position = Rotation2d.fromRadians(motor.getPosition().getValue());
+        inputs.velocity = motor.getVelocity().getValue();
+        inputs.acceleration = motor.getAcceleration().getValue();
+        inputs.absoluteEncoderPosition = absoluteEncoder.getAbsolutePosition();
+        inputs.hasReachedForwardLimit = motor.getForwardLimit().getValue().value == IS_SWITCH_CLOSED;
+        inputs.hasReachedBackwardLimit = motor.getReverseLimit().getValue().value == IS_SWITCH_CLOSED;
     }
 }
