@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.swerve.Chassis;
+package edu.greenblitz.robotName.subsystems.swerve.chassis;
 
 
 public interface ISwerveChassis {

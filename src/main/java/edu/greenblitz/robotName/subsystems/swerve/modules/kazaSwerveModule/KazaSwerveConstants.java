@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.swerve.Modules.kazaSwerveModule;
+package edu.greenblitz.robotName.subsystems.swerve.modules.kazaSwerveModule;
 
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.RobotConstants;

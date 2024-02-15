@@ -1,10 +1,10 @@
-package edu.greenblitz.robotName.subsystems.swerve.Modules.kazaSwerveModule;
+package edu.greenblitz.robotName.subsystems.swerve.modules.kazaSwerveModule;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
-import edu.greenblitz.robotName.subsystems.swerve.Modules.ISwerveModule;
-import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModuleInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
+import edu.greenblitz.robotName.subsystems.swerve.modules.ISwerveModule;
+import edu.greenblitz.robotName.subsystems.swerve.modules.SwerveModuleInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.swerve.SwerveModuleConfigObject;
 import edu.greenblitz.robotName.utils.Conversions;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;

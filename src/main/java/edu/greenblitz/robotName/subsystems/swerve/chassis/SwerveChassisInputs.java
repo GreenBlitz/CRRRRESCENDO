@@ -1,6 +1,5 @@
-package edu.greenblitz.robotName.subsystems.swerve.Chassis;
+package edu.greenblitz.robotName.subsystems.swerve.chassis;
 
-import edu.wpi.first.math.geometry.Pose2d;
 import org.littletonrobotics.junction.AutoLog;
 
 @AutoLog

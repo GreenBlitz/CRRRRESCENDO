@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.swerve.Chassis;
+package edu.greenblitz.robotName.subsystems.swerve.chassis;
 
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
@@ -9,11 +9,11 @@ import edu.greenblitz.robotName.subsystems.Gyros.GyroInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.Gyros.IAngleMeasurementGyro;
 import edu.greenblitz.robotName.subsystems.Limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.Photonvision;
-import edu.greenblitz.robotName.subsystems.swerve.Modules.ISwerveModule;
-import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModule;
-import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModuleFactory;
-import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModuleInputsAutoLogged;
-import edu.greenblitz.robotName.subsystems.swerve.Modules.mk4iSwerveModule.MK4iSwerveConstants;
+import edu.greenblitz.robotName.subsystems.swerve.modules.ISwerveModule;
+import edu.greenblitz.robotName.subsystems.swerve.modules.SwerveModule;
+import edu.greenblitz.robotName.subsystems.swerve.modules.SwerveModuleFactory;
+import edu.greenblitz.robotName.subsystems.swerve.modules.SwerveModuleInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.swerve.modules.mk4iSwerveModule.MK4iSwerveConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.MatBuilder;
@@ -35,9 +35,9 @@ import org.photonvision.EstimatedRobotPose;
 import java.util.Optional;
 
 import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.TIME_STEP;
-import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.DRIVE_MODE;
-import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.FAST_DISCRETION_CONSTANT;
-import static edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants.SLOW_DISCRETION_CONSTANT;
+import static edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants.DRIVE_MODE;
+import static edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants.FAST_DISCRETION_CONSTANT;
+import static edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants.SLOW_DISCRETION_CONSTANT;
 
 
 public class SwerveChassis extends GBSubsystem implements ISwerveChassis {

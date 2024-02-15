@@ -1,11 +1,11 @@
-package edu.greenblitz.robotName.subsystems.swerve.Modules.simulationSwerveModule;
+package edu.greenblitz.robotName.subsystems.swerve.modules.simulationSwerveModule;
 
 
 import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
-import edu.greenblitz.robotName.subsystems.swerve.Modules.ISwerveModule;
-import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModuleInputsAutoLogged;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
+import edu.greenblitz.robotName.subsystems.swerve.modules.ISwerveModule;
+import edu.greenblitz.robotName.subsystems.swerve.modules.SwerveModuleInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.utils.Conversions;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;

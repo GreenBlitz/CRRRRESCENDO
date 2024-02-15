@@ -1,8 +1,7 @@
 package edu.greenblitz.robotName.utils;
 
 
-import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.swerve.Modules.mk4iSwerveModule.MK4iSwerveConstants;
+import edu.greenblitz.robotName.subsystems.swerve.modules.mk4iSwerveModule.MK4iSwerveConstants;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 

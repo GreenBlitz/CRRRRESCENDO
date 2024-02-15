@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.swerve.Modules;
+package edu.greenblitz.robotName.subsystems.swerve.modules;
 
 
 import org.littletonrobotics.junction.AutoLog;

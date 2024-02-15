@@ -1,8 +1,8 @@
-package edu.greenblitz.robotName.subsystems.swerve.Modules.replaySwerveModule;
+package edu.greenblitz.robotName.subsystems.swerve.modules.replaySwerveModule;
 
 
-import edu.greenblitz.robotName.subsystems.swerve.Modules.ISwerveModule;
-import edu.greenblitz.robotName.subsystems.swerve.Modules.SwerveModuleInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.swerve.modules.ISwerveModule;
+import edu.greenblitz.robotName.subsystems.swerve.modules.SwerveModuleInputsAutoLogged;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public class ReplaySwerveModule implements ISwerveModule {

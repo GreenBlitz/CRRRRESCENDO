@@ -1,7 +1,7 @@
-package edu.greenblitz.robotName.subsystems.swerve.Modules.kazaSwerveModule;
+package edu.greenblitz.robotName.subsystems.swerve.modules.kazaSwerveModule;
 
 
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.wpi.first.math.interpolation.InterpolatingTreeMap;
 import edu.wpi.first.math.interpolation.Interpolator;
 import edu.wpi.first.math.interpolation.InverseInterpolator;

@@ -1,7 +1,7 @@
 package edu.greenblitz.robotName.commands.swerve;
 
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.ChassisConstants;
-import edu.greenblitz.robotName.subsystems.swerve.Chassis.SwerveChassis;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public class RotateToAngle extends SwerveCommand{

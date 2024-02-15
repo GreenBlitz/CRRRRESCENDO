@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.swerve.Modules.mk4iSwerveModule;
+package edu.greenblitz.robotName.subsystems.swerve.modules.mk4iSwerveModule;
 
 import com.ctre.phoenix6.configs.*;
 import com.ctre.phoenix6.signals.InvertedValue;

@@ -1,7 +1,7 @@
-package edu.greenblitz.robotName.subsystems.swerve.Modules.simulationSwerveModule;
+package edu.greenblitz.robotName.subsystems.swerve.modules.simulationSwerveModule;
 
 import com.pathplanner.lib.util.PIDConstants;
-import edu.greenblitz.robotName.subsystems.swerve.Modules.mk4iSwerveModule.MK4iSwerveConstants;
+import edu.greenblitz.robotName.subsystems.swerve.modules.mk4iSwerveModule.MK4iSwerveConstants;
 
 public class SimulationConstants{
     public static final PIDConstants ANGULAR_PID_CONSTANTS = new PIDConstants(1, 0, 0);
