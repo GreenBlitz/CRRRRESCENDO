@@ -33,7 +33,7 @@ public class NeoLifter implements ILifter {
                 CANSparkMax.SoftLimitDirection.kForward,
                 LifterConstants.FORWARD_LIMIT.getRadians()
         );
-        motor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+        motor.setIdleMode(LifterConstants.IDLE_MODE);
     }
 
     @Override

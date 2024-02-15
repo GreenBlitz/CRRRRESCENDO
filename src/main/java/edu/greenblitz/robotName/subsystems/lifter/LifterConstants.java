@@ -38,5 +38,5 @@ public class LifterConstants {
 
     public static final double LIFTER_MASS_KG = 7;
 
-    public static final CANSparkBase.IdleMode IDLE_MODE = CANSparkMax.IdleMode.kBrake;
+    public static final CANSparkMax.IdleMode IDLE_MODE = CANSparkMax.IdleMode.kBrake;
 }
