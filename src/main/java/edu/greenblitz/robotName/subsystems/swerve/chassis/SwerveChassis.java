@@ -1,9 +1,12 @@
 package edu.greenblitz.robotName.subsystems.swerve.chassis;
 
+import edu.greenblitz.robotName.Field;
+import edu.greenblitz.robotName.FieldConstants;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.VisionConstants;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.subsystems.Photonvision;
+import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.gyros.GyroFactory;
 import edu.greenblitz.robotName.subsystems.gyros.GyroInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.gyros.IAngleMeasurementGyro;
@@ -16,6 +19,7 @@ import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
@@ -226,6 +230,21 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
     public Rotation2d getChassisAngle() {
         return getRobotPose().getRotation();
+    }
+
+    public boolean isRobotNearBounds() {
+        Translation2d currentPosition = getRobotPose().getTranslation();
+
+        Rotation2d armAngle = Rotation2d.fromRadians(Math.PI).minus(getChassisAngle());
+        double tipOfElbowX = armAngle.getCos() * ElbowConstants.MAX_ARM_EXTENSION_FROM_CENTER + currentPosition.getX();
+        double tipOfElbowY = armAngle.getSin() * ElbowConstants.MAX_ARM_EXTENSION_FROM_CENTER + currentPosition.getY();
+
+        System.out.println(tipOfElbowX + "," + tipOfElbowY);
+        if (tipOfElbowY > FieldConstants.FIELD_WIDTH || tipOfElbowY < 0)
+            return true;
+        if (tipOfElbowX > FieldConstants.FIELD_LENGTH || tipOfElbowX < 0)
+            return true;
+        return false;
     }
 
     /**
