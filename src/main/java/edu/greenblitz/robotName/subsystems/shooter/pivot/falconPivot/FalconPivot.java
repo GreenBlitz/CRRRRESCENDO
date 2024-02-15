@@ -2,7 +2,6 @@ package edu.greenblitz.robotName.subsystems.shooter.pivot.falconPivot;
 
 import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.controls.PositionVoltage;
-import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.IPivot;
@@ -12,7 +11,6 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 
 import static edu.greenblitz.robotName.RobotConstants.General.Motors.IS_SWITCH_CLOSED;
-import static edu.greenblitz.robotName.subsystems.shooter.pivot.falconPivot.FalconPivotConstants.*;
 
 public class FalconPivot implements IPivot {
 	
@@ -23,12 +21,12 @@ public class FalconPivot implements IPivot {
 	private PositionVoltage positionVoltage;
 	
 	public FalconPivot() {
-		motor = new GBTalonFXPro(FalconPivotConstants.MOTOR_ID);
-		motor.getConfigurator().apply(TALON_FX_CONFIGURATION);
+		motor = new GBTalonFXPro(FalconPivotConstants.MOTOR_ID, FalconPivotConstants.CANBUS_NAME);
+		motor.getConfigurator().apply(FalconPivotConstants.TALON_FX_CONFIGURATION);
 		motor.setNeutralMode(FalconPivotConstants.NEUTRAL_MODE_VALUE);
 		optimizeCanBusUtilization();
 		
-		absoluteEncoder = new DutyCycleEncoder(ABSOLUTE_ENCODER_CHANNEL);
+		absoluteEncoder = new DutyCycleEncoder(FalconPivotConstants.ABSOLUTE_ENCODER_CHANNEL);
 		
 		resetAngle(Rotation2d.fromRotations(absoluteEncoder.getAbsolutePosition()));
 		

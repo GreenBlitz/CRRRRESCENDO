@@ -13,6 +13,8 @@ public class FalconElbowConstants {
 
     public static final int MOTOR_ID = 23;
 
+    public static final String CANBUS_NAME = "*";
+
     public static final int ABSOLUTE_ENCODER_CHANNEL = 9;
 
     public static final int HARD_REVERSE_LIMIT_SWITCH_ID = 1;

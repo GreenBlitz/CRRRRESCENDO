@@ -12,7 +12,6 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 
 import static edu.greenblitz.robotName.RobotConstants.General.Motors.IS_SWITCH_CLOSED;
-import static edu.greenblitz.robotName.utils.sysId.falconSysId.SysIdFalconConstants.SIGNAL_SPEED;
 
 public class FalconElbow implements IElbow {
 
@@ -25,7 +24,7 @@ public class FalconElbow implements IElbow {
     private PositionVoltage positionVoltage;
 
     public FalconElbow() {
-        motor = new GBTalonFXPro(FalconElbowConstants.MOTOR_ID);
+        motor = new GBTalonFXPro(FalconElbowConstants.MOTOR_ID, FalconElbowConstants.CANBUS_NAME);
         motor.getConfigurator().apply(FalconElbowConstants.TALON_FX_CONFIGURATION);
         motor.setNeutralMode(FalconElbowConstants.NEUTRAL_MODE_VALUE);
         optimizeCanBusUtilization(motor);
