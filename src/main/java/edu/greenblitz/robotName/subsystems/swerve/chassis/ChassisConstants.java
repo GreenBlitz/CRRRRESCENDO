@@ -11,7 +11,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 
 public class ChassisConstants {
-	
+
 	public static final double ROBOT_WIDTH_IN_METERS = 0.69;
 	
 	public static final double ROBOT_LENGTH_IN_METERS = 0.82;
