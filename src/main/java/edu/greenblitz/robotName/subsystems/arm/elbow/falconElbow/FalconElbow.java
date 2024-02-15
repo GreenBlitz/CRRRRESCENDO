@@ -24,7 +24,7 @@ public class FalconElbow implements IElbow {
     private PositionVoltage positionVoltage;
 
     public FalconElbow() {
-        motor = new GBTalonFXPro(FalconElbowConstants.MOTOR_ID, FalconElbowConstants.CANBUS_CHANNEL);
+        motor = new GBTalonFXPro(FalconElbowConstants.MOTOR_ID, FalconElbowConstants.CANBUS_CHAIN);
         motor.getConfigurator().apply(FalconElbowConstants.TALON_FX_CONFIGURATION);
         motor.setNeutralMode(FalconElbowConstants.NEUTRAL_MODE_VALUE);
         optimizeCanBusUtilization(motor);
