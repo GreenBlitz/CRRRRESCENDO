@@ -10,7 +10,7 @@ public class SysIdFalconConstants {
 
     protected static final int MOTOR_ID = 187;
 
-    protected static final String CANBUS_NAME = "*";
+    protected static final String CANBUS_CHANNEL = "*";
 
     protected static final SoftwareLimitSwitchConfigs LIMIT_SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();
     static {
