@@ -2,8 +2,13 @@ package edu.greenblitz.robotName;
 
 import edu.wpi.first.apriltag.AprilTag;
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
+import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.geometry.*;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -37,33 +42,16 @@ public class Field {
 	}
 	
 	public static class Apriltags {
-		
-		public static int selectedTagId = 1;
-		
-		public static final Pose3d RED_APRILTAG_LOCATION_ID_1 = new Pose3d(new Translation3d(15.513558, 1.071626, 0), new Rotation3d(0, 0, Math.PI));
-		
-		public static final Pose3d RED_APRILTAG_LOCATION_ID_2 = new Pose3d(new Translation3d(15.513558, 2.748026, 0), new Rotation3d(0, 0, Math.PI));
-		
-		public static final Pose3d RED_APRILTAG_LOCATION_ID_3 = new Pose3d(new Translation3d(15.513558, 4.424426, 0), new Rotation3d(0, 0, Math.PI));
-		
-		public static final Pose3d BLUE_APRILTAG_LOCATION_ID_1 = new Pose3d(new Translation3d(1.02743, 4.424426, 0), new Rotation3d(0, 0, Math.PI));
-		
-		public static final Pose3d BLUE_APRILTAG_LOCATION_ID_2 = new Pose3d(new Translation3d(1.02743, 2.748026, 0), new Rotation3d(0, 0, Math.PI));
-		
-		public static final Pose3d BLUE_APRILTAG_LOCATION_ID_3 = new Pose3d(new Translation3d(1.02743, 1.071626, 0), new Rotation3d(0, 0, Math.PI));
-		
-		static List<AprilTag> apriltags = new ArrayList<>(9);
-		
+
+		public static final AprilTagFieldLayout APRIL_TAG_FIELD_LAYOUT;
+
 		static {
-			apriltags.add(new AprilTag(1, RED_APRILTAG_LOCATION_ID_1));
-			apriltags.add(new AprilTag(2, RED_APRILTAG_LOCATION_ID_2));
-			apriltags.add(new AprilTag(3, RED_APRILTAG_LOCATION_ID_3));
-			apriltags.add(new AprilTag(6, BLUE_APRILTAG_LOCATION_ID_1));
-			apriltags.add(new AprilTag(7, BLUE_APRILTAG_LOCATION_ID_2));
-			apriltags.add(new AprilTag(8, BLUE_APRILTAG_LOCATION_ID_3));
+			try {
+				APRIL_TAG_FIELD_LAYOUT = AprilTagFieldLayout.loadFromResource(AprilTagFields.k2024Crescendo.m_resourceFile);
+			} catch (IOException ioException) {
+				throw new RuntimeException(ioException);
+			}
 		}
-		
-		public static final AprilTagFieldLayout APRIL_TAG_FIELD_LAYOUT = new AprilTagFieldLayout(apriltags, 10, 10);
 	}
 	
 	public static class PlacementLocations {
