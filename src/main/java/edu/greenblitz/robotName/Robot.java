@@ -62,6 +62,7 @@ public class Robot extends LoggedRobot {
 		AutonomousSelector.getInstance();
 		MultiLimelight.init();
 		SwerveChassis.init();
+		ScoringModeSelector.init();
 
 		Pivot.init();
 		Funnel.init();

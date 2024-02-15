@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems;
 
+import edu.greenblitz.robotName.ScoringModeSelector;
 import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.GBSubsystem;
@@ -62,5 +63,10 @@ public class Dashboard extends GBSubsystem {
 		//field
 		driversTab.add("Field", SwerveChassis.getInstance().getField()).withPosition(5, 2).withSize(3, 2);
 		driversTab.addDouble("std devs", () -> MultiLimelight.getInstance().getDynamicStdDevs(0));
+
+		//Scoring Mode
+		driversTab.addBoolean("Scoring Mode Color", () -> ScoringModeSelector.isSpeakerMode());
+		driversTab.addString("Scoring Mode", () -> ScoringModeSelector.getScoringMode().toString() + " MODE");
+
 	}
 }
