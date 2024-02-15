@@ -90,7 +90,8 @@ public class Robot extends LoggedRobot {
         RoborioUtils.updateCurrentCycleTime();
         ArmShooterMechanism.getInstance().periodic();
 
-        SwerveChassis.getInstance().getModule(SwerveChassis.Module.FRONT_LEFT
+        SwerveChassis.getInstance().getModule(SwerveChassis.Module.FRONT_LEFT);
+    }
 
     private void initializeAutonomousBuilder() {
         AutoBuilder.configureHolonomic(
