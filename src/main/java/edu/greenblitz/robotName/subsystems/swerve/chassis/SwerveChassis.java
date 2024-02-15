@@ -239,12 +239,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         double tipOfArmX = armAngle.getCos() * ElbowConstants.MAX_ARM_EXTENSION_FROM_CENTER + currentPosition.getX();
         double tipOfArmY = armAngle.getSin() * ElbowConstants.MAX_ARM_EXTENSION_FROM_CENTER + currentPosition.getY();
 
-        System.out.println(tipOfArmX + "," + tipOfArmY);
-        if (tipOfArmY > FieldConstants.FIELD_WIDTH || tipOfArmY < 0)
-            return true;
-        if (tipOfArmX > FieldConstants.FIELD_LENGTH || tipOfArmX < 0)
-            return true;
-        return false;
+        return tipOfArmY > FieldConstants.FIELD_WIDTH ||
+                tipOfArmY < 0 ||
+                tipOfArmX > FieldConstants.FIELD_LENGTH ||
+                tipOfArmX < 0;
     }
 
     /**
