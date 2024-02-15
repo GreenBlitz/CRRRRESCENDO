@@ -235,14 +235,14 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     public boolean isRobotNearBounds() {
         Translation2d currentPosition = getRobotPose().getTranslation();
 
-        Rotation2d armAngle = Rotation2d.fromRadians(Math.PI).minus(getChassisAngle());
-        double tipOfElbowX = armAngle.getCos() * ElbowConstants.MAX_ARM_EXTENSION_FROM_CENTER + currentPosition.getX();
-        double tipOfElbowY = armAngle.getSin() * ElbowConstants.MAX_ARM_EXTENSION_FROM_CENTER + currentPosition.getY();
+        Rotation2d armAngle = getChassisAngle().plus(Rotation2d.fromRadians(Math.PI));
+        double tipOfArmX = armAngle.getCos() * ElbowConstants.MAX_ARM_EXTENSION_FROM_CENTER + currentPosition.getX();
+        double tipOfArmY = armAngle.getSin() * ElbowConstants.MAX_ARM_EXTENSION_FROM_CENTER + currentPosition.getY();
 
-        System.out.println(tipOfElbowX + "," + tipOfElbowY);
-        if (tipOfElbowY > FieldConstants.FIELD_WIDTH || tipOfElbowY < 0)
+        System.out.println(tipOfArmX + "," + tipOfArmY);
+        if (tipOfArmY > FieldConstants.FIELD_WIDTH || tipOfArmY < 0)
             return true;
-        if (tipOfElbowX > FieldConstants.FIELD_LENGTH || tipOfElbowX < 0)
+        if (tipOfArmX > FieldConstants.FIELD_LENGTH || tipOfArmX < 0)
             return true;
         return false;
     }
