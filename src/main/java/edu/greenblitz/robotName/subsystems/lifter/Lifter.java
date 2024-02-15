@@ -16,7 +16,7 @@ public class Lifter extends GBSubsystem {
         lifter = LifterFactory.create();
         lifterInputs = new LifterInputsAutoLogged();
         lifter.updateInputs(lifterInputs);
-        setIdleMode(CANSparkMax.IdleMode.kBrake);
+        setIdleMode(LifterConstants.IDLE_MODE);
     }
 
     public static Lifter getInstance() {
@@ -50,12 +50,12 @@ public class Lifter extends GBSubsystem {
         lifter.setVoltage(voltage);
     }
 
-    public void resetEncoder(Rotation2d position) {
+    public void resetEncoderPosition(Rotation2d position) {
         lifter.resetEncoder(position);
     }
 
-    public void resetEncoder() {
-        resetEncoder(LifterConstants.ENCODER_POSITION_WHEN_RESET);
+    public void resetEncoderPosition() {
+        resetEncoderPosition(LifterConstants.ENCODER_POSITION_WHEN_RESET);
     }
 
     public void stop() {

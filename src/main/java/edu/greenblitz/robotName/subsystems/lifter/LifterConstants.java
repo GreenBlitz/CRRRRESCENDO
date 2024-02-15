@@ -1,5 +1,7 @@
 package edu.greenblitz.robotName.subsystems.lifter;
 
+import com.revrobotics.CANSparkBase;
+import com.revrobotics.CANSparkMax;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation3d;
@@ -35,4 +37,6 @@ public class LifterConstants {
     public static final double LENGTH_OF_LIFTER = 0.45;
 
     public static final double LIFTER_MASS_KG = 7;
+
+    public static final CANSparkBase.IdleMode IDLE_MODE = CANSparkMax.IdleMode.kBrake;
 }

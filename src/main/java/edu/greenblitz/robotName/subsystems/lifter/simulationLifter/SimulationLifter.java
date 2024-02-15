@@ -32,7 +32,8 @@ public class SimulationLifter implements ILifter {
                 LifterConstants.LENGTH_OF_LIFTER,
                 LifterConstants.BACKWARD_LIMIT.getRadians(),
                 LifterConstants.FORWARD_LIMIT.getRadians(),
-                false, LifterConstants.STARTING_ANGLE.getRadians()
+                false,
+                LifterConstants.STARTING_ANGLE.getRadians()
         );
         pidController = SimulationLifterConstants.SIMULATION_PID;
 

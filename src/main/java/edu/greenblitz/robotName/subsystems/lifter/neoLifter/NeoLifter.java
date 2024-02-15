@@ -20,11 +20,19 @@ public class NeoLifter implements ILifter {
         solenoid = new TalonSRX(NeoLifterConstants.SOLENOID_ID);
         motor.config(NeoLifterConstants.CONFIG);
 
-        motor.getReverseLimitSwitch(NeoLifterConstants.BACKWARD_LIMIT_SWITCH_TYPE).enableLimitSwitch(NeoLifterConstants.IS_BACKWARD_LIMIT_SWITCH_ENABLED);
-        motor.getForwardLimitSwitch(NeoLifterConstants.FORWARD_LIMIT_SWITCH_TYPE).enableLimitSwitch(NeoLifterConstants.IS_FORWARD_LIMIT_SWITCH_ENABLED);
+        motor.getReverseLimitSwitch(NeoLifterConstants.BACKWARD_LIMIT_SWITCH_TYPE)
+                .enableLimitSwitch(NeoLifterConstants.IS_BACKWARD_LIMIT_SWITCH_ENABLED);
+        motor.getForwardLimitSwitch(NeoLifterConstants.FORWARD_LIMIT_SWITCH_TYPE)
+                .enableLimitSwitch(NeoLifterConstants.IS_FORWARD_LIMIT_SWITCH_ENABLED);
 
-        motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, LifterConstants.BACKWARD_LIMIT.getRadians());
-        motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, LifterConstants.FORWARD_LIMIT.getRadians());
+        motor.setSoftLimit(
+                CANSparkMax.SoftLimitDirection.kReverse,
+                LifterConstants.BACKWARD_LIMIT.getRadians()
+        );
+        motor.setSoftLimit(
+                CANSparkMax.SoftLimitDirection.kForward,
+                LifterConstants.FORWARD_LIMIT.getRadians()
+        );
         motor.setIdleMode(CANSparkMax.IdleMode.kBrake);
     }
 
