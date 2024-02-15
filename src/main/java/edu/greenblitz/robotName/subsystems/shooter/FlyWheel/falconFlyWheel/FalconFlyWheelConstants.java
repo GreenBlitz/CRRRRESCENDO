@@ -8,7 +8,9 @@ public class FalconFlyWheelConstants {
 	public static class rightMotorConstants {
 		
 		public static final int ID = 12;
-		
+
+		public static final String CANBUS_CHAIN = "*";
+
 		public static final NeutralModeValue NEUTRAL_MODE_VALUE = NeutralModeValue.Coast;
 		
 		public static final int PID_SLOT = 0;
@@ -65,7 +67,9 @@ public class FalconFlyWheelConstants {
 	public static class leftMotorConstants {
 		
 		public static final int ID = 22;
-		
+
+		public static final String CANBUS_CHAIN = "*";
+
 		public static final NeutralModeValue NEUTRAL_MODE_VALUE = NeutralModeValue.Coast;
 		
 		public static final int PID_SLOT = 0;
