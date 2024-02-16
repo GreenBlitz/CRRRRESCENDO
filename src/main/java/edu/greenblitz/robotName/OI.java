@@ -95,7 +95,7 @@ public class OI {
 		usedJoystick.A.whileTrue(new RunRollerByJoystick(usedJoystick));
 		usedJoystick.B.whileTrue(new RunIntakeByJoystick(usedJoystick));
 		usedJoystick.X.whileTrue(new RunFunnelByJoystick(usedJoystick));
-		usedJoystick.Y.whileTrue(new ShootSimulationNote());
+		fourthJoystick.Y.whileTrue(new ShootSimulationNote());
 	}
 
 	public void initializeDefaultCommands() {
