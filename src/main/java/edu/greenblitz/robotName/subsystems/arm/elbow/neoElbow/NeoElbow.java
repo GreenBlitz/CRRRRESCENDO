@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkAbsoluteEncoder;
 import com.revrobotics.SparkLimitSwitch;
+import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowInputsAutoLogged;
@@ -75,9 +76,9 @@ public class NeoElbow implements IElbow {
         inputs.appliedOutput = motor.getAppliedOutput() * Battery.getInstance().getCurrentVoltage();
         inputs.outputCurrent = motor.getOutputCurrent();
         inputs.position = Rotation2d.fromRotations(motor.getEncoder().getPosition());
+        inputs.acceleration = (motor.getEncoder().getVelocity() - inputs.velocity) / RobotConstants.SimulationConstants.TIME_STEP;
         inputs.velocity = motor.getEncoder().getVelocity();
         inputs.absoluteEncoderPosition = motor.getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle).getPosition();
-        inputs.temperature = motor.getMotorTemperature();
         inputs.hasReachedBackwardLimit = Math.abs(inputs.position.getRadians() - ElbowConstants.BACKWARD_ANGLE_LIMIT.getRadians()) <= ElbowConstants.TOLERANCE.getRadians();
         inputs.hasReachedForwardLimit = Math.abs(inputs.position.getRadians() - ElbowConstants.FORWARD_ANGLE_LIMIT.getRadians()) <= ElbowConstants.TOLERANCE.getRadians();
     }

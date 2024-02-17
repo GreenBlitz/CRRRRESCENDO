@@ -38,7 +38,7 @@ public class RunFlyWheelByVelocity extends FlyWheelCommand {
         } else {
             timeInShootingSpeed = 0;
         }
-        flyWheel.setPreparedToShoot(timeInShootingSpeed > FlyWheelConstants.SHOOTING_SPEED_TIME);
+        flyWheel.setPreparedToShoot(timeInShootingSpeed > FlyWheelConstants.SHOOTING_SPEED_TIME_SECONDS);
     }
 
     @Override
