@@ -2,32 +2,31 @@ package edu.greenblitz.robotName.subsystems.shooter.pivot.falconPivot;
 
 import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.controls.PositionVoltage;
-import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.IPivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotInputsAutoLogged;
+import edu.greenblitz.robotName.utils.motors.GBTalonFXPro;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 
 import static edu.greenblitz.robotName.RobotConstants.General.Motors.IS_SWITCH_CLOSED;
-import static edu.greenblitz.robotName.subsystems.shooter.pivot.falconPivot.FalconPivotConstants.*;
 
 public class FalconPivot implements IPivot {
 	
-	private TalonFX motor;
+	private GBTalonFXPro motor;
 	
 	private DutyCycleEncoder absoluteEncoder;
 	
 	private PositionVoltage positionVoltage;
 	
 	public FalconPivot() {
-		motor = new TalonFX(MOTOR_ID);
-		motor.getConfigurator().apply(TALON_FX_CONFIGURATION);
-		motor.setNeutralMode(NEUTRAL_MODE_VALUE);
+		motor = new GBTalonFXPro(FalconPivotConstants.MOTOR_ID, FalconPivotConstants.CANBUS_CHANNEL);
+		motor.getConfigurator().apply(FalconPivotConstants.TALON_FX_CONFIGURATION);
+		motor.setNeutralMode(FalconPivotConstants.NEUTRAL_MODE_VALUE);
 		optimizeCanBusUtilization();
 		
-		absoluteEncoder = new DutyCycleEncoder(ABSOLUTE_ENCODER_CHANNEL);
+		absoluteEncoder = new DutyCycleEncoder(FalconPivotConstants.ABSOLUTE_ENCODER_CHANNEL);
 		
 		resetAngle(Rotation2d.fromRotations(absoluteEncoder.getAbsolutePosition()));
 		
@@ -74,10 +73,11 @@ public class FalconPivot implements IPivot {
 		motor.setControl(
 				positionVoltage
 						.withPosition(targetAngle.getRotations())
-						.withSlot(PID_SLOT)
+						.withSlot(FalconPivotConstants.PID_SLOT)
 						.withLimitForwardMotion(true)
 						.withLimitReverseMotion(true)
 						.withEnableFOC(true)
+						.withOverrideBrakeDurNeutral(true)
 		);
 	}
 	

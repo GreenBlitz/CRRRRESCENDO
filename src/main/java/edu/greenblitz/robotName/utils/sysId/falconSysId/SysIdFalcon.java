@@ -11,8 +11,6 @@ import edu.wpi.first.units.Voltage;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
-
-import static edu.greenblitz.robotName.utils.sysId.falconSysId.SysIdFalconConstants.*;
 import static edu.wpi.first.units.Units.Volts;
 
 public class SysIdFalcon extends GBSubsystem {
@@ -30,14 +28,14 @@ public class SysIdFalcon extends GBSubsystem {
     private SysIdRoutine sysIdRoutine;
 
     private SysIdFalcon() {
-        motor = new TalonFX(MOTOR_ID);
-        motor.getConfigurator().apply(LIMIT_SWITCH_CONFIGS);
+        motor = new TalonFX(SysIdFalconConstants.MOTOR_ID, SysIdFalconConstants.CANBUS_CHAIN);
+        motor.getConfigurator().apply(SysIdFalconConstants.LIMIT_SWITCH_CONFIGS);
 
         sysIdControl = new VoltageOut(0);
 
         config = new SysIdRoutine.Config(
                 null,
-                Volts.of(DYNAMIC_VOLTAGE),
+                Volts.of(SysIdFalconConstants.DYNAMIC_VOLTAGE),
                 null,
                 (state) -> SignalLogger.writeString("state", state.toString())
         );
@@ -49,7 +47,7 @@ public class SysIdFalcon extends GBSubsystem {
         sysIdRoutine = new SysIdRoutine(config, mechanism);
 
         BaseStatusSignal.setUpdateFrequencyForAll(
-                SIGNAL_SPEED,
+                SysIdFalconConstants.SIGNAL_SPEED,
                 motor.getPosition(),
                 motor.getVelocity(),
                 motor.getMotorVoltage()
