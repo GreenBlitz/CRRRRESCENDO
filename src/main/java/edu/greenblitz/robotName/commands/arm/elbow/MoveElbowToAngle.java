@@ -9,7 +9,7 @@ public class MoveElbowToAngle extends ElbowCommand {
 
     private Rotation2d targetAngle;
 
-    private boolean isRobotNearFieldWalls;
+    private boolean isElbowCrashableIntoWall;
 
     public MoveElbowToAngle(Rotation2d targetAngle) {
         this.targetAngle = targetAngle;
@@ -21,8 +21,8 @@ public class MoveElbowToAngle extends ElbowCommand {
 
     @Override
     public void initialize() {
-        isRobotNearFieldWalls = SwerveChassis.getInstance().isRobotNearBoundsOfField();
-        if (isRobotNearFieldWalls) {
+        isElbowCrashableIntoWall = SwerveChassis.getInstance().isRobotNearBoundsOfField();
+        if (isElbowCrashableIntoWall) {
             elbow.setCurrentAngle();
             elbow.standInPlace();
         }
@@ -34,11 +34,11 @@ public class MoveElbowToAngle extends ElbowCommand {
     public void execute() {
         if (SwerveChassis.getInstance().isRobotNearBoundsOfField()) {
             elbowStandInPlaceOnce();
-            isRobotNearFieldWalls = true;
+            isElbowCrashableIntoWall = true;
         }
-        else if (isRobotNearFieldWalls) {
+        else if (isElbowCrashableIntoWall) {
             elbow.moveToAngle(targetAngle);
-            isRobotNearFieldWalls = false;
+            isElbowCrashableIntoWall = false;
         }
         else if (Robot.isSimulation()) {
             elbow.moveToAngle(targetAngle);
@@ -47,7 +47,7 @@ public class MoveElbowToAngle extends ElbowCommand {
     }
 
     private void elbowStandInPlaceOnce() {
-        if (!isRobotNearFieldWalls || Robot.isSimulation()) {
+        if (!isElbowCrashableIntoWall || Robot.isSimulation()) {
             elbow.setCurrentAngle();
             elbow.standInPlace();
         }
