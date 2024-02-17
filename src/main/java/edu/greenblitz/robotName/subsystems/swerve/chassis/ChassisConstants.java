@@ -77,7 +77,7 @@ public class ChassisConstants {
 	
 	public static final double ERROR_SPIKE_FOR_REPLANNING = 1;
 	
-	public static final double TRANSLATIONAL_TOLERANCE = 0.05;
+	public static final double PATHPLANNER_TRANSLATIONAL_TOLERANCE = 0.5;
 	
 	public static final HolonomicPathFollowerConfig PATH_FOLLOWER_CONFIG = new HolonomicPathFollowerConfig(
 			TRANSLATION_PID,
