@@ -130,15 +130,8 @@ public class MK4ISwerveModule implements ISwerveModule {
     public void updateInputs(SwerveModuleInputsAutoLogged inputs) {
         updateStatusSignals(true);
 
-
-        inputs.linearVelocity = BaseStatusSignal.getLatencyCompensatedValue(linearVelocityStatusSignal, linearAccelerationStatusSignal) / MK4iSwerveConstants.LINEAR_GEAR_RATIO;
-        inputs.angularVelocity = BaseStatusSignal.getLatencyCompensatedValue(angularVelocityStatusSignal, angularAccelerationStatusSignal) / MK4iSwerveConstants.LINEAR_GEAR_RATIO;
-
-        SmartDashboard.putNumber("linearVelocity compensated",BaseStatusSignal.getLatencyCompensatedValue(linearVelocityStatusSignal, linearAccelerationStatusSignal) / MK4iSwerveConstants.ANGULAR_GEAR_RATIO);
-        SmartDashboard.putNumber("linearVelocity compensated",BaseStatusSignal.getLatencyCompensatedValue(angularVelocityStatusSignal, angularAccelerationStatusSignal) / MK4iSwerveConstants.ANGULAR_GEAR_RATIO);
-
-        SmartDashboard.putNumber("linearVelocity uncompensated",linearMotor.getVelocity().getValue() * MK4iSwerveConstants.WHEEL_CIRCUMFERENCE);
-        SmartDashboard.putNumber("linearVelocity uncompensated",angularMotor.getVelocity().getValue() / MK4iSwerveConstants.ANGULAR_GEAR_RATIO);
+        inputs.linearVelocity = BaseStatusSignal.getLatencyCompensatedValue(linearVelocityStatusSignal, linearAccelerationStatusSignal);
+        inputs.angularVelocity = BaseStatusSignal.getLatencyCompensatedValue(angularVelocityStatusSignal, angularAccelerationStatusSignal);
 
         inputs.linearVoltage = linearMotor.getSupplyVoltage().getValue();
         inputs.angularVoltage = angularMotor.getSupplyVoltage().getValue();
