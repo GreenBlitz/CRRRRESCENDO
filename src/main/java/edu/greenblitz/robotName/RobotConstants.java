@@ -58,7 +58,7 @@ public class RobotConstants {
 		
 		public static final double MIN_MOTOR_VOLTAGE = -12;
 		
-		public static final Translation3d ARM_TO_ROBOT = new Translation3d(0, 0, 1.2);
+		public static final Translation3d ROBOT_TRANSLATION = new Translation3d(0, 0, 0.1);
 	}
 	
 	public static class Joystick {

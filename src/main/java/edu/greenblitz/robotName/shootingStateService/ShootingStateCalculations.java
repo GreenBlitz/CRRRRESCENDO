@@ -18,7 +18,7 @@ public class ShootingStateCalculations {
 	}
 
 	private static Pose2d getRobotPose() {
-		return SwerveChassis.getInstance().getRobotPose();
+		return SwerveChassis.getInstance().getRobotPose2d();
 	}
 
 	public static Translation2d getRobotTargetTranslation(ShootingZone zone) {
