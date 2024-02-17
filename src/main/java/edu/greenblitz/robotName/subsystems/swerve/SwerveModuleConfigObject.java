@@ -24,7 +24,7 @@ public class SwerveModuleConfigObject {
 		this.linInverted = linInverted;
 		this.encoderOffset = encoderOffset;
 	}
-	
+
 	public SwerveModuleConfigObject(String canbus_chain, int angleMotorID, int linearMotorID, int AbsoluteEncoderID, boolean linInverted) {
 		this(
 				canbus_chain,
