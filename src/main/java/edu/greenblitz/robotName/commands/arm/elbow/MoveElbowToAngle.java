@@ -21,7 +21,7 @@ public class MoveElbowToAngle extends ElbowCommand {
 
     @Override
     public void initialize() {
-        isRobotNearFieldWalls = SwerveChassis.getInstance().isRobotNearBounds();
+        isRobotNearFieldWalls = SwerveChassis.getInstance().isRobotNearBoundsOfField();
         if (isRobotNearFieldWalls) {
             elbow.setCurrentAngle();
             elbow.standInPlace();
@@ -32,14 +32,8 @@ public class MoveElbowToAngle extends ElbowCommand {
 
     @Override
     public void execute() {
-        if (SwerveChassis.getInstance().isRobotNearBounds()) {
-            if (!isRobotNearFieldWalls) {
-                elbow.setCurrentAngle();
-                elbow.standInPlace();
-            }
-            if (Robot.isSimulation()) {
-                elbow.standInPlace();
-            }
+        if (SwerveChassis.getInstance().isRobotNearBoundsOfField()) {
+            elbowStandInPlaceOnce();
             isRobotNearFieldWalls = true;
         }
         else if (isRobotNearFieldWalls) {
@@ -50,6 +44,13 @@ public class MoveElbowToAngle extends ElbowCommand {
             elbow.moveToAngle(targetAngle);
         }
 
+    }
+
+    private void elbowStandInPlaceOnce() {
+        if (!isRobotNearFieldWalls || Robot.isSimulation()) {
+            elbow.setCurrentAngle();
+            elbow.standInPlace();
+        }
     }
 
     @Override

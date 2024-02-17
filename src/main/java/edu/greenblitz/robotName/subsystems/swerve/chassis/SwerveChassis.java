@@ -1,6 +1,5 @@
 package edu.greenblitz.robotName.subsystems.swerve.chassis;
 
-import edu.greenblitz.robotName.Field;
 import edu.greenblitz.robotName.FieldConstants;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.VisionConstants;
@@ -232,7 +231,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         return getRobotPose().getRotation();
     }
 
-    public boolean isRobotNearBounds() {
+    public boolean isRobotNearBoundsOfField() {
         Translation2d currentPosition = getRobotPose().getTranslation();
 
         Rotation2d armAngle = getChassisAngle().plus(Rotation2d.fromRadians(Math.PI));
