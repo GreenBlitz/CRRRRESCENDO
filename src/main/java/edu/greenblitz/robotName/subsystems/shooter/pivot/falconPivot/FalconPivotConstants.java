@@ -7,7 +7,7 @@ import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 
 public class FalconPivotConstants {
 	
-	public static final int MOTOR_ID = 12;
+	public static final int MOTOR_ID = 49;
 
 	public static final String CANBUS_CHANNEL = "*";
 	
@@ -50,9 +50,9 @@ public class FalconPivotConstants {
 	public static final SoftwareLimitSwitchConfigs SOFTWARE_LIMIT_SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();
 	
 	static {
-		SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitEnable = true;
+		SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitEnable = false;
 		SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitThreshold = PivotConstants.FORWARD_ANGLE_LIMIT.getRotations();
-		SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitEnable = true;
+		SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitEnable = false;
 		SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitThreshold = PivotConstants.BACKWARD_ANGLE_LIMIT.getRotations();
 	}
 	
