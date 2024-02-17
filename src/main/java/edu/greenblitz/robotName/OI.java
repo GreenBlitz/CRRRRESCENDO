@@ -31,6 +31,7 @@ import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 public class OI {
 
@@ -95,9 +96,17 @@ public class OI {
 
 	public void thirdJoystickButtons() {
 		SmartJoystick usedJoystick = thirdJoystick;
-		usedJoystick.A.whileTrue(new RunIntakeByJoystick(usedJoystick));
-		usedJoystick.B.whileTrue(new RunFunnelByJoystick(usedJoystick));
-		usedJoystick.X.whileTrue(new RunFlyWheelByJoystick(usedJoystick));
+		usedJoystick.B.whileTrue(new RunIntakeByJoystick(usedJoystick));//Right x-axis
+		usedJoystick.X.whileTrue(new RunFunnelByJoystick(usedJoystick));//Left x axis
+		usedJoystick.POV_UP.whileTrue(new RunFlyWheelByPower(0.4));
+//		usedJoystick.POV_DOWN.whileTrue(new RunFlyWheelByPower(-0.9));
+		usedJoystick.POV_LEFT.whileTrue(new RunFlyWheelByPower(0.4));
+//		usedJoystick.POV_RIGHT.whileTrue(new RunFlyWheelByPower(-0.5));
+		usedJoystick.A.whileTrue(new RunFunnelByPower(0.9));
+//		usedJoystick.R1.whileTrue(new RunFunnelByPower(-0.9));
+		usedJoystick.L1.whileTrue(new RollIntakeByPower(-0.9).alongWith(new RunFunnelByPower(-0.9)));
+		usedJoystick.BACK.whileTrue(new RollIntakeByPower(0.9));
+		
 	}
 
 	public void initializeDefaultCommands() {
