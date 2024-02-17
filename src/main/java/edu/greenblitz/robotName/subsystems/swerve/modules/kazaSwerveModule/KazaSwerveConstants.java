@@ -6,15 +6,17 @@ import edu.greenblitz.robotName.subsystems.swerve.SwerveModuleConfigObject;
 import edu.greenblitz.robotName.utils.PIDObject;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 
+import static edu.greenblitz.robotName.RobotConstants.General.CANIVORE_NAME;
+
 public class KazaSwerveConstants {
 	
-	public static final SwerveModuleConfigObject KAZA_SWERVE_MODULE_FRONT_LEFT = new SwerveModuleConfigObject("*", 1, 10, 0, false);
+	public static final SwerveModuleConfigObject KAZA_SWERVE_MODULE_FRONT_LEFT = new SwerveModuleConfigObject(CANIVORE_NAME, 1, 10, 0, false);
 	
-	public static final SwerveModuleConfigObject KAZA_SWERVE_MODULE_FRONT_RIGHT = new SwerveModuleConfigObject("*" , 3, 11, 2, true);
+	public static final SwerveModuleConfigObject KAZA_SWERVE_MODULE_FRONT_RIGHT = new SwerveModuleConfigObject(CANIVORE_NAME, 3, 11, 2, true);
 	
-	public static final SwerveModuleConfigObject KAZA_SWERVE_MODULE_BACK_LEFT = new SwerveModuleConfigObject("*", 2, 8, 1, false);
+	public static final SwerveModuleConfigObject KAZA_SWERVE_MODULE_BACK_LEFT = new SwerveModuleConfigObject(CANIVORE_NAME, 2, 8, 1, false);
 	
-	public static final SwerveModuleConfigObject KAZA_SWERVE_MODULE_BACK_RIGHT = new SwerveModuleConfigObject("*", 12, 5, 3, true);
+	public static final SwerveModuleConfigObject KAZA_SWERVE_MODULE_BACK_RIGHT = new SwerveModuleConfigObject(CANIVORE_NAME, 12, 5, 3, true);
 	
 	public static final double ANGULAR_GEAR_RATIO = 6.0;
 	
