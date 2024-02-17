@@ -3,6 +3,7 @@ package edu.greenblitz.robotName.subsystems;
 import edu.greenblitz.robotName.ScoringModeSelector;
 import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
+import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -45,7 +46,7 @@ public class Dashboard extends GBSubsystem {
 	 */
 	public void activateDriversDashboard() {
 		if (driverDashboardInitiated) return;
-		
+
 		driverDashboardInitiated = true;
 		ShuffleboardTab driversTab = Shuffleboard.getTab("Drivers");
 		
@@ -67,6 +68,9 @@ public class Dashboard extends GBSubsystem {
 		//Scoring Mode
 		driversTab.addBoolean("Scoring Mode Color", () -> ScoringModeSelector.isSpeakerMode());
 		driversTab.addString("Scoring Mode", () -> ScoringModeSelector.getScoringMode().toString() + " MODE");
-
+		
+		//Note Placement
+		driversTab.addString("Current Note Place", () -> FMSUtils.getNotePlacement());
+		
 	}
 }
