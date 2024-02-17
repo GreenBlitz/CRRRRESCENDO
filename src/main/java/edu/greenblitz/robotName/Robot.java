@@ -65,16 +65,16 @@ public class Robot extends LoggedRobot {
 		SwerveChassis.init();
 		ScoringModeSelector.init();
 
-//		Pivot.init();
-//		Funnel.init();
-//		FlyWheel.init();
-//
-//		Elbow.init();
-//		Wrist.init();
-//		Roller.init();
-//
-//		Lifter.init();
-//		Intake.init();
+		Pivot.init();
+		Funnel.init();
+		FlyWheel.init();
+
+		Elbow.init();
+		Wrist.init();
+		Roller.init();
+
+		Lifter.init();
+		Intake.init();
 	}
 
 	@Override
