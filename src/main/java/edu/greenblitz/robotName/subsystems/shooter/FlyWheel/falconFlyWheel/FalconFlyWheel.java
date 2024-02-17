@@ -26,12 +26,12 @@ public class FalconFlyWheel implements IFlyWheel {
 	
 	public FalconFlyWheel() {
 		rightMotor = new GBTalonFXPro(rightMotorConstants.ID, rightMotorConstants.CANBUS_CHAIN);
-		rightMotor.getConfigurator().apply(rightMotorConstants.CONFIGURATION);
+		rightMotor.applyConfiguration(rightMotorConstants.CONFIGURATION);
 		rightMotor.setNeutralMode(rightMotorConstants.NEUTRAL_MODE_VALUE);
 		optimizeCanBusUtilization(rightMotor);
 		
 		leftMotor = new GBTalonFXPro(leftMotorConstants.ID, leftMotorConstants.CANBUS_CHAIN);
-		leftMotor.getConfigurator().apply(leftMotorConstants.CONFIGURATION);
+		leftMotor.applyConfiguration(leftMotorConstants.CONFIGURATION);
 		leftMotor.setNeutralMode(leftMotorConstants.NEUTRAL_MODE_VALUE);
 		optimizeCanBusUtilization(leftMotor);
 	}

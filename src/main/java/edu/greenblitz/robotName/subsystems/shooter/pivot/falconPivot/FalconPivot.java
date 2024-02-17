@@ -22,7 +22,7 @@ public class FalconPivot implements IPivot {
 	
 	public FalconPivot() {
 		motor = new GBTalonFXPro(FalconPivotConstants.MOTOR_ID, FalconPivotConstants.CANBUS_CHANNEL);
-		motor.getConfigurator().apply(FalconPivotConstants.TALON_FX_CONFIGURATION);
+		motor.applyConfiguration(FalconPivotConstants.TALON_FX_CONFIGURATION);
 		motor.setNeutralMode(FalconPivotConstants.NEUTRAL_MODE_VALUE);
 		optimizeCanBusUtilization();
 		

@@ -47,10 +47,10 @@ public class MK4ISwerveModule implements ISwerveModule {
         };
 
         angularMotor = new GBTalonFXPro(configObject.angleMotorID);
-        angularMotor.getConfigurator().apply(MK4iSwerveConstants.ANGULAR_FALCON_CONFIG_OBJECT);
+        angularMotor.applyConfiguration(MK4iSwerveConstants.ANGULAR_FALCON_CONFIG_OBJECT);
 
         linearMotor = new GBTalonFXPro(configObject.linearMotorID);
-        linearMotor.getConfigurator().apply(MK4iSwerveConstants.LINEAR_FALCON_CONFIG_OBJECT);
+        linearMotor.applyConfiguration(MK4iSwerveConstants.LINEAR_FALCON_CONFIG_OBJECT);
         linearMotor.setInverted(configObject.linInverted);
 
         canCoder = new CANcoder(configObject.AbsoluteEncoderID);
