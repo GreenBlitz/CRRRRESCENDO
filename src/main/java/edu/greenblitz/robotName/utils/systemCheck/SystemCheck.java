@@ -106,14 +106,17 @@ public class SystemCheck extends GBSubsystem {
 
     public void initPingableDashboard() {
         ShuffleboardLayout pingableDataList = tab.getLayout("pingable", BuiltInLayouts.kList)
-                .withPosition(6, 0).withSize(PingableManager.getInstance().getPingableList().toArray().length / 4, PingableManager.getInstance().getPingableList().toArray().length + 1)
+                .withPosition(SystemCheckConstants.STARTING_X_OF_PINGABLE_WIDGET, SystemCheckConstants.STARTING_Y_OF_PINGABLE_WIDGET)
+                .withSize(
+                        PingableManager.getInstance().getPingableList().toArray().length / SystemCheckConstants.NUMBER_OF_CELLS_IN_PINGABLE_WIDGET,
+                        PingableManager.getInstance().getPingableList().toArray().length + 1)
                 .withProperties(Map.of("Label position", "TOP",
-                        "Number of columns", PingableManager.getInstance().getPingableList().toArray().length / 8 + 1,
+                        "Number of columns", PingableManager.getInstance().getPingableList().toArray().length,
                         "Number of rows", PingableManager.getInstance().getPingableList().toArray().length));
 
         int columns = 1;
         for (IPingable pingable : PingableManager.getInstance().getPingableList()) {
-            pingableDataList.addBoolean(pingable.deviceName(), () -> pingable.isConnected()).withPosition(columns / 4, columns);
+            pingableDataList.addBoolean(pingable.deviceName(), () -> pingable.isConnected()).withPosition(columns / SystemCheckConstants.NUMBER_OF_CELLS_IN_PINGABLE_WIDGET, columns);
             columns++;
         }
     }
