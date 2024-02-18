@@ -53,8 +53,8 @@ public class Robot extends LoggedRobot {
 		CommandScheduler.getInstance().enable();
 //		initializeLogger();
 //		initializeAutonomousBuilder();
-		initializeSubsystems();
-//		SwerveChassis.getInstance().resetAllEncoders();
+//		initializeSubsystems();
+		SwerveChassis.getInstance().resetAllEncoders();
 		OI.init();
 	}
 

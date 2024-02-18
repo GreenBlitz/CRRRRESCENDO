@@ -4,7 +4,8 @@ import com.ctre.phoenix6.configs.*;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 public class FalconFlyWheelConstants {
-	
+
+
 	public static class rightMotorConstants {
 		
 		public static final int ID = 16;

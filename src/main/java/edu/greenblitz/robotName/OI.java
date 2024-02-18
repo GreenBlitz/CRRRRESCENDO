@@ -15,6 +15,7 @@ import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByPower;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.funnel.runByPowerUntilCondition.RunFunnelByPower;
+import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingState;
 import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
@@ -52,8 +53,8 @@ public class OI {
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
 		
 //		initButtons();
-//		initializeDefaultCommands();
-		thirdJoystickButtons();
+		initializeDefaultCommands();
+//		thirdJoystickButtons();
 	}
 
 	public static void init() {
@@ -101,19 +102,16 @@ public class OI {
 		usedJoystick.POV_UP.whileTrue(new RunFlyWheelByPower(0.4));
 //		usedJoystick.POV_DOWN.whileTrue(new RunFlyWheelByPower(-0.9));
 		usedJoystick.POV_LEFT.whileTrue(new RunFlyWheelByPower(0.4));
-//		usedJoystick.POV_RIGHT.whileTrue(new RunFlyWheelByPower(-0.5));
-		usedJoystick.A.whileTrue(new RunFunnelByPower(0.9));
-//		usedJoystick.R1.whileTrue(new RunFunnelByPower(-0.9));
-		usedJoystick.L1.whileTrue(new RollIntakeByPower(-0.9).alongWith(new RunFunnelByPower(-0.9)));
-		usedJoystick.BACK.whileTrue(new RollIntakeByPower(0.9));
+
+		usedJoystick.A.whileTrue(new MovePivotByJoystick(usedJoystick));
 		
 	}
 
 	public void initializeDefaultCommands() {
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
-		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
-		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
-		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
+//		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+//		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
+//		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
+//		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
 	}
 }

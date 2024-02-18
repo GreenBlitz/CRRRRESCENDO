@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.PowerDistribution;
 
 public class RobotConstants {
 	
-	public static final Robot.RobotType ROBOT_TYPE = Robot.RobotType.SYNCOPA;
+	public static final Robot.RobotType ROBOT_TYPE = Robot.RobotType.PEGA_SWERVE;
 	
 	public static final String SIMULATION_LOG_PATH = System.getProperty("user.home") + "\\Desktop\\SimulationLogs";
 	

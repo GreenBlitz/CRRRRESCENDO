@@ -7,7 +7,7 @@ import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 
 public class FalconPivotConstants {
 	
-	public static final int MOTOR_ID = 12;
+	public static final int MOTOR_ID = 11;
 
 	public static final String CANBUS_CHANNEL = "*";
 	
