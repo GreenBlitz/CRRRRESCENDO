@@ -78,13 +78,9 @@ public class OI {
 	public void initButtons() {
 		secondJoystick.START.whileTrue(new PanicMode());
 		secondJoystick.BACK.whileTrue(new ToggleScoringMode());
-		secondJoystick.A.whileTrue(new ScoreToScoringMode());
-		secondJoystick.B.whileTrue(new MoveElbowAndWristToSafe());
-		secondJoystick.X.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE));
-		secondJoystick.Y.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
 		secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
 
-		mainJoystick.A.whileTrue(new GoToShootingState(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
+		mainJoystick.A.whileTrue(new ScoreToScoringMode());
 	}
 
 	public void thirdJoystickButtons() {
