@@ -48,7 +48,8 @@ public class OI {
 		secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
 		thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
-		secondJoystick.B.whileTrue(new RunFlyWheelByVelocity(1000));
+//		secondJoystick.B.whileTrue(new RunFlyWheelByVelocity(1000));
+		SysIdFalcon.getInstance().buttons(secondJoystick);
 //		initButtons();
 //		initializeDefaultCommands();
 	}

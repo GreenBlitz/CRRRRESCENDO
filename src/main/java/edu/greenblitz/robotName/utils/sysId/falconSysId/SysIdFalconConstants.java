@@ -9,7 +9,7 @@ public class SysIdFalconConstants {
 
     protected static final double DYNAMIC_VOLTAGE = 4;
 
-    protected static final int MOTOR_ID = 16;
+    protected static final int MOTOR_ID = 22;
 
     protected static final String CANBUS_CHAIN = "";
 
