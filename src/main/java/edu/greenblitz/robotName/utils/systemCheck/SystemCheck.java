@@ -31,7 +31,7 @@ public class SystemCheck extends GBSubsystem {
 
     private SystemCheck() {
         this.innerBatteryResistance = calculateInnerBatteryResistance();
-        this.startingVoltage = 13.73;
+        this.startingVoltage = batteryStartingVoltageEntry.getDouble(SystemCheckBatteryConstants.DEFAULT_STARTING_VOLTAGE);
         this.commandGroup = new SequentialCommandGroup();
         limeLightCheck();
         initDashBoard();
@@ -55,7 +55,7 @@ public class SystemCheck extends GBSubsystem {
 
     @Override
     public void periodic() {
-        updateStartingVoltage(batteryStartingVoltageEntry.getDouble(13)); //by shuffle-board input
+        updateStartingVoltage(batteryStartingVoltageEntry.getDouble(SystemCheckBatteryConstants.DEFAULT_STARTING_VOLTAGE));
     }
 
     private void initDashBoard() {
@@ -81,7 +81,7 @@ public class SystemCheck extends GBSubsystem {
 
     private void initBatteryWidget() {
 
-        batteryStartingVoltageEntry = tab.add("set starting voltage", 13/*default value*/)
+        batteryStartingVoltageEntry = tab.add("set starting voltage", SystemCheckBatteryConstants.DEFAULT_STARTING_VOLTAGE)
                 .withWidget(BuiltInWidgets.kTextView)
                 .getEntry();
 
