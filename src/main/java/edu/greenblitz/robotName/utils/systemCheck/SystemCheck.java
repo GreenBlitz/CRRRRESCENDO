@@ -143,7 +143,8 @@ public class SystemCheck extends GBSubsystem {
 
         add(
                 new CheckFlywheelByVelocity(),
-                "flywheel"
+                "flywheel",
+                SystemCheckConstants.CHECK_FLYWHEEL_TIME
         );
 
         add(
@@ -195,9 +196,13 @@ public class SystemCheck extends GBSubsystem {
         return ((startingVoltage - Battery.getInstance().getCurrentVoltage()) / Battery.getInstance().getTotalCurrent());
     }
 
-    public void add(SystemCheckCommand command, String checkName) {
-        addToSeqCommand(command.raceWith(new WaitCommand(SystemCheckConstants.DEFAULT_COMMAND_TIME)));
+    public void add(SystemCheckCommand command, String checkName, double checkTime) {
+        addToSeqCommand(command.raceWith(new WaitCommand(checkTime)));
         tab.addBoolean(checkName, () -> command.hasFinished());
+    }
+
+    public void add(SystemCheckCommand command, String checkName) {
+        add(command, checkName, SystemCheckConstants.DEFAULT_COMMAND_TIME);
     }
 
     public Command getRunCommands() {

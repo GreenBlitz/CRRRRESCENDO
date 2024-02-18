@@ -1,6 +1,5 @@
 package edu.greenblitz.robotName.commands.systemCheck;
 
-import edu.greenblitz.robotName.ScoringModeSelector;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 
@@ -10,8 +9,6 @@ public class CheckShooterToArm extends SystemCheckCommand {
 
     private Roller roller;
 
-    private boolean isTargetModeSpeaker;
-
     public CheckShooterToArm() {
         roller = Roller.getInstance();
         require(roller);
@@ -20,24 +17,14 @@ public class CheckShooterToArm extends SystemCheckCommand {
     }
 
     @Override
-    public void initialize() {
-        isTargetModeSpeaker = ScoringModeSelector.isSpeakerMode();
-    }
-
-    @Override
     public void execute() {
-        if (isTargetModeSpeaker) {
-            funnel.rollIn();
-            roller.rollCounterClockwise();
-        } else {
             funnel.rollOut();
             roller.rollClockwise();
-        }
     }
 
     @Override
     public boolean isFinished() {
-        return isTargetModeSpeaker ? funnel.isObjectIn() : roller.isObjectIn();
+        return roller.isObjectIn();
     }
 
     @Override

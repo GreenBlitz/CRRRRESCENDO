@@ -44,4 +44,9 @@ public class CheckFlywheelByVelocity extends SystemCheckCommand {
         return flyWheel.getPreparedToShoot();
     }
 
+    @Override
+    public void end(boolean interrupted) {
+        super.end(interrupted);
+        flyWheel.stop();
+    }
 }
