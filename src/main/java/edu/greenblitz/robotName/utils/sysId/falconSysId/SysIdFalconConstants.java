@@ -9,7 +9,7 @@ public class SysIdFalconConstants {
 
     protected static final double DYNAMIC_VOLTAGE = 4;
 
-    protected static final int MOTOR_ID = 22;
+    protected static final int MOTOR_ID = 16;
 
     protected static final String CANBUS_CHAIN = "";
 
@@ -23,6 +23,6 @@ public class SysIdFalconConstants {
 
     protected static final FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();
     static{
-        FEEDBACK_CONFIGS.SensorToMechanismRatio = 36/42.0;
+        FEEDBACK_CONFIGS.SensorToMechanismRatio = 36 / 42.0;
     }
 }
