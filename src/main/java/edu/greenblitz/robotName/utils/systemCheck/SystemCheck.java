@@ -5,7 +5,6 @@ import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.greenblitz.robotName.utils.RoborioUtils;
-import edu.wpi.first.math.filter.Debouncer;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.shuffleboard.*;
@@ -122,21 +121,21 @@ public class SystemCheck extends GBSubsystem {
     public void initCheckCommands() {
         add(
                 new CheckWristToAngle(
-                        Rotation2d.fromDegrees(SystemCheckConstants.CHECK_WRIST_ANGLE)
+                        Rotation2d.fromDegrees(SystemCheckConstants.CHECK_WRIST_ANGLE_DEGREES)
                 ),
                 "wrist to angle"
         );
 
         add(
                 new CheckElbowToAngle(
-                        Rotation2d.fromDegrees(SystemCheckConstants.CHECK_ELBOW_ANGLE)
+                        Rotation2d.fromDegrees(SystemCheckConstants.CHECK_ELBOW_ANGLE_DEGREES)
                 ),
                 "elbow to angle"
         );
 
         add(
                 new CheckPivotToAngle(
-                        Rotation2d.fromDegrees(SystemCheckConstants.CHECK_PIVOT_ANGLE)
+                        Rotation2d.fromDegrees(SystemCheckConstants.CHECK_PIVOT_ANGLE_DEGREES)
                 ),
                 "pivot to angle"
         );
@@ -144,7 +143,7 @@ public class SystemCheck extends GBSubsystem {
         add(
                 new CheckFlywheelByVelocity(),
                 "flywheel",
-                SystemCheckConstants.CHECK_FLYWHEEL_TIME
+                SystemCheckConstants.CHECK_FLYWHEEL_TIME_SECONDS
         );
 
         add(
@@ -202,7 +201,7 @@ public class SystemCheck extends GBSubsystem {
     }
 
     public void add(SystemCheckCommand command, String checkName) {
-        add(command, checkName, SystemCheckConstants.DEFAULT_COMMAND_TIME);
+        add(command, checkName, SystemCheckConstants.DEFAULT_COMMAND_TIME_SECONDS);
     }
 
     public Command getRunCommands() {
