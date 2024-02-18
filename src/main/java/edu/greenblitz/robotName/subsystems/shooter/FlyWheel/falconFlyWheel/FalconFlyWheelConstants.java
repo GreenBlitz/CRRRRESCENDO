@@ -84,7 +84,7 @@ public class FalconFlyWheelConstants {
 		
 		static {
 			SLOT_0_CONFIGS.kS = 0.096788;
-			SLOT_0_CONFIGS.kV = 0.15167;
+			SLOT_0_CONFIGS.kV = 0.118;
 			SLOT_0_CONFIGS.kA = 0.069135;
 			SLOT_0_CONFIGS.kP = 0;
 			SLOT_0_CONFIGS.kI = 0;
@@ -101,7 +101,7 @@ public class FalconFlyWheelConstants {
 		public static final FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();
 		
 		static {
-			FEEDBACK_CONFIGS.SensorToMechanismRatio = 42 / 36.0;
+			FEEDBACK_CONFIGS.SensorToMechanismRatio = 36 / 42.0;
 		}
 		
 		public static final CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();

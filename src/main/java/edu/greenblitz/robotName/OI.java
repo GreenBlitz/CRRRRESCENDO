@@ -10,6 +10,7 @@ import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocity;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
@@ -27,6 +28,7 @@ import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
+import edu.greenblitz.robotName.utils.SysId.falconSysId.SysIdFalcon;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 
 public class OI {
@@ -46,7 +48,7 @@ public class OI {
 		secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
 		thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
-
+		secondJoystick.B.whileTrue(new RunFlyWheelByVelocity(1000));
 //		initButtons();
 //		initializeDefaultCommands();
 	}
