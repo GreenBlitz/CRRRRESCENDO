@@ -8,15 +8,15 @@ public class SysIdFalconConstants {
 
     protected static final double DYNAMIC_VOLTAGE = 4;
 
-    protected static final int MOTOR_ID = 187;
+    protected static final int MOTOR_ID = 11;
 
     protected static final String CANBUS_CHAIN = "*";
 
     protected static final SoftwareLimitSwitchConfigs LIMIT_SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();
     static {
         LIMIT_SWITCH_CONFIGS.ForwardSoftLimitEnable = true;
-        LIMIT_SWITCH_CONFIGS.ForwardSoftLimitThreshold = 187;
+        LIMIT_SWITCH_CONFIGS.ForwardSoftLimitThreshold = -0.2;
         LIMIT_SWITCH_CONFIGS.ReverseSoftLimitEnable = true;
-        LIMIT_SWITCH_CONFIGS.ReverseSoftLimitThreshold = -187;
+        LIMIT_SWITCH_CONFIGS.ReverseSoftLimitThreshold = 0.5;
     }
 }

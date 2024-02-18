@@ -27,6 +27,7 @@ import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
+import edu.greenblitz.robotName.utils.SysId.falconSysId.SysIdFalcon;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 
 public class OI {
@@ -49,6 +50,7 @@ public class OI {
 
 //		initButtons();
 //		initializeDefaultCommands();
+		SysIdFalcon.getInstance().buttons(secondJoystick);
 	}
 
 	public static void init() {
