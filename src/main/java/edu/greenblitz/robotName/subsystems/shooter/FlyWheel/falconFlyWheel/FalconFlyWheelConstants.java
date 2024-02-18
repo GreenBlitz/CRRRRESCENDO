@@ -7,26 +7,26 @@ public class FalconFlyWheelConstants {
 	
 	public static class rightMotorConstants {
 		
-		public static final int ID = 12;
+		public static final int ID = 16;
 
-		public static final String CANBUS_CHAIN = "*";
+		public static final String CANBUS_CHAIN = "";
 
 		public static final NeutralModeValue NEUTRAL_MODE_VALUE = NeutralModeValue.Coast;
 		
 		public static final int PID_SLOT = 0;
 		
-		public static final double MAX_RPM = 4000;
+		public static final double MAX_RPM = 6170;//Todo calibrate
 		
-		public static final double MAX_ACCELERATION = 50;
+		public static final double MAX_ACCELERATION = 50;//Todo calibrate
 		
 		public static final boolean ENABLE_FOC = true;
 		
 		public static final Slot0Configs SLOT_0_CONFIGS = new Slot0Configs();
 		
 		static {
-			SLOT_0_CONFIGS.kS = 0;
-			SLOT_0_CONFIGS.kV = 0;
-			SLOT_0_CONFIGS.kA = 0;
+			SLOT_0_CONFIGS.kS = 0.26603;
+			SLOT_0_CONFIGS.kV = 0.11306;
+			SLOT_0_CONFIGS.kA = 0.027703;
 			SLOT_0_CONFIGS.kP = 1;
 			SLOT_0_CONFIGS.kI = 0;
 			SLOT_0_CONFIGS.kD = 0;
@@ -42,16 +42,16 @@ public class FalconFlyWheelConstants {
 		public static final CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();
 		
 		static {
-			CURRENT_LIMITS_CONFIGS.StatorCurrentLimit = 40;
+			CURRENT_LIMITS_CONFIGS.StatorCurrentLimit = 80;
 			CURRENT_LIMITS_CONFIGS.StatorCurrentLimitEnable = true;
-			CURRENT_LIMITS_CONFIGS.SupplyCurrentLimit = 40;
+			CURRENT_LIMITS_CONFIGS.SupplyCurrentLimit = 80;
 			CURRENT_LIMITS_CONFIGS.SupplyCurrentLimitEnable = true;
 		}
 		
 		public static final FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();
 		
 		static {
-			FEEDBACK_CONFIGS.SensorToMechanismRatio = 1;
+			FEEDBACK_CONFIGS.SensorToMechanismRatio = 36 / 42.0;
 		}
 		
 		public static final TalonFXConfiguration CONFIGURATION = new TalonFXConfiguration();
@@ -74,20 +74,20 @@ public class FalconFlyWheelConstants {
 		
 		public static final int PID_SLOT = 0;
 		
-		public static final double MAX_RPM = 7200;
+		public static final double MAX_RPM = 6170;//Todo calibrate
 		
-		public static final double MAX_ACCELERATION = 100;
+		public static final double MAX_ACCELERATION = 100;//Todo calibrate
 		
 		public static final boolean ENABLE_FOC = true;
 		
 		public static final Slot0Configs SLOT_0_CONFIGS = new Slot0Configs();
 		
 		static {
-			SLOT_0_CONFIGS.kS = 0.096788;
-			SLOT_0_CONFIGS.kV = 0.15167;
-			SLOT_0_CONFIGS.kA = 0.069135;
-			SLOT_0_CONFIGS.kP = 0;
-			SLOT_0_CONFIGS.kI = 0;
+			SLOT_0_CONFIGS.kS = 0.18387;
+			SLOT_0_CONFIGS.kV = 0.11236;
+			SLOT_0_CONFIGS.kA = 0.030816;
+			SLOT_0_CONFIGS.kP = 1.6;
+			SLOT_0_CONFIGS.kI = 0.1;
 			SLOT_0_CONFIGS.kD = 0;
 		}
 		
@@ -101,7 +101,7 @@ public class FalconFlyWheelConstants {
 		public static final FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();
 		
 		static {
-			FEEDBACK_CONFIGS.SensorToMechanismRatio = 42 / 36.0;
+			FEEDBACK_CONFIGS.SensorToMechanismRatio = 36 / 42.0;
 		}
 		
 		public static final CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();
