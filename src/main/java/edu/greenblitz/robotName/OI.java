@@ -47,8 +47,8 @@ public class OI {
 		thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
 
-		initButtons();
-		initializeDefaultCommands();
+//		initButtons();
+//		initializeDefaultCommands();
 	}
 
 	public static void init() {

@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.utils.sysId.falconSysId;
+package edu.greenblitz.robotName.utils.SysId.falconSysId;
 
 import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 
