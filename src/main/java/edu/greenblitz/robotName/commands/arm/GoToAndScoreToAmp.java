@@ -9,7 +9,6 @@ public class GoToAndScoreToAmp extends ParallelCommandGroup {
         super(
                 new ScoreToAmp(),
                 new MoveToAmp()
-
         );
     }
 }
