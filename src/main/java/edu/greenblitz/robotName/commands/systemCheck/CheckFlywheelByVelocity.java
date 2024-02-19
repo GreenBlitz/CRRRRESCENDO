@@ -30,12 +30,12 @@ public class CheckFlywheelByVelocity extends SystemCheckCommand {
         if (Robot.isSimulation()) {
             flyWheel.setVelocity(leftWheelVelocity, rightWheelVelocity);
         }
-        if (flyWheel.isRightWheelAtVelocity(rightWheelVelocity) && flyWheel.isLeftWheelAtVelocity(leftWheelVelocity)) {
+        if (flyWheel.isAtVelocity(rightWheelVelocity, leftWheelVelocity)) {
             timeInShootingSpeed++;
         } else {
             timeInShootingSpeed = 0;
         }
-        flyWheel.setPreparedToShoot(timeInShootingSpeed > FlyWheelConstants.SHOOTING_SPEED_TIME);
+        flyWheel.setPreparedToShoot(timeInShootingSpeed >= FlyWheelConstants.MINIMUM_SHOOTING_SPEED_TIME);
     }
 
     @Override

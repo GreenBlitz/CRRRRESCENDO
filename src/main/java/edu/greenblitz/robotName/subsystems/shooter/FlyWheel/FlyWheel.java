@@ -86,6 +86,10 @@ public class FlyWheel extends GBSubsystem {
 	public boolean isLeftWheelAtVelocity(double velocity) {
 		return Math.abs(getLeftSideVelocity() - velocity) < FlyWheelConstants.EPSILON_RPM;
 	}
+
+	public boolean isAtVelocity(double rightWheelVelocity, double leftWheelVelocity) {
+		return isRightWheelAtVelocity(rightWheelVelocity) && isLeftWheelAtVelocity(leftWheelVelocity);
+	}
 	
 	@Override
 	public void periodic() {
