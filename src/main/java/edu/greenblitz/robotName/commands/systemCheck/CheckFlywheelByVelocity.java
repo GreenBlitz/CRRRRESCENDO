@@ -27,7 +27,6 @@ public class CheckFlywheelByVelocity extends SystemCheckCommand {
 
     @Override
     public void execute() {
-
         if (Robot.isSimulation()) {
             flyWheel.setVelocity(leftWheelVelocity, rightWheelVelocity);
         }

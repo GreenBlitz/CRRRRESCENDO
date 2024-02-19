@@ -4,6 +4,7 @@ import edu.greenblitz.robotName.subsystems.lifter.Lifter;
 import edu.greenblitz.robotName.subsystems.lifter.LifterConstants;
 
 public class CheckRevereLift extends SystemCheckCommand {
+
     protected Lifter lifter;
 
     public CheckRevereLift() {

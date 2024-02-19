@@ -5,6 +5,7 @@ import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public class CheckWristToAngle extends SystemCheckCommand {
+
     protected Wrist wrist;
 
     private final Rotation2d targetAngle;

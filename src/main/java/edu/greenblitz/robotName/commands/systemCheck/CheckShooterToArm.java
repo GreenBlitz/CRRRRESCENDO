@@ -18,8 +18,8 @@ public class CheckShooterToArm extends SystemCheckCommand {
 
     @Override
     public void execute() {
-            funnel.rollOut();
-            roller.rollClockwise();
+        funnel.rollOut();
+        roller.rollClockwise();
     }
 
     @Override

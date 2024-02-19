@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import java.util.Map;
 
 public class SystemCheck extends GBSubsystem {
+
     private static SystemCheck instance;
 
     private final SequentialCommandGroup commandGroup;
@@ -40,8 +41,9 @@ public class SystemCheck extends GBSubsystem {
     }
 
     public static void init() {
-        if (instance == null)
+        if (instance == null) {
             instance = new SystemCheck();
+        }
     }
 
     public static SystemCheck getInstance() {
@@ -80,15 +82,12 @@ public class SystemCheck extends GBSubsystem {
     }
 
     private void initBatteryWidget() {
-
         batteryStartingVoltageEntry = tab.add("set starting voltage", SystemCheckBatteryConstants.DEFAULT_STARTING_VOLTAGE)
                 .withWidget(BuiltInWidgets.kTextView)
                 .getEntry();
 
-
         ShuffleboardLayout batteryDataList = tab.getLayout("System check", BuiltInLayouts.kList)
                 .withPosition(0, 0).withSize(1, 5).withProperties(Map.of("Label position", "TOP", "Number of columns", 1, "Number of rows", 5));
-
 
         batteryDataList.addDouble("current voltage", () -> Battery.getInstance().getCurrentVoltage())
                 .withPosition(0, 0);
@@ -116,7 +115,14 @@ public class SystemCheck extends GBSubsystem {
 
         int columns = 1;
         for (IPingable pingable : PingableManager.getInstance().getPingableList()) {
-            pingableDataList.addBoolean(pingable.deviceName(), () -> pingable.isConnected()).withPosition(columns / SystemCheckConstants.NUMBER_OF_CELLS_IN_PINGABLE_WIDGET, columns);
+            pingableDataList.addBoolean(
+                    pingable.deviceName(),
+                    () -> pingable.isConnected()
+            )
+                    .withPosition(
+                            columns / SystemCheckConstants.NUMBER_OF_CELLS_IN_PINGABLE_WIDGET,
+                            columns
+                    );
             columns++;
         }
     }
@@ -199,7 +205,7 @@ public class SystemCheck extends GBSubsystem {
     }
 
     public void add(SystemCheckCommand command, String checkName, double checkTime) {
-        addToSeqCommand(command.raceWith(new WaitCommand(checkTime)));
+        addToSequentialCommand(command.raceWith(new WaitCommand(checkTime)));
         tab.addBoolean(checkName, () -> command.hasFinished());
     }
 
@@ -215,7 +221,7 @@ public class SystemCheck extends GBSubsystem {
         return RoborioUtils.getCANUtilization() > SystemCheckConstants.MAX_CAN_UTILIZATION_IN_TESTS;
     }
 
-    private void addToSeqCommand(Command command) {
+    private void addToSequentialCommand(Command command) {
         commandGroup.addCommands(command);
     }
 
@@ -227,5 +233,4 @@ public class SystemCheck extends GBSubsystem {
     public double getVoltageDrop() {
         return getStartingVoltage() - Battery.getInstance().getCurrentVoltage();
     }
-
 }

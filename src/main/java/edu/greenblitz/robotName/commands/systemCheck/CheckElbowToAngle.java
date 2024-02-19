@@ -5,6 +5,7 @@ import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public class CheckElbowToAngle extends SystemCheckCommand {
+
     protected Elbow elbow;
 
     private Rotation2d targetAngle;

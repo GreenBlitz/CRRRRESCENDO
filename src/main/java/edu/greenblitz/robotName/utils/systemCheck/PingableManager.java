@@ -3,7 +3,9 @@ package edu.greenblitz.robotName.utils.systemCheck;
 import java.util.LinkedList;
 
 public class PingableManager {
+
     private static PingableManager instance;
+
     private final LinkedList<IPingable> pingableList;
 
     private PingableManager() {

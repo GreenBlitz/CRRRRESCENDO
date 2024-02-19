@@ -37,6 +37,6 @@ public class GBTalonFXPro extends TalonFX implements IPingable {
 
 	@Override
 	public String deviceName() {
-		return "talon "+getDeviceID();
+		return "talon " + getDeviceID();
 	}
 }

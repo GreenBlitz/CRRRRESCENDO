@@ -3,6 +3,7 @@ package edu.greenblitz.robotName.commands.systemCheck;
 import edu.greenblitz.robotName.subsystems.intake.Intake;
 
 public class CheckNoteToIntake extends SystemCheckCommand {
+
     protected Intake intake;
 
     public CheckNoteToIntake() {
