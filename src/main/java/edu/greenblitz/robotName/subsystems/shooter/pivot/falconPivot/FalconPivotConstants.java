@@ -18,6 +18,8 @@ public class FalconPivotConstants {
 
 	public static final double ABSOLUTE_ENCODER_OFFSET = 0.855 - Units.degreesToRotations(16);
 
+	public static final boolean INVERTED = true;
+
 	public static final double kS = 0;
 	
 	public static final double kV = 0;
@@ -57,7 +59,7 @@ public class FalconPivotConstants {
 	static {
 		SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitEnable = true;
 		SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitThreshold = PivotConstants.FORWARD_ANGLE_LIMIT.getRotations();
-		SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitEnable = true;
+		SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitEnable = false;
 		SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitThreshold = PivotConstants.BACKWARD_ANGLE_LIMIT.getRotations();
 	}
 	

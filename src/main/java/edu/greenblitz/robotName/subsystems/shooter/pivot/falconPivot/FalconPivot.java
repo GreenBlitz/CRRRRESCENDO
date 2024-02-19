@@ -26,12 +26,14 @@ public class FalconPivot implements IPivot {
 		motor = new GBTalonFXPro(FalconPivotConstants.MOTOR_ID, FalconPivotConstants.CANBUS_CHANNEL);
 		motor.getConfigurator().apply(FalconPivotConstants.TALON_FX_CONFIGURATION);
 		motor.setNeutralMode(FalconPivotConstants.NEUTRAL_MODE_VALUE);
+		motor.setInverted(FalconPivotConstants.INVERTED);
 		optimizeCanBusUtilization();
 		
 		absoluteEncoder = new DutyCycleEncoder(FalconPivotConstants.ABSOLUTE_ENCODER_CHANNEL);
 
+		getAbsoluteEncoderPosition();
 		resetAngle(getAbsoluteEncoderPosition());
-		
+
 		positionVoltage = new PositionVoltage(motor.getPosition().getValue());
 	}
 	
@@ -94,20 +96,17 @@ public class FalconPivot implements IPivot {
 	
 	@Override
 	public void updateInputs(PivotInputsAutoLogged inputs) {
-		SmartDashboard.putNumber("absolute position - with get", absoluteEncoder.get());
-		SmartDashboard.putNumber("absolute position", getAbsoluteEncoderPosition().getDegrees());
-
-
 		inputs.outputCurrent = motor.getSupplyCurrent().getValue();
 		inputs.appliedOutput = motor.getMotorVoltage().getValue();
 		inputs.position = Rotation2d.fromRotations(motor.getPosition().getValue());
 		inputs.velocity = motor.getVelocity().getValue();
 		inputs.acceleration = motor.getAcceleration().getValue();
-		inputs.absoluteEncoderPosition = absoluteEncoder.getAbsolutePosition();
+		inputs.absoluteEncoderPosition = getAbsoluteEncoderPosition();
 		inputs.temperature = motor.getDeviceTemp().getValue();
 		inputs.hasHitForwardLimit = motor.getForwardLimit().getValue().value == IS_SWITCH_CLOSED;
 		inputs.hasHitBackwardsLimit = motor.getReverseLimit().getValue().value == IS_SWITCH_CLOSED;
 
+		SmartDashboard.putNumber("abd pos", inputs.absoluteEncoderPosition.getDegrees());
 		SmartDashboard.putNumber("position", inputs.position.getDegrees());
 	}
 }
