@@ -10,7 +10,7 @@ public class FalconFlyWheelConstants {
 		
 		public static final int ID = 12;
 
-		public static final String CANBUS_CHAIN = RobotConstants.General.CANIVORE_NAME;
+		public static final String CANBUS_CHAIN = RobotConstants.General.CANBUS_NAME;
 
 		public static final NeutralModeValue NEUTRAL_MODE_VALUE = NeutralModeValue.Coast;
 		
@@ -69,7 +69,7 @@ public class FalconFlyWheelConstants {
 		
 		public static final int ID = 22;
 
-		public static final String CANBUS_CHAIN = RobotConstants.General.CANIVORE_NAME;
+		public static final String CANBUS_CHAIN = RobotConstants.General.CANBUS_NAME;
 
 		public static final NeutralModeValue NEUTRAL_MODE_VALUE = NeutralModeValue.Coast;
 		

@@ -35,7 +35,9 @@ public class MK4ISwerveModule implements ISwerveModule {
 
 
     public VelocityVoltage velocityVoltage = new VelocityVoltage(0).withEnableFOC(true);
+
     public PositionVoltage motionMagicDutyCycle = new PositionVoltage(0).withEnableFOC(true);
+
     public MK4ISwerveModule(SwerveChassis.Module module) {
 
         SwerveModuleConfigObject configObject = switch (module) {
@@ -101,13 +103,11 @@ public class MK4ISwerveModule implements ISwerveModule {
         angularMotor.setPosition(angle.getRotations());
     }
 
-
     @Override
     public void stop() {
         linearMotor.stopMotor();
         angularMotor.stopMotor();
     }
-
 
     public void updateStatusSignals(boolean refresh){
         if(refresh){

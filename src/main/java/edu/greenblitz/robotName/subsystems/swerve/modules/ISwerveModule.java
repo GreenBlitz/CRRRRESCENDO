@@ -22,5 +22,4 @@ public interface ISwerveModule {
 	void stop();
 	
 	void updateInputs(SwerveModuleInputsAutoLogged inputs);
-
 }
