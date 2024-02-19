@@ -35,7 +35,7 @@ public class CheckFlywheelByVelocity extends SystemCheckCommand {
         } else {
             timeInShootingSpeed = 0;
         }
-        flyWheel.setPreparedToShoot(timeInShootingSpeed >= FlyWheelConstants.MINIMUM_SHOOTING_SPEED_TIME);
+        flyWheel.setPreparedToShoot(timeInShootingSpeed >= FlyWheelConstants.MINIMUM_SHOOTING_SPEED_TIME_SECONDS);
     }
 
     @Override
