@@ -30,6 +30,7 @@ public class SysIdFalcon extends GBSubsystem {
     private SysIdFalcon() {
         motor = new TalonFX(SysIdFalconConstants.MOTOR_ID, SysIdFalconConstants.CANBUS_CHAIN);
         motor.getConfigurator().apply(SysIdFalconConstants.LIMIT_SWITCH_CONFIGS);
+        motor.getConfigurator().apply(SysIdFalconConstants.FEEDBACK_CONFIGS);
 
         sysIdControl = new VoltageOut(0);
 
