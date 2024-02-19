@@ -26,30 +26,33 @@ public class MoveElbowToAngle extends ElbowCommand {
             elbow.setCurrentAngle();
             elbow.standInPlace();
         }
-        else
+        else {
             elbow.moveToAngle(targetAngle);
+        }
     }
 
     @Override
     public void execute() {
         if (SwerveChassis.getInstance().isRobotNearBoundsOfField()) {
-            elbowStandInPlaceOnce();
-            isElbowCrashableIntoWall = true;
+            elbowStandInPlaceAccordingToRobotType();
         }
-        else if (isElbowCrashableIntoWall) {
-            elbow.moveToAngle(targetAngle);
-            isElbowCrashableIntoWall = false;
+        else {
+            elbowMoveToAngleAccordingToRobotType();
         }
-        else if (Robot.isSimulation()) {
-            elbow.moveToAngle(targetAngle);
-        }
-
     }
 
-    private void elbowStandInPlaceOnce() {
+    private void elbowStandInPlaceAccordingToRobotType() {
         if (!isElbowCrashableIntoWall || Robot.isSimulation()) {
             elbow.setCurrentAngle();
             elbow.standInPlace();
+            isElbowCrashableIntoWall = true;
+        }
+    }
+
+    private void elbowMoveToAngleAccordingToRobotType() {
+        if (isElbowCrashableIntoWall || Robot.isSimulation()) {
+            elbow.moveToAngle(targetAngle);
+            isElbowCrashableIntoWall = false;
         }
     }
 
