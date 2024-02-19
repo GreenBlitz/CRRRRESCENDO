@@ -4,44 +4,33 @@ import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.wpi.first.math.geometry.Rotation2d;
 
-import java.util.function.Supplier;
-
 public class CheckPivotToAngle extends SystemCheckCommand {
 
     protected Pivot pivot;
 
-    private Supplier<Rotation2d> targetAngle;
+    private Rotation2d targetAngle;
 
-    private Rotation2d suppliedTargetAngle;
-
-    public CheckPivotToAngle(Supplier<Rotation2d> targetAngle) {
+    public CheckPivotToAngle(Rotation2d targetAngle) {
         pivot = Pivot.getInstance();
         require(pivot);
         this.targetAngle = targetAngle;
     }
 
-    public CheckPivotToAngle(Rotation2d targetAngle) {
-        pivot = Pivot.getInstance();
-        require(pivot);
-        this.targetAngle = () -> targetAngle;
-    }
-
     @Override
     public void initialize() {
-        suppliedTargetAngle = targetAngle.get();
-        pivot.moveToAngle(suppliedTargetAngle);
+        pivot.moveToAngle(targetAngle);
     }
 
     @Override
     public void execute() {
         if (Robot.isSimulation()) {
-            pivot.moveToAngle(suppliedTargetAngle);
+            pivot.moveToAngle(targetAngle);
         }
     }
 
     @Override
     public boolean isFinished() {
-        return pivot.isAtAngle(suppliedTargetAngle);
+        return pivot.isAtAngle(targetAngle);
     }
 
     public void end(boolean interrupted) {
