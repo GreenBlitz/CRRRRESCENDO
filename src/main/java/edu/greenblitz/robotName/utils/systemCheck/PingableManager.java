@@ -12,10 +12,14 @@ public class PingableManager {
         this.pingableList = new LinkedList<>();
     }
 
-    public static PingableManager getInstance() {
+    public static void init() {
         if (instance == null) {
             instance = new PingableManager();
         }
+    }
+
+    public static PingableManager getInstance() {
+        init();
         return instance;
     }
 

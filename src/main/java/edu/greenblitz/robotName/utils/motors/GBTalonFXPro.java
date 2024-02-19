@@ -5,11 +5,13 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.ControlRequest;
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.greenblitz.robotName.utils.systemCheck.IPingable;
+import edu.greenblitz.robotName.utils.systemCheck.PingableManager;
 
 public class GBTalonFXPro extends TalonFX implements IPingable {
 	
 	public GBTalonFXPro(int deviceId) {
 		super(deviceId);
+		PingableManager.getInstance().add(this);
 	}
 	
 	public GBTalonFXPro(int deviceId, String canbus) {

@@ -22,19 +22,13 @@ public class SystemCheck extends GBSubsystem {
 
     private ShuffleboardTab tab;
 
-    private double innerBatteryResistance;
-
     private double startingVoltage;
 
     private GenericEntry batteryStartingVoltageEntry;
 
-    private boolean isLimeLightConnected;
-
     private SystemCheck() {
-        this.innerBatteryResistance = calculateInnerBatteryResistance();
         this.startingVoltage = batteryStartingVoltageEntry.getDouble(SystemCheckBatteryConstants.DEFAULT_STARTING_VOLTAGE);
         this.commandGroup = new SequentialCommandGroup();
-        limeLightCheck();
         initDashBoard();
         initPingableDashboard();
         initCheckCommands();
@@ -51,10 +45,6 @@ public class SystemCheck extends GBSubsystem {
         return instance;
     }
 
-    public void limeLightCheck() {
-        isLimeLightConnected = MultiLimelight.getInstance().isConnected();
-    }
-
     @Override
     public void periodic() {
         updateStartingVoltage(batteryStartingVoltageEntry.getDouble(SystemCheckBatteryConstants.DEFAULT_STARTING_VOLTAGE));
@@ -62,7 +52,7 @@ public class SystemCheck extends GBSubsystem {
 
     private void initDashBoard() {
         this.tab = Shuffleboard.getTab("System check");
-        this.tab.addBoolean("is LL connected", () -> this.isLimeLightConnected);
+        this.tab.addBoolean("is LL connected", () -> MultiLimelight.getInstance().isConnected());
         initBatteryWidget();
         initCANWidget();
     }
@@ -192,8 +182,7 @@ public class SystemCheck extends GBSubsystem {
     }
 
     public double getInnerBatteryResistance() {
-        this.innerBatteryResistance = calculateInnerBatteryResistance();
-        return innerBatteryResistance;
+        return calculateInnerBatteryResistance();
     }
 
     public double getStartingVoltage() {

@@ -6,6 +6,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import edu.greenblitz.robotName.utils.PIDObject;
 import edu.greenblitz.robotName.utils.systemCheck.IPingable;
+import edu.greenblitz.robotName.utils.systemCheck.PingableManager;
 
 public class GBSparkMax extends CANSparkMax implements IPingable {
 	
@@ -19,6 +20,7 @@ public class GBSparkMax extends CANSparkMax implements IPingable {
 	 */
 	public GBSparkMax(int deviceId, MotorType type) {
 		super(deviceId, type);
+		PingableManager.getInstance().add(this);
 	}
 	
 	/**
