@@ -50,9 +50,9 @@ public class Dashboard extends GBSubsystem {
 		
 		ShuffleboardLayout robotPoseWidget = driversTab.getLayout("Robot pose", BuiltInLayouts.kList)
 				.withPosition(0, 2).withSize(1, 2).withProperties(Map.of("Label position", "TOP"));
-		robotPoseWidget.addDouble("X", () -> SwerveChassis.getInstance().getRobotPose().getX());
-		robotPoseWidget.addDouble("Y", () -> SwerveChassis.getInstance().getRobotPose().getY());
-		robotPoseWidget.addDouble("Rotation", () -> SwerveChassis.getInstance().getRobotPose().getRotation().getDegrees());
+		robotPoseWidget.addDouble("X", () -> SwerveChassis.getInstance().getRobotPose2d().getX());
+		robotPoseWidget.addDouble("Y", () -> SwerveChassis.getInstance().getRobotPose2d().getY());
+		robotPoseWidget.addDouble("Rotation", () -> SwerveChassis.getInstance().getRobotPose2d().getRotation().getDegrees());
 		
 		//battery
 		driversTab.addDouble("Battery", () -> Battery.getInstance().getCurrentVoltage())

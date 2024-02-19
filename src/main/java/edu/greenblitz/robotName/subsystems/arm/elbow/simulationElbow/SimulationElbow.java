@@ -86,8 +86,8 @@ public class SimulationElbow implements IElbow {
         inputs.outputCurrent = elbowSimulation.getCurrentDrawAmps();
         inputs.position = Rotation2d.fromRadians(elbowSimulation.getAngleRads());
         inputs.velocity = elbowSimulation.getVelocityRadPerSec();
+        inputs.acceleration = (elbowSimulation.getVelocityRadPerSec() - inputs.velocity) / RobotConstants.SimulationConstants.TIME_STEP;
         inputs.absoluteEncoderPosition = elbowSimulation.getAngleRads();
-        inputs.temperature = 0;
         inputs.hasReachedForwardLimit = elbowSimulation.hasHitLowerLimit();
         inputs.hasReachedBackwardLimit = elbowSimulation.hasHitLowerLimit();
 
