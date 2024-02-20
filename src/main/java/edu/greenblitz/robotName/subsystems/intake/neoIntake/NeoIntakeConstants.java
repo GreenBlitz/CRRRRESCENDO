@@ -8,7 +8,7 @@ import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 
 public class NeoIntakeConstants {
 	
-	public static final int INTAKE_ID = 3;
+	public static final int MOTOR_ID = 3;
 	
 	public static final double ENTRANCE_DEBOUNCE_TIME_FOR_LIMIT_SWITCH = 0.1;
 	

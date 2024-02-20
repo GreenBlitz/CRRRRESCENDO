@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.falconFlyWheel;
 
 import com.ctre.phoenix6.BaseStatusSignal;
-import com.ctre.phoenix6.controls.MotionMagicVelocityVoltage;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.greenblitz.robotName.RobotConstants;
@@ -26,12 +25,12 @@ public class FalconFlyWheel implements IFlyWheel {
 					.withEnableFOC(leftMotorConstants.ENABLE_FOC);
 	
 	public FalconFlyWheel() {
-		rightMotor = new GBTalonFXPro(rightMotorConstants.ID, rightMotorConstants.CANBUS_CHAIN);
+		rightMotor = new GBTalonFXPro(rightMotorConstants.MOTOR_ID, rightMotorConstants.CANBUS_CHAIN);
 		rightMotor.getConfigurator().apply(rightMotorConstants.CONFIGURATION);
 		rightMotor.setNeutralMode(rightMotorConstants.NEUTRAL_MODE_VALUE);
 		optimizeCanBusUtilization(rightMotor);
 		
-		leftMotor = new GBTalonFXPro(leftMotorConstants.ID, leftMotorConstants.CANBUS_CHAIN);
+		leftMotor = new GBTalonFXPro(leftMotorConstants.MOTOR_ID, leftMotorConstants.CANBUS_CHAIN);
 		leftMotor.getConfigurator().apply(leftMotorConstants.CONFIGURATION);
 		leftMotor.setNeutralMode(leftMotorConstants.NEUTRAL_MODE_VALUE);
 		optimizeCanBusUtilization(leftMotor);

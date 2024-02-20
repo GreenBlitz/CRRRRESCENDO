@@ -15,7 +15,7 @@ public class NeoIntake implements IIntake {
 	private Debouncer exitBeamBreaker;
 
 	public NeoIntake() {
-		motor = new GBSparkMax(NeoIntakeConstants.INTAKE_ID, CANSparkLowLevel.MotorType.kBrushless);
+		motor = new GBSparkMax(NeoIntakeConstants.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
 		motor.config(NeoIntakeConstants.INTAKE_CONFIG_OBJECT);
 		
 		entranceBeamBreaker = new Debouncer(NeoIntakeConstants.ENTRANCE_DEBOUNCE_TIME_FOR_LIMIT_SWITCH);
