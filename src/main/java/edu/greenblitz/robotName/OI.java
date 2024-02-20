@@ -28,6 +28,7 @@ import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.SysId.falconSysId.SysIdFalcon;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import edu.greenblitz.robotName.utils.tuneableNumber.TunableNumber;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public class OI {
@@ -47,9 +48,10 @@ public class OI {
 		secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
 		thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
-		secondJoystick.B.whileTrue(new MovePivotByJoystick(secondJoystick));
-		secondJoystick.X.onTrue(new MovePivotToAngle(Rotation2d.fromDegrees(50)));
-		secondJoystick.A.onTrue(new MovePivotToAngle(Rotation2d.fromDegrees(30)));
+		secondJoystick.A.onTrue(new MovePivotToAngle(PivotConstants.PresetPositions.STARTING.ANGLE));
+		secondJoystick.B.onTrue(new MovePivotToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
+		secondJoystick.X.onTrue(new MovePivotToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE));
+		secondJoystick.Y.onTrue(new MovePivotToAngle(PivotConstants.PresetPositions.SAFE.ANGLE));
 //		initButtons();
 //		SysIdFalcon.getInstance().buttons(secondJoystick);
 		initializeDefaultCommands();
