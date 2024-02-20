@@ -7,7 +7,7 @@ public class FalconFlyWheelConstants {
 	
 	public static class rightMotorConstants {
 		
-		public static final int ID = 16;
+		public static final int MOTOR_ID = 16;
 
 		public static final String CANBUS_CHAIN = "";
 
@@ -54,7 +54,7 @@ public class FalconFlyWheelConstants {
 	
 	public static class leftMotorConstants {
 		
-		public static final int ID = 22;
+		public static final int MOTOR_ID = 22;
 
 		public static final String CANBUS_CHAIN = "";
 
