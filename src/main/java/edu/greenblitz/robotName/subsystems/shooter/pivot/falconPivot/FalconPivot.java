@@ -82,8 +82,8 @@ public class FalconPivot implements IPivot {
 				positionVoltage
 						.withPosition(targetAngle.getRotations())
 						.withSlot(FalconPivotConstants.PID_SLOT)
-						.withLimitForwardMotion(false)
-						.withLimitReverseMotion(false)
+						.withLimitForwardMotion(true)
+						.withLimitReverseMotion(true)
 						.withEnableFOC(true)
 						.withOverrideBrakeDurNeutral(true)
 		);
