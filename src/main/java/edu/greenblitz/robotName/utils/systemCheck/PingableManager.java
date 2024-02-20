@@ -8,8 +8,11 @@ public class PingableManager {
 
     private final LinkedList<IPingable> pingableList;
 
+    private static boolean isCanivoreConnected;
+
     private PingableManager() {
         this.pingableList = new LinkedList<>();
+        isCanivoreConnected = false;
     }
 
     public static void init() {
@@ -24,11 +27,20 @@ public class PingableManager {
     }
 
     public void add(IPingable pingable) {
-        this.pingableList.add(pingable);
+        add(pingable, false);
+    }
+
+    public void add(IPingable pingable, boolean isCanivore) {
+        pingableList.add(pingable);
+        isCanivoreConnected |= isCanivore;
     }
 
     public LinkedList<IPingable> getPingableList() {
-        return this.pingableList;
+        return pingableList;
+    }
+
+    public static boolean isCanivoreConnected() {
+        return isCanivoreConnected;
     }
 
     public boolean isAllConnected() {

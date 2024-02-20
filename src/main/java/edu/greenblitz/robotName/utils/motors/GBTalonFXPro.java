@@ -16,6 +16,7 @@ public class GBTalonFXPro extends TalonFX implements IPingable {
 	
 	public GBTalonFXPro(int deviceId, String canbus) {
 		super(deviceId, canbus);
+		PingableManager.getInstance().add(this, true);
 	}
 	
 	public StatusCode setControl(ControlRequest control) {
@@ -27,14 +28,18 @@ public class GBTalonFXPro extends TalonFX implements IPingable {
 	}
 
 	@Override
-	public boolean isConnected() {
+	public int getDeviceID() {
 		try {
-			getDeviceID();
-			return true;
+			return super.getDeviceID();
 		}
 		catch (Exception e) {
-			return false;
+			return -1;
 		}
+	}
+
+	@Override
+	public boolean isConnected() {
+		return getDeviceID() >= 0;
 	}
 
 	@Override

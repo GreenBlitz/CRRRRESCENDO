@@ -59,14 +59,18 @@ public class GBSparkMax extends CANSparkMax implements IPingable {
 	}
 
 	@Override
-	public boolean isConnected() {
+	public int getDeviceId() {
 		try {
-			getDeviceId();
-			return true;
+			return super.getDeviceId();
 		}
 		catch (Exception e) {
-			return false;
+			return -1;
 		}
+	}
+
+	@Override
+	public boolean isConnected() {
+		return getDeviceId() >= 0;
 	}
 
 	@Override

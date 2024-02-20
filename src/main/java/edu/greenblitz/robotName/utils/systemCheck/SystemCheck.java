@@ -3,6 +3,7 @@ package edu.greenblitz.robotName.utils.systemCheck;
 import edu.greenblitz.robotName.commands.systemCheck.*;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -61,7 +62,7 @@ public class SystemCheck extends GBSubsystem {
         ShuffleboardLayout CANDataList = tab.getLayout("CANBus", BuiltInLayouts.kGrid)
                 .withPosition(1, 0).withSize(2, 2).withProperties(Map.of("Label position", "TOP", "Number of columns", 2, "Number of rows", 2));
 
-        CANDataList.addBoolean("is CAN Connected", RoborioUtils::isCANConnectedToRoborio)
+        CANDataList.addBoolean("is CAN connected", RoborioUtils::isCANConnectedToRoborio)
                 .withPosition(0, 0);
 
         CANDataList.addBoolean("is CAN utilization high:", this::isCANUtilizationHigh)
@@ -69,6 +70,9 @@ public class SystemCheck extends GBSubsystem {
 
         CANDataList.addDouble("CAN utilization %", RoborioUtils::getCANUtilization)
                 .withPosition(1, 0);
+
+        CANDataList.addBoolean("is canivore connected", PingableManager :: isCanivoreConnected)
+                .withPosition(1, 1);
     }
 
     private void initBatteryWidget() {
