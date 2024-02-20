@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import static edu.greenblitz.robotName.RobotConstants.General.Motors.FALCON_REVOLUTIONS_PER_RADIAN;
 import static edu.greenblitz.robotName.RobotConstants.General.Motors.IS_SWITCH_CLOSED;
+import static edu.greenblitz.robotName.subsystems.shooter.pivot.falconPivot.FalconPivotConstants.*;
 
 public class FalconPivot implements IPivot {
 	

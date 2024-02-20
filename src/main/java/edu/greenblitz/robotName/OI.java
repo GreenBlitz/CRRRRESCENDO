@@ -1,5 +1,7 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.CollectNote;
+import edu.greenblitz.robotName.commands.NoteToShooter;
 import edu.greenblitz.robotName.commands.PanicMode;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
 import edu.greenblitz.robotName.commands.arm.ScoreToAmp;
@@ -48,10 +50,9 @@ public class OI {
 		secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
 		thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
-		secondJoystick.A.onTrue(new MovePivotToAngle(PivotConstants.PresetPositions.STARTING.ANGLE));
-		secondJoystick.B.onTrue(new MovePivotToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
-		secondJoystick.X.onTrue(new MovePivotToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE));
-		secondJoystick.Y.onTrue(new MovePivotToAngle(PivotConstants.PresetPositions.SAFE.ANGLE));
+		secondJoystick.A.onTrue(new MovePivotByJoystick(secondJoystick));
+		secondJoystick.B.onTrue(new MovePivotToAngle(Rotation2d.fromDegrees(50)));
+		secondJoystick.X.onTrue(new MovePivotToAngle(Rotation2d.fromDegrees(30)));
 //		initButtons();
 //		SysIdFalcon.getInstance().buttons(secondJoystick);
 		initializeDefaultCommands();

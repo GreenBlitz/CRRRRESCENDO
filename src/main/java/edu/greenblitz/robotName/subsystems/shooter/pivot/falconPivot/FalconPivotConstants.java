@@ -20,13 +20,15 @@ public class FalconPivotConstants {
 
 	public static final boolean INVERTED = true;
 
-	public static final double kS = 0.10609;
+	public static final double kS = 0.26;
 	
 	public static final double kV = 18.57;
 	
 	public static final double kA = 0.7702;
 	
 	public static final double kG = 0;
+
+	public static final double MAX_VELOCITY_IN_ROTATIONS_PER_SECOND = 0.45;
 	
 	public static final NeutralModeValue NEUTRAL_MODE_VALUE = NeutralModeValue.Coast;
 	
@@ -40,9 +42,9 @@ public class FalconPivotConstants {
 		SLOT_0_CONFIGS.kS = kS;
 		SLOT_0_CONFIGS.kA = kA;
 		SLOT_0_CONFIGS.kV = kV;
-		SLOT_0_CONFIGS.kP = 0.55 * 360;
+		SLOT_0_CONFIGS.kP = 198;
 		SLOT_0_CONFIGS.kI = 0;
-		SLOT_0_CONFIGS.kD = 0.01 * 360;
+		SLOT_0_CONFIGS.kD = 3.6;
 	}
 
 

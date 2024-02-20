@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.subsystems.shooter.funnel.neoFunnel;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkMaxLimitSwitch;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.FunnelInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.IFunnel;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
@@ -15,13 +16,11 @@ public class NeoFunnel implements IFunnel {
 	private GBSparkMax motor;
 	
 	private Debouncer debouncer;
-	
-	private DigitalInput beamBreaker;
-	
+
 	public NeoFunnel() {
 		motor = new GBSparkMax(MOTOR_ID, CANSparkMax.MotorType.kBrushless);
 		motor.config(FUNNEL_CONFIG_OBJECT);
-		beamBreaker = new DigitalInput(NeoFunnelConstants.BEAM_BREAKER_CHANNEL);
+
 		debouncer = new Debouncer(NeoFunnelConstants.DEBOUNCE_TIME_FOR_LIMIT_SWITCH);
 	}
 	
@@ -34,6 +33,6 @@ public class NeoFunnel implements IFunnel {
 	public void updateInputs(FunnelInputsAutoLogged inputs) {
 		inputs.outputCurrent = motor.getOutputCurrent();
 		inputs.appliedOutput = motor.getAppliedOutput();
-		inputs.isObjectIn = debouncer.calculate(beamBreaker.get());
+		inputs.isObjectIn = debouncer.calculate(motor.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen).isLimitSwitchEnabled());
 	}
 }

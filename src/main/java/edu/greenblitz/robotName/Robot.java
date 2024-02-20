@@ -22,7 +22,6 @@ import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
-import edu.greenblitz.robotName.utils.AutonomousSelector;
 import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.greenblitz.robotName.utils.RoborioUtils;
@@ -59,7 +58,7 @@ public class Robot extends LoggedRobot {
 	}
 
 	public void initializeSubsystems() {
-		AutonomousSelector.getInstance();
+//		AutonomousSelector.getInstance();
 		MultiLimelight.init();
 		SwerveChassis.init();
 
@@ -138,7 +137,7 @@ public class Robot extends LoggedRobot {
 
 	@Override
 	public void autonomousInit() {
-		AutonomousSelector.getInstance().getChosenValue().schedule();
+//		AutonomousSelector.getInstance().getChosenValue().schedule();
 	}
 
 	public static RobotType getRobotType() {
