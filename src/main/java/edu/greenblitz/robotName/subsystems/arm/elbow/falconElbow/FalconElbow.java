@@ -100,8 +100,8 @@ public class FalconElbow implements IElbow {
     public void updateInputs(ElbowInputsAutoLogged inputs) {
         inputs.outputCurrent = motor.getSupplyCurrent().getValue();
         inputs.appliedOutput = motor.getMotorVoltage().getValue();
-        inputs.position = Rotation2d.fromRotations(motor.getLatencyValue(motor.getPosition(), motor.getVelocity()));
-        inputs.velocity = motor.getLatencyValue(motor.getVelocity(), motor.getAcceleration());
+        inputs.position = Rotation2d.fromRotations(motor.getLatencyCompensatedValue(motor.getPosition(), motor.getVelocity()));
+        inputs.velocity = motor.getLatencyCompensatedValue(motor.getVelocity(), motor.getAcceleration());
         inputs.acceleration = motor.getAcceleration().getValue();
         inputs.absoluteEncoderPosition = absoluteEncoder.getAbsolutePosition();
         inputs.hasReachedForwardLimit = motor.getForwardLimit().getValue().value == IS_SWITCH_CLOSED;

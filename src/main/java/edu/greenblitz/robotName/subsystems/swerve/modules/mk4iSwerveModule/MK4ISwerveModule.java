@@ -48,10 +48,10 @@ public class MK4ISwerveModule implements ISwerveModule {
             default -> throw new IllegalArgumentException("Invalid swerve module");
         };
 
-        angularMotor = new GBTalonFXPro(configObject.angleMotorID);
+        angularMotor = new GBTalonFXPro(configObject.angleMotorID, configObject.canbusChain);
         angularMotor.applyConfiguration(MK4iSwerveConstants.ANGULAR_FALCON_CONFIG_OBJECT);
 
-        linearMotor = new GBTalonFXPro(configObject.linearMotorID);
+        linearMotor = new GBTalonFXPro(configObject.linearMotorID, configObject.canbusChain);
         linearMotor.applyConfiguration(MK4iSwerveConstants.LINEAR_FALCON_CONFIG_OBJECT);
         linearMotor.setInverted(configObject.linInverted);
 

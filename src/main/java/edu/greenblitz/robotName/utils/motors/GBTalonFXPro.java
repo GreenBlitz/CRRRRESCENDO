@@ -6,7 +6,6 @@ import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.ControlRequest;
 import com.ctre.phoenix6.hardware.TalonFX;
-import jdk.jshell.Snippet;
 
 public class GBTalonFXPro extends TalonFX {
 	
@@ -18,8 +17,8 @@ public class GBTalonFXPro extends TalonFX {
 		super(deviceId, canbus);
 	}
 
-	public double getLatencyValue(StatusSignal value, StatusSignal valueDerivative){
-		return BaseStatusSignal.getLatencyCompensatedValue(value, valueDerivative);
+	public double getLatencyCompensatedValue(StatusSignal value, StatusSignal valueSlope){
+		return BaseStatusSignal.getLatencyCompensatedValue(value, valueSlope);
 	}
 
 	public StatusCode setControl(ControlRequest control) {
