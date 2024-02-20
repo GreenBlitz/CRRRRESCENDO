@@ -7,9 +7,9 @@ import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-public class GoToAndScoreToAmp extends SequentialCommandGroup {
+public class MoveToAndScoreToAmp extends SequentialCommandGroup {
 
-    public GoToAndScoreToAmp() {
+    public MoveToAndScoreToAmp() {
         super(
                 new ParallelCommandGroup(
                         new MoveToAmp(),
