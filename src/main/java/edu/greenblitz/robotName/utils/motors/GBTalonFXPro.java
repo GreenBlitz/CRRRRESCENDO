@@ -8,15 +8,19 @@ import edu.greenblitz.robotName.utils.systemCheck.IPingable;
 import edu.greenblitz.robotName.utils.systemCheck.PingableManager;
 
 public class GBTalonFXPro extends TalonFX implements IPingable {
+
+	private int deviceId;
 	
 	public GBTalonFXPro(int deviceId) {
 		super(deviceId);
 		PingableManager.getInstance().add(this);
+		this.deviceId = deviceId;
 	}
 	
 	public GBTalonFXPro(int deviceId, String canbus) {
 		super(deviceId, canbus);
 		PingableManager.getInstance().add(this, true);
+		this.deviceId = deviceId;
 	}
 	
 	public StatusCode setControl(ControlRequest control) {
@@ -28,22 +32,12 @@ public class GBTalonFXPro extends TalonFX implements IPingable {
 	}
 
 	@Override
-	public int getDeviceID() {
-		try {
-			return super.getDeviceID();
-		}
-		catch (Exception e) {
-			return -1;
-		}
-	}
-
-	@Override
 	public boolean isConnected() {
-		return getDeviceID() >= 0;
+		return isAlive();
 	}
 
 	@Override
 	public String deviceName() {
-		return "talon " + getDeviceID();
+		return "talon " + deviceId;
 	}
 }
