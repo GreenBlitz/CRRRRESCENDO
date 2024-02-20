@@ -50,13 +50,9 @@ public class OI {
 		secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
 		thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
-		secondJoystick.A.onTrue(new MovePivotByJoystick(secondJoystick));
-		secondJoystick.B.onTrue(new MovePivotToAngle(Rotation2d.fromDegrees(50)));
-		secondJoystick.X.onTrue(new MovePivotToAngle(Rotation2d.fromDegrees(30)));
-//		initButtons();
-//		SysIdFalcon.getInstance().buttons(secondJoystick);
+
+		initButtons();
 		initializeDefaultCommands();
-//		secondJoystick.B.whileTrue(new MovePivotByJoystick(secondJoystick));
 	}
 	public static void init() {
 		if (instance == null) {
@@ -106,10 +102,10 @@ public class OI {
 	}
 
 	public void initializeDefaultCommands() {
-//		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
-//		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-//		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
-//		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
+		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
+		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
+		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
 		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
 	}
 }

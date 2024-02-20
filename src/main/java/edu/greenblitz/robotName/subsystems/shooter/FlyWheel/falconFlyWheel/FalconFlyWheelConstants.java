@@ -15,10 +15,6 @@ public class FalconFlyWheelConstants {
 		
 		public static final int PID_SLOT = 0;
 		
-		public static final double MAX_RPM = 6170;//Todo calibrate
-		
-		public static final double MAX_ACCELERATION = 50;//Todo calibrate
-		
 		public static final boolean ENABLE_FOC = true;
 		
 		public static final Slot0Configs SLOT_0_CONFIGS = new Slot0Configs();
@@ -31,14 +27,7 @@ public class FalconFlyWheelConstants {
 			SLOT_0_CONFIGS.kI = 0;
 			SLOT_0_CONFIGS.kD = 0;
 		}
-		
-		public static final MotionMagicConfigs MOTION_MAGIC_CONFIGS = new MotionMagicConfigs();
-		
-		static {
-			MOTION_MAGIC_CONFIGS.MotionMagicAcceleration = MAX_ACCELERATION;
-			MOTION_MAGIC_CONFIGS.MotionMagicCruiseVelocity = MAX_RPM;
-		}
-		
+
 		public static final CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();
 		
 		static {
@@ -58,7 +47,6 @@ public class FalconFlyWheelConstants {
 		
 		static {
 			CONFIGURATION.CurrentLimits = CURRENT_LIMITS_CONFIGS;
-			CONFIGURATION.MotionMagic = MOTION_MAGIC_CONFIGS;
 			CONFIGURATION.Slot0 = SLOT_0_CONFIGS;
 			CONFIGURATION.Feedback = FEEDBACK_CONFIGS;
 		}
@@ -74,10 +62,6 @@ public class FalconFlyWheelConstants {
 		
 		public static final int PID_SLOT = 0;
 		
-		public static final double MAX_RPM = 6170;//Todo calibrate
-		
-		public static final double MAX_ACCELERATION = 100;//Todo calibrate
-		
 		public static final boolean ENABLE_FOC = true;
 		
 		public static final Slot0Configs SLOT_0_CONFIGS = new Slot0Configs();
@@ -89,13 +73,6 @@ public class FalconFlyWheelConstants {
 			SLOT_0_CONFIGS.kP = 1.6;
 			SLOT_0_CONFIGS.kI = 0.1;
 			SLOT_0_CONFIGS.kD = 0;
-		}
-		
-		public static final MotionMagicConfigs MOTION_MAGIC_CONFIGS = new MotionMagicConfigs();
-		
-		static {
-			MOTION_MAGIC_CONFIGS.MotionMagicAcceleration = MAX_ACCELERATION;
-			MOTION_MAGIC_CONFIGS.MotionMagicCruiseVelocity = MAX_RPM;
 		}
 		
 		public static final FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();
@@ -117,7 +94,6 @@ public class FalconFlyWheelConstants {
 		
 		static {
 			CONFIGURATION.CurrentLimits = CURRENT_LIMITS_CONFIGS;
-			CONFIGURATION.MotionMagic = MOTION_MAGIC_CONFIGS;
 			CONFIGURATION.Feedback = FEEDBACK_CONFIGS;
 			CONFIGURATION.Slot0 = SLOT_0_CONFIGS;
 		}
