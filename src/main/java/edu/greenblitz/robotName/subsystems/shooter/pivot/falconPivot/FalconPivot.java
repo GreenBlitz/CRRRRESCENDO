@@ -77,7 +77,6 @@ public class FalconPivot implements IPivot {
 	
 	@Override
 	public void moveToAngle(Rotation2d targetAngle) {
-		SmartDashboard.putNumber("ajajjaja", targetAngle.getRotations());
 		motor.setControl(
 				positionVoltage
 						.withPosition(targetAngle.getRotations())
