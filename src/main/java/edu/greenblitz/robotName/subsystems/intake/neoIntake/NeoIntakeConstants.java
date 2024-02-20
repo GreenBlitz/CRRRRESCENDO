@@ -1,3 +1,4 @@
+
 package edu.greenblitz.robotName.subsystems.intake.neoIntake;
 
 import com.revrobotics.CANSparkMax;
@@ -13,9 +14,9 @@ public class NeoIntakeConstants {
 	
 	public static final double EXIT_DEBOUNCE_TIME_FOR_LIMIT_SWITCH = 0.1;
 	
-	public static final SparkLimitSwitch.Type ENTRANCE_BEAM_BREAKER_TYPE = SparkLimitSwitch.Type.kNormallyClosed;
+	public static final SparkLimitSwitch.Type ENTRANCE_BEAM_BREAKER_TYPE = SparkLimitSwitch.Type.kNormallyOpen;
 	
-	public static final SparkLimitSwitch.Type EXIT_BEAM_BREAKER_TYPE = SparkLimitSwitch.Type.kNormallyClosed;
+	public static final SparkLimitSwitch.Type EXIT_BEAM_BREAKER_TYPE = SparkLimitSwitch.Type.kNormallyOpen;
 	
 	public static final boolean IS_ENTRANCE_BEAM_BREAKER_ACTIVE = false;
  
