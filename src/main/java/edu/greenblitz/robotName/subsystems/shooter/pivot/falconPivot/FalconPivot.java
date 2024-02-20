@@ -5,13 +5,16 @@ import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.IPivot;
+import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotInputsAutoLogged;
 import edu.greenblitz.robotName.utils.motors.GBTalonFXPro;
+import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import static edu.greenblitz.robotName.RobotConstants.General.Motors.FALCON_REVOLUTIONS_PER_RADIAN;
 import static edu.greenblitz.robotName.RobotConstants.General.Motors.IS_SWITCH_CLOSED;
 
 public class FalconPivot implements IPivot {
@@ -66,7 +69,7 @@ public class FalconPivot implements IPivot {
 	public void setIdleMode(NeutralModeValue idleMode) {
 		motor.setNeutralMode(idleMode);
 	}
-	
+
 	@Override
 	public void resetAngle(Rotation2d position) {
 		motor.setPosition(position.getRotations());
@@ -74,12 +77,13 @@ public class FalconPivot implements IPivot {
 	
 	@Override
 	public void moveToAngle(Rotation2d targetAngle) {
+		SmartDashboard.putNumber("ajajjaja", targetAngle.getRotations());
 		motor.setControl(
 				positionVoltage
 						.withPosition(targetAngle.getRotations())
 						.withSlot(FalconPivotConstants.PID_SLOT)
-						.withLimitForwardMotion(true)
-						.withLimitReverseMotion(true)
+						.withLimitForwardMotion(false)
+						.withLimitReverseMotion(false)
 						.withEnableFOC(true)
 						.withOverrideBrakeDurNeutral(true)
 		);
@@ -106,7 +110,7 @@ public class FalconPivot implements IPivot {
 		inputs.hasHitForwardLimit = motor.getForwardLimit().getValue().value == IS_SWITCH_CLOSED;
 		inputs.hasHitBackwardsLimit = motor.getReverseLimit().getValue().value == IS_SWITCH_CLOSED;
 
-		SmartDashboard.putNumber("abd pos", inputs.absoluteEncoderPosition.getDegrees());
+		SmartDashboard.putNumber("abs pos", inputs.absoluteEncoderPosition.getDegrees());
 		SmartDashboard.putNumber("position", inputs.position.getDegrees());
 	}
 }

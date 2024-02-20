@@ -21,7 +21,7 @@ public class RobotConstants {
 		
 		public final static double RAMP_RATE_VALUE = 0.4;
 		
-		public static final double SAFETY_POWER_CONVERSION_FACTOR = 0.1;
+		public static final double SAFETY_POWER_CONVERSION_FACTOR = 0.5;
 		
 		public static class Motors {
 			

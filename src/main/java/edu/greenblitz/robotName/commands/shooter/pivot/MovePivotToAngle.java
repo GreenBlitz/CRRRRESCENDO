@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.commands.shooter.pivot;
 
 import edu.greenblitz.robotName.Robot;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.function.Supplier;
 
@@ -34,6 +35,8 @@ public class MovePivotToAngle extends PivotCommand {
 
     @Override
     public boolean isFinished() {
+        System.out.println(pivot.isAtAngle(supplliedTargetAngle));
         return pivot.isAtAngle(supplliedTargetAngle);
     }
+
 }

@@ -20,11 +20,11 @@ public class FalconPivotConstants {
 
 	public static final boolean INVERTED = true;
 
-	public static final double kS = 0;
+	public static final double kS = 0.10609;
 	
-	public static final double kV = 0;
+	public static final double kV = 18.57;
 	
-	public static final double kA = 0;
+	public static final double kA = 0.7702;
 	
 	public static final double kG = 0;
 	
@@ -40,11 +40,13 @@ public class FalconPivotConstants {
 		SLOT_0_CONFIGS.kS = kS;
 		SLOT_0_CONFIGS.kA = kA;
 		SLOT_0_CONFIGS.kV = kV;
-		SLOT_0_CONFIGS.kP = 0;
+		SLOT_0_CONFIGS.kP = 0.55 * 360;
 		SLOT_0_CONFIGS.kI = 0;
-		SLOT_0_CONFIGS.kD = 0;
+		SLOT_0_CONFIGS.kD = 0.01 * 360;
 	}
-	
+
+
+
 	public static final CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();
 	
 	static {
@@ -59,7 +61,7 @@ public class FalconPivotConstants {
 	static {
 		SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitEnable = true;
 		SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitThreshold = PivotConstants.FORWARD_ANGLE_LIMIT.getRotations();
-		SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitEnable = false;
+		SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitEnable = true;
 		SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitThreshold = PivotConstants.BACKWARD_ANGLE_LIMIT.getRotations();
 	}
 	
