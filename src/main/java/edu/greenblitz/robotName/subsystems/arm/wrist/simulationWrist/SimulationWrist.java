@@ -87,8 +87,7 @@ public class SimulationWrist implements IWrist {
         inputs.outputCurrent = wristSimulation.getCurrentDrawAmps();
         inputs.position = Rotation2d.fromRadians(wristSimulation.getAngleRads());
         inputs.velocity = wristSimulation.getVelocityRadPerSec();
-        inputs.absoluteEncoderPosition = wristSimulation.getAngleRads();
-        inputs.temperature = 0;
+        inputs.absoluteEncoderPosition = Rotation2d.fromRadians(wristSimulation.getAngleRads());
         inputs.hasReachedForwardLimit = wristSimulation.hasHitLowerLimit();
         inputs.hasReachedBackwardLimit = wristSimulation.hasHitLowerLimit();
 

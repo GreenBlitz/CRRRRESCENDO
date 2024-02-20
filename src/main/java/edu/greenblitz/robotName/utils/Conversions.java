@@ -40,4 +40,15 @@ public class Conversions {
 			return Conversions.convertRPMToMeterPerSecond(rpm, MK4iSwerveConstants.WHEEL_CIRCUMFERENCE / (2 * Math.PI));
 		}
 	}
+
+	public static class MagEncoderConversions {
+
+		public static Rotation2d MotorPositionToRotation2D(double motorPosition) {
+			return Rotation2d.fromRotations(motorPosition / 4096.0);
+		}
+
+		public static double Rotation2DToMotorPosition(Rotation2d angle) {
+			return angle.getRotations() * 4096.0;
+		}
+	}
 }
