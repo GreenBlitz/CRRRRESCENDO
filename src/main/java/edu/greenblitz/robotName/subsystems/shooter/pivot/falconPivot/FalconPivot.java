@@ -85,8 +85,8 @@ public class FalconPivot implements IPivot {
 	public void updateInputs(PivotInputsAutoLogged inputs) {
 		inputs.outputCurrent = motor.getSupplyCurrent().getValue();
 		inputs.appliedOutput = motor.getMotorVoltage().getValue();
-		inputs.position = Rotation2d.fromRotations(motor.getLatencyValue(motor.getPosition(), motor.getVelocity()));
-		inputs.velocity = motor.getLatencyValue(motor.getPosition(), motor.getVelocity());
+		inputs.position = Rotation2d.fromRotations(motor.getLatencyCompensatedValue(motor.getPosition(), motor.getVelocity()));
+		inputs.velocity = motor.getLatencyCompensatedValue(motor.getPosition(), motor.getVelocity());
 		inputs.acceleration = motor.getAcceleration().getValue();
 		inputs.absoluteEncoderPosition = absoluteEncoder.getAbsolutePosition();
 		inputs.temperature = motor.getDeviceTemp().getValue();
