@@ -11,11 +11,11 @@ import static edu.greenblitz.robotName.RobotConstants.General.CANIVORE_NAME;
 
 public class MK4iSwerveConstants {
 	
-	public static SwerveModuleConfigObject MK4I_MODULE_FRONT_LEFT = new SwerveModuleConfigObject(CANIVORE_NAME, 1, 0, 1, false);
+	public static SwerveModuleConfigObject MK4I_MODULE_FRONT_LEFT = new SwerveModuleConfigObject(CANIVORE_NAME, 5, 4, 1, false);
 	
 	public static SwerveModuleConfigObject MK4I_MODULE_FRONT_RIGHT = new SwerveModuleConfigObject(CANIVORE_NAME, 3, 2, 2, true);
 	
-	public static SwerveModuleConfigObject MK4I_MODULE_BACK_LEFT = new SwerveModuleConfigObject(CANIVORE_NAME, 5, 4, 3, false);
+	public static SwerveModuleConfigObject MK4I_MODULE_BACK_LEFT = new SwerveModuleConfigObject(CANIVORE_NAME, 1, 43, 3, false);
 	
 	public static SwerveModuleConfigObject MK4I_MODULE_BACK_RIGHT = new SwerveModuleConfigObject(CANIVORE_NAME, 7, 6, 4, true);
 	
@@ -45,7 +45,7 @@ public class MK4iSwerveConstants {
 
 
 		Slot0Configs PID_CONFIGS = new Slot0Configs();
-		PID_CONFIGS.kP = 1;
+		PID_CONFIGS.kP = 12 ;
 		PID_CONFIGS.kI = 0;
 		PID_CONFIGS.kD = 0;
 		PID_CONFIGS.kS = 0;
@@ -80,7 +80,7 @@ public class MK4iSwerveConstants {
 	
 	static {
 		Slot0Configs PID_CONFIGS = new Slot0Configs();
-		PID_CONFIGS.kP = 0.2;
+		PID_CONFIGS.kP = 1;
 		PID_CONFIGS.kI = 0;
 		PID_CONFIGS.kD = 0;
 		PID_CONFIGS.kS = 0;

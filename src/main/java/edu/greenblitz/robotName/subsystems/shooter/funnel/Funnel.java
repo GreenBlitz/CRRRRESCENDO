@@ -41,7 +41,7 @@ public class Funnel extends GBSubsystem {
 	}
 	
 	public void rollIn() {
-		setPower(ROLL_POWER);
+		setPower(-ROLL_POWER);
 	}
 	
 	public void rollOut() {

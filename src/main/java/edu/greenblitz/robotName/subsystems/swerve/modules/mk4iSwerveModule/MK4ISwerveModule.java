@@ -50,7 +50,8 @@ public class MK4ISwerveModule implements ISwerveModule {
 
         angularMotor = new GBTalonFXPro(configObject.angleMotorID, configObject.canbusChain);
         angularMotor.applyConfiguration(MK4iSwerveConstants.ANGULAR_FALCON_CONFIG_OBJECT);
-
+        if (angularMotor.getDeviceID() == 1)
+            angularMotor.setInverted(true);
         linearMotor = new GBTalonFXPro(configObject.linearMotorID, configObject.canbusChain);
         linearMotor.applyConfiguration(MK4iSwerveConstants.LINEAR_FALCON_CONFIG_OBJECT);
         linearMotor.setInverted(configObject.linInverted);
@@ -70,12 +71,12 @@ public class MK4ISwerveModule implements ISwerveModule {
 
     @Override
     public void setLinearVelocity(double speed) {
-        linearMotor.setControl(velocityVoltage.withVelocity(speed * MK4iSwerveConstants.LINEAR_GEAR_RATIO / MK4iSwerveConstants.WHEEL_CIRCUMFERENCE));
+        linearMotor.setControl(velocityVoltage.withVelocity(speed / MK4iSwerveConstants.WHEEL_CIRCUMFERENCE));
     }
 
     @Override
     public void rotateToAngle(Rotation2d angle) {
-        angularMotor.setControl(motionMagicDutyCycle.withPosition(angle.getRotations() * MK4iSwerveConstants.ANGULAR_GEAR_RATIO));
+        angularMotor.setControl(motionMagicDutyCycle.withPosition(angle.getRotations()));
     }
 
     @Override
@@ -144,6 +145,8 @@ public class MK4ISwerveModule implements ISwerveModule {
 
         inputs.isAbsoluteEncoderConnected = canCoder.getVersion().getValue() != 0;
 
+        SmartDashboard.putNumber("pos, "+ angularMotor.getDeviceID(), Rotation2d.fromRotations(angularMotor.getPosition().getValue()).getDegrees());
+        
         if (Double.isNaN(canCoder.getAbsolutePosition().getValue())) {
             inputs.absoluteEncoderPosition = 0;
         } else {
