@@ -2,9 +2,9 @@ package edu.greenblitz.robotName.subsystems.LED;
 
 import edu.greenblitz.robotName.OI;
 import edu.greenblitz.robotName.ScoringModeSelector;
-import edu.greenblitz.robotName.subsystems.Intake.Intake;
+import edu.greenblitz.robotName.subsystems.intake.Intake;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
-import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
+import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
