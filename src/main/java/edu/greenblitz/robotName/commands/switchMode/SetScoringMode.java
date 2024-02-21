@@ -15,6 +15,7 @@ public class SetScoringMode extends InstantCommand {
 
     @Override
     public void initialize() {
+        SmartDashboard.putBoolean("scoirng",true);
         ScoringModeSelector.setScoringMode(scoringMode);
     }
 

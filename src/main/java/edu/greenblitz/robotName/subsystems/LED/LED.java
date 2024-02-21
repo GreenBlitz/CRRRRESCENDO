@@ -9,11 +9,13 @@ import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 
 import static edu.greenblitz.robotName.subsystems.LED.LEDConstants.*;
 
-public class LED extends GBSubsystem {
+public class   LED extends GBSubsystem {
 	
 	private Color currentColor;
 	private static LED instance;
@@ -22,14 +24,22 @@ public class LED extends GBSubsystem {
 	private Timer LEDBlinkTimer;
 	private boolean lastNotePosition;
 
+	private SendableChooser<Boolean> chooser;
+
 	private LED() {
 		this.addressableLED = new AddressableLED(LED_PORT);
 		this.addressableLEDBuffer = new AddressableLEDBuffer(LED_LENGTH);
 		this.addressableLED.setLength(LED_LENGTH);
 		this.addressableLED.start();
 		LEDBlinkTimer = new Timer();
+		LEDBlinkTimer.restart();
 		currentColor = SPEAKER_MODE_COLOR;
 		lastNotePosition = false;
+
+		chooser = new SendableChooser<>();
+		chooser.setDefaultOption("False", false);
+		chooser.addOption("True", true);
+		SmartDashboard.putData("Is npot robot", chooser);
 	}
 	
 	public static LED getInstance() {
@@ -103,10 +113,11 @@ public class LED extends GBSubsystem {
 	}
 
 	public boolean isNoteInRobot() {
-		return (Intake.getInstance().getExitBeamBreakerValue()
-				|| Intake.getInstance().getEntranceBeamBreakerValue()
-				|| Funnel.getInstance().isObjectIn()
-				|| Roller.getInstance().isObjectInside());
+//		return (Intake.getInstance().getExitBeamBreakerValue()
+//				|| Intake.getInstance().getEntranceBeamBreakerValue()
+//				|| Funnel.getInstance().isObjectIn()
+//				|| Roller.getInstance().isObjectInside());
+		return chooser.getSelected();
 	}
 
 	public void updateNoteState(){
@@ -114,16 +125,11 @@ public class LED extends GBSubsystem {
 	}
 	
 	public void blink(Color color) {
-		LEDBlinkTimer.restart();
-		System.out.println(LEDBlinkTimer);
-		while (LEDBlinkTimer.get() < LEDConstants.BLINKING_TIME) {
-			if ((LED.getInstance().getLEDBlinkTimer()) % (LEDConstants.BLINK_DURATION * 2) >= LEDConstants.BLINK_DURATION) {
-				LED.getInstance().turnOff(LEDConstants.ALL_LED);
-			} else {
-				LED.getInstance().setLEDColor(color, LEDConstants.ALL_LED);
-			}
+		if ((LEDBlinkTimer.get()) % (LEDConstants.BLINK_DURATION * 2) >= LEDConstants.BLINK_DURATION) {
+			LED.getInstance().turnOff(LEDConstants.ALL_LED);
+		} else {
+			LED.getInstance().setLEDColor(color, LEDConstants.ALL_LED);
 		}
-		setColorByMode();
 	}
 	public void rumble(){
 		OI.getInstance().getMainJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, LEDConstants.RUMBLE_POWER);

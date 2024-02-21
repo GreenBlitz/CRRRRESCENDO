@@ -1,68 +1,64 @@
 package edu.greenblitz.robotName;
 
 
-import edu.greenblitz.robotName.commands.LED.Rumble;
 import edu.greenblitz.robotName.commands.LED.UpdateLEDStateDefaultCommand;
-import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.switchMode.SetScoringMode;
 import edu.greenblitz.robotName.subsystems.LED.LED;
-import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.utils.ScoringMode;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 public class OI {
-    private static OI instance;
+	private static OI instance;
 
-    private SmartJoystick mainJoystick;
-    private SmartJoystick secondJoystick;
+	private SmartJoystick mainJoystick;
+	private SmartJoystick secondJoystick;
 
-    private OI() {
-        mainJoystick = new SmartJoystick(RobotConstants.Joystick.MAIN);
-        secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
-        System.out.println("This is now running \n\n\n\n\n\n\n\n This is also a line");
-        initButtons();
-        initializeDefaultCommands();
-    }
+	private OI() {
+		mainJoystick = new SmartJoystick(RobotConstants.Joystick.MAIN);
+		secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
+		System.out.println("This is now running \n\n\n\n\n\n\n\n This is also a line");
+		initButtons();
+		initializeDefaultCommands();
+	}
 
-    public static OI getInstance() {
-        init();
-        return instance;
-    }
-    
-    public static void init(){
-        if (instance == null) {
-            instance = new OI();
-        }
-    }
+	public static OI getInstance() {
+		init();
+		return instance;
+	}
 
-    public SmartJoystick getMainJoystick() {
-        return mainJoystick;
-    }
+	public static void init() {
+		if (instance == null) {
+			instance = new OI();
+		}
+	}
 
-    public SmartJoystick getSecondJoystick() {
-        return secondJoystick;
-    }
+	public SmartJoystick getMainJoystick() {
+		return mainJoystick;
+	}
 
-    public void initButtons() {
-        ledButtons();
-    }
+	public SmartJoystick getSecondJoystick() {
+		return secondJoystick;
+	}
 
-    public void initializeDefaultCommands(){
+	public void initButtons() {
+		ledButtons();
+	}
+
+	public void initializeDefaultCommands() {
 //        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(DRIVE_MODE));
 //        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
 //        Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
 //        Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
 //        Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
-        //LED.getInstance().setDefaultCommand(new UpdateLEDStateDefaultCommand());
-    }
+		//LED.getInstance().setDefaultCommand(new UpdateLEDStateDefaultCommand());
+	}
 
-    public void ledButtons(){
-     //   mainJoystick.X.whileTrue(new InstantCommand(() -> LED.getInstance().turnOff(LEDConstants.ALL_LED)));
+	public void ledButtons() {
+		//   mainJoystick.X.whileTrue(new InstantCommand(() -> LED.getInstance().turnOff(LEDConstants.ALL_LED)));
 //        mainJoystick.Y.onTrue(new Rumble());
-        mainJoystick.B.whileTrue(new UpdateLEDStateDefaultCommand());
-        mainJoystick.A.onTrue(new SetScoringMode(ScoringMode.AMP));
-        mainJoystick.X.onTrue(new SetScoringMode(ScoringMode.SPEAKER));
-    }
-  
+		LED.getInstance().setDefaultCommand(new UpdateLEDStateDefaultCommand());
+		mainJoystick.A.onTrue(new SetScoringMode(ScoringMode.AMP));
+		mainJoystick.X.onTrue(new SetScoringMode(ScoringMode.SPEAKER));
+	}
+
 }

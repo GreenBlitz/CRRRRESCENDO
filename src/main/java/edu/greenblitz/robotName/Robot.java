@@ -44,15 +44,15 @@ public class Robot extends LoggedRobot {
 
     @Override
     public void robotInit() {
-        Pathfinding.setPathfinder(new LocalADStar());
+//        Pathfinding.setPathfinder(new LocalADStar());
         CommandScheduler.getInstance().enable();
 //        initializeLogger();
-        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
+//        SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL));
         Battery.getInstance().setDefaultCommand(new BatteryLimiter());
         //initializeSubsystems();
         LED.init();
-        SwerveChassis.getInstance().resetAllEncoders();
-        initializeAutonomousBuilder();
+//        SwerveChassis.getInstance().resetAllEncoders();
+//        initializeAutonomousBuilder();
         OI.init();
     }
 
