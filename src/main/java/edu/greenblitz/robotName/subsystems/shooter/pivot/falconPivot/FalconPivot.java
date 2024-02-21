@@ -22,7 +22,7 @@ public class FalconPivot implements IPivot {
 	
 	public FalconPivot() {
 		motor = new GBTalonFXPro(FalconPivotConstants.MOTOR_ID, FalconPivotConstants.CANBUS_CHANNEL);
-		motor.getConfigurator().apply(FalconPivotConstants.TALON_FX_CONFIGURATION);
+		motor.applyConfiguration(FalconPivotConstants.TALON_FX_CONFIGURATION);
 		motor.setNeutralMode(FalconPivotConstants.NEUTRAL_MODE_VALUE);
 		optimizeCanBusUtilization();
 		
@@ -85,8 +85,8 @@ public class FalconPivot implements IPivot {
 	public void updateInputs(PivotInputsAutoLogged inputs) {
 		inputs.outputCurrent = motor.getSupplyCurrent().getValue();
 		inputs.appliedOutput = motor.getMotorVoltage().getValue();
-		inputs.position = Rotation2d.fromRotations(motor.getPosition().getValue());
-		inputs.velocity = motor.getVelocity().getValue();
+		inputs.position = Rotation2d.fromRotations(motor.getLatencyValue(motor.getPosition(), motor.getVelocity()));
+		inputs.velocity = motor.getLatencyValue(motor.getPosition(), motor.getVelocity());
 		inputs.acceleration = motor.getAcceleration().getValue();
 		inputs.absoluteEncoderPosition = absoluteEncoder.getAbsolutePosition();
 		inputs.temperature = motor.getDeviceTemp().getValue();

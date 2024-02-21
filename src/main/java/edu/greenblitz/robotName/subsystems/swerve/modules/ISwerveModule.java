@@ -4,7 +4,7 @@ package edu.greenblitz.robotName.subsystems.swerve.modules;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public interface ISwerveModule {
-	
+
 	void setLinearVelocity(double speed);
 	
 	void rotateToAngle(Rotation2d angle);

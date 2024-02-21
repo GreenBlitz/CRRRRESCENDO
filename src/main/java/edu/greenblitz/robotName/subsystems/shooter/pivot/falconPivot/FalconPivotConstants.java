@@ -3,13 +3,14 @@ package edu.greenblitz.robotName.subsystems.shooter.pivot.falconPivot;
 import com.ctre.phoenix6.configs.*;
 import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 
 public class FalconPivotConstants {
 	
-	public static final int MOTOR_ID = 12;
+	public static final int MOTOR_ID = 49;
 
-	public static final String CANBUS_CHANNEL = "*";
+	public static final String CANBUS_CHANNEL = RobotConstants.General.CANIVORE_NAME;
 	
 	public static final int ABSOLUTE_ENCODER_CHANNEL = 7;
 	
