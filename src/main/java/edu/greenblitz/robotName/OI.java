@@ -50,9 +50,9 @@ public class OI {
 		secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
 		thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
-
-		initButtons();
-		initializeDefaultCommands();
+		secondJoystick.B.whileTrue(new RunIntakeByJoystick(secondJoystick));
+//		initButtons();
+//		initializeDefaultCommands();
 	}
 	public static void init() {
 		if (instance == null) {

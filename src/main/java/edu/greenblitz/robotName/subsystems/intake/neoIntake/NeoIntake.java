@@ -1,10 +1,12 @@
 package edu.greenblitz.robotName.subsystems.intake.neoIntake;
 
 import com.revrobotics.CANSparkLowLevel;
+import com.revrobotics.SparkMaxLimitSwitch;
 import edu.greenblitz.robotName.subsystems.intake.IIntake;
 import edu.greenblitz.robotName.subsystems.intake.IntakeInputsAutoLogged;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.filter.Debouncer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class NeoIntake implements IIntake {
 	
@@ -45,8 +47,13 @@ public class NeoIntake implements IIntake {
 		intakeInputs.entranceBeamBreakerValue = entranceBeamBreaker.calculate(
 				motor.getReverseLimitSwitch(NeoIntakeConstants.ENTRANCE_BEAM_BREAKER_TYPE).isPressed()
 		);
-		intakeInputs.exitBeamBreakerValue = exitBeamBreaker.calculate(
-				motor.getForwardLimitSwitch(NeoIntakeConstants.EXIT_BEAM_BREAKER_TYPE).isPressed()
-		);
+//		intakeInputs.exitBeamBreakerValue = exitBeamBreaker.calculate(
+//				motor.getForwardLimitSwitch(NeoIntakeConstants.EXIT_BEAM_BREAKER_TYPE).isPressed()
+//		);
+//		SmartDashboard.putBoolean("forward bb without db",exitBeamBreaker.calculate(
+//				motor.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen).isPressed()));
+		SmartDashboard.putBoolean("reverse bb without db",
+				entranceBeamBreaker.calculate(motor.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed)
+						.isPressed()));
 	}
 }

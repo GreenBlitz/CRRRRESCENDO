@@ -7,6 +7,7 @@ import edu.greenblitz.robotName.subsystems.shooter.funnel.IFunnel;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.filter.Debouncer;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import static edu.greenblitz.robotName.subsystems.shooter.funnel.neoFunnel.NeoFunnelConstants.FUNNEL_CONFIG_OBJECT;
 import static edu.greenblitz.robotName.subsystems.shooter.funnel.neoFunnel.NeoFunnelConstants.MOTOR_ID;
