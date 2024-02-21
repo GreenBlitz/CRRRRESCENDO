@@ -4,15 +4,16 @@ import com.ctre.phoenix6.configs.*;
 import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.ReverseLimitTypeValue;
+import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.wpi.first.math.util.Units;
 
 
 public class FalconPivotConstants {
-	
+
 	public static final int MOTOR_ID = 11;
 
-	public static final String CANBUS_CHANNEL = "*";
+	public static final String CANBUS_CHANNEL = RobotConstants.General.CANIVORE_NAME;
 	
 	public static final int ABSOLUTE_ENCODER_CHANNEL = 1;
 

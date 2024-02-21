@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.falconFlyWheel;
 
 import com.ctre.phoenix6.configs.*;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.greenblitz.robotName.RobotConstants;
 
 public class FalconFlyWheelConstants {
 	
@@ -9,7 +10,7 @@ public class FalconFlyWheelConstants {
 		
 		public static final int MOTOR_ID = 16;
 
-		public static final String CANBUS_CHAIN = "";
+		public static final String CANBUS_CHAIN = RobotConstants.General.CANBUS_NAME;
 
 		public static final NeutralModeValue NEUTRAL_MODE_VALUE = NeutralModeValue.Coast;
 		
@@ -56,7 +57,7 @@ public class FalconFlyWheelConstants {
 		
 		public static final int MOTOR_ID = 22;
 
-		public static final String CANBUS_CHAIN = "";
+		public static final String CANBUS_CHAIN = RobotConstants.General.CANBUS_NAME;
 
 		public static final NeutralModeValue NEUTRAL_MODE_VALUE = NeutralModeValue.Coast;
 		

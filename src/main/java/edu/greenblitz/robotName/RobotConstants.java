@@ -23,6 +23,10 @@ public class RobotConstants {
 		
 		public static final double SAFETY_POWER_CONVERSION_FACTOR = 0.5;
 		
+		public final static String CANIVORE_NAME = "*";
+		
+		public final static String CANBUS_NAME = "";
+		
 		public static class Motors {
 			
 			public final static double SPARKMAX_TICKS_PER_RADIAN = Math.PI * 2;
@@ -31,7 +35,7 @@ public class RobotConstants {
 			
 			public final static double NEO_TICKS_PER_ROTATION = 42;
 			
-			public static final double NEO_PHYSICAL_TICKS_TO_RADIANS = SPARKMAX_TICKS_PER_RADIAN / NEO_TICKS_PER_ROTATION; //do not use unless you understand the meaning
+			public final static double NEO_PHYSICAL_TICKS_TO_RADIANS = SPARKMAX_TICKS_PER_RADIAN / NEO_TICKS_PER_ROTATION; //do not use unless you understand the meaning
 			
 			public final static double FALCON_REVOLUTIONS_PER_RADIAN = 2 * Math.PI;
 			
