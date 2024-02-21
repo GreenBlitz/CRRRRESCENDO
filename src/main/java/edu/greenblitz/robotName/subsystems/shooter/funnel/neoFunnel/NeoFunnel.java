@@ -35,5 +35,6 @@ public class NeoFunnel implements IFunnel {
 		inputs.outputCurrent = motor.getOutputCurrent();
 		inputs.appliedOutput = motor.getAppliedOutput();
 		inputs.isObjectIn = debouncer.calculate(motor.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen).isPressed());
+		SmartDashboard.putBoolean("funnel",inputs.isObjectIn);
 	}
 }
