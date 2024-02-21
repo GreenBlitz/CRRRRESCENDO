@@ -1,11 +1,15 @@
 package edu.greenblitz.robotName.commands.swerve;
 
 import edu.greenblitz.robotName.Field;
-import edu.greenblitz.robotName.commands.auto.MoveToPosition;
+import edu.greenblitz.robotName.utils.FMSUtils;
+import edu.wpi.first.wpilibj.DriverStation;
 
 public class MoveToAmp extends MoveToPosition {
 
     public MoveToAmp() {
-        super(Field.ScoringPositions.AMP_SCORE_POSITION);
+        super(FMSUtils.getAlliance() == DriverStation.Alliance.Red ?
+                Field.ScoringPositions.RED_AMP_SCORE_POSITION :
+                Field.ScoringPositions.BLUE_AMP_SCORE_POSITION
+        );
     }
 }

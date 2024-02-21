@@ -9,46 +9,86 @@ import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 
 public class SimulationFlyWheel implements IFlyWheel {
-    private FlywheelSim flyWheelSimulation;
-    private double appliedVoltage;
-    private PIDController pidController;
-
-    public SimulationFlyWheel() {
-        flyWheelSimulation = new FlywheelSim(
-                DCMotor.getNEO(SimulationFlyWheelConstants.NUMBER_OF_MOTORS),
-                SimulationFlyWheelConstants.GEARING,
-                SimulationFlyWheelConstants.J_KG_METERS_SQUARED
-        );
-        pidController = SimulationFlyWheelConstants.SIMULATION_PID;
-    }
-
-    @Override
-    public void setPower(double power) {
-        setVoltage(power * RobotConstants.SimulationConstants.BATTERY_VOLTAGE);
-    }
-
-    @Override
-    public void setVoltage(double voltage) {
-        appliedVoltage = MathUtil.clamp(
-                voltage,
-                -RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE,
-                RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE
-        );
-        flyWheelSimulation.setInputVoltage(appliedVoltage);
-    }
-
-    @Override
-    public void setVelocity(double velocity) {
-        double power = velocity / SimulationFlyWheelConstants.POWER_TO_VELOCITY_FACTOR;
-        setPower(power);
-    }
-
-    @Override
-    public void updateInputs(FlyWheelInputsAutoLogged inputs) {
-        flyWheelSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
-
-        inputs.appliedOutput = appliedVoltage;
-        inputs.velocity = flyWheelSimulation.getAngularVelocityRPM();
-        inputs.temperature = 0;
-    }
+	
+	private FlywheelSim rightMotorFlywheel;
+	
+	private FlywheelSim leftMotorFlywheel;
+	
+	private double rightMotorAppliedOutput;
+	
+	private double leftMotorAppliedOutput;
+	
+	private PIDController rightMotorPIDController;
+	
+	private PIDController leftMotorPIDController;
+	
+	public SimulationFlyWheel() {
+		rightMotorFlywheel = new FlywheelSim(
+				DCMotor.getNEO(SimulationFlyWheelConstants.RightMotor.NUMBER_OF_MOTORS),
+				SimulationFlyWheelConstants.RightMotor.GEARING,
+				SimulationFlyWheelConstants.RightMotor.MOMENT_OF_INERTIA
+		);
+		rightMotorPIDController = SimulationFlyWheelConstants.RightMotor.SIMULATION_PID;
+		
+		leftMotorFlywheel = new FlywheelSim(
+				DCMotor.getNEO(SimulationFlyWheelConstants.LeftMotor.NUMBER_OF_MOTORS),
+				SimulationFlyWheelConstants.LeftMotor.GEARING,
+				SimulationFlyWheelConstants.LeftMotor.MOMENT_OF_INERTIA
+		);
+		leftMotorPIDController = SimulationFlyWheelConstants.LeftMotor.SIMULATION_PID;
+	}
+	
+	@Override
+	public void setPower(double rightPower, double leftPower) {
+		setVoltage(
+				rightPower * RobotConstants.SimulationConstants.BATTERY_VOLTAGE,
+				leftPower * RobotConstants.SimulationConstants.BATTERY_VOLTAGE
+		);
+	}
+	
+	@Override
+	public void setVoltage(double rightVoltage, double leftVoltage) {
+		rightMotorAppliedOutput = MathUtil.clamp(
+				rightVoltage,
+				-RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE,
+				RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE
+		);
+		leftMotorAppliedOutput = MathUtil.clamp(
+				leftVoltage,
+				-RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE,
+				RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE
+		);
+		
+		leftMotorFlywheel.setInputVoltage(leftMotorAppliedOutput);
+		rightMotorFlywheel.setInputVoltage(rightMotorAppliedOutput);
+		
+	}
+	
+	@Override
+	public void setVelocity(double rightVelocity, double leftVelocity) {
+		rightMotorPIDController.setSetpoint(rightVelocity);
+		leftMotorPIDController.setSetpoint(leftVelocity);
+		
+		setVoltage(
+				rightMotorPIDController.calculate(rightMotorFlywheel.getAngularVelocityRPM()),
+				leftMotorPIDController.calculate(leftMotorFlywheel.getAngularVelocityRPM())
+		);
+	}
+	
+	@Override
+	public void updateInputs(FlyWheelInputsAutoLogged inputs) {
+		rightMotorFlywheel.update(RobotConstants.SimulationConstants.TIME_STEP);
+		leftMotorFlywheel.update(RobotConstants.SimulationConstants.TIME_STEP);
+		
+		
+		inputs.leftFlywheelVelocity = leftMotorFlywheel.getAngularVelocityRPM();
+		inputs.leftFlywheelCurrent = leftMotorFlywheel.getCurrentDrawAmps();
+		inputs.leftFlywheelVoltage = leftMotorAppliedOutput;
+		inputs.leftWheelAcceleration = 0;
+		
+		inputs.rightFlywheelVelocity = rightMotorFlywheel.getAngularVelocityRPM();
+		inputs.rightFlywheelCurrent = rightMotorFlywheel.getCurrentDrawAmps();
+		inputs.rightFlywheelVoltage = rightMotorAppliedOutput;
+		inputs.rightWheelAcceleration = 0;
+	}
 }

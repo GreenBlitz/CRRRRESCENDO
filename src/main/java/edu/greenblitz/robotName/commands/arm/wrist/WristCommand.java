@@ -7,12 +7,13 @@ public class WristCommand extends GBCommand {
 
     protected Wrist wrist;
 
-    public WristCommand(){
+    public WristCommand() {
         wrist = Wrist.getInstance();
         require(wrist);
     }
 
     public void end(boolean interrupted) {
+        wrist.setCurrentAngle();
         wrist.standInPlace();
     }
 }

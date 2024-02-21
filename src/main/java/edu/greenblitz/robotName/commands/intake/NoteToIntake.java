@@ -1,12 +1,6 @@
-
 package edu.greenblitz.robotName.commands.intake;
 
-import edu.greenblitz.robotName.subsystems.Intake.IntakeConstants;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-
 public class NoteToIntake extends IntakeCommand {
-
 
     @Override
     public void execute() {
@@ -22,6 +16,4 @@ public class NoteToIntake extends IntakeCommand {
     public void end(boolean interrupted) {
         intake.stop();
     }
-
 }
-

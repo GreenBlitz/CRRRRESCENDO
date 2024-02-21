@@ -2,7 +2,7 @@ package edu.greenblitz.robotName.commands.getNoteToSystem;
 
 import edu.greenblitz.robotName.ScoringModeSelector;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
-import edu.greenblitz.robotName.subsystems.shooter.Funnel.Funnel;
+import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.greenblitz.robotName.utils.GBCommand;
 
 public class MoveNoteBetweenShooterAndArm extends GBCommand {
@@ -13,7 +13,7 @@ public class MoveNoteBetweenShooterAndArm extends GBCommand {
 
     private boolean isTargetModeSpeaker;
 
-    public MoveNoteBetweenShooterAndArm(){
+    public MoveNoteBetweenShooterAndArm() {
         roller = Roller.getInstance();
         require(roller);
         funnel = Funnel.getInstance();
@@ -27,19 +27,18 @@ public class MoveNoteBetweenShooterAndArm extends GBCommand {
 
     @Override
     public void execute() {
-        if (isTargetModeSpeaker){
+        if (isTargetModeSpeaker) {
             funnel.rollIn();
-            roller.rollOut();
-        }
-        else {
+            roller.rollCounterClockwise();
+        } else {
             funnel.rollOut();
-            roller.rollIn();
+            roller.rollClockwise();
         }
     }
 
     @Override
     public boolean isFinished() {
-        return isTargetModeSpeaker ? funnel.isObjectIn() :  roller.isObjectInside() ;
+        return isTargetModeSpeaker ? funnel.isObjectIn() : roller.isObjectIn();
     }
 
     @Override

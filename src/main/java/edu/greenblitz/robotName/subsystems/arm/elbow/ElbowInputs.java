@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.arm.elbow;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import org.littletonrobotics.junction.AutoLog;
 
 @AutoLog
@@ -9,16 +10,15 @@ public class ElbowInputs {
 
     public double outputCurrent;
 
-    public double position;
+    public Rotation2d position;
 
     public double velocity;
 
-    public double absoluteEncoderPosition;
+    public double acceleration;
 
-    public double temperature;
+    public double absoluteEncoderPosition;
 
     public boolean hasReachedForwardLimit;
 
     public boolean hasReachedBackwardLimit;
-
 }

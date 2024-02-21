@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.commands.arm.wrist;
 
 import edu.greenblitz.robotName.Robot;
+import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public class MoveWristToAngle extends WristCommand {
@@ -9,6 +10,10 @@ public class MoveWristToAngle extends WristCommand {
 
     public MoveWristToAngle(Rotation2d targetAngle) {
         this.targetAngle = targetAngle;
+    }
+
+    public MoveWristToAngle(WristConstants.PresetPositions targetAngle) {
+        this(targetAngle.ANGLE);
     }
 
     @Override
@@ -27,5 +32,4 @@ public class MoveWristToAngle extends WristCommand {
     public boolean isFinished() {
         return wrist.isAtAngle(targetAngle);
     }
-
 }

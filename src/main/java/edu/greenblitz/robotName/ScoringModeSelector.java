@@ -5,17 +5,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ScoringModeSelector {
 
-    private static ScoringMode currentMode;
+	private static ScoringMode currentMode;
 
-    public static ScoringMode getScoringMode() {
-        if (currentMode == null) {
-            currentMode = ScoringMode.SPEAKER;
-        }
-        return currentMode;
-    }
+	public static ScoringMode getScoringMode() {
+		if (currentMode == null) {
+			currentMode = ScoringMode.SPEAKER;
+		}
+		return currentMode;
+	}
 
-    public static void setScoringMode(ScoringMode scoringMode) {
-        SmartDashboard.putString("mode", scoringMode.toString());
+	public static void setScoringMode(ScoringMode scoringMode) {
+		SmartDashboard.putString("mode", scoringMode.toString());
         currentMode = scoringMode;
     }
 

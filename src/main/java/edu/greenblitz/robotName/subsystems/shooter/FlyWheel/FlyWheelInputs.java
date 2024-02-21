@@ -4,11 +4,20 @@ import org.littletonrobotics.junction.AutoLog;
 
 @AutoLog
 public class FlyWheelInputs {
-    public double appliedOutput;
-
-    public double outputCurrent;
-
-    public double temperature;
-
-    public double velocity;
+	
+	public double rightFlywheelVoltage;
+	
+	public double rightFlywheelVelocity;
+	
+	public double rightFlywheelCurrent;
+	
+	public double rightWheelAcceleration;
+	
+	public double leftFlywheelVoltage;
+	
+	public double leftFlywheelVelocity;
+	
+	public double leftFlywheelCurrent;
+	
+	public double leftWheelAcceleration;
 }

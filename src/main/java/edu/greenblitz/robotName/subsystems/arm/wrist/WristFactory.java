@@ -1,15 +1,16 @@
 package edu.greenblitz.robotName.subsystems.arm.wrist;
 
-import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.arm.wrist.NeoWrist.NeoWrist;
-import edu.greenblitz.robotName.subsystems.arm.wrist.SimulationWrist.SimulationWrist;
+import edu.greenblitz.robotName.Robot;
+import edu.greenblitz.robotName.subsystems.arm.wrist.neoWrist.NeoWrist;
+import edu.greenblitz.robotName.subsystems.arm.wrist.simulationWrist.SimulationWrist;
 
 public class WristFactory {
+
     public static IWrist create() {
-        return switch (RobotConstants.ROBOT_TYPE) {
-            case ROBOT_NAME -> new NeoWrist();
+        return switch (Robot.getRobotType()) {
+            case SYNCOPA -> new NeoWrist();
             case REPLAY -> new ReplayWrist();
-            case SIMULATION -> new SimulationWrist();
+            case SIMULATION, PEGA_SWERVE -> new SimulationWrist();
         };
     }
 }

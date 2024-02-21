@@ -13,6 +13,8 @@ public interface IWrist {
 
     void resetAngle(Rotation2d position);
 
+    void resetEncoder();
+
     void moveToAngle(Rotation2d targetAngle);
 
     void updateInputs(WristInputsAutoLogged inputs);

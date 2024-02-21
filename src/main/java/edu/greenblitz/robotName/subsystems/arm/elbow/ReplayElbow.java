@@ -31,6 +31,11 @@ public class ReplayElbow implements IElbow {
     }
 
     @Override
+    public void standInPlace(Rotation2d targetAngle) {
+
+    }
+
+    @Override
     public void updateInputs(ElbowInputsAutoLogged inputs) {
 
     }

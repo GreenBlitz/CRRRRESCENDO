@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.commands.arm.elbow;
 
 import edu.greenblitz.robotName.Robot;
+import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public class MoveElbowToAngle extends ElbowCommand {
@@ -9,6 +10,10 @@ public class MoveElbowToAngle extends ElbowCommand {
 
     public MoveElbowToAngle(Rotation2d targetAngle) {
         this.targetAngle = targetAngle;
+    }
+
+    public MoveElbowToAngle(ElbowConstants.PresetPositions targetAngle) {
+        this(targetAngle.ANGLE);
     }
 
     @Override
@@ -27,5 +32,4 @@ public class MoveElbowToAngle extends ElbowCommand {
     public boolean isFinished() {
         return elbow.isAtAngle(targetAngle);
     }
-
 }
