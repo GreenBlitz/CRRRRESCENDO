@@ -140,7 +140,7 @@ public class MK4ISwerveModule implements ISwerveModule {
         inputs.angularCurrent = angularMotor.getStatorCurrent().getValue();
         
         inputs.linearMetersPassed = BaseStatusSignal.getLatencyCompensatedValue(linearPositionStatusSignal, linearVelocityStatusSignal);
-        inputs.angularPositionRadians = Conversions.MK4IConversions.convertRevolutionsToRadians(angularPositionStatusSignal.getValue());
+        inputs.angularPositionRadians = Units.rotationsToRadians(angularPositionStatusSignal.getValue());
 
         inputs.isAbsoluteEncoderConnected = canCoder.getVersion().getValue() != 0;
 

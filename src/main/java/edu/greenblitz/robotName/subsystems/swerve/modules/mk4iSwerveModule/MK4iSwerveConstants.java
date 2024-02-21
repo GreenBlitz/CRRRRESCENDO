@@ -40,6 +40,10 @@ public class MK4iSwerveConstants {
 	public static final TalonFXConfiguration ANGULAR_FALCON_CONFIG_OBJECT = new TalonFXConfiguration();
 	
 	static {
+		FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();
+		FEEDBACK_CONFIGS.SensorToMechanismRatio = ANGULAR_GEAR_RATIO;
+
+
 		Slot0Configs PID_CONFIGS = new Slot0Configs();
 		PID_CONFIGS.kP = 1;
 		PID_CONFIGS.kI = 0;
@@ -55,7 +59,7 @@ public class MK4iSwerveConstants {
 		ClosedLoopRampsConfigs CLOSED_LOOP_RAMPS_CONFIGS = new ClosedLoopRampsConfigs();
 		CLOSED_LOOP_RAMPS_CONFIGS.VoltageClosedLoopRampPeriod = 0.1;
 		
-		var MOTOR_OUTPUT_CONFIGS = new MotorOutputConfigs();
+		MotorOutputConfigs MOTOR_OUTPUT_CONFIGS = new MotorOutputConfigs();
 		MOTOR_OUTPUT_CONFIGS.NeutralMode = NeutralModeValue.Brake;
 		MOTOR_OUTPUT_CONFIGS.Inverted = InvertedValue.CounterClockwise_Positive; //true
 		
@@ -69,6 +73,7 @@ public class MK4iSwerveConstants {
 		ANGULAR_FALCON_CONFIG_OBJECT.ClosedLoopRamps = CLOSED_LOOP_RAMPS_CONFIGS;
 		ANGULAR_FALCON_CONFIG_OBJECT.MotorOutput = MOTOR_OUTPUT_CONFIGS;
 		ANGULAR_FALCON_CONFIG_OBJECT.MotionMagic = MOTION_MAGIC_CONFIGS;
+		ANGULAR_FALCON_CONFIG_OBJECT.Feedback = FEEDBACK_CONFIGS;
 	}
 	
 	public static final TalonFXConfiguration LINEAR_FALCON_CONFIG_OBJECT = new TalonFXConfiguration();
@@ -98,7 +103,6 @@ public class MK4iSwerveConstants {
 		
 		FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();
 		FEEDBACK_CONFIGS.SensorToMechanismRatio = LINEAR_GEAR_RATIO;
-		FEEDBACK_CONFIGS.FeedbackRotorOffset = 0;
 		
 		LINEAR_FALCON_CONFIG_OBJECT.Slot0 = PID_CONFIGS;
 		LINEAR_FALCON_CONFIG_OBJECT.CurrentLimits = CURRENT_LIMITS_CONFIGS;
