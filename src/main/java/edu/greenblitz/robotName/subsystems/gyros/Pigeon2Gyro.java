@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.subsystems.gyros;
 
 import com.ctre.phoenix6.hardware.Pigeon2;
+import edu.greenblitz.robotName.RobotConstants;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public class Pigeon2Gyro implements IAngleMeasurementGyro {
@@ -16,7 +17,7 @@ public class Pigeon2Gyro implements IAngleMeasurementGyro {
 	private GyroInputsAutoLogged lastInputs;
 	
 	public Pigeon2Gyro(int deviceID) {
-		pigeon2 = new Pigeon2(deviceID, "*");
+		pigeon2 = new Pigeon2(deviceID, RobotConstants.General.CANIVORE_NAME);
 		lastInputs = new GyroInputsAutoLogged();
 		
 		this.pitchOffset = new Rotation2d();

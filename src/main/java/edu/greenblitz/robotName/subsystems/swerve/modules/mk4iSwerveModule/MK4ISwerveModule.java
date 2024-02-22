@@ -4,7 +4,6 @@ import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.controls.*;
 import com.ctre.phoenix6.hardware.CANcoder;
-
 import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
@@ -12,7 +11,6 @@ import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.subsystems.swerve.modules.ISwerveModule;
 import edu.greenblitz.robotName.subsystems.swerve.modules.SwerveModuleInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.swerve.SwerveModuleConfigObject;
-import edu.greenblitz.robotName.utils.Conversions;
 import edu.greenblitz.robotName.utils.motors.GBTalonFXPro;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
@@ -36,7 +34,7 @@ public class MK4ISwerveModule implements ISwerveModule {
 
     public VelocityVoltage velocityVoltage = new VelocityVoltage(0).withEnableFOC(true);
 
-    public PositionVoltage motionMagicDutyCycle = new PositionVoltage(0).withEnableFOC(true);
+    public PositionVoltage positionVoltage = new PositionVoltage(0).withEnableFOC(true);
 
     public MK4ISwerveModule(SwerveChassis.Module module) {
 
@@ -56,7 +54,7 @@ public class MK4ISwerveModule implements ISwerveModule {
         linearMotor.applyConfiguration(MK4iSwerveConstants.LINEAR_FALCON_CONFIG_OBJECT);
         linearMotor.setInverted(configObject.linInverted);
 
-        canCoder = new CANcoder(configObject.AbsoluteEncoderID);
+        canCoder = new CANcoder(configObject.AbsoluteEncoderID, configObject.canbusChain);
 
         FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();
         FEEDBACK_CONFIGS.FeedbackRemoteSensorID = canCoder.getDeviceID();
@@ -76,7 +74,7 @@ public class MK4ISwerveModule implements ISwerveModule {
 
     @Override
     public void rotateToAngle(Rotation2d angle) {
-        angularMotor.setControl(motionMagicDutyCycle.withPosition(angle.getRotations()));
+        angularMotor.setControl(positionVoltage.withPosition(angle.getRotations()));
     }
 
     @Override
@@ -145,7 +143,7 @@ public class MK4ISwerveModule implements ISwerveModule {
 
         inputs.isAbsoluteEncoderConnected = canCoder.getVersion().getValue() != 0;
 
-        SmartDashboard.putNumber("pos, "+ angularMotor.getDeviceID(), Rotation2d.fromRotations(angularMotor.getPosition().getValue()).getDegrees());
+        SmartDashboard.putNumber("pos, " + angularMotor.getDeviceID(), Units.radiansToDegrees(inputs.angularPositionRadians));
         
         if (Double.isNaN(canCoder.getAbsolutePosition().getValue())) {
             inputs.absoluteEncoderPosition = 0;
