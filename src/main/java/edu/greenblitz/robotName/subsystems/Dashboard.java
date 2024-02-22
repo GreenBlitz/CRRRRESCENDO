@@ -37,6 +37,7 @@ public class Dashboard extends GBSubsystem {
 	 */
 	public void openDriversDashboard() {
 		Shuffleboard.getTab("Drivers");
+		swerveDashboard();
 	}
 	
 	/**
@@ -63,4 +64,20 @@ public class Dashboard extends GBSubsystem {
 		driversTab.add("Field", SwerveChassis.getInstance().getField()).withPosition(5, 2).withSize(3, 2);
 		driversTab.addDouble("std devs", () -> MultiLimelight.getInstance().getDynamicStdDevs(0));
 	}
+
+	public void swerveDashboard() {
+		ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
+		for (SwerveChassis.Module module : SwerveChassis.Module.values()) {
+			swerveTab.addDouble(module + "-angle", () -> Math.IEEEremainder(SwerveChassis.getInstance().getModuleAngle(module).getDegrees(), 360))
+					.withSize(2, 1).withPosition(module.ordinal() * 2, 0);
+			swerveTab.addDouble(module + "-absolute-angle", () -> SwerveChassis.getInstance().getModuleAbsoluteEncoderAngle(module).getDegrees())
+					.withSize(2, 1).withPosition(module.ordinal() * 2, 1);
+			swerveTab.addDouble(module + "-lin-dist", () -> SwerveChassis.getInstance().getSwerveModulePositions()[module.ordinal()].distanceMeters)
+					.withSize(2, 1).withPosition(module.ordinal() * 2, 2);
+		}
+		swerveTab.addDouble("pigeon-angle", () -> SwerveChassis.getInstance().getChassisAngle().getDegrees())
+				.withSize(1, 1).withPosition(0, 3);
+
+	}
+
 }

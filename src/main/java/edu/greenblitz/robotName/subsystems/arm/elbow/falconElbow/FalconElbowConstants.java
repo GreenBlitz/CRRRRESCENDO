@@ -5,6 +5,7 @@ import com.ctre.phoenix6.signals.ForwardLimitTypeValue;
 import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.ReverseLimitTypeValue;
+import edu.greenblitz.robotName.RobotConstants;
 
 import static edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants.*;
 
@@ -12,7 +13,7 @@ public class FalconElbowConstants {
 
     public static final int MOTOR_ID = 23;
 
-    public static final String CANBUS_CHAIN = "*";
+    public static final String CANBUS_CHAIN = RobotConstants.General.CANIVORE_NAME;
 
     public static final int ABSOLUTE_ENCODER_CHANNEL = 9;
 

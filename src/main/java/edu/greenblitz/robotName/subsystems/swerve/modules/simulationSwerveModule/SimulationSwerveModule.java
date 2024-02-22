@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import org.littletonrobotics.junction.Logger;
 
 public class SimulationSwerveModule implements ISwerveModule {
-	
+
 	private final DCMotorSim linearMotor;
 	
 	private final DCMotorSim angularMotor;

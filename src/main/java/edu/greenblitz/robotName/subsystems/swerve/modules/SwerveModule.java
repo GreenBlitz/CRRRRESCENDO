@@ -8,7 +8,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import org.littletonrobotics.junction.Logger;
 
 public class SwerveModule {
-	
+
 	ISwerveModule swerveModule;
 	
 	SwerveModuleInputsAutoLogged swerveModuleInputs;
@@ -141,3 +141,4 @@ public class SwerveModule {
 		return swerveModuleInputs.linearVoltage;
 	}
 }
+
