@@ -45,10 +45,10 @@ public class MK4iSwerveConstants {
 
 
 		Slot0Configs PID_CONFIGS = new Slot0Configs();
-		PID_CONFIGS.kP = 10 ;
+		PID_CONFIGS.kP = 70;
 		PID_CONFIGS.kI = 0;
 		PID_CONFIGS.kD = 1;
-		PID_CONFIGS.kS = 0;
+		PID_CONFIGS.kS = 0.31;
 		PID_CONFIGS.kV = 0;
 		
 		CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();
