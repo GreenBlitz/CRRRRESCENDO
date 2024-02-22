@@ -15,7 +15,8 @@ public class NeoFunnel implements IFunnel {
 	public NeoFunnel() {
 		motor = new GBSparkMax(NeoFunnelConstants.MOTOR_ID, CANSparkMax.MotorType.kBrushless);
 		motor.config(NeoFunnelConstants.FUNNEL_CONFIG_OBJECT);
-		motor.getReverseLimitSwitch(NeoFunnelConstants.BEAM_BREAKER_TYPE).enableLimitSwitch(NeoFunnelConstants.IS_BEAM_BREAKER_ENABLE);
+		motor.getReverseLimitSwitch(NeoFunnelConstants.BEAM_BREAKER_TYPE)
+				.enableLimitSwitch(NeoFunnelConstants.IS_BEAM_BREAKER_ENABLE);
 		debouncer = new Debouncer(NeoFunnelConstants.DEBOUNCE_TIME_FOR_LIMIT_SWITCH);
 	}
 	

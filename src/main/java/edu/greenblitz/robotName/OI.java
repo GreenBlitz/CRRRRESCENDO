@@ -46,7 +46,7 @@ public class OI {
 		secondJoystick.X.whileTrue(new RunFlyWheelByVelocity(3000));
 		secondJoystick.A.whileTrue(new RunFunnelByJoystick(secondJoystick));
 
-//		initButtons();
+		initButtons();
 		initializeDefaultCommands();
 	}
 	public static void init() {

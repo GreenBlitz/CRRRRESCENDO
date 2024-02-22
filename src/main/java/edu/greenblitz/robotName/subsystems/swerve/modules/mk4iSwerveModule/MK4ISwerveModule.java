@@ -2,15 +2,16 @@ package edu.greenblitz.robotName.subsystems.swerve.modules.mk4iSwerveModule;
 
 import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.StatusSignal;
-import com.ctre.phoenix6.controls.*;
-import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.configs.FeedbackConfigs;
+import com.ctre.phoenix6.controls.PositionVoltage;
+import com.ctre.phoenix6.controls.VelocityVoltage;
+import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.greenblitz.robotName.subsystems.swerve.SwerveModuleConfigObject;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.subsystems.swerve.modules.ISwerveModule;
 import edu.greenblitz.robotName.subsystems.swerve.modules.SwerveModuleInputsAutoLogged;
-import edu.greenblitz.robotName.subsystems.swerve.SwerveModuleConfigObject;
 import edu.greenblitz.robotName.utils.motors.GBTalonFXPro;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
@@ -18,8 +19,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MK4ISwerveModule implements ISwerveModule {
 
-    private GBTalonFXPro angularMotor;
-    private GBTalonFXPro linearMotor;
+    private final GBTalonFXPro angularMotor;
+    private final GBTalonFXPro linearMotor;
     private final CANcoder canCoder;
     private final double encoderOffset;
 
@@ -29,7 +30,6 @@ public class MK4ISwerveModule implements ISwerveModule {
     private StatusSignal<Double> angularPositionStatusSignal;
     private StatusSignal<Double> angularVelocityStatusSignal;
     private StatusSignal<Double> angularAccelerationStatusSignal;
-
 
 
     public VelocityVoltage velocityVoltage = new VelocityVoltage(0).withEnableFOC(true);
@@ -108,15 +108,15 @@ public class MK4ISwerveModule implements ISwerveModule {
         angularMotor.stopMotor();
     }
 
-    public void updateStatusSignals(boolean refresh){
-        if(refresh){
+    public void updateStatusSignals(boolean refresh) {
+        if (refresh) {
             linearVelocityStatusSignal = linearMotor.getVelocity().refresh();
             linearPositionStatusSignal = linearMotor.getPosition().refresh();
             linearAccelerationStatusSignal = linearMotor.getAcceleration().refresh();
             angularVelocityStatusSignal = angularMotor.getVelocity().refresh();
             angularPositionStatusSignal = angularMotor.getPosition().refresh();
             angularAccelerationStatusSignal = angularMotor.getAcceleration().refresh();
-        }else{
+        } else {
             linearVelocityStatusSignal = linearMotor.getVelocity();
             linearPositionStatusSignal = linearMotor.getPosition();
             linearAccelerationStatusSignal = linearMotor.getAcceleration();
@@ -125,6 +125,7 @@ public class MK4ISwerveModule implements ISwerveModule {
             angularAccelerationStatusSignal = angularMotor.getAcceleration();
         }
     }
+
     @Override
     public void updateInputs(SwerveModuleInputsAutoLogged inputs) {
         updateStatusSignals(true);
@@ -137,14 +138,14 @@ public class MK4ISwerveModule implements ISwerveModule {
 
         inputs.linearCurrent = linearMotor.getSupplyCurrent().getValue();
         inputs.angularCurrent = angularMotor.getStatorCurrent().getValue();
-        
+
         inputs.linearMetersPassed = BaseStatusSignal.getLatencyCompensatedValue(linearPositionStatusSignal, linearVelocityStatusSignal);
         inputs.angularPositionRadians = Units.rotationsToRadians(angularPositionStatusSignal.getValue());
 
         inputs.isAbsoluteEncoderConnected = canCoder.getVersion().getValue() != 0;
 
         SmartDashboard.putNumber("pos, " + angularMotor.getDeviceID(), Units.radiansToDegrees(inputs.angularPositionRadians));
-        
+
         if (Double.isNaN(canCoder.getAbsolutePosition().getValue())) {
             inputs.absoluteEncoderPosition = 0;
         } else {
