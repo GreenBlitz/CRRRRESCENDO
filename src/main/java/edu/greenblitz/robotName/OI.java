@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName;
 
+import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 import edu.greenblitz.robotName.commands.PanicMode;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
@@ -13,7 +14,10 @@ import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
+import edu.greenblitz.robotName.commands.shooter.shootingState.GoToAndShootToSpeaker;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingState;
+import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingStateAndShoot;
+import edu.greenblitz.robotName.commands.swerve.ToggleRobotRelative;
 import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
@@ -28,6 +32,7 @@ import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import pabeles.concurrency.ConcurrencyOps;
 
 public class OI {
 
@@ -88,6 +93,24 @@ public class OI {
 		secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
 
 		mainJoystick.A.whileTrue(new GoToShootingState(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
+	}
+
+	public void romyButtons() {
+//        mainJoystick.joystick - linear
+//        mainJoystick.joystick - rotational
+		mainJoystick.R1.whileTrue(new RunIntakeByJoystick(mainJoystick));
+//		mainJoystick.L1.whileTrue(new GoToShootingState());
+		mainJoystick.R2.whileTrue(new ToggleRobotRelative());
+//		mainJoystick.Y.whileTrue(); //where's reset pigeon
+	}
+	public void schoriButtons() {
+        secondJoystick.R1.whileTrue(new GoToAndShootToSpeaker());
+        secondJoystick.L1.whileTrue(new ScoreToAmp()); // need to go to and then shoot
+		secondJoystick.R2.whileTrue(new GoToShootingStateAndShoot(ShootingPositionConstants.CLOSE_SHOOTING_ZONE));
+//		secondJoystick.L2.whileTrue(new GoToShootingStateAndShootToAmp()); // what about it? and the other one
+//        secondJoystick.A.whileTrue(new Eject()); // will be added
+		secondJoystick.B.whileTrue(new PanicMode());
+//        secondJoystick.POV_UP.whileTrue(new Climb()); // will be added
 	}
 
 	public void thirdJoystickButtons() {
