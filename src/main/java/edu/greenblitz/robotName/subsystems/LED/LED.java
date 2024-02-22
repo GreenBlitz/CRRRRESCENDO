@@ -2,9 +2,6 @@ package edu.greenblitz.robotName.subsystems.LED;
 
 import edu.greenblitz.robotName.OI;
 import edu.greenblitz.robotName.ScoringModeSelector;
-import edu.greenblitz.robotName.subsystems.intake.Intake;
-import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
-import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
@@ -15,14 +12,14 @@ import edu.wpi.first.wpilibj.util.Color;
 
 import static edu.greenblitz.robotName.subsystems.LED.LEDConstants.*;
 
-public class   LED extends GBSubsystem {
+public class LED extends GBSubsystem {
 	
 	private Color currentColor;
 	private static LED instance;
 	private AddressableLED addressableLED;
 	private AddressableLEDBuffer addressableLEDBuffer;
 	private Timer LEDBlinkTimer;
-	private boolean lastNotePosition;
+	private boolean wasNoteInRobot;
 	private SendableChooser<Boolean> chooser;
 
 	private LED() {
@@ -33,7 +30,7 @@ public class   LED extends GBSubsystem {
 		LEDBlinkTimer = new Timer();
 		LEDBlinkTimer.restart();
 		currentColor = SPEAKER_MODE_COLOR;
-		lastNotePosition = false;
+		wasNoteInRobot = false;
 
 		chooser = new SendableChooser<>();
 		chooser.setDefaultOption("False", false);
@@ -56,8 +53,8 @@ public class   LED extends GBSubsystem {
 		return LEDBlinkTimer.get();
 	}
 
-	public boolean getLastNotePosition(){
-		return lastNotePosition;
+	public boolean getWasNoteInRobot(){
+		return wasNoteInRobot;
 	}
 	
 	public void restartTimer() {
@@ -120,7 +117,7 @@ public class   LED extends GBSubsystem {
 	}
 
 	public void updateNoteState(){
-		lastNotePosition = isNoteInRobot();
+		wasNoteInRobot = isNoteInRobot();
 	}
 	
 	public void blink(Color color) {
