@@ -10,16 +10,11 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 public class MoveElbowAndWrist extends ParallelCommandGroup {
 
     public MoveElbowAndWrist(Rotation2d elbowAngle, Rotation2d wristAngle) {
-        super(
-                new MoveElbowToAngle(elbowAngle),
-                new MoveWristToAngle(wristAngle)
-        );
+        super();
     }
 
     public MoveElbowAndWrist(ElbowConstants.PresetPositions elbowAngle, WristConstants.PresetPositions wristAngle) {
         super(
-                new MoveElbowToAngle(elbowAngle),
-                new MoveWristToAngle(wristAngle)
         );
     }
 }

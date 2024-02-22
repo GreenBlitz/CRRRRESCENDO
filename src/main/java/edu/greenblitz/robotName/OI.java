@@ -1,7 +1,9 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.CollectNote;
 import edu.greenblitz.robotName.commands.NoteToShooter;
 import edu.greenblitz.robotName.commands.PanicMode;
+import edu.greenblitz.robotName.commands.ShootToSpeaker;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
 import edu.greenblitz.robotName.commands.arm.ScoreToAmp;
 import edu.greenblitz.robotName.commands.arm.roller.RunRollerByJoystick;
@@ -10,6 +12,7 @@ import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocity;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
@@ -78,15 +81,11 @@ public class OI {
 	}
 
 	public void initButtons() {
-		secondJoystick.START.whileTrue(new PanicMode());
-		secondJoystick.BACK.whileTrue(new ToggleScoringMode());
-		secondJoystick.A.whileTrue(new ScoreToAmp());
-		secondJoystick.B.whileTrue(new MoveElbowAndWristToSafe());
-		secondJoystick.X.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE));
-		secondJoystick.Y.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
-		secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
+		secondJoystick.R1.whileTrue(new ShootToSpeaker());
+		secondJoystick.B.whileTrue(new PanicMode());
 
-		mainJoystick.A.whileTrue(new GoToShootingState(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
+		mainJoystick.R1.whileTrue(new CollectNote());
+		mainJoystick.L1.whileTrue(new GoToShootingState(ShootingPositionConstants.CLOSE_SHOOTING_ZONE));
 	}
 
 	public void thirdJoystickButtons() {
