@@ -6,6 +6,7 @@ import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
 import edu.greenblitz.robotName.commands.NoteToShooter;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingStateAndShoot;
+import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
 import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
@@ -64,14 +65,14 @@ public class Robot extends LoggedRobot {
         CommandScheduler.getInstance().enable();
         //initializeLogger();
         //initializeAutonomousBuilder();
-        //initializeSubsystems();
-        //		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
+        initializeSubsystems();
+        SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
         Dashboard.getInstance();
-        LED.init();OI.init();
+        OI.init();
     }
 
     public void initializeSubsystems() {
-        AutonomousSelector.getInstance();
+//        AutonomousSelector.getInstance();
         MultiLimelight.init();
         SwerveChassis.init();
 
@@ -79,9 +80,9 @@ public class Robot extends LoggedRobot {
         Funnel.init();
         FlyWheel.init();
 
-        Elbow.init();
-        Wrist.init();
-        Roller.init();
+//        Elbow.init();
+//        Wrist.init();
+//        Roller.init();
 
         Lifter.init();
         Intake.init();
