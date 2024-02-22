@@ -14,13 +14,14 @@ public class UpdateLEDStateDefaultCommand extends GBCommand {
 	private Timer ledBlinkingDurationTimer;
 
 	private Timer rumbleTimer;
-	int i;
 
 	public UpdateLEDStateDefaultCommand() {
 		led = LED.getInstance();
 		require(led);
+		
 		ledBlinkingDurationTimer = new Timer();
 		rumbleTimer = new Timer();
+//		actionTimer = new Timer();
 	}
 
 	@Override
@@ -43,6 +44,6 @@ public class UpdateLEDStateDefaultCommand extends GBCommand {
 			led.setColorByMode();
 		}
 		led.updateNoteState();
-
+		
 	}
 }

@@ -23,7 +23,7 @@ public class   LED extends GBSubsystem {
 	private AddressableLEDBuffer addressableLEDBuffer;
 	private Timer LEDBlinkTimer;
 	private boolean lastNotePosition;
-
+	private OI OIInstance = OI.getInstance();
 	private SendableChooser<Boolean> chooser;
 
 	private LED() {
@@ -132,9 +132,9 @@ public class   LED extends GBSubsystem {
 		}
 	}
 	public void rumble(){
-		OI.getInstance().getMainJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, LEDConstants.RUMBLE_POWER);
+		OIInstance.getMainJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, LEDConstants.RUMBLE_POWER);
 	}
 	public void stopRumble(){
-		OI.getInstance().getMainJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, 0);
+		OIInstance.getMainJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, 0);
 	}
 }

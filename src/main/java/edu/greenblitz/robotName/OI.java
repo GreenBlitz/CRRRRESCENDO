@@ -50,8 +50,8 @@ public class OI {
 		secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
 		thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
-		initButtons();
-		initializeDefaultCommands();
+//		initButtons();
+//		initializeDefaultCommands();
 	}
 
 	public static void init() {
@@ -107,8 +107,5 @@ public class OI {
 		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
 		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
 		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
-	}
-	public void LEDButtons(){
-	
 	}
 }
