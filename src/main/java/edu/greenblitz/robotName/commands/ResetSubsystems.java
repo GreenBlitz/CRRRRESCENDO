@@ -19,7 +19,7 @@ public class ResetSubsystems extends GBCommand {
     private void resetSubsystems() {
         Pivot.getInstance().moveToAngle(PivotConstants.PresetPositions.SAFE.ANGLE);
         Elbow.getInstance().moveToAngle(Rotation2d.fromRadians(0));
-        SwerveChassis.getInstance().resetWheels();
+        SwerveChassis.getInstance().moveWheelsToAngleZero();
         Wrist.getInstance().moveToAngle(Rotation2d.fromRadians(0));
     }
 

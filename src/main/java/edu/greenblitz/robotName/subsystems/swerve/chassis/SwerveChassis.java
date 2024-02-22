@@ -536,7 +536,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		doVision = true;
 	}
 
-	public void resetWheels() {
+	public void moveWheelsToAngleZero() {
 		frontLeft.rotateToAngle(Rotation2d.fromRadians(0));
 		frontRight.rotateToAngle(Rotation2d.fromRadians(0));
 		backLeft.rotateToAngle(Rotation2d.fromRadians(0));
