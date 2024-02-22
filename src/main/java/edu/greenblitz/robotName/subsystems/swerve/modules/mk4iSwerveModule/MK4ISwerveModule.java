@@ -4,7 +4,6 @@ import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.controls.*;
 import com.ctre.phoenix6.hardware.CANcoder;
-
 import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
@@ -60,7 +59,6 @@ public class MK4ISwerveModule implements ISwerveModule {
         FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();
         FEEDBACK_CONFIGS.FeedbackRemoteSensorID = canCoder.getDeviceID();
         FEEDBACK_CONFIGS.FeedbackSensorSource = FeedbackSensorSourceValue.SyncCANcoder;
-        FEEDBACK_CONFIGS.RotorToSensorRatio = MK4iSwerveConstants.ANGULAR_GEAR_RATIO;
 
         angularMotor.getConfigurator().refresh(FEEDBACK_CONFIGS);
 
@@ -144,7 +142,7 @@ public class MK4ISwerveModule implements ISwerveModule {
 
         inputs.isAbsoluteEncoderConnected = canCoder.getVersion().getValue() != 0;
 
-        SmartDashboard.putNumber("pos, "+ angularMotor.getDeviceID(), Rotation2d.fromRotations(angularMotor.getPosition().getValue()).getDegrees());
+        SmartDashboard.putNumber("pos, " + angularMotor.getDeviceID(), Units.radiansToDegrees(inputs.angularPositionRadians));
         
         if (Double.isNaN(canCoder.getAbsolutePosition().getValue())) {
             inputs.absoluteEncoderPosition = 0;
