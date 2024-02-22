@@ -51,7 +51,8 @@ public class OI {
 		thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
 //		initButtons();
-//		initializeDefaultCommands();
+		initializeDefaultCommands();
+
 	}
 
 	public static void init() {
@@ -102,10 +103,11 @@ public class OI {
 	}
 
 	public void initializeDefaultCommands() {
-		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
-		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
-		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
-		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
+//		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
+//		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+//		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
+//		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
+//		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
+		LED.getInstance().setDefaultCommand(new UpdateLEDStateDefaultCommand());
 	}
 }

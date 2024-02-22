@@ -26,6 +26,7 @@ public class UpdateLEDStateDefaultCommand extends GBCommand {
 
 	@Override
 	public void execute() {
+		SmartDashboard.putString("0","0");
 		if (led.getLastNotePosition() && !led.isNoteInRobot()) {
 			rumbleTimer.restart();
 		}
@@ -40,7 +41,7 @@ public class UpdateLEDStateDefaultCommand extends GBCommand {
 		else {
 			led.stopRumble();
 		}
-		if (!led.isNoteInRobot()){
+		if (!led.isNoteInRobot()) {
 			led.setColorByMode();
 		}
 		led.updateNoteState();
