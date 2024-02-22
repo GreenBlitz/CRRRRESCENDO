@@ -12,27 +12,31 @@ public class UpdateLEDStateDefaultCommand extends GBCommand {
 	private LED led;
 
 	private Timer ledBlinkingDurationTimer;
+
+	private Timer rumbleTimer;
 	int i;
 
 	public UpdateLEDStateDefaultCommand() {
 		led = LED.getInstance();
 		require(led);
 		ledBlinkingDurationTimer = new Timer();
+		rumbleTimer = new Timer();
 	}
 
 	@Override
 	public void execute() {
 		if (led.getLastNotePosition() && !led.isNoteInRobot()) {
-			led.rumble();
-			i++;
-			SmartDashboard.putNumber("hereee",i);
+			rumbleTimer.restart();
 		}
 		else if (!led.getLastNotePosition() && led.isNoteInRobot()) {
 			ledBlinkingDurationTimer.restart();
 		}
 		if (led.isNoteInRobot() && ledBlinkingDurationTimer.get() <= LEDConstants.BLINKING_TIME) {
 			led.blink(led.getColorByMode());
-		} else {
+		} else if (rumbleTimer.get() <= LEDConstants.RUMBLE_TIME){
+			led.rumble();
+		}
+		if (!led.isNoteInRobot()){
 			led.setColorByMode();
 		}
 		led.updateNoteState();
