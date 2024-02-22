@@ -33,7 +33,7 @@ public class FalconPivot implements IPivot {
 		motor.setInverted(FalconPivotConstants.INVERTED);
 		optimizeCanBusUtilization();
 		
-//		absoluteEncoder = new DutyCycleEncoder(FalconPivotConstants.ABSOLUTE_ENCODER_CHANNEL);
+		absoluteEncoder = new DutyCycleEncoder(FalconPivotConstants.ABSOLUTE_ENCODER_CHANNEL);
 
 		positionVoltage = new PositionVoltage(motor.getPosition().getValue());
 	}
@@ -102,11 +102,12 @@ public class FalconPivot implements IPivot {
 		inputs.position = Rotation2d.fromRotations(motor.getLatencyCompensatedValue(motor.getPosition(), motor.getVelocity()));
 		inputs.velocity = motor.getLatencyCompensatedValue(motor.getPosition(), motor.getVelocity());
 		inputs.acceleration = motor.getAcceleration().getValue();
-//		inputs.absoluteEncoderPosition = getAbsoluteEncoderPosition();
+		inputs.absoluteEncoderPosition = getAbsoluteEncoderPosition();
 		inputs.temperature = motor.getDeviceTemp().getValue();
 		inputs.hasHitForwardLimit = motor.getForwardLimit().getValue().value == IS_SWITCH_CLOSED;
 		inputs.hasHitBackwardsLimit = motor.getReverseLimit().getValue().value == IS_SWITCH_CLOSED;
 
 		SmartDashboard.putNumber("pivot angle", inputs.position.getDegrees());
+		SmartDashboard.putNumber("pivot angle abs", inputs.position.getDegrees());
 	}
 }
