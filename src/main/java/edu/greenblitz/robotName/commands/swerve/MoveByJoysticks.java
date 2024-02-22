@@ -4,6 +4,7 @@ import edu.greenblitz.robotName.OI;
 import edu.greenblitz.robotName.subsystems.swerve.SwerveChassisUtils;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 
 import java.util.function.DoubleSupplier;
 
@@ -13,6 +14,8 @@ public class MoveByJoysticks extends SwerveCommand {
         SLOW,
         NORMAL
     }
+
+    protected static boolean isRobotRelative;
 
     private double angularSpeedFactor;
 
@@ -25,6 +28,7 @@ public class MoveByJoysticks extends SwerveCommand {
     public MoveByJoysticks(DriveMode driveMode, DoubleSupplier angularVelocitySupplier) {
         this.driveMode = driveMode;
         this.angularVelocitySupplier = angularVelocitySupplier;
+        isRobotRelative = false;
     }
 
     public MoveByJoysticks(DriveMode driveMode) {
@@ -72,12 +76,20 @@ public class MoveByJoysticks extends SwerveCommand {
             return;
         }
 
-        swerveChassis.moveByChassisSpeeds(
-                forwardSpeed,
-                leftwardSpeed,
-                angularSpeed,
-                swerveChassis.getGyroAngle()
-        );
+        if (isRobotRelative)
+            swerveChassis.moveByRobotRelativeSpeeds(new ChassisSpeeds(
+                    forwardSpeed,
+                    leftwardSpeed,
+                    angularSpeed
+            ));
+        else {
+            swerveChassis.moveByChassisSpeeds(
+                    forwardSpeed,
+                    leftwardSpeed,
+                    angularSpeed,
+                    swerveChassis.getGyroAngle()
+            );
+        }
     }
 
     @Override
