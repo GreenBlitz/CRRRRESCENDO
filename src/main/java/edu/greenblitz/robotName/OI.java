@@ -107,7 +107,7 @@ public class OI {
         secondJoystick.R1.whileTrue(new GoToAndShootToSpeaker());
         secondJoystick.L1.whileTrue(new ScoreToAmp()); // need to go to and then shoot
 		secondJoystick.R2.whileTrue(new GoToShootingStateAndShoot(ShootingPositionConstants.CLOSE_SHOOTING_ZONE));
-//		secondJoystick.L2.whileTrue(new GoToShootingStateAndShootToAmp()); // what about it? and the other one
+//		secondJoystick.L2.whileTrue(new GoToShootingStateAndShootToAmp()); // what about it? and the other one/
 //        secondJoystick.A.whileTrue(new Eject()); // will be added
 		secondJoystick.B.whileTrue(new PanicMode());
 //        secondJoystick.POV_UP.whileTrue(new Climb()); // will be added
