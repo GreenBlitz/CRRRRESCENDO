@@ -59,6 +59,7 @@ public class MK4ISwerveModule implements ISwerveModule {
         FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();
         FEEDBACK_CONFIGS.FeedbackRemoteSensorID = canCoder.getDeviceID();
         FEEDBACK_CONFIGS.FeedbackSensorSource = FeedbackSensorSourceValue.SyncCANcoder;
+        FEEDBACK_CONFIGS.RotorToSensorRatio = MK4iSwerveConstants.ANGULAR_GEAR_RATIO;
 
         angularMotor.getConfigurator().refresh(FEEDBACK_CONFIGS);
 
