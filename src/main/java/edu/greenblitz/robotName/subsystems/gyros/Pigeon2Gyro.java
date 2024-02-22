@@ -3,6 +3,7 @@ package edu.greenblitz.robotName.subsystems.gyros;
 import com.ctre.phoenix6.hardware.Pigeon2;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.util.Units;
 
 public class Pigeon2Gyro implements IAngleMeasurementGyro {
 	
@@ -28,6 +29,10 @@ public class Pigeon2Gyro implements IAngleMeasurementGyro {
 	@Override
 	public void updateYaw(Rotation2d yaw) {
 		yawOffset.minus(yaw.plus(Rotation2d.fromRadians(lastInputs.yaw)));
+		System.out.println(
+				yawOffset.getDegrees()
+		);
+		System.out.println(Units.radiansToDegrees(lastInputs.yaw));
 	}
 	
 	@Override

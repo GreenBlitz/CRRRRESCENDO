@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName;
 
+import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.commands.CollectNote;
 import edu.greenblitz.robotName.commands.NoteToShooter;
 import edu.greenblitz.robotName.commands.PanicMode;
@@ -8,13 +9,17 @@ import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
 import edu.greenblitz.robotName.commands.arm.ScoreToAmp;
 import edu.greenblitz.robotName.commands.arm.roller.RunRollerByJoystick;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
+import edu.greenblitz.robotName.commands.intake.IntakeCommand;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocity;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityConstant;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
+import edu.greenblitz.robotName.commands.shooter.funnel.runByPowerUntilCondition.RunFunnelByPower;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
+import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToAndShootToSpeaker;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingState;
@@ -24,12 +29,20 @@ import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
 import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
+import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
+import edu.greenblitz.robotName.utils.GBCommand;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class OI {
 
@@ -79,13 +92,39 @@ public class OI {
 		return fourthJoystick;
 	}
 
-	public void initButtons() {
-		secondJoystick.R1.whileTrue(new ShootToSpeaker());
-		secondJoystick.B.whileTrue(new PanicMode());
-		secondJoystick.Y.whileTrue(new MovePivotByJoystick(secondJoystick));
+	public static boolean isLock;
 
+	public void initButtons() {
+		isLock = false;
 		mainJoystick.R1.whileTrue(new CollectNote());
 		mainJoystick.L1.whileTrue(new GoToShootingState(ShootingPositionConstants.CLOSE_SHOOTING_ZONE));
+
+		secondJoystick.BACK.whileTrue(new InstantCommand(() -> secondJoystick.rumble(true,1)));
+		secondJoystick.START.whileTrue(new InstantCommand(() -> secondJoystick.rumble(true,0)));
+		secondJoystick.POV_UP.whileTrue(new RunFunnelByPower(0.5));
+		secondJoystick.R1.whileTrue(new CollectNote());
+		secondJoystick.POV_DOWN.whileTrue(new ParallelRaceGroup(
+				new RunFunnelByPower(-0.2),new WaitCommand(0.5)));
+		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityConstant());
+		secondJoystick.Y.onTrue(new InstantCommand(() -> getCommand()));
+		secondJoystick.X.whileTrue(new MovePivotToAngle(Rotation2d.fromDegrees(55)));
+		secondJoystick.A.whileTrue(new PanicMode());
+		secondJoystick.B.whileTrue(new MovePivotToAngle(
+				ShootingStateCalculations.getTargetShooterAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE))
+		);
+
+	}
+
+	public GBCommand getCommand(){
+		if (!isLock) {
+			Pivot.getInstance().setIdleMode(NeutralModeValue.Brake);
+			isLock = true;
+		}
+		else{
+			Pivot.getInstance().setIdleMode(NeutralModeValue.Coast);
+			isLock = false;
+		}
+		return new IntakeCommand() {};
 	}
 
 	public void romyButtons() {
@@ -117,9 +156,10 @@ public class OI {
 
 	public void initializeDefaultCommands() {
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
-		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+//		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
 //		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
 //		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
-		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
+//		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
+		Pivot.getInstance().setDefaultCommand(new MovePivotByJoystick(secondJoystick));
 	}
 }

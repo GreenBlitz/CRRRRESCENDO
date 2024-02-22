@@ -18,12 +18,12 @@ import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
-import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
-import edu.greenblitz.robotName.utils.AutonomousSelector;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;;
 import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -63,12 +63,13 @@ public class Robot extends LoggedRobot {
     public void robotInit() {
         //Pathfinding.setPathfinder(new LocalADStar());
         CommandScheduler.getInstance().enable();
-        //initializeLogger();
+//        initializeLogger();
         //initializeAutonomousBuilder();
         initializeSubsystems();
         SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
         Dashboard.getInstance();
         OI.init();
+        Pivot.getInstance().resetAngle(Rotation2d.fromDegrees(18));
     }
 
     public void initializeSubsystems() {
@@ -84,14 +85,14 @@ public class Robot extends LoggedRobot {
 //        Wrist.init();
 //        Roller.init();
 
-        Lifter.init();
+//        Lifter.init();
         Intake.init();
     }
 
     @Override
     public void teleopInit() {
         Dashboard.getInstance().activateDriversDashboard();
-        Pivot.getInstance().resetAngle(Pivot.getInstance().getAbsolutePosition());
+//        Pivot.getInstance().resetAngle(Pivot.getInstance().getAbsolutePosition());
     }
 
     @Override
@@ -131,8 +132,9 @@ public class Robot extends LoggedRobot {
                     Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
                     System.out.println("initialized Logger, roborio");
                 }
-                Logger.addDataReceiver(new NT4Publisher());
-                break;
+              Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
+              Logger.addDataReceiver(new NT4Publisher());
+              break;
             // Replaying a log, set up replay source
             case REPLAY:
                 setUseTiming(false); // Run as fast as possible
@@ -151,6 +153,6 @@ public class Robot extends LoggedRobot {
 
     @Override
     public void autonomousInit() {
-		AutonomousSelector.getInstance().getChosenValue().schedule();
+//		AutonomousSelector.getInstance().getChosenValue().schedule();
     }
 }
