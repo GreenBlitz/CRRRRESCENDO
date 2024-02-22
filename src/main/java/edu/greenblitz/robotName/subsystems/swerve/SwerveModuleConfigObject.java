@@ -13,7 +13,7 @@ public class SwerveModuleConfigObject {
 	public int AbsoluteEncoderID;
 	
 	public boolean linInverted;
-	
+	public boolean angularInverted;
 	public Rotation2d encoderOffset;
 	
 	public SwerveModuleConfigObject(String canbusChain, int angleMotorID, int linearMotorID, int AbsoluteEncoderID, Rotation2d encoderOffset, boolean linInverted) {
@@ -24,7 +24,27 @@ public class SwerveModuleConfigObject {
 		this.linInverted = linInverted;
 		this.encoderOffset = encoderOffset;
 	}
+	public SwerveModuleConfigObject(String canbusChain, int angleMotorID, int linearMotorID, int AbsoluteEncoderID, Rotation2d encoderOffset, boolean linInverted,boolean angularInverted) {
+		this.canbusChain = canbusChain;
+		this.angleMotorID = angleMotorID;
+		this.linearMotorID = linearMotorID;
+		this.AbsoluteEncoderID = AbsoluteEncoderID;
+		this.linInverted = linInverted;
+		this.encoderOffset = encoderOffset;
+		this.angularInverted = angularInverted;
+	}
 
+	public SwerveModuleConfigObject(String canbusChain, int angleMotorID, int linearMotorID, int AbsoluteEncoderID, boolean linInverted, boolean angularInverted) {
+		this(
+				canbusChain,
+				angleMotorID,
+				linearMotorID,
+				AbsoluteEncoderID,
+				Rotation2d.fromRadians(0),
+				linInverted,
+				angularInverted
+		);
+	}
 	public SwerveModuleConfigObject(String canbusChain, int angleMotorID, int linearMotorID, int AbsoluteEncoderID, boolean linInverted) {
 		this(
 				canbusChain,
@@ -32,7 +52,8 @@ public class SwerveModuleConfigObject {
 				linearMotorID,
 				AbsoluteEncoderID,
 				Rotation2d.fromRadians(0),
-				linInverted
+				linInverted,
+				false
 		);
 	}
 }
