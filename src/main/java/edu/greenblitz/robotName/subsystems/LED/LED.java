@@ -134,4 +134,7 @@ public class   LED extends GBSubsystem {
 	public void rumble(){
 		OI.getInstance().getMainJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, LEDConstants.RUMBLE_POWER);
 	}
+	public void stopRumble(){
+		OI.getInstance().getMainJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, 0);
+	}
 	}

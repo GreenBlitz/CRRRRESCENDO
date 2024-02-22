@@ -36,6 +36,9 @@ public class UpdateLEDStateDefaultCommand extends GBCommand {
 		} else if (rumbleTimer.get() <= LEDConstants.RUMBLE_TIME){
 			led.rumble();
 		}
+		else {
+			led.stopRumble();
+		}
 		if (!led.isNoteInRobot()){
 			led.setColorByMode();
 		}
