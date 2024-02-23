@@ -44,7 +44,7 @@ public class MK4iSwerveConstants {
 		FEEDBACK_CONFIGS.SensorToMechanismRatio = ANGULAR_GEAR_RATIO;
 
 		Slot0Configs PID_CONFIGS = new Slot0Configs();
-		PID_CONFIGS.kP = 45;
+		PID_CONFIGS.kP = 40;
 		PID_CONFIGS.kI = 0;
 		PID_CONFIGS.kD = 1;
 		PID_CONFIGS.kS = 0.31;
@@ -76,8 +76,9 @@ public class MK4iSwerveConstants {
 		PID_CONFIGS.kP = 5;
 		PID_CONFIGS.kI = 0;
 		PID_CONFIGS.kD = 0;
-		PID_CONFIGS.kS = 0;
-		PID_CONFIGS.kV = 0;
+		PID_CONFIGS.kS = 0.16411;
+		PID_CONFIGS.kV = 2.6824;
+		PID_CONFIGS.kA = 0.25968;
 		
 		CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();
 		CURRENT_LIMITS_CONFIGS.StatorCurrentLimitEnable = true;

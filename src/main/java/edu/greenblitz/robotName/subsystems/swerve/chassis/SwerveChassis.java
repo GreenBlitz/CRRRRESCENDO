@@ -58,7 +58,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
 	public static final Rotation2d ROTATION_TOLERANCE = Rotation2d.fromDegrees(5);
 
-	private boolean doVision;
+	private boolean doVision = true;
 
 	public final double CURRENT_TOLERANCE = 0.5;
 
@@ -128,7 +128,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		Logger.processInputs("DriveTrain/Gyro", gyroInputs);
 
 		updatePoseEstimationLimeLight();
-		updatePoseEstimatorOdometry();
 
 		SmartDashboard.putData(getField());
 	}
@@ -210,7 +209,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), getRobotPose2d());
 	}
 	public Pose2d visionPoseStartMatch() {
-		if (MultiLimelight.getInstance().hasTarget(0)) {
+		if (MultiLimelight.getInstance().hasTarget(1) && MultiLimelight.getInstance().hasTarget(0)) {
 			return MultiLimelight.getInstance().getFirstAvailableTarget().get().getFirst();
 		} else {
 			return new Pose2d();
@@ -218,7 +217,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 
 	public void resetPoseByVision() {
-		if (MultiLimelight.getInstance().hasTarget(0)) {
+		if (MultiLimelight.getInstance().hasTarget(0) || MultiLimelight.getInstance().hasTarget(1)) {
 			if (MultiLimelight.getInstance().getFirstAvailableTarget().isPresent()) {
 				Pose2d visionPose = MultiLimelight.getInstance().getFirstAvailableTarget().get().getFirst();
 				getGyro().updateYaw(Rotation2d.fromRadians(0));
@@ -394,8 +393,11 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 			for (Optional<Pair<Pose2d, Double>> target :
 					MultiLimelight.getInstance().getAll2DEstimates()
 			) {
-				target.ifPresent(this::addVisionMeasurement);
+				if(target.isPresent()){
+					resetPoseByVision();
+				}
 			}
+			updatePoseEstimatorOdometry();
 		}
 	}
 

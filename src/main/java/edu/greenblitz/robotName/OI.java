@@ -10,6 +10,7 @@ import edu.greenblitz.robotName.commands.arm.ScoreToAmp;
 import edu.greenblitz.robotName.commands.arm.roller.RunRollerByJoystick;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
 import edu.greenblitz.robotName.commands.intake.IntakeCommand;
+import edu.greenblitz.robotName.commands.intake.ReverseRunIntake;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.*;
@@ -95,6 +96,7 @@ public class OI {
 		isLock = false;
 		mainJoystick.R1.whileTrue(new CollectNote());
 		mainJoystick.L1.whileTrue(new GoToShootingState(ShootingPositionConstants.CLOSE_SHOOTING_ZONE));
+		mainJoystick.A.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetPoseByVision()));
 
 		secondJoystick.BACK.whileTrue(new InstantCommand(() -> secondJoystick.rumble(true,1)));
 		secondJoystick.START.whileTrue(new InstantCommand(() -> secondJoystick.rumble(true,0)));
@@ -104,8 +106,9 @@ public class OI {
 				new RunFunnelByPower(-0.2),new WaitCommand(0.5)));
 		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityConstant());
 		secondJoystick.Y.onTrue(new InstantCommand(() -> getCommand()));
-		secondJoystick.X.whileTrue(new MovePivotToAngle(Rotation2d.fromDegrees(55)));
+		secondJoystick.X.whileTrue(new MovePivotToAngle(Rotation2d.fromDegrees(65)));
 		secondJoystick.A.whileTrue(new PanicMode());
+		secondJoystick.POV_LEFT.whileTrue(new ReverseRunIntake());
 		secondJoystick.B.whileTrue(new RunFlyWheelByPower(-0.2));
 
 	}
