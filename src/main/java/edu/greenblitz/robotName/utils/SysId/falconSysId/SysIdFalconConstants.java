@@ -17,6 +17,7 @@ public class SysIdFalconConstants {
     protected static final String CANBUS_CHAIN = RobotConstants.General.CANIVORE_NAME;
 
     public static final SoftwareLimitSwitchConfigs SOFTWARE_LIMIT_SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();
+
     static {
         SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitEnable = false;
         SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitThreshold = 187;
@@ -25,13 +26,17 @@ public class SysIdFalconConstants {
     }
 
     public static final HardwareLimitSwitchConfigs HARDWARE_LIMIT_SWITCH_CONFIGS = new HardwareLimitSwitchConfigs();
+
     static {
         HARDWARE_LIMIT_SWITCH_CONFIGS.ReverseLimitEnable = false;
         HARDWARE_LIMIT_SWITCH_CONFIGS.ReverseLimitType = ReverseLimitTypeValue.NormallyOpen;
     }
 
     public static final FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();
+
     static {
         FEEDBACK_CONFIGS.SensorToMechanismRatio = 1;
     }
+
+    public static final double STARTING_POSE_ROTATIONS = 0.05 ;
 }

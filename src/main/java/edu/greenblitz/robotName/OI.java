@@ -4,19 +4,26 @@ import edu.greenblitz.robotName.commands.NoteToShooter;
 import edu.greenblitz.robotName.commands.PanicMode;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
 import edu.greenblitz.robotName.commands.arm.ScoreToAmp;
+import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.roller.RunRollerByJoystick;
+import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocity;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingState;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
+import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
 import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
+import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
+import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
@@ -100,9 +107,9 @@ public class OI {
 
 	public void initializeDefaultCommands() {
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
-//		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-//		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
-//		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
-//		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
+		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
+		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
+		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
 	}
 }

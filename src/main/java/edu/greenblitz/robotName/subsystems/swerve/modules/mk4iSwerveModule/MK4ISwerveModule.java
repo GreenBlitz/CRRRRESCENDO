@@ -144,7 +144,7 @@ public class MK4ISwerveModule implements ISwerveModule {
 
         inputs.isAbsoluteEncoderConnected = canCoder.getVersion().getValue() != 0;
 
-        SmartDashboard.putNumber("pos, " + angularMotor.getDeviceID(), Units.radiansToDegrees(inputs.angularPositionRadians));
+        SmartDashboard.putNumber("position, " + angularMotor.getDeviceID(), Units.radiansToDegrees(inputs.angularPositionRadians));
 
         if (Double.isNaN(canCoder.getAbsolutePosition().getValue())) {
             inputs.absoluteEncoderPosition = 0;

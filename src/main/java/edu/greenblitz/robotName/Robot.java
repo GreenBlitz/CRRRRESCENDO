@@ -12,6 +12,7 @@ import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.intake.Intake;
+import edu.greenblitz.robotName.subsystems.intake.IntakeConstants;
 import edu.greenblitz.robotName.subsystems.lifter.Lifter;
 import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
@@ -102,7 +103,7 @@ public class Robot extends LoggedRobot {
 
     private void initializeAutonomousBuilder() {
         NamedCommands.registerCommand("shoot", new GoToShootingStateAndShoot(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
-        NamedCommands.registerCommand("grip", new NoteToShooter().raceWith(new WaitCommand(1)));
+        NamedCommands.registerCommand("grip", new NoteToShooter().raceWith(new WaitCommand(IntakeConstants.AUTONOMOUS_GRIP_TIMEOUT)));
         AutoBuilder.configureHolonomic(
                 SwerveChassis.getInstance()::getRobotPose2d,
                 SwerveChassis.getInstance()::resetChassisPosition,

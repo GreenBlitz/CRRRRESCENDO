@@ -33,7 +33,7 @@ public class SysIdFalcon extends GBSubsystem {
         motor.getConfigurator().apply(SysIdFalconConstants.SOFTWARE_LIMIT_SWITCH_CONFIGS);
         motor.getConfigurator().apply(SysIdFalconConstants.HARDWARE_LIMIT_SWITCH_CONFIGS);
         motor.getConfigurator().apply(SysIdFalconConstants.FEEDBACK_CONFIGS);
-        motor.setPosition(Units.degreesToRotations(18));
+        motor.setPosition(SysIdFalconConstants.STARTING_POSE_ROTATIONS);
 
         sysIdControl = new VoltageOut(0);
 
