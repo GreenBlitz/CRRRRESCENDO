@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.utils;
 
 
+import edu.greenblitz.robotName.subsystems.arm.wrist.bagWrist.BagWristConstants;
 import edu.greenblitz.robotName.subsystems.swerve.modules.mk4iSwerveModule.MK4iSwerveConstants;
 import edu.wpi.first.math.geometry.Rotation2d;
 
@@ -44,11 +45,11 @@ public class Conversions {
 	public static class MagEncoderConversions {
 
 		public static Rotation2d MotorPositionToRotation2D(double motorPosition) {
-			return Rotation2d.fromRotations(motorPosition / 4096.0);
+			return Rotation2d.fromRotations(motorPosition / BagWristConstants.MAG_ENCODER_CONVERSION_FACTOR);
 		}
 
 		public static double Rotation2DToMotorPosition(Rotation2d angle) {
-			return angle.getRotations() * 4096.0;
+			return angle.getRotations() * BagWristConstants.MAG_ENCODER_CONVERSION_FACTOR;
 		}
 	}
 }

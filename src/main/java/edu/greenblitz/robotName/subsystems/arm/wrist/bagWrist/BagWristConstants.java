@@ -13,6 +13,8 @@ public class BagWristConstants {
 
     public static final int TIMEOUT_FOR_CONFIG_SET = 0;
 
+    public static final double MAG_ENCODER_CONVERSION_FACTOR = 4096.0;
+
     public static final TalonSRXConfiguration TALON_SRX_CONFIGURATION = new TalonSRXConfiguration();
     static{
         TALON_SRX_CONFIGURATION.forwardSoftLimitEnable = true;
