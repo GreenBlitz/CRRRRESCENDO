@@ -15,7 +15,7 @@ public class SimulationIntake implements IIntake {
 	
 	private double appliedOutput;
 	
-	private SendableChooser<Boolean> entranceBeamBreaker;
+	private SendableChooser<Boolean> beamBreaker;
 
 	public SimulationIntake() {
 		motorSimulation = new DCMotorSim(
@@ -24,10 +24,10 @@ public class SimulationIntake implements IIntake {
 				SimulationIntakeConstants.MOMENT_OF_INERTIA
 		);
 		
-		entranceBeamBreaker = new SendableChooser<>();
-		entranceBeamBreaker.setDefaultOption("False", false);
-		entranceBeamBreaker.addOption("True", true);
-		SmartDashboard.putData("is object in intake entrance", entranceBeamBreaker);
+		beamBreaker = new SendableChooser<>();
+		beamBreaker.setDefaultOption("False", false);
+		beamBreaker.addOption("True", true);
+		SmartDashboard.putData("is object in intake entrance", beamBreaker);
 	}
 	
 	@Override
@@ -50,6 +50,6 @@ public class SimulationIntake implements IIntake {
 		intakeInputs.appliedOutput = appliedOutput;
 		intakeInputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
 		intakeInputs.velocity = motorSimulation.getAngularVelocityRPM();
-		intakeInputs.beamBreakerValue = entranceBeamBreaker.getSelected();
+		intakeInputs.beamBreakerValue = beamBreaker.getSelected();
 	}
 }
