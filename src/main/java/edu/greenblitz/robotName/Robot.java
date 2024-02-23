@@ -93,7 +93,7 @@ public class Robot extends LoggedRobot {
     @Override
     public void teleopInit() {
         Dashboard.getInstance().activateDriversDashboard();
-//        Pivot.getInstance().resetAngle(Pivot.getInstance().getAbsolutePosition());
+        Pivot.getInstance().resetAngle(Pivot.getInstance().getAbsolutePosition());
     }
 
     @Override
