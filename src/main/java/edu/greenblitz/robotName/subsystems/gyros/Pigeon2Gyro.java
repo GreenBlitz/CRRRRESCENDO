@@ -42,9 +42,9 @@ public class Pigeon2Gyro implements IAngleMeasurementGyro {
 	
 	@Override
 	public void updateInputs(GyroInputsAutoLogged inputs) {
-		inputs.yaw = (Units.degreesToRadians(pigeon2.getYaw().getValue()) - yawOffset.getRadians()) % (2 * Math.PI);
-		inputs.pitch = (Units.degreesToRadians(pigeon2.getPitch().getValue()) - pitchOffset.getRadians()) % (2 * Math.PI);
-		inputs.roll = (Units.degreesToRadians(pigeon2.getRoll().getValue()) - rollOffset.getRadians()) % (2 * Math.PI);
+		inputs.yaw = (Units.degreesToRadians(pigeon2.getYaw().getValue()) - yawOffset.getRadians()) % GyroConstants.CIRCLE_CIRCUMFRENCE.getRadians();
+		inputs.pitch = (Units.degreesToRadians(pigeon2.getPitch().getValue()) - pitchOffset.getRadians()) % GyroConstants.CIRCLE_CIRCUMFRENCE.getRadians();
+		inputs.roll = (Units.degreesToRadians(pigeon2.getRoll().getValue()) - rollOffset.getRadians()) % GyroConstants.CIRCLE_CIRCUMFRENCE.getRadians();
 		
 		lastInputs = inputs;
 	}
