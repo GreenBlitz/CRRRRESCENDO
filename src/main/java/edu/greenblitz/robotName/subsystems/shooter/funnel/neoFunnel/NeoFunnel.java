@@ -5,6 +5,7 @@ import edu.greenblitz.robotName.subsystems.shooter.funnel.FunnelInputsAutoLogged
 import edu.greenblitz.robotName.subsystems.shooter.funnel.IFunnel;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.filter.Debouncer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class NeoFunnel implements IFunnel {
 	
@@ -30,5 +31,6 @@ public class NeoFunnel implements IFunnel {
 		inputs.outputCurrent = motor.getOutputCurrent();
 		inputs.appliedOutput = motor.getAppliedOutput();
 		inputs.isObjectIn = debouncer.calculate(motor.getReverseLimitSwitch(NeoFunnelConstants.BEAM_BREAKER_TYPE).isPressed());
+		SmartDashboard.putBoolean("Funnel",inputs.isObjectIn);
 	}
 }

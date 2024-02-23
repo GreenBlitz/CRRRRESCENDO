@@ -12,10 +12,7 @@ import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMod
 import edu.greenblitz.robotName.commands.intake.IntakeCommand;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
-import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
-import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocity;
-import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityConstant;
-import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.*;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.funnel.runByPowerUntilCondition.RunFunnelByPower;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
@@ -109,9 +106,7 @@ public class OI {
 		secondJoystick.Y.onTrue(new InstantCommand(() -> getCommand()));
 		secondJoystick.X.whileTrue(new MovePivotToAngle(Rotation2d.fromDegrees(55)));
 		secondJoystick.A.whileTrue(new PanicMode());
-		secondJoystick.B.whileTrue(new MovePivotToAngle( () ->
-				ShootingStateCalculations.getTargetShooterAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE))
-		);
+		secondJoystick.B.whileTrue(new RunFlyWheelByPower(-0.2));
 
 	}
 

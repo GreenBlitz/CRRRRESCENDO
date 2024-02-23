@@ -28,7 +28,7 @@ public class NoteToShooter extends GBCommand {
     
     @Override
     public void execute() {
-        if (timer.get() > 1.3)
+        if (timer.get() > 0.5)
             funnel.rollIn();
         intake.rollIn();
     }
