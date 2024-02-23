@@ -65,16 +65,16 @@ public class Robot extends LoggedRobot {
         Pathfinding.setPathfinder(new LocalADStar());
         CommandScheduler.getInstance().enable();
         initializeLogger();
-//        initializeAutonomousBuilder();
+        initializeAutonomousBuilder();
         initializeSubsystems();
         SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
-//        Dashboard.getInstance();
+        Dashboard.getInstance();
         OI.init();
 
     }
 
     public void initializeSubsystems() {
-//        AutonomousSelector.getInstance();
+        AutonomousSelector.getInstance();
         MultiLimelight.init();
         SwerveChassis.init();
 
@@ -92,7 +92,7 @@ public class Robot extends LoggedRobot {
 
     @Override
     public void teleopInit() {
-//        Dashboard.getInstance().activateDriversDashboard();
+        Dashboard.getInstance().activateDriversDashboard();
 //        Pivot.getInstance().resetAngle(Pivot.getInstance().getAbsolutePosition());
     }
 
@@ -100,6 +100,7 @@ public class Robot extends LoggedRobot {
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
         RoborioUtils.updateCurrentCycleTime();
+
     }
 
     private void initializeAutonomousBuilder() {
@@ -151,8 +152,8 @@ public class Robot extends LoggedRobot {
         Logger.start();
     }
 
-//    @Override
-//    public void autonomousInit() {
-//		AutonomousSelector.getInstance().getChosenValue().schedule();
-//    }
+    @Override
+    public void autonomousInit() {
+		AutonomousSelector.getInstance().getChosenValue().schedule();
+    }
 }
