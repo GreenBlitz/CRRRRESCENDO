@@ -9,8 +9,14 @@ import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.funnel.runByPowerUntilCondition.RunFunnelByPowerUntilCondition;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
-import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
+import edu.greenblitz.robotName.commands.swerve.ResetPigeon;
+import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
+import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
+import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
+import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
+import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
@@ -46,10 +52,10 @@ public class OI {
 		secondJoystick.POV_UP.whileTrue(new NoteToShooter());
 		secondJoystick.POV_DOWN.onTrue(new InstantCommand(() -> SmartDashboard.putNumber("capture pivot angle", Pivot.getInstance().getAngle().getDegrees())));
 		secondJoystick.Y.whileTrue(new MovePivotByJoystick(secondJoystick));
-
 		secondJoystick.X.whileTrue(new RunFlyWheelByVelocity(300));
 
 
+		mainJoystick.BACK.onTrue(new ResetPigeon());
 		SwerveModule frontLeft = new SwerveModule(SwerveChassis.Module.FRONT_LEFT);
 		mainJoystick.POV_UP.whileTrue(
 				new RunCommand(() -> frontLeft.rotateToAngle(Rotation2d.fromDegrees(360))));

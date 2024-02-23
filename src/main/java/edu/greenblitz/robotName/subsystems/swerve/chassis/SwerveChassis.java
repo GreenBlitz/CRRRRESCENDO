@@ -176,13 +176,13 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		getModule(Module.BACK_RIGHT).resetEncoderToValue(Rotation2d.fromDegrees(0));
 	}
 
-
 	public void resetAngularEncodersByAbsoluteEncoder() {
 		getModule(Module.FRONT_LEFT).resetEncoderByAbsoluteEncoder();
 		getModule(Module.FRONT_RIGHT).resetEncoderByAbsoluteEncoder();
 		getModule(Module.BACK_LEFT).resetEncoderByAbsoluteEncoder();
 		getModule(Module.BACK_RIGHT).resetEncoderByAbsoluteEncoder();
 	}
+
 	public Rotation2d getModuleAbsoluteEncoderAngle(Module module) {
 		return getModule(module).getAbsoluteEncoderPosition();
 	}
