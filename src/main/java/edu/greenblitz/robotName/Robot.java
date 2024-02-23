@@ -37,12 +37,12 @@ import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 
 public class Robot extends LoggedRobot {
 
-	public enum RobotType {
-		SYNCOPA,
-		SIMULATION,
-		PEGA_SWERVE,
-		REPLAY
-	}
+    public enum RobotType {
+        SYNCOPA,
+        SIMULATION,
+        PEGA_SWERVE,
+        REPLAY
+    }
 
     public static RobotType getRobotType() {
         RobotType robotType = RobotConstants.ROBOT_TYPE;
@@ -64,15 +64,16 @@ public class Robot extends LoggedRobot {
         Pathfinding.setPathfinder(new LocalADStar());
         CommandScheduler.getInstance().enable();
         initializeLogger();
-        initializeAutonomousBuilder();
-        initializeSubsystems();
-        SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
-        Dashboard.getInstance();
+//        initializeAutonomousBuilder();
+//        initializeSubsystems();
+//        SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
+//        Dashboard.getInstance();
         OI.init();
+
     }
 
     public void initializeSubsystems() {
-        AutonomousSelector.getInstance();
+//        AutonomousSelector.getInstance();
         MultiLimelight.init();
         SwerveChassis.init();
 
@@ -80,18 +81,18 @@ public class Robot extends LoggedRobot {
         Funnel.init();
         FlyWheel.init();
 
-        Elbow.init();
-        Wrist.init();
-        Roller.init();
+//        Elbow.init();
+//        Wrist.init();
+//        Roller.init();
 
-        Lifter.init();
+//        Lifter.init();
         Intake.init();
     }
 
     @Override
     public void teleopInit() {
-        Dashboard.getInstance().activateDriversDashboard();
-        Pivot.getInstance().resetAngle(Pivot.getInstance().getAbsolutePosition());
+//        Dashboard.getInstance().activateDriversDashboard();
+//        Pivot.getInstance().resetAngle(Pivot.getInstance().getAbsolutePosition());
     }
 
     @Override
@@ -149,8 +150,8 @@ public class Robot extends LoggedRobot {
         Logger.start();
     }
 
-    @Override
-    public void autonomousInit() {
-		AutonomousSelector.getInstance().getChosenValue().schedule();
-    }
+//    @Override
+//    public void autonomousInit() {
+//		AutonomousSelector.getInstance().getChosenValue().schedule();
+//    }
 }

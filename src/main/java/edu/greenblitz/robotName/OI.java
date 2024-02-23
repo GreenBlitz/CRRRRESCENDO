@@ -1,28 +1,25 @@
 package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.NoteToShooter;
-import edu.greenblitz.robotName.commands.PanicMode;
-import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
-import edu.greenblitz.robotName.commands.arm.ScoreToAmp;
-import edu.greenblitz.robotName.commands.arm.roller.RunRollerByJoystick;
-import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
-import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocity;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
+import edu.greenblitz.robotName.commands.shooter.funnel.runByPowerUntilCondition.RunFunnelByPowerUntilCondition;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
-import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
-import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingState;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
-import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
-import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
+import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
+import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
-import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
+import edu.greenblitz.robotName.subsystems.swerve.modules.SwerveModule;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 
 public class OI {
 
@@ -42,14 +39,33 @@ public class OI {
 		thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
 
-		secondJoystick.B.whileTrue(new NoteToShooter());
+		secondJoystick.B.whileTrue(new RunFunnelByPowerUntilCondition(
+				0.3,
+				() -> Funnel.getInstance().isObjectIn()
+		));
+		secondJoystick.POV_UP.whileTrue(new NoteToShooter());
+		secondJoystick.POV_DOWN.onTrue(new InstantCommand(() -> SmartDashboard.putNumber("capture pivot angle", Pivot.getInstance().getAngle().getDegrees())));
 		secondJoystick.Y.whileTrue(new MovePivotByJoystick(secondJoystick));
-		secondJoystick.X.whileTrue(new RunFlyWheelByVelocity(3000));
-		secondJoystick.A.whileTrue(new RunFunnelByJoystick(secondJoystick));
 
-		initButtons();
-		initializeDefaultCommands();
+		secondJoystick.X.whileTrue(new RunFlyWheelByVelocity(300));
+
+
+		SwerveModule frontLeft = new SwerveModule(SwerveChassis.Module.FRONT_LEFT);
+		mainJoystick.POV_UP.whileTrue(
+				new RunCommand(() -> frontLeft.rotateToAngle(Rotation2d.fromDegrees(360))));
+		mainJoystick.POV_RIGHT.whileTrue(
+				new RunCommand(() -> frontLeft.rotateToAngle(Rotation2d.fromDegrees(270))));
+		mainJoystick.POV_LEFT.whileTrue(
+				new RunCommand(() -> frontLeft.rotateToAngle(Rotation2d.fromDegrees(180))));
+		mainJoystick.POV_DOWN.whileTrue(
+				new RunCommand(() -> frontLeft.rotateToAngle(Rotation2d.fromDegrees(90))));
+		mainJoystick.R1.whileTrue(
+				new RunCommand(() -> frontLeft.rotateToAngle(Rotation2d.fromDegrees(90))));
+
+//		initButtons();
+//		initializeDefaultCommands();
 	}
+
 	public static void init() {
 		if (instance == null) {
 			instance = new OI();
@@ -78,15 +94,17 @@ public class OI {
 	}
 
 	public void initButtons() {
-		secondJoystick.START.whileTrue(new PanicMode());
-		secondJoystick.BACK.whileTrue(new ToggleScoringMode());
-		secondJoystick.A.whileTrue(new ScoreToAmp());
-		secondJoystick.B.whileTrue(new MoveElbowAndWristToSafe());
-		secondJoystick.X.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE));
-		secondJoystick.Y.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
-		secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
+//		secondJoystick.START.whileTrue(new PanicMode());
+//		secondJoystick.BACK.whileTrue(new ToggleScoringMode());
+//		secondJoystick.A.whileTrue(new ScoreToAmp());
+//		secondJoystick.B.whileTrue(new MoveElbowAndWristToSafe());
+//		secondJoystick.X.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE));
+//		secondJoystick.Y.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
+//		secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
+//
+//		mainJoystick.A.whileTrue(new GoToShootingState(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
 
-		mainJoystick.A.whileTrue(new GoToShootingState(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
+
 	}
 
 	public void thirdJoystickButtons() {

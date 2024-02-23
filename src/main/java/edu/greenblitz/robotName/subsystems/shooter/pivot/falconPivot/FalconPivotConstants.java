@@ -17,7 +17,7 @@ public class FalconPivotConstants {
 	
 	public static final int ABSOLUTE_ENCODER_CHANNEL = 1;
 
-	public static final double ABSOLUTE_ENCODER_OFFSET = 0.855 - Units.degreesToRotations(16);
+	public static final double ABSOLUTE_ENCODER_OFFSET = Units.degreesToRotations(309) - Units.degreesToRotations(16);
 
 	public static final boolean INVERTED = true;
 

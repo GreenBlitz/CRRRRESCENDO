@@ -4,6 +4,7 @@ import edu.greenblitz.robotName.subsystems.intake.Intake;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.greenblitz.robotName.utils.GBCommand;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class NoteToShooter extends GBCommand {
 
@@ -28,7 +29,7 @@ public class NoteToShooter extends GBCommand {
     
     @Override
     public void execute() {
-        if (timer.get() > 0.2)
+        if (timer.get() > 0.5)
             funnel.rollIn();
         intake.rollIn();
     }
@@ -40,6 +41,7 @@ public class NoteToShooter extends GBCommand {
 
     @Override
     public void end(boolean interrupted) {
+        SmartDashboard.putNumber("SS", 1);
         funnel.stop();
         intake.stop();
     }

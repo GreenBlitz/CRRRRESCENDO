@@ -91,7 +91,6 @@ public class FalconPivot implements IPivot {
 		if (encoderPosition.getRotations() < 0) {
 			return Rotation2d.fromRotations(encoderPosition.getRotations() + 1);
 		}
-
 		return encoderPosition;
 	}
 	
@@ -106,5 +105,8 @@ public class FalconPivot implements IPivot {
 		inputs.temperature = motor.getDeviceTemp().getValue();
 		inputs.hasHitForwardLimit = motor.getForwardLimit().getValue().value == IS_SWITCH_CLOSED;
 		inputs.hasHitBackwardsLimit = motor.getReverseLimit().getValue().value == IS_SWITCH_CLOSED;
+
+		SmartDashboard.putNumber("pivit angle", inputs.position.getDegrees());
+		SmartDashboard.putNumber("pivit angle abs", inputs.absoluteEncoderPosition.getDegrees());
 	}
 }

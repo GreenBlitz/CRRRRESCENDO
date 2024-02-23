@@ -23,11 +23,11 @@ public class MK4iSwerveConstants {
 	
 	public static final double LINEAR_GEAR_RATIO = 8.14;
 	
-	public static final double ks = 0.16411;
+	public static final double ks = 0.32;
 	
-	public static final double kv = 2.6824;
+	public static final double kv = 2.5289;
 	
-	public static final double ka = 0.25968;
+	public static final double ka = 0.40665;
 	
 	public static final double WHEEL_RADIUS = Units.inchesToMeters(2);
 	
@@ -45,16 +45,16 @@ public class MK4iSwerveConstants {
 
 
 		Slot0Configs PID_CONFIGS = new Slot0Configs();
-		PID_CONFIGS.kP = 70;
+		PID_CONFIGS.kP = 0;//70;
 		PID_CONFIGS.kI = 0;
-		PID_CONFIGS.kD = 1;
-		PID_CONFIGS.kS = 0.31;
+		PID_CONFIGS.kD = 0;
+		PID_CONFIGS.kS = ks;
 		PID_CONFIGS.kV = 0;
+		PID_CONFIGS.kA = 0;
 		
 		CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();
 		CURRENT_LIMITS_CONFIGS.StatorCurrentLimitEnable = true;
 		CURRENT_LIMITS_CONFIGS.StatorCurrentLimit = 40;
-		CURRENT_LIMITS_CONFIGS.SupplyCurrentThreshold = 2;
 		
 		ClosedLoopRampsConfigs CLOSED_LOOP_RAMPS_CONFIGS = new ClosedLoopRampsConfigs();
 		CLOSED_LOOP_RAMPS_CONFIGS.VoltageClosedLoopRampPeriod = 0.1;
