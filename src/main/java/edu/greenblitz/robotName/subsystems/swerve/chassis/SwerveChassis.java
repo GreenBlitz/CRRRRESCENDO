@@ -1,10 +1,12 @@
 package edu.greenblitz.robotName.subsystems.swerve.chassis;
 
+import edu.greenblitz.robotName.FieldConstants;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.VisionConstants;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.subsystems.Photonvision;
+import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.gyros.GyroFactory;
 import edu.greenblitz.robotName.subsystems.gyros.GyroInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.gyros.IAngleMeasurementGyro;
@@ -16,6 +18,7 @@ import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.*;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
@@ -235,14 +238,27 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		return getRobotPose2d().getRotation();
 	}
 
-	/**
-	 * setting module states to all 4 modules
-	 */
-	public void setModuleStates(SwerveModuleState[] states) {
-		for (Module module : Module.values()) {
-			setModuleStateForModule(module, states[module.ordinal()]);
-		}
-	}
+	public boolean isRobotNearBoundsOfField() {
+        Translation2d currentPosition = getRobotPose2d().getTranslation();
+
+        Rotation2d armAngle = getChassisAngle().plus(Rotation2d.fromRadians(Math.PI));
+        double tipOfArmX = armAngle.getCos() * ElbowConstants.MAX_ARM_EXTENSION_FROM_CENTER + currentPosition.getX();
+        double tipOfArmY = armAngle.getSin() * ElbowConstants.MAX_ARM_EXTENSION_FROM_CENTER + currentPosition.getY();
+
+        return tipOfArmY > FieldConstants.FIELD_WIDTH ||
+                tipOfArmY < 0 ||
+                tipOfArmX > FieldConstants.FIELD_LENGTH ||
+                tipOfArmX < 0;
+    }
+
+    /**
+     * setting module states to all 4 modules
+     */
+    public void setModuleStates(SwerveModuleState[] states) {
+        for (Module module : Module.values()) {
+            setModuleStateForModule(module, states[module.ordinal()]);
+        }
+    }
 
 	private double getDiscretizedTimeStep() {
 		double timeStep = getActualTimeStep();
