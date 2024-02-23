@@ -200,7 +200,9 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 
 	public void resetChassisPose() {
+		SmartDashboard.putNumber("gyro before", getGyroAngle().getDegrees());
 		gyro.updateYaw(Rotation2d.fromRadians(0));
+		SmartDashboard.putNumber("gyro after", getGyroAngle().getDegrees());
 		poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), new Pose2d());
 	}
 

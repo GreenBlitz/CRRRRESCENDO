@@ -55,7 +55,11 @@ public class OI {
 		secondJoystick.X.whileTrue(new RunFlyWheelByVelocity(300));
 
 
-		mainJoystick.BACK.onTrue(new ResetPigeon());
+		thirdJoystick.B.onTrue(new ResetPigeon());
+		thirdJoystick.A.onTrue(new InstantCommand(
+				() -> SwerveChassis.getInstance().getGyro().updateYaw(Rotation2d.fromDegrees(12))));
+
+
 		SwerveModule frontLeft = new SwerveModule(SwerveChassis.Module.FRONT_LEFT);
 		mainJoystick.POV_UP.whileTrue(
 				new RunCommand(() -> frontLeft.rotateToAngle(Rotation2d.fromDegrees(360))));
