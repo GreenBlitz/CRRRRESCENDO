@@ -6,6 +6,7 @@ import edu.greenblitz.robotName.utils.GBMath;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ShootingAngleCalculations {
 
@@ -26,6 +27,7 @@ public class ShootingAngleCalculations {
                         shooterPosition.getZ()
                 )
         );
+        SmartDashboard.putNumber("xy distance to middle of speaker",distanceInMeters);
         double differenceHeightInMeters = speaker.getZ() - shooterPosition.getZ();
 
         Translation2d relativeSpeakerPosition = new Translation2d(distanceInMeters, differenceHeightInMeters);

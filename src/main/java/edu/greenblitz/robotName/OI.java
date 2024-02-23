@@ -22,6 +22,7 @@ import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToAndShootToSpeaker;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingState;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingStateAndShoot;
+import edu.greenblitz.robotName.commands.swerve.MoveRobotToShootingPosition;
 import edu.greenblitz.robotName.commands.swerve.ToggleRobotRelative;
 import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
@@ -95,21 +96,23 @@ public class OI {
 	public void initButtons() {
 		isLock = false;
 		mainJoystick.R1.whileTrue(new CollectNote());
-		mainJoystick.L1.whileTrue(new GoToShootingState(ShootingPositionConstants.CLOSE_SHOOTING_ZONE));
+		mainJoystick.L1.whileTrue(new MoveRobotToShootingPosition(ShootingPositionConstants.LEGAL_SHOOTING_ZONE));
 		mainJoystick.A.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetPoseByVision()));
 
 		secondJoystick.BACK.whileTrue(new InstantCommand(() -> secondJoystick.rumble(true,1)));
 		secondJoystick.START.whileTrue(new InstantCommand(() -> secondJoystick.rumble(true,0)));
-		secondJoystick.POV_UP.whileTrue(new RunFunnelByPower(0.5));
+		secondJoystick.B.whileTrue(new MovePivotToAngle(() ->
+				ShootingStateCalculations.getTargetShooterAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE)
+		));
 		secondJoystick.R1.whileTrue(new CollectNote());
 		secondJoystick.POV_DOWN.whileTrue(new ParallelRaceGroup(
 				new RunFunnelByPower(-0.2),new WaitCommand(0.5)));
-		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityConstant());
-		secondJoystick.Y.onTrue(new InstantCommand(() -> getCommand()));
+		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityConstant().andThen(new RunFunnelByPower(0.5)));
+		secondJoystick.POV_UP.onTrue(new RunFunnelByPower(0.5));
 		secondJoystick.X.whileTrue(new MovePivotToAngle(Rotation2d.fromDegrees(65)));
 		secondJoystick.A.whileTrue(new PanicMode());
 		secondJoystick.POV_LEFT.whileTrue(new ReverseRunIntake());
-		secondJoystick.B.whileTrue(new RunFlyWheelByPower(-0.2));
+		secondJoystick.Y.whileTrue(new RunFlyWheelByPower(-0.2));
 
 	}
 

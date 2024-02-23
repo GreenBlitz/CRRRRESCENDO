@@ -48,6 +48,7 @@ public class RunFlyWheelByVelocity extends FlyWheelCommand {
     
     @Override
     public void end(boolean interrupted) {
-        flyWheel.stop();
+        if (interrupted)
+            flyWheel.stop();
     }
 }
