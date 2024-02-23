@@ -5,12 +5,13 @@ import edu.greenblitz.robotName.subsystems.intake.IIntake;
 import edu.greenblitz.robotName.subsystems.intake.IntakeInputsAutoLogged;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.filter.Debouncer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class NeoIntake implements IIntake {
 
 	private GBSparkMax motor;
 
-	private Debouncer beamBreaker;
+	private Debouncer debouncer;
 
 
 	public NeoIntake() {
@@ -20,7 +21,7 @@ public class NeoIntake implements IIntake {
 		motor.getReverseLimitSwitch(NeoIntakeConstants.BEAM_BREAKER_TYPE)
 				.enableLimitSwitch(NeoIntakeConstants.IS_BEAM_BREAKER_LIMITING);
 
-		beamBreaker = new Debouncer(NeoIntakeConstants.DEBOUNCE_TIME_FOR_LIMIT_SWITCH);
+		debouncer = new Debouncer(NeoIntakeConstants.DEBOUNCE_TIME_FOR_LIMIT_SWITCH);
 
 	}
 
@@ -39,8 +40,6 @@ public class NeoIntake implements IIntake {
 		intakeInputs.outputCurrent = motor.getOutputCurrent();
 		intakeInputs.appliedOutput = motor.getAppliedOutput();
 		intakeInputs.velocity = motor.getEncoder().getVelocity();
-		intakeInputs.beamBreakerValue = beamBreaker.calculate(
-				motor.getReverseLimitSwitch(NeoIntakeConstants.BEAM_BREAKER_TYPE).isPressed()
-		);
+		intakeInputs.beamBreakerValue = debouncer.calculate(motor.getReverseLimitSwitch(NeoIntakeConstants.BEAM_BREAKER_TYPE).isPressed());
 	}
 }
