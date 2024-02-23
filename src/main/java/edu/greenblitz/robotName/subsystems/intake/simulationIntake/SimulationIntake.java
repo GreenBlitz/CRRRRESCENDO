@@ -16,9 +16,7 @@ public class SimulationIntake implements IIntake {
 	private double appliedOutput;
 	
 	private SendableChooser<Boolean> entranceBeamBreaker;
-	
-	private SendableChooser<Boolean> exitBeamBreaker;
-	
+
 	public SimulationIntake() {
 		motorSimulation = new DCMotorSim(
 				DCMotor.getNEO(SimulationIntakeConstants.NUMBER_OF_MOTORS),
@@ -30,11 +28,6 @@ public class SimulationIntake implements IIntake {
 		entranceBeamBreaker.setDefaultOption("False", false);
 		entranceBeamBreaker.addOption("True", true);
 		SmartDashboard.putData("is object in intake entrance", entranceBeamBreaker);
-		
-		exitBeamBreaker = new SendableChooser<>();
-		exitBeamBreaker.setDefaultOption("False", false);
-		exitBeamBreaker.addOption("True", true);
-		SmartDashboard.putData("is object in intake exit", exitBeamBreaker);
 	}
 	
 	@Override
@@ -57,7 +50,6 @@ public class SimulationIntake implements IIntake {
 		intakeInputs.appliedOutput = appliedOutput;
 		intakeInputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
 		intakeInputs.velocity = motorSimulation.getAngularVelocityRPM();
-		intakeInputs.entranceBeamBreakerValue = entranceBeamBreaker.getSelected();
-		intakeInputs.exitBeamBreakerValue = exitBeamBreaker.getSelected();
+		intakeInputs.beamBreakerValue = entranceBeamBreaker.getSelected();
 	}
 }
