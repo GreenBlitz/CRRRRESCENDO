@@ -12,7 +12,7 @@ public class NeoIntakeConstants {
 
 	public static final double DEBOUNCE_TIME_FOR_LIMIT_SWITCH = 0.1;
 
-	public static final SparkLimitSwitch.Type BEAM_BREAKER_TYPE = SparkLimitSwitch.Type.kNormallyClosed;
+	public static final SparkLimitSwitch.Type BEAM_BREAKER_TYPE = SparkLimitSwitch.Type.kNormallyOpen;
 
 	public static final boolean IS_BEAM_BREAKER_LIMITING = false;
 
