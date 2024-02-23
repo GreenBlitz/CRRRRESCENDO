@@ -24,4 +24,5 @@ public class LEDConstants {
 	public static final boolean RUMBLE_LEFT_MOTOR = true;
  
 	public static final double RUMBLE_TIME = 1.0;
+	
 }

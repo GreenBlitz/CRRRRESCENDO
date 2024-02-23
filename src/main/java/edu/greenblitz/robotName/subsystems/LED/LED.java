@@ -15,11 +15,19 @@ import static edu.greenblitz.robotName.subsystems.LED.LEDConstants.*;
 public class LED extends GBSubsystem {
 	
 	private Color currentColor;
+	
 	private static LED instance;
+	
 	private AddressableLED addressableLED;
+	
 	private AddressableLEDBuffer addressableLEDBuffer;
+	
 	private Timer LEDBlinkTimer;
+	
 	private boolean wasNoteInRobot;
+	
+	private Timer actionTimer;
+	
 	private SendableChooser<Boolean> chooser;
 
 	private LED() {
@@ -27,8 +35,11 @@ public class LED extends GBSubsystem {
 		this.addressableLEDBuffer = new AddressableLEDBuffer(LED_LENGTH);
 		this.addressableLED.setLength(LED_LENGTH);
 		this.addressableLED.start();
+		
 		LEDBlinkTimer = new Timer();
+		actionTimer = new Timer();
 		LEDBlinkTimer.restart();
+		
 		currentColor = SPEAKER_MODE_COLOR;
 		wasNoteInRobot = false;
 
@@ -49,18 +60,9 @@ public class LED extends GBSubsystem {
 		}
 	}
 	
-	public double getLEDBlinkTimer() {
-		return LEDBlinkTimer.get();
-	}
-
 	public boolean getWasNoteInRobot(){
 		return wasNoteInRobot;
 	}
-	
-	public void restartTimer() {
-		LEDBlinkTimer.restart();
-	}
-	
 	
 	public void setLEDColor(Color color, Section section) {
 		setLEDColor(color, section.startIndex(), section.endIndex());
@@ -127,10 +129,37 @@ public class LED extends GBSubsystem {
 			LED.getInstance().setLEDColor(color, LEDConstants.ALL_LED);
 		}
 	}
+	
 	public void rumble(){
 		OI.getInstance().getMainJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, LEDConstants.RUMBLE_POWER);
 	}
+	
 	public void stopRumble(){
 		OI.getInstance().getMainJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, 0);
+	}
+	
+	public void restartTimerByNoteState(){
+		if (getWasNoteInRobot() && !isNoteInRobot()) {
+			actionTimer.restart();
+		}
+		else if (!getWasNoteInRobot() && isNoteInRobot()) {
+			actionTimer.restart();
+		}
+	}
+	public void blinkOrRumbleByNoteState(){
+		if (isNoteInRobot() && actionTimer.get() <= LEDConstants.BLINKING_TIME) {
+			blink(getColorByMode());
+		} else if (actionTimer.get() <= LEDConstants.RUMBLE_TIME){
+			rumble();
+		}
+		else {
+			stopRumble();
+		}
+	}
+	
+	public void setColorByNoteState(){
+		if (!isNoteInRobot()) {
+			setColorByMode();
+		}
 	}
 }

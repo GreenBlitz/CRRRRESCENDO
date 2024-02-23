@@ -54,27 +54,28 @@ public class Robot extends LoggedRobot {
 		CommandScheduler.getInstance().enable();
 //		initializeLogger();
 //		initializeAutonomousBuilder();
-//		initializeSubsystems();
+		initializeSubsystems();
 //		SwerveChassis.getInstance().resetAllEncoders();
-		LED.init();
         OI.init();
 	}
 
 	public void initializeSubsystems() {
-		AutonomousSelector.getInstance();
-		MultiLimelight.init();
-		SwerveChassis.init();
-
-		Pivot.init();
-		Funnel.init();
-		FlyWheel.init();
-
-		Elbow.init();
-		Wrist.init();
-		Roller.init();
-
-		Lifter.init();
-		Intake.init();
+//		AutonomousSelector.getInstance();
+//		MultiLimelight.init();
+//		SwerveChassis.init();
+//
+//		Pivot.init();
+//		Funnel.init();
+//		FlyWheel.init();
+//
+//		Elbow.init();
+//		Wrist.init();
+//		Roller.init();
+//
+//		Lifter.init();
+//		Intake.init();
+//
+		LED.init();
 	}
 
 	@Override
