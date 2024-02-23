@@ -4,6 +4,8 @@ import edu.greenblitz.robotName.commands.NoteToShooter;
 import edu.greenblitz.robotName.commands.PanicMode;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
 import edu.greenblitz.robotName.commands.arm.ScoreToAmp;
+import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
+import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
@@ -56,29 +58,7 @@ public class OI {
 		thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
 
-		secondJoystick.B.whileTrue(new RunFunnelByPowerUntilCondition(
-				0.3,
-				() -> Funnel.getInstance().isObjectIn()
-		));
-		secondJoystick.POV_UP.whileTrue(new NoteToShooter());
-		secondJoystick.POV_DOWN.onTrue(new InstantCommand(() -> SmartDashboard.putNumber("capture pivot angle", Pivot.getInstance().getAngle().getDegrees())));
-		secondJoystick.Y.whileTrue(new MovePivotByJoystick(secondJoystick));
-		secondJoystick.X.whileTrue(new RunFlyWheelByVelocity(300));
-
-
-		SwerveModule frontLeft = new SwerveModule(SwerveChassis.Module.FRONT_LEFT);
-		mainJoystick.POV_UP.whileTrue(
-				new RunCommand(() -> frontLeft.rotateToAngle(Rotation2d.fromDegrees(360))));
-		mainJoystick.POV_RIGHT.whileTrue(
-				new RunCommand(() -> frontLeft.rotateToAngle(Rotation2d.fromDegrees(270))));
-		mainJoystick.POV_LEFT.whileTrue(
-				new RunCommand(() -> frontLeft.rotateToAngle(Rotation2d.fromDegrees(180))));
-		mainJoystick.POV_DOWN.whileTrue(
-				new RunCommand(() -> frontLeft.rotateToAngle(Rotation2d.fromDegrees(90))));
-		mainJoystick.R1.whileTrue(
-				new RunCommand(() -> frontLeft.rotateToAngle(Rotation2d.fromDegrees(90))));
-
-//		initButtons();
+		initButtons();
 		initializeDefaultCommands();
 	}
 
@@ -110,16 +90,6 @@ public class OI {
 	}
 
 	public void initButtons() {
-		secondJoystick.START.whileTrue(new PanicMode());
-		secondJoystick.BACK.whileTrue(new ToggleScoringMode());
-		secondJoystick.A.whileTrue(new ScoreToAmp());
-		secondJoystick.B.whileTrue(new MoveElbowAndWristToSafe());
-		secondJoystick.X.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE));
-		secondJoystick.Y.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE));
-		secondJoystick.POV_DOWN.whileTrue(new CollectNoteToScoringMode());
-
-		mainJoystick.A.whileTrue(new GoToShootingState(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
-
 
 	}
 
@@ -135,8 +105,8 @@ public class OI {
 	public void initializeDefaultCommands() {
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
 		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-//		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
-//		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
+		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
+		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
 		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
 	}
 }
