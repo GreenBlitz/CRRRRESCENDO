@@ -21,7 +21,6 @@ public class BagWrist implements IWrist {
         motor.configAllSettings(BagWristConstants.TALON_SRX_CONFIGURATION);
     }
 
-
     @Override
     public void setPower(double power) {
         motor.set(TalonSRXControlMode.PercentOutput, power);
@@ -47,7 +46,7 @@ public class BagWrist implements IWrist {
     }
 
     @Override
-    public void resetEncoder() {
+    public void resetAngleByAbsoluteEncoder() {
 
     }
 

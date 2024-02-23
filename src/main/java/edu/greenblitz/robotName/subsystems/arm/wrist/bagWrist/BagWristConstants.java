@@ -9,8 +9,9 @@ public class BagWristConstants {
 
     public static final int MOTOR_ID = 1;
 
-    public static int PID_SLOT = 0;
-    public static int TIMEOUT_FOR_CONFIG_SET = 0;
+    public static final int PID_SLOT = 0;
+
+    public static final int TIMEOUT_FOR_CONFIG_SET = 0;
 
     public static final TalonSRXConfiguration TALON_SRX_CONFIGURATION = new TalonSRXConfiguration();
     static{

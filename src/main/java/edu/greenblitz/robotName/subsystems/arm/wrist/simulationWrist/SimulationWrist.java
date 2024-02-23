@@ -69,7 +69,7 @@ public class SimulationWrist implements IWrist {
     }
 
     @Override
-    public void resetEncoder() {
+    public void resetAngleByAbsoluteEncoder() {
         Logger.recordOutput("Arm/Wrist", "tried to reset the encoder");
     }
 

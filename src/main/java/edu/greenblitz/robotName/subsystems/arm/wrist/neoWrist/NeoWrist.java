@@ -57,7 +57,7 @@ public class NeoWrist implements IWrist {
     }
 
     @Override
-    public void resetEncoder() {
+    public void resetAngleByAbsoluteEncoder() {
         resetAngle(Rotation2d.fromRotations(motor.getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle).getPosition()));
     }
 
