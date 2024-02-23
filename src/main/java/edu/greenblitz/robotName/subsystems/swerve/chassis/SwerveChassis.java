@@ -202,6 +202,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	public void resetChassisPose() {
 		gyro.updateYaw(Rotation2d.fromRadians(0));
 		poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), new Pose2d());
+		System.out.println("asasa");
 	}
 
 	public Pose2d visionPoseStartMatch() {
