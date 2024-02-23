@@ -30,8 +30,9 @@ public class NoteToShooter extends GBCommand {
     
     @Override
     public void execute() {
-        if (timer.get() > FunnelConstants.NOTE_TO_SHOOTER_DELAY_TIME)
+        if (timer.get() > FunnelConstants.NOTE_TO_SHOOTER_DELAY_TIME) {
             funnel.rollIn();
+        }
         intake.rollIn();
     }
 
@@ -42,7 +43,6 @@ public class NoteToShooter extends GBCommand {
 
     @Override
     public void end(boolean interrupted) {
-        SmartDashboard.putNumber("SS", 1);
         funnel.stop();
         intake.stop();
     }

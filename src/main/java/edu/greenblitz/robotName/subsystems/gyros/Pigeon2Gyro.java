@@ -36,20 +36,18 @@ public class Pigeon2Gyro implements IAngleMeasurementGyro {
 
 	@Override
 	public void updateYaw(Rotation2d yaw) {
-		pigeon2.setYaw(yaw.getDegrees());
+		yawOffset.minus(yaw.plus(Rotation2d.fromRadians(lastInputs.yaw)));
 	}
 
 	
 	@Override
 	public void updatePitch(Rotation2d pitch) {
-//		pitchOffset.plus(pitch.plus(Rotation2d.fromRadians(lastInputs.pitch)));
-		pitchOffset = Rotation2d.fromDegrees(pigeon2.getPitch().getValue() - pitch.getDegrees());
+		pitchOffset.plus(pitch.plus(Rotation2d.fromRadians(lastInputs.pitch)));
 	}
 	
 	@Override
 	public void updateRoll(Rotation2d roll) {
-//		rollOffset.plus(roll.plus(Rotation2d.fromRadians(lastInputs.roll)));
-		rollOffset = Rotation2d.fromDegrees(pigeon2.getRoll().getValue() - roll.getDegrees());
+		rollOffset.plus(roll.plus(Rotation2d.fromRadians(lastInputs.roll)));
 	}
 	
 	@Override

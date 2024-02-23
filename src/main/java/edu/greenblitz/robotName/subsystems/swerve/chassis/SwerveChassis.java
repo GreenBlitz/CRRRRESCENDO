@@ -83,7 +83,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				this.kinematics,
 				getGyroAngle(),
 				getSwerveModulePositions(),
-				new Pose2d(),
+				visionPoseStartMatch(),
 				fill(
 						VisionConstants.STANDARD_DEVIATION_ODOMETRY,
 						VisionConstants.STANDARD_DEVIATION_ODOMETRY,

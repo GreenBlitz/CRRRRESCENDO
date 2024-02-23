@@ -48,8 +48,6 @@ public class FalconPivotConstants {
 		SLOT_0_CONFIGS.kD = 3.6;
 	}
 
-
-
 	public static final CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();
 	
 	static {
@@ -69,17 +67,20 @@ public class FalconPivotConstants {
 	}
 	
 	public static final FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();
+
 	static {
 		FEEDBACK_CONFIGS.SensorToMechanismRatio = PivotConstants.GEAR_RATIO;
 	}
 
 	public static final HardwareLimitSwitchConfigs HARDWARE_LIMIT_SWITCH_CONFIGS = new HardwareLimitSwitchConfigs();
+
 	static {
 		HARDWARE_LIMIT_SWITCH_CONFIGS.ReverseLimitEnable = true;
 		HARDWARE_LIMIT_SWITCH_CONFIGS.ReverseLimitType = ReverseLimitTypeValue.NormallyOpen;
 	}
 	
 	public static final TalonFXConfiguration TALON_FX_CONFIGURATION = new TalonFXConfiguration();
+
 	static {
 		TALON_FX_CONFIGURATION.CurrentLimits = CURRENT_LIMITS_CONFIGS;
 		TALON_FX_CONFIGURATION.SoftwareLimitSwitch = SOFTWARE_LIMIT_SWITCH_CONFIGS;

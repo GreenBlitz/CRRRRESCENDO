@@ -47,11 +47,5 @@ public class NeoIntake implements IIntake {
 		intakeInputs.entranceBeamBreakerValue = entranceBeamBreaker.calculate(
 				motor.getReverseLimitSwitch(NeoIntakeConstants.ENTRANCE_BEAM_BREAKER_TYPE).isPressed()
 		);
-		SmartDashboard.putBoolean(
-				"reverse bb",
-				entranceBeamBreaker
-						.calculate(motor.getReverseLimitSwitch(NeoIntakeConstants.ENTRANCE_BEAM_BREAKER_TYPE)
-						.isPressed())
-		);
 	}
 }

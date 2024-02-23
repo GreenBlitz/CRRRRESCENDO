@@ -18,18 +18,12 @@ public class SysIdFalconConstants {
     protected static final String CANBUS_CHAIN = RobotConstants.General.CANIVORE_NAME;
 
     public static final SoftwareLimitSwitchConfigs SOFTWARE_LIMIT_SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();
-    static {
-
-    }
 
     public static final HardwareLimitSwitchConfigs HARDWARE_LIMIT_SWITCH_CONFIGS = new HardwareLimitSwitchConfigs();
-    static {
-
-    }
 
     public static final FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();
+
     static {
         FEEDBACK_CONFIGS.SensorToMechanismRatio = MK4iSwerveConstants.ANGULAR_GEAR_RATIO;
     }
-
 }
