@@ -61,11 +61,7 @@ public class Intake extends GBSubsystem {
         Logger.processInputs("intake", intakeInputs);
     }
 
-    public boolean getEntranceBeamBreakerValue() {
-        return intakeInputs.entranceBeamBreakerValue;
-    }
-
-    public boolean getExitBeamBreakerValue() {
-        return intakeInputs.exitBeamBreakerValue;
+    public boolean isObjectIn() {
+        return intakeInputs.beamBreakerValue;
     }
 }
