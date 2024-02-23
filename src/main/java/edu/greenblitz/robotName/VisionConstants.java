@@ -9,10 +9,9 @@ public class VisionConstants {
 	public static final String[] LIMELIGHT_NAMES = new String[]{
 			"limelight-front",
 			"limelight-back",
-			"limelight-gb"
 	};
 	
-	public static double STANDARD_DEVIATION_ODOMETRY = 1;
+	public static double STANDARD_DEVIATION_ODOMETRY = 0.8;
 	
 	public static int LIMELIGHT_ENTRY_ARRAY_LENGTH = 7;
 	

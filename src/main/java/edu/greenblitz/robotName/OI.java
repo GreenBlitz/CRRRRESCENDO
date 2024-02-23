@@ -109,7 +109,7 @@ public class OI {
 		secondJoystick.Y.onTrue(new InstantCommand(() -> getCommand()));
 		secondJoystick.X.whileTrue(new MovePivotToAngle(Rotation2d.fromDegrees(55)));
 		secondJoystick.A.whileTrue(new PanicMode());
-		secondJoystick.B.whileTrue(new MovePivotToAngle(
+		secondJoystick.B.whileTrue(new MovePivotToAngle( () ->
 				ShootingStateCalculations.getTargetShooterAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE))
 		);
 

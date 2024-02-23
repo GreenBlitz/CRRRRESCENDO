@@ -128,7 +128,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		Logger.processInputs("DriveTrain/Gyro", gyroInputs);
 
 		updatePoseEstimationLimeLight();
-//		updatePoseEstimatorOdometry();
+		updatePoseEstimatorOdometry();
 
 		SmartDashboard.putData(getField());
 	}
