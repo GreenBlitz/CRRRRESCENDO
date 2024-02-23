@@ -1,34 +1,32 @@
 package edu.greenblitz.robotName;
 
 import com.pathplanner.lib.auto.AutoBuilder;
-import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
-import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
-import edu.greenblitz.robotName.subsystems.Dashboard;
-
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
 import edu.greenblitz.robotName.commands.NoteToShooter;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingStateAndShoot;
+import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
 import edu.greenblitz.robotName.subsystems.Dashboard;
-import edu.greenblitz.robotName.subsystems.intake.Intake;
-import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
-import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
+import edu.greenblitz.robotName.subsystems.intake.Intake;
+import edu.greenblitz.robotName.subsystems.intake.IntakeConstants;
 import edu.greenblitz.robotName.subsystems.lifter.Lifter;
-import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
-import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
+import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
+import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.AutonomousSelector;
 import edu.greenblitz.robotName.utils.FMSUtils;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import org.littletonrobotics.junction.LogFileUtil;
@@ -37,7 +35,6 @@ import org.littletonrobotics.junction.Logger;
 import org.littletonrobotics.junction.networktables.NT4Publisher;
 import org.littletonrobotics.junction.wpilog.WPILOGReader;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
-
 public class Robot extends LoggedRobot {
 
 	public enum RobotType {
@@ -47,6 +44,21 @@ public class Robot extends LoggedRobot {
 		REPLAY
 	}
 
+	public static RobotType getRobotType() {
+		RobotType robotType = RobotConstants.ROBOT_TYPE;
+		if (isSimulation()) {
+			if (robotType.equals(RobotType.REPLAY)) {
+				return RobotType.REPLAY;
+			}
+			return RobotType.SIMULATION;
+		} else {
+			if (robotType.equals(RobotType.SYNCOPA)) {
+				return RobotType.SYNCOPA;
+			}
+			return RobotType.PEGA_SWERVE;
+		}
+	}
+
 	@Override
 	public void robotInit() {
 		Pathfinding.setPathfinder(new LocalADStar());
@@ -54,7 +66,8 @@ public class Robot extends LoggedRobot {
 		initializeLogger();
 		initializeAutonomousBuilder();
 		initializeSubsystems();
-		SwerveChassis.getInstance().resetAllEncoders();
+		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
+		Dashboard.getInstance();
 		OI.init();
 	}
 
@@ -78,17 +91,19 @@ public class Robot extends LoggedRobot {
 	@Override
 	public void teleopInit() {
 		Dashboard.getInstance().activateDriversDashboard();
+		Pivot.getInstance().resetAngle(Pivot.getInstance().getAbsolutePosition());
 	}
 
 	@Override
 	public void robotPeriodic() {
 		CommandScheduler.getInstance().run();
 		RoborioUtils.updateCurrentCycleTime();
+
 	}
 
 	private void initializeAutonomousBuilder() {
 		NamedCommands.registerCommand("shoot", new GoToShootingStateAndShoot(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
-		NamedCommands.registerCommand("grip", new NoteToShooter().raceWith(new WaitCommand(1)));
+		NamedCommands.registerCommand("grip", new NoteToShooter().raceWith(new WaitCommand(IntakeConstants.AUTONOMOUS_GRIP_TIMEOUT)));
 		AutoBuilder.configureHolonomic(
 				SwerveChassis.getInstance()::getRobotPose2d,
 				SwerveChassis.getInstance()::resetChassisPosition,
@@ -138,20 +153,5 @@ public class Robot extends LoggedRobot {
 	@Override
 	public void autonomousInit() {
 		AutonomousSelector.getInstance().getChosenValue().schedule();
-	}
-
-	public static RobotType getRobotType() {
-		RobotType robotType = RobotConstants.ROBOT_TYPE;
-		if (isSimulation()) {
-			if (robotType.equals(RobotType.REPLAY)) {
-				return RobotType.REPLAY;
-			}
-			return RobotType.SIMULATION;
-		} else {
-			if (robotType.equals(RobotType.SYNCOPA)) {
-				return RobotType.SYNCOPA;
-			}
-			return RobotType.PEGA_SWERVE;
-		}
 	}
 }

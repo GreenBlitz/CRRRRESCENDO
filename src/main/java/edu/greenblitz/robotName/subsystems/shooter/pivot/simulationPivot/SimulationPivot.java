@@ -83,7 +83,7 @@ public class SimulationPivot implements IPivot {
 		inputs.acceleration = (pivotSimulation.getVelocityRadPerSec() - inputs.velocity) / RobotConstants.SimulationConstants.TIME_STEP;
 		inputs.position = Rotation2d.fromRadians(pivotSimulation.getAngleRads());
 		inputs.velocity = pivotSimulation.getVelocityRadPerSec();
-		inputs.absoluteEncoderPosition = pivotSimulation.getAngleRads();
+		inputs.absoluteEncoderPosition = Rotation2d.fromRadians(pivotSimulation.getAngleRads());
 		inputs.temperature = 0;
 		inputs.hasHitForwardLimit = pivotSimulation.hasHitLowerLimit();
 		inputs.hasHitBackwardsLimit = pivotSimulation.hasHitLowerLimit();

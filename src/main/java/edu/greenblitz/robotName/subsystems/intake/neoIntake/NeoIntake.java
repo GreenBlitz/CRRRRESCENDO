@@ -7,9 +7,9 @@ import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.filter.Debouncer;
 
 public class NeoIntake implements IIntake {
-	
+
 	private GBSparkMax motor;
-	
+
 	private Debouncer beamBreaker;
 
 
@@ -19,21 +19,21 @@ public class NeoIntake implements IIntake {
 
 		motor.getReverseLimitSwitch(NeoIntakeConstants.BEAM_BREAKER_TYPE)
 				.enableLimitSwitch(NeoIntakeConstants.IS_BEAM_BREAKER_LIMITING);
-		
+
 		beamBreaker = new Debouncer(NeoIntakeConstants.DEBOUNCE_TIME_FOR_LIMIT_SWITCH);
 
 	}
-	
+
 	@Override
 	public void setPower(double power) {
 		motor.set(power);
 	}
-	
+
 	@Override
 	public void setVoltage(double voltage) {
 		motor.setVoltage(voltage);
 	}
-	
+
 	@Override
 	public void updateInputs(IntakeInputsAutoLogged intakeInputs) {
 		intakeInputs.outputCurrent = motor.getOutputCurrent();
