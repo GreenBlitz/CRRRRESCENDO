@@ -96,7 +96,7 @@ public class OI {
 	public void initButtons() {
 		isLock = false;
 		mainJoystick.R1.whileTrue(new CollectNote());
-		mainJoystick.L1.whileTrue(new MoveRobotToShootingPosition(ShootingPositionConstants.LEGAL_SHOOTING_ZONE));
+		mainJoystick.L1.whileTrue(new MoveRobotToShootingPosition(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
 		mainJoystick.A.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetPoseByVision()));
 
 		secondJoystick.BACK.whileTrue(new InstantCommand(() -> secondJoystick.rumble(true,1)));
