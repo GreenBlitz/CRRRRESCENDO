@@ -25,7 +25,7 @@ public class GBTalonFXPro extends TalonFX {
 		return super.setControl(control);
 	}
 	
-	public void applyConfiguration(TalonFXConfiguration configuration) {
-		super.getConfigurator().apply(configuration);
+	public StatusCode applyConfiguration(TalonFXConfiguration configuration) {
+		return super.getConfigurator().apply(configuration);
 	}
 }
