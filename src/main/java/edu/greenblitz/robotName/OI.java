@@ -3,6 +3,7 @@ package edu.greenblitz.robotName;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.commands.CollectNote;
 import edu.greenblitz.robotName.commands.NoteToShooter;
+import edu.greenblitz.robotName.commands.PanicMode;
 import edu.greenblitz.robotName.commands.ShootToSpeaker;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
@@ -10,14 +11,17 @@ import edu.greenblitz.robotName.commands.intake.IntakeCommand;
 import edu.greenblitz.robotName.commands.intake.ReverseRunIntake;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
-import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
-import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocity;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.*;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
+import edu.greenblitz.robotName.commands.shooter.funnel.runByPowerUntilCondition.RunFunnelByPower;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
+import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingState;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
+import edu.greenblitz.robotName.commands.swerve.MoveRobotToShootingPosition;
 import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
+import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
@@ -29,6 +33,9 @@ import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.GBCommand;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class OI {
 
