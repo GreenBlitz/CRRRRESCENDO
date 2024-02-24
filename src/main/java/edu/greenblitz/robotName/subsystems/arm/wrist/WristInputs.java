@@ -14,9 +14,7 @@ public class WristInputs {
 
     public double velocity;
 
-    public double absoluteEncoderPosition;
-
-    public double temperature;
+    public Rotation2d absoluteEncoderPosition;
 
     public boolean hasReachedForwardLimit;
 
