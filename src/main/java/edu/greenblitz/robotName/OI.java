@@ -93,8 +93,8 @@ public class OI {
 	}
 
 	public void schoriButtons() {
-		secondJoystick.BACK.whileTrue(new InstantCommand(() -> secondJoystick.rumble(true,1)));
-		secondJoystick.START.whileTrue(new InstantCommand(() -> secondJoystick.rumble(true,0)));
+		secondJoystick.BACK.whileTrue(new InstantCommand(() -> secondJoystick.rumble(true, 1)));
+		secondJoystick.START.whileTrue(new InstantCommand(() -> secondJoystick.rumble(true, 0)));
 		secondJoystick.B.whileTrue(new MovePivotToAngle(() ->
 				ShootingStateCalculations.getTargetShooterAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE)
 		));
