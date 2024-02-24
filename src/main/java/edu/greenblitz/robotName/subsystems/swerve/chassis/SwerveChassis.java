@@ -209,7 +209,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), getRobotPose2d());
 	}
 	public Pose2d visionPoseStartMatch() {
-		if (MultiLimelight.getInstance().hasTarget(1) && MultiLimelight.getInstance().hasTarget(0)) {
+		if (MultiLimelight.getInstance().hasTarget(1) || MultiLimelight.getInstance().hasTarget(0)) {
 			return MultiLimelight.getInstance().getFirstAvailableTarget().get().getFirst();
 		} else {
 			return new Pose2d();
@@ -217,11 +217,13 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 
 	public void resetPoseByVision() {
-		if (MultiLimelight.getInstance().hasTarget(0) || MultiLimelight.getInstance().hasTarget(1)) {
-			if (MultiLimelight.getInstance().getFirstAvailableTarget().isPresent()) {
-				Pose2d visionPose = MultiLimelight.getInstance().getFirstAvailableTarget().get().getFirst();
-				getGyro().updateYaw(Rotation2d.fromRadians(0));
-				poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), visionPose);
+		if (MultiLimelight.getInstance().getAll2DEstimates().size() != 0) {
+			for(Optional<Pair<Pose2d, Double>> visionPoseAndTimeStamp : MultiLimelight.getInstance().getAll2DEstimates()){
+				if(visionPoseAndTimeStamp.isPresent()) {
+					Pose2d visionPose = visionPoseAndTimeStamp.get().getFirst();
+					getGyro().updateYaw(Rotation2d.fromRadians(0));
+					poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), visionPose);
+				}
 			}
 		} else {
 			resetChassisPose();
