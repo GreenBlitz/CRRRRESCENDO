@@ -155,6 +155,6 @@ public class Robot extends LoggedRobot {
 
 	@Override
 	public void autonomousInit() {
-		AutonomousSelector.getInstance().getChosenValue().schedule();
+//		AutonomousSelector.getInstance().getChosenValue().schedule();
 	}
 }
