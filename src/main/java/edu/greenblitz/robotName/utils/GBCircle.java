@@ -12,7 +12,7 @@ import java.util.List;
  * and an upper and lower angle limits to set partial circles i.e. half circles, quarter circles...
  */
 public class GBCircle {
-	
+
 	private Translation2d centerPosition;
 	
 	private double radius;
@@ -21,8 +21,8 @@ public class GBCircle {
 	
 	private Rotation2d upperAngleLimit;
 	
-	public final static double EPSILON = 0.1;
-	
+	public static final double EPSILON = 0.1;
+
 	/**
 	 * Constructor using the center and radius.
 	 *

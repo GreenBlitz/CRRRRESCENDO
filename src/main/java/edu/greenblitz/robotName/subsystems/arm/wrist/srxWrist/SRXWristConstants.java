@@ -15,6 +15,7 @@ public class SRXWristConstants {
     public static final double MAG_ENCODER_CONVERSION_FACTOR = 4096.0;
 
     public static final TalonSRXConfiguration TALON_SRX_CONFIGURATION = new TalonSRXConfiguration();
+
     static{
         TALON_SRX_CONFIGURATION.forwardSoftLimitEnable = true;
         TALON_SRX_CONFIGURATION.forwardSoftLimitThreshold = Conversions.MagEncoderConversions.Rotation2DToMotorPosition(WristConstants.FORWARD_ANGLE_LIMIT);
