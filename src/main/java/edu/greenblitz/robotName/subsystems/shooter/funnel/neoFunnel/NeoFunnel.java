@@ -1,6 +1,8 @@
 package edu.greenblitz.robotName.subsystems.shooter.funnel.neoFunnel;
 
+import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.ControlType;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.FunnelInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.IFunnel;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
@@ -22,7 +24,7 @@ public class NeoFunnel implements IFunnel {
 		motor.getReverseLimitSwitch(NeoFunnelConstants.BEAM_BREAKER_TYPE)
 				.enableLimitSwitch(NeoFunnelConstants.IS_BEAM_BREAKER_ENABLE);
 		debouncer = new Debouncer(NeoFunnelConstants.DEBOUNCE_TIME_FOR_LIMIT_SWITCH);
-		pidController = NeoFunnelConstants.PID_CONTROLLER;
+		motor.getPIDController().setP(NeoFunnelConstants.kP, NeoFunnelConstants.VELOCITY_PID_SLOT);
 	}
 	
 	@Override
@@ -38,8 +40,11 @@ public class NeoFunnel implements IFunnel {
 	@Override
 	public void setVelocity(double velocity) {
 		pidController.setSetpoint(velocity);
-		setVoltage(
-				pidController.calculate(motor.getEncoder().getVelocity())
+		motor.getPIDController().setReference(
+				pidController.calculate(motor.getEncoder().getVelocity()),
+				CANSparkBase.ControlType.kVelocity,
+				0,
+				NeoFunnelConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(velocity)
 		);
 	}
 	

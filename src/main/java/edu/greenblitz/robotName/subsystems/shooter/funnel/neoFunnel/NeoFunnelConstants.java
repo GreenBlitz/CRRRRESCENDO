@@ -5,6 +5,7 @@ import com.revrobotics.SparkLimitSwitch;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 
 public class NeoFunnelConstants {
 	
@@ -12,7 +13,17 @@ public class NeoFunnelConstants {
 
 	public static final boolean IS_INVERTED = true;
 	
-	public static double kS = 0.1;
+	public static final double kS = 0;
+	
+	public static final double kV = 0;
+	
+	public static final double kA = 0;
+	
+	public static final double kP = 0;
+	
+	public static final int VELOCITY_PID_SLOT = 0;
+	
+	public static SimpleMotorFeedforward SIMPLE_MOTOR_FEED_FORWARD = new SimpleMotorFeedforward(kS, kV, kA);
 	
 	public static final PIDController PID_CONTROLLER = new PIDController(1, 0, 0);
 	

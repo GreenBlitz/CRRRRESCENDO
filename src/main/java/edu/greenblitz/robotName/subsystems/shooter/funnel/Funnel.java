@@ -40,6 +40,14 @@ public class Funnel extends GBSubsystem {
 		funnel.setPower(power);
 	}
 	
+	public void setVoltage(double voltage){
+		funnel.setVoltage(voltage);
+	}
+	
+	public void setVelocity(double velocity){
+		funnel.setVelocity(velocity);
+	}
+	
 	public void rollIn() {
 		setPower(ROLL_POWER);
 	}
