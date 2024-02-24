@@ -112,11 +112,10 @@ public class SystemCheck extends GBSubsystem {
             pingableDataList.addBoolean(
                     pingable.deviceName(),
                     () -> pingable.isConnected()
-            )
-                    .withPosition(
-                            columns / SystemCheckConstants.NUMBER_OF_CELLS_IN_PINGABLE_WIDGET,
-                            columns
-                    );
+            ).withPosition(
+                    columns / SystemCheckConstants.NUMBER_OF_CELLS_IN_PINGABLE_WIDGET,
+                    columns
+            );
             columns++;
         }
     }
