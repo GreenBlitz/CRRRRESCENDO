@@ -16,7 +16,7 @@ public class SRXWrist implements IWrist {
 
     private TalonSRX motor;
 
-    public SRXWrist(){
+    public SRXWrist() {
         motor = new TalonSRX(SRXWristConstants.MOTOR_ID);
         motor.configSelectedFeedbackSensor(
                 FeedbackDevice.CTRE_MagEncoder_Absolute,
