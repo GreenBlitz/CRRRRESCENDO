@@ -18,6 +18,7 @@ import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
+import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.AutonomousSelector;
@@ -70,7 +71,7 @@ public class Robot extends LoggedRobot {
 		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
 		Dashboard.getInstance();
 		OI.init();
-		Pivot.getInstance().resetAngle(Rotation2d.fromDegrees(18));
+		Pivot.getInstance().resetAngle(PivotConstants.PresetPositions.STARTING.ANGLE);
 	}
 
 	public void initializeSubsystems() {

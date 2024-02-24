@@ -82,10 +82,17 @@ public class OI {
 	}
 
 	public void initButtons() {
+		romyButtons();
+		schoriButtons();
+	}
+
+	public void romyButtons() {
 		mainJoystick.R1.whileTrue(new CollectNote());
 		mainJoystick.L1.whileTrue(new MoveRobotToShootingPosition(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
 		mainJoystick.A.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetPoseByVision()));
+	}
 
+	public void schoriButtons() {
 		secondJoystick.BACK.whileTrue(new InstantCommand(() -> secondJoystick.rumble(true,1)));
 		secondJoystick.START.whileTrue(new InstantCommand(() -> secondJoystick.rumble(true,0)));
 		secondJoystick.B.whileTrue(new MovePivotToAngle(() ->

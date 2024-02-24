@@ -74,8 +74,8 @@ public class MK4iSwerveConstants {
 	static {
 		Slot0Configs PID_CONFIGS = new Slot0Configs();
 		PID_CONFIGS.kS = 0.16411;
-		PID_CONFIGS.kV = 2.6824;
 		PID_CONFIGS.kA = 0.25968;
+		PID_CONFIGS.kV = 2.6824;
 		PID_CONFIGS.kP = 5;
 		PID_CONFIGS.kI = 0;
 		PID_CONFIGS.kD = 0;

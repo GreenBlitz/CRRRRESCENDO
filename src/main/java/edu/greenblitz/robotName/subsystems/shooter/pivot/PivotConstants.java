@@ -11,10 +11,11 @@ public class PivotConstants {
 
 	public enum PresetPositions {
 
-		STARTING(Rotation2d.fromDegrees(19)),
-		TRANSFER(Rotation2d.fromDegrees(19)),
+		STARTING(Rotation2d.fromDegrees(18)),
+		TRANSFER(Rotation2d.fromDegrees(20)),
 		SAFE(Rotation2d.fromDegrees(58)),
-		PICK_UP(Rotation2d.fromDegrees(35));
+		PICK_UP(Rotation2d.fromDegrees(35)),
+		CLOSE_SHOOTING(Rotation2d.fromDegrees(45));
 
 		public final Rotation2d ANGLE;
 
