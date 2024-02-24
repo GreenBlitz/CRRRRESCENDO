@@ -8,6 +8,11 @@ public class ReverseRunIntake extends IntakeCommand {
     }
 
     @Override
+    public boolean isFinished() {
+        return !intake.getEntranceBeamBreakerValue();
+    }
+
+    @Override
     public void end(boolean interrupted) {
         intake.stop();
     }
