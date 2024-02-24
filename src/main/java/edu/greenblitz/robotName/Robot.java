@@ -67,12 +67,12 @@ public class Robot extends LoggedRobot {
 		Pathfinding.setPathfinder(new LocalADStar());
 		CommandScheduler.getInstance().enable();
 		initializeLogger();
-		initializeAutonomousBuilder();
-		initializeSubsystems();
-		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
-		Dashboard.getInstance();
+//		initializeAutonomousBuilder();
+//		initializeSubsystems();
+//		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
+//		Dashboard.getInstance();
 		OI.init();
-		Pivot.getInstance().resetAngle(PivotConstants.PresetPositions.STARTING.ANGLE);
+//		Pivot.getInstance().resetAngle(PivotConstants.PresetPositions.STARTING.ANGLE);
 	}
 
     public void initializeSubsystems() {
@@ -92,10 +92,10 @@ public class Robot extends LoggedRobot {
         Intake.init();
     }
 
-	@Override
-	public void teleopInit() {
-		Dashboard.getInstance().activateDriversDashboard();
-	}
+//	@Override
+//	public void teleopInit() {
+//		Dashboard.getInstance().activateDriversDashboard();
+//	}
 
     @Override
     public void robotPeriodic() {
@@ -155,8 +155,8 @@ public class Robot extends LoggedRobot {
         Logger.start();
     }
 
-    @Override
-    public void autonomousInit() {
-        AutonomousSelector.getInstance().getChosenValue().schedule();
-    }
+//    @Override
+//    public void autonomousInit() {
+//        AutonomousSelector.getInstance().getChosenValue().schedule();
+//    }
 }

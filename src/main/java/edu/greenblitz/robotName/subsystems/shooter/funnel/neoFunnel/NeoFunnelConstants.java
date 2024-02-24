@@ -4,12 +4,17 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkLimitSwitch;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
+import edu.wpi.first.math.controller.PIDController;
 
 public class NeoFunnelConstants {
 	
 	public static final int MOTOR_ID = 52;
 
 	public static final boolean IS_INVERTED = true;
+	
+	public static double kS = 0.1;
+	
+	public static final PIDController PID_CONTROLLER = new PIDController(1, 0, 0);
 	
 	public static final double DEBOUNCE_TIME_FOR_LIMIT_SWITCH = 0.1;
 	

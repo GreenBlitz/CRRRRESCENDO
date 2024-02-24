@@ -26,6 +26,7 @@ import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
+import edu.greenblitz.robotName.utils.SysId.neoSysId.SysIdNeo;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -48,13 +49,15 @@ public class OI {
 		thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
 
-		secondJoystick.A.whileTrue(new NoteToShooter());
-		secondJoystick.B.whileTrue(new EjectNote());
-		secondJoystick.POV_UP.whileTrue(new MovePivotToAngle(Rotation2d.fromDegrees(50)));
-		secondJoystick.POV_DOWN.whileTrue(new MovePivotToAngle(Rotation2d.fromDegrees(30)));
-		secondJoystick.X.whileTrue(new MovePivotByJoystick(secondJoystick));
+//		secondJoystick.A.whileTrue(new NoteToShooter());
+//		secondJoystick.B.whileTrue(new EjectNote());
+//		secondJoystick.POV_UP.whileTrue(new MovePivotToAngle(Rotation2d.fromDegrees(50)));
+//		secondJoystick.POV_DOWN.whileTrue(new MovePivotToAngle(Rotation2d.fromDegrees(30)));
+//		secondJoystick.X.whileTrue(new MovePivotByJoystick(secondJoystick));
+//		secondJoystick.Y.whileTrue(new RunFunnelByJoystick(secondJoystick));
 //		initButtons();
 //		initializeDefaultCommands();
+		SysIdNeo.getInstance().buttons(secondJoystick);
 	}
 
 	public static void init() {
