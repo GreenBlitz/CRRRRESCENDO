@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.subsystems.lifter.neoLifter;
 
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import edu.greenblitz.robotName.subsystems.lifter.ILifter;
@@ -16,7 +17,7 @@ public class NeoLifter implements ILifter {
     private TalonSRX solenoid;
 
     public NeoLifter() {
-        motor = new GBSparkMax(NeoLifterConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        motor = new GBSparkMax(NeoLifterConstants.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
         solenoid = new TalonSRX(NeoLifterConstants.SOLENOID_ID);
         motor.config(NeoLifterConstants.CONFIG);
 
