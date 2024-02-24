@@ -15,7 +15,7 @@ public class LEDConstants {
  
 	public static final Color SPEAKER_MODE_COLOR = Color.kYellow;
  
-	public static final Section ALL_LED = new Section(0, LED_LENGTH);
+	public static final Section ALL_LEDS = new Section(0, LED_LENGTH);
  
 	public static final double BLINKING_TIME = 5.0;
  
