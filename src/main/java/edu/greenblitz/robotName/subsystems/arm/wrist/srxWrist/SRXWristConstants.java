@@ -1,11 +1,10 @@
-package edu.greenblitz.robotName.subsystems.arm.wrist.bagWrist;
+package edu.greenblitz.robotName.subsystems.arm.wrist.srxWrist;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.greenblitz.robotName.utils.Conversions;
 
-public class BagWristConstants {
+public class SRXWristConstants {
 
     public static final int MOTOR_ID = 1;
 

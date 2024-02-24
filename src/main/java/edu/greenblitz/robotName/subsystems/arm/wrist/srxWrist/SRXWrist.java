@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.arm.wrist.bagWrist;
+package edu.greenblitz.robotName.subsystems.arm.wrist.srxWrist;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -11,14 +11,14 @@ import edu.greenblitz.robotName.subsystems.arm.wrist.WristInputsAutoLogged;
 import edu.greenblitz.robotName.utils.Conversions;
 import edu.wpi.first.math.geometry.Rotation2d;
 
-public class BagWrist implements IWrist {
+public class SRXWrist implements IWrist {
 
     private TalonSRX motor;
 
-    public BagWrist(){
-        motor = new TalonSRX(BagWristConstants.MOTOR_ID);
-        motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, BagWristConstants.PID_SLOT, BagWristConstants.TIMEOUT_FOR_CONFIG_SET);
-        motor.configAllSettings(BagWristConstants.TALON_SRX_CONFIGURATION);
+    public SRXWrist(){
+        motor = new TalonSRX(SRXWristConstants.MOTOR_ID);
+        motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, SRXWristConstants.PID_SLOT, SRXWristConstants.TIMEOUT_FOR_CONFIG_SET);
+        motor.configAllSettings(SRXWristConstants.TALON_SRX_CONFIGURATION);
     }
 
     @Override
