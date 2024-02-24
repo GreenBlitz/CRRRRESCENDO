@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.utils.sysId.neoSysId;
+package edu.greenblitz.robotName.utils.SysId.neoSysId;
 
 public class SysIdNeoConstants {
 	

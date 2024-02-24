@@ -8,6 +8,11 @@ public class ReverseRunIntake extends IntakeCommand {
     }
 
     @Override
+    public boolean isFinished() {
+        return !intake.isObjectIn();
+    }
+
+    @Override
     public void end(boolean interrupted) {
         intake.stop();
     }

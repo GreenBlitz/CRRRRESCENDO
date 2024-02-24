@@ -9,7 +9,7 @@ public class NoteToIntake extends IntakeCommand {
 
     @Override
     public boolean isFinished() {
-        return intake.getExitBeamBreakerValue();
+        return intake.isObjectIn();
     }
 
     @Override
