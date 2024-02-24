@@ -27,7 +27,7 @@ public class Wrist extends GBSubsystem {
         wristInputs = new WristInputsAutoLogged();
 
         wrist.updateInputs(wristInputs);
-        wrist.resetEncoder();
+        wrist.resetAngleByAbsoluteEncoder();
         currentAngle = wristInputs.position;
     }
 

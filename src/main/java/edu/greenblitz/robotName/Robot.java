@@ -5,6 +5,7 @@ import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
 import edu.greenblitz.robotName.commands.intake.NoteFromIntakeToShooter;
+import edu.greenblitz.robotName.commands.shooter.ShootFromInFunnel;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingStateAndShoot;
 import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
 import edu.greenblitz.robotName.subsystems.Dashboard;
@@ -36,29 +37,30 @@ import org.littletonrobotics.junction.Logger;
 import org.littletonrobotics.junction.networktables.NT4Publisher;
 import org.littletonrobotics.junction.wpilog.WPILOGReader;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
+
 public class Robot extends LoggedRobot {
 
-	public enum RobotType {
-		SYNCOPA,
-		SIMULATION,
-		PEGA_SWERVE,
-		REPLAY
-	}
+    public enum RobotType {
+        SYNCOPA,
+        SIMULATION,
+        PEGA_SWERVE,
+        REPLAY
+    }
 
-	public static RobotType getRobotType() {
-		RobotType robotType = RobotConstants.ROBOT_TYPE;
-		if (isSimulation()) {
-			if (robotType.equals(RobotType.REPLAY)) {
-				return RobotType.REPLAY;
-			}
-			return RobotType.SIMULATION;
-		} else {
-			if (robotType.equals(RobotType.SYNCOPA)) {
-				return RobotType.SYNCOPA;
-			}
-			return RobotType.PEGA_SWERVE;
-		}
-	}
+    public static RobotType getRobotType() {
+        RobotType robotType = RobotConstants.ROBOT_TYPE;
+        if (isSimulation()) {
+            if (robotType.equals(RobotType.REPLAY)) {
+                return RobotType.REPLAY;
+            }
+            return RobotType.SIMULATION;
+        } else {
+            if (robotType.equals(RobotType.SYNCOPA)) {
+                return RobotType.SYNCOPA;
+            }
+            return RobotType.PEGA_SWERVE;
+        }
+    }
 
 	@Override
 	public void robotInit() {
@@ -73,87 +75,88 @@ public class Robot extends LoggedRobot {
 		Pivot.getInstance().resetAngle(PivotConstants.PresetPositions.STARTING.ANGLE);
 	}
 
-	public void initializeSubsystems() {
-		AutonomousSelector.getInstance();
-		MultiLimelight.init();
-		SwerveChassis.init();
+    public void initializeSubsystems() {
+        AutonomousSelector.getInstance();
+        MultiLimelight.init();
+        SwerveChassis.init();
 
-		Pivot.init();
-		Funnel.init();
-		FlyWheel.init();
+        Pivot.init();
+        Funnel.init();
+        FlyWheel.init();
 
-		Elbow.init();
-		Wrist.init();
-		Roller.init();
+        Elbow.init();
+        Wrist.init();
+        Roller.init();
 
-		Lifter.init();
-		Intake.init();
-	}
+        Lifter.init();
+        Intake.init();
+    }
 
 	@Override
 	public void teleopInit() {
 		Dashboard.getInstance().activateDriversDashboard();
 	}
 
-	@Override
-	public void robotPeriodic() {
-		CommandScheduler.getInstance().run();
-		RoborioUtils.updateCurrentCycleTime();
+    @Override
+    public void robotPeriodic() {
+        CommandScheduler.getInstance().run();
+        RoborioUtils.updateCurrentCycleTime();
 
-	}
+    }
 
-	private void initializeAutonomousBuilder() {
-		NamedCommands.registerCommand("shoot", new GoToShootingStateAndShoot(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
-		NamedCommands.registerCommand("grip", new NoteFromIntakeToShooter().raceWith(new WaitCommand(IntakeConstants.AUTONOMOUS_GRIP_TIMEOUT)));
-		AutoBuilder.configureHolonomic(
-				SwerveChassis.getInstance()::getRobotPose2d,
-				SwerveChassis.getInstance()::resetChassisPosition,
-				SwerveChassis.getInstance()::getRobotRelativeChassisSpeeds,
-				SwerveChassis.getInstance()::moveByRobotRelativeSpeeds,
-				ChassisConstants.PATH_FOLLOWER_CONFIG,
-				() -> FMSUtils.getAlliance() == DriverStation.Alliance.Red,
-				SwerveChassis.getInstance()
-		);
-	}
+    private void initializeAutonomousBuilder() {
+        NamedCommands.registerCommand("shoot", new GoToShootingStateAndShoot(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
+        NamedCommands.registerCommand("close shoot", new ShootFromInFunnel());
+        NamedCommands.registerCommand("grip", new NoteFromIntakeToShooter().raceWith(new WaitCommand(IntakeConstants.AUTONOMOUS_GRIP_TIMEOUT)));
+        AutoBuilder.configureHolonomic(
+                SwerveChassis.getInstance()::getRobotPose2d,
+                SwerveChassis.getInstance()::resetChassisPosition,
+                SwerveChassis.getInstance()::getRobotRelativeChassisSpeeds,
+                SwerveChassis.getInstance()::moveByRobotRelativeSpeeds,
+                ChassisConstants.PATH_FOLLOWER_CONFIG,
+                () -> FMSUtils.getAlliance() == DriverStation.Alliance.Red,
+                SwerveChassis.getInstance()
+        );
+    }
 
-	private void initializeLogger() {
-		NetworkTableInstance.getDefault()
-				.getStructTopic("RobotPose", Pose2d.struct).publish();
+    private void initializeLogger() {
+        NetworkTableInstance.getDefault()
+                .getStructTopic("RobotPose", Pose2d.struct).publish();
 
-		NetworkTableInstance.getDefault()
-				.getStructTopic("MechanismPoses", Pose3d.struct).publish();
-		switch (getRobotType()) {
-			// Running on a real robot, log to a USB stick
-			case SYNCOPA:
-				try {
-					Logger.addDataReceiver(new WPILOGWriter(RobotConstants.USB_LOG_PATH));
-					System.out.println("initialized Logger, USB");
-				} catch (Exception e) {
-					Logger.end();
-					Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
-					System.out.println("initialized Logger, roborio");
-				}
-				Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
+        NetworkTableInstance.getDefault()
+                .getStructTopic("MechanismPoses", Pose3d.struct).publish();
+        switch (getRobotType()) {
+            // Running on a real robot, log to a USB stick
+            case SYNCOPA:
+                try {
+                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.USB_LOG_PATH));
+                    System.out.println("initialized Logger, USB");
+                } catch (Exception e) {
+                    Logger.end();
+                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
+                    System.out.println("initialized Logger, roborio");
+                }
+                Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
 				Logger.addDataReceiver(new NT4Publisher());
-				break;
-			// Replaying a log, set up replay source
-			case REPLAY:
-				setUseTiming(false); // Run as fast as possible
-				String logPath = LogFileUtil.findReplayLog();
-				Logger.setReplaySource(new WPILOGReader(logPath));
-				Logger.addDataReceiver(new WPILOGWriter(LogFileUtil.addPathSuffix(logPath, "_simulation")));
-				break;
-			case SIMULATION:
-			default:
-				Logger.addDataReceiver(new NT4Publisher());
-				Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SIMULATION_LOG_PATH));
-				break;
-		}
-		Logger.start();
-	}
+                break;
+            // Replaying a log, set up replay source
+            case REPLAY:
+                setUseTiming(false); // Run as fast as possible
+                String logPath = LogFileUtil.findReplayLog();
+                Logger.setReplaySource(new WPILOGReader(logPath));
+                Logger.addDataReceiver(new WPILOGWriter(LogFileUtil.addPathSuffix(logPath, "_simulation")));
+                break;
+            case SIMULATION:
+            default:
+                Logger.addDataReceiver(new NT4Publisher());
+                Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SIMULATION_LOG_PATH));
+                break;
+        }
+        Logger.start();
+    }
 
-	@Override
-	public void autonomousInit() {
-		AutonomousSelector.getInstance().getChosenValue().schedule();
-	}
+    @Override
+    public void autonomousInit() {
+        AutonomousSelector.getInstance().getChosenValue().schedule();
+    }
 }
