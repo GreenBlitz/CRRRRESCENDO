@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.subsystems.gyros;
 
 import com.ctre.phoenix6.hardware.Pigeon2;
+import edu.greenblitz.robotName.utils.GBCircle;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
 
@@ -43,8 +44,8 @@ public class Pigeon2Gyro implements IAngleMeasurementGyro {
 	@Override
 	public void updateInputs(GyroInputsAutoLogged inputs) {
 		inputs.yaw = Units.degreesToRadians(pigeon2.getYaw().getValue());
-		inputs.pitch = (Units.degreesToRadians(pigeon2.getPitch().getValue()) - pitchOffset.getRadians()) % GyroConstants.CIRCLE_CIRCUMFRENCE.getRadians();
-		inputs.roll = (Units.degreesToRadians(pigeon2.getRoll().getValue()) - rollOffset.getRadians()) % GyroConstants.CIRCLE_CIRCUMFRENCE.getRadians();
+		inputs.pitch = (Units.degreesToRadians(pigeon2.getPitch().getValue()) - pitchOffset.getRadians()) % GBCircle.FULL_ROTATION.getRadians();
+		inputs.roll = (Units.degreesToRadians(pigeon2.getRoll().getValue()) - rollOffset.getRadians()) % GBCircle.FULL_ROTATION.getRadians();
 		
 		lastInputs = inputs;
 	}

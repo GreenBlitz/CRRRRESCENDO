@@ -22,6 +22,9 @@ public class GBCircle {
 	private Rotation2d upperAngleLimit;
 	
 	public final static double EPSILON = 0.1;
+
+	public static final Rotation2d FULL_ROTATION = Rotation2d.fromRotations(1);
+
 	
 	/**
 	 * Constructor using the center and radius.
