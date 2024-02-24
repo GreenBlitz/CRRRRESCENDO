@@ -4,6 +4,7 @@ import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRoller;
 import edu.greenblitz.robotName.commands.intake.ReverseRunIntake;
 import edu.greenblitz.robotName.commands.shooter.PushNoteToFlyWheel;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocity;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.StopFlyWheel;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
 import edu.greenblitz.robotName.subsystems.intake.Intake;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
@@ -24,9 +25,10 @@ public class EjectNote extends ProxyCommand {
             return new ReverseRunIntake();
         }
         if (Funnel.getInstance().isObjectIn()) {
-            return new ParallelCommandGroup(
+            return new SequentialCommandGroup(
+                    new RunFlyWheelByVelocity(FlyWheelConstants.SLOW_SHOOTING_VELOCITY),
                     new PushNoteToFlyWheel(),
-                    new RunFlyWheelByVelocity(FlyWheelConstants.SLOW_SHOOTING_VELOCITY)
+                    new StopFlyWheel()
             );
         }
         return new InstantCommand();
