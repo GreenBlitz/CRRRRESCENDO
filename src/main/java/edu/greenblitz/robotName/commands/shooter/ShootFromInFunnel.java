@@ -7,7 +7,7 @@ public class ShootFromInFunnel extends SequentialCommandGroup {
 
     public ShootFromInFunnel() {
         super(
-//                new RunFlyWheelByVelocityConstant(),
+                new RunFlyWheelByVelocityConstant(),
                 new PushNoteToFlyWheel()
         );
     }

@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName.commands.shooter.funnel.runByPowerUntilCondition;
 
 import edu.greenblitz.robotName.commands.shooter.funnel.FunnelCommand;
-import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 
 public class RunFunnelByPower extends FunnelCommand {
 
@@ -16,9 +15,4 @@ public class RunFunnelByPower extends FunnelCommand {
         funnel.setPower(power);
     }
 
-    @Override
-    public void end(boolean interrupted) {
-        super.end(interrupted);
-        FlyWheel.getInstance().stop();
-    }
 }
