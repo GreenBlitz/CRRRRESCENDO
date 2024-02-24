@@ -18,7 +18,7 @@ public class ShootingPositionConstants {
 
 	public static final Rotation2d OPTIMAL_UPPER_ANGLE_LIMIT = Rotation2d.fromDegrees(10);
 
-	public static final double LEGAL_SHOOTING_ZONE_RADIUS_IN_METERS = 3;
+	public static final double LEGAL_SHOOTING_ZONE_RADIUS_IN_METERS = 10;
 
 	public static ShootingZone LEGAL_SHOOTING_ZONE;
 
@@ -27,20 +27,16 @@ public class ShootingPositionConstants {
 				CENTER_OF_SHOOTING_ZONE,
 				LEGAL_SHOOTING_ZONE_RADIUS_IN_METERS,
 				FieldConstants.FieldZones.RESTRICTED_BOUNDS,
-				LEGAL_LOWER_ANGLE_LIMIT,
-				LEGAL_UPPER_ANGLE_LIMIT,
 				LEGAL_SHOOTING_ZONE
 		);
 	}
 
-	public static final double OPTIMAL_SHOOTING_ZONE_RADIUS_IN_METERS = 2.5;
+	public static final double OPTIMAL_SHOOTING_ZONE_RADIUS_IN_METERS = 10;
 
 	public static ShootingZone OPTIMAL_SHOOTING_ZONE = new ShootingZone(
 			CENTER_OF_SHOOTING_ZONE,
 			OPTIMAL_SHOOTING_ZONE_RADIUS_IN_METERS,
 			FieldConstants.FieldZones.RESTRICTED_BOUNDS,
-			OPTIMAL_LOWER_ANGLE_LIMIT,
-			OPTIMAL_UPPER_ANGLE_LIMIT,
 			LEGAL_SHOOTING_ZONE
 	);
 

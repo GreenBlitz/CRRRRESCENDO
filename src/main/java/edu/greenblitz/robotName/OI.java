@@ -1,15 +1,25 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.CollectNote;
 import edu.greenblitz.robotName.commands.NoteToShooter;
+import edu.greenblitz.robotName.commands.PanicMode;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
+import edu.greenblitz.robotName.commands.intake.ReverseRunIntake;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByPower;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityConstant;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
+import edu.greenblitz.robotName.commands.shooter.funnel.runByPowerUntilCondition.RunFunnelByPower;
+import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
+import edu.greenblitz.robotName.commands.swerve.MoveRobotToShootingPosition;
 import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
+import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
+import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
@@ -17,6 +27,10 @@ import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class OI {
 
@@ -68,7 +82,24 @@ public class OI {
 	}
 
 	public void initButtons() {
+		mainJoystick.R1.whileTrue(new CollectNote());
+		mainJoystick.L1.whileTrue(new MoveRobotToShootingPosition(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
+		mainJoystick.A.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetPoseByVision()));
 
+		secondJoystick.BACK.whileTrue(new InstantCommand(() -> secondJoystick.rumble(true,1)));
+		secondJoystick.START.whileTrue(new InstantCommand(() -> secondJoystick.rumble(true,0)));
+		secondJoystick.B.whileTrue(new MovePivotToAngle(() ->
+				ShootingStateCalculations.getTargetShooterAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE)
+		));
+		secondJoystick.R1.whileTrue(new CollectNote());
+		secondJoystick.POV_DOWN.whileTrue(new ParallelRaceGroup(
+				new RunFunnelByPower(-0.2),new WaitCommand(0.5)));
+		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityConstant().andThen(new RunFunnelByPower(0.5)));
+		secondJoystick.POV_UP.onTrue(new RunFunnelByPower(0.5));
+		secondJoystick.X.whileTrue(new MovePivotToAngle(Rotation2d.fromDegrees(65)));
+		secondJoystick.A.whileTrue(new PanicMode());
+		secondJoystick.POV_LEFT.whileTrue(new ReverseRunIntake());
+		secondJoystick.Y.whileTrue(new RunFlyWheelByPower(-0.2));
 	}
 
 	public void thirdJoystickButtons() {

@@ -132,6 +132,7 @@ public class Robot extends LoggedRobot {
 					Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
 					System.out.println("initialized Logger, roborio");
 				}
+				Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
 				Logger.addDataReceiver(new NT4Publisher());
 				break;
 			// Replaying a log, set up replay source

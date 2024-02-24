@@ -43,11 +43,13 @@ public class RunFlyWheelByVelocity extends FlyWheelCommand {
 
     @Override
     public boolean isFinished() {
-        return flyWheel.getPreparedToShoot();
+        return false;
     }
     
     @Override
     public void end(boolean interrupted) {
-        flyWheel.stop();
+        if (interrupted) {
+            flyWheel.stop();
+        }
     }
 }
