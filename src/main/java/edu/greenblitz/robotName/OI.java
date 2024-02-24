@@ -99,14 +99,8 @@ public class OI {
 				ShootingStateCalculations.getTargetShooterAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE)
 		));
 		secondJoystick.R1.whileTrue(new CollectNote());
-		secondJoystick.POV_DOWN.whileTrue(new ParallelRaceGroup(
-				new RunFunnelByPower(-0.2),new WaitCommand(0.5)));
-		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityConstant().andThen(new RunFunnelByPower(0.5)));
-		secondJoystick.POV_UP.onTrue(new RunFunnelByPower(0.5));
-		secondJoystick.X.whileTrue(new MovePivotToAngle(Rotation2d.fromDegrees(65)));
 		secondJoystick.A.whileTrue(new PanicMode());
 		secondJoystick.POV_LEFT.whileTrue(new ReverseRunIntake());
-		secondJoystick.Y.whileTrue(new RunFlyWheelByPower(-0.2));
 	}
 
 	public void thirdJoystickButtons() {
