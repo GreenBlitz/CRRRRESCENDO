@@ -149,10 +149,9 @@ public class LED extends GBSubsystem {
 	public void blinkOrRumbleByNoteState(){
 		if (isNoteInRobot() && actionTimer.get() <= LEDConstants.BLINKING_TIME) {
 			blink(getColorByMode());
-		} else if (actionTimer.get() <= LEDConstants.RUMBLE_TIME){
+		} else if (actionTimer.get() <= LEDConstants.RUMBLE_TIME) {
 			rumble();
-		}
-		else {
+		} else {
 			stopRumble();
 		}
 	}
