@@ -9,9 +9,7 @@ public class IntakeInputs {
 	
 	public double velocity;
 	
-	public boolean entranceBeamBreakerValue;
-	
-	public boolean exitBeamBreakerValue;
-	
+	public boolean beamBreakerValue;
+
 	public double outputCurrent;
 }

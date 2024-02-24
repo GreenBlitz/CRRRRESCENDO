@@ -91,7 +91,6 @@ public class FalconPivot implements IPivot {
 		if (encoderPosition.getRotations() < 0) {
 			return Rotation2d.fromRotations(encoderPosition.getRotations() + 1);
 		}
-
 		return encoderPosition;
 	}
 	

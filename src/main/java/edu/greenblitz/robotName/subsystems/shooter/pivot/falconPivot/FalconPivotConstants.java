@@ -17,7 +17,7 @@ public class FalconPivotConstants {
 	
 	public static final int ABSOLUTE_ENCODER_CHANNEL = 1;
 
-	public static final double ABSOLUTE_ENCODER_OFFSET = 0;
+	public static final double ABSOLUTE_ENCODER_OFFSET = Units.degreesToRotations(309) - Units.degreesToRotations(16);
 
 	public static final boolean INVERTED = true;
 
@@ -48,8 +48,6 @@ public class FalconPivotConstants {
 		SLOT_0_CONFIGS.kD = 3.6;
 	}
 
-
-
 	public static final CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();
 	
 	static {
@@ -69,11 +67,13 @@ public class FalconPivotConstants {
 	}
 	
 	public static final FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();
+
 	static {
 		FEEDBACK_CONFIGS.SensorToMechanismRatio = PivotConstants.GEAR_RATIO;
 	}
 
 	public static final HardwareLimitSwitchConfigs HARDWARE_LIMIT_SWITCH_CONFIGS = new HardwareLimitSwitchConfigs();
+
 	static {
 		HARDWARE_LIMIT_SWITCH_CONFIGS.ReverseLimitEnable = false;
 		HARDWARE_LIMIT_SWITCH_CONFIGS.ReverseLimitType = ReverseLimitTypeValue.NormallyOpen;
@@ -81,6 +81,7 @@ public class FalconPivotConstants {
 	}
 	
 	public static final TalonFXConfiguration TALON_FX_CONFIGURATION = new TalonFXConfiguration();
+
 	static {
 		TALON_FX_CONFIGURATION.CurrentLimits = CURRENT_LIMITS_CONFIGS;
 		TALON_FX_CONFIGURATION.SoftwareLimitSwitch = SOFTWARE_LIMIT_SWITCH_CONFIGS;

@@ -44,7 +44,7 @@ public class KazaSwerveModule implements ISwerveModule {
 		angleMotorID = configObject.angleMotorID;
 		linearMotorID = configObject.linearMotorID;
 		lampreyID = configObject.AbsoluteEncoderID;
-		linInverted = configObject.linInverted;
+		linInverted = configObject.linearInverted;
 		
 		angleMotor = new GBSparkMax(angleMotorID, CANSparkLowLevel.MotorType.kBrushless);
 		angleMotor.config(KazaSwerveConstants.BASE_ANGULAR_MOTOR_CONFIG_OBJECT);

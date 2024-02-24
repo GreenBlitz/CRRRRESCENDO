@@ -12,6 +12,7 @@ import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.intake.Intake;
+import edu.greenblitz.robotName.subsystems.intake.IntakeConstants;
 import edu.greenblitz.robotName.subsystems.lifter.Lifter;
 import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
@@ -34,7 +35,6 @@ import org.littletonrobotics.junction.Logger;
 import org.littletonrobotics.junction.networktables.NT4Publisher;
 import org.littletonrobotics.junction.wpilog.WPILOGReader;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
-
 public class Robot extends LoggedRobot {
 
 	public enum RobotType {
@@ -44,24 +44,24 @@ public class Robot extends LoggedRobot {
 		REPLAY
 	}
 
-    public static RobotType getRobotType() {
-        RobotType robotType = RobotConstants.ROBOT_TYPE;
-        if (isSimulation()) {
-            if (robotType.equals(RobotType.REPLAY)) {
-                return RobotType.REPLAY;
-            }
-            return RobotType.SIMULATION;
-        } else {
-            if (robotType.equals(RobotType.SYNCOPA)) {
-                return RobotType.SYNCOPA;
-            }
-            return RobotType.PEGA_SWERVE;
-        }
-    }
+	public static RobotType getRobotType() {
+		RobotType robotType = RobotConstants.ROBOT_TYPE;
+		if (isSimulation()) {
+			if (robotType.equals(RobotType.REPLAY)) {
+				return RobotType.REPLAY;
+			}
+			return RobotType.SIMULATION;
+		} else {
+			if (robotType.equals(RobotType.SYNCOPA)) {
+				return RobotType.SYNCOPA;
+			}
+			return RobotType.PEGA_SWERVE;
+		}
+	}
 
-    @Override
-    public void robotInit() {
-        //Pathfinding.setPathfinder(new LocalADStar());
+	@Override
+	public void robotInit() {
+		//Pathfinding.setPathfinder(new LocalADStar());
         CommandScheduler.getInstance().enable();
 //        initializeLogger();
         //initializeAutonomousBuilder();
@@ -77,9 +77,9 @@ public class Robot extends LoggedRobot {
         MultiLimelight.init();
         SwerveChassis.init();
 
-        Pivot.init();
-        Funnel.init();
-        FlyWheel.init();
+		Pivot.init();
+		Funnel.init();
+		FlyWheel.init();
 
 //        Elbow.init();
 //        Wrist.init();
@@ -95,29 +95,30 @@ public class Robot extends LoggedRobot {
 //        Pivot.getInstance().resetAngle(Pivot.getInstance().getAbsolutePosition());
     }
 
-    @Override
-    public void robotPeriodic() {
-        CommandScheduler.getInstance().run();
-        RoborioUtils.updateCurrentCycleTime();
-    }
+	@Override
+	public void robotPeriodic() {
+		CommandScheduler.getInstance().run();
+		RoborioUtils.updateCurrentCycleTime();
 
-    private void initializeAutonomousBuilder() {
-        NamedCommands.registerCommand("shoot", new GoToShootingStateAndShoot(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
-        NamedCommands.registerCommand("grip", new NoteToShooter().raceWith(new WaitCommand(1)));
-        AutoBuilder.configureHolonomic(
-                SwerveChassis.getInstance()::getRobotPose2d,
-                SwerveChassis.getInstance()::resetChassisPosition,
-                SwerveChassis.getInstance()::getRobotRelativeChassisSpeeds,
-                SwerveChassis.getInstance()::moveByRobotRelativeSpeeds,
-                ChassisConstants.PATH_FOLLOWER_CONFIG,
-                () -> FMSUtils.getAlliance() == DriverStation.Alliance.Red,
-                SwerveChassis.getInstance()
-        );
-    }
+	}
 
-    private void initializeLogger() {
-        NetworkTableInstance.getDefault()
-                .getStructTopic("RobotPose", Pose2d.struct).publish();
+	private void initializeAutonomousBuilder() {
+		NamedCommands.registerCommand("shoot", new GoToShootingStateAndShoot(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
+		NamedCommands.registerCommand("grip", new NoteToShooter().raceWith(new WaitCommand(IntakeConstants.AUTONOMOUS_GRIP_TIMEOUT)));
+		AutoBuilder.configureHolonomic(
+				SwerveChassis.getInstance()::getRobotPose2d,
+				SwerveChassis.getInstance()::resetChassisPosition,
+				SwerveChassis.getInstance()::getRobotRelativeChassisSpeeds,
+				SwerveChassis.getInstance()::moveByRobotRelativeSpeeds,
+				ChassisConstants.PATH_FOLLOWER_CONFIG,
+				() -> FMSUtils.getAlliance() == DriverStation.Alliance.Red,
+				SwerveChassis.getInstance()
+		);
+	}
+
+	private void initializeLogger() {
+		NetworkTableInstance.getDefault()
+				.getStructTopic("RobotPose", Pose2d.struct).publish();
 
         NetworkTableInstance.getDefault()
                 .getStructTopic("MechanismPoses", Pose3d.struct).publish();
@@ -151,8 +152,8 @@ public class Robot extends LoggedRobot {
         Logger.start();
     }
 
-    @Override
-    public void autonomousInit() {
+	@Override
+	public void autonomousInit() {
 //		AutonomousSelector.getInstance().getChosenValue().schedule();
-    }
+	}
 }
