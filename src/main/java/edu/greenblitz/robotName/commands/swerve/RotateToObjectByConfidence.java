@@ -11,7 +11,7 @@ public class RotateToObjectByConfidence extends ConditionalCommand {
 		super(
 				new RotateToObject(),
 				new WaitCommand(0),
-				() -> ObjectDetectionLimelight.getInstance().getTargetConfidence()
+				() -> ObjectDetectionLimelight.getInstance().isNoteConfidenceAboveThreshold()
 		);
 	}
 }

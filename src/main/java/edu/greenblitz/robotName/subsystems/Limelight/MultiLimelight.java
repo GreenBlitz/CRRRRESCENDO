@@ -23,7 +23,6 @@ public class MultiLimelight extends GBSubsystem {
         initializeLimelightPipeline();
     }
 
-
     public static MultiLimelight getInstance() {
         if (instance == null) {
             init();
@@ -38,7 +37,7 @@ public class MultiLimelight extends GBSubsystem {
     public List<Optional<Pair<Pose2d, Double>>> getAll2DEstimates() {
         ArrayList<Optional<Pair<Pose2d, Double>>> estimates = new ArrayList<>();
         for (Limelight limelight : limelights) {
-            if (limelight.hasTarget() && Math.abs(VisionConstants.APRIL_TAG_HEIGHT - limelight.getTagHeight()) < VisionConstants.APRIL_TAG_HEIGHT_TOLERANCE) {
+            if (limelight.hasTarget() && Math.abs(VisionConstants.APRIL_TAG_HEIGHT_CM - limelight.getTagHeight()) < VisionConstants.APRIL_TAG_HEIGHT_TOLERANCE_CM) {
                 estimates.add(limelight.getUpdatedPose2DEstimation());
             }
         }
@@ -46,10 +45,8 @@ public class MultiLimelight extends GBSubsystem {
     }
 
     public double getDynamicStdDevs(int limelightId) {
-        double stdDevsSum = limelights.get(limelightId).getDistanceFromTag() / VisionConstants.VISION_TO_STANDARD_DEVIATION;
-        return stdDevsSum;
+        return limelights.get(limelightId).getDistanceFromTag() / VisionConstants.VISION_TO_STANDARD_DEVIATION;
     }
-
 
     public boolean hasTarget(int limelightId) {
         return limelights.get(limelightId).hasTarget();
@@ -76,7 +73,6 @@ public class MultiLimelight extends GBSubsystem {
         Limelight limelight = new Limelight(VisionConstants.OBJECT_DETECTION_LIMELIGHT_NAME);
         return limelight.getPipeline();
     }
-
 
     public Optional<Pair<Pose2d, Double>> getFirstAvailableTarget() {
         for (Optional<Pair<Pose2d, Double>> output : getAll2DEstimates()) {

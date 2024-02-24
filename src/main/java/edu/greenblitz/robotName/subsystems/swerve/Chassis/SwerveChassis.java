@@ -1,5 +1,4 @@
 package edu.greenblitz.robotName.subsystems.swerve.Chassis;
-import edu.greenblitz.robotName.FieldConstants;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.VisionConstants;
@@ -373,7 +372,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
     private void addVisionMeasurement(Pair<Pose2d, Double> poseTimestampPair) {
         Pose2d visionPose = poseTimestampPair.getFirst();
-        if (!(visionPose.getTranslation().getDistance(SwerveChassis.getInstance().getRobotPose().getTranslation()) > VisionConstants.MIN_DISTANCE_TO_FILTER_OUT)) {
+        if (!(visionPose.getTranslation().getDistance(SwerveChassis.getInstance().getRobotPose().getTranslation()) > VisionConstants.MIN_DISTANCE_TO_FILTER_OUT_METERS)) {
             resetToVision();
         }
     }

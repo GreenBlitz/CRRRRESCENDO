@@ -30,7 +30,7 @@ public class ObjectDetectionLimelight {
         }
     }
 
-    public Pair<Double, Double> getObjectPosition() {
+    public Pair<Double, Double> getNotePosition() {
         MultiLimelight.getInstance().changePipeline(true);
         double xPosition = getNoteAbsoluteAngle();
         double yPosition = Math.abs(yNotePositionEntry.getDouble(VisionConstants.DEFAULT_NETWORKTABLE_VALUE));
@@ -46,7 +46,7 @@ public class ObjectDetectionLimelight {
         return xPosition;
     }
 
-    public boolean getTargetConfidence() {
+    public boolean isNoteConfidenceAboveThreshold() {
         double targetConfidence = confidenceNotePositionEntry.getDouble(VisionConstants.DEFAULT_NETWORKTABLE_VALUE);
         return targetConfidence >= VisionConstants.OBJECT_DETECTION_THRESHOLD;
     }
