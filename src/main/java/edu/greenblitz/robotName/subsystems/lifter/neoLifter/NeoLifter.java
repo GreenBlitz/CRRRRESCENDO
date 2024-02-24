@@ -16,7 +16,7 @@ public class NeoLifter implements ILifter {
     private TalonSRX solenoid;
 
     public NeoLifter() {
-        motor = new GBSparkMax(NeoLifterConstants.MOTOR_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        motor = new GBSparkMax(NeoLifterConstants.MOTOR_ID, CANSparkMax.MotorType.kBrushless);
         solenoid = new TalonSRX(NeoLifterConstants.SOLENOID_ID);
         motor.config(NeoLifterConstants.CONFIG);
 

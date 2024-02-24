@@ -1,15 +1,18 @@
 package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.CollectNote;
+import edu.greenblitz.robotName.commands.getNoteToSystem.EjectNote;
 import edu.greenblitz.robotName.commands.intake.NoteFromIntakeToShooter;
 import edu.greenblitz.robotName.commands.PanicMode;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
+import edu.greenblitz.robotName.commands.intake.NoteToShooter;
 import edu.greenblitz.robotName.commands.intake.ReverseRunIntake;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
+import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
@@ -24,6 +27,7 @@ import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 public class OI {
@@ -44,8 +48,13 @@ public class OI {
 		thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
 
-		initButtons();
-		initializeDefaultCommands();
+		secondJoystick.A.whileTrue(new NoteToShooter());
+		secondJoystick.B.whileTrue(new EjectNote());
+		secondJoystick.POV_UP.whileTrue(new MovePivotToAngle(Rotation2d.fromDegrees(50)));
+		secondJoystick.POV_DOWN.whileTrue(new MovePivotToAngle(Rotation2d.fromDegrees(30)));
+		secondJoystick.X.whileTrue(new MovePivotByJoystick(secondJoystick));
+//		initButtons();
+//		initializeDefaultCommands();
 	}
 
 	public static void init() {
