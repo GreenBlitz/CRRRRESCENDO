@@ -173,11 +173,17 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 
 	public void resetAllEncoders() {
+		getModule(Module.FRONT_LEFT).resetEncoderToValue(Rotation2d.fromDegrees(0));
+		getModule(Module.FRONT_RIGHT).resetEncoderToValue(Rotation2d.fromDegrees(0));
+		getModule(Module.BACK_LEFT).resetEncoderToValue(Rotation2d.fromDegrees(0));
+		getModule(Module.BACK_RIGHT).resetEncoderToValue(Rotation2d.fromDegrees(0));
+	}
+
+	public void resetAngularEncodersByAbsoluteEncoder() {
 		getModule(Module.FRONT_LEFT).resetEncoderByAbsoluteEncoder();
 		getModule(Module.FRONT_RIGHT).resetEncoderByAbsoluteEncoder();
 		getModule(Module.BACK_LEFT).resetEncoderByAbsoluteEncoder();
 		getModule(Module.BACK_RIGHT).resetEncoderByAbsoluteEncoder();
-
 	}
 
 	public Rotation2d getModuleAbsoluteEncoderAngle(Module module) {
@@ -550,6 +556,13 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
 	public void enableVision() {
 		doVision = true;
+	}
+
+	public void moveWheelsToAngleZero() {
+		frontLeft.rotateToAngle(Rotation2d.fromRadians(0));
+		frontRight.rotateToAngle(Rotation2d.fromRadians(0));
+		backLeft.rotateToAngle(Rotation2d.fromRadians(0));
+		backRight.rotateToAngle(Rotation2d.fromRadians(0));
 	}
 
 	@Override

@@ -17,7 +17,7 @@ public class GBTalonFXPro extends TalonFX {
 		super(deviceId, canbus);
 	}
 
-	public double getLatencyCompensatedValue(StatusSignal value, StatusSignal valueSlope){
+	public double getLatencyCompensatedValue(StatusSignal<Double> value, StatusSignal<Double> valueSlope){
 		return BaseStatusSignal.getLatencyCompensatedValue(value, valueSlope);
 	}
 

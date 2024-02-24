@@ -89,6 +89,10 @@ public class Pivot extends GBSubsystem {
 	public boolean isAtAngle(Rotation2d angle) {
 		return Math.abs(angle.getRadians() - getAngle().getRadians()) <= PivotConstants.TOLERANCE.getRadians();
 	}
+
+	public Rotation2d getAbsolutePosition (){
+		return pivotInputs.absoluteEncoderPosition;
+	}
 	
 	public Pose3d getSimulationPivotPosition3d() {
 		return new Pose3d(

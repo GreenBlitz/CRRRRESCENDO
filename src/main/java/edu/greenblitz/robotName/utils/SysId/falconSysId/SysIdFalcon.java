@@ -1,11 +1,13 @@
-package edu.greenblitz.robotName.utils.sysId.falconSysId;
+package edu.greenblitz.robotName.utils.SysId.falconSysId;
 
 import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.SignalLogger;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.units.Measure;
 import edu.wpi.first.units.Voltage;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -29,7 +31,10 @@ public class SysIdFalcon extends GBSubsystem {
 
     private SysIdFalcon() {
         motor = new TalonFX(SysIdFalconConstants.MOTOR_ID, SysIdFalconConstants.CANBUS_CHAIN);
-        motor.getConfigurator().apply(SysIdFalconConstants.LIMIT_SWITCH_CONFIGS);
+        motor.getConfigurator().apply(new TalonFXConfiguration());
+        motor.getConfigurator().apply(SysIdFalconConstants.SOFTWARE_LIMIT_SWITCH_CONFIGS);
+        motor.getConfigurator().apply(SysIdFalconConstants.HARDWARE_LIMIT_SWITCH_CONFIGS);
+        motor.getConfigurator().apply(SysIdFalconConstants.FEEDBACK_CONFIGS);
 
         sysIdControl = new VoltageOut(0);
 
