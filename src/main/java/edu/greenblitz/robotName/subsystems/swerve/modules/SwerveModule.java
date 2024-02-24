@@ -140,5 +140,6 @@ public class SwerveModule {
 	public double getLinVoltage() {
 		return swerveModuleInputs.linearVoltage;
 	}
+
 }
 

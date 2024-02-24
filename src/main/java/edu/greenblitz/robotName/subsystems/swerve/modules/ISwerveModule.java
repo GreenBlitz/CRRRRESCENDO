@@ -18,6 +18,7 @@ public interface ISwerveModule {
 	void setAngularIdleModeBrake(boolean isBrake);
 	
 	void resetAngle(Rotation2d angle);
+
 	
 	void stop();
 	

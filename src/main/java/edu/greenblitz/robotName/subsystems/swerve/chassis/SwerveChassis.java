@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.swerve.chassis;
 
+import com.ctre.phoenix6.controls.VoltageOut;
 import edu.greenblitz.robotName.FieldConstants;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
@@ -510,6 +511,14 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				ChassisSpeeds.fromRobotRelativeSpeeds(chassisSpeeds, getChassisAngle())
 		);
 	}
+
+	public void moveLinearSysIdByVoltage(VoltageOut voltage){
+		getModule(Module.FRONT_RIGHT).setLinearPower(voltage.Output);
+		getModule(Module.FRONT_LEFT).setLinearPower(voltage.Output);
+		getModule(Module.BACK_RIGHT).setLinearPower(voltage.Output);
+		getModule(Module.BACK_LEFT).setLinearPower(voltage.Output);
+	}
+
 
 	/**
 	 * set the idle mode of the linear motor to brake
