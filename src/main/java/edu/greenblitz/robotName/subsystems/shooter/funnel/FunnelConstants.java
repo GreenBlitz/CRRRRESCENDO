@@ -11,5 +11,4 @@ public class FunnelConstants {
 	
 	public static final Rotation2d TOLERANCE = Rotation2d.fromRotations(0.5);
 
-	public static final double NOTE_TO_SHOOTER_DELAY_TIME = 0.5;
 }
