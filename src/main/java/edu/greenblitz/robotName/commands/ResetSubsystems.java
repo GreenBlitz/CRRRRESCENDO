@@ -11,7 +11,6 @@ import edu.wpi.first.math.geometry.Rotation2d;
 
 public class ResetSubsystems extends GBCommand {
 
-
     private void resetSubsystems() {
         Pivot.getInstance().moveToAngle(PivotConstants.PresetPositions.SAFE.ANGLE);
         Elbow.getInstance().moveToAngle(Rotation2d.fromRadians(0));
