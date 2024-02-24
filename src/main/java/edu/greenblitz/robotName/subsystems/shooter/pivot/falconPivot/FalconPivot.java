@@ -82,7 +82,7 @@ public class FalconPivot implements IPivot {
 						.withLimitForwardMotion(true)
 						.withLimitReverseMotion(true)
 						.withEnableFOC(true)
-						.withOverrideBrakeDurNeutral(true)
+						.withOverrideBrakeDurNeutral(false)
 		);
 	}
 

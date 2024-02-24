@@ -27,16 +27,28 @@ public class ChassisConstants {
 	public static final double ROBOT_RADIUS = Math.sqrt(Math.pow(ROBOT_WIDTH_WITH_BUMPER / 2, 2) + Math.pow(ROBOT_LENGTH_WITH_BUMPER / 2, 2));
 	
 	static final Pose2d INITIAL_ROBOT_POSITION = new Pose2d(0, 0, new Rotation2d(0));
-	
-	public static final double FRONT_LEFT_X_POSITION = 0.3020647;
-	
-	public static final double FRONT_LEFT_Y_POSITION = 0.25265;
-	
+
+	public static final double FRONT_LEFT_X_POSITION = 0.344;
+
+	public static final double FRONT_LEFT_Y_POSITION = 0.281;
+
+	public static final double FRONT_RIGHT_X_POSITION = -0.344;
+
+	public static final double FRONT_RIGHT_Y_POSITION = 0.281;
+
+	public static final double BACK_RIGHT_X_POSITION = -0.344;
+
+	public static final double BACK_RIGHT_Y_POSITION = -0.280;
+
+	public static final double BACK_LEFT_X_POSITION = 0.344;
+
+	public static final double BACK_LEFT_Y_POSITION = -0.280;
+
 	public static final Translation2d[] SWERVE_LOCATIONS_IN_SWERVE_KINEMATICS_COORDINATES = new Translation2d[]{
 			new Translation2d(FRONT_LEFT_X_POSITION, FRONT_LEFT_Y_POSITION),
-			new Translation2d(FRONT_LEFT_X_POSITION, -FRONT_LEFT_Y_POSITION),
-			new Translation2d(-FRONT_LEFT_X_POSITION, FRONT_LEFT_Y_POSITION),
-			new Translation2d(-FRONT_LEFT_X_POSITION, -FRONT_LEFT_Y_POSITION)
+			new Translation2d(BACK_LEFT_X_POSITION, BACK_LEFT_Y_POSITION),
+			new Translation2d(FRONT_RIGHT_X_POSITION, FRONT_RIGHT_Y_POSITION),
+			new Translation2d(BACK_RIGHT_X_POSITION, BACK_RIGHT_Y_POSITION)
 	};
 	
 	public static final PIDController ROTATION_PID_CONTROLLER = new PIDController(3, 0, 0.2);

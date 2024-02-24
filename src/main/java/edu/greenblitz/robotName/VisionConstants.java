@@ -12,13 +12,13 @@ public class VisionConstants {
 			"limelight-gb"
 	};
 	
-	public static double STANDARD_DEVIATION_ODOMETRY = 1;
+	public static double STANDARD_DEVIATION_ODOMETRY = 0.1;
 	
 	public static int LIMELIGHT_ENTRY_ARRAY_LENGTH = 7;
 	
 	public static double STANDARD_DEVIATION_ODOMETRY_ANGLE = 0.01;
 	
-	public static double STANDARD_DEVIATION_VISION2D = 0.5;
+	public static double STANDARD_DEVIATION_VISION2D = 0;
 	
 	public static double STANDARD_DEVIATION_VISION_ANGLE = 0.6;
 	

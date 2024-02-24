@@ -4,7 +4,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
-import edu.greenblitz.robotName.commands.NoteToShooter;
+import edu.greenblitz.robotName.commands.intake.NoteFromIntakeToShooter;
 import edu.greenblitz.robotName.commands.shooter.ShootFromInFunnel;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingStateAndShoot;
 import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
@@ -19,6 +19,7 @@ import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
+import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.AutonomousSelector;
@@ -61,17 +62,18 @@ public class Robot extends LoggedRobot {
         }
     }
 
-    @Override
-    public void robotInit() {
-        Pathfinding.setPathfinder(new LocalADStar());
-        CommandScheduler.getInstance().enable();
-        initializeLogger();
-        initializeAutonomousBuilder();
-        initializeSubsystems();
-        SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
-        Dashboard.getInstance();
-        OI.init();
-    }
+	@Override
+	public void robotInit() {
+		Pathfinding.setPathfinder(new LocalADStar());
+		CommandScheduler.getInstance().enable();
+		initializeLogger();
+		initializeAutonomousBuilder();
+		initializeSubsystems();
+		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
+		Dashboard.getInstance();
+		OI.init();
+		Pivot.getInstance().resetAngle(PivotConstants.PresetPositions.STARTING.ANGLE);
+	}
 
     public void initializeSubsystems() {
         AutonomousSelector.getInstance();
@@ -90,11 +92,10 @@ public class Robot extends LoggedRobot {
         Intake.init();
     }
 
-    @Override
-    public void teleopInit() {
-        Dashboard.getInstance().activateDriversDashboard();
-        Pivot.getInstance().resetAngle(Pivot.getInstance().getAbsolutePosition());
-    }
+	@Override
+	public void teleopInit() {
+		Dashboard.getInstance().activateDriversDashboard();
+	}
 
     @Override
     public void robotPeriodic() {
@@ -106,7 +107,7 @@ public class Robot extends LoggedRobot {
     private void initializeAutonomousBuilder() {
         NamedCommands.registerCommand("shoot", new GoToShootingStateAndShoot(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
         NamedCommands.registerCommand("close shoot", new ShootFromInFunnel());
-        NamedCommands.registerCommand("grip", new NoteToShooter().raceWith(new WaitCommand(IntakeConstants.AUTONOMOUS_GRIP_TIMEOUT)));
+        NamedCommands.registerCommand("grip", new NoteFromIntakeToShooter().raceWith(new WaitCommand(IntakeConstants.AUTONOMOUS_GRIP_TIMEOUT)));
         AutoBuilder.configureHolonomic(
                 SwerveChassis.getInstance()::getRobotPose2d,
                 SwerveChassis.getInstance()::resetChassisPosition,
@@ -135,7 +136,8 @@ public class Robot extends LoggedRobot {
                     Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
                     System.out.println("initialized Logger, roborio");
                 }
-                Logger.addDataReceiver(new NT4Publisher());
+                Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
+				Logger.addDataReceiver(new NT4Publisher());
                 break;
             // Replaying a log, set up replay source
             case REPLAY:

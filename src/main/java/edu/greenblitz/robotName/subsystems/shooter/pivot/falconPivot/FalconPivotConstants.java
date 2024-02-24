@@ -17,7 +17,7 @@ public class FalconPivotConstants {
 	
 	public static final int ABSOLUTE_ENCODER_CHANNEL = 1;
 
-	public static final double ABSOLUTE_ENCODER_OFFSET = Units.degreesToRotations(309) - Units.degreesToRotations(16);
+	public static final double ABSOLUTE_ENCODER_OFFSET = 0.855 - Units.degreesToRotations(16);
 
 	public static final boolean INVERTED = true;
 
@@ -75,8 +75,9 @@ public class FalconPivotConstants {
 	public static final HardwareLimitSwitchConfigs HARDWARE_LIMIT_SWITCH_CONFIGS = new HardwareLimitSwitchConfigs();
 
 	static {
-		HARDWARE_LIMIT_SWITCH_CONFIGS.ReverseLimitEnable = true;
+		HARDWARE_LIMIT_SWITCH_CONFIGS.ReverseLimitEnable = false;
 		HARDWARE_LIMIT_SWITCH_CONFIGS.ReverseLimitType = ReverseLimitTypeValue.NormallyOpen;
+		HARDWARE_LIMIT_SWITCH_CONFIGS.ForwardLimitEnable = false;
 	}
 	
 	public static final TalonFXConfiguration TALON_FX_CONFIGURATION = new TalonFXConfiguration();

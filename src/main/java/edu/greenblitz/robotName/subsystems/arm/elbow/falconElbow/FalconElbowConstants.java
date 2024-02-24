@@ -11,7 +11,7 @@ import static edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants.*;
 
 public class FalconElbowConstants {
 
-    public static final int MOTOR_ID = 23;
+    public static final int MOTOR_ID = 12;
 
     public static final String CANBUS_CHAIN = RobotConstants.General.CANIVORE_NAME;
 
