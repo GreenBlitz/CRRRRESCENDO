@@ -21,7 +21,7 @@ public class EjectNote extends ProxyCommand {
         if (Roller.getInstance().isObjectIn()) {
             return new ReleaseNoteFromRoller();
         }
-        if (Intake.getInstance().getEntranceBeamBreakerValue()) {
+        if (Intake.getInstance().isObjectIn()) {
             return new ReverseRunIntake();
         }
         if (Funnel.getInstance().isObjectIn()) {

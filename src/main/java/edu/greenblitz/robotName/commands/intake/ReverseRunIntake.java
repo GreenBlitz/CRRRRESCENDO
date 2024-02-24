@@ -9,7 +9,7 @@ public class ReverseRunIntake extends IntakeCommand {
 
     @Override
     public boolean isFinished() {
-        return !intake.getEntranceBeamBreakerValue();
+        return !intake.isObjectIn();
     }
 
     @Override
