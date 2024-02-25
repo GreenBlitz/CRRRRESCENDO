@@ -2,10 +2,8 @@ package edu.greenblitz.robotName.commands.getNoteToSystem;
 
 import edu.greenblitz.robotName.ScoringModeSelector;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
-import edu.greenblitz.robotName.subsystems.arm.roller.RollerConstants;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.greenblitz.robotName.utils.GBCommand;
-import edu.wpi.first.math.geometry.Rotation2d;
 
 public class MoveNoteBetweenShooterAndArm extends GBCommand {
 
