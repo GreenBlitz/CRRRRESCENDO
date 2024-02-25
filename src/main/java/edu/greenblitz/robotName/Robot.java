@@ -64,37 +64,36 @@ public class Robot extends LoggedRobot {
 
 	@Override
 	public void robotInit() {
-//		Pathfinding.setPathfinder(new LocalADStar());
+		Pathfinding.setPathfinder(new LocalADStar());
 		CommandScheduler.getInstance().enable();
-//		initializeLogger();
-//		initializeAutonomousBuilder();
+		initializeLogger();
+		initializeAutonomousBuilder();
 		initializeSubsystems();
-//		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
-//		Dashboard.getInstance();
+		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
+		Dashboard.getInstance();
 		OI.init();
-//		Pivot.getInstance().resetAngle(PivotConstants.PresetPositions.STARTING.ANGLE);
-	}
+    }
 
     public void initializeSubsystems() {
-//        AutonomousSelector.getInstance();
-//        MultiLimelight.init();
-//        SwerveChassis.init();
-//
-//        Pivot.init();
-//        Funnel.init();
-//        FlyWheel.init();
+        AutonomousSelector.getInstance();
+        MultiLimelight.init();
+        SwerveChassis.init();
+
+        Pivot.init();
+        Funnel.init();
+        FlyWheel.init();
 
         Elbow.init();
         Wrist.init();
         Roller.init();
 
-//        Lifter.init();
-//        Intake.init();
+        Lifter.init();
+        Intake.init();
     }
 
 	@Override
 	public void teleopInit() {
-//		Dashboard.getInstance().activateDriversDashboard();
+		Dashboard.getInstance().activateDriversDashboard();
 	}
 
     @Override
