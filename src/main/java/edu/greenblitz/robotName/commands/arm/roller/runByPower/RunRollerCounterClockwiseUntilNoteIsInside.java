@@ -5,13 +5,6 @@ import edu.greenblitz.robotName.subsystems.arm.roller.RollerConstants;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public class RunRollerCounterClockwiseUntilNoteIsInside extends RollerCommand {
-
-    private Rotation2d targetPosition;
-    
-    @Override
-    public void initialize() {
-        targetPosition = roller.getAngle().plus(RollerConstants.ROTATIONS_TILL_OBJECT_ENTERED);
-    }
     
     @Override
     public void execute() {
@@ -20,12 +13,11 @@ public class RunRollerCounterClockwiseUntilNoteIsInside extends RollerCommand {
 
     @Override
     public boolean isFinished() {
-        return roller.isAtAngle(targetPosition);
+        return roller.isObjectIn();
     }
     
     @Override
     public void end(boolean interrupted) {
         super.end(interrupted);
-        roller.setObjectInside(true);
     }
 }

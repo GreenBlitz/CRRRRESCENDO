@@ -15,13 +15,10 @@ public class Roller extends GBSubsystem {
 
 	private IRoller roller;
     
-    private boolean isObjectIn;
-
     private Roller() {
         roller = RollerFactory.create();
         rollerInputs = new RollerInputsAutoLogged();
         roller.updateInputs(rollerInputs);
-        isObjectIn = false;
     }
 
     public static void init() {
@@ -76,18 +73,14 @@ public class Roller extends GBSubsystem {
     }
 
     public boolean isObjectIn() {
-        return isObjectIn;
-    }
-
-    public void setObjectInside(boolean isObjectIn) {
-        this.isObjectIn = isObjectIn;
+        return rollerInputs.isObjectIn;
     }
     
     public Rotation2d getAngle() {
         return rollerInputs.position;
     }
 
-    public boolean isAtAngle(Rotation2d targetAngle) {
+    public boolean isAtPosition(Rotation2d targetAngle) {
         return Math.abs(targetAngle.getRadians() - getAngle().getRadians()) <= RollerConstants.TOLERANCE.getRadians();
     }
 }

@@ -15,8 +15,6 @@ public class MoveNoteBetweenShooterAndArm extends GBCommand {
 
     private boolean isTargetModeSpeaker;
     
-    private Rotation2d targetRollerPosition;
-
     public MoveNoteBetweenShooterAndArm() {
         roller = Roller.getInstance();
         require(roller);
@@ -27,7 +25,6 @@ public class MoveNoteBetweenShooterAndArm extends GBCommand {
     @Override
     public void initialize() {
         isTargetModeSpeaker = ScoringModeSelector.isSpeakerMode();
-        targetRollerPosition = roller.getAngle().plus(RollerConstants.ROTATIONS_TILL_OBJECT_ENTERED);
     }
 
     @Override
@@ -43,13 +40,12 @@ public class MoveNoteBetweenShooterAndArm extends GBCommand {
 
     @Override
     public boolean isFinished() {
-        return isTargetModeSpeaker ? funnel.isObjectIn() : roller.isAtAngle(targetRollerPosition);
+        return isTargetModeSpeaker ? funnel.isObjectIn() : roller.isObjectIn();
     }
 
     @Override
     public void end(boolean interrupted) {
         funnel.stop();
         roller.stop();
-        roller.setObjectInside(!isTargetModeSpeaker);
     }
 }

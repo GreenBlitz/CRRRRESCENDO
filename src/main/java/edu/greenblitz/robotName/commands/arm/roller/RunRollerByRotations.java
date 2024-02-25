@@ -26,7 +26,7 @@ public class RunRollerByRotations extends RollerCommand {
 
     @Override
     public boolean isFinished() {
-        return roller.isAtAngle(rotations);
+        return roller.isAtPosition(rotations);
     }
 
     @Override
