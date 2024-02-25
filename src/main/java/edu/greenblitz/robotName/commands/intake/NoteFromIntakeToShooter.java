@@ -20,9 +20,9 @@ public class NoteFromIntakeToShooter extends GBCommand {
     }
 
     @Override
-    public void execute() {
-        funnel.rollIn();
-        intake.rollIn();
+    public void initialize() {
+        funnel.setVelocity(150);
+        intake.setVelocity(150);
     }
 
     @Override

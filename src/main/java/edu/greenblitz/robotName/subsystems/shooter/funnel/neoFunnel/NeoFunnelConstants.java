@@ -14,13 +14,13 @@ public class NeoFunnelConstants {
 
 	public static final boolean IS_INVERTED = true;
 	
-	public static final double kS = 0.27;
+	public static final double kS = 0.65;
 	
-	public static final double kV = 0.01025;
+	public static final double kV = 0.01;
 	
 	public static final double kA = 0.03;
 	
-	public static final double kP = 3;
+	public static final double kP = 7;
 	
 	public static final int VELOCITY_PID_SLOT = 0;
 	

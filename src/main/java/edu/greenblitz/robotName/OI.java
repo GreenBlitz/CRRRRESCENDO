@@ -65,6 +65,7 @@ public class OI {
 		secondJoystick.A.whileTrue(new RunFunnelByVelocity(300));
 		secondJoystick.B.whileTrue(new RunFunnelByVelocity(200));
 		secondJoystick.Y.whileTrue(new RunFunnelByVelocity(-200));
+		secondJoystick.POV_UP.whileTrue(new NoteToShooter());
 	}
 
 	public static void init() {
