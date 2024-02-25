@@ -8,7 +8,8 @@ public class MoveArmToIntakePosition extends ParallelCommandGroup {
 
     public MoveArmToIntakePosition(){
         super(
-                new MoveElbowAndWrist(ElbowConstants.PresetPositions.TRANSFER, WristConstants.PresetPositions.TRANSFER)
+                new MoveElbowAndWrist(ElbowConstants.PresetPositions.TRANSFER,
+                        WristConstants.PresetPositions.TRANSFER)
         );
     }
 }

@@ -12,11 +12,13 @@ public class CollectNote extends ConditionalCommand {
 
     public CollectNote() {
         super(
-                new MoveArmToIntakePosition().andThen(new NoteFromIntakeToShooter()),
+                new NoteToIntake()
+                        .andThen(new MoveArmToIntakePosition())
+                        .alongWith(new NoteFromIntakeToShooter()),
                 new NoteToIntake()
                         .alongWith(new MoveShooterToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE))
-                        .alongWith(new MoveArmToIntakePosition())
-                        .andThen(new NoteFromIntakeToShooter()),
+                        .andThen(new MoveArmToIntakePosition())
+                        .alongWith(new NoteFromIntakeToShooter()),
                 () -> Pivot.getInstance().isAtAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE)
         );
     }
