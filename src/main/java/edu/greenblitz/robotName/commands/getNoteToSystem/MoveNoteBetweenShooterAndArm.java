@@ -2,8 +2,10 @@ package edu.greenblitz.robotName.commands.getNoteToSystem;
 
 import edu.greenblitz.robotName.ScoringModeSelector;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
+import edu.greenblitz.robotName.subsystems.arm.roller.RollerConstants;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.greenblitz.robotName.utils.GBCommand;
+import edu.wpi.first.math.geometry.Rotation2d;
 
 public class MoveNoteBetweenShooterAndArm extends GBCommand {
 
@@ -12,6 +14,8 @@ public class MoveNoteBetweenShooterAndArm extends GBCommand {
     private Roller roller;
 
     private boolean isTargetModeSpeaker;
+    
+    private Rotation2d targetRollerPosition;
 
     public MoveNoteBetweenShooterAndArm() {
         roller = Roller.getInstance();
@@ -23,6 +27,7 @@ public class MoveNoteBetweenShooterAndArm extends GBCommand {
     @Override
     public void initialize() {
         isTargetModeSpeaker = ScoringModeSelector.isSpeakerMode();
+        targetRollerPosition = roller.getAngle().plus(RollerConstants.ROTATIONS_TILL_OBJECT_ENTERED);
     }
 
     @Override
@@ -38,12 +43,13 @@ public class MoveNoteBetweenShooterAndArm extends GBCommand {
 
     @Override
     public boolean isFinished() {
-        return isTargetModeSpeaker ? funnel.isObjectIn() : roller.isObjectIn();
+        return isTargetModeSpeaker ? funnel.isObjectIn() : roller.isAtAngle(targetRollerPosition);
     }
 
     @Override
     public void end(boolean interrupted) {
         funnel.stop();
         roller.stop();
+        roller.setObjectInside(!isTargetModeSpeaker);
     }
 }
