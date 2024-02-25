@@ -79,6 +79,10 @@ public class Roller extends GBSubsystem {
         return isObjectIn;
     }
 
+    public void setObjectInside(boolean isObjectIn) {
+        this.isObjectIn = isObjectIn;
+    }
+    
     public Rotation2d getAngle() {
         return rollerInputs.position;
     }

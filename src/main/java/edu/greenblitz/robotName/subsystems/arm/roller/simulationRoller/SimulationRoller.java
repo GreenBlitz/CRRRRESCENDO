@@ -24,7 +24,7 @@ public class SimulationRoller implements IRoller {
 
     public SimulationRoller() {
         rollerSimulation = new DCMotorSim(
-                DCMotor.getNEO(SimulationRollerConstants.NUMBER_OF_MOTORS),
+                DCMotor.getBag(SimulationRollerConstants.NUMBER_OF_MOTORS),
                 SimulationRollerConstants.GEAR_RATIO,
                 SimulationRollerConstants.MOMENT_OF_INERTIA
         );
