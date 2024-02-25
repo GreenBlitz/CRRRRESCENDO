@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.Limelight;
+package edu.greenblitz.robotName.subsystems.limelight;
 
 import edu.greenblitz.robotName.VisionConstants;
 import edu.greenblitz.robotName.utils.FMSUtils;
