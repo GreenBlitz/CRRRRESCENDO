@@ -57,17 +57,5 @@ public class NeoIntake implements IIntake {
 		intakeInputs.appliedOutput = motor.getAppliedOutput() * RobotConstants.SimulationConstants.BATTERY_VOLTAGE;
 		intakeInputs.velocity = motor.getEncoder().getVelocity();
 		intakeInputs.beamBreakerValue = debouncer.calculate(motor.getReverseLimitSwitch(NeoIntakeConstants.BEAM_BREAKER_TYPE).isPressed());
-		
-		SmartDashboard.putNumber("intake velocity", intakeInputs.velocity);
-		SmartDashboard.putNumber("intake voltage", intakeInputs.appliedOutput);
-		double accc = (intakeInputs.velocity - lastvel) / (RobotConstants.SimulationConstants.TIME_STEP / 60);
-		SmartDashboard.putNumber("intake acceleration", accc);
-		SmartDashboard.putNumber("intake acceleration first", intakeInputs.velocity);
-		SmartDashboard.putNumber("intake acceleration second", lastvel);
-		if (accc<=1+0.05 && accc >=1-0.05){
-			SmartDashboard.putNumber("saved", intakeInputs.appliedOutput);
-		}
-		lastvel = intakeInputs.velocity;
-
 	}
 }

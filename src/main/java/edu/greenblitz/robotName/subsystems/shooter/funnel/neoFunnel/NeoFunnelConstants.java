@@ -14,19 +14,19 @@ public class NeoFunnelConstants {
 
 	public static final boolean IS_INVERTED = true;
 	
-	public static final double kS = 0;
+	public static final double kS = 0.27;
 	
-	public static final double kV = 0;
+	public static final double kV = 0.01025;
 	
-	public static final double kA = 0;
+	public static final double kA = 0.03;
 	
-	public static final double kP = 0;
+	public static final double kP = 3;
 	
 	public static final int VELOCITY_PID_SLOT = 0;
 	
 	public static SimpleMotorFeedforward SIMPLE_MOTOR_FEED_FORWARD = new SimpleMotorFeedforward(kS, kV, kA);
 	
-	public static final PIDObject PID_CONTROLLER = new PIDObject(1, 0, 0);
+	public static final PIDObject PID_CONTROLLER = new PIDObject(kP, 0, 0);
 	
 	public static final double DEBOUNCE_TIME_FOR_LIMIT_SWITCH = 0.1;
 	
@@ -41,5 +41,6 @@ public class NeoFunnelConstants {
 			.withRampRate(RobotConstants.General.RAMP_RATE_VALUE)
 			.withCurrentLimit(CURRENT_LIMIT)
 			.withInverted(IS_INVERTED)
-			.withPID(PID_CONTROLLER);
+			.withPID(PID_CONTROLLER)
+			.withVelocityConversionFactor(1 / 5.0);
 }

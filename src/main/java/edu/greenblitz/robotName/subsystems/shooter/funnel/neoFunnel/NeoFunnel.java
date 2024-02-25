@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.subsystems.shooter.funnel.neoFunnel;
 
 import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkMax;
+import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.FunnelInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.IFunnel;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
@@ -15,7 +16,10 @@ public class NeoFunnel implements IFunnel {
 	
 	private Debouncer debouncer;
 	
+	private double lastvel;
+	
 	public NeoFunnel() {
+		SmartDashboard.putNumber("saved", 300);
 		motor = new GBSparkMax(NeoFunnelConstants.MOTOR_ID, CANSparkMax.MotorType.kBrushless);
 		motor.config(NeoFunnelConstants.FUNNEL_CONFIG_OBJECT);
 		motor.getReverseLimitSwitch(NeoFunnelConstants.BEAM_BREAKER_TYPE)
@@ -38,7 +42,7 @@ public class NeoFunnel implements IFunnel {
 		motor.getPIDController().setReference(
 				velocity,
 				CANSparkBase.ControlType.kVelocity,
-				0,
+				NeoFunnelConstants.VELOCITY_PID_SLOT,
 				NeoFunnelConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(velocity)
 		);
 	}
@@ -46,10 +50,17 @@ public class NeoFunnel implements IFunnel {
 	@Override
 	public void updateInputs(FunnelInputsAutoLogged inputs) {
 		inputs.outputCurrent = motor.getOutputCurrent();
-		inputs.appliedOutput = motor.getAppliedOutput();
+		inputs.appliedOutput = motor.getAppliedOutput() * 12;
 		inputs.velocity = motor.getEncoder().getVelocity();
 		inputs.isObjectIn = debouncer.calculate(motor.getReverseLimitSwitch(NeoFunnelConstants.BEAM_BREAKER_TYPE).isPressed());
-		SmartDashboard.putNumber("velocity in funnel", motor.getEncoder().getVelocity());
-		SmartDashboard.putNumber("voltage in funnel", motor.getAppliedOutput());
+		
+		SmartDashboard.putNumber("funnel velocity", inputs.velocity);
+		SmartDashboard.putNumber("funnel voltage", inputs.appliedOutput);
+		double accc = (inputs.velocity - lastvel) / (RobotConstants.SimulationConstants.TIME_STEP);
+		SmartDashboard.putNumber("funnel acceleration", accc);
+		if (inputs.velocity<SmartDashboard.getNumber("saved", 300)){
+			SmartDashboard.putNumber("saved", inputs.velocity);
+		}
+		lastvel = inputs.velocity;
 	}
 }

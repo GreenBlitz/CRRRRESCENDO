@@ -61,7 +61,6 @@ public class OI {
 //		initializeDefaultCommands();
 //		SysIdNeo.getInstance().buttons(secondJoystick);
 		secondJoystick.POV_DOWN.whileTrue(new RunBy());
-//		secondJoystick.A.whileTrue(new RunIntakeByJoystick(secondJoystick));
 		secondJoystick.X.whileTrue(new RunFunnelByVelocity(250));
 		secondJoystick.A.whileTrue(new RunFunnelByVelocity(300));
 		secondJoystick.B.whileTrue(new RunFunnelByVelocity(200));
