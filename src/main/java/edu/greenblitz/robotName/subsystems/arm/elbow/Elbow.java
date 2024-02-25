@@ -80,6 +80,11 @@ public class Elbow extends GBSubsystem {
         return elbowInputs.appliedOutput;
     }
 
+    public double getCurrent() {
+        return elbowInputs.outputCurrent;
+    }
+
+
     public double getVelocity() {
         return elbowInputs.velocity;
     }

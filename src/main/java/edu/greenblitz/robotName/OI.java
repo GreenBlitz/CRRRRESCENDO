@@ -3,6 +3,7 @@ package edu.greenblitz.robotName;
 import edu.greenblitz.robotName.commands.CollectNote;
 import edu.greenblitz.robotName.commands.PanicMode;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
+import edu.greenblitz.robotName.commands.arm.elbow.ResetElbow;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.intake.NoteFromIntakeToShooter;
 import edu.greenblitz.robotName.commands.intake.ReverseRunIntake;
@@ -43,9 +44,10 @@ public class OI {
 		secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
 		thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
-		
-		initButtons();
-		initializeDefaultCommands();
+
+		secondJoystick.A.whileTrue(new ResetElbow());
+//		initButtons();
+//		initializeDefaultCommands();
 	}
 	
 	public static void init() {
