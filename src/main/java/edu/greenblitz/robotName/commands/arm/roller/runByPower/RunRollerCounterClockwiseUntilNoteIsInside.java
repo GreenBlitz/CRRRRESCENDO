@@ -16,8 +16,4 @@ public class RunRollerCounterClockwiseUntilNoteIsInside extends RollerCommand {
         return roller.isObjectIn();
     }
     
-    @Override
-    public void end(boolean interrupted) {
-        super.end(interrupted);
-    }
 }

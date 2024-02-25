@@ -1,6 +1,8 @@
 package edu.greenblitz.robotName.commands.arm.roller;
 
 import edu.greenblitz.robotName.Robot;
+import edu.greenblitz.robotName.subsystems.arm.roller.RollerConstants;
+import edu.greenblitz.robotName.subsystems.arm.roller.neoRoller.NeoRollerConstants;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public class RunRollerByRotations extends RollerCommand {
@@ -29,8 +31,4 @@ public class RunRollerByRotations extends RollerCommand {
         return roller.isAtPosition(rotations);
     }
 
-    @Override
-    public void end(boolean interrupted) {
-        super.end(interrupted);
-    }
 }

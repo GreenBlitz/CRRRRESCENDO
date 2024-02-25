@@ -15,9 +15,5 @@ public class RunRollerClockwiseUntilObjectIsOut extends RollerCommand {
     public boolean isFinished() {
         return !roller.isObjectIn();
     }
-    
-    @Override
-    public void end(boolean interrupted) {
-        super.end(interrupted);
-    }
+
 }
