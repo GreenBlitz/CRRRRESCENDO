@@ -105,7 +105,8 @@ public class SystemCheck extends GBSubsystem {
                         PingableManager.getInstance().getPingableList().toArray().length + 1)
                 .withProperties(Map.of("Label position", "TOP",
                         "Number of columns", PingableManager.getInstance().getPingableList().toArray().length,
-                        "Number of rows", PingableManager.getInstance().getPingableList().toArray().length));
+                        "Number of rows", PingableManager.getInstance().getPingableList().toArray().length)
+                );
 
         int columns = 1;
         for (IPingable pingable : PingableManager.getInstance().getPingableList()) {
