@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName.commands.swerve;
 
 import edu.wpi.first.math.geometry.Rotation2d;
-
 import java.util.function.Supplier;
 
 public class RotateToAngle extends SwerveCommand {

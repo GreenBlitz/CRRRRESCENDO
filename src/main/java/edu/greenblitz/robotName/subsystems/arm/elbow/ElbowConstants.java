@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.arm.elbow;
 
+import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation3d;
@@ -20,6 +21,10 @@ public class ElbowConstants {
     }
 
     public static final double ARM_LENGTH = 0.44;
+
+    public static final double ARM_DISTANCE_FROM_CENTER = 0.1;
+
+    public static final double MAX_ARM_EXTENSION_FROM_CENTER = ARM_LENGTH + WristConstants.LENGTH_OF_ENDEFFECTOR + ARM_DISTANCE_FROM_CENTER;
 
     public static final double ARM_MASS_KG = 0.44;
 

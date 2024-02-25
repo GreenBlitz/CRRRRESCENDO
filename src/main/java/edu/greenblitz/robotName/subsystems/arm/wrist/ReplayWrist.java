@@ -26,7 +26,7 @@ public class ReplayWrist implements IWrist {
     }
 
     @Override
-    public void resetEncoder() {
+    public void resetAngleByAbsoluteEncoder() {
 
     }
 
