@@ -13,7 +13,6 @@ public class NeoIntake implements IIntake {
 
 	private Debouncer debouncer;
 
-
 	public NeoIntake() {
 		motor = new GBSparkMax(NeoIntakeConstants.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
 		motor.config(NeoIntakeConstants.INTAKE_CONFIG_OBJECT);
