@@ -43,7 +43,7 @@ public class BagRoller implements IRoller {
 	}
 	
 	public boolean isObjectInByCurrent(double current){
-		return Math.abs(current - lastInputs.outputCurrent) >= NeoRollerConstants.NOTE_IN_CURRENT
+		return current - lastInputs.outputCurrent >= NeoRollerConstants.NOTE_IN_CURRENT_JUMP
 				|| current >= NeoRollerConstants.NOTE_IN_CURRENT;
 	}
 	

@@ -10,8 +10,10 @@ public class NeoRollerConstants {
 
     public static int CURRENT_LIMIT = 40;
     
+    public static final double NOTE_IN_CURRENT_JUMP = 30;
+
     public static final double NOTE_IN_CURRENT = 30;
-    
+
     public static final GBSparkMax.SparkMaxConfObject ROLLER_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
             .withIdleMode(CANSparkMax.IdleMode.kBrake)
             .withRampRate(RobotConstants.General.RAMP_RATE_VALUE)
