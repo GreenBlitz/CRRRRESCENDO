@@ -2,13 +2,12 @@ package edu.greenblitz.robotName.subsystems.shooter.funnel.neoFunnel;
 
 import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.ControlType;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.FunnelInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.IFunnel;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
-import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.Debouncer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class NeoFunnel implements IFunnel {
 	
@@ -16,15 +15,12 @@ public class NeoFunnel implements IFunnel {
 	
 	private Debouncer debouncer;
 	
-	private PIDController pidController;
-
 	public NeoFunnel() {
 		motor = new GBSparkMax(NeoFunnelConstants.MOTOR_ID, CANSparkMax.MotorType.kBrushless);
 		motor.config(NeoFunnelConstants.FUNNEL_CONFIG_OBJECT);
 		motor.getReverseLimitSwitch(NeoFunnelConstants.BEAM_BREAKER_TYPE)
 				.enableLimitSwitch(NeoFunnelConstants.IS_BEAM_BREAKER_ENABLE);
 		debouncer = new Debouncer(NeoFunnelConstants.DEBOUNCE_TIME_FOR_LIMIT_SWITCH);
-		motor.getPIDController().setP(NeoFunnelConstants.kP, NeoFunnelConstants.VELOCITY_PID_SLOT);
 	}
 	
 	@Override
@@ -39,9 +35,8 @@ public class NeoFunnel implements IFunnel {
 	
 	@Override
 	public void setVelocity(double velocity) {
-		pidController.setSetpoint(velocity);
 		motor.getPIDController().setReference(
-				pidController.calculate(motor.getEncoder().getVelocity()),
+				velocity,
 				CANSparkBase.ControlType.kVelocity,
 				0,
 				NeoFunnelConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(velocity)
@@ -54,5 +49,7 @@ public class NeoFunnel implements IFunnel {
 		inputs.appliedOutput = motor.getAppliedOutput();
 		inputs.velocity = motor.getEncoder().getVelocity();
 		inputs.isObjectIn = debouncer.calculate(motor.getReverseLimitSwitch(NeoFunnelConstants.BEAM_BREAKER_TYPE).isPressed());
+		SmartDashboard.putNumber("velocity in funnel", motor.getEncoder().getVelocity());
+		SmartDashboard.putNumber("voltage in funnel", motor.getAppliedOutput());
 	}
 }

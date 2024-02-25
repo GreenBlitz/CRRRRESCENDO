@@ -3,6 +3,7 @@ package edu.greenblitz.robotName.subsystems.shooter.funnel.neoFunnel;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkLimitSwitch;
 import edu.greenblitz.robotName.RobotConstants;
+import edu.greenblitz.robotName.utils.PIDObject;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -25,7 +26,7 @@ public class NeoFunnelConstants {
 	
 	public static SimpleMotorFeedforward SIMPLE_MOTOR_FEED_FORWARD = new SimpleMotorFeedforward(kS, kV, kA);
 	
-	public static final PIDController PID_CONTROLLER = new PIDController(1, 0, 0);
+	public static final PIDObject PID_CONTROLLER = new PIDObject(1, 0, 0);
 	
 	public static final double DEBOUNCE_TIME_FOR_LIMIT_SWITCH = 0.1;
 	
@@ -39,5 +40,6 @@ public class NeoFunnelConstants {
 			.withIdleMode(CANSparkMax.IdleMode.kBrake)
 			.withRampRate(RobotConstants.General.RAMP_RATE_VALUE)
 			.withCurrentLimit(CURRENT_LIMIT)
-			.withInverted(IS_INVERTED);
+			.withInverted(IS_INVERTED)
+			.withPID(PID_CONTROLLER);
 }

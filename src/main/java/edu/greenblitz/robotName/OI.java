@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.CollectNote;
+import edu.greenblitz.robotName.commands.RunBy;
 import edu.greenblitz.robotName.commands.getNoteToSystem.EjectNote;
 import edu.greenblitz.robotName.commands.intake.NoteFromIntakeToShooter;
 import edu.greenblitz.robotName.commands.PanicMode;
@@ -12,6 +13,7 @@ import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
+import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByVelocity;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
@@ -50,14 +52,20 @@ public class OI {
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
 
 //		secondJoystick.A.whileTrue(new NoteToShooter());
-//		secondJoystick.B.whileTrue(new EjectNote());
+//		secondJoystick.Y.whileTrue(new EjectNote());
 //		secondJoystick.POV_UP.whileTrue(new MovePivotToAngle(Rotation2d.fromDegrees(50)));
 //		secondJoystick.POV_DOWN.whileTrue(new MovePivotToAngle(Rotation2d.fromDegrees(30)));
 //		secondJoystick.X.whileTrue(new MovePivotByJoystick(secondJoystick));
 //		secondJoystick.Y.whileTrue(new RunFunnelByJoystick(secondJoystick));
 //		initButtons();
 //		initializeDefaultCommands();
-		SysIdNeo.getInstance().buttons(secondJoystick);
+//		SysIdNeo.getInstance().buttons(secondJoystick);
+		secondJoystick.POV_DOWN.whileTrue(new RunBy());
+//		secondJoystick.A.whileTrue(new RunIntakeByJoystick(secondJoystick));
+		secondJoystick.X.whileTrue(new RunFunnelByVelocity(250));
+		secondJoystick.A.whileTrue(new RunFunnelByVelocity(300));
+		secondJoystick.B.whileTrue(new RunFunnelByVelocity(200));
+		secondJoystick.Y.whileTrue(new RunFunnelByVelocity(-200));
 	}
 
 	public static void init() {

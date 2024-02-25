@@ -6,5 +6,7 @@ public interface IIntake {
 	
 	void setVoltage(double voltage);
 	
+	void setVelocity(double velocity);
+	
 	void updateInputs(IntakeInputsAutoLogged chassisIntakeInputs);
 }
