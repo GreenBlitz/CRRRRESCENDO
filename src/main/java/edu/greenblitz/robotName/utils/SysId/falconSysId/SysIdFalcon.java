@@ -7,7 +7,6 @@ import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.units.Measure;
 import edu.wpi.first.units.Voltage;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -19,7 +18,10 @@ public class SysIdFalcon extends GBSubsystem {
 
     private static SysIdFalcon instance;
 
-    private TalonFX motor;
+    private TalonFX motorLB;
+    private TalonFX motorRB;
+    private TalonFX motorLF;
+    private TalonFX motorRF;
 
     private VoltageOut sysIdControl;
 
@@ -30,11 +32,23 @@ public class SysIdFalcon extends GBSubsystem {
     private SysIdRoutine sysIdRoutine;
 
     private SysIdFalcon() {
-        motor = new TalonFX(SysIdFalconConstants.MOTOR_ID, SysIdFalconConstants.CANBUS_CHAIN);
-        motor.getConfigurator().apply(new TalonFXConfiguration());
-        motor.getConfigurator().apply(SysIdFalconConstants.SOFTWARE_LIMIT_SWITCH_CONFIGS);
-        motor.getConfigurator().apply(SysIdFalconConstants.HARDWARE_LIMIT_SWITCH_CONFIGS);
-        motor.getConfigurator().apply(SysIdFalconConstants.FEEDBACK_CONFIGS);
+        motorLB = new TalonFX(SysIdFalconConstants.MOTOR_LB, SysIdFalconConstants.CANBUS_CHAIN);
+        motorRB = new TalonFX(SysIdFalconConstants.MOTOR_RB, SysIdFalconConstants.CANBUS_CHAIN);
+        motorLF = new TalonFX(SysIdFalconConstants.MOTOR_LF, SysIdFalconConstants.CANBUS_CHAIN);
+        motorRF = new TalonFX(SysIdFalconConstants.MOTOR_RF, SysIdFalconConstants.CANBUS_CHAIN);
+        motorLB.getConfigurator().apply(new TalonFXConfiguration());
+        motorRB.getConfigurator().apply(new TalonFXConfiguration());
+        motorLF.getConfigurator().apply(new TalonFXConfiguration());
+        motorRF.getConfigurator().apply(new TalonFXConfiguration());
+        motorLB.getConfigurator().apply(SysIdFalconConstants.a);
+        motorRB.getConfigurator().apply(SysIdFalconConstants.a);
+        motorRF.getConfigurator().apply(SysIdFalconConstants.a);
+        motorLF.getConfigurator().apply(SysIdFalconConstants.a);
+        motorLB.setInverted(false);
+        motorRB.setInverted(false);
+        motorLF.setInverted(false);
+        motorRF.setInverted(true);
+
 
         sysIdControl = new VoltageOut(0);
 
@@ -45,7 +59,7 @@ public class SysIdFalcon extends GBSubsystem {
                 (state) -> SignalLogger.writeString("state", state.toString())
         );
         mechanism = new SysIdRoutine.Mechanism(
-                (Measure<Voltage> volts) -> motor.setControl(sysIdControl.withOutput(volts.in(Volts))),
+                (Measure<Voltage> volts) -> setControl(volts),
                 null,
                 this
         );
@@ -53,14 +67,33 @@ public class SysIdFalcon extends GBSubsystem {
 
         BaseStatusSignal.setUpdateFrequencyForAll(
                 SysIdFalconConstants.SIGNAL_SPEED,
-                motor.getPosition(),
-                motor.getVelocity(),
-                motor.getMotorVoltage()
+                motorLB.getPosition(),
+                motorLB.getVelocity(),
+                motorLB.getMotorVoltage(),
+                motorRB.getPosition(),
+                motorRB.getVelocity(),
+                motorRB.getMotorVoltage(),
+                motorLF.getPosition(),
+                motorLF.getVelocity(),
+                motorLF.getMotorVoltage(),
+                motorRF.getPosition(),
+                motorRF.getVelocity(),
+                motorRF.getMotorVoltage()
         );
 
-        motor.optimizeBusUtilization();
+        motorLB.optimizeBusUtilization();
+        motorRB.optimizeBusUtilization();
+        motorLF.optimizeBusUtilization();
+        motorRF.optimizeBusUtilization();
     }
 
+    
+    public void setControl(Measure<Voltage> volts){
+        motorLB.setControl(sysIdControl.withOutput(volts.in(Volts)));
+        motorRB.setControl(sysIdControl.withOutput(volts.in(Volts)));
+        motorLF.setControl(sysIdControl.withOutput(volts.in(Volts)));
+        motorRF.setControl(sysIdControl.withOutput(volts.in(Volts)));
+    }
     public static void init() {
         if (instance == null) {
             instance = new SysIdFalcon();
