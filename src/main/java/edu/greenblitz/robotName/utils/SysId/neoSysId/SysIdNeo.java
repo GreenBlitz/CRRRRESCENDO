@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.utils.sysId.neoSysId;
+package edu.greenblitz.robotName.utils.SysId.neoSysId;
 
 import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import org.littletonrobotics.junction.Logger;
 
-import static edu.greenblitz.robotName.utils.sysId.neoSysId.SysIdNeoConstants.MOTOR_ID;
+import static edu.greenblitz.robotName.utils.SysId.neoSysId.SysIdNeoConstants.MOTOR_ID;
 import static edu.wpi.first.units.Units.Volts;
 
 public class SysIdNeo extends GBSubsystem {

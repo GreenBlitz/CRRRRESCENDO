@@ -1,7 +1,7 @@
 package edu.greenblitz.robotName.subsystems.shooter.FlyWheel.falconFlyWheel;
 
 import com.ctre.phoenix6.BaseStatusSignal;
-import com.ctre.phoenix6.controls.MotionMagicVelocityVoltage;
+import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelInputsAutoLogged;
@@ -17,21 +17,21 @@ public class FalconFlyWheel implements IFlyWheel {
 	
 	private GBTalonFXPro leftMotor;
 	
-	private MotionMagicVelocityVoltage rightMotorVelocityVoltage = new MotionMagicVelocityVoltage(0)
+	private VelocityVoltage rightMotorVelocityVoltage = new VelocityVoltage(0)
 			.withSlot(rightMotorConstants.PID_SLOT)
 			.withEnableFOC(rightMotorConstants.ENABLE_FOC),
-			leftMotorVelocityVoltage = new MotionMagicVelocityVoltage(0)
+			leftMotorVelocityVoltage = new VelocityVoltage(0)
 					.withSlot(leftMotorConstants.PID_SLOT)
 					.withEnableFOC(leftMotorConstants.ENABLE_FOC);
 	
 	public FalconFlyWheel() {
-		rightMotor = new GBTalonFXPro(rightMotorConstants.ID, rightMotorConstants.CANBUS_CHAIN);
-		rightMotor.getConfigurator().apply(rightMotorConstants.CONFIGURATION);
+		rightMotor = new GBTalonFXPro(rightMotorConstants.MOTOR_ID, rightMotorConstants.CANBUS_CHAIN);
+		rightMotor.applyConfiguration(rightMotorConstants.CONFIGURATION);
 		rightMotor.setNeutralMode(rightMotorConstants.NEUTRAL_MODE_VALUE);
 		optimizeCanBusUtilization(rightMotor);
 		
-		leftMotor = new GBTalonFXPro(leftMotorConstants.ID, leftMotorConstants.CANBUS_CHAIN);
-		leftMotor.getConfigurator().apply(leftMotorConstants.CONFIGURATION);
+		leftMotor = new GBTalonFXPro(leftMotorConstants.MOTOR_ID, leftMotorConstants.CANBUS_CHAIN);
+		leftMotor.applyConfiguration(leftMotorConstants.CONFIGURATION);
 		leftMotor.setNeutralMode(leftMotorConstants.NEUTRAL_MODE_VALUE);
 		optimizeCanBusUtilization(leftMotor);
 	}
@@ -69,12 +69,12 @@ public class FalconFlyWheel implements IFlyWheel {
 	public void updateInputs(FlyWheelInputsAutoLogged inputs) {
 		inputs.leftFlywheelCurrent = leftMotor.getSupplyCurrent().getValue();
 		inputs.leftFlywheelVoltage = leftMotor.getMotorVoltage().getValue();
-		inputs.leftFlywheelVelocity = leftMotor.getVelocity().getValue();
+		inputs.leftFlywheelVelocity = leftMotor.getLatencyCompensatedValue(leftMotor.getVelocity(), leftMotor.getAcceleration());
 		inputs.leftWheelAcceleration = leftMotor.getAcceleration().getValue();
 		
 		inputs.rightFlywheelCurrent = rightMotor.getSupplyCurrent().getValue();
 		inputs.rightFlywheelVoltage = rightMotor.getMotorVoltage().getValue();
-		inputs.rightFlywheelVelocity = rightMotor.getVelocity().getValue();
+		inputs.rightFlywheelVelocity = rightMotor.getLatencyCompensatedValue(rightMotor.getVelocity(), rightMotor.getAcceleration());
 		inputs.rightWheelAcceleration = rightMotor.getAcceleration().getValue();
 	}
 }

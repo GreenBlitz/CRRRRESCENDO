@@ -25,7 +25,7 @@ public class FalconElbow implements IElbow {
 
     public FalconElbow() {
         motor = new GBTalonFXPro(FalconElbowConstants.MOTOR_ID, FalconElbowConstants.CANBUS_CHAIN);
-        motor.getConfigurator().apply(FalconElbowConstants.TALON_FX_CONFIGURATION);
+        motor.applyConfiguration(FalconElbowConstants.TALON_FX_CONFIGURATION);
         motor.setNeutralMode(FalconElbowConstants.NEUTRAL_MODE_VALUE);
         optimizeCanBusUtilization(motor);
 
@@ -100,8 +100,8 @@ public class FalconElbow implements IElbow {
     public void updateInputs(ElbowInputsAutoLogged inputs) {
         inputs.outputCurrent = motor.getSupplyCurrent().getValue();
         inputs.appliedOutput = motor.getMotorVoltage().getValue();
-        inputs.position = Rotation2d.fromRadians(motor.getPosition().getValue());
-        inputs.velocity = motor.getVelocity().getValue();
+        inputs.position = Rotation2d.fromRotations(motor.getLatencyCompensatedValue(motor.getPosition(), motor.getVelocity()));
+        inputs.velocity = motor.getLatencyCompensatedValue(motor.getVelocity(), motor.getAcceleration());
         inputs.acceleration = motor.getAcceleration().getValue();
         inputs.absoluteEncoderPosition = absoluteEncoder.getAbsolutePosition();
         inputs.hasReachedForwardLimit = motor.getForwardLimit().getValue().value == IS_SWITCH_CLOSED;

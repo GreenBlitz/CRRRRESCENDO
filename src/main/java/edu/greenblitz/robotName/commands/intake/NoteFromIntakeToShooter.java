@@ -1,16 +1,18 @@
-package edu.greenblitz.robotName.commands;
+package edu.greenblitz.robotName.commands.intake;
 
 import edu.greenblitz.robotName.subsystems.intake.Intake;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
+import edu.greenblitz.robotName.subsystems.shooter.funnel.FunnelConstants;
 import edu.greenblitz.robotName.utils.GBCommand;
+import edu.wpi.first.wpilibj.Timer;
 
-public class NoteToShooter extends GBCommand {
+public class NoteFromIntakeToShooter extends GBCommand {
 
     private Funnel funnel;
 
     private Intake intake;
 
-    public NoteToShooter() {
+    public NoteFromIntakeToShooter() {
         funnel = Funnel.getInstance();
         intake = Intake.getInstance();
         require(intake);
