@@ -9,8 +9,6 @@ public class RollerInputs {
     public double appliedOutput;
 
     public double outputCurrent;
-
-    public boolean isObjectIn;
-
+    
     public Rotation2d position;
 }

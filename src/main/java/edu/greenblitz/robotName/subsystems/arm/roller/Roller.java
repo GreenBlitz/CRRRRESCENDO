@@ -14,11 +14,14 @@ public class Roller extends GBSubsystem {
     private RollerInputsAutoLogged rollerInputs;
 
 	private IRoller roller;
+    
+    private boolean isObjectIn;
 
     private Roller() {
         roller = RollerFactory.create();
         rollerInputs = new RollerInputsAutoLogged();
         roller.updateInputs(rollerInputs);
+        isObjectIn = false;
     }
 
     public static void init() {
@@ -73,7 +76,7 @@ public class Roller extends GBSubsystem {
     }
 
     public boolean isObjectIn() {
-        return rollerInputs.isObjectIn;
+        return isObjectIn;
     }
 
     public Rotation2d getAngle() {

@@ -17,9 +17,7 @@ public class SimulationRoller implements IRoller {
     private DCMotorSim rollerSimulation;
 
     private double appliedOutput;
-
-    private SendableChooser<Boolean> isObjectInArm;
-
+    
     private PIDController pidController;
 
     private RollerInputsAutoLogged lastInputs;
@@ -30,13 +28,7 @@ public class SimulationRoller implements IRoller {
                 SimulationRollerConstants.GEAR_RATIO,
                 SimulationRollerConstants.MOMENT_OF_INERTIA
         );
-
-        isObjectInArm = new SendableChooser<>();
-        isObjectInArm.setDefaultOption("False", false);
-        isObjectInArm.addOption("True", true);
-        SmartDashboard.putData("Is Object In Arm?", isObjectInArm);
-
-
+        
         pidController = SimulationRollerConstants.SIMULATION_PID.getPIDController();
 
         lastInputs = new RollerInputsAutoLogged();
@@ -74,7 +66,6 @@ public class SimulationRoller implements IRoller {
 
         inputs.appliedOutput = appliedOutput;
         inputs.outputCurrent = rollerSimulation.getCurrentDrawAmps();
-        inputs.isObjectIn = isObjectInArm.getSelected();
         inputs.position = Rotation2d.fromRadians(rollerSimulation.getAngularPositionRad());
 
         lastInputs = inputs;

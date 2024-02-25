@@ -13,18 +13,11 @@ public class NeoRoller implements IRoller {
 
     private GBSparkMax motor;
 
-    private Debouncer debouncer;
-
-    private DigitalInput beamBreaker;
-
     public NeoRoller() {
         motor = new GBSparkMax(NeoRollerConstants.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
 
         motor.config(NeoRollerConstants.ROLLER_CONFIG_OBJECT);
         motor.getPIDController().setFeedbackDevice(motor.getEncoder());
-
-        beamBreaker = new DigitalInput(NeoRollerConstants.BEAM_BREAKER_CHANNEL);
-        debouncer = new Debouncer(NeoRollerConstants.DEBOUNCE_TIME_FOR_LIMIT_SWITCH_IN_SECONDS);
     }
 
     @Override
@@ -54,7 +47,6 @@ public class NeoRoller implements IRoller {
     public void updateInputs(RollerInputsAutoLogged inputs) {
         inputs.outputCurrent = motor.getOutputCurrent();
         inputs.appliedOutput = motor.getAppliedOutput();
-        inputs.isObjectIn = debouncer.calculate(beamBreaker.get());
         inputs.position = Rotation2d.fromRotations(motor.getEncoder().getPosition());
     }
 }
