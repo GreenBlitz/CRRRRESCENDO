@@ -45,13 +45,9 @@ public class OI {
 		secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
 		thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
-
-		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetChassisAngle(Rotation2d.fromRadians(0))));
 		
-		
-//		initButtons();
+		initButtons();
 		initializeDefaultCommands();
-//		SysIdFalcon.getInstance().buttons(secondJoystick);
 	}
 
 	public static void init() {
@@ -114,9 +110,9 @@ public class OI {
 
 	public void initializeDefaultCommands() {
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
-//		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-//		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
-//		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
-//		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
+		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
+		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
+		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
 	}
 }

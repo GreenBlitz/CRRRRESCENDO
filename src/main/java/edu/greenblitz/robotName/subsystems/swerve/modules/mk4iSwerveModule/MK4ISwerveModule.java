@@ -12,11 +12,9 @@ import edu.greenblitz.robotName.subsystems.swerve.SwerveModuleConfigObject;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.subsystems.swerve.modules.ISwerveModule;
 import edu.greenblitz.robotName.subsystems.swerve.modules.SwerveModuleInputsAutoLogged;
-import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.greenblitz.robotName.utils.motors.GBTalonFXPro;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MK4ISwerveModule implements ISwerveModule {
 
@@ -142,9 +140,6 @@ public class MK4ISwerveModule implements ISwerveModule {
 
 		inputs.linearMetersPassed = BaseStatusSignal.getLatencyCompensatedValue(linearPositionStatusSignal, linearVelocityStatusSignal);
 		inputs.angularPositionRadians = Units.rotationsToRadians(angularPositionStatusSignal.getValue());
-		
-		SmartDashboard.putNumber("pos, "+ angularMotor.getDeviceID(), Units.radiansToDegrees(inputs.angularPositionRadians));
-		SmartDashboard.putNumber("pos, "+ angularMotor.getDeviceID(), Units.radiansToDegrees(inputs.angularPositionRadians));
 		
 		inputs.isAbsoluteEncoderConnected = canCoder.getVersion().getValue() != 0;
 
