@@ -2,6 +2,8 @@ package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.NoteToShooter;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
+import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowByJoystick;
+import edu.greenblitz.robotName.commands.arm.wrist.MoveWristByJoystick;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
@@ -74,8 +76,8 @@ public class OI {
 	public void thirdJoystickButtons() {
 		SmartJoystick usedJoystick = thirdJoystick;
 		usedJoystick.A.whileTrue(new NoteToShooter());
-		usedJoystick.B.whileTrue(new RunIntakeByJoystick(usedJoystick));
-		usedJoystick.X.whileTrue(new RunFunnelByJoystick(usedJoystick));
+		usedJoystick.B.whileTrue(new MoveElbowByJoystick(usedJoystick));
+		usedJoystick.X.whileTrue(new MoveWristByJoystick(usedJoystick));
 		usedJoystick.Y.whileTrue(new RunFlyWheelByJoystick(usedJoystick));
 		fourthJoystick.Y.whileTrue(new ShootSimulationNote());
 	}
