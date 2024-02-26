@@ -108,7 +108,7 @@ public class OI {
 		mainJoystick.L1.whileTrue(
 				new RotateToAngle( () -> ShootingStateCalculations.getTargetRobotAngle(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE.getWrapperZone()))
 		);
-		mainJoystick.A.onTrue(new InstantCommand(
+		mainJoystick.Y.onTrue(new InstantCommand(
 				() -> SwerveChassis.getInstance().resetChassisPose()
 		));
 	}
@@ -123,8 +123,8 @@ public class OI {
 		secondJoystick.POV_LEFT.whileTrue(new ReverseRunIntake());
 		secondJoystick.X.onTrue(new MovePivotToAngle(PivotConstants.PresetPositions.CLOSE_SHOOTING.ANGLE));
 		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocity(2000));
-		secondJoystick.POV_UP.whileTrue(new PushNoteToFlyWheel());
-		secondJoystick.POV_DOWN.whileTrue(new RunFunnelByPower(-0.2).deadlineWith(new WaitCommand(0.5)));
+		secondJoystick.POV_UP.whileTrue(new RunFunnelByPower(0.4));
+		secondJoystick.POV_DOWN.whileTrue(new RunFunnelByPower(-0.4));
 	}
 	
 	public void thirdJoystickButtons() {

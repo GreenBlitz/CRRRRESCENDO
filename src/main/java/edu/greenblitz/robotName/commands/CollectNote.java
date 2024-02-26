@@ -19,4 +19,5 @@ public class CollectNote extends ConditionalCommand {
                 () -> Pivot.getInstance().isAtAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE)
         );
     }
+
 }

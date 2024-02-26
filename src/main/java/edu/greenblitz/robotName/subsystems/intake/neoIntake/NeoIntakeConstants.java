@@ -19,7 +19,7 @@ public class NeoIntakeConstants {
 	public static final int CURRENT_LIMIT = 40;
 
 	public static final GBSparkMax.SparkMaxConfObject INTAKE_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
-			.withIdleMode(CANSparkMax.IdleMode.kBrake)
+			. withIdleMode(CANSparkMax.IdleMode.kBrake)
 			.withRampRate(RobotConstants.General.RAMP_RATE_VALUE)
 			.withCurrentLimit(CURRENT_LIMIT);
 }

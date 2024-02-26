@@ -134,6 +134,7 @@ public class Robot extends LoggedRobot {
                     System.out.println("initialized Logger, USB");
                 } catch (Exception e) {
                     Logger.end();
+                    Logger.addDataReceiver(new NT4Publisher());
                     Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
                     System.out.println("initialized Logger, roborio");
                 }
