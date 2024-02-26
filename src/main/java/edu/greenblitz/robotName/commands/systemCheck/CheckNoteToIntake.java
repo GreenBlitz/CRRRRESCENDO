@@ -18,7 +18,7 @@ public class CheckNoteToIntake extends SystemCheckCommand {
 
     @Override
     public boolean isFinished() {
-        return intake.getExitBeamBreakerValue();
+        return !intake.isObjectIn();
     }
 
     @Override
