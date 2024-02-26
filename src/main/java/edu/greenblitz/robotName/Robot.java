@@ -68,16 +68,16 @@ public class Robot extends LoggedRobot {
 		Pathfinding.setPathfinder(new LocalADStar());
 		CommandScheduler.getInstance().enable();
 		initializeLogger();
-		initializeAutonomousBuilder();
-		initializeSubsystems();
+//		initializeAutonomousBuilder();
+        initializeSubsystems();
 		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
 		Dashboard.getInstance();
 		OI.init();
     }
 
     public void initializeSubsystems() {
-        AutonomousSelector.getInstance();
-        MultiLimelight.init();
+//        AutonomousSelector.getInstance();
+//        MultiLimelight.init();
         SwerveChassis.init();
 
         Pivot.init();
@@ -85,13 +85,14 @@ public class Robot extends LoggedRobot {
         Funnel.init();
         FlyWheel.init();
 
-        Elbow.init();
-        Wrist.init();
-        Roller.init();
+//        Elbow.init();
+//        Elbow.getInstance().resetAngle(Rotation2d.fromDegrees(-75));
+//        Wrist.init();
+//        Roller.init();
 
-        Lifter.init();
-        Intake.init();
-    }
+//        Lifter.init();
+	}
+ 
 
 	@Override
 	public void teleopInit() {
@@ -129,6 +130,7 @@ public class Robot extends LoggedRobot {
         switch (getRobotType()) {
             // Running on a real robot, log to a USB stick
             case SYNCOPA:
+<<<<<<< HEAD
                 try {
                     Logger.addDataReceiver(new WPILOGWriter(RobotConstants.USB_LOG_PATH));
                     System.out.println("initialized Logger, USB");
@@ -139,6 +141,18 @@ public class Robot extends LoggedRobot {
                     System.out.println("initialized Logger, roborio");
                 }
                 Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
+=======
+//                try {
+//                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.USB_LOG_PATH));
+//                    System.out.println("initialized Logger, USB");
+//                } catch (Exception e) {
+//                    Logger.end();
+//                    Logger.addDataReceiver(new NT4Publisher());
+//                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
+//                    System.out.println("initialized Logger, roborio");
+//                }
+//                Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
+>>>>>>> edfb9acb6f695f7472b28fb25905e2f51ea279fd
 				Logger.addDataReceiver(new NT4Publisher());
                 break;
             // Replaying a log, set up replay source

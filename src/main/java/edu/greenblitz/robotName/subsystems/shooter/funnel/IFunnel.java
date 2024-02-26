@@ -4,6 +4,10 @@ public interface IFunnel {
 	
 	void setPower(double power);
 	
+	void setVoltage(double voltage);
+	
+	void setVelocity(double velocity);
+	
 	void updateInputs(FunnelInputsAutoLogged funnelInputs);
 	
 }

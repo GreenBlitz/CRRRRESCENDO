@@ -9,5 +9,7 @@ public class FunnelInputs {
 	
 	public double outputCurrent;
 	
+	public double velocity;
+	
 	public boolean isObjectIn;
 }
