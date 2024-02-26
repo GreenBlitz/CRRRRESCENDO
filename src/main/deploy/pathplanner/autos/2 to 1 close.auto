@@ -40,6 +40,30 @@
           "data": {
             "name": "close shoot"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "speaker to 1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "grip"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "1 to speaker"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "close shoot"
+          }
         }
       ]
     }
