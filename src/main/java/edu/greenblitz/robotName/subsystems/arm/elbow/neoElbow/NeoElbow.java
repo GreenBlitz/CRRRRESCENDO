@@ -24,8 +24,8 @@ public class NeoElbow implements IElbow {
         motor.config(NeoElbowConstants.ELBOW_CONFIG_OBJECT);
 
         motor.getPIDController().setFeedbackDevice(motor.getEncoder());
-        motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
-        motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
+        motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, false);
+        motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, false);
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, ElbowConstants.BACKWARD_ANGLE_LIMIT.getRadians());
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, ElbowConstants.FORWARD_ANGLE_LIMIT.getRadians());
         motor.getReverseLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen)

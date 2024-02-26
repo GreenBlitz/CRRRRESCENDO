@@ -64,13 +64,13 @@ public class Robot extends LoggedRobot {
 
 	@Override
 	public void robotInit() {
-		Pathfinding.setPathfinder(new LocalADStar());
+//		Pathfinding.setPathfinder(new LocalADStar());
 		CommandScheduler.getInstance().enable();
 		initializeLogger();
-		initializeAutonomousBuilder();
-		initializeSubsystems();
-		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
-		Dashboard.getInstance();
+//		initializeAutonomousBuilder();
+//		initializeSubsystems();
+//		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
+//		Dashboard.getInstance();
 		OI.init();
     }
 

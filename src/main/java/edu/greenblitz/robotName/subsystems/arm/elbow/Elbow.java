@@ -42,6 +42,8 @@ public class Elbow extends GBSubsystem {
         elbow.updateInputs(elbowInputs);
         Logger.processInputs("Elbow", elbowInputs);
         Logger.recordOutput("Elbow", getPose3D());
+
+        System.out.println(elbowInputs.outputCurrent);
     }
 
     public void setPower(double power) {
