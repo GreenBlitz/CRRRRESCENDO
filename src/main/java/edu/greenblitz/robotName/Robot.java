@@ -27,6 +27,7 @@ import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -64,13 +65,13 @@ public class Robot extends LoggedRobot {
 
 	@Override
 	public void robotInit() {
-//		Pathfinding.setPathfinder(new LocalADStar());
+		Pathfinding.setPathfinder(new LocalADStar());
 		CommandScheduler.getInstance().enable();
 		initializeLogger();
-//		initializeAutonomousBuilder();
-//		initializeSubsystems();
-//		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
-//		Dashboard.getInstance();
+		initializeAutonomousBuilder();
+		initializeSubsystems();
+		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
+		Dashboard.getInstance();
 		OI.init();
     }
 
@@ -80,6 +81,7 @@ public class Robot extends LoggedRobot {
         SwerveChassis.init();
 
         Pivot.init();
+        Pivot.getInstance().resetAngle(Rotation2d.fromDegrees(17));
         Funnel.init();
         FlyWheel.init();
 

@@ -12,6 +12,12 @@ import edu.wpi.first.math.geometry.Translation2d;
 
 public class ChassisConstants {
 
+	public static final double CURRENT_TOLERANCE = 0.5;
+
+	public static final double TRANSLATION_TOLERANCE = 0.05;
+
+	public static final Rotation2d ROTATION_TOLERANCE = Rotation2d.fromDegrees(5);
+
 	public static final double ROBOT_WIDTH_IN_METERS = 0.69;
 	
 	public static final double ROBOT_LENGTH_IN_METERS = 0.82;
