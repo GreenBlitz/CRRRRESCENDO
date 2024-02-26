@@ -3,7 +3,6 @@ package edu.greenblitz.robotName;
 import edu.greenblitz.robotName.commands.CollectNote;
 import edu.greenblitz.robotName.commands.intake.NoteFromIntakeToShooter;
 import edu.greenblitz.robotName.commands.PanicMode;
-import edu.greenblitz.robotName.commands.ScoreToScoringMode;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.intake.ReverseRunIntake;
