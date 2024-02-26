@@ -59,4 +59,8 @@ public class MultiLimelight extends GBSubsystem {
 		}
 		return Optional.empty();
 	}
+
+	public boolean isConnected() {
+		return limelights.get(0).hasTarget();
+	}
 }
