@@ -14,5 +14,7 @@ public class RollerConstants {
     
     public static final Rotation2d ROTATIONS_TILL_OBJECT_EXITED = Rotation2d.fromRotations(2);
 
+    public static final Rotation2d ROTATIONS_TILL_NOTE_IN_TRAP_POSITION = Rotation2d.fromRotations(0); // not calibrated
+
     public static final Rotation2d TOLERANCE = Rotation2d.fromRotations(0.5);
 }
