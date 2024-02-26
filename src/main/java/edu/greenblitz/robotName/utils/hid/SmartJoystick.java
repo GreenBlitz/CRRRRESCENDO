@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
  */
 public class SmartJoystick {
 	
-	private static final double DEADZONE = 0.05;
+	private static final double DEADZONE = 0.07;
 	
 	public final JoystickButton
 			A,
