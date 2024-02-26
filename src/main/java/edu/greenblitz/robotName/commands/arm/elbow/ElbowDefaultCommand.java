@@ -9,7 +9,7 @@ public class ElbowDefaultCommand extends ElbowCommand {
 
     @Override
     public void initialize() {
-        elbow.setCurrentAngle(Elbow.getInstance().getAngle());
+        elbow.setCurrentAngle(Rotation2d.fromDegrees(-50));
         elbow.standInPlace();
     }
 

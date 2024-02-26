@@ -48,7 +48,7 @@ public class MK4iSwerveConstants {
 		PID_CONFIGS.kS = ks;
 		PID_CONFIGS.kA = ka;
 		PID_CONFIGS.kV = kv;
-		PID_CONFIGS.kP = 20;
+		PID_CONFIGS.kP = 12;
 		PID_CONFIGS.kI = 0;
 		PID_CONFIGS.kD = 1;
 		

@@ -3,7 +3,9 @@ package edu.greenblitz.robotName.subsystems.intake.simulationIntake;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.intake.IIntake;
 import edu.greenblitz.robotName.subsystems.intake.IntakeInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.intake.neoIntake.NeoIntakeConstants;
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -16,6 +18,8 @@ public class SimulationIntake implements IIntake {
 	private double appliedOutput;
 	
 	private SendableChooser<Boolean> beamBreaker;
+	
+	private PIDController pidController;
 
 	public SimulationIntake() {
 		motorSimulation = new DCMotorSim(
@@ -23,6 +27,8 @@ public class SimulationIntake implements IIntake {
 				SimulationIntakeConstants.GEAR_RATIO,
 				SimulationIntakeConstants.MOMENT_OF_INERTIA
 		);
+		
+		pidController = NeoIntakeConstants.PID_CONTROLLER.getPIDController();
 		
 		beamBreaker = new SendableChooser<>();
 		beamBreaker.setDefaultOption("False", false);
@@ -43,6 +49,14 @@ public class SimulationIntake implements IIntake {
 				RobotConstants.SimulationConstants.MAX_MOTOR_VOLTAGE
 		);
 		motorSimulation.setInputVoltage(appliedOutput);
+	}
+	
+	@Override
+	public void setVelocity(double velocity) {
+		pidController.setSetpoint(velocity);
+		setVoltage(
+				pidController.calculate(motorSimulation.getAngularVelocityRPM())
+		);
 	}
 	
 	@Override

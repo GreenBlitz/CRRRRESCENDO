@@ -8,6 +8,16 @@ public class ReplayFunnel implements IFunnel {
 	}
 	
 	@Override
+	public void setVoltage(double voltage) {
+	
+	}
+	
+	@Override
+	public void setVelocity(double velocity) {
+	
+	}
+	
+	@Override
 	public void updateInputs(FunnelInputsAutoLogged funnelInputs) {
 	
 	}

@@ -9,7 +9,7 @@ public class ReverseRunIntake extends IntakeCommand {
 
     @Override
     public boolean isFinished() {
-        return !intake.isObjectIn();
+        return false;
     }
 
     @Override

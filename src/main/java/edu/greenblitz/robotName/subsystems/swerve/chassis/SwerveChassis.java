@@ -264,9 +264,9 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	private double getDiscretizedTimeStep() {
 		double timeStep = getActualTimeStep();
 		double discretizedTimeStep = timeStep * FAST_DISCRETION_CONSTANT;
-		if (DRIVE_MODE.equals(MoveByJoysticks.DriveMode.SLOW)) {
-			discretizedTimeStep = timeStep * SLOW_DISCRETION_CONSTANT;
-		}
+//		if (DRIVE_MODE.equals(MoveByJoysticks.DriveMode.SLOW)) {
+//			discretizedTimeStep = timeStep * SLOW_DISCRETION_CONSTANT;
+//		}
 		return discretizedTimeStep;
 	}
 
