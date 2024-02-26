@@ -10,10 +10,13 @@ public class SysIdFalconSwerveConstants {
 
     protected static final double DYNAMIC_VOLTAGE = 0.5;
 
-    protected static final int MOTOR_LB = 43;
-    protected static final int MOTOR_LF = 4;
-    protected static final int MOTOR_RF = 2;
-    protected static final int MOTOR_RB = 6;
+    protected static final int MOTOR_FRONT_LEFT = 4;
+
+    protected static final int MOTOR_FRONT_RIGHT = 2;
+
+    protected static final int MOTOR_BACK_LEFT = 43;
+
+    protected static final int MOTOR_BACK_RIGHT = 6;
 
     protected static final String CANBUS_CHAIN = RobotConstants.General.CANIVORE_NAME;
 
@@ -26,15 +29,17 @@ public class SysIdFalconSwerveConstants {
     static {
         FEEDBACK_CONFIGS.SensorToMechanismRatio = MK4iSwerveConstants.LINEAR_GEAR_RATIO;
     }
-    
+
     public static final CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();
+
     static {
         CURRENT_LIMITS_CONFIGS.StatorCurrentLimitEnable = true;
         CURRENT_LIMITS_CONFIGS.StatorCurrentLimit = 40;
     }
-    
+
     public static final TalonFXConfiguration a = new TalonFXConfiguration();
-    static{
+
+    static {
         a.CurrentLimits = CURRENT_LIMITS_CONFIGS;
         a.Feedback = FEEDBACK_CONFIGS;
     }

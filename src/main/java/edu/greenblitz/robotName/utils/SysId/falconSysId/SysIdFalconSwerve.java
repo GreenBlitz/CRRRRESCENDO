@@ -18,10 +18,13 @@ public class SysIdFalconSwerve extends GBSubsystem {
 
     private static SysIdFalconSwerve instance;
 
-    private TalonFX motorLB;
-    private TalonFX motorRB;
-    private TalonFX motorLF;
-    private TalonFX motorRF;
+    private TalonFX motorFrontLeft;
+
+    private TalonFX motorFrontRight;
+
+    private TalonFX motorBackLeft;
+
+    private TalonFX motorBackRight;
 
     private VoltageOut sysIdControl;
 
@@ -32,22 +35,22 @@ public class SysIdFalconSwerve extends GBSubsystem {
     private SysIdRoutine sysIdRoutine;
 
     private SysIdFalconSwerve() {
-        motorLB = new TalonFX(SysIdFalconSwerveConstants.MOTOR_LB, SysIdFalconSwerveConstants.CANBUS_CHAIN);
-        motorRB = new TalonFX(SysIdFalconSwerveConstants.MOTOR_RB, SysIdFalconSwerveConstants.CANBUS_CHAIN);
-        motorLF = new TalonFX(SysIdFalconSwerveConstants.MOTOR_LF, SysIdFalconSwerveConstants.CANBUS_CHAIN);
-        motorRF = new TalonFX(SysIdFalconSwerveConstants.MOTOR_RF, SysIdFalconSwerveConstants.CANBUS_CHAIN);
-        motorLB.getConfigurator().apply(new TalonFXConfiguration());
-        motorRB.getConfigurator().apply(new TalonFXConfiguration());
-        motorLF.getConfigurator().apply(new TalonFXConfiguration());
-        motorRF.getConfigurator().apply(new TalonFXConfiguration());
-        motorLB.getConfigurator().apply(SysIdFalconSwerveConstants.a);
-        motorRB.getConfigurator().apply(SysIdFalconSwerveConstants.a);
-        motorRF.getConfigurator().apply(SysIdFalconSwerveConstants.a);
-        motorLF.getConfigurator().apply(SysIdFalconSwerveConstants.a);
-        motorLB.setInverted(false);
-        motorRB.setInverted(false);
-        motorLF.setInverted(false);
-        motorRF.setInverted(true);
+        motorBackLeft = new TalonFX(SysIdFalconSwerveConstants.MOTOR_BACK_LEFT, SysIdFalconSwerveConstants.CANBUS_CHAIN);
+        motorBackRight = new TalonFX(SysIdFalconSwerveConstants.MOTOR_BACK_RIGHT, SysIdFalconSwerveConstants.CANBUS_CHAIN);
+        motorFrontLeft = new TalonFX(SysIdFalconSwerveConstants.MOTOR_FRONT_LEFT, SysIdFalconSwerveConstants.CANBUS_CHAIN);
+        motorFrontRight = new TalonFX(SysIdFalconSwerveConstants.MOTOR_FRONT_RIGHT, SysIdFalconSwerveConstants.CANBUS_CHAIN);
+        motorBackLeft.getConfigurator().apply(new TalonFXConfiguration());
+        motorBackRight.getConfigurator().apply(new TalonFXConfiguration());
+        motorFrontLeft.getConfigurator().apply(new TalonFXConfiguration());
+        motorFrontRight.getConfigurator().apply(new TalonFXConfiguration());
+        motorBackLeft.getConfigurator().apply(SysIdFalconSwerveConstants.a);
+        motorBackRight.getConfigurator().apply(SysIdFalconSwerveConstants.a);
+        motorFrontRight.getConfigurator().apply(SysIdFalconSwerveConstants.a);
+        motorFrontLeft.getConfigurator().apply(SysIdFalconSwerveConstants.a);
+        motorBackLeft.setInverted(false);
+        motorBackRight.setInverted(false);
+        motorFrontLeft.setInverted(false);
+        motorFrontRight.setInverted(true);
 
 
         sysIdControl = new VoltageOut(0);
@@ -67,32 +70,32 @@ public class SysIdFalconSwerve extends GBSubsystem {
 
         BaseStatusSignal.setUpdateFrequencyForAll(
                 SysIdFalconSwerveConstants.SIGNAL_SPEED,
-                motorLB.getPosition(),
-                motorLB.getVelocity(),
-                motorLB.getMotorVoltage(),
-                motorRB.getPosition(),
-                motorRB.getVelocity(),
-                motorRB.getMotorVoltage(),
-                motorLF.getPosition(),
-                motorLF.getVelocity(),
-                motorLF.getMotorVoltage(),
-                motorRF.getPosition(),
-                motorRF.getVelocity(),
-                motorRF.getMotorVoltage()
+                motorBackLeft.getPosition(),
+                motorBackLeft.getVelocity(),
+                motorBackLeft.getMotorVoltage(),
+                motorBackRight.getPosition(),
+                motorBackRight.getVelocity(),
+                motorBackRight.getMotorVoltage(),
+                motorFrontLeft.getPosition(),
+                motorFrontLeft.getVelocity(),
+                motorFrontLeft.getMotorVoltage(),
+                motorFrontRight.getPosition(),
+                motorFrontRight.getVelocity(),
+                motorFrontRight.getMotorVoltage()
         );
 
-        motorLB.optimizeBusUtilization();
-        motorRB.optimizeBusUtilization();
-        motorLF.optimizeBusUtilization();
-        motorRF.optimizeBusUtilization();
+        motorBackLeft.optimizeBusUtilization();
+        motorBackRight.optimizeBusUtilization();
+        motorFrontLeft.optimizeBusUtilization();
+        motorFrontRight.optimizeBusUtilization();
     }
 
     
     public void setControl(Measure<Voltage> volts){
-        motorLB.setControl(sysIdControl.withOutput(volts.in(Volts)));
-        motorRB.setControl(sysIdControl.withOutput(volts.in(Volts)));
-        motorLF.setControl(sysIdControl.withOutput(volts.in(Volts)));
-        motorRF.setControl(sysIdControl.withOutput(volts.in(Volts)));
+        motorBackLeft.setControl(sysIdControl.withOutput(volts.in(Volts)));
+        motorBackRight.setControl(sysIdControl.withOutput(volts.in(Volts)));
+        motorFrontLeft.setControl(sysIdControl.withOutput(volts.in(Volts)));
+        motorFrontRight.setControl(sysIdControl.withOutput(volts.in(Volts)));
     }
     public static void init() {
         if (instance == null) {
