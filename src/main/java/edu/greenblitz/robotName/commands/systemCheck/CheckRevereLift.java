@@ -25,6 +25,6 @@ public class CheckRevereLift extends SystemCheckCommand {
     @Override
     public void end(boolean interrupted) {
         super.end(interrupted);
-        lifter.stopMotor();
+        lifter.stop();
     }
 }
