@@ -2,8 +2,12 @@ package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.CollectNote;
 import edu.greenblitz.robotName.commands.PanicMode;
+import edu.greenblitz.robotName.commands.RUnBY;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
+import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
 import edu.greenblitz.robotName.commands.arm.elbow.ResetElbow;
+import edu.greenblitz.robotName.commands.arm.wrist.MoveWristByJoystick;
+import edu.greenblitz.robotName.commands.arm.wrist.MoveWristToAngle;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.intake.NoteFromIntakeToShooter;
 import edu.greenblitz.robotName.commands.intake.ReverseRunIntake;
@@ -20,11 +24,14 @@ import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
 import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
+import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
+import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 public class OI {
@@ -45,9 +52,16 @@ public class OI {
 		thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
 
-		secondJoystick.A.whileTrue(new ResetElbow());
+		secondJoystick.B.whileTrue(new RUnBY());
+		secondJoystick.R1.onTrue(new MoveWristToAngle(WristConstants.PresetPositions.SCORE));
+		secondJoystick.L1.onTrue(new MoveWristToAngle(WristConstants.PresetPositions.SAFE));
+		secondJoystick.A.whileTrue(new MoveWristToAngle(Rotation2d.fromDegrees(0)));
+		Elbow.getInstance().resetAngle(Rotation2d.fromDegrees(0));
+		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
+		secondJoystick.Y.whileTrue(new MoveWristByJoystick(secondJoystick));
+
 //		initButtons();
-//		initializeDefaultCommands();
+		initializeDefaultCommands();
 	}
 	
 	public static void init() {

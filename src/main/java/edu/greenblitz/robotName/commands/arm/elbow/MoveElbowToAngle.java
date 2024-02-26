@@ -4,6 +4,7 @@ import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MoveElbowToAngle extends ElbowCommand {
 
@@ -21,24 +22,26 @@ public class MoveElbowToAngle extends ElbowCommand {
 
     @Override
     public void initialize() {
-        isElbowCrashableIntoWall = SwerveChassis.getInstance().isRobotNearBoundsOfField();
-        if (isElbowCrashableIntoWall) {
-            elbow.setCurrentAngle();
-            elbow.standInPlace();
-        }
-        else {
-            elbow.moveToAngle(targetAngle);
-        }
+//        isElbowCrashableIntoWall = SwerveChassis.getInstance().isRobotNearBoundsOfField();
+//        if (isElbowCrashableIntoWall) {
+//            elbow.setCurrentAngle();
+//            elbow.standInPlace();
+//        }
+//        else {
+//            elbow.moveToAngle(targetAngle);
+//        }
+        elbow.moveToAngle(targetAngle);
+
     }
 
     @Override
     public void execute() {
-        if (SwerveChassis.getInstance().isRobotNearBoundsOfField()) {
-            elbowStandInPlaceAccordingToRobotType();
-        }
-        else {
-            elbowMoveToAngleAccordingToRobotType();
-        }
+//        if (SwerveChassis.getInstance().isRobotNearBoundsOfField()) {
+//            elbowStandInPlaceAccordingToRobotType();
+//        }
+//        else {
+//            elbowMoveToAngleAccordingToRobotType();
+//        }
     }
 
     private void elbowStandInPlaceAccordingToRobotType() {

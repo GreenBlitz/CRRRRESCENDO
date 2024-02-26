@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.arm.elbow.neoElbow;
 
+import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
@@ -11,11 +12,13 @@ public class NeoElbowConstants {
 
     public static final int MOTOR_ID = 5;
 
-    public static final double kS = 0;
+    public static final boolean IS_INVERTED = true;
+
+    public static final double kS = 0.18;
 
     public static final double kV = 0;
 
-    public static final double kG = 0;
+    public static final double kG = 0.15;
 
     public static final double kA = 0;
 
@@ -27,13 +30,14 @@ public class NeoElbowConstants {
 
     public static final int PID_SLOT = 0;
 
-    public static final PIDObject PID = new PIDObject().withKp(0.8).withKd(0.3).withKi(0).withMaxPower(1);
+    public static final PIDObject PID = new PIDObject().withKp(6.4).withKd(0).withKi(0).withMaxPower(1);
 
     public static final GBSparkMax.SparkMaxConfObject ELBOW_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
             .withPID(PID)
-            .withIdleMode(CANSparkMax.IdleMode.kBrake)
+            .withIdleMode(CANSparkMax.IdleMode.kCoast)
             .withRampRate(RobotConstants.General.RAMP_RATE_VALUE)
             .withPositionConversionFactor(ElbowConstants.GEAR_RATIO)
             .withVelocityConversionFactor(ElbowConstants.GEAR_RATIO)
-            .withCurrentLimit(ElbowConstants.CURRENT_LIMIT);
+            .withCurrentLimit(ElbowConstants.CURRENT_LIMIT)
+            .withInverted(IS_INVERTED);
 }

@@ -11,6 +11,7 @@ import edu.greenblitz.robotName.subsystems.arm.wrist.IWrist;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristInputsAutoLogged;
 import edu.greenblitz.robotName.utils.Conversions;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SRXWrist implements IWrist {
 
@@ -28,6 +29,7 @@ public class SRXWrist implements IWrist {
 
     @Override
     public void setPower(double power) {
+        SmartDashboard.putBoolean("aa", true);
         motor.set(TalonSRXControlMode.PercentOutput, power);
     }
 
@@ -57,6 +59,7 @@ public class SRXWrist implements IWrist {
 
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
+        SmartDashboard.putNumber("set", targetAngle.getDegrees());
         motor.set(TalonSRXControlMode.Position, targetAngle.getRotations());
     }
 
@@ -69,6 +72,8 @@ public class SRXWrist implements IWrist {
         inputs.velocity = motor.getSelectedSensorVelocity();
         inputs.hasReachedBackwardLimit = motor.isRevLimitSwitchClosed() == 1;
         inputs.hasReachedForwardLimit = motor.isFwdLimitSwitchClosed() == 1;
+
+        SmartDashboard.putNumber("wrist position", inputs.absoluteEncoderPosition.getDegrees());
     }
 
 }
