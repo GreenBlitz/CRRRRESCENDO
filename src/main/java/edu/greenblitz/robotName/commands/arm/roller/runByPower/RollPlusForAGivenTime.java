@@ -3,11 +3,11 @@ package edu.greenblitz.robotName.commands.arm.roller.runByPower;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-public class RollClockwiseForAGivenTime extends ParallelRaceGroup {
+public class RollPlusForAGivenTime extends ParallelRaceGroup {
 
-    public RollClockwiseForAGivenTime(double seconds) {
+    public RollPlusForAGivenTime(double seconds) {
         super(
-                new RollClockwise(),
+                new RollPlus(),
                 new WaitCommand(seconds)
         );
     }

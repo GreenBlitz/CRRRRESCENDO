@@ -48,11 +48,11 @@ public class Roller extends GBSubsystem {
     }
 
 
-    public void rollClockwise() {
+    public void rollPlus() {
         setPower(ROLL_FORWARD_POWER);
     }
 
-    public void rollCounterClockwise() {
+    public void rollMinus() {
         setPower(ROLL_BACKWARD_POWER);
     }
 

@@ -13,7 +13,7 @@ public class CheckRollClockwise extends SystemCheckCommand {
 
     @Override
     public void execute() {
-        roller.rollClockwise();
+        roller.rollPlus();
     }
 
     @Override
