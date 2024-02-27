@@ -36,14 +36,14 @@ public class SwerveModule {
 	public void rotateToAngle(Rotation2d angle) {
 		targetAngle = angle;
 		
-		double rotationDifferance = Math.IEEEremainder(angle.getRadians() - getModuleAngle().getRadians(), 2 * Math.PI);
+		double rotationDifferance = angle.getRadians() - getModuleAngle().getRadians();
 		rotationDifferance -= rotationDifferance > Math.PI ? 2 * Math.PI : 0;
 		
 		swerveModule.rotateToAngle(Rotation2d.fromRadians(getModuleAngle().getRadians() + rotationDifferance));
 	}
 	
 	public Rotation2d getModuleAngle() {
-		return Rotation2d.fromRadians(Math.IEEEremainder(swerveModuleInputs.angularPositionRadians, 2 * Math.PI));
+		return Rotation2d.fromRadians(swerveModuleInputs.angularPositionRadians);
 	}
 	
 	public double getCurrentVelocity() {
@@ -94,9 +94,22 @@ public class SwerveModule {
 	public boolean isAtAngle(Rotation2d errorAngleTolerance) {
 		return isAtAngle(targetAngle, errorAngleTolerance);
 	}
+
+	public static Rotation2d  calculateContinuousInputSetpoint(Rotation2d currentAngle, Rotation2d targetAngleSetpoint) {
+		double remainder = currentAngle.getRadians() % (Math.PI * 2);
+		double adjustedAngleSetpoint = targetAngleSetpoint.getRadians() + (currentAngle.getRadians() - remainder);
+		if (adjustedAngleSetpoint - currentAngle.getRadians() > Math.PI) {
+			adjustedAngleSetpoint -= Math.PI * 2;
+		} else if (adjustedAngleSetpoint - currentAngle.getRadians() < -Math.PI) {
+			adjustedAngleSetpoint += Math.PI * 2;
+		}
+
+		return Rotation2d.fromRadians(adjustedAngleSetpoint);
+	}
 	
 	public void setModuleState(SwerveModuleState moduleState) {
 		SwerveModuleState optimizedModuleState = SwerveModuleState.optimize(moduleState, getModuleAngle());
+		optimizedModuleState.angle = calculateContinuousInputSetpoint(getModuleAngle(), optimizedModuleState.angle);
 		setLinearVelocity(optimizedModuleState.speedMetersPerSecond);
 		rotateToAngle(optimizedModuleState.angle);
 	}
