@@ -4,8 +4,14 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
+import edu.greenblitz.robotName.commands.CollectNote;
 import edu.greenblitz.robotName.commands.intake.NoteFromIntakeToShooter;
+import edu.greenblitz.robotName.commands.intake.NoteToIntake;
+import edu.greenblitz.robotName.commands.intake.NoteToShooter;
+import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.shooter.ShootFromInFunnel;
+import edu.greenblitz.robotName.commands.shooter.ShootToSpeakerFromClose;
+import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.shootingState.GoToShootingStateAndShoot;
 import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
 import edu.greenblitz.robotName.subsystems.Dashboard;
@@ -105,9 +111,9 @@ public class Robot extends LoggedRobot {
     }
 
     private void initializeAutonomousBuilder() {
-        NamedCommands.registerCommand("shoot", new GoToShootingStateAndShoot(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
-        NamedCommands.registerCommand("close shoot", new ShootFromInFunnel());
-        NamedCommands.registerCommand("grip", new NoteFromIntakeToShooter().raceWith(new WaitCommand(IntakeConstants.AUTONOMOUS_GRIP_TIMEOUT)));
+        NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
+        NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
+        NamedCommands.registerCommand("grip",(new NoteToShooter()));
         AutoBuilder.configureHolonomic(
                 SwerveChassis.getInstance()::getRobotPose2d,
                 SwerveChassis.getInstance()::resetChassisPosition,

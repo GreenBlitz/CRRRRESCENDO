@@ -32,7 +32,7 @@ public class RunFlyWheelByVelocity extends FlyWheelCommand {
         if (Robot.isSimulation()) {
             flyWheel.setVelocity(leftWheelVelocity, rightWheelVelocity);
         }
-        if (flyWheel.isAtVelocity(rightWheelVelocity, leftWheelVelocity)) {
+        if (flyWheel.isAtVelocity(leftWheelVelocity, rightWheelVelocity)) {
             timeInShootingSpeed++;
         } else {
             timeInShootingSpeed = 0;
