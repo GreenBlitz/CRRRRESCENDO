@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.385354324682553,
-      "y": 5.57998439840296
+      "x": 0.708089344106616,
+      "y": 4.354255194996877
     },
-    "rotation": 180.0
+    "rotation": 119.98163936884933
   },
   "command": {
     "type": "sequential",
@@ -20,7 +20,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "speaker start to 2"
+            "pathName": "speaker to 3"
           }
         },
         {
@@ -32,7 +32,31 @@
         {
           "type": "path",
           "data": {
-            "pathName": "2 to speaker"
+            "pathName": "3 to speaker"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "close shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "speaker to 8"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "grip"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "8 to speaker"
           }
         },
         {
