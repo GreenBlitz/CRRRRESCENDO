@@ -12,6 +12,6 @@ public class RunRollerClockwiseUntilObjectIsOut extends RollerCommand {
 
     @Override
     public boolean isFinished() {
-        return !Funnel.getInstance().isObjectIn();
+        return !roller.isObjectIn();
     }
 }
