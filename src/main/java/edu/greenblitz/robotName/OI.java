@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName;
 
-import edu.greenblitz.robotName.commands.CollectNote;
+import edu.greenblitz.robotName.commands.CollectNoteFromGround;
+import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
 import edu.greenblitz.robotName.commands.intake.*;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocity;
@@ -20,6 +21,7 @@ import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 public class OI {
@@ -42,6 +44,8 @@ public class OI {
 
 		initButtons();
 		initializeDefaultCommands();
+		setFourthJoystick();
+		shchoriButtons();
 	}
 
 	public static void init() {
@@ -77,7 +81,7 @@ public class OI {
 	}
 
 	public void romyButtons() {
-		mainJoystick.R1.whileTrue(new CollectNote());
+		mainJoystick.R1.whileTrue(new CollectNoteFromGround());
 		mainJoystick.L1.whileTrue(new MoveRobotToShootingPosition(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
 		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetPoseByVision()));
 
@@ -114,8 +118,16 @@ public class OI {
 		fourthJoystick.Y.whileTrue(new ShootSimulationNote());
 	}
 
+	public void setFourthJoystick(){
+		SmartJoystick usedJoystick = fourthJoystick;
+		usedJoystick.B.whileTrue(new CollectNoteFromFeeder());
+		usedJoystick.A.whileTrue(new CollectNoteFromGround());
+		usedJoystick.R1.onTrue(new InstantCommand(() -> SmartDashboard.putNumber("Pivot angleee", Pivot.getInstance().getAngle().getDegrees())));
+		usedJoystick.Y.whileTrue(new MovePivotByJoystick(usedJoystick, SmartJoystick.Axis.LEFT_Y));
+	}
+
 	public void initializeDefaultCommands() {
-		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+//		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
 //		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
 //		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
 		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
