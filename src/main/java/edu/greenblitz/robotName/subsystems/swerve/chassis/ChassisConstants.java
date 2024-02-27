@@ -65,7 +65,7 @@ public class ChassisConstants {
 	
 	public static final double MAX_ANGULAR_ACCELERATION = 4;
 	
-	public static final double FAST_DISCRETION_CONSTANT = 8;
+	public static final double FAST_DISCRETION_CONSTANT = 1;
 	
 	public static final double SLOW_DISCRETION_CONSTANT = FAST_DISCRETION_CONSTANT / 2;
 	
@@ -77,7 +77,7 @@ public class ChassisConstants {
 	
 	public static final double DRIVER_LINEAR_SPEED_FACTOR_SLOW = 0.5;
 	
-	public static final boolean ANGULAR_JOYSTICK_INVERTED = true;
+	public static final boolean ANGULAR_JOYSTICK_INVERTED = false;
 	
 	public static final boolean LINEAR_JOYSTICK_INVERTED = false;
 	
@@ -115,5 +115,5 @@ public class ChassisConstants {
 	
 	public static final boolean IS_JOYSTICK_FORWARD_VALUE_INVERTED = false;
 	
-	public static final boolean IS_JOYSTICK_LEFTWARD_VALUE_INVERTED = true;
+	public static final boolean IS_JOYSTICK_LEFTWARD_VALUE_INVERTED = false;
 }
