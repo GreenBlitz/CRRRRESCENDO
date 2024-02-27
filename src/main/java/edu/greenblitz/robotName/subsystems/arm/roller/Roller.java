@@ -50,7 +50,6 @@ public class Roller extends GBSubsystem {
 
 
     public void rollClockwise() {
-        SmartDashboard.putNumber("ahshs", 1);
         setPower(ROLL_FORWARD_POWER);
     }
 
