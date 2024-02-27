@@ -1,10 +1,11 @@
 package edu.greenblitz.robotName;
 
-import edu.greenblitz.robotName.commands.CollectNoteFromGround;
+import edu.greenblitz.robotName.commands.intake.CollectNoteFromGround;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
 import edu.greenblitz.robotName.commands.intake.*;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocity;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityWithoutIsFinished;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
@@ -96,7 +97,7 @@ public class OI {
 		secondJoystick.B.whileTrue(new RunIntakeByPower(-0.4));
 
 		//FlyWheel Run
-		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocity(100));
+		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityWithoutIsFinished(100));
 
 		//Pivot Poses
 		secondJoystick.POV_UP.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.RIGHT_STAGE.ANGLE));
@@ -127,9 +128,9 @@ public class OI {
 	}
 
 	public void initializeDefaultCommands() {
-//		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-//		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
-//		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
+		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
+		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
 		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
 	}
 }

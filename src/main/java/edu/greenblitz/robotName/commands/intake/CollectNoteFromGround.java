@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.commands;
+package edu.greenblitz.robotName.commands.intake;
 
 import edu.greenblitz.robotName.commands.intake.NoteFromIntakeToShooter;
 import edu.greenblitz.robotName.commands.intake.NoteToIntake;

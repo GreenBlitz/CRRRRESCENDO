@@ -42,7 +42,7 @@ public class RunFlyWheelByVelocity extends FlyWheelCommand {
 
     @Override
     public boolean isFinished() {
-        return false;
+        return flyWheel.getPreparedToShoot();
     }
     
     @Override
