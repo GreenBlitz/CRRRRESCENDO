@@ -33,8 +33,8 @@ public class MK4ISwerveModule implements ISwerveModule {
 
 	public VelocityVoltage velocityVoltage = new VelocityVoltage(0).withEnableFOC(true);
 
-	public PositionVoltage positionVoltage = new PositionVoltage(0).withEnableFOC(true);
-
+	public PositionVoltage positionVoltage = new PositionVoltage(0).withEnableFOC(false);
+	
 	public MK4ISwerveModule(SwerveChassis.Module module) {
 
 		SwerveModuleConfigObject configObject = switch (module) {
@@ -140,7 +140,7 @@ public class MK4ISwerveModule implements ISwerveModule {
 
 		inputs.linearMetersPassed = BaseStatusSignal.getLatencyCompensatedValue(linearPositionStatusSignal, linearVelocityStatusSignal);
 		inputs.angularPositionRadians = Units.rotationsToRadians(angularPositionStatusSignal.getValue());
-
+		
 		inputs.isAbsoluteEncoderConnected = canCoder.getVersion().getValue() != 0;
 
 		if (Double.isNaN(canCoder.getAbsolutePosition().getValue())) {

@@ -46,10 +46,8 @@ public class OI {
 		thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
 
-
-		secondJoystick.POV_DOWN.whileTrue(new NoteToShooter());
-//		initButtons();
-//		initializeDefaultCommands();
+		initButtons();
+		initializeDefaultCommands();
 	}
 
 	public static void init() {

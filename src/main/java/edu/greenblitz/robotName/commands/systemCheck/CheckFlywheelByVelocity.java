@@ -1,24 +1,22 @@
-package edu.greenblitz.robotName.commands.shooter.flyWheel;
+package edu.greenblitz.robotName.commands.systemCheck;
 
 import edu.greenblitz.robotName.Robot;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 
-public class RunFlyWheelByVelocity extends FlyWheelCommand {
+public class CheckFlywheelByVelocity extends SystemCheckCommand {
+
+    protected FlyWheel flyWheel;
 
     private int timeInShootingSpeed;
 
-    double rightWheelVelocity;
+    private final double rightWheelVelocity = FlyWheelConstants.SHOOTING_VELOCITY;
 
-    double leftWheelVelocity;
+    private final double leftWheelVelocity = FlyWheelConstants.SHOOTING_VELOCITY * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR;
 
-    public RunFlyWheelByVelocity(double velocity) {
-        rightWheelVelocity = velocity;
-        leftWheelVelocity = velocity * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR;
-    }
-
-    protected void changeVelocity(double velocity) {
-        rightWheelVelocity = velocity;
-        leftWheelVelocity = velocity * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR;
+    public CheckFlywheelByVelocity() {
+        flyWheel = FlyWheel.getInstance();
+        require(flyWheel);
     }
 
     @Override
@@ -44,9 +42,10 @@ public class RunFlyWheelByVelocity extends FlyWheelCommand {
     public boolean isFinished() {
         return flyWheel.getPreparedToShoot();
     }
-    
+
     @Override
     public void end(boolean interrupted) {
+        super.end(interrupted);
         flyWheel.stop();
     }
 }
