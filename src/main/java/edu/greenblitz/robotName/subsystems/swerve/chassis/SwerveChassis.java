@@ -282,6 +282,25 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		return TIME_STEP;
 	}
 
+	public SwerveModuleState calculateStateWithContinuousInput(SwerveModuleState originalState) {
+		SwerveModuleState adjustedState;
+		if (originalState.angle.getRadians() > Math.PI)
+			adjustedState = new SwerveModuleState(originalState.speedMetersPerSecond, originalState.angle.minus(Rotation2d.fromRadians(Math.PI*2)));
+		else if (originalState.angle.getRadians() < -Math.PI)
+			adjustedState = new SwerveModuleState(originalState.speedMetersPerSecond, originalState.angle.plus(Rotation2d.fromRadians(Math.PI*2)));
+		else
+			adjustedState = new SwerveModuleState(originalState.speedMetersPerSecond, originalState.angle);
+		return adjustedState;
+	}
+
+	public SwerveModuleState[] calculateStatesWithContinuousInput(SwerveModuleState[] originalStates) {
+		SwerveModuleState[] calculatedStates = new SwerveModuleState[originalStates.length];
+		for (int i = 0; i < originalStates.length; i++) {
+			calculatedStates[i] = calculateStateWithContinuousInput(originalStates[i]);
+		}
+		return calculatedStates;
+	}
+
 	public void moveByChassisSpeeds(double forwardSpeed, double leftwardSpeed, double angSpeed, Rotation2d currentAng) {
 		ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
 				forwardSpeed,
@@ -292,7 +311,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
 		SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
 		SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
-		setModuleStates(desaturatedStates);
+		SwerveModuleState[] calculatedStates = calculateStatesWithContinuousInput(desaturatedStates);
+		setModuleStates(calculatedStates);
 	}
 
 	public void moveByChassisSpeeds(ChassisSpeeds fieldRelativeSpeeds, Rotation2d currentAng) {
