@@ -6,5 +6,5 @@ public class IntakeConstants {
 
 	public static final double POWER_TO_REVERSE_RUN = -POWER_TO_RUN;
 
-	public static final double AUTONOMOUS_GRIP_TIMEOUT = 1;
+	public static final double AUTONOMOUS_GRIP_TIMEOUT = 3;
 }

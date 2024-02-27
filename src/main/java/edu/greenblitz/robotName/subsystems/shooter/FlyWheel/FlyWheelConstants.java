@@ -8,7 +8,7 @@ public class FlyWheelConstants {
 	
 	public static final double EPSILON_RPM = 50;
 	
-	public static final double MINIMUM_SHOOTING_SPEED_TIME_ROBORIO_CYCLES = 50;
+	public static final double MINIMUM_SHOOTING_SPEED_TIME_ROBORIO_CYCLES = 7;
 	
 	public static final double SHOOTING_POWER = 0.9;
 	
@@ -40,5 +40,5 @@ public class FlyWheelConstants {
 	
 	public static final double LEFT_SHOOTING_POWER_CONVERSION_FACTOR = 0.8;
 	
-	public static final double DELAY_SECONDS_UNTIL_EXIT = 1;
+	public static final double DELAY_SECONDS_UNTIL_EXIT = 0.5;
 }
