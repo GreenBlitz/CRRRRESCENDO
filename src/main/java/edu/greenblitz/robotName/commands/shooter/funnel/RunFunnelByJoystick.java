@@ -7,13 +7,17 @@ public class RunFunnelByJoystick extends FunnelCommand {
 
     private SmartJoystick joystick;
 
-    public RunFunnelByJoystick(SmartJoystick joystick) {
+    private SmartJoystick.Axis axis;
+
+    public RunFunnelByJoystick(SmartJoystick joystick, SmartJoystick.Axis axis) {
         super();
         this.joystick = joystick;
+        this.axis = axis;
     }
 
     @Override
     public void execute() {
-        funnel.setPower(joystick.getAxisValue(SmartJoystick.Axis.LEFT_X) * RobotConstants.General.SAFETY_POWER_CONVERSION_FACTOR);
+        funnel.setPower(joystick.getAxisValue(axis) * RobotConstants.General.SAFETY_POWER_CONVERSION_FACTOR);
     }
+
 }
