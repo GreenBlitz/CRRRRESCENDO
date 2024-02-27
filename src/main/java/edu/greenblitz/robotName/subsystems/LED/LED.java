@@ -139,10 +139,7 @@ public class LED extends GBSubsystem {
 	}
 	
 	public void restartTimerByNoteState(){
-		if (getWasNoteInRobot() && !isNoteInRobot()) {
-			actionTimer.restart();
-		}
-		else if (!getWasNoteInRobot() && isNoteInRobot()) {
+		if (getWasNoteInRobot() != isNoteInRobot()) {
 			actionTimer.restart();
 		}
 	}
