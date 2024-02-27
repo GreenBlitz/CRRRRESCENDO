@@ -61,7 +61,6 @@ public class Dashboard extends GBSubsystem {
 		
 		
 		//field
-		driversTab.addDouble("ll",() -> MultiLimelight.getInstance().getAll2DEstimates().size());
 		driversTab.add("Field", SwerveChassis.getInstance().getField()).withPosition(5, 2).withSize(3, 2);
 		driversTab.addDouble("std devs", () -> MultiLimelight.getInstance().getDynamicStdDevs(0));
 	}
