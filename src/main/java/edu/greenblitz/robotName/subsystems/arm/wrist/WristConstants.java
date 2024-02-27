@@ -9,7 +9,8 @@ public class WristConstants {
         STARTING(Rotation2d.fromDegrees(90)),
         SCORE(Rotation2d.fromDegrees(-45)),
         TRANSFER(Rotation2d.fromDegrees(180)),
-        SAFE(TRANSFER.ANGLE);
+        SAFE(TRANSFER.ANGLE),
+        SCORE_CLIMB(Rotation2d.fromDegrees()); //find
 
         public final Rotation2d ANGLE;
 

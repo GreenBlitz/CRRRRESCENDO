@@ -8,6 +8,10 @@ import edu.wpi.first.math.geometry.Translation3d;
 
 public class LifterConstants {
 
+    public static final double POWER_TO_RELEASE_LIFTER = 0.3; //find
+
+    public static final double TIME_TO_RELEASE_LIFTER = 0.2; //find
+
     public static final Translation3d ROBOT_RELATIVE_LIFTER_POSITION = new Translation3d(-0.24, 0, 0.35);
 
     public static final Rotation3d ROBOT_RELATIVE_LIFTER_ROTATION = new Rotation3d(0, Math.PI, -Math.PI / 2);

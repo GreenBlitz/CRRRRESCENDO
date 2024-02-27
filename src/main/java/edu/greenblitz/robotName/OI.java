@@ -97,6 +97,11 @@ public class OI {
 		secondJoystick.R1.whileTrue(new CollectNote());
 		secondJoystick.A.whileTrue(new PanicMode());
 		secondJoystick.POV_LEFT.whileTrue(new ReverseRunIntake());
+
+		//getToClimbPosiiton
+		//RetractLifter or and then ScoreToTrap
+		//ScoreToTrap
+		//ReleaseNoteFromRoller
 	}
 
 	public void thirdJoystickButtons() {
