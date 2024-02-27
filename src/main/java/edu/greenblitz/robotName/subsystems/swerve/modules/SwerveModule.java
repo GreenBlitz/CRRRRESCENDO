@@ -44,7 +44,6 @@ public class SwerveModule {
 	
 	public Rotation2d getModuleAngle() {
 		return Rotation2d.fromRadians(swerveModuleInputs.angularPositionRadians);
-		//return Rotation2d.fromRadians(Math.IEEEremainder(swerveModuleInputs.angularPositionRadians, 2 * Math.PI));
 	}
 	
 	public double getCurrentVelocity() {
