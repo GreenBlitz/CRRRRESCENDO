@@ -20,7 +20,7 @@ public class NeoFunnelConstants {
 	
 	public static final double kA = 0.03;
 	
-	public static final double kP = 1;
+	public static final double kP = 3;
 	
 	public static final double kI = 30;
 	

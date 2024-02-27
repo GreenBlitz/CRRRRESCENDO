@@ -86,7 +86,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				this.kinematics,
 				getGyroAngle(),
 				getSwerveModulePositions(),
-				new Pose2d(),
+				visionPoseStartMatch(),
 				fill(
 						VisionConstants.STANDARD_DEVIATION_ODOMETRY,
 						VisionConstants.STANDARD_DEVIATION_ODOMETRY,
@@ -213,7 +213,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 
 	public Pose2d visionPoseStartMatch() {
-		if (MultiLimelight.getInstance().hasTarget(1) || MultiLimelight.getInstance().hasTarget(0)) {
+		if (MultiLimelight.getInstance().getFirstAvailableTarget().isPresent()) {
 			return MultiLimelight.getInstance().getFirstAvailableTarget().get().getFirst();
 		} else {
 			return new Pose2d();
@@ -289,7 +289,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				angSpeed,
 				currentAng
 		);
-		chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
+//		chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
 		SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
 		SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
 		setModuleStates(desaturatedStates);
