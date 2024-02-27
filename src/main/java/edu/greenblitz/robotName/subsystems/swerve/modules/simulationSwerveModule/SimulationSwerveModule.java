@@ -109,7 +109,7 @@ public class SimulationSwerveModule implements ISwerveModule {
 		inputs.angularCurrent = angularMotor.getCurrentDrawAmps();
 
 		inputs.linearMetersPassed = linearMotor.getAngularPositionRad() * MK4iSwerveConstants.WHEEL_RADIUS;
-		inputs.angularPositionRadians = Math.IEEEremainder(angularMotor.getAngularPositionRad(), 2 * Math.PI);
+		inputs.angularPositionRadians = angularMotor.getAngularPositionRad();
 
 		inputs.absoluteEncoderPosition = inputs.angularPositionRadians;
 		inputs.isAbsoluteEncoderConnected = true;
