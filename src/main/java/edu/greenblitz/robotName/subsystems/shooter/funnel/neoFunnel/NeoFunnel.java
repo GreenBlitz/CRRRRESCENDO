@@ -15,11 +15,8 @@ public class NeoFunnel implements IFunnel {
 	private GBSparkMax motor;
 	
 	private Debouncer debouncer;
-	
-	private double lastvel;
-	
+
 	public NeoFunnel() {
-		SmartDashboard.putNumber("saved", 300);
 		motor = new GBSparkMax(NeoFunnelConstants.MOTOR_ID, CANSparkMax.MotorType.kBrushless);
 		motor.config(NeoFunnelConstants.FUNNEL_CONFIG_OBJECT);
 		motor.getReverseLimitSwitch(NeoFunnelConstants.BEAM_BREAKER_TYPE)
@@ -53,14 +50,5 @@ public class NeoFunnel implements IFunnel {
 		inputs.appliedOutput = motor.getAppliedOutput() * 12;
 		inputs.velocity = motor.getEncoder().getVelocity();
 		inputs.isObjectIn = debouncer.calculate(motor.getReverseLimitSwitch(NeoFunnelConstants.BEAM_BREAKER_TYPE).isPressed());
-		
-		SmartDashboard.putNumber("funnel velocity", inputs.velocity);
-		SmartDashboard.putNumber("funnel voltage", inputs.appliedOutput);
-		double accc = (inputs.velocity - lastvel) / (RobotConstants.SimulationConstants.TIME_STEP);
-		SmartDashboard.putNumber("funnel acceleration", accc);
-		if (inputs.velocity<SmartDashboard.getNumber("saved", 300)){
-			SmartDashboard.putNumber("saved", inputs.velocity);
-		}
-		lastvel = inputs.velocity;
 	}
 }

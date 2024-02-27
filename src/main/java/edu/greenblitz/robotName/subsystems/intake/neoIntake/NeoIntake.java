@@ -17,9 +17,7 @@ public class NeoIntake implements IIntake {
 
 	private Debouncer debouncer;
 
-	private double lastvel;
 	public NeoIntake() {
-		lastvel = 0;
 		motor = new GBSparkMax(NeoIntakeConstants.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
 		motor.config(NeoIntakeConstants.INTAKE_CONFIG_OBJECT);
 		
@@ -54,9 +52,8 @@ public class NeoIntake implements IIntake {
 	@Override
 	public void updateInputs(IntakeInputsAutoLogged intakeInputs) {
 		intakeInputs.outputCurrent = motor.getOutputCurrent();
-		intakeInputs.appliedOutput = motor.getAppliedOutput() * RobotConstants.SimulationConstants.BATTERY_VOLTAGE;
+		intakeInputs.appliedOutput = motor.getAppliedOutput();
 		intakeInputs.velocity = motor.getEncoder().getVelocity();
 		intakeInputs.beamBreakerValue = debouncer.calculate(motor.getReverseLimitSwitch(NeoIntakeConstants.BEAM_BREAKER_TYPE).isPressed());
-		SmartDashboard.putBoolean("bb intake", intakeInputs.beamBreakerValue);
 	}
 }

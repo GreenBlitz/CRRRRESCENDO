@@ -30,10 +30,12 @@ public class NeoIntakeConstants {
 
 	public static final int CURRENT_LIMIT = 40;
 
+	public static final double GEAR_RATIO = 1 / 10.0;
+
 	public static final GBSparkMax.SparkMaxConfObject INTAKE_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
 			.withIdleMode(CANSparkMax.IdleMode.kBrake)
 			.withRampRate(RobotConstants.General.RAMP_RATE_VALUE)
 			.withCurrentLimit(CURRENT_LIMIT)
 			.withPID(PID_CONTROLLER)
-			.withVelocityConversionFactor(1 / 10.0);
+			.withVelocityConversionFactor(GEAR_RATIO);
 }

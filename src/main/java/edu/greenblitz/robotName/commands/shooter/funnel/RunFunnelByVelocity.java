@@ -22,12 +22,6 @@ public class RunFunnelByVelocity extends FunnelCommand {
 		funnel.setVelocity(velocity);
 	}
 	
-	
-	@Override
-	public void execute() {
-		SmartDashboard.putString("calculation", NeoFunnelConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(velocity)+", "+velocity);
-	}
-	
 	@Override
 	public void end(boolean interrupted) {
 		funnel.stop();

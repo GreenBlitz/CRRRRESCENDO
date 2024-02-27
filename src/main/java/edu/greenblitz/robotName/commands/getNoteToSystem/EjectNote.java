@@ -18,9 +18,9 @@ public class EjectNote extends ProxyCommand {
     }
 
     private static Command getCommand() {
-//        if (Roller.getInstance().isObjectIn()) {
-//            return new ReleaseNoteFromRoller();
-//        }
+        if (Roller.getInstance().isObjectIn()) {
+            return new ReleaseNoteFromRoller();
+        }
         if (Intake.getInstance().isObjectIn()) {
             return new ReverseRunIntake();
         }

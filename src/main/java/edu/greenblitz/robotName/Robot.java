@@ -67,35 +67,35 @@ public class Robot extends LoggedRobot {
 		Pathfinding.setPathfinder(new LocalADStar());
 		CommandScheduler.getInstance().enable();
 		initializeLogger();
-//		initializeAutonomousBuilder();
+		initializeAutonomousBuilder();
 		initializeSubsystems();
-//		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
-//		Dashboard.getInstance();
+		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
+		Dashboard.getInstance();
 		OI.init();
-//		Pivot.getInstance().resetAngle(PivotConstants.PresetPositions.STARTING.ANGLE);
+		Pivot.getInstance().resetAngle(PivotConstants.PresetPositions.STARTING.ANGLE);
 	}
 
     public void initializeSubsystems() {
-//        AutonomousSelector.getInstance();
-//        MultiLimelight.init();
-//        SwerveChassis.init();
-//
-//        Pivot.init();
-//        Funnel.init();
-//        FlyWheel.init();
-//
-//        Elbow.init();
-//        Wrist.init();
-//        Roller.init();
-//
-//        Lifter.init();
+        AutonomousSelector.getInstance();
+        MultiLimelight.init();
+        SwerveChassis.init();
+
+        Pivot.init();
+        Funnel.init();
+        FlyWheel.init();
+
+        Elbow.init();
+        Wrist.init();
+        Roller.init();
+
+        Lifter.init();
         Intake.init();
     }
 
-//	@Override
-//	public void teleopInit() {
-//		Dashboard.getInstance().activateDriversDashboard();
-//	}
+	@Override
+	public void teleopInit() {
+		Dashboard.getInstance().activateDriversDashboard();
+	}
 
     @Override
     public void robotPeriodic() {
@@ -155,8 +155,8 @@ public class Robot extends LoggedRobot {
         Logger.start();
     }
 
-//    @Override
-//    public void autonomousInit() {
-//        AutonomousSelector.getInstance().getChosenValue().schedule();
-//    }
+    @Override
+    public void autonomousInit() {
+        AutonomousSelector.getInstance().getChosenValue().schedule();
+    }
 }

@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.subsystems.arm.roller;
 
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.littletonrobotics.junction.Logger;
 
 import static edu.greenblitz.robotName.subsystems.arm.roller.RollerConstants.ROLL_BACKWARD_POWER;
@@ -49,6 +50,7 @@ public class Roller extends GBSubsystem {
 
 
     public void rollClockwise() {
+        SmartDashboard.putNumber("ahshs", 1);
         setPower(ROLL_FORWARD_POWER);
     }
 

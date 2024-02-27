@@ -22,7 +22,7 @@ public class NeoFunnelConstants {
 	
 	public static final double kP = 1;
 	
-	public static final double kI = 15;
+	public static final double kI = 30;
 	
 	public static final int VELOCITY_PID_SLOT = 0;
 	
