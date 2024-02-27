@@ -18,8 +18,8 @@ public class NeoLifter implements ILifter {
     private TalonSRX solenoid;
 
     public NeoLifter() {
-        motor = new GBSparkMax(NeoLifterConstants.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
         solenoid = new TalonSRX(NeoLifterConstants.SOLENOID_ID);
+        motor = new GBSparkMax(NeoLifterConstants.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
         motor.config(NeoLifterConstants.CONFIG);
 
         motor.getReverseLimitSwitch(NeoLifterConstants.BACKWARD_LIMIT_SWITCH_TYPE)

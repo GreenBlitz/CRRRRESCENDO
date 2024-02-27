@@ -20,7 +20,7 @@ public class NeoLifterConstants {
 
     public static final SimpleMotorFeedforward FEED_FORWARD = new SimpleMotorFeedforward(0, 0, 0);
 
-    public static final SparkLimitSwitch.Type FORWARD_LIMIT_SWITCH_TYPE = SparkLimitSwitch.Type.kNormallyClosed;
+    public static final SparkLimitSwitch.Type FORWARD_LIMIT_SWITCH_TYPE = SparkLimitSwitch.Type.kNormallyOpen;
 
     public static final SparkLimitSwitch.Type BACKWARD_LIMIT_SWITCH_TYPE = SparkLimitSwitch.Type.kNormallyClosed;
 

@@ -1,10 +1,14 @@
 package edu.greenblitz.robotName.subsystems.shooter.funnel.neoFunnel;
 
+import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkMax;
+import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.FunnelInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.IFunnel;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.Debouncer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class NeoFunnel implements IFunnel {
 	
@@ -26,9 +30,25 @@ public class NeoFunnel implements IFunnel {
 	}
 	
 	@Override
+	public void setVoltage(double voltage) {
+		motor.setVoltage(voltage);
+	}
+	
+	@Override
+	public void setVelocity(double velocity) {
+		motor.getPIDController().setReference(
+				velocity,
+				CANSparkBase.ControlType.kVelocity,
+				NeoFunnelConstants.VELOCITY_PID_SLOT,
+				NeoFunnelConstants.SIMPLE_MOTOR_FEED_FORWARD.calculate(velocity)
+		);
+	}
+	
+	@Override
 	public void updateInputs(FunnelInputsAutoLogged inputs) {
 		inputs.outputCurrent = motor.getOutputCurrent();
-		inputs.appliedOutput = motor.getAppliedOutput();
+		inputs.appliedOutput = motor.getAppliedOutput() * 12;
+		inputs.velocity = motor.getEncoder().getVelocity();
 		inputs.isObjectIn = debouncer.calculate(motor.getReverseLimitSwitch(NeoFunnelConstants.BEAM_BREAKER_TYPE).isPressed());
 	}
 }

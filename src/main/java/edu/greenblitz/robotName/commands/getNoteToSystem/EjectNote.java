@@ -25,9 +25,10 @@ public class EjectNote extends ProxyCommand {
             return new ReverseRunIntake();
         }
         if (Funnel.getInstance().isObjectIn()) {
-            return new SequentialCommandGroup(
-                    new RunFlyWheelByVelocity(FlyWheelConstants.SLOW_SHOOTING_VELOCITY),
+            return new ParallelDeadlineGroup(
                     new PushNoteToFlyWheel(),
+                    new RunFlyWheelByVelocity(FlyWheelConstants.SLOW_SHOOTING_VELOCITY)
+            ).andThen(
                     new StopFlyWheel()
             );
         }
