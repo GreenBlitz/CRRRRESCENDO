@@ -6,6 +6,7 @@ import edu.greenblitz.robotName.commands.RUnBY;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
 import edu.greenblitz.robotName.commands.arm.elbow.ResetElbow;
+import edu.greenblitz.robotName.commands.arm.roller.RunRollerByJoystick;
 import edu.greenblitz.robotName.commands.arm.wrist.MoveWristByJoystick;
 import edu.greenblitz.robotName.commands.arm.wrist.MoveWristToAngle;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
@@ -52,16 +53,15 @@ public class OI {
 		thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
 
-		secondJoystick.B.whileTrue(new RUnBY());
-		secondJoystick.R1.onTrue(new MoveWristToAngle(WristConstants.PresetPositions.SCORE));
-		secondJoystick.L1.onTrue(new MoveWristToAngle(WristConstants.PresetPositions.SAFE));
+		secondJoystick.POV_UP.whileTrue(new RunRollerByJoystick(secondJoystick));
 		secondJoystick.A.whileTrue(new MoveWristToAngle(Rotation2d.fromDegrees(0)));
+		secondJoystick.B.whileTrue(new MoveWristToAngle(Rotation2d.fromDegrees(180)));
+		secondJoystick.X.whileTrue(new MoveWristToAngle(Rotation2d.fromDegrees(270)));
 		Elbow.getInstance().resetAngle(Rotation2d.fromDegrees(0));
-		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
 		secondJoystick.Y.whileTrue(new MoveWristByJoystick(secondJoystick));
 
 //		initButtons();
-		initializeDefaultCommands();
+//		initializeDefaultCommands();
 	}
 	
 	public static void init() {

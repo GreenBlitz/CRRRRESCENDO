@@ -6,13 +6,13 @@ import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 
 public class NeoRollerConstants {
 
-    public static final int MOTOR_ID = 9;
+    public static final int MOTOR_ID = 22;
 
     public static int CURRENT_LIMIT = 40;
     
-    public static final double NOTE_IN_CURRENT_JUMP = 30;
+    public static final double NOTE_IN_CURRENT_JUMP = 4;
 
-    public static final double NOTE_IN_CURRENT = 30;
+    public static final double NOTE_IN_CURRENT = 5;
 
     public static final GBSparkMax.SparkMaxConfObject ROLLER_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
             .withIdleMode(CANSparkMax.IdleMode.kBrake)

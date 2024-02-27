@@ -29,7 +29,6 @@ public class SRXWrist implements IWrist {
 
     @Override
     public void setPower(double power) {
-        SmartDashboard.putBoolean("aa", true);
         motor.set(TalonSRXControlMode.PercentOutput, power);
     }
 
