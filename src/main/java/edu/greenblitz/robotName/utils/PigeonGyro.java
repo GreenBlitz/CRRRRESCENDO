@@ -42,7 +42,7 @@ public class PigeonGyro extends PigeonIMU {
 	
 	@Override
 	public double getYaw() {
-		return Math.IEEEremainder((Math.toRadians(super.getYaw()) - yawOffset), 2 * Math.PI);
+		return Math.toRadians(super.getYaw()) - yawOffset;
 	}
 	
 	@Override
