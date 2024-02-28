@@ -80,9 +80,18 @@ public class FalconPivotConstants {
 		HARDWARE_LIMIT_SWITCH_CONFIGS.ForwardLimitEnable = false;
 	}
 	
+	public static final  ClosedLoopRampsConfigs CLOSED_LOOP_RAMPS_CONFIGS = new ClosedLoopRampsConfigs();
+	
+	static {
+		CLOSED_LOOP_RAMPS_CONFIGS.VoltageClosedLoopRampPeriod = 0.5;
+	}
+	
+	
+	
 	public static final TalonFXConfiguration TALON_FX_CONFIGURATION = new TalonFXConfiguration();
 
 	static {
+		TALON_FX_CONFIGURATION.ClosedLoopRamps = CLOSED_LOOP_RAMPS_CONFIGS;
 		TALON_FX_CONFIGURATION.CurrentLimits = CURRENT_LIMITS_CONFIGS;
 		TALON_FX_CONFIGURATION.SoftwareLimitSwitch = SOFTWARE_LIMIT_SWITCH_CONFIGS;
 		TALON_FX_CONFIGURATION.Slot0 = SLOT_0_CONFIGS;

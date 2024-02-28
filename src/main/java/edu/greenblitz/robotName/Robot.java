@@ -105,6 +105,7 @@ public class Robot extends LoggedRobot {
 
 	@Override
 	public void teleopInit() {
+        SwerveChassis.getInstance().getGyro().updateYaw(Rotation2d.fromDegrees(180 + SwerveChassis.getInstance().getGyroAngle().getDegrees()));
 		Dashboard.getInstance().activateDriversDashboard();
         Elbow.getInstance().setCurrentAngle();
         

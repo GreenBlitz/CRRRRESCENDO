@@ -9,10 +9,7 @@ import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
 import edu.greenblitz.robotName.commands.arm.wrist.MoveWristToAngle;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
 import edu.greenblitz.robotName.commands.intake.*;
-import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
-import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByPower;
-import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityWithoutIsFinished;
-import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.*;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.funnel.runByPowerUntilCondition.ForwardRunFunnelUntilObjectIn;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
@@ -26,6 +23,7 @@ import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.lifter.Lifter;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
@@ -133,11 +131,12 @@ public class OI {
 		
 		//Intake
 		secondJoystick.B.whileTrue(new RunIntakeByPower(-0.4));
+		secondJoystick.X.whileTrue(new RunIntakeByPower(0.5));
 		
 		//FlyWheel Run
 		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityWithoutIsFinished(100));
 		//pit flywheel
-//		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityWithoutIsFinished(20));
+//		secondJoystick.L1.whileTrue(new RunFlyWheelByPower(0.15));
 		
 		//Pivot Poses
 		secondJoystick.POV_UP.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.RIGHT_STAGE.ANGLE));
@@ -173,5 +172,6 @@ public class OI {
 		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
 //		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
 		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
+//		FlyWheel.getInstance().setDefaultCommand(new FlyWheelDefaultCommand());
 	}
 }

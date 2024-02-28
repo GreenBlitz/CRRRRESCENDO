@@ -7,6 +7,7 @@ import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.IFlyWheel;
 import edu.greenblitz.robotName.utils.motors.GBTalonFXPro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import static edu.greenblitz.robotName.subsystems.shooter.FlyWheel.falconFlyWheel.FalconFlyWheelConstants.leftMotorConstants;
 import static edu.greenblitz.robotName.subsystems.shooter.FlyWheel.falconFlyWheel.FalconFlyWheelConstants.rightMotorConstants;
@@ -76,5 +77,8 @@ public class FalconFlyWheel implements IFlyWheel {
 		inputs.rightFlywheelVoltage = rightMotor.getMotorVoltage().getValue();
 		inputs.rightFlywheelVelocity = rightMotor.getLatencyCompensatedValue(rightMotor.getVelocity(), rightMotor.getAcceleration());
 		inputs.rightWheelAcceleration = rightMotor.getAcceleration().getValue();
+		
+		inputs.rightVelocityReferance = rightMotor.getClosedLoopReference().getValue();
+		inputs.leftVelocityReferance = leftMotor.getClosedLoopReference().getValue();
 	}
 }
