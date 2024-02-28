@@ -30,7 +30,7 @@ public class ElbowConstants {
 
     public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(-75);
 
-    public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(90);
+    public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(75);
 
     public static final Pair<Rotation2d, Rotation2d> SHOOTER_COLLISION_RANGE = new Pair<>(BACKWARD_ANGLE_LIMIT, PresetPositions.SAFE.ANGLE);
 

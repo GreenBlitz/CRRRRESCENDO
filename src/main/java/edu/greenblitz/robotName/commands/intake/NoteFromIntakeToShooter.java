@@ -21,8 +21,8 @@ public class NoteFromIntakeToShooter extends GBCommand {
 
     @Override
     public void initialize() {
-        funnel.setPower(0.5);
-        intake.setVelocity(200);
+        funnel.setVelocity(175 * (4 / 5.0));
+        intake.setVelocity(175);
     }
 
     @Override

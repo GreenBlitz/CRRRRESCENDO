@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.arm.elbow.neoElbow;
 
+import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
@@ -9,7 +10,7 @@ import edu.wpi.first.math.controller.ArmFeedforward;
 
 public class NeoElbowConstants {
 
-    public static final int MOTOR_ID = 1;
+    public static final int MOTOR_ID = 5;
 
     public static final double kS = 1;
 
@@ -31,7 +32,7 @@ public class NeoElbowConstants {
 
     public static final GBSparkMax.SparkMaxConfObject ELBOW_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
             .withPID(PID)
-            .withIdleMode(CANSparkMax.IdleMode.kBrake)
+            .withIdleMode(CANSparkMax.IdleMode.kCoast)
             .withRampRate(RobotConstants.General.RAMP_RATE_VALUE)
             .withPositionConversionFactor(ElbowConstants.GEAR_RATIO)
             .withVelocityConversionFactor(ElbowConstants.GEAR_RATIO)
