@@ -22,5 +22,8 @@ public class NoteToIntake extends IntakeCommand {
     @Override
     public void end(boolean interrupted) {
         intake.stop();
+        if (!interrupted) {
+            new NoteFromIntakeToShooter().schedule();
+        }
     }
 }

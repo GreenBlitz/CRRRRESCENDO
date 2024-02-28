@@ -4,6 +4,7 @@ import edu.greenblitz.robotName.VisionConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Pose2d;
+import org.littletonrobotics.junction.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,14 @@ public class MultiLimelight extends GBSubsystem {
 			}
 		}
 		return estimates;
+	}
+	public void recordEstimatedPositions (){
+		int i = 0;
+		for (Optional<Pair<Pose2d, Double>> estimation : MultiLimelight.getInstance().getAll2DEstimates()){
+			if(estimation.isPresent()){
+				Logger.recordOutput("estimation " + i , estimation.get().getFirst());
+			}
+		}
 	}
 	
 	public double getDynamicStdDevs(int limelightId) {

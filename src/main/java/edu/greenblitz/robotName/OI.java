@@ -61,19 +61,19 @@ public class OI {
 //		thirdJoystick.B.onTrue(new InstantCommand(() -> a.set(TalonSRXControlMode.PercentOutput, 1)));
 //		thirdJoystick.A.onTrue(new InstantCommand(() -> a.set(TalonSRXControlMode.PercentOutput, 0)));
 //		thirdJoystick.X.onTrue(new InstantCommand(() -> a.set(TalonSRXControlMode.PercentOutput, 0.2)));
-		thirdJoystick.POV_DOWN.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(70)));
-		thirdJoystick.POV_UP.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(-80)));
-		
-		thirdJoystick.POV_RIGHT.whileTrue(new MoveWristToAngle(new Rotation2d(0)));
-		thirdJoystick.POV_RIGHT.whileTrue(new MoveWristToAngle(new Rotation2d(40
-		)));
-		
-		thirdJoystick.B.whileTrue(
-				new RunCommand(
-						() -> Lifter.getInstance().setPower(thirdJoystick.getAxisValue(SmartJoystick.Axis.RIGHT_X))
-				)
-		);
-		
+//		thirdJoystick.POV_DOWN.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(70)));
+//		thirdJoystick.POV_UP.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(-80)));
+//
+//		thirdJoystick.POV_RIGHT.whileTrue(new MoveWristToAngle(new Rotation2d(0)));
+//		thirdJoystick.POV_RIGHT.whileTrue(new MoveWristToAngle(new Rotation2d(40
+//		)));
+//
+//		thirdJoystick.B.whileTrue(
+//				new RunCommand(
+//						() -> Lifter.getInstance().setPower(thirdJoystick.getAxisValue(SmartJoystick.Axis.RIGHT_X))
+//				)
+//		);
+		thirdJoystickButtons();
 	}
 	
 	public static void init() {
@@ -150,13 +150,11 @@ public class OI {
 		secondJoystick.Y.whileTrue(new ForwardRunFunnelUntilObjectIn());
 	}
 	
-	public void thirdJoystickButtons() {
+public void thirdJoystickButtons() {
 		SmartJoystick usedJoystick = thirdJoystick;
-		usedJoystick.A.whileTrue(new NoteFromIntakeToShooter());
-		usedJoystick.B.whileTrue(new RunIntakeByJoystick(usedJoystick));
-		usedJoystick.X.whileTrue(new RunFunnelByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_Y));
-		usedJoystick.Y.whileTrue(new RunFlyWheelByJoystick(usedJoystick));
-		fourthJoystick.Y.whileTrue(new ShootSimulationNote());
+		usedJoystick.R1.whileTrue(new NoteToShooter());
+		usedJoystick.L1.whileTrue(new RunFunnelByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_Y));
+		
 	}
 	
 	public void setFourthJoystick() {
