@@ -88,7 +88,7 @@ public class Robot extends LoggedRobot {
 
     public void initializeSubsystems() {
         AutonomousSelector.getInstance();
-        MultiLimelight.init();
+//        MultiLimelight.init();
         SwerveChassis.init();
 
         Pivot.init();
@@ -126,7 +126,7 @@ public class Robot extends LoggedRobot {
     private void initializeAutonomousBuilder() {
         NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
         NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
-        NamedCommands.registerCommand("grip",(new NoteToShooter()));
+        NamedCommands.registerCommand("grip",(new NoteToShooter()).raceWith(new WaitCommand(3.5)));
         AutoBuilder.configureHolonomic(
                 SwerveChassis.getInstance()::getRobotPose2d,
                 SwerveChassis.getInstance()::resetChassisPosition,
