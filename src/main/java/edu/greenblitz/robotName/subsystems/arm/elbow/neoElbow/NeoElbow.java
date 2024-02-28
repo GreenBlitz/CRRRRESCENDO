@@ -23,18 +23,11 @@ public class NeoElbow implements IElbow {
     public NeoElbow() {
         motor = new GBSparkMax(NeoElbowConstants.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
         motor.config(NeoElbowConstants.ELBOW_CONFIG_OBJECT);
-
         motor.getPIDController().setFeedbackDevice(motor.getEncoder());
         motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
         motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, ElbowConstants.BACKWARD_ANGLE_LIMIT.getRadians());
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, ElbowConstants.FORWARD_ANGLE_LIMIT.getRadians());
-        motor.getReverseLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen)
-                .enableLimitSwitch(NeoElbowConstants.ENABLE_REVERSE_LIMIT_SWITCH);
-        motor.getForwardLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen)
-                .enableLimitSwitch(NeoElbowConstants.ENABLE_FORWARD_LIMIT_SWITCH);
-
-        resetAngle(Rotation2d.fromRotations(motor.getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle).getPosition()));
     }
 
     @Override
@@ -59,8 +52,12 @@ public class NeoElbow implements IElbow {
 
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
+        SmartDashboard.putNumber("refrence", targetAngle.getDegrees());
+        if (targetAngle.getDegrees() <= ElbowConstants.BACKWARD_ANGLE_LIMIT.getDegrees()){
+            targetAngle = ElbowConstants.BACKWARD_ANGLE_LIMIT;
+        }
         motor.getPIDController().setReference(
-                targetAngle.getRadians(),
+                targetAngle.getRotations(),
                 CANSparkMax.ControlType.kPosition,
                 NeoElbowConstants.PID_SLOT,
                 ELBOW_FEEDFORWARD.calculate(targetAngle.getRadians(), 0)

@@ -3,7 +3,9 @@ package edu.greenblitz.robotName;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkLowLevel;
+import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowByJoystick;
+import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
 import edu.greenblitz.robotName.commands.intake.CollectNoteFromGround;
 import edu.greenblitz.robotName.commands.intake.NoteFromIntakeToShooter;
@@ -22,6 +24,7 @@ import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
 import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
+import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
@@ -30,6 +33,7 @@ import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.GBCommand;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
@@ -57,20 +61,9 @@ public class OI {
 		thirdJoystick.B.onTrue(new InstantCommand(() -> a.set(TalonSRXControlMode.PercentOutput, 1)));
 		thirdJoystick.A.onTrue(new InstantCommand(() -> a.set(TalonSRXControlMode.PercentOutput, 0)));
 		thirdJoystick.X.onTrue(new InstantCommand(() -> a.set(TalonSRXControlMode.PercentOutput, 0.2)));
-		Elbow.getInstance().setDefaultCommand(new MoveElbowByJoystick(thirdJoystick, SmartJoystick.Axis.LEFT_Y));
-		GBSparkMax b = new GBSparkMax(4, CANSparkLowLevel.MotorType.kBrushless);
-		thirdJoystick.POV_RIGHT.whileTrue(new GBCommand() {
-											   @Override
-											   public void execute() {
-												   b.set(thirdJoystick.getAxisValue(SmartJoystick.Axis.RIGHT_X) * 0.5);
-											   }
-											   
-											   @Override
-											   public void end(boolean interrupted) {
-												   b.set(0);
-											   }
-		}
-		);
+		thirdJoystick.POV_UP.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(0)));
+		thirdJoystick.POV_DOWN.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(-10)));
+		thirdJoystick.POV_LEFT.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(45)));
 	}
 	
 	public static void init() {
@@ -153,7 +146,7 @@ public class OI {
 	
 	public void initializeDefaultCommands() {
 		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-//		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
+		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
 //		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
 		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
 	}

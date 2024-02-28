@@ -7,7 +7,7 @@ public class ElbowDefaultCommand extends ElbowCommand {
 
     @Override
     public void initialize() {
-        elbow.setCurrentAngle(ElbowConstants.PresetPositions.SAFE.ANGLE);
+//        elbow.setCurrentAngle();
         elbow.standInPlace();
     }
 

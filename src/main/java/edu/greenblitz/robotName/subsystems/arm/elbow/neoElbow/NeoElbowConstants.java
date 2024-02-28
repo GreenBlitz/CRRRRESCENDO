@@ -17,23 +17,19 @@ public class NeoElbowConstants {
     
     public static final Rotation2d MINIMUM_ANGLE = Rotation2d.fromDegrees(-82);
 
-    public static final double kS = 1;
+    public static final double kS = 0;
 
-    public static final double kV = 1;
+    public static final double kV = 0;
 
-    public static final double kG = 1;
+    public static final double kG = 0.17;
 
-    public static final double kA = 1;
+    public static final double kA = 0;
 
     public static final ArmFeedforward ELBOW_FEEDFORWARD = new ArmFeedforward(kS, kG, kV, kA);
 
-    public static final boolean ENABLE_REVERSE_LIMIT_SWITCH = true;
-
-    public static final boolean ENABLE_FORWARD_LIMIT_SWITCH = true;
-
     public static final int PID_SLOT = 0;
 
-    public static final PIDObject PID = new PIDObject().withKp(0.8).withKd(0.3).withKi(0).withMaxPower(1);
+    public static final PIDObject PID = new PIDObject().withKp(2).withKd(0).withKi(0).withMaxPower(0.5);
 
     public static final GBSparkMax.SparkMaxConfObject ELBOW_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
             .withPID(PID)
