@@ -25,6 +25,7 @@ import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
+import edu.greenblitz.robotName.subsystems.lifter.Lifter;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
@@ -36,6 +37,7 @@ import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 
 public class OI {
 	
@@ -56,14 +58,24 @@ public class OI {
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
 		
 		initButtons();
-		initializeDefaultCommands();
+		initializeDefaultCommands(
+		
+		);
 		TalonSRX a = new TalonSRX(5);
 		thirdJoystick.B.onTrue(new InstantCommand(() -> a.set(TalonSRXControlMode.PercentOutput, 1)));
 		thirdJoystick.A.onTrue(new InstantCommand(() -> a.set(TalonSRXControlMode.PercentOutput, 0)));
 		thirdJoystick.X.onTrue(new InstantCommand(() -> a.set(TalonSRXControlMode.PercentOutput, 0.2)));
 		thirdJoystick.POV_UP.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(0)));
-		thirdJoystick.POV_DOWN.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(-10)));
+		thirdJoystick.POV_DOWN.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(70)));
 		thirdJoystick.POV_LEFT.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(45)));
+		thirdJoystick.POV_RIGHT.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(-80)));
+		
+		thirdJoystick.B.whileTrue(
+				new RunCommand(
+						() -> Lifter.getInstance().setPower(thirdJoystick.getAxisValue(SmartJoystick.Axis.RIGHT_X))
+				)
+		);
+		
 	}
 	
 	public static void init() {
@@ -145,7 +157,7 @@ public class OI {
 	}
 	
 	public void initializeDefaultCommands() {
-		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+//		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
 		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
 //		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
 		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());

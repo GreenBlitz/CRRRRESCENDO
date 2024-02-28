@@ -105,6 +105,8 @@ public class Robot extends LoggedRobot {
 	public void teleopInit() {
 		Dashboard.getInstance().activateDriversDashboard();
         Elbow.getInstance().setCurrentAngle();
+        
+        
 	}
 
     @Override

@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName.subsystems.lifter.neoLifter;
 
 import com.revrobotics.SparkLimitSwitch;
-import com.revrobotics.SparkMaxLimitSwitch;
 import edu.greenblitz.robotName.utils.PIDObject;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
