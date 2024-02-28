@@ -11,7 +11,7 @@ public class RobotConstants {
 	
 	public static final String USB_LOG_PATH = "/usb/";
 	
-	public static final String SAFE_ROBORIO_LOG_PATH = "/logs/";
+	public static final String SAFE_ROBORIO_LOG_PATH = "/home/lvuser/logs";
 	
 	public static class General {
 		

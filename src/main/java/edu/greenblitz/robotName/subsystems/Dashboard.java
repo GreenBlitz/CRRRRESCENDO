@@ -1,5 +1,7 @@
 package edu.greenblitz.robotName.subsystems;
 
+import edu.greenblitz.robotName.subsystems.intake.Intake;
+import edu.greenblitz.robotName.subsystems.intake.neoIntake.NeoIntake;
 import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.GBSubsystem;
@@ -58,6 +60,7 @@ public class Dashboard extends GBSubsystem {
 		//battery
 		driversTab.addDouble("Battery", () -> Battery.getInstance().getCurrentVoltage())
 				.withPosition(9, 3);
+		driversTab.addBoolean("bb", () -> Intake.getInstance().isObjectIn());
 		
 		
 		//field

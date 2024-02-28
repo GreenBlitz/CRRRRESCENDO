@@ -4,6 +4,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
+import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
 import edu.greenblitz.robotName.commands.intake.CollectNoteFromGround;
 import edu.greenblitz.robotName.commands.intake.NoteFromIntakeToShooter;
 import edu.greenblitz.robotName.commands.intake.NoteToIntake;
@@ -37,6 +38,7 @@ import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import org.littletonrobotics.junction.LogFileUtil;
@@ -106,6 +108,10 @@ public class Robot extends LoggedRobot {
 		Dashboard.getInstance().activateDriversDashboard();
         Elbow.getInstance().setCurrentAngle();
         
+        if(Elbow.getInstance().getAngle().getDegrees() < -75){
+            new MoveElbowToAngle(Rotation2d.fromDegrees(-70)).schedule();
+        }
+        
         
 	}
 
@@ -113,13 +119,14 @@ public class Robot extends LoggedRobot {
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
         RoborioUtils.updateCurrentCycleTime();
-
+        
+        SmartDashboard.putNumber("wrist angle", Wrist.getInstance().getAngle().getDegrees());
     }
 
     private void initializeAutonomousBuilder() {
         NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
         NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
-        NamedCommands.registerCommand("grip",(new CollectNoteFromGround()));
+        NamedCommands.registerCommand("grip",(new NoteToShooter()));
         AutoBuilder.configureHolonomic(
                 SwerveChassis.getInstance()::getRobotPose2d,
                 SwerveChassis.getInstance()::resetChassisPosition,
@@ -140,14 +147,14 @@ public class Robot extends LoggedRobot {
         switch (getRobotType()) {
             // Running on a real robot, log to a USB stick
             case SYNCOPA:
-                try {
-                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.USB_LOG_PATH));
-                    System.out.println("initialized Logger, USB");
-                } catch (Exception e) {
-                    Logger.end();
-                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
-                    System.out.println("initialized Logger, roborio");
-                }
+//                try {
+//                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.USB_LOG_PATH));
+//                    System.out.println("initialized Logger, USB");
+//                } catch (Exception e) {
+//                    Logger.end();
+//                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
+//                    System.out.println("initialized Logger, roborio");
+//                }
                 Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
 				Logger.addDataReceiver(new NT4Publisher());
                 break;

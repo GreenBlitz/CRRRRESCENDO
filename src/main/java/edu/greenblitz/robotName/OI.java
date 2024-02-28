@@ -6,15 +6,15 @@ import com.revrobotics.CANSparkLowLevel;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowByJoystick;
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
+import edu.greenblitz.robotName.commands.arm.wrist.MoveWristToAngle;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
-import edu.greenblitz.robotName.commands.intake.CollectNoteFromGround;
-import edu.greenblitz.robotName.commands.intake.NoteFromIntakeToShooter;
-import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
-import edu.greenblitz.robotName.commands.intake.RunIntakeByPower;
+import edu.greenblitz.robotName.commands.intake.*;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByPower;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityWithoutIsFinished;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
+import edu.greenblitz.robotName.commands.shooter.funnel.runByPowerUntilCondition.ForwardRunFunnelUntilObjectIn;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
@@ -58,17 +58,17 @@ public class OI {
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
 		
 		initButtons();
-		initializeDefaultCommands(
-		
-		);
-		TalonSRX a = new TalonSRX(5);
-		thirdJoystick.B.onTrue(new InstantCommand(() -> a.set(TalonSRXControlMode.PercentOutput, 1)));
-		thirdJoystick.A.onTrue(new InstantCommand(() -> a.set(TalonSRXControlMode.PercentOutput, 0)));
-		thirdJoystick.X.onTrue(new InstantCommand(() -> a.set(TalonSRXControlMode.PercentOutput, 0.2)));
-		thirdJoystick.POV_UP.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(0)));
+		initializeDefaultCommands();
+//		TalonSRX a = new TalonSRX(5);
+//		thirdJoystick.B.onTrue(new InstantCommand(() -> a.set(TalonSRXControlMode.PercentOutput, 1)));
+//		thirdJoystick.A.onTrue(new InstantCommand(() -> a.set(TalonSRXControlMode.PercentOutput, 0)));
+//		thirdJoystick.X.onTrue(new InstantCommand(() -> a.set(TalonSRXControlMode.PercentOutput, 0.2)));
 		thirdJoystick.POV_DOWN.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(70)));
-		thirdJoystick.POV_LEFT.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(45)));
-		thirdJoystick.POV_RIGHT.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(-80)));
+		thirdJoystick.POV_UP.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(-80)));
+		
+		thirdJoystick.POV_RIGHT.whileTrue(new MoveWristToAngle(new Rotation2d(0)));
+		thirdJoystick.POV_RIGHT.whileTrue(new MoveWristToAngle(new Rotation2d(40
+		)));
 		
 		thirdJoystick.B.whileTrue(
 				new RunCommand(
@@ -111,14 +111,23 @@ public class OI {
 	}
 	
 	public void romyButtons() {
-		mainJoystick.R1.whileTrue(new CollectNoteFromGround());
-		mainJoystick.L1.whileTrue(new MoveRobotToShootingPosition(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
+		mainJoystick.R1.whileTrue(new NoteToShooter());
+//		mainJoystick.L1.whileTrue(new MoveRobotToShootingPosition(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
+		mainJoystick.L1.whileTrue(new CollectNoteFromFeeder());
 		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetPoseByVision()));
 		
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
 	}
 	
 	public void shchoriButtons() {
+//		secondJoystick.A.whileTrue(new RunFlyWheelByPower(0.15));
+//		secondJoystick.X.whileTrue(new RunFlyWheelByPower(0.2));
+//		secondJoystick.R3.onTrue(new InstantCommand(() ->
+//				SmartDashboard.putNumber("pivot amp angle", Pivot.getInstance().getAngle().getDegrees())));
+		secondJoystick.X.onTrue(new InstantCommand(() ->
+				SmartDashboard.putNumber("pivot right stage angle", Pivot.getInstance().getAngle().getDegrees())));
+		
+		//Rumble
 		secondJoystick.BACK.whileTrue(new InstantCommand(() -> secondJoystick.rumble(true, 1)));
 		secondJoystick.START.whileTrue(new InstantCommand(() -> secondJoystick.rumble(true, 0)));
 		
@@ -127,6 +136,8 @@ public class OI {
 		
 		//FlyWheel Run
 		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityWithoutIsFinished(100));
+		//pit flywheel
+//		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityWithoutIsFinished(20));
 		
 		//Pivot Poses
 		secondJoystick.POV_UP.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.RIGHT_STAGE.ANGLE));
@@ -136,7 +147,8 @@ public class OI {
 		secondJoystick.R1.whileTrue(new MovePivotByJoystick(secondJoystick, SmartJoystick.Axis.LEFT_Y));
 		
 		//Funnel
-		Funnel.getInstance().setDefaultCommand(new RunFunnelByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_Y));
+		secondJoystick.R1.whileTrue(new RunFunnelByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_Y));
+		secondJoystick.Y.whileTrue(new ForwardRunFunnelUntilObjectIn());
 	}
 	
 	public void thirdJoystickButtons() {
