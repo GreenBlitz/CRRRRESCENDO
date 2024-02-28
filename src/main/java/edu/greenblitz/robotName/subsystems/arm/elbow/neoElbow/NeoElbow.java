@@ -12,6 +12,7 @@ import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.arm.elbow.IElbow;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import static edu.greenblitz.robotName.subsystems.arm.elbow.neoElbow.NeoElbowConstants.ELBOW_FEEDFORWARD;
 
@@ -53,7 +54,7 @@ public class NeoElbow implements IElbow {
 
     @Override
     public void resetAngle(Rotation2d position) {
-        motor.getEncoder().setPosition(position.getRadians());
+        motor.getEncoder().setPosition(position.getRotations());
     }
 
     @Override
@@ -81,5 +82,7 @@ public class NeoElbow implements IElbow {
         inputs.absoluteEncoderPosition = motor.getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle).getPosition();
         inputs.hasReachedBackwardLimit = Math.abs(inputs.position.getRadians() - ElbowConstants.BACKWARD_ANGLE_LIMIT.getRadians()) <= ElbowConstants.TOLERANCE.getRadians();
         inputs.hasReachedForwardLimit = Math.abs(inputs.position.getRadians() - ElbowConstants.FORWARD_ANGLE_LIMIT.getRadians()) <= ElbowConstants.TOLERANCE.getRadians();
+        
+        SmartDashboard.putNumber("pos elbow", inputs.position.getDegrees());
     }
 }

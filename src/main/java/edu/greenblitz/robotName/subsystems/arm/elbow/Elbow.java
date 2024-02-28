@@ -1,6 +1,8 @@
 package edu.greenblitz.robotName.subsystems.arm.elbow;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.greenblitz.robotName.subsystems.arm.elbow.neoElbow.NeoElbow;
+import edu.greenblitz.robotName.subsystems.arm.elbow.neoElbow.NeoElbowConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -16,7 +18,7 @@ public class Elbow extends GBSubsystem {
     private ElbowInputsAutoLogged elbowInputs;
 
     private Rotation2d currentAngle;
-
+    
     private Elbow() {
         elbow = ElbowFactory.create();
         elbowInputs = new ElbowInputsAutoLogged();
@@ -38,8 +40,10 @@ public class Elbow extends GBSubsystem {
     @Override
     public void periodic() {
         super.periodic();
-
         elbow.updateInputs(elbowInputs);
+        if (NeoElbowConstants.MINIMUM_ANGLE.getRadians() > elbowInputs.position.getRadians()){
+            elbow.resetAngle(NeoElbowConstants.MINIMUM_ANGLE);
+        }
         Logger.processInputs("Elbow", elbowInputs);
         Logger.recordOutput("Elbow", getPose3D());
     }

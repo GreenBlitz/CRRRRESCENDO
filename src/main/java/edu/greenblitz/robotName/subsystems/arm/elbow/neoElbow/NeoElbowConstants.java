@@ -7,10 +7,15 @@ import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.utils.PIDObject;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.controller.ArmFeedforward;
+import edu.wpi.first.math.geometry.Rotation2d;
 
 public class NeoElbowConstants {
 
     public static final int MOTOR_ID = 5;
+    
+    public static final boolean IS_INVERTED = true;
+    
+    public static final Rotation2d MINIMUM_ANGLE = Rotation2d.fromDegrees(-82);
 
     public static final double kS = 1;
 
@@ -36,5 +41,6 @@ public class NeoElbowConstants {
             .withRampRate(RobotConstants.General.RAMP_RATE_VALUE)
             .withPositionConversionFactor(ElbowConstants.GEAR_RATIO)
             .withVelocityConversionFactor(ElbowConstants.GEAR_RATIO)
-            .withCurrentLimit(ElbowConstants.CURRENT_LIMIT);
+            .withCurrentLimit(ElbowConstants.CURRENT_LIMIT)
+            .withInverted(IS_INVERTED);
 }
