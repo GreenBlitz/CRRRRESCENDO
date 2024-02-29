@@ -5,6 +5,7 @@ import edu.greenblitz.robotName.subsystems.intake.neoIntake.NeoIntake;
 import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.GBSubsystem;
+import edu.greenblitz.robotName.utils.shootingCalculations.ShootingAngleCalculations;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
@@ -61,7 +62,7 @@ public class Dashboard extends GBSubsystem {
 		driversTab.addDouble("Battery", () -> Battery.getInstance().getCurrentVoltage())
 				.withPosition(9, 3);
 		driversTab.addBoolean("bb", () -> Intake.getInstance().isObjectIn());
-		
+//		driversTab.addDouble("shoot", () -> ShootingAngleCalculations.getShootingAngle());
 		
 		//field
 		driversTab.add("Field", SwerveChassis.getInstance().getField()).withPosition(5, 2).withSize(3, 2);

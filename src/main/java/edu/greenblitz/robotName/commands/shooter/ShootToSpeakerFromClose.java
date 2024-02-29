@@ -11,7 +11,8 @@ public class ShootToSpeakerFromClose extends SequentialCommandGroup {
 
     public ShootToSpeakerFromClose() {
         super(
-                new RunFlyWheelByVelocityConstant().alongWith(new MovePivotToAngle(PivotConstants.PresetPositions.CLOSE_SHOOTING.ANGLE)),
+                //new RunFlyWheelByVelocityConstant().alongWith(
+                new MovePivotToAngle(PivotConstants.PresetPositions.CLOSE_SHOOTING.ANGLE),
                 new InstantCommand(() -> System.out.println("aaaaaa")),
                 new InstantCommand(() -> System.out.println("aaaaaa")),
                 new InstantCommand(() -> System.out.println("aaaaaa")),

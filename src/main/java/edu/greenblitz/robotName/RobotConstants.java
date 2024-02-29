@@ -9,7 +9,7 @@ public class RobotConstants {
 	
 	public static final String SIMULATION_LOG_PATH = System.getProperty("user.home") + "\\Desktop\\SimulationLogs";
 	
-	public static final String USB_LOG_PATH = "/usb/";
+	public static final String USB_LOG_PATH = "/media/sda1";
 	
 	public static final String SAFE_ROBORIO_LOG_PATH = "/home/lvuser/logs";
 	
