@@ -112,7 +112,9 @@ public class Robot extends LoggedRobot {
             new MoveElbowToAngle(Rotation2d.fromDegrees(-70)).schedule();
         }
         
-        
+        SwerveChassis.getInstance().resetChassisAngle(
+                SwerveChassis.getInstance().getGyroAngle().plus(Rotation2d.fromDegrees(180))
+        );
 	}
 
     @Override
