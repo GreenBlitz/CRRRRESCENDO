@@ -30,6 +30,7 @@ import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
 import org.littletonrobotics.junction.Logger;
@@ -98,9 +99,12 @@ public class Robot extends LoggedRobot {
     }
 
     private void initializeAutonomousBuilder() {
-        NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
-        NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
-        NamedCommands.registerCommand("grip", new NoteToShooter());
+//        NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
+//        NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
+//        NamedCommands.registerCommand("grip", new NoteToShooter());
+        NamedCommands.registerCommand("shoot", new InstantCommand());
+        NamedCommands.registerCommand("close shoot", new InstantCommand());
+        NamedCommands.registerCommand("grip", new InstantCommand());
         AutoBuilder.configureHolonomic(
                 SwerveChassis.getInstance()::getRobotPose2d,
                 SwerveChassis.getInstance()::resetChassisPose,
