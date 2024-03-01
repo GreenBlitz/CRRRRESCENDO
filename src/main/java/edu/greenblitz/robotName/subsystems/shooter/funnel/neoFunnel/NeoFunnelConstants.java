@@ -44,5 +44,5 @@ public class NeoFunnelConstants {
 			.withCurrentLimit(CURRENT_LIMIT)
 			.withInverted(IS_INVERTED)
 			.withPID(PID_CONTROLLER)
-			.withVelocityConversionFactor(1 /9.0);
+			.withVelocityConversionFactor(1 / 9.0);
 }

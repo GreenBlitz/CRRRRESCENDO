@@ -6,9 +6,12 @@ import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 
 public class RunFlyWheelByVelocityWithoutIsFinished extends FlyWheelCommand {
 
-    double rightWheelVelocity;
-    double leftWheelVelocity;
+    private double rightWheelVelocity;
+
+    private double leftWheelVelocity;
+
     private int timeInShootingSpeed;
+
     private SmartJoystick joystick;
 
     public RunFlyWheelByVelocityWithoutIsFinished(double velocity, SmartJoystick joystick) {

@@ -5,8 +5,10 @@ import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 
 public class RunFlyWheelByVelocity extends FlyWheelCommand {
 
-    double rightWheelVelocity;
-    double leftWheelVelocity;
+    private double rightWheelVelocity;
+
+    private double leftWheelVelocity;
+
     private int timeInShootingSpeed;
 
     double spin;
@@ -20,7 +22,6 @@ public class RunFlyWheelByVelocity extends FlyWheelCommand {
         this.spin = spin;
         rightWheelVelocity = velocity;
         leftWheelVelocity = velocity * spin;
-
     }
 
     protected void changeVelocity(double velocity) {

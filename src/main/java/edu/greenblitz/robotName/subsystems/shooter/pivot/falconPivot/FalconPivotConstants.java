@@ -86,8 +86,6 @@ public class FalconPivotConstants {
 		CLOSED_LOOP_RAMPS_CONFIGS.VoltageClosedLoopRampPeriod = 0.5;
 	}
 	
-	
-	
 	public static final TalonFXConfiguration TALON_FX_CONFIGURATION = new TalonFXConfiguration();
 
 	static {
