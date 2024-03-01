@@ -16,9 +16,8 @@ public class ElbowInputs {
 
     public double acceleration;
 
-    public double absoluteEncoderPosition;
-
     public boolean hasReachedForwardLimit;
 
     public boolean hasReachedBackwardLimit;
+
 }

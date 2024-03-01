@@ -1,8 +1,6 @@
 package edu.greenblitz.robotName.subsystems.arm.elbow;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.greenblitz.robotName.subsystems.arm.elbow.neoElbow.NeoElbow;
-import edu.greenblitz.robotName.subsystems.arm.elbow.neoElbow.NeoElbowConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -18,12 +16,15 @@ public class Elbow extends GBSubsystem {
     private ElbowInputsAutoLogged elbowInputs;
 
     private Rotation2d currentAngle;
-    
+
+    private Rotation2d pidReference;
+
     private Elbow() {
         elbow = ElbowFactory.create();
         elbowInputs = new ElbowInputsAutoLogged();
         elbow.updateInputs(elbowInputs);
         currentAngle = ElbowConstants.MINIMUM_ANGLE;
+        pidReference = currentAngle;
     }
 
     public static void init() {
@@ -41,7 +42,7 @@ public class Elbow extends GBSubsystem {
     public void periodic() {
         super.periodic();
         elbow.updateInputs(elbowInputs);
-        if (ElbowConstants.MINIMUM_ANGLE.getRadians() > elbowInputs.position.getRadians()){
+        if (ElbowConstants.MINIMUM_ANGLE.getRadians() > elbowInputs.position.getRadians()) {
             elbow.resetAngle(ElbowConstants.MINIMUM_ANGLE);
         }
         Logger.processInputs("Elbow", elbowInputs);
@@ -66,11 +67,15 @@ public class Elbow extends GBSubsystem {
     }
 
     public void moveToAngle(Rotation2d targetAngle) {
-        elbow.moveToAngle(targetAngle);
+        pidReference = targetAngle;
+        elbow.moveToAngle(pidReference);
     }
 
     public void standInPlace() {
-        elbow.standInPlace(currentAngle);
+        if (currentAngle != pidReference) {
+            pidReference = currentAngle;
+            elbow.standInPlace(pidReference);
+        }
     }
 
     public void setCurrentAngle() {
@@ -102,8 +107,8 @@ public class Elbow extends GBSubsystem {
                 elbowInputs.position.getRadians() <= ElbowConstants.SHOOTER_COLLISION_RANGE.getSecond().getRadians();
     }
 
-    public void moveToSafeAngleInit(){
-        if(isInShooterCollisionRange()){
+    public void moveToSafeAngleInit() {
+        if (isInShooterCollisionRange()) {
             moveToAngle(ElbowConstants.PresetPositions.SAFE.ANGLE);
         }
     }

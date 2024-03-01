@@ -20,6 +20,8 @@ public class NeoElbow implements IElbow {
 
     private GBSparkMax motor;
 
+    private double pidReference;
+
     public NeoElbow() {
         motor = new GBSparkMax(NeoElbowConstants.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
         motor.config(NeoElbowConstants.ELBOW_CONFIG_OBJECT);
@@ -78,7 +80,6 @@ public class NeoElbow implements IElbow {
         inputs.position = Rotation2d.fromRotations(motor.getEncoder().getPosition());
         inputs.acceleration = (motor.getEncoder().getVelocity() - inputs.velocity) / RobotConstants.SimulationConstants.TIME_STEP;
         inputs.velocity = motor.getEncoder().getVelocity();
-        inputs.absoluteEncoderPosition = motor.getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle).getPosition();
         inputs.hasReachedBackwardLimit = Math.abs(inputs.position.getRadians() - ElbowConstants.BACKWARD_ANGLE_LIMIT.getRadians()) <= ElbowConstants.TOLERANCE.getRadians();
         inputs.hasReachedForwardLimit = Math.abs(inputs.position.getRadians() - ElbowConstants.FORWARD_ANGLE_LIMIT.getRadians()) <= ElbowConstants.TOLERANCE.getRadians();
     }
