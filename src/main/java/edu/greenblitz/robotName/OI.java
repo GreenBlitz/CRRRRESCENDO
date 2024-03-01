@@ -1,5 +1,7 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
+import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.intake.CollectNoteFromGround;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
 import edu.greenblitz.robotName.commands.intake.*;
@@ -16,6 +18,8 @@ import edu.greenblitz.robotName.commands.swerve.MoveRobotToShootingPosition;
 import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
 import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
+import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
