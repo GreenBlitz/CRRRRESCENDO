@@ -14,8 +14,6 @@ public class NeoElbowConstants {
     public static final int MOTOR_ID = 5;
     
     public static final boolean IS_INVERTED = true;
-    
-    public static final Rotation2d MINIMUM_ANGLE = Rotation2d.fromDegrees(-82);
 
     public static final double kS = 0;
 

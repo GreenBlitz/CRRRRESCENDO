@@ -23,7 +23,7 @@ public class Elbow extends GBSubsystem {
         elbow = ElbowFactory.create();
         elbowInputs = new ElbowInputsAutoLogged();
         elbow.updateInputs(elbowInputs);
-        currentAngle = NeoElbowConstants.MINIMUM_ANGLE;
+        currentAngle = ElbowConstants.MINIMUM_ANGLE;
     }
 
     public static void init() {
@@ -41,8 +41,8 @@ public class Elbow extends GBSubsystem {
     public void periodic() {
         super.periodic();
         elbow.updateInputs(elbowInputs);
-        if (NeoElbowConstants.MINIMUM_ANGLE.getRadians() > elbowInputs.position.getRadians()){
-            elbow.resetAngle(NeoElbowConstants.MINIMUM_ANGLE);
+        if (ElbowConstants.MINIMUM_ANGLE.getRadians() > elbowInputs.position.getRadians()){
+            elbow.resetAngle(ElbowConstants.MINIMUM_ANGLE);
         }
         Logger.processInputs("Elbow", elbowInputs);
         Logger.recordOutput("Elbow", getPose3D());

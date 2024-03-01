@@ -20,6 +20,8 @@ public class ElbowConstants {
         }
     }
 
+    public static final Rotation2d MINIMUM_ANGLE = Rotation2d.fromDegrees(-82);
+
     public static final double ARM_LENGTH = 0.44;
 
     public static final double ARM_DISTANCE_FROM_CENTER = 0.1;
