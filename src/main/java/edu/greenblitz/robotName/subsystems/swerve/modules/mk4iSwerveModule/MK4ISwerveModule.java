@@ -15,6 +15,7 @@ import edu.greenblitz.robotName.subsystems.swerve.modules.SwerveModuleInputsAuto
 import edu.greenblitz.robotName.utils.motors.GBTalonFXPro;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MK4ISwerveModule implements ISwerveModule {
 
@@ -125,6 +126,8 @@ public class MK4ISwerveModule implements ISwerveModule {
 		}
 	}
 
+	double vel = 0;
+
 	@Override
 	public void updateInputs(SwerveModuleInputsAutoLogged inputs) {
 		updateStatusSignals(true);
@@ -147,6 +150,11 @@ public class MK4ISwerveModule implements ISwerveModule {
 			inputs.absoluteEncoderPosition = 0;
 		} else {
 			inputs.absoluteEncoderPosition = Units.rotationsToRadians(canCoder.getAbsolutePosition().getValue());
+		}
+
+		if (vel< Math.abs(inputs.linearVelocity)){
+			vel = Math.abs(inputs.linearVelocity);
+			SmartDashboard.putNumber(angularMotor.getDeviceID() + "vel", vel);
 		}
 	}
 }
