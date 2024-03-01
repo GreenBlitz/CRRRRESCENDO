@@ -12,7 +12,7 @@ public class ElbowConstants {
         SCORE(Rotation2d.fromDegrees(85)),
         STARTING(Rotation2d.fromDegrees(0)),
         TRANSFER(Rotation2d.fromDegrees(-75)),
-        CLIMB(Rotation2d.fromDegrees()); //find
+        CLIMB(Rotation2d.fromDegrees(85));
 
         public final Rotation2d ANGLE;
 
