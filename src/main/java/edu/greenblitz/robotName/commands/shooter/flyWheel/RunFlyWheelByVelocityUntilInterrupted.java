@@ -4,14 +4,14 @@ import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 
-public class RunFlyWheelByVelocityWithoutIsFinished extends FlyWheelCommand {
+public class RunFlyWheelByVelocityUntilInterrupted extends FlyWheelCommand {
 
     double rightWheelVelocity;
     double leftWheelVelocity;
     private int timeInShootingSpeed;
     private SmartJoystick joystick;
 
-    public RunFlyWheelByVelocityWithoutIsFinished(double velocity, SmartJoystick joystick) {
+    public RunFlyWheelByVelocityUntilInterrupted(double velocity, SmartJoystick joystick) {
         rightWheelVelocity = velocity;
         leftWheelVelocity = velocity * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR;
         this.joystick = joystick;

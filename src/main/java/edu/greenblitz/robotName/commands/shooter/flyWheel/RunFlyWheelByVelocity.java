@@ -6,7 +6,9 @@ import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 public class RunFlyWheelByVelocity extends FlyWheelCommand {
 
     double rightWheelVelocity;
+
     double leftWheelVelocity;
+
     private int timeInShootingSpeed;
 
     public RunFlyWheelByVelocity(double velocity) {

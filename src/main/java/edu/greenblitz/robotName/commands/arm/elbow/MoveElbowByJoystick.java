@@ -18,6 +18,6 @@ public class MoveElbowByJoystick extends ElbowCommand {
     @Override
     public void execute() {
         double power = joystick.getAxisValue(axis);
-        elbow.setPower(power);
+        elbow.setPower(power * RobotConstants.General.SAFETY_POWER_CONVERSION_FACTOR);
     }
 }

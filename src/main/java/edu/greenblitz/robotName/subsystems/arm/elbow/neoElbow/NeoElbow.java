@@ -52,8 +52,11 @@ public class NeoElbow implements IElbow {
 
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
-        if (targetAngle.getDegrees() <= ElbowConstants.BACKWARD_ANGLE_LIMIT.getDegrees()){
+        if (targetAngle.getDegrees() < ElbowConstants.BACKWARD_ANGLE_LIMIT.getDegrees()){
             targetAngle = ElbowConstants.BACKWARD_ANGLE_LIMIT;
+        }
+        else if (targetAngle.getDegrees() > ElbowConstants.FORWARD_ANGLE_LIMIT.getDegrees()){
+            targetAngle = ElbowConstants.FORWARD_ANGLE_LIMIT;
         }
         motor.getPIDController().setReference(
                 targetAngle.getRotations(),
