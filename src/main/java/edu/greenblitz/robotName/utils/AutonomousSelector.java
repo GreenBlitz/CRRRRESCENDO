@@ -18,8 +18,8 @@ public class AutonomousSelector {
 
     private AutonomousSelector() {
         chooser = AutoBuilder.buildAutoChooser();
-        chooser.addOption("playoffsgame", new ShootToSpeakerFromClose());
         ShuffleboardTab tab = Shuffleboard.getTab("auto");
+        chooser.addOption("auto", AutoBuilder.buildAuto("2 to 1 close"));
         tab.add("autonomous chooser", chooser);
     }
 

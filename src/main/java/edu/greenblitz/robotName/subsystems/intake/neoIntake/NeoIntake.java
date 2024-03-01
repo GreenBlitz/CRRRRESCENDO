@@ -47,14 +47,11 @@ public class NeoIntake implements IIntake {
 		);
 	}
 	
-	int count = 0;
-	
 	@Override
 	public void updateInputs(IntakeInputsAutoLogged intakeInputs) {
 		intakeInputs.outputCurrent = motor.getOutputCurrent();
 		intakeInputs.appliedOutput = motor.getAppliedOutput();
 		intakeInputs.velocity = motor.getEncoder().getVelocity();
 		intakeInputs.beamBreakerValue = debouncer.calculate(motor.getReverseLimitSwitch(NeoIntakeConstants.BEAM_BREAKER_TYPE).isPressed());
-		SmartDashboard.putNumber("velvel intake", intakeInputs.velocity);
 	}
 }

@@ -50,7 +50,5 @@ public class NeoFunnel implements IFunnel {
 		inputs.appliedOutput = motor.getAppliedOutput() * 12;
 		inputs.velocity = motor.getEncoder().getVelocity();
 		inputs.isObjectIn = debouncer.calculate(motor.getReverseLimitSwitch(NeoFunnelConstants.BEAM_BREAKER_TYPE).isPressed());
-		SmartDashboard.putNumber("app out", inputs.appliedOutput);
-		SmartDashboard.putNumber("vel fun", inputs.velocity);
 	}
 }

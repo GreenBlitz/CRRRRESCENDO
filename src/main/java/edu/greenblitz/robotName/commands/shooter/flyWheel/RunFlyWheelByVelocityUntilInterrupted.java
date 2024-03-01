@@ -2,27 +2,22 @@ package edu.greenblitz.robotName.commands.shooter.flyWheel;
 
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
+import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 
-public class RunFlyWheelByVelocity extends FlyWheelCommand {
+public class RunFlyWheelByVelocityUntilInterrupted extends FlyWheelCommand {
 
+    private double rightWheelVelocity;
 
-    double rightWheelVelocity;
-
-    double leftWheelVelocity;
+    private double leftWheelVelocity;
 
     private int timeInShootingSpeed;
 
-    double spin;
+    private SmartJoystick joystick;
 
-    public RunFlyWheelByVelocity(double velocity) {
+    public RunFlyWheelByVelocityUntilInterrupted(double velocity, SmartJoystick joystick) {
         rightWheelVelocity = velocity;
         leftWheelVelocity = velocity * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR;
-    }
-
-    public RunFlyWheelByVelocity(double velocity, double spin) {
-        this.spin = spin;
-        rightWheelVelocity = velocity;
-        leftWheelVelocity = velocity * spin;
+        this.joystick = joystick;
     }
 
     protected void changeVelocity(double velocity) {
@@ -41,7 +36,7 @@ public class RunFlyWheelByVelocity extends FlyWheelCommand {
         if (Robot.isSimulation()) {
             flyWheel.setVelocity(leftWheelVelocity, rightWheelVelocity);
         }
-        if (flyWheel.isAtVelocity(leftWheelVelocity, rightWheelVelocity)) {
+        if (flyWheel.isAtVelocity(rightWheelVelocity, leftWheelVelocity)) {
             timeInShootingSpeed++;
         } else {
             timeInShootingSpeed = 0;
@@ -51,7 +46,16 @@ public class RunFlyWheelByVelocity extends FlyWheelCommand {
 
     @Override
     public boolean isFinished() {
-        return flyWheel.getPreparedToShoot();
+        if (flyWheel.getPreparedToShoot()) {
+            joystick.rumble(true, 0.4);
+        }
+        return false;
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        joystick.rumble(true, 0);
+        flyWheel.stop();
     }
 
 }
