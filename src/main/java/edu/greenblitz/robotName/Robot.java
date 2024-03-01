@@ -123,11 +123,10 @@ public class Robot extends LoggedRobot {
             case SYNCOPA:
                 try {
                     Logger.addDataReceiver(new WPILOGWriter(RobotConstants.USB_LOG_PATH));
-                    Logger.addDataReceiver(new WPILOGWriter(LogFileUtil.addPathSuffix(RobotConstants.USB_LOG_PATH, "_logs")));
                     System.out.println("initialized Logger, USB");
                 } catch (Exception e) {
                     Logger.end();
-                    Logger.addDataReceiver(new WPILOGWriter(LogFileUtil.addPathSuffix(RobotConstants.SAFE_ROBORIO_LOG_PATH, "_logs")));
+                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
                     System.out.println("initialized Logger, roborio");
                 }
                 Logger.addDataReceiver(new NT4Publisher());
