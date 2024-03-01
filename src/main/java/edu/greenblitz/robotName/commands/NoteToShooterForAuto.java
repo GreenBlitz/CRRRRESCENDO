@@ -8,7 +8,7 @@ public class NoteToShooterForAuto extends SequentialCommandGroup {
 	
 	public NoteToShooterForAuto(){
 		super(
-				new NoteToIntake(true),
+				new NoteToIntake(),
 				new NoteFromIntakeToShooter()
 		);
 	}
