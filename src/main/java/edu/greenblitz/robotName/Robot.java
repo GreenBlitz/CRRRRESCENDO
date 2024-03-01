@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName;
 
+import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.pathfinding.LocalADStar;
@@ -149,8 +150,11 @@ public class Robot extends LoggedRobot {
 
     @Override
     public void autonomousInit() {
+        Elbow.getInstance().setIdleMode(NeutralModeValue.Brake);
+        Pivot.getInstance().setIdleMode(NeutralModeValue.Brake);
         AutonomousSelector.getInstance().getChosenValue().schedule();
     }
+
 
     public enum RobotType {
         SYNCOPA,
