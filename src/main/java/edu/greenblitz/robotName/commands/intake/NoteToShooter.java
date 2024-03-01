@@ -7,7 +7,7 @@ public class NoteToShooter extends SequentialCommandGroup {
 
     public NoteToShooter() {
         super(
-                new NoteToIntake()
+                new NoteToIntake(false)
 //                new NoteFromIntakeToShooter()//.alongWith(new RunRollerClockwiseUntilObjectIsOut())
         );
     }

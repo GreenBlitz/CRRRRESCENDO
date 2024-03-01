@@ -1,19 +1,24 @@
 package edu.greenblitz.robotName.commands.shooter.flyWheel;
 
+import edu.greenblitz.robotName.OI;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
+import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 
 public class RunFlyWheelByVelocityWithoutIsFinished extends FlyWheelCommand{
 
 	private int timeInShootingSpeed;
+	
+	private SmartJoystick joystick;
 
 	double rightWheelVelocity;
 
 	double leftWheelVelocity;
 
-	public RunFlyWheelByVelocityWithoutIsFinished(double velocity) {
+	public RunFlyWheelByVelocityWithoutIsFinished(double velocity, SmartJoystick joystick) {
 		rightWheelVelocity = velocity;
 		leftWheelVelocity = velocity * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR;
+		this.joystick = joystick;
 	}
 
 	protected void changeVelocity(double velocity) {
@@ -39,9 +44,18 @@ public class RunFlyWheelByVelocityWithoutIsFinished extends FlyWheelCommand{
 		}
 		flyWheel.setPreparedToShoot(timeInShootingSpeed >= FlyWheelConstants.MINIMUM_SHOOTING_SPEED_TIME_ROBORIO_CYCLES);
 	}
-
+	
+	@Override
+	public boolean isFinished() {
+		if (flyWheel.getPreparedToShoot()){
+			joystick.rumble(true, 0.4);
+		}
+		return false;
+	}
+	
 	@Override
 	public void end(boolean interrupted) {
+		joystick.rumble(true, 0);
 		flyWheel.stop();
 	}
 

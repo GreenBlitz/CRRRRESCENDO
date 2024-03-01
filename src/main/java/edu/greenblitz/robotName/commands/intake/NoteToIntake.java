@@ -4,6 +4,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class NoteToIntake extends IntakeCommand {
     
+    private boolean isAuto;
+    public NoteToIntake(boolean isAuto){
+        super();
+        this.isAuto = isAuto;
+    }
+    
     @Override
     public void initialize() {
         SmartDashboard.putNumber("init",1);
@@ -22,7 +28,7 @@ public class NoteToIntake extends IntakeCommand {
     @Override
     public void end(boolean interrupted) {
         intake.stop();
-        if (!interrupted) {
+        if (!interrupted && !isAuto) {
             new NoteFromIntakeToShooter().schedule();
         }
     }

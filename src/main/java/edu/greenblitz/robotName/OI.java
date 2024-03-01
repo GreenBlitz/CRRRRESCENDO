@@ -113,7 +113,7 @@ public class OI {
 		secondJoystick.X.whileTrue(new RunIntakeByPower(0.5));
 
 		//FlyWheel Run
-		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityWithoutIsFinished(100));
+		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityWithoutIsFinished(100, secondJoystick));
 		//pit flywheel
 //		secondJoystick.L1.whileTrue(new RunFlyWheelByPower(0.15));
 

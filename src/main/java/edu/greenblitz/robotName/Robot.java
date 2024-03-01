@@ -4,6 +4,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
+import edu.greenblitz.robotName.commands.NoteToShooterForAuto;
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
 import edu.greenblitz.robotName.commands.intake.CollectNoteFromGround;
 import edu.greenblitz.robotName.commands.intake.NoteFromIntakeToShooter;
@@ -95,9 +96,9 @@ public class Robot extends LoggedRobot {
         Funnel.init();
         FlyWheel.init();
 
-        Elbow.init();
-        Wrist.init();
-        Roller.init();
+//        Elbow.init();
+//        Wrist.init();
+//        Roller.init();
 
 //        Lifter.init();
         Intake.init();
@@ -128,7 +129,7 @@ public class Robot extends LoggedRobot {
     private void initializeAutonomousBuilder() {
         NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
         NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
-        NamedCommands.registerCommand("grip",(new NoteToShooter()).raceWith(new WaitCommand(3.5)));
+        NamedCommands.registerCommand("grip",(new NoteToShooterForAuto()).raceWith(new WaitCommand(3.5)));
         AutoBuilder.configureHolonomic(
                 SwerveChassis.getInstance()::getRobotPose2d,
                 SwerveChassis.getInstance()::resetChassisPose,
@@ -151,6 +152,7 @@ public class Robot extends LoggedRobot {
             case SYNCOPA:
                 try {
                     Logger.addDataReceiver(new WPILOGWriter(RobotConstants.USB_LOG_PATH));
+                    Logger.addDataReceiver(new WPILOGWriter(LogFileUtil.addPathSuffix(RobotConstants.USB_LOG_PATH, "_logs")));
                     System.out.println("initialized Logger, USB");
                 } catch (Exception e) {
                     Logger.end();
