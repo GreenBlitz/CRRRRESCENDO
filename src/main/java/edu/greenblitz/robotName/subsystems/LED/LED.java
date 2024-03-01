@@ -99,7 +99,7 @@ public class LED extends GBSubsystem {
 	}
 	
 	public void setColorByMode() {
-		setLEDColor(currentColor, LEDConstants.ALL_LED);
+		setLEDColor(currentColor, LEDConstants.ALL_LEDS);
 	}
 	
 	public Color getColorByMode() {
@@ -124,9 +124,9 @@ public class LED extends GBSubsystem {
 	
 	public void blink(Color color) {
 		if ((LEDBlinkTimer.get()) % (LEDConstants.BLINK_DURATION * 2) >= LEDConstants.BLINK_DURATION) {
-			LED.getInstance().turnOff(LEDConstants.ALL_LED);
+			LED.getInstance().turnOff(LEDConstants.ALL_LEDS);
 		} else {
-			LED.getInstance().setLEDColor(color, LEDConstants.ALL_LED);
+			LED.getInstance().setLEDColor(color, LEDConstants.ALL_LEDS);
 		}
 	}
 	
