@@ -3,7 +3,9 @@ package edu.greenblitz.robotName.subsystems.intake.simulationIntake;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.intake.IIntake;
 import edu.greenblitz.robotName.subsystems.intake.IntakeInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.intake.neoIntake.NeoIntakeConstants;
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -15,10 +17,10 @@ public class SimulationIntake implements IIntake {
 	
 	private double appliedOutput;
 	
-	private SendableChooser<Boolean> entranceBeamBreaker;
+	private SendableChooser<Boolean> beamBreaker;
 	
-	private SendableChooser<Boolean> exitBeamBreaker;
-	
+	private PIDController pidController;
+
 	public SimulationIntake() {
 		motorSimulation = new DCMotorSim(
 				DCMotor.getNEO(SimulationIntakeConstants.NUMBER_OF_MOTORS),
@@ -26,15 +28,12 @@ public class SimulationIntake implements IIntake {
 				SimulationIntakeConstants.MOMENT_OF_INERTIA
 		);
 		
-		entranceBeamBreaker = new SendableChooser<>();
-		entranceBeamBreaker.setDefaultOption("False", false);
-		entranceBeamBreaker.addOption("True", true);
-		SmartDashboard.putData("is object in intake entrance", entranceBeamBreaker);
+		pidController = NeoIntakeConstants.PID_CONTROLLER.getPIDController();
 		
-		exitBeamBreaker = new SendableChooser<>();
-		exitBeamBreaker.setDefaultOption("False", false);
-		exitBeamBreaker.addOption("True", true);
-		SmartDashboard.putData("is object in intake exit", exitBeamBreaker);
+		beamBreaker = new SendableChooser<>();
+		beamBreaker.setDefaultOption("False", false);
+		beamBreaker.addOption("True", true);
+		SmartDashboard.putData("is object in intake entrance", beamBreaker);
 	}
 	
 	@Override
@@ -53,11 +52,18 @@ public class SimulationIntake implements IIntake {
 	}
 	
 	@Override
+	public void setVelocity(double velocity) {
+		pidController.setSetpoint(velocity);
+		setVoltage(
+				pidController.calculate(motorSimulation.getAngularVelocityRPM())
+		);
+	}
+	
+	@Override
 	public void updateInputs(IntakeInputsAutoLogged intakeInputs) {
 		intakeInputs.appliedOutput = appliedOutput;
 		intakeInputs.outputCurrent = motorSimulation.getCurrentDrawAmps();
 		intakeInputs.velocity = motorSimulation.getAngularVelocityRPM();
-		intakeInputs.entranceBeamBreakerValue = entranceBeamBreaker.getSelected();
-		intakeInputs.exitBeamBreakerValue = exitBeamBreaker.getSelected();
+		intakeInputs.beamBreakerValue = beamBreaker.getSelected();
 	}
 }

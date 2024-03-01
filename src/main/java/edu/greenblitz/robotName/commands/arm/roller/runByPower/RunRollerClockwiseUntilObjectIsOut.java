@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.commands.arm.roller.runByPower;
 
 import edu.greenblitz.robotName.commands.arm.roller.RollerCommand;
+import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 
 public class RunRollerClockwiseUntilObjectIsOut extends RollerCommand {
 

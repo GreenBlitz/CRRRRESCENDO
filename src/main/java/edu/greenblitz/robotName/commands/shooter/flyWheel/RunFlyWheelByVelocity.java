@@ -32,17 +32,21 @@ public class RunFlyWheelByVelocity extends FlyWheelCommand {
         if (Robot.isSimulation()) {
             flyWheel.setVelocity(leftWheelVelocity, rightWheelVelocity);
         }
-        if (flyWheel.isRightWheelAtVelocity(rightWheelVelocity)
-                && flyWheel.isLeftWheelAtVelocity(leftWheelVelocity)) {
+        if (flyWheel.isAtVelocity(leftWheelVelocity, rightWheelVelocity)) {
             timeInShootingSpeed++;
         } else {
             timeInShootingSpeed = 0;
         }
-        flyWheel.setPreparedToShoot(timeInShootingSpeed > FlyWheelConstants.SHOOTING_SPEED_TIME_SECONDS);
+        flyWheel.setPreparedToShoot(timeInShootingSpeed >= FlyWheelConstants.MINIMUM_SHOOTING_SPEED_TIME_ROBORIO_CYCLES);
     }
 
     @Override
     public boolean isFinished() {
         return flyWheel.getPreparedToShoot();
+    }
+    
+    @Override
+    public void end(boolean interrupted) {
+        flyWheel.stop();
     }
 }

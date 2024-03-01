@@ -1,0 +1,73 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.708089344106616,
+      "y": 4.354255194996877
+    },
+    "rotation": 119.98163936884933
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "close shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "speaker to 3"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "grip"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "3 to speaker"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "close shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "speaker to 8"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "grip"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "8 to speaker"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "close shoot"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

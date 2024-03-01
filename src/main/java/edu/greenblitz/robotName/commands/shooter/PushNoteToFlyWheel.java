@@ -11,8 +11,7 @@ public class PushNoteToFlyWheel extends SequentialCommandGroup {
     public PushNoteToFlyWheel() {
         super(
                 new ForwardRunFunnelUntilObjectOut(),
-                new WaitCommand(FlyWheelConstants.DELAY_SECONDS_UNTIL_EXIT),
-                new StopFlyWheel()
+                new WaitCommand(FlyWheelConstants.DELAY_SECONDS_UNTIL_EXIT)
         );
     }
 }

@@ -27,11 +27,21 @@ public class BagFunnel implements IFunnel {
 		motor.set(ControlMode.PercentOutput, power);
 	}
 	
+	@Override
+	public void setVoltage(double voltage) {
+	
+	}
+	
+	@Override
+	public void setVelocity(double velocity) {
+	
+	}
+	
 	
 	@Override
 	public void updateInputs(FunnelInputsAutoLogged funnelInputs) {
 		funnelInputs.appliedOutput = motor.getMotorOutputVoltage();
-		funnelInputs.appliedOutput = motor.getMotorOutputVoltage();
+		funnelInputs.outputCurrent = motor.getSupplyCurrent();
 		funnelInputs.isObjectIn = debouncer.calculate(beamBreaker.get());
 	}
 }

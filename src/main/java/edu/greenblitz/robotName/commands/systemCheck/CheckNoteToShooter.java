@@ -1,16 +1,15 @@
-package edu.greenblitz.robotName.commands;
+package edu.greenblitz.robotName.commands.systemCheck;
 
 import edu.greenblitz.robotName.subsystems.intake.Intake;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
-import edu.greenblitz.robotName.utils.GBCommand;
 
-public class NoteToShooter extends GBCommand {
+public class CheckNoteToShooter extends SystemCheckCommand {
 
     private Funnel funnel;
 
     private Intake intake;
 
-    public NoteToShooter() {
+    public CheckNoteToShooter() {
         funnel = Funnel.getInstance();
         intake = Intake.getInstance();
         require(intake);
@@ -30,6 +29,7 @@ public class NoteToShooter extends GBCommand {
 
     @Override
     public void end(boolean interrupted) {
+        super.end(interrupted);
         funnel.stop();
         intake.stop();
     }

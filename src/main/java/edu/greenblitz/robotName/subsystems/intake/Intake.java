@@ -43,6 +43,10 @@ public class Intake extends GBSubsystem {
     public double getVelocity() {
         return intakeInputs.velocity;
     }
+    
+    public void setVelocity(double velocity){
+        intake.setVelocity(velocity);
+    }
 
     public void stop() {
         setPower(0);
@@ -61,11 +65,7 @@ public class Intake extends GBSubsystem {
         Logger.processInputs("intake", intakeInputs);
     }
 
-    public boolean getEntranceBeamBreakerValue() {
-        return intakeInputs.entranceBeamBreakerValue;
-    }
-
-    public boolean getExitBeamBreakerValue() {
-        return intakeInputs.exitBeamBreakerValue;
+    public boolean isObjectIn() {
+        return intakeInputs.beamBreakerValue;
     }
 }

@@ -1,0 +1,118 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.4,
+      "y": 5.55
+    },
+    "rotation": 4.35542488537107
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "close shoot"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "grip"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "speaker start to 2"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "2 to speaker"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "close shoot"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "grip"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "speaker mid to 3"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "3 to speaker"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "close shoot"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "speaker to 1"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "grip"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "1 to speaker"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "close shoot"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

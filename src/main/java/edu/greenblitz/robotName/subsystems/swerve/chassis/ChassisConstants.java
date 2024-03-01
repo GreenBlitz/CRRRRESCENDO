@@ -27,16 +27,28 @@ public class ChassisConstants {
 	public static final double ROBOT_RADIUS = Math.sqrt(Math.pow(ROBOT_WIDTH_WITH_BUMPER / 2, 2) + Math.pow(ROBOT_LENGTH_WITH_BUMPER / 2, 2));
 	
 	static final Pose2d INITIAL_ROBOT_POSITION = new Pose2d(0, 0, new Rotation2d(0));
-	
-	public static final double FRONT_LEFT_X_POSITION = 0.3020647;
-	
-	public static final double FRONT_LEFT_Y_POSITION = 0.25265;
-	
+
+	public static final double FRONT_LEFT_X_POSITION = 0.344;
+
+	public static final double FRONT_LEFT_Y_POSITION = 0.281;
+
+	public static final double FRONT_RIGHT_X_POSITION = -0.344;
+
+	public static final double FRONT_RIGHT_Y_POSITION = 0.281;
+
+	public static final double BACK_RIGHT_X_POSITION = -0.344;
+
+	public static final double BACK_RIGHT_Y_POSITION = -0.280;
+
+	public static final double BACK_LEFT_X_POSITION = 0.344;
+
+	public static final double BACK_LEFT_Y_POSITION = -0.280;
+
 	public static final Translation2d[] SWERVE_LOCATIONS_IN_SWERVE_KINEMATICS_COORDINATES = new Translation2d[]{
 			new Translation2d(FRONT_LEFT_X_POSITION, FRONT_LEFT_Y_POSITION),
-			new Translation2d(FRONT_LEFT_X_POSITION, -FRONT_LEFT_Y_POSITION),
-			new Translation2d(-FRONT_LEFT_X_POSITION, FRONT_LEFT_Y_POSITION),
-			new Translation2d(-FRONT_LEFT_X_POSITION, -FRONT_LEFT_Y_POSITION)
+			new Translation2d(BACK_LEFT_X_POSITION, BACK_LEFT_Y_POSITION),
+			new Translation2d(FRONT_RIGHT_X_POSITION, FRONT_RIGHT_Y_POSITION),
+			new Translation2d(BACK_RIGHT_X_POSITION, BACK_RIGHT_Y_POSITION)
 	};
 	
 	public static final PIDController ROTATION_PID_CONTROLLER = new PIDController(3, 0, 0.2);
@@ -53,7 +65,7 @@ public class ChassisConstants {
 	
 	public static final double MAX_ANGULAR_ACCELERATION = 4;
 	
-	public static final double FAST_DISCRETION_CONSTANT = 8;
+	public static final double FAST_DISCRETION_CONSTANT = 1;
 	
 	public static final double SLOW_DISCRETION_CONSTANT = FAST_DISCRETION_CONSTANT / 2;
 	
@@ -65,13 +77,13 @@ public class ChassisConstants {
 	
 	public static final double DRIVER_LINEAR_SPEED_FACTOR_SLOW = 0.5;
 	
-	public static final boolean ANGULAR_JOYSTICK_INVERTED = true;
+	public static final boolean ANGULAR_JOYSTICK_INVERTED = false;
 	
 	public static final boolean LINEAR_JOYSTICK_INVERTED = false;
 	
-	public static final PIDConstants TRANSLATION_PID = new PIDConstants(2, 0, 0);
+	public static final PIDConstants TRANSLATION_PID = new PIDConstants(2.2, 0, 0);
 	
-	public static final PIDConstants ROTATION_PID = new PIDConstants(3.6, 0, 0);
+	public static final PIDConstants ROTATION_PID = new PIDConstants(0, 0, 0);
 	
 	public static final double TOTAL_ERROR_FOR_REPLANNING = 0.5;
 	
@@ -93,8 +105,8 @@ public class ChassisConstants {
 	);
 	
 	public static final PathConstraints CONSTRAINTS = new PathConstraints(
-			MAX_VELOCITY,
-			MAX_ACCELERATION,
+			MAX_VELOCITY /2,
+			MAX_ACCELERATION /2,
 			MAX_ANGULAR_SPEED,
 			MAX_ANGULAR_ACCELERATION
 	);
@@ -103,5 +115,5 @@ public class ChassisConstants {
 	
 	public static final boolean IS_JOYSTICK_FORWARD_VALUE_INVERTED = false;
 	
-	public static final boolean IS_JOYSTICK_LEFTWARD_VALUE_INVERTED = true;
+	public static final boolean IS_JOYSTICK_LEFTWARD_VALUE_INVERTED = false;
 }

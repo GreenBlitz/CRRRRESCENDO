@@ -13,6 +13,11 @@ public class ReplayIntake implements IIntake {
 	}
 	
 	@Override
+	public void setVelocity(double velocity) {
+	
+	}
+	
+	@Override
 	public void updateInputs(IntakeInputsAutoLogged intakeInputs) {
 	
 	}

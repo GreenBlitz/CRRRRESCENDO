@@ -5,29 +5,30 @@ import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.SwerveModuleConfigObject;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
 
 import static edu.greenblitz.robotName.RobotConstants.General.CANIVORE_NAME;
 
 public class MK4iSwerveConstants {
 	
-	public static SwerveModuleConfigObject MK4I_MODULE_FRONT_LEFT = new SwerveModuleConfigObject(CANIVORE_NAME, 1, 0, 1, false);
+	public static SwerveModuleConfigObject MK4I_MODULE_FRONT_LEFT = new SwerveModuleConfigObject(CANIVORE_NAME, 5, 4, 0, true, true);
 	
-	public static SwerveModuleConfigObject MK4I_MODULE_FRONT_RIGHT = new SwerveModuleConfigObject(CANIVORE_NAME, 3, 2, 2, true);
+	public static SwerveModuleConfigObject MK4I_MODULE_FRONT_RIGHT = new SwerveModuleConfigObject(CANIVORE_NAME, 3, 2, 1, false, true);
 	
-	public static SwerveModuleConfigObject MK4I_MODULE_BACK_LEFT = new SwerveModuleConfigObject(CANIVORE_NAME, 5, 4, 3, false);
+	public static SwerveModuleConfigObject MK4I_MODULE_BACK_LEFT = new SwerveModuleConfigObject(CANIVORE_NAME, 1, 43, 2, true, false);
 	
-	public static SwerveModuleConfigObject MK4I_MODULE_BACK_RIGHT = new SwerveModuleConfigObject(CANIVORE_NAME, 7, 6, 4, true);
+	public static SwerveModuleConfigObject MK4I_MODULE_BACK_RIGHT = new SwerveModuleConfigObject(CANIVORE_NAME, 7, 6, 3, true, true);
 	
 	public static final double ANGULAR_GEAR_RATIO = (150.0 / 7);
 	
-	public static final double LINEAR_GEAR_RATIO = 8.14;
-	
-	public static final double ks = 0.16411;
-	
-	public static final double kv = 2.6824;
-	
-	public static final double ka = 0.25968;
+	public static final double LINEAR_GEAR_RATIO = 6.12;
+
+	public static final double ks = 0.32;
+
+	public static final double kv = 0;
+
+	public static final double ka = 0;
 	
 	public static final double WHEEL_RADIUS = Units.inchesToMeters(2);
 	
@@ -40,46 +41,43 @@ public class MK4iSwerveConstants {
 	public static final TalonFXConfiguration ANGULAR_FALCON_CONFIG_OBJECT = new TalonFXConfiguration();
 	
 	static {
+		FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();
+		FEEDBACK_CONFIGS.SensorToMechanismRatio = ANGULAR_GEAR_RATIO;
+
 		Slot0Configs PID_CONFIGS = new Slot0Configs();
-		PID_CONFIGS.kP = 1;
+		PID_CONFIGS.kS = ks;
+		PID_CONFIGS.kA = ka;
+		PID_CONFIGS.kV = kv;
+		PID_CONFIGS.kP = 20;
 		PID_CONFIGS.kI = 0;
-		PID_CONFIGS.kD = 0;
-		PID_CONFIGS.kS = 0;
-		PID_CONFIGS.kV = 0;
+		PID_CONFIGS.kD = 1;
 		
 		CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();
 		CURRENT_LIMITS_CONFIGS.StatorCurrentLimitEnable = true;
 		CURRENT_LIMITS_CONFIGS.StatorCurrentLimit = 40;
-		CURRENT_LIMITS_CONFIGS.SupplyCurrentThreshold = 2;
 		
-		ClosedLoopRampsConfigs CLOSED_LOOP_RAMPS_CONFIGS = new ClosedLoopRampsConfigs();
-		CLOSED_LOOP_RAMPS_CONFIGS.VoltageClosedLoopRampPeriod = 0.1;
+
 		
-		var MOTOR_OUTPUT_CONFIGS = new MotorOutputConfigs();
+		MotorOutputConfigs MOTOR_OUTPUT_CONFIGS = new MotorOutputConfigs();
 		MOTOR_OUTPUT_CONFIGS.NeutralMode = NeutralModeValue.Brake;
-		MOTOR_OUTPUT_CONFIGS.Inverted = InvertedValue.CounterClockwise_Positive; //true
-		
-		MotionMagicConfigs MOTION_MAGIC_CONFIGS = new MotionMagicConfigs();
-		MOTION_MAGIC_CONFIGS.MotionMagicAcceleration = 10;
-		MOTION_MAGIC_CONFIGS.MotionMagicCruiseVelocity = 20;
-		MOTION_MAGIC_CONFIGS.MotionMagicJerk = 5;
-		
+		MOTOR_OUTPUT_CONFIGS.Inverted = InvertedValue.CounterClockwise_Positive;
+
 		ANGULAR_FALCON_CONFIG_OBJECT.Slot0 = PID_CONFIGS;
 		ANGULAR_FALCON_CONFIG_OBJECT.CurrentLimits = CURRENT_LIMITS_CONFIGS;
-		ANGULAR_FALCON_CONFIG_OBJECT.ClosedLoopRamps = CLOSED_LOOP_RAMPS_CONFIGS;
 		ANGULAR_FALCON_CONFIG_OBJECT.MotorOutput = MOTOR_OUTPUT_CONFIGS;
-		ANGULAR_FALCON_CONFIG_OBJECT.MotionMagic = MOTION_MAGIC_CONFIGS;
+		ANGULAR_FALCON_CONFIG_OBJECT.Feedback = FEEDBACK_CONFIGS;
 	}
 	
 	public static final TalonFXConfiguration LINEAR_FALCON_CONFIG_OBJECT = new TalonFXConfiguration();
 	
 	static {
 		Slot0Configs PID_CONFIGS = new Slot0Configs();
-		PID_CONFIGS.kP = 0.2;
+		PID_CONFIGS.kS = 0.0098261;
+		PID_CONFIGS.kA = 0.22448;
+		PID_CONFIGS.kV = 0.71632;
+		PID_CONFIGS.kP = 3;
 		PID_CONFIGS.kI = 0;
 		PID_CONFIGS.kD = 0;
-		PID_CONFIGS.kS = 0;
-		PID_CONFIGS.kV = 0;
 		
 		CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();
 		CURRENT_LIMITS_CONFIGS.StatorCurrentLimitEnable = true;
@@ -98,7 +96,6 @@ public class MK4iSwerveConstants {
 		
 		FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();
 		FEEDBACK_CONFIGS.SensorToMechanismRatio = LINEAR_GEAR_RATIO;
-		FEEDBACK_CONFIGS.FeedbackRotorOffset = 0;
 		
 		LINEAR_FALCON_CONFIG_OBJECT.Slot0 = PID_CONFIGS;
 		LINEAR_FALCON_CONFIG_OBJECT.CurrentLimits = CURRENT_LIMITS_CONFIGS;

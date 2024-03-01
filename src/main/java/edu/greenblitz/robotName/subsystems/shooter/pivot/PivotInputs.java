@@ -16,7 +16,7 @@ public class PivotInputs {
 	
 	public double acceleration;
 	
-	public double absoluteEncoderPosition;
+	public Rotation2d absoluteEncoderPosition;
 	
 	public double temperature;
 	
