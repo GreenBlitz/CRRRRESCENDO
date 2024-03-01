@@ -5,11 +5,9 @@ import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 
 public class RunFlyWheelByVelocity extends FlyWheelCommand {
 
-    private int timeInShootingSpeed;
-
     double rightWheelVelocity;
-
     double leftWheelVelocity;
+    private int timeInShootingSpeed;
 
     public RunFlyWheelByVelocity(double velocity) {
         rightWheelVelocity = velocity;
@@ -44,9 +42,5 @@ public class RunFlyWheelByVelocity extends FlyWheelCommand {
     public boolean isFinished() {
         return flyWheel.getPreparedToShoot();
     }
-    
-    @Override
-    public void end(boolean interrupted) {
-//        flyWheel.stop();
-    }
+
 }

@@ -5,7 +5,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 
 public class FunnelConstants {
 	
-	public static final double ROLL_POWER = 0.7;
+	public static final double ROLL_POWER = 0.5;
 	
 	public static final double EJECT_POWER = -0.5;
 	

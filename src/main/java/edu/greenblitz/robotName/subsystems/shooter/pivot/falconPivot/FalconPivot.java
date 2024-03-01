@@ -105,9 +105,6 @@ public class FalconPivot implements IPivot {
 		inputs.temperature = motor.getDeviceTemp().getValue();
 		inputs.hasHitForwardLimit = motor.getForwardLimit().getValue().value == IS_SWITCH_CLOSED;
 		inputs.hasHitBackwardsLimit = motor.getReverseLimit().getValue().value == IS_SWITCH_CLOSED;
-		inputs.positionReferance = Rotation2d.fromRotations(motor.getClosedLoopReference().getValue());
-		
-		SmartDashboard.putNumber("curr pos pivot", inputs.position.getDegrees());
-		SmartDashboard.putNumber("ref pos pivot", inputs.positionReferance.getDegrees());
+		inputs.positionReference = Rotation2d.fromRotations(motor.getClosedLoopReference().getValue());
 	}
 }

@@ -13,7 +13,7 @@ public class CollectNoteFromGround extends ConditionalCommand {
     public CollectNoteFromGround() {
         super(
                 new NoteToShooter(),
-                new NoteToIntake(false)
+                new NoteToIntake()
                         .alongWith(new MoveShooterToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE))
                         .andThen(new NoteFromIntakeToShooter()),
                 () -> Pivot.getInstance().isAtAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE)

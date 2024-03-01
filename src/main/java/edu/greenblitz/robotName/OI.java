@@ -41,22 +41,6 @@ public class OI {
 		
 		initButtons();
 		initializeDefaultCommands();
-//		TalonSRX a = new TalonSRX(5);
-//		thirdJoystick.B.onTrue(new InstantCommand(() -> a.set(TalonSRXControlMode.PercentOutput, 1)));
-//		thirdJoystick.A.onTrue(new InstantCommand(() -> a.set(TalonSRXControlMode.PercentOutput, 0)));
-//		thirdJoystick.X.onTrue(new InstantCommand(() -> a.set(TalonSRXControlMode.PercentOutput, 0.2)));
-//		thirdJoystick.POV_DOWN.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(70)));
-//		thirdJoystick.POV_UP.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(-80)));
-//
-//		thirdJoystick.POV_RIGHT.whileTrue(new MoveWristToAngle(new Rotation2d(0)));
-//		thirdJoystick.POV_RIGHT.whileTrue(new MoveWristToAngle(new Rotation2d(40
-//		)));
-//
-//		thirdJoystick.B.whileTrue(
-//				new RunCommand(
-//						() -> Lifter.getInstance().setPower(thirdJoystick.getAxisValue(SmartJoystick.Axis.RIGHT_X))
-//				)
-//		);
 	}
 	
 	public static void init() {
@@ -93,7 +77,6 @@ public class OI {
 	
 	public void romyButtons() {
 		mainJoystick.R1.whileTrue(new NoteToShooter());
-//		mainJoystick.L1.whileTrue(new MoveRobotToShootingPosition(ShootingPositionConstants.OPTIMAL_SHOOTING_ZONE));
 		mainJoystick.L1.whileTrue(new CollectNoteFromFeeder());
 		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetPoseByVision()));
 		
@@ -101,9 +84,6 @@ public class OI {
 	}
 	
 	public void shchoriButtons() {
-		secondJoystick.X.onTrue(new InstantCommand(() ->
-				SmartDashboard.putNumber("pivot right stage angle", Pivot.getInstance().getAngle().getDegrees())));
-		
 		//Rumble
 		secondJoystick.BACK.whileTrue(new InstantCommand(() -> secondJoystick.rumble(true, 1)));
 		secondJoystick.START.whileTrue(new InstantCommand(() -> secondJoystick.rumble(true, 0)));
@@ -114,8 +94,6 @@ public class OI {
 
 		//FlyWheel Run
 		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityWithoutIsFinished(100, secondJoystick));
-		//pit flywheel
-//		secondJoystick.L1.whileTrue(new RunFlyWheelByPower(0.15));
 
 		//Pivot Poses
 		secondJoystick.POV_UP.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.RIGHT_STAGE.ANGLE));
@@ -136,7 +114,7 @@ public class OI {
 		
 	}
 	
-	public void setFourthJoystick() {
+	public void fourthJoystickButtons() {
 		SmartJoystick usedJoystick = fourthJoystick;
 		usedJoystick.B.whileTrue(new CollectNoteFromFeeder());
 		usedJoystick.A.whileTrue(new CollectNoteFromGround());
