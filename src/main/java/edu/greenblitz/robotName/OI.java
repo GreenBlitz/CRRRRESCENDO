@@ -4,6 +4,7 @@ import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
 import edu.greenblitz.robotName.commands.intake.NoteToShooter;
+import edu.greenblitz.robotName.commands.intake.NoteToShooterForJoystick;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByPower;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityUntilInterrupted;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
@@ -79,7 +80,7 @@ public class OI {
 	}
 
 	public void romyButtons() {
-		mainJoystick.R1.whileTrue(new NoteToShooter());
+		mainJoystick.R1.whileTrue(new NoteToShooterForJoystick());
 		mainJoystick.L1.whileTrue(new CollectNoteFromFeeder());
 		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetPoseByVision()));
 
