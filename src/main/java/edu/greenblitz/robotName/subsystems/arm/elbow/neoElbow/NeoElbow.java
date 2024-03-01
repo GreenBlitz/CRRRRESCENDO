@@ -20,8 +20,6 @@ public class NeoElbow implements IElbow {
 
     private GBSparkMax motor;
 
-    private double pidReference;
-
     public NeoElbow() {
         motor = new GBSparkMax(NeoElbowConstants.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
         motor.config(NeoElbowConstants.ELBOW_CONFIG_OBJECT);
@@ -82,5 +80,7 @@ public class NeoElbow implements IElbow {
         inputs.velocity = motor.getEncoder().getVelocity();
         inputs.hasReachedBackwardLimit = Math.abs(inputs.position.getRadians() - ElbowConstants.BACKWARD_ANGLE_LIMIT.getRadians()) <= ElbowConstants.TOLERANCE.getRadians();
         inputs.hasReachedForwardLimit = Math.abs(inputs.position.getRadians() - ElbowConstants.FORWARD_ANGLE_LIMIT.getRadians()) <= ElbowConstants.TOLERANCE.getRadians();
+
+        SmartDashboard.putNumber("elbow angle", inputs.position.getDegrees());
     }
 }

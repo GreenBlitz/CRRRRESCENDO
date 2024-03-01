@@ -27,7 +27,7 @@ public class NeoElbowConstants {
 
     public static final int PID_SLOT = 0;
 
-    public static final PIDObject PID = new PIDObject().withKp(2).withKd(0).withKi(0).withMaxPower(0.5);
+    public static final PIDObject PID = new PIDObject().withKp(6.5).withKd(0).withKi(0).withMaxPower(1);
 
     public static final GBSparkMax.SparkMaxConfObject ELBOW_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
             .withPID(PID)
