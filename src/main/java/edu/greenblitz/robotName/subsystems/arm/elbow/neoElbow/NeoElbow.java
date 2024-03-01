@@ -52,7 +52,6 @@ public class NeoElbow implements IElbow {
 
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
-        SmartDashboard.putNumber("refrence", targetAngle.getDegrees());
         if (targetAngle.getDegrees() <= ElbowConstants.BACKWARD_ANGLE_LIMIT.getDegrees()){
             targetAngle = ElbowConstants.BACKWARD_ANGLE_LIMIT;
         }
@@ -79,7 +78,5 @@ public class NeoElbow implements IElbow {
         inputs.absoluteEncoderPosition = motor.getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle).getPosition();
         inputs.hasReachedBackwardLimit = Math.abs(inputs.position.getRadians() - ElbowConstants.BACKWARD_ANGLE_LIMIT.getRadians()) <= ElbowConstants.TOLERANCE.getRadians();
         inputs.hasReachedForwardLimit = Math.abs(inputs.position.getRadians() - ElbowConstants.FORWARD_ANGLE_LIMIT.getRadians()) <= ElbowConstants.TOLERANCE.getRadians();
-        
-        SmartDashboard.putNumber("pos elbow", inputs.position.getDegrees());
     }
 }

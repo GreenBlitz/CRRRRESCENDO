@@ -20,4 +20,6 @@ public class FlyWheelInputs {
 	public double leftFlywheelCurrent;
 	
 	public double leftWheelAcceleration;
+	public double rightVelocityReferance;
+	public double leftVelocityReferance;
 }

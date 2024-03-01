@@ -23,7 +23,7 @@ public class Elbow extends GBSubsystem {
         elbow = ElbowFactory.create();
         elbowInputs = new ElbowInputsAutoLogged();
         elbow.updateInputs(elbowInputs);
-        currentAngle = elbowInputs.position;
+        currentAngle = NeoElbowConstants.MINIMUM_ANGLE;
     }
 
     public static void init() {
@@ -62,6 +62,7 @@ public class Elbow extends GBSubsystem {
 
     public void resetAngle(Rotation2d position) {
         elbow.resetAngle(position);
+        currentAngle = position;
     }
 
     public void moveToAngle(Rotation2d targetAngle) {

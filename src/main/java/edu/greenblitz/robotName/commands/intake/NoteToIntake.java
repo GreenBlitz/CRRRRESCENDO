@@ -5,11 +5,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class NoteToIntake extends IntakeCommand {
     
     @Override
-    public void initialize() {
-        SmartDashboard.putNumber("init",1);
-    }
-    
-    @Override
     public void execute() {
         intake.rollIn();
     }

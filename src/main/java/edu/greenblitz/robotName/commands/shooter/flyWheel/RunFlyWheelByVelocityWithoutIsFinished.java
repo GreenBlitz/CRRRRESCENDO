@@ -2,47 +2,57 @@ package edu.greenblitz.robotName.commands.shooter.flyWheel;
 
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
+import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 
-public class RunFlyWheelByVelocityWithoutIsFinished extends FlyWheelCommand{
+public class RunFlyWheelByVelocityWithoutIsFinished extends FlyWheelCommand {
 
-	private int timeInShootingSpeed;
+    double rightWheelVelocity;
+    double leftWheelVelocity;
+    private int timeInShootingSpeed;
+    private SmartJoystick joystick;
 
-	double rightWheelVelocity;
+    public RunFlyWheelByVelocityWithoutIsFinished(double velocity, SmartJoystick joystick) {
+        rightWheelVelocity = velocity;
+        leftWheelVelocity = velocity * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR;
+        this.joystick = joystick;
+    }
 
-	double leftWheelVelocity;
+    protected void changeVelocity(double velocity) {
+        rightWheelVelocity = velocity;
+        leftWheelVelocity = velocity * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR;
+    }
 
-	public RunFlyWheelByVelocityWithoutIsFinished(double velocity) {
-		rightWheelVelocity = velocity;
-		leftWheelVelocity = velocity * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR;
-	}
+    @Override
+    public void initialize() {
+        timeInShootingSpeed = 0;
+        flyWheel.setVelocity(leftWheelVelocity, rightWheelVelocity);
+    }
 
-	protected void changeVelocity(double velocity) {
-		rightWheelVelocity = velocity;
-		leftWheelVelocity = velocity * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR;
-	}
+    @Override
+    public void execute() {
+        if (Robot.isSimulation()) {
+            flyWheel.setVelocity(leftWheelVelocity, rightWheelVelocity);
+        }
+        if (flyWheel.isAtVelocity(rightWheelVelocity, leftWheelVelocity)) {
+            timeInShootingSpeed++;
+        } else {
+            timeInShootingSpeed = 0;
+        }
+        flyWheel.setPreparedToShoot(timeInShootingSpeed >= FlyWheelConstants.MINIMUM_SHOOTING_SPEED_TIME_ROBORIO_CYCLES);
+    }
 
-	@Override
-	public void initialize() {
-		timeInShootingSpeed = 0;
-		flyWheel.setVelocity(leftWheelVelocity, rightWheelVelocity);
-	}
+    @Override
+    public boolean isFinished() {
+        if (flyWheel.getPreparedToShoot()) {
+            joystick.rumble(true, 0.4);
+        }
+        return false;
+    }
 
-	@Override
-	public void execute() {
-		if (Robot.isSimulation()) {
-			flyWheel.setVelocity(leftWheelVelocity, rightWheelVelocity);
-		}
-		if (flyWheel.isAtVelocity(rightWheelVelocity, leftWheelVelocity)) {
-			timeInShootingSpeed++;
-		} else {
-			timeInShootingSpeed = 0;
-		}
-		flyWheel.setPreparedToShoot(timeInShootingSpeed >= FlyWheelConstants.MINIMUM_SHOOTING_SPEED_TIME_ROBORIO_CYCLES);
-	}
-
-	@Override
-	public void end(boolean interrupted) {
-		flyWheel.stop();
-	}
+    @Override
+    public void end(boolean interrupted) {
+        joystick.rumble(true, 0);
+        flyWheel.stop();
+    }
 
 }
