@@ -28,21 +28,21 @@ public class ChassisConstants {
 	
 	static final Pose2d INITIAL_ROBOT_POSITION = new Pose2d(0, 0, new Rotation2d(0));
 
-	public static final double FRONT_LEFT_X_POSITION = 0.344;
+	public static final double FRONT_LEFT_X_POSITION = 0.34733;
 
-	public static final double FRONT_LEFT_Y_POSITION = 0.281;
+	public static final double FRONT_LEFT_Y_POSITION = 0.27833;
 
-	public static final double FRONT_RIGHT_X_POSITION = -0.344;
+	public static final double FRONT_RIGHT_X_POSITION = -0.34733;
 
-	public static final double FRONT_RIGHT_Y_POSITION = 0.281;
+	public static final double FRONT_RIGHT_Y_POSITION = 0.27833;
 
-	public static final double BACK_RIGHT_X_POSITION = -0.344;
+	public static final double BACK_RIGHT_X_POSITION = -0.34733;
 
-	public static final double BACK_RIGHT_Y_POSITION = -0.280;
+	public static final double BACK_RIGHT_Y_POSITION = -0.27833;
 
-	public static final double BACK_LEFT_X_POSITION = 0.344;
+	public static final double BACK_LEFT_X_POSITION = 0.34733;
 
-	public static final double BACK_LEFT_Y_POSITION = -0.280;
+	public static final double BACK_LEFT_Y_POSITION = -0.27833;
 
 	public static final Translation2d[] SWERVE_LOCATIONS_IN_SWERVE_KINEMATICS_COORDINATES = new Translation2d[]{
 			new Translation2d(FRONT_LEFT_X_POSITION, FRONT_LEFT_Y_POSITION),
