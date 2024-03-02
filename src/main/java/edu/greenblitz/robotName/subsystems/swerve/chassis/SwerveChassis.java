@@ -59,7 +59,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
 	public static final double TRANSLATION_TOLERANCE = 0.05;
 
-	public static final Rotation2d ROTATION_TOLERANCE = Rotation2d.fromDegrees(5);
+	public static final Rotation2d ROTATION_TOLERANCE = Rotation2d.fromDegrees(2);
 
 	private boolean doVision = true;
 
@@ -309,7 +309,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		moveByChassisSpeeds(
 				0,
 				0,
-				ChassisConstants.ROTATION_PID_CONTROLLER.calculate(
+				-ChassisConstants.ROTATION_PID_CONTROLLER.calculate(
 						getChassisAngle().getRadians()
 				),
 				getChassisAngle()

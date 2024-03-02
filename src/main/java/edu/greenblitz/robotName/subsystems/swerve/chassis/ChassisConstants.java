@@ -51,7 +51,7 @@ public class ChassisConstants {
 			new Translation2d(BACK_RIGHT_X_POSITION, BACK_RIGHT_Y_POSITION)
 	};
 	
-	public static final PIDController ROTATION_PID_CONTROLLER = new PIDController(3, 0, 0.2);
+	public static final PIDController ROTATION_PID_CONTROLLER = new PIDController(4, 0, 0);
 	
 	static {
 		ROTATION_PID_CONTROLLER.enableContinuousInput(-Math.PI, Math.PI);
