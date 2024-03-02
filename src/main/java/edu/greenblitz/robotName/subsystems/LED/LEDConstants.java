@@ -11,7 +11,7 @@ public class LEDConstants {
  
 	public static final Section FIRST_SECTION = new Section(1, 1);
  
-	public static final Color AMP_MODE_COLOR = Color.kBlue;
+	public static final Color AMP_MODE_COLOR = Color.kDeepPink;
  
 	public static final Color SPEAKER_MODE_COLOR = Color.kYellow;
  
