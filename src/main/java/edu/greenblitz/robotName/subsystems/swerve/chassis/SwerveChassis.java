@@ -239,7 +239,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	 * returns chassis angle in radians
 	 */
 	public Rotation2d getGyroAngle() {
-		return Rotation2d.fromRadians(gyroInputs.yaw);
+		return Rotation2d.fromRadians(-gyroInputs.yaw);
 	}
 
 	public Rotation2d getChassisAngle() {
@@ -310,7 +310,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		moveByChassisSpeeds(
 				0,
 				0,
-				-ChassisConstants.ROTATION_PID_CONTROLLER.calculate(
+				ChassisConstants.ROTATION_PID_CONTROLLER.calculate(
 						getChassisAngle().getRadians()
 				),
 				getChassisAngle()
