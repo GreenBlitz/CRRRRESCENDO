@@ -99,8 +99,6 @@ public class OI {
 		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetPoseByVision()));
 
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
-
-		secondJoystick.A.onTrue(new InstantCommand(() -> ScoringModeSelector.setScoringMode(ScoringMode.AMP)));
 	}
 
 	public void shchoriButtons() {

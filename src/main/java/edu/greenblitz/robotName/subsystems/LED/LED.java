@@ -105,9 +105,9 @@ public class LED extends GBSubsystem {
 	}
 
 	public boolean isNoteInRobot() {
-		return (Intake.getInstance().isObjectIn());
-//				|| Funnel.getInstance().isObjectIn()
-//				|| Roller.getInstance().isObjectIn());
+		return (Intake.getInstance().isObjectIn()
+				|| Funnel.getInstance().isObjectIn()
+				|| Roller.getInstance().isObjectIn());
 	}
 
 	public void updateNoteState() {
@@ -132,22 +132,16 @@ public class LED extends GBSubsystem {
 
 	public void restartTimerByNoteState() {
 		if (getWasNoteInRobot() != isNoteInRobot()) {
-			System.out.println("startedddddddddddddddddddddddd");
 			actionTimer.restart();
 		}
 	}
 
 	public void blinkOrRumbleByNoteState() {
 		if (isNoteInRobot() && (actionTimer.get() <= LEDConstants.BLINKING_TIME)) {
-			System.out.println(actionTimer);
-			System.out.println("blinkkkkkkkkkkkkkkkkkkkk");
 			blink(getColorByMode());
 		} else if (actionTimer.get() <= LEDConstants.RUMBLE_TIME) {
-			System.out.println(actionTimer);
-			System.out.println("rumbleeeeeeeeeeeeeeeeeeeeeeeeeee");
 			rumble();
 		} else {
-			System.out.println("stopppppppppp");
 			stopRumble();
 		}
 	}
