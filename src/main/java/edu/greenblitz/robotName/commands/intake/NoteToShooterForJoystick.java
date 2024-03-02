@@ -1,9 +1,7 @@
 package edu.greenblitz.robotName.commands.intake;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+public class NoteToShooterForJoystick extends IntakeCommand {
 
-public class NoteToIntake extends IntakeCommand {
-    
     @Override
     public void execute() {
         intake.rollIn();
@@ -17,5 +15,10 @@ public class NoteToIntake extends IntakeCommand {
     @Override
     public void end(boolean interrupted) {
         intake.stop();
+        if (!interrupted) {
+            new NoteFromIntakeToShooter().schedule();
+        }
     }
+
 }
+

@@ -8,16 +8,16 @@ public class PivotConstants {
 	public static final double SHOOTER_MASS_KG = 3;
 
 	public static final double LENGTH_OF_SHOOTER = 0.418;
-
+	
 	public enum PresetPositions {
 
 		STARTING(Rotation2d.fromDegrees(18)),
 		TRANSFER(Rotation2d.fromDegrees(20)),
 		SAFE(Rotation2d.fromDegrees(58)),
-		PICK_UP(Rotation2d.fromDegrees(3)),
+		PICK_UP(Rotation2d.fromDegrees(25)),
 		CLOSE_SHOOTING(Rotation2d.fromDegrees(60)),
 		PODIUM(Rotation2d.fromDegrees(36.3)),
-		RIGHT_STAGE(Rotation2d.fromDegrees(28.3)),
+		RIGHT_STAGE(Rotation2d.fromDegrees(29)),
 		FEEDER(Rotation2d.fromDegrees(58.9));
 
 		public final Rotation2d ANGLE;

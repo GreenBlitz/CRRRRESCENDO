@@ -7,6 +7,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.RobotConstants;
+import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.arm.wrist.IWrist;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristInputsAutoLogged;
 import edu.greenblitz.robotName.utils.Conversions;
@@ -24,6 +25,7 @@ public class SRXWrist implements IWrist {
                 SRXWristConstants.TIMEOUT_FOR_CONFIG_SET
         );
         motor.configAllSettings(SRXWristConstants.TALON_SRX_CONFIGURATION);
+        resetAngleByAbsoluteEncoder();
     }
 
     @Override
@@ -33,7 +35,7 @@ public class SRXWrist implements IWrist {
 
     @Override
     public void setVoltage(double voltage) {
-        setPower(voltage / RobotConstants.SimulationConstants.BATTERY_VOLTAGE);
+        setPower(voltage / Battery.getInstance().getCurrentVoltage());
     }
 
     @Override
@@ -52,7 +54,7 @@ public class SRXWrist implements IWrist {
 
     @Override
     public void resetAngleByAbsoluteEncoder() {
-
+    
     }
 
     @Override

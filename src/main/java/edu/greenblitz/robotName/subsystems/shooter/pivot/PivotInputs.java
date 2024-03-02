@@ -23,4 +23,6 @@ public class PivotInputs {
 	public boolean hasHitForwardLimit;
 	
 	public boolean hasHitBackwardsLimit;
+
+	public Rotation2d positionReference;
 }

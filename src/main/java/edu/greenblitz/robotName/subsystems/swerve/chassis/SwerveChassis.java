@@ -86,7 +86,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				this.kinematics,
 				getGyroAngle(),
 				getSwerveModulePositions(),
-				visionPoseStartMatch(),
+				new Pose2d(),
 				fill(
 						VisionConstants.STANDARD_DEVIATION_ODOMETRY,
 						VisionConstants.STANDARD_DEVIATION_ODOMETRY,
@@ -130,8 +130,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		Logger.processInputs("DriveTrain/Chassis", ChassisInputs);
 		Logger.processInputs("DriveTrain/Gyro", gyroInputs);
 
-//		updatePoseEstimationLimeLight();
 		updatePoseEstimatorOdometry();
+		MultiLimelight.getInstance().recordEstimatedPositions();
 		SmartDashboard.putData(getField());
 	}
 
