@@ -48,7 +48,6 @@ public class Roller extends GBSubsystem {
         roller.setVoltage(voltage);
     }
 
-
     public void rollClockwise() {
         setPower(ROLL_FORWARD_POWER);
     }
