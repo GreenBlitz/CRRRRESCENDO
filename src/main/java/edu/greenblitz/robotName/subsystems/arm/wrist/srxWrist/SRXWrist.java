@@ -19,12 +19,13 @@ public class SRXWrist implements IWrist {
     public SRXWrist() {
         motor = new TalonSRX(SRXWristConstants.MOTOR_ID);
 
+        motor.configAllSettings(SRXWristConstants.TALON_SRX_CONFIGURATION);
         motor.configSelectedFeedbackSensor(
                 FeedbackDevice.CTRE_MagEncoder_Relative,
                 SRXWristConstants.PID_SLOT,
                 SRXWristConstants.TIMEOUT_FOR_CONFIG_SET
         );
-        resetAngle(Rotation2d.fromDegrees(0));
+        resetAngle(Rotation2d.fromDegrees(180));
     }
 
     @Override

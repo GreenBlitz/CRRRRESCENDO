@@ -1,5 +1,7 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
+import edu.greenblitz.robotName.commands.arm.ScoreToAmp;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
 import edu.greenblitz.robotName.commands.arm.wrist.MoveWristToAngle;
@@ -15,10 +17,13 @@ import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
+import edu.greenblitz.robotName.commands.swerve.MoveToAmp;
 import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
+import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
+import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
@@ -48,10 +53,10 @@ public class OI {
 
 //		initButtons();
 		initializeDefaultCommands();
-		secondJoystick.POV_UP.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(0)));
+		secondJoystick.POV_UP.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(0)).andThen(new MoveWristToAngle(Rotation2d.fromDegrees(90))));
 		secondJoystick.R1.whileTrue(new MoveWristToAngle(Rotation2d.fromDegrees(0)));
-		secondJoystick.L1.whileTrue(new MoveWristToAngle(Rotation2d.fromDegrees(90)));
-		secondJoystick.Y.whileTrue(new MoveWristToAngle(Rotation2d.fromDegrees(180)));
+		secondJoystick.L1.whileTrue(new MoveElbowAndWrist(ElbowConstants.PresetPositions.SAFE, WristConstants.PresetPositions.SAFE));
+		secondJoystick.Y.whileTrue(new ScoreToAmp());
 	}
 
 	public static void init() {

@@ -7,7 +7,7 @@ public class WristConstants {
     public enum PresetPositions {
 
         STARTING(Rotation2d.fromDegrees(90)),
-        SCORE(Rotation2d.fromDegrees(-45)),
+        SCORE(Rotation2d.fromDegrees(45)),
         TRANSFER(Rotation2d.fromDegrees(180)),
         SAFE(TRANSFER.ANGLE);
 
@@ -28,7 +28,7 @@ public class WristConstants {
 
     public static final double CONVERSION_FACTOR = 1;
 
-    public static final Rotation2d TOLERANCE = Rotation2d.fromDegrees(0.5);
+    public static final Rotation2d TOLERANCE = Rotation2d.fromDegrees(5);
 
     public static final int CURRENT_LIMIT = 40;
 }

@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.subsystems.arm.wrist.srxWrist;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
+import com.ctre.phoenix6.hardware.TalonFX;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.greenblitz.robotName.utils.Conversions;
 
@@ -21,7 +22,7 @@ public class SRXWristConstants {
         TALON_SRX_CONFIGURATION.forwardSoftLimitThreshold = Conversions.MagEncoderConversions.Rotation2DToMotorPosition(WristConstants.FORWARD_ANGLE_LIMIT);
         TALON_SRX_CONFIGURATION.reverseSoftLimitEnable = false;
         TALON_SRX_CONFIGURATION.reverseSoftLimitThreshold = Conversions.MagEncoderConversions.Rotation2DToMotorPosition(WristConstants.BACKWARD_ANGLE_LIMIT);
-        TALON_SRX_CONFIGURATION.slot0.kP = 200;
+        TALON_SRX_CONFIGURATION.slot0.kP = 5;
         TALON_SRX_CONFIGURATION.slot0.kI = 0;
         TALON_SRX_CONFIGURATION.slot0.kD = 0;
     }
