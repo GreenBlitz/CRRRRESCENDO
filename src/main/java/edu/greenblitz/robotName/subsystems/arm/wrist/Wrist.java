@@ -68,7 +68,7 @@ public class Wrist extends GBSubsystem {
     }
 
     public void moveToAngle(Rotation2d targetAngle) {
-        wrist.moveToAngle(Rotation2d.fromRadians(targetAngle.getRadians() % (2 * Math.PI)));
+        wrist.moveToAngle(targetAngle);
     }
 
     public void setCurrentAngle() {
@@ -96,7 +96,7 @@ public class Wrist extends GBSubsystem {
     }
 
     public boolean isAtAngle(Rotation2d angle) {
-        return Math.abs(angle.getRadians() - getAngle().getRadians()) <= TOLERANCE.getRadians();
+        return Math.abs(getAngle().getRadians() - angle.getRadians()) <= TOLERANCE.getRadians();
     }
 
     public Pose3d getPose3D() {

@@ -2,6 +2,7 @@ package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
+import edu.greenblitz.robotName.commands.arm.wrist.MoveWristToAngle;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
 import edu.greenblitz.robotName.commands.intake.NoteToShooter;
@@ -47,9 +48,10 @@ public class OI {
 
 //		initButtons();
 		initializeDefaultCommands();
-		secondJoystick.R1.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(0)));
-		secondJoystick.L1.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(50)));
-		secondJoystick.Y.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(-50)));
+		secondJoystick.POV_UP.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(0)));
+		secondJoystick.R1.whileTrue(new MoveWristToAngle(Rotation2d.fromDegrees(0)));
+		secondJoystick.L1.whileTrue(new MoveWristToAngle(Rotation2d.fromDegrees(90)));
+		secondJoystick.Y.whileTrue(new MoveWristToAngle(Rotation2d.fromDegrees(180)));
 	}
 
 	public static void init() {
@@ -133,7 +135,7 @@ public class OI {
 	public void initializeDefaultCommands() {
 		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
 		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
-		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
+//		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
 		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
 	}
 }
