@@ -8,14 +8,13 @@ import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.filter.Debouncer;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class NeoRoller implements IRoller {
 
     private GBSparkMax motor;
 
-    private Debouncer debouncer;
-
-    private DigitalInput beamBreaker;
+    private RollerInputsAutoLogged lastInputs;
 
     public NeoRoller() {
         motor = new GBSparkMax(NeoRollerConstants.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
@@ -23,8 +22,7 @@ public class NeoRoller implements IRoller {
         motor.config(NeoRollerConstants.ROLLER_CONFIG_OBJECT);
         motor.getPIDController().setFeedbackDevice(motor.getEncoder());
 
-        beamBreaker = new DigitalInput(NeoRollerConstants.BEAM_BREAKER_CHANNEL);
-        debouncer = new Debouncer(NeoRollerConstants.DEBOUNCE_TIME_FOR_LIMIT_SWITCH_IN_SECONDS);
+        lastInputs = new RollerInputsAutoLogged();
     }
 
     @Override
@@ -50,11 +48,14 @@ public class NeoRoller implements IRoller {
         );
     }
 
+    public boolean isObjectInByCurrent(double current){
+        return current >= NeoRollerConstants.NOTE_IN_CURRENT;
+    }
     @Override
     public void updateInputs(RollerInputsAutoLogged inputs) {
         inputs.outputCurrent = motor.getOutputCurrent();
         inputs.appliedOutput = motor.getAppliedOutput();
-        inputs.isObjectIn = debouncer.calculate(beamBreaker.get());
+        inputs.isObjectIn = isObjectInByCurrent(inputs.outputCurrent);
         inputs.position = Rotation2d.fromRotations(motor.getEncoder().getPosition());
     }
 }

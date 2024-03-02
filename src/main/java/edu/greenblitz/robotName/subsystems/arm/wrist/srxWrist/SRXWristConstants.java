@@ -22,8 +22,8 @@ public class SRXWristConstants {
         TALON_SRX_CONFIGURATION.forwardSoftLimitThreshold = Conversions.MagEncoderConversions.Rotation2DToMotorPosition(WristConstants.FORWARD_ANGLE_LIMIT);
         TALON_SRX_CONFIGURATION.reverseSoftLimitEnable = false;
         TALON_SRX_CONFIGURATION.reverseSoftLimitThreshold = Conversions.MagEncoderConversions.Rotation2DToMotorPosition(WristConstants.BACKWARD_ANGLE_LIMIT);
-        TALON_SRX_CONFIGURATION.slot0.kP = 5;
+        TALON_SRX_CONFIGURATION.slot0.kP = 0.25;
         TALON_SRX_CONFIGURATION.slot0.kI = 0;
-        TALON_SRX_CONFIGURATION.slot0.kD = 0;
+        TALON_SRX_CONFIGURATION.slot0.kD = 0.1;
     }
 }

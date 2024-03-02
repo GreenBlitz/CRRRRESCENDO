@@ -53,13 +53,13 @@ public class OI {
 		thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
 
+
 //		initButtons();
 		initializeDefaultCommands();
-		secondJoystick.POV_UP.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(0)).andThen(new MoveWristToAngle(Rotation2d.fromDegrees(90))));
-		secondJoystick.R1.whileTrue(new MoveWristToAngle(Rotation2d.fromDegrees(0)));
-		secondJoystick.L1.whileTrue(new MoveElbowAndWrist(ElbowConstants.PresetPositions.SAFE, WristConstants.PresetPositions.SAFE));
-		secondJoystick.Y.whileTrue(new ScoreToAmp());
-		secondJoystick.X.whileTrue( new RunRollerCounterClockwiseUntilNoteIsInside());
+//		secondJoystick.POV_UP.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(0)).andThen(new MoveWristToAngle(Rotation2d.fromDegrees(90))));
+//		secondJoystick.Y.whileTrue(new MoveWristToAngle(Rotation2d.fromDegrees(0)));
+//		secondJoystick.Y.whileTrue(new ScoreToAmp());
+		secondJoystick.X.whileTrue(new RunRollerCounterClockwiseUntilNoteIsInside());
 	}
 
 	public static void init() {
@@ -143,7 +143,7 @@ public class OI {
 	public void initializeDefaultCommands() {
 		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
 		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
-//		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
+		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
 		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
 	}
 }

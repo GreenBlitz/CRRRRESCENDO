@@ -9,8 +9,8 @@ public class RunRollerCounterClockwiseUntilNoteIsInside extends RollerCommand {
         roller.rollCounterClockwise();
     }
 
-//    @Override
-//    public boolean isFinished() {
-//        return roller.isObjectIn();
-//    }
+    @Override
+    public boolean isFinished() {
+        return roller.isObjectIn();
+    }
 }
