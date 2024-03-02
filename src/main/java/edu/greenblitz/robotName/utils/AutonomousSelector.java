@@ -19,6 +19,7 @@ public class AutonomousSelector {
     private AutonomousSelector() {
         chooser = AutoBuilder.buildAutoChooser();
         ShuffleboardTab tab = Shuffleboard.getTab("auto");
+        chooser.addOption("posisoi", AutoBuilder.buildAuto("2 to 1 close"));
         tab.add("autonomous chooser", chooser);
     }
 

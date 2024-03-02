@@ -99,12 +99,15 @@ public class Robot extends LoggedRobot {
     }
 
     private void initializeAutonomousBuilder() {
-        NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
-        NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
-        NamedCommands.registerCommand("grip", new NoteToShooter());
+//        NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
+//        NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
+//        NamedCommands.registerCommand("grip", new NoteToShooter());
+        NamedCommands.registerCommand("shoot", new InstantCommand());
+        NamedCommands.registerCommand("close shoot", new InstantCommand());
+        NamedCommands.registerCommand("grip", new InstantCommand());
         AutoBuilder.configureHolonomic(
                 SwerveChassis.getInstance()::getRobotPose2d,
-                SwerveChassis.getInstance()::resetChassisPose,
+                SwerveChassis.getInstance()::resetChassisPosition,
                 SwerveChassis.getInstance()::getRobotRelativeChassisSpeeds,
                 SwerveChassis.getInstance()::moveByRobotRelativeSpeeds,
                 ChassisConstants.PATH_FOLLOWER_CONFIG,
