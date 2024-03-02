@@ -94,7 +94,7 @@ public class ChassisConstants {
 	public static final HolonomicPathFollowerConfig PATH_FOLLOWER_CONFIG = new HolonomicPathFollowerConfig(
 			TRANSLATION_PID,
 			ROTATION_PID_FOR_AUTO,
-			3,
+			MAX_VELOCITY,
 			ROBOT_RADIUS,
 			new ReplanningConfig(
 					true,
@@ -105,8 +105,8 @@ public class ChassisConstants {
 	);
 	
 	public static final PathConstraints CONSTRAINTS = new PathConstraints(
-			3,
-			0.5,
+			MAX_VELOCITY / 2,
+			MAX_ACCELERATION / 2,
 			MAX_ANGULAR_SPEED,
 			MAX_ANGULAR_ACCELERATION
 	);
