@@ -34,6 +34,7 @@ public class NeoWrist implements IWrist {
                 .enableLimitSwitch(NeoWristConstants.IS_BACKWARD_LIMIT_SWITCH_ENABLED);
         motor.getForwardLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen)
                 .enableLimitSwitch(NeoWristConstants.IS_FORWARD_LIMIT_SWITCH_ENABLED);
+        motor.setSmartCurrentLimit(NeoWristConstants.MAX_VOLT);
     }
 
     @Override
