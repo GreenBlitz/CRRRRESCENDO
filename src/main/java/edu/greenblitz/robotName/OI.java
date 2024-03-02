@@ -33,6 +33,7 @@ import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
+import edu.greenblitz.robotName.utils.ScoringMode;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -57,8 +58,7 @@ public class OI {
     
 		initButtons();
 		initializeDefaultCommands();
-		setFourthJoystick();
-		shchoriButtons();
+		secondJoystick.X.whileTrue(new RunIntakeByPower(0.5));
 	}
 
 	public static void init() {
