@@ -83,7 +83,7 @@ public class ChassisConstants {
 	
 	public static final PIDConstants TRANSLATION_PID = new PIDConstants(2.2, 0, 0);
 
-	public static final PIDConstants ROTATION_PID_FOR_AUTO = new PIDConstants(2, 0, 0);
+	public static final PIDConstants ROTATION_PID_FOR_AUTO = new PIDConstants(0, 0, 0);
 
 	public static final double TOTAL_ERROR_FOR_REPLANNING = 0.5;
 	
