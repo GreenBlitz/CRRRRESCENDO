@@ -132,6 +132,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		Logger.processInputs("DriveTrain/Chassis", ChassisInputs);
 		Logger.processInputs("DriveTrain/Gyro", gyroInputs);
 
+
 		updatePoseEstimatorOdometry();
 		MultiLimelight.getInstance().recordEstimatedPositions();
 		SmartDashboard.putData(getField());
@@ -520,9 +521,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 
 	public void moveByRobotRelativeSpeeds(ChassisSpeeds chassisSpeeds) {
-		moveByChassisSpeeds(
-				ChassisSpeeds.fromRobotRelativeSpeeds(chassisSpeeds, getChassisAngle())
-		);
+		ChassisSpeeds a = ChassisSpeeds.fromRobotRelativeSpeeds(chassisSpeeds, getGyroAngle());
+		SwerveModuleState[] states = kinematics.toSwerveModuleStates(a);
+		SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
+		setModuleStates(desaturatedStates);
 	}
 
 	/**
