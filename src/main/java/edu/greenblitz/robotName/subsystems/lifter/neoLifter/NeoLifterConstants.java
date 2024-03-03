@@ -10,7 +10,7 @@ public class NeoLifterConstants {
 
     public static final int MOTOR_ID = 45;
 
-    public static final int SOLENOID_ID = 6;
+    public static final int SOLENOID_ID = 55;
 
     public static final GBSparkMax.SparkMaxConfObject CONFIG = new GBSparkMax.SparkMaxConfObject().withPID(new PIDObject(3.6, 1, 0));
 

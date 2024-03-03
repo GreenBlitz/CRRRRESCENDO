@@ -1,20 +1,13 @@
 package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.CollectNote;
-import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToClimb;
-import edu.greenblitz.robotName.commands.arm.ScoreToTrap;
-import edu.greenblitz.robotName.commands.arm.roller.RunRollerByJoystick;
 import edu.greenblitz.robotName.commands.intake.NoteFromIntakeToShooter;
 import edu.greenblitz.robotName.commands.PanicMode;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
-import edu.greenblitz.robotName.commands.intake.NoteToShooter;
 import edu.greenblitz.robotName.commands.intake.ReverseRunIntake;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
-import edu.greenblitz.robotName.commands.lifter.ExtendLifter;
-import edu.greenblitz.robotName.commands.lifter.MoveLifterByPower;
-import edu.greenblitz.robotName.commands.lifter.PrepareToClimb;
-import edu.greenblitz.robotName.commands.lifter.RetractLifter;
+import edu.greenblitz.robotName.commands.lifter.*;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
@@ -103,9 +96,9 @@ public class OI {
 		secondJoystick.R1.whileTrue(new CollectNote());
 		secondJoystick.A.whileTrue(new PanicMode());
 		secondJoystick.POV_LEFT.whileTrue(new ReverseRunIntake());
-		secondJoystick.X.whileTrue(new ExtendLifter());
-		secondJoystick.Y.whileTrue(new RetractLifter());
-		secondJoystick.POV_UP.whileTrue(new MoveLifterByPower(0.1));
+		secondJoystick.X.whileTrue(new SolenoidClose());
+		secondJoystick.Y.whileTrue(new SolenoidHold());
+		secondJoystick.POV_UP.whileTrue(new SolenoidOpen());
 		secondJoystick.POV_DOWN.whileTrue(new PrepareToClimb());
 	}
 
