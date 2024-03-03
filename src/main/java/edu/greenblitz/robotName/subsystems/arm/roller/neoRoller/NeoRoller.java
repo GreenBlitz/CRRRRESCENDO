@@ -13,15 +13,12 @@ public class NeoRoller implements IRoller {
 
     private RollerInputsAutoLogged lastInputs;
 
-    private Rotation2d sum;
-
     public NeoRoller() {
         motor = new GBSparkMax(NeoRollerConstants.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
         motor.config(NeoRollerConstants.ROLLER_CONFIG_OBJECT);
         motor.getPIDController().setFeedbackDevice(motor.getEncoder());
         resetEncoder(Rotation2d.fromDegrees(0));
         lastInputs = new RollerInputsAutoLogged();
-        sum = Rotation2d.fromDegrees(0);
     }
 
     @Override
