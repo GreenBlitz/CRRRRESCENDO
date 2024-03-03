@@ -27,7 +27,7 @@ public class SafeMoveElbowToAngle extends ElbowCommand{
             elbow.standInPlace();
         }
         else {
-        elbow.moveToAngle(targetAngle);
+            elbow.moveToAngle(targetAngle);
         }
     }
 

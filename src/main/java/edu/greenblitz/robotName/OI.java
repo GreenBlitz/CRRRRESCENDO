@@ -3,7 +3,7 @@ package edu.greenblitz.robotName;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
-import edu.greenblitz.robotName.commands.intake.NoteToShooter;
+import edu.greenblitz.robotName.commands.intake.NoteToShooterWithoutArm;
 import edu.greenblitz.robotName.commands.intake.NoteToShooterForJoystick;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByPower;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityUntilInterrupted;
@@ -113,11 +113,11 @@ public class OI {
         secondJoystick.Y.whileTrue(new ForwardRunFunnelUntilObjectIn());
     }
 
-    public void thirdJoystickButtons() {
-        SmartJoystick usedJoystick = thirdJoystick;
-        usedJoystick.R1.whileTrue(new NoteToShooter());
-        usedJoystick.L1.whileTrue(new RunFunnelByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_Y));
 
+	public void thirdJoystickButtons() {
+		SmartJoystick usedJoystick = thirdJoystick;
+		usedJoystick.R1.whileTrue(new NoteToShooterWithoutArm());
+		usedJoystick.L1.whileTrue(new RunFunnelByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_Y));
     }
 
     public void fourthJoystickButtons() {
