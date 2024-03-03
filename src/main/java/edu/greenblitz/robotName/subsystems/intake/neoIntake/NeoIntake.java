@@ -47,8 +47,6 @@ public class NeoIntake implements IIntake {
 		);
 	}
 	
-	int count = 0;
-	
 	@Override
 	public void updateInputs(IntakeInputsAutoLogged intakeInputs) {
 		intakeInputs.outputCurrent = motor.getOutputCurrent();

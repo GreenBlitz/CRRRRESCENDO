@@ -57,7 +57,7 @@ public class ChassisConstants {
 		ROTATION_PID_CONTROLLER.enableContinuousInput(-Math.PI, Math.PI);
 	}
 	
-	public static final double MAX_VELOCITY = 4.1818320981472068;
+	public static final double MAX_VELOCITY = 6.6818320981472068;
 	
 	public static final double MAX_ACCELERATION = 2;
 	

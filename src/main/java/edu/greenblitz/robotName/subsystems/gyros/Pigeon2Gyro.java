@@ -5,6 +5,7 @@ import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.utils.GBCircle;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Pigeon2Gyro implements IAngleMeasurementGyro {
 

@@ -1,6 +1,8 @@
 package edu.greenblitz.robotName.subsystems.arm.elbow;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.greenblitz.robotName.subsystems.arm.elbow.neoElbow.NeoElbow;
+import edu.greenblitz.robotName.subsystems.arm.elbow.neoElbow.NeoElbowConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -16,12 +18,12 @@ public class Elbow extends GBSubsystem {
     private ElbowInputsAutoLogged elbowInputs;
 
     private Rotation2d currentAngle;
-
+    
     private Elbow() {
         elbow = ElbowFactory.create();
         elbowInputs = new ElbowInputsAutoLogged();
         elbow.updateInputs(elbowInputs);
-        currentAngle = elbowInputs.position;
+        currentAngle = NeoElbowConstants.MINIMUM_ANGLE;
     }
 
     public static void init() {
@@ -38,8 +40,10 @@ public class Elbow extends GBSubsystem {
     @Override
     public void periodic() {
         super.periodic();
-
         elbow.updateInputs(elbowInputs);
+        if (NeoElbowConstants.MINIMUM_ANGLE.getRadians() > elbowInputs.position.getRadians()){
+            elbow.resetAngle(NeoElbowConstants.MINIMUM_ANGLE);
+        }
         Logger.processInputs("Elbow", elbowInputs);
         Logger.recordOutput("Elbow", getPose3D());
     }
@@ -58,6 +62,7 @@ public class Elbow extends GBSubsystem {
 
     public void resetAngle(Rotation2d position) {
         elbow.resetAngle(position);
+        currentAngle = position;
     }
 
     public void moveToAngle(Rotation2d targetAngle) {
@@ -95,6 +100,12 @@ public class Elbow extends GBSubsystem {
     public boolean isInShooterCollisionRange() {
         return elbowInputs.position.getRadians() >= ElbowConstants.SHOOTER_COLLISION_RANGE.getFirst().getRadians() &&
                 elbowInputs.position.getRadians() <= ElbowConstants.SHOOTER_COLLISION_RANGE.getSecond().getRadians();
+    }
+
+    public void moveToSafeAngleInit(){
+        if(isInShooterCollisionRange()){
+            moveToAngle(ElbowConstants.PresetPositions.SAFE.ANGLE);
+        }
     }
 
     public Pose3d getPose3D() {

@@ -8,8 +8,8 @@ import edu.wpi.first.math.geometry.Translation3d;
 public class ElbowConstants {
 
     public enum PresetPositions {
-        SAFE(Rotation2d.fromDegrees(-65)),
-        SCORE(Rotation2d.fromDegrees(85)),
+        SAFE(Rotation2d.fromDegrees(-70)),
+        SCORE(Rotation2d.fromDegrees(45)),
         STARTING(Rotation2d.fromDegrees(0)),
         TRANSFER(Rotation2d.fromDegrees(-75));
 
@@ -36,7 +36,7 @@ public class ElbowConstants {
 
     public static final Translation3d ELBOW_POSITION_RELATIVE_TO_ROBOT = new Translation3d(-0.1, 0, 0.6);
 
-    public static final double GEAR_RATIO = 1;
+    public static final double GEAR_RATIO = 1 / (28.0 * (60.0 / 16.0));
 
     public static final Rotation2d TOLERANCE = Rotation2d.fromDegrees(0.5);
 

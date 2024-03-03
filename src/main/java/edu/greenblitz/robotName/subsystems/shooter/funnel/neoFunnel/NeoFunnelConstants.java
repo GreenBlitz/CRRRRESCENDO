@@ -16,13 +16,13 @@ public class NeoFunnelConstants {
 	
 	public static final double kS = 0.27;
 	
-	public static final double kV = 0.01025;
+	public static final double kV = 0.018;
 	
 	public static final double kA = 0.03;
 	
-	public static final double kP = 3;
+	public static final double kP = 6;
 	
-	public static final double kI = 30;
+	public static final double kI = 0;
 	
 	public static final int VELOCITY_PID_SLOT = 0;
 	
@@ -44,5 +44,5 @@ public class NeoFunnelConstants {
 			.withCurrentLimit(CURRENT_LIMIT)
 			.withInverted(IS_INVERTED)
 			.withPID(PID_CONTROLLER)
-			.withVelocityConversionFactor(1 / 5.0);
+			.withVelocityConversionFactor(1 / 9.0);
 }

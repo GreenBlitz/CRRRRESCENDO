@@ -4,15 +4,14 @@ import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.wpilibj.PowerDistribution;
 
 public class RobotConstants {
-
 	public static final Robot.RobotType ROBOT_TYPE = Robot.RobotType.SYNCOPA;
 
 	public static final String SIMULATION_LOG_PATH = System.getProperty("user.home") + "\\Desktop\\SimulationLogs";
+	
+	public static final String USB_LOG_PATH = "/media/sda1";
 
-	public static final String USB_LOG_PATH = "/usb/";
-
-	public static final String SAFE_ROBORIO_LOG_PATH = "/logs/";
-
+	public static final String SAFE_ROBORIO_LOG_PATH = "/home/lvuser/logs";
+	
 	public static class General {
 
 		public static final int POWER_DISTRIBUTION_CAN_ID = 20;
