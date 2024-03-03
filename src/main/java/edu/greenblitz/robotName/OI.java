@@ -134,6 +134,7 @@ public class OI {
         Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
         Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
         Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
+        LED.getInstance().setDefaultCommand(new UpdateLEDStateDefaultCommand());
     }
 }
 
