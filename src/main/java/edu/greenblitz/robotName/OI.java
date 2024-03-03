@@ -12,6 +12,7 @@ import edu.greenblitz.robotName.commands.intake.NoteToShooter;
 import edu.greenblitz.robotName.commands.intake.ReverseRunIntake;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
 import edu.greenblitz.robotName.commands.lifter.ExtendLifter;
+import edu.greenblitz.robotName.commands.lifter.MoveLifterByPower;
 import edu.greenblitz.robotName.commands.lifter.PrepareToClimb;
 import edu.greenblitz.robotName.commands.lifter.RetractLifter;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
@@ -103,7 +104,8 @@ public class OI {
 		secondJoystick.A.whileTrue(new PanicMode());
 		secondJoystick.POV_LEFT.whileTrue(new ReverseRunIntake());
 		secondJoystick.X.whileTrue(new ExtendLifter());
-		secondJoystick.POV_RIGHT.whileTrue(new RetractLifter());
+		secondJoystick.Ygit.whileTrue(new RetractLifter());
+		secondJoystick.POV_UP.whileTrue(new MoveLifterByPower(0.1));
 		secondJoystick.POV_DOWN.whileTrue(new PrepareToClimb());
 	}
 
