@@ -1,6 +1,8 @@
 package edu.greenblitz.robotName.utils;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.path.PathPlannerPath;
+import com.pathplanner.lib.util.PathPlannerLogging;
 import edu.greenblitz.robotName.commands.shooter.ShootToSpeakerFromClose;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
@@ -23,7 +25,7 @@ public class AutonomousSelector {
     }
 
     public Command getChosenValue() {
-        return chooser.getSelected();
+        return AutoBuilder.buildAuto("move 2 meters");
     }
 
     public static AutonomousSelector getInstance() {
