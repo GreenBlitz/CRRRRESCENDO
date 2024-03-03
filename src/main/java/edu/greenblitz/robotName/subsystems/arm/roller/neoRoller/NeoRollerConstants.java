@@ -4,6 +4,7 @@ import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.utils.PIDObject;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
+import edu.wpi.first.math.geometry.Rotation2d;
 
 public class NeoRollerConstants {
 
@@ -16,6 +17,8 @@ public class NeoRollerConstants {
     public static double GEAR_RATIO = 1 / 6.0;
 
     public static boolean IS_INVERTED = true;
+
+    public static Rotation2d MOVING_TOLERANCE = Rotation2d.fromRotations(0.001);
 
     public static PIDObject PID = new PIDObject().withKp(15).withKd(0).withMaxPower(1);
 

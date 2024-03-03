@@ -12,5 +12,7 @@ public class RollerConstants {
 
     public static final Rotation2d SAFETY_ROTATIONS_TILL_OBJECT_ENTERED = Rotation2d.fromRotations(-0.4);
 
+    public static final double CHECK_MOTION_POWER = 0.01;
+
     public static final Rotation2d TOLERANCE = Rotation2d.fromRotations(0.04);
 }

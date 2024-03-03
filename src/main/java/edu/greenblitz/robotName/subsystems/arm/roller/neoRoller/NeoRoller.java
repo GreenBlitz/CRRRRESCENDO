@@ -49,15 +49,17 @@ public class NeoRoller implements IRoller {
         );
     }
 
-    public boolean isObjectInByCurrent(double current){
-        return current >= NeoRollerConstants.NOTE_IN_CURRENT;
+    public boolean isObjectInByCurrent(RollerInputsAutoLogged inputs){
+        if (inputs.outputCurrent >= NeoRollerConstants.NOTE_IN_CURRENT) return true;
+        if ((inputs.position.getRotations() - motor.getEncoder().getPosition() <= NeoRollerConstants.MOVING_TOLERANCE.getRotations())) return true;
+        return false;
     }
+
     @Override
     public void updateInputs(RollerInputsAutoLogged inputs) {
         inputs.outputCurrent = motor.getOutputCurrent();
         inputs.appliedOutput = motor.getAppliedOutput();
-        inputs.isObjectIn = isObjectInByCurrent(inputs.outputCurrent);
+        inputs.isObjectIn = isObjectInByCurrent(inputs);
         inputs.position = Rotation2d.fromRotations(motor.getEncoder().getPosition());
-        SmartDashboard.putNumber("pos roll", inputs.position.getRotations());
     }
 }
