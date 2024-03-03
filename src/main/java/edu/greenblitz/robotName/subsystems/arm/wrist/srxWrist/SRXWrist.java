@@ -60,15 +60,9 @@ public class SRXWrist implements IWrist {
 
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
-  /*      motor.set(
-                TalonSRXControlMode.Position,
-                targetAngle.getRotations() * SRXWristConstants.MAG_ENCODER_CONVERSION_FACTOR,
-                DemandType.ArbitraryFeedForward,3 * Math.signum(motor.getSelectedSensorPosition() - targetAngle.getRotations() * SRXWristConstants.MAG_ENCODER_CONVERSION_FACTOR));
-     */
         int PID_SLOT = Roller.getInstance().isObjectIn() ? 1 : 0;
         motor.selectProfileSlot(PID_SLOT, 0);
         motor.set(ControlMode.Position, targetAngle.getRotations() * SRXWristConstants.MAG_ENCODER_CONVERSION_FACTOR);
-        SmartDashboard.putNumber("target angle - srx wrist", Conversions.MagEncoderConversions.MotorPositionToRotation2D(motor.getClosedLoopTarget()).getDegrees());
     }
 
     @Override
@@ -80,8 +74,6 @@ public class SRXWrist implements IWrist {
         inputs.velocity = motor.getSelectedSensorVelocity();
         inputs.hasReachedBackwardLimit = motor.isRevLimitSwitchClosed() == 1;
         inputs.hasReachedForwardLimit = motor.isFwdLimitSwitchClosed() == 1;
-        SmartDashboard.putNumber("srx encoder value", inputs.position.getDegrees());
-        SmartDashboard.putNumber("srx encoder current", inputs.outputCurrent);
     }
 
 }

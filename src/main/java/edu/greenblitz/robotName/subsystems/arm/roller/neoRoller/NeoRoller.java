@@ -5,10 +5,7 @@ import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.subsystems.arm.roller.IRoller;
 import edu.greenblitz.robotName.subsystems.arm.roller.RollerInputsAutoLogged;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
-import edu.wpi.first.math.filter.Debouncer;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class NeoRoller implements IRoller {
 
@@ -16,13 +13,15 @@ public class NeoRoller implements IRoller {
 
     private RollerInputsAutoLogged lastInputs;
 
+    private Rotation2d sum;
+
     public NeoRoller() {
         motor = new GBSparkMax(NeoRollerConstants.MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless);
-
         motor.config(NeoRollerConstants.ROLLER_CONFIG_OBJECT);
         motor.getPIDController().setFeedbackDevice(motor.getEncoder());
         resetEncoder(Rotation2d.fromDegrees(0));
         lastInputs = new RollerInputsAutoLogged();
+        sum = Rotation2d.fromDegrees(0);
     }
 
     @Override
@@ -42,7 +41,6 @@ public class NeoRoller implements IRoller {
 
     @Override
     public void moveToPosition(Rotation2d position) {
-        SmartDashboard.putNumber("targett", position.getRotations());
         motor.getPIDController().setReference(
                 position.getRotations(),
                 CANSparkMax.ControlType.kPosition
@@ -50,16 +48,14 @@ public class NeoRoller implements IRoller {
     }
 
     public boolean isObjectInByCurrent(RollerInputsAutoLogged inputs){
-        if (inputs.outputCurrent >= NeoRollerConstants.NOTE_IN_CURRENT) return true;
-        if ((inputs.position.getRotations() - motor.getEncoder().getPosition() <= NeoRollerConstants.MOVING_TOLERANCE.getRotations())) return true;
-        return false;
+        return inputs.outputCurrent >= NeoRollerConstants.NOTE_IN_CURRENT;
     }
 
     @Override
     public void updateInputs(RollerInputsAutoLogged inputs) {
         inputs.outputCurrent = motor.getOutputCurrent();
         inputs.appliedOutput = motor.getAppliedOutput();
-        inputs.isObjectIn = isObjectInByCurrent(inputs);
         inputs.position = Rotation2d.fromRotations(motor.getEncoder().getPosition());
+        inputs.isObjectIn = isObjectInByCurrent(inputs);
     }
 }

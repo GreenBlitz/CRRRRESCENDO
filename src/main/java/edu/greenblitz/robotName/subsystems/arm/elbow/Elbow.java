@@ -107,12 +107,6 @@ public class Elbow extends GBSubsystem {
                 elbowInputs.position.getRadians() <= ElbowConstants.SHOOTER_COLLISION_RANGE.getSecond().getRadians();
     }
 
-    public void moveToSafeAngleInit() {
-        if (isInShooterCollisionRange()) {
-            moveToAngle(ElbowConstants.PresetPositions.SAFE.ANGLE);
-        }
-    }
-
     public Pose3d getPose3D() {
         return new Pose3d(
                 ElbowConstants.ELBOW_POSITION_RELATIVE_TO_ROBOT,

@@ -18,9 +18,7 @@ public class NeoRollerConstants {
 
     public static boolean IS_INVERTED = true;
 
-    public static Rotation2d MOVING_TOLERANCE = Rotation2d.fromRotations(0.001);
-
-    public static PIDObject PID = new PIDObject().withKp(15).withKd(0).withMaxPower(1);
+    public static PIDObject PID = new PIDObject().withKp(1).withKd(0).withMaxPower(1);
 
     public static final GBSparkMax.SparkMaxConfObject ROLLER_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
             .withIdleMode(CANSparkMax.IdleMode.kBrake)

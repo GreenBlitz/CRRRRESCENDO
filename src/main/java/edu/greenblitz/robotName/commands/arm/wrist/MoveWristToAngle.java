@@ -3,7 +3,6 @@ package edu.greenblitz.robotName.commands.arm.wrist;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MoveWristToAngle extends WristCommand {
 
