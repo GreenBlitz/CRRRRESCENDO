@@ -8,3 +8,4 @@ public class IntakeConstants {
 
 	public static final double AUTONOMOUS_GRIP_TIMEOUT = 3;
 }
+

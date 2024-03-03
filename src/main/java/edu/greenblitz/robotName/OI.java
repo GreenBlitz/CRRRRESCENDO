@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.LED.UpdateLEDStateDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
@@ -15,6 +16,7 @@ import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.LED.LED;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
@@ -130,5 +132,7 @@ public class OI {
 		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
 		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
 		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
+		LED.getInstance().setDefaultCommand(new UpdateLEDStateDefaultCommand());
 	}
 }
+
