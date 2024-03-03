@@ -104,7 +104,7 @@ public class OI {
 		secondJoystick.A.whileTrue(new PanicMode());
 		secondJoystick.POV_LEFT.whileTrue(new ReverseRunIntake());
 		secondJoystick.X.whileTrue(new ExtendLifter());
-		secondJoystick.Ygit.whileTrue(new RetractLifter());
+		secondJoystick.Y.whileTrue(new RetractLifter());
 		secondJoystick.POV_UP.whileTrue(new MoveLifterByPower(0.1));
 		secondJoystick.POV_DOWN.whileTrue(new PrepareToClimb());
 	}
