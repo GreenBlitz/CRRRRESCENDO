@@ -9,7 +9,7 @@ public class ReleaseNoteFromRoller extends SequentialCommandGroup {
 
     public ReleaseNoteFromRoller() {
         super(
-                new RunRollerByRotations(RollerConstants.SAFETY_ROTATIONS_TILL_OBJECT_OUT),
+                new RunByPowerAndCountRotations(RollerConstants.SAFETY_ROTATIONS_TILL_OBJECT_OUT),
                 new InstantCommand(() -> Roller.getInstance().setObjectOut())
         );
     }

@@ -44,6 +44,7 @@ public class Roller extends GBSubsystem {
         if (rollerInputs.isObjectIn){
             objectWasIn = true;
         }
+        SmartDashboard.putBoolean("is ob in ", isObjectIn());
     }
 
     public void setPower(double power) {
