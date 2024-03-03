@@ -6,6 +6,7 @@ import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.roller.RollerDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
+import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
 import edu.greenblitz.robotName.commands.getNoteToSystem.MoveToTransferNotePosition;
 import edu.greenblitz.robotName.commands.getNoteToSystem.TransferNote;
 import edu.greenblitz.robotName.commands.intake.NoteToShooter;
@@ -19,6 +20,7 @@ import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
+import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
@@ -54,8 +56,10 @@ public class OI {
 
         initButtons();
         initializeDefaultCommands();
+
         secondJoystick.A.whileTrue(new NoteToShooter());
         secondJoystick.B.whileTrue(new TransferNote());
+        secondJoystick.POV_UP.whileTrue(new ToggleScoringMode());
         secondJoystick.X.whileTrue(new ScoreToAmp());
         secondJoystick.R1.onTrue(new InstantCommand(() -> ScoringModeSelector.setScoringMode(ScoringMode.AMP)));
         secondJoystick.L1.onTrue(new InstantCommand(() -> ScoringModeSelector.setScoringMode(ScoringMode.SPEAKER)));
