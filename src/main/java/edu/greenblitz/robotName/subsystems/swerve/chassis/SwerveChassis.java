@@ -57,13 +57,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
 	private Field2d field = new Field2d();
 
-	public static final double TRANSLATION_TOLERANCE = 0.05;
-
-	public static final Rotation2d ROTATION_TOLERANCE = Rotation2d.fromDegrees(3);
-
 	private boolean doVision = true;
-
-	public final double CURRENT_TOLERANCE = 0.5;
 
 	private SwerveChassisInputsAutoLogged ChassisInputs = new SwerveChassisInputsAutoLogged();
 
@@ -239,7 +233,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	 * returns chassis angle in radians
 	 */
 	public Rotation2d getGyroAngle() {
-		return Rotation2d.fromRadians(-gyroInputs.yaw);
+		return Rotation2d.fromRadians(gyroInputs.yaw);
 	}
 
 	public Rotation2d getChassisAngle() {
@@ -424,8 +418,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 
 	private boolean isModuleAtFreeCurrent(SwerveModule module) {
-		return module.getLinearCurrent() > MK4iSwerveConstants.LINEAR_MOTOR_FREE_CURRENT - CURRENT_TOLERANCE
-				&& module.getLinearCurrent() < CURRENT_TOLERANCE + MK4iSwerveConstants.LINEAR_MOTOR_FREE_CURRENT;
+		return module.getLinearCurrent() > MK4iSwerveConstants.LINEAR_MOTOR_FREE_CURRENT - ChassisConstants.CURRENT_TOLERANCE
+				&& module.getLinearCurrent() < ChassisConstants.CURRENT_TOLERANCE + MK4iSwerveConstants.LINEAR_MOTOR_FREE_CURRENT;
 	}
 
 	public boolean isRobotOnGround() {
