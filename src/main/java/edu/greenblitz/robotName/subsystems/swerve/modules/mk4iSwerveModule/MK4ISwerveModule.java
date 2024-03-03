@@ -129,9 +129,9 @@ public class MK4ISwerveModule implements ISwerveModule {
 	public void updateInputs(SwerveModuleInputsAutoLogged inputs) {
 		updateStatusSignals(true);
 
-		inputs.linearVelocity = BaseStatusSignal.getLatencyCompensatedValue(linearVelocityStatusSignal, linearAccelerationStatusSignal);
+		inputs.linearVelocity = BaseStatusSignal.getLatencyCompensatedValue(linearVelocityStatusSignal, linearAccelerationStatusSignal)  * MK4iSwerveConstants.WHEEL_CIRCUMFERENCE;
 		inputs.angularVelocity = BaseStatusSignal.getLatencyCompensatedValue(angularVelocityStatusSignal, angularAccelerationStatusSignal);
-
+		
 		inputs.linearVoltage = linearMotor.getSupplyVoltage().getValue();
 		inputs.angularVoltage = angularMotor.getSupplyVoltage().getValue();
 

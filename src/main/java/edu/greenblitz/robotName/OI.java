@@ -115,9 +115,8 @@ public class OI {
 
 	public void thirdJoystickButtons() {
 		SmartJoystick usedJoystick = thirdJoystick;
-		usedJoystick.R1.whileTrue(new NoteToShooterWithoutArm());
-		usedJoystick.L1.whileTrue(new RunFunnelByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_Y));
-
+//		usedJoystick.R1.whileTrue(new NoteToShooterWithoutArm());
+//		usedJoystick.L1.whileTrue(new RunFunnelByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_Y));
 	}
 
 	public void fourthJoystickButtons() {

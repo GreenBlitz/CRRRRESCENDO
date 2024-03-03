@@ -25,7 +25,7 @@ public class AutonomousSelector {
     }
 
     public Command getChosenValue() {
-        return AutoBuilder.buildAuto("move 2 meters");
+        return chooser.getSelected();
     }
 
     public static AutonomousSelector getInstance() {
