@@ -44,7 +44,7 @@ public class OI {
         secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
         thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
         fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
-    mainJoystick.A.whileTrue(new RotateToAngle(Rotation2d.fromDegrees(90)));
+
         initButtons();
         initializeDefaultCommands();
     }
