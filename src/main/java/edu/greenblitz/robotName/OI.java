@@ -4,11 +4,14 @@ import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.arm.ScoreToAmp;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
+import edu.greenblitz.robotName.commands.arm.roller.MoveNoteToMiddleOfRoller;
 import edu.greenblitz.robotName.commands.arm.roller.RunRollerByJoystick;
+import edu.greenblitz.robotName.commands.arm.roller.RunRollerByRotations;
 import edu.greenblitz.robotName.commands.arm.roller.runByPower.RunRollerCounterClockwiseUntilNoteIsInside;
 import edu.greenblitz.robotName.commands.arm.wrist.MoveWristToAngle;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
+import edu.greenblitz.robotName.commands.getNoteToSystem.MoveNoteBetweenShooterAndArm;
 import edu.greenblitz.robotName.commands.intake.NoteToShooter;
 import edu.greenblitz.robotName.commands.intake.NoteToShooterForJoystick;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByPower;
@@ -34,6 +37,7 @@ import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public class OI {
 
@@ -57,9 +61,13 @@ public class OI {
 //		initButtons();
 		initializeDefaultCommands();
 //		secondJoystick.POV_UP.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(0)).andThen(new MoveWristToAngle(Rotation2d.fromDegrees(90))));
-//		secondJoystick.Y.whileTrue(new MoveWristToAngle(Rotation2d.fromDegrees(0)));
+		secondJoystick.Y.whileTrue(new MoveWristToAngle(Rotation2d.fromDegrees(0)));
 //		secondJoystick.Y.whileTrue(new ScoreToAmp());
 		secondJoystick.X.whileTrue(new RunRollerCounterClockwiseUntilNoteIsInside());
+		secondJoystick.A.whileTrue(new SequentialCommandGroup(
+				new RunRollerCounterClockwiseUntilNoteIsInside(),
+				new MoveNoteToMiddleOfRoller()
+		));
 	}
 
 	public static void init() {

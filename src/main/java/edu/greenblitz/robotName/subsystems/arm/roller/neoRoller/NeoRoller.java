@@ -21,7 +21,7 @@ public class NeoRoller implements IRoller {
 
         motor.config(NeoRollerConstants.ROLLER_CONFIG_OBJECT);
         motor.getPIDController().setFeedbackDevice(motor.getEncoder());
-
+        resetEncoder(Rotation2d.fromDegrees(0));
         lastInputs = new RollerInputsAutoLogged();
     }
 
@@ -42,6 +42,7 @@ public class NeoRoller implements IRoller {
 
     @Override
     public void moveToPosition(Rotation2d position) {
+        SmartDashboard.putNumber("targett", position.getRotations());
         motor.getPIDController().setReference(
                 position.getRotations(),
                 CANSparkMax.ControlType.kPosition
@@ -57,5 +58,6 @@ public class NeoRoller implements IRoller {
         inputs.appliedOutput = motor.getAppliedOutput();
         inputs.isObjectIn = isObjectInByCurrent(inputs.outputCurrent);
         inputs.position = Rotation2d.fromRotations(motor.getEncoder().getPosition());
+        SmartDashboard.putNumber("pos roll", inputs.position.getRotations());
     }
 }
