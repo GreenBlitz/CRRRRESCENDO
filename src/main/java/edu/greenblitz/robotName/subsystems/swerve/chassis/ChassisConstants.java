@@ -16,7 +16,7 @@ public class ChassisConstants {
 	
 	public static final double ROBOT_LENGTH_IN_METERS = 0.82;
 	
-	public static final double BUMPER_WIDTH = 0.13;
+	public static final double BUMPER_WIDTH = 0.077;
 	
 	public static final Rotation2d CLOSE_RANGE_SHOOTING_ANGLE = Rotation2d.fromDegrees(180);
 	
