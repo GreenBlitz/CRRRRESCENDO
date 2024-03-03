@@ -9,7 +9,7 @@ public class ElbowConstants {
 
     public enum PresetPositions {
         SAFE(Rotation2d.fromDegrees(-67)),
-        SCORE(Rotation2d.fromDegrees(45)),
+        SCORE(Rotation2d.fromDegrees(60)),
         STARTING(Rotation2d.fromDegrees(0)),
         TRANSFER(Rotation2d.fromDegrees(-75));
 

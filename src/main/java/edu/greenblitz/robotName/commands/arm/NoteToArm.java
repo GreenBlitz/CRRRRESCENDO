@@ -1,16 +1,16 @@
 package edu.greenblitz.robotName.commands.arm;
 
 import edu.greenblitz.robotName.commands.arm.roller.CollectNoteToRoller;
-import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
-import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByVelocity;
+import edu.greenblitz.robotName.subsystems.shooter.funnel.FunnelConstants;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 
-public class NoteToArm extends SequentialCommandGroup {
+public class NoteToArm extends ParallelDeadlineGroup {
 
-    public NoteToArm(){
+    public NoteToArm() {
         super(
-                new MoveElbowAndWrist(ElbowConstants.PresetPositions.SAFE.ANGLE, WristConstants.PresetPositions.SAFE.ANGLE),
-                new CollectNoteToRoller()
+                new CollectNoteToRoller(),
+                new RunFunnelByVelocity(-FunnelConstants.INTAKE_VELOCITY)
         );
     }
 

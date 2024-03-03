@@ -1,11 +1,13 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.arm.NoteToArm;
 import edu.greenblitz.robotName.commands.arm.ScoreToAmp;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
-import edu.greenblitz.robotName.commands.arm.roller.CollectNoteToRoller;
 import edu.greenblitz.robotName.commands.arm.roller.RollerDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
+import edu.greenblitz.robotName.commands.getNoteToSystem.MoveToTransferNotePosition;
+import edu.greenblitz.robotName.commands.getNoteToSystem.TransferNote;
 import edu.greenblitz.robotName.commands.intake.NoteToShooter;
 import edu.greenblitz.robotName.commands.intake.NoteToShooterForJoystick;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByPower;
@@ -25,10 +27,11 @@ import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
-import edu.greenblitz.robotName.utils.GBCommand;
+import edu.greenblitz.robotName.utils.ScoringMode;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public class OI {
 
@@ -49,11 +52,13 @@ public class OI {
         fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
 
 
-		initButtons();
+        initButtons();
         initializeDefaultCommands();
-
+        secondJoystick.A.whileTrue(new NoteToShooter());
+        secondJoystick.B.whileTrue(new TransferNote());
         secondJoystick.X.whileTrue(new ScoreToAmp());
-        secondJoystick.A.whileTrue(new CollectNoteToRoller());
+        secondJoystick.R1.onTrue(new InstantCommand(() -> ScoringModeSelector.setScoringMode(ScoringMode.AMP)));
+        secondJoystick.L1.onTrue(new InstantCommand(() -> ScoringModeSelector.setScoringMode(ScoringMode.SPEAKER)));
     }
 
     public static void init() {
