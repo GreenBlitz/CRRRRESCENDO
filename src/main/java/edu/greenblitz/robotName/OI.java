@@ -12,6 +12,8 @@ import edu.greenblitz.robotName.commands.intake.NoteToShooter;
 import edu.greenblitz.robotName.commands.intake.ReverseRunIntake;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByJoystick;
 import edu.greenblitz.robotName.commands.lifter.ExtendLifter;
+import edu.greenblitz.robotName.commands.lifter.PrepareToClimb;
+import edu.greenblitz.robotName.commands.lifter.RetractLifter;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
@@ -100,8 +102,9 @@ public class OI {
 		secondJoystick.R1.whileTrue(new CollectNote());
 		secondJoystick.A.whileTrue(new PanicMode());
 		secondJoystick.POV_LEFT.whileTrue(new ReverseRunIntake());
-		secondJoystick.X.whileTrue(new ScoreToTrap());
-		secondJoystick.POV_DOWN.whileTrue(new MoveElbowAndWristToClimb());
+		secondJoystick.X.whileTrue(new ExtendLifter());
+		secondJoystick.POV_RIGHT.whileTrue(new RetractLifter());
+		secondJoystick.POV_DOWN.whileTrue(new PrepareToClimb());
 	}
 
 	public void thirdJoystickButtons() {
