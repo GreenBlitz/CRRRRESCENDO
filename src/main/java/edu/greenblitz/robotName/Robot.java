@@ -79,7 +79,7 @@ public class Robot extends LoggedRobot {
         Wrist.init();
         Roller.init();
 
-        Lifter.init();
+//        Lifter.init();
         Intake.init();
     }
 

@@ -1,8 +1,10 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.arm.NoteToArm;
 import edu.greenblitz.robotName.commands.arm.ScoreToAmp;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
+import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRoller;
 import edu.greenblitz.robotName.commands.arm.roller.RollerDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
@@ -11,6 +13,7 @@ import edu.greenblitz.robotName.commands.getNoteToSystem.MoveToTransferNotePosit
 import edu.greenblitz.robotName.commands.getNoteToSystem.TransferNote;
 import edu.greenblitz.robotName.commands.intake.NoteToShooter;
 import edu.greenblitz.robotName.commands.intake.NoteToShooterForJoystick;
+import edu.greenblitz.robotName.commands.intake.ReverseRunIntake;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByPower;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityUntilInterrupted;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
@@ -23,8 +26,10 @@ import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
+import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
+import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
@@ -54,15 +59,17 @@ public class OI {
         fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
 
 
-        initButtons();
+//        initButtons();
         initializeDefaultCommands();
 
-        secondJoystick.A.whileTrue(new NoteToShooter());
-        secondJoystick.B.whileTrue(new TransferNote());
         secondJoystick.POV_UP.whileTrue(new ToggleScoringMode());
-        secondJoystick.X.whileTrue(new ScoreToAmp());
-        secondJoystick.R1.onTrue(new InstantCommand(() -> ScoringModeSelector.setScoringMode(ScoringMode.AMP)));
-        secondJoystick.L1.onTrue(new InstantCommand(() -> ScoringModeSelector.setScoringMode(ScoringMode.SPEAKER)));
+        secondJoystick.X.whileTrue(new MoveElbowAndWrist(
+                ElbowConstants.PresetPositions.SCORE.ANGLE,
+                WristConstants.PresetPositions.SCORE.ANGLE
+        ));
+        secondJoystick.Y.whileTrue(new ReleaseNoteFromRoller());
+        secondJoystick.R1.whileTrue(new CollectNoteToScoringMode());
+        secondJoystick.L1.whileTrue(new TransferNote());
     }
 
     public static void init() {
@@ -145,7 +152,7 @@ public class OI {
     }
 
     public void initializeDefaultCommands() {
-        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+//        Battery.getInstance().setDefaultCommand(new BatteryLimiter());
         Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
         Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
         Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());

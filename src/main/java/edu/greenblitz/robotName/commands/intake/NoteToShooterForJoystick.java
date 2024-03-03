@@ -16,7 +16,7 @@ public class NoteToShooterForJoystick extends IntakeCommand {
     public void end(boolean interrupted) {
         intake.stop();
         if (!interrupted) {
-            new NoteFromIntakeToShooter().schedule();
+            new NoteFromIntakeToShooterWithArm().schedule();
         }
     }
 
