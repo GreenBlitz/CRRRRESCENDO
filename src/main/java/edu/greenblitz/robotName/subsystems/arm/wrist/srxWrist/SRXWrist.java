@@ -6,6 +6,7 @@ import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
 import edu.greenblitz.robotName.subsystems.arm.wrist.IWrist;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristInputsAutoLogged;
 import edu.greenblitz.robotName.utils.Conversions;
@@ -64,6 +65,8 @@ public class SRXWrist implements IWrist {
                 targetAngle.getRotations() * SRXWristConstants.MAG_ENCODER_CONVERSION_FACTOR,
                 DemandType.ArbitraryFeedForward,3 * Math.signum(motor.getSelectedSensorPosition() - targetAngle.getRotations() * SRXWristConstants.MAG_ENCODER_CONVERSION_FACTOR));
      */
+        int PID_SLOT = Roller.getInstance().isObjectIn() ? 1 : 0;
+        motor.selectProfileSlot(PID_SLOT, 0);
         motor.set(ControlMode.Position, targetAngle.getRotations() * SRXWristConstants.MAG_ENCODER_CONVERSION_FACTOR);
         SmartDashboard.putNumber("target angle - srx wrist", Conversions.MagEncoderConversions.MotorPositionToRotation2D(motor.getClosedLoopTarget()).getDegrees());
     }
@@ -78,6 +81,7 @@ public class SRXWrist implements IWrist {
         inputs.hasReachedBackwardLimit = motor.isRevLimitSwitchClosed() == 1;
         inputs.hasReachedForwardLimit = motor.isFwdLimitSwitchClosed() == 1;
         SmartDashboard.putNumber("srx encoder value", inputs.position.getDegrees());
+        SmartDashboard.putNumber("srx encoder current", inputs.outputCurrent);
     }
 
 }

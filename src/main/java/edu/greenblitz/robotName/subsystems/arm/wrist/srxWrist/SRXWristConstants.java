@@ -26,5 +26,9 @@ public class SRXWristConstants {
         TALON_SRX_CONFIGURATION.slot0.kI = 0;
         TALON_SRX_CONFIGURATION.slot0.kD = 0.1;
         TALON_SRX_CONFIGURATION.slot0.kF = 0;
+        TALON_SRX_CONFIGURATION.slot1.kP = 3;
+        TALON_SRX_CONFIGURATION.slot1.kI = 0;
+        TALON_SRX_CONFIGURATION.slot1.kD = 0.1;
+        TALON_SRX_CONFIGURATION.slot1.kF = 0;
     }
 }

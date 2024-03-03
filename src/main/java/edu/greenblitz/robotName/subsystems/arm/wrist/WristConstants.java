@@ -7,7 +7,7 @@ public class WristConstants {
     public enum PresetPositions {
 
         STARTING(Rotation2d.fromDegrees(90)),
-        SCORE(Rotation2d.fromDegrees(45)),
+        SCORE(Rotation2d.fromDegrees(180)),
         TRANSFER(Rotation2d.fromDegrees(180)),
         SAFE(TRANSFER.ANGLE);
 

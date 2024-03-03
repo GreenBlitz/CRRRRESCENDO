@@ -15,6 +15,8 @@ public class NeoRollerConstants {
 
     public static double GEAR_RATIO = 1 / 6.0;
 
+    public static boolean IS_INVERTED = true;
+
     public static PIDObject PID = new PIDObject().withKp(15).withKd(0).withMaxPower(1);
 
     public static final GBSparkMax.SparkMaxConfObject ROLLER_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
@@ -22,5 +24,6 @@ public class NeoRollerConstants {
             .withRampRate(RobotConstants.General.RAMP_RATE_VALUE)
             .withCurrentLimit(CURRENT_LIMIT)
             .withPositionConversionFactor(GEAR_RATIO)
-            .withPID(PID);
+            .withPID(PID)
+            .withInverted(IS_INVERTED);
 }

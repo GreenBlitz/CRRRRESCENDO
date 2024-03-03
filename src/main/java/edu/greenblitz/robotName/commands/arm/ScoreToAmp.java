@@ -12,25 +12,6 @@ public class ScoreToAmp extends SequentialCommandGroup {
         super(
                 new MoveElbowAndWrist(
                         ElbowConstants.PresetPositions.SCORE.ANGLE,
-                        WristConstants.PresetPositions.SAFE.ANGLE
-                ),
-                new InstantCommand(() ->{
-                    System.out.println("aaaaaaaaaaaaaa");
-                    System.out.println("aaaaaaaaaaaaaa");
-                    System.out.println("aaaaaaaaaaaaaa");
-                    System.out.println("aaaaaaaaaaaaaa");
-                    System.out.println("aaaaaaaaaaaaaa");
-                    System.out.println("aaaaaaaaaaaaaa");
-                    System.out.println("aaaaaaaaaaaaaa");
-                    System.out.println("aaaaaaaaaaaaaa");
-                    System.out.println("aaaaaaaaaaaaaa");
-                    System.out.println("aaaaaaaaaaaaaa");
-                    System.out.println("aaaaaaaaaaaaaa");
-                    System.out.println("aaaaaaaaaaaaaa");
-                }),
-
-                new MoveElbowAndWrist(
-                        ElbowConstants.PresetPositions.SCORE.ANGLE,
                         WristConstants.PresetPositions.SCORE.ANGLE
                 ),
                 new RunRollerClockwiseUntilObjectIsOut()

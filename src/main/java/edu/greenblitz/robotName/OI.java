@@ -4,6 +4,7 @@ import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.arm.ScoreToAmp;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
+import edu.greenblitz.robotName.commands.arm.roller.CollectNoteToRoller;
 import edu.greenblitz.robotName.commands.arm.roller.MoveNoteToMiddleOfRoller;
 import edu.greenblitz.robotName.commands.arm.roller.RunRollerByJoystick;
 import edu.greenblitz.robotName.commands.arm.roller.RunRollerByRotations;
@@ -60,14 +61,9 @@ public class OI {
 
 //		initButtons();
 		initializeDefaultCommands();
-//		secondJoystick.POV_UP.whileTrue(new MoveElbowToAngle(Rotation2d.fromDegrees(0)).andThen(new MoveWristToAngle(Rotation2d.fromDegrees(90))));
-		secondJoystick.Y.whileTrue(new MoveWristToAngle(Rotation2d.fromDegrees(0)));
-//		secondJoystick.Y.whileTrue(new ScoreToAmp());
-		secondJoystick.X.whileTrue(new RunRollerCounterClockwiseUntilNoteIsInside());
-		secondJoystick.A.whileTrue(new SequentialCommandGroup(
-				new RunRollerCounterClockwiseUntilNoteIsInside(),
-				new MoveNoteToMiddleOfRoller()
-		));
+
+		secondJoystick.X.whileTrue(new ScoreToAmp());
+		secondJoystick.A.whileTrue(new CollectNoteToRoller());
 	}
 
 	public static void init() {
@@ -84,6 +80,7 @@ public class OI {
 	public SmartJoystick getMainJoystick() {
 		return mainJoystick;
 	}
+
 
 	public SmartJoystick getSecondJoystick() {
 		return secondJoystick;
