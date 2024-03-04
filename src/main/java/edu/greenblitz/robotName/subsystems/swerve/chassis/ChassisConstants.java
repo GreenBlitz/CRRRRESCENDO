@@ -63,7 +63,6 @@ public class ChassisConstants {
 	static {
 		ROTATION_PID_CONTROLLER_RADIANS.setTolerance(Units.degreesToRadians(2));
 		ROTATION_PID_CONTROLLER_RADIANS.enableContinuousInput(-Math.PI, Math.PI);
-		ROTATION_PID_CONTROLLER.enableContinuousInput(-Math.PI, Math.PI);
 	}
 
 	public static final double MAX_VELOCITY = 6.6818320981472068;
