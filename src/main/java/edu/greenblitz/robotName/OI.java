@@ -92,7 +92,7 @@ public class OI {
 	}
 
 	public void romyButtons() {
-//		mainJoystick.R1.whileTrue(new NoteToShooterForJoystick());
+		mainJoystick.R1.whileTrue(new NoteToShooterForJoystick());
 		mainJoystick.L1.whileTrue(new CollectNoteFromFeeder());
 		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetPoseByVision()));
 
