@@ -5,6 +5,9 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
+import edu.greenblitz.robotName.commands.intake.NoteToShooter;
+import edu.greenblitz.robotName.commands.shooter.ShootFromInFunnel;
+import edu.greenblitz.robotName.commands.shooter.ShootToSpeakerFromClose;
 import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
@@ -79,7 +82,7 @@ public class Robot extends LoggedRobot {
         Wrist.init();
         Roller.init();
 
-//        Lifter.init();
+        Lifter.init();
         Intake.init();
     }
 
@@ -95,12 +98,9 @@ public class Robot extends LoggedRobot {
     }
 
     private void initializeAutonomousBuilder() {
-//        NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
-//        NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
-//        NamedCommands.registerCommand("grip", new NoteToShooter());
-        NamedCommands.registerCommand("shoot", new InstantCommand());
-        NamedCommands.registerCommand("close shoot", new InstantCommand());
-        NamedCommands.registerCommand("grip", new InstantCommand());
+        NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
+        NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
+        NamedCommands.registerCommand("grip", new NoteToShooter());
         AutoBuilder.configureHolonomic(
                 SwerveChassis.getInstance()::getRobotPose2d,
                 SwerveChassis.getInstance()::resetChassisPose,

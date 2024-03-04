@@ -6,7 +6,6 @@ import edu.greenblitz.robotName.subsystems.arm.roller.IRoller;
 import edu.greenblitz.robotName.subsystems.arm.roller.RollerInputsAutoLogged;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class NeoRoller implements IRoller {
 
@@ -45,7 +44,7 @@ public class NeoRoller implements IRoller {
         );
     }
 
-    public boolean isObjectInByCurrent(RollerInputsAutoLogged inputs){
+    public boolean isObjectInByCurrent(RollerInputsAutoLogged inputs) {
         return inputs.outputCurrent >= NeoRollerConstants.NOTE_IN_CURRENT;
     }
 
@@ -55,8 +54,5 @@ public class NeoRoller implements IRoller {
         inputs.appliedOutput = motor.getAppliedOutput();
         inputs.position = Rotation2d.fromRotations(motor.getEncoder().getPosition());
         inputs.isObjectIn = isObjectInByCurrent(inputs);
-        SmartDashboard.putNumber("pos", inputs.position.getRotations());
-        SmartDashboard.putNumber("current", inputs.outputCurrent);
-        SmartDashboard.putBoolean("isisis obobob", inputs.isObjectIn);
     }
 }

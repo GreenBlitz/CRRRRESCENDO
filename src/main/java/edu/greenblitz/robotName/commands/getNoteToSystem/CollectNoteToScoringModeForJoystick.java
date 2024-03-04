@@ -28,7 +28,8 @@ public class CollectNoteToScoringModeForJoystick extends IntakeCommand {
                             new InstantCommand(),
                             ScoringModeSelector::isAmpMode
 
-                    )).schedule();
+                    )
+            ).schedule();
         }
     }
 

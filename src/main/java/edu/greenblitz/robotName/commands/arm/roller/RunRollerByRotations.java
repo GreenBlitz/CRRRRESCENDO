@@ -2,7 +2,6 @@ package edu.greenblitz.robotName.commands.arm.roller;
 
 import edu.greenblitz.robotName.Robot;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RunRollerByRotations extends RollerCommand {
 
@@ -14,7 +13,6 @@ public class RunRollerByRotations extends RollerCommand {
 
     @Override
     public void initialize() {
-        SmartDashboard.putNumber("target", rotations.getRotations());
         roller.resetEncoder(Rotation2d.fromRadians(0));
         roller.moveToPosition(rotations);
     }
@@ -28,7 +26,6 @@ public class RunRollerByRotations extends RollerCommand {
 
     @Override
     public boolean isFinished() {
-        SmartDashboard.putBoolean("Aa", roller.isAtAngle(rotations));
         return roller.isAtAngle(rotations);
     }
 
