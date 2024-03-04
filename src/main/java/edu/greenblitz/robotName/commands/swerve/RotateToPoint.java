@@ -1,12 +1,13 @@
 package edu.greenblitz.robotName.commands.swerve;
 
 
+import edu.greenblitz.robotName.subsystems.swerve.chassis.GetRotationSupplier;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.wpi.first.math.geometry.Translation2d;
 
 import java.util.function.Supplier;
 
-public class RotateToPoint extends RotateToAngleSupplier{
+public class RotateToPoint extends GetRotationSupplier {
 
     public RotateToPoint(Supplier<Translation2d> targetPointSupplier) {
         super(
