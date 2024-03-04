@@ -50,7 +50,7 @@ public class Pigeon2Gyro implements IAngleMeasurementGyro {
 
     @Override
     public void updateInputs(GyroInputsAutoLogged inputs) {
-		inputs.yaw = Units.degreesToRadians(pigeon2.getYaw().getValue());
+		inputs.yaw = -Units.degreesToRadians(pigeon2.getYaw().getValue());
 		inputs.pitch = (Units.degreesToRadians(pigeon2.getPitch().getValue()) - pitchOffset.getRadians()) % GBCircle.FULL_ROTATION.getRadians();
 		inputs.roll = (Units.degreesToRadians(pigeon2.getRoll().getValue()) - rollOffset.getRadians()) % GBCircle.FULL_ROTATION.getRadians();
 

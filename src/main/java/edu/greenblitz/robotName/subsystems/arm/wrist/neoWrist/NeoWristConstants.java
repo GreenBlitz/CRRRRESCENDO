@@ -32,4 +32,6 @@ public class NeoWristConstants {
     public static final boolean IS_SOFT_FORWARD_LIMIT_ENABLED = true;
 
     public static final boolean IS_SOFT_BACKWARD_LIMIT_ENABLED = true;
+
+    public static final int MAX_VOLT = 6;
 }
