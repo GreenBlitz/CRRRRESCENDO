@@ -1,0 +1,97 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.385354324682553,
+      "y": 5.57998439840296
+    },
+    "rotation": 180.0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "close shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "speaker start to 2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "grip"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "2 to speaker"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "close shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "speaker to 1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "grip"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "1 to speaker"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "close shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "speaker mid to 3"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "grip"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "3 to speaker"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "shoot"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
