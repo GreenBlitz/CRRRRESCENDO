@@ -29,8 +29,4 @@ public class RunRollerByRotations extends RollerCommand {
         return roller.isAtAngle(rotations);
     }
 
-    @Override
-    public void end(boolean interrupted) {
-        super.end(interrupted);
-    }
 }

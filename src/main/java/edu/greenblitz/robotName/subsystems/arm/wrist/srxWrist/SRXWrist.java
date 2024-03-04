@@ -1,17 +1,17 @@
 package edu.greenblitz.robotName.subsystems.arm.wrist.srxWrist;
 
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
+import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
 import edu.greenblitz.robotName.subsystems.arm.wrist.IWrist;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristInputsAutoLogged;
 import edu.greenblitz.robotName.utils.Conversions;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SRXWrist implements IWrist {
 
@@ -19,13 +19,14 @@ public class SRXWrist implements IWrist {
 
     public SRXWrist() {
         motor = new TalonSRX(SRXWristConstants.MOTOR_ID);
+
+        motor.configAllSettings(SRXWristConstants.TALON_SRX_CONFIGURATION);
         motor.configSelectedFeedbackSensor(
-                FeedbackDevice.CTRE_MagEncoder_Absolute,
+                FeedbackDevice.CTRE_MagEncoder_Relative,
                 SRXWristConstants.PID_SLOT,
                 SRXWristConstants.TIMEOUT_FOR_CONFIG_SET
         );
-        motor.configAllSettings(SRXWristConstants.TALON_SRX_CONFIGURATION);
-        resetAngleByAbsoluteEncoder();
+        resetAngle(Rotation2d.fromDegrees(180));
     }
 
     @Override
@@ -54,12 +55,14 @@ public class SRXWrist implements IWrist {
 
     @Override
     public void resetAngleByAbsoluteEncoder() {
-    
+
     }
 
     @Override
     public void moveToAngle(Rotation2d targetAngle) {
-        motor.set(TalonSRXControlMode.Position, targetAngle.getRotations());
+        int PID_SLOT = Roller.getInstance().isObjectIn() ? 1 : 0;
+        motor.selectProfileSlot(PID_SLOT, 0);
+        motor.set(ControlMode.Position, targetAngle.getRotations() * SRXWristConstants.MAG_ENCODER_CONVERSION_FACTOR);
     }
 
     @Override

@@ -16,10 +16,13 @@ public class Roller extends GBSubsystem {
 
 	private IRoller roller;
 
+    private boolean objectWasIn;
+
     private Roller() {
         roller = RollerFactory.create();
         rollerInputs = new RollerInputsAutoLogged();
         roller.updateInputs(rollerInputs);
+        objectWasIn = false;
     }
 
     public static void init() {
@@ -38,6 +41,9 @@ public class Roller extends GBSubsystem {
 
         roller.updateInputs(rollerInputs);
         Logger.processInputs("Roller", rollerInputs);
+        if (rollerInputs.isObjectIn) {
+            objectWasIn = true;
+        }
     }
 
     public void setPower(double power) {
@@ -72,8 +78,13 @@ public class Roller extends GBSubsystem {
         return rollerInputs.appliedOutput;
     }
 
+    public void setObjectOut() {
+        objectWasIn = false;
+    }
+
+
     public boolean isObjectIn() {
-        return rollerInputs.isObjectIn;
+        return rollerInputs.isObjectIn || objectWasIn;
     }
 
     public Rotation2d getAngle() {

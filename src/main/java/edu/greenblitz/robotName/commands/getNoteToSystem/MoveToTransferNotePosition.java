@@ -14,8 +14,8 @@ public class MoveToTransferNotePosition extends ParallelCommandGroup {
                 new MoveElbowAndWrist(
                         ElbowConstants.PresetPositions.TRANSFER.ANGLE,
                         WristConstants.PresetPositions.TRANSFER.ANGLE
-                ),
-                new MovePivotToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE)
+                )
+                , new MovePivotToAngle(PivotConstants.PresetPositions.TRANSFER.ANGLE)
         );
     }
 }
