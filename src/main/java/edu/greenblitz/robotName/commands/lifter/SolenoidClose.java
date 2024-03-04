@@ -2,7 +2,7 @@ package edu.greenblitz.robotName.commands.lifter;
 
 public class SolenoidClose extends LifterCommand{
     @Override
-    public void initialize() {
+    public void execute() {
         lifter.closeSolenoid();
     }
 
