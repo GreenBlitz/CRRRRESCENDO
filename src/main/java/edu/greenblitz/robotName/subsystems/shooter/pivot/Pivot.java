@@ -9,6 +9,8 @@ import edu.wpi.first.math.geometry.Rotation3d;
 import org.littletonrobotics.junction.Logger;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 
+import java.util.function.Supplier;
+
 public class Pivot extends GBSubsystem {
 	
 	private static Pivot instance;
@@ -62,7 +64,11 @@ public class Pivot extends GBSubsystem {
 		pivot.resetAngle(position);
 	}
 	
-	public void moveToAngle(Rotation2d targetAngle) {
+	public void moveToAngle(Supplier<Rotation2d> targetAngle) {
+		pivot.moveToAngle(targetAngle.get());
+	}
+
+	public void moveToAngle(Rotation2d targetAngle){
 		pivot.moveToAngle(targetAngle);
 	}
 	
