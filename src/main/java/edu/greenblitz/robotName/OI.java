@@ -6,6 +6,7 @@ import edu.greenblitz.robotName.commands.arm.ScoreToAmp;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRoller;
 import edu.greenblitz.robotName.commands.arm.roller.RollerDefaultCommand;
+import edu.greenblitz.robotName.commands.arm.roller.runByPower.RollCounterClockwise;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
@@ -62,14 +63,15 @@ public class OI {
 //        initButtons();
         initializeDefaultCommands();
 
-        secondJoystick.POV_UP.whileTrue(new ToggleScoringMode());
+        secondJoystick.POV_UP.onTrue(new ToggleScoringMode());
         secondJoystick.X.whileTrue(new MoveElbowAndWrist(
                 ElbowConstants.PresetPositions.SCORE.ANGLE,
                 WristConstants.PresetPositions.SCORE.ANGLE
         ));
-        secondJoystick.Y.whileTrue(new ReleaseNoteFromRoller());
+        secondJoystick.Y.onTrue(new ReleaseNoteFromRoller());
         secondJoystick.R1.whileTrue(new CollectNoteToScoringMode());
-        secondJoystick.L1.whileTrue(new TransferNote());
+        secondJoystick.L1.onTrue(new TransferNote());
+        secondJoystick.A.onTrue(new InstantCommand(() -> Roller.getInstance().setObjectOut()));
     }
 
     public static void init() {

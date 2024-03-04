@@ -14,6 +14,8 @@ public class Roller extends GBSubsystem {
 
     private RollerInputsAutoLogged rollerInputs;
 
+    private double counter;
+
 	private IRoller roller;
 
     private boolean objectWasIn;
@@ -41,7 +43,7 @@ public class Roller extends GBSubsystem {
 
         roller.updateInputs(rollerInputs);
         Logger.processInputs("Roller", rollerInputs);
-        if (rollerInputs.isObjectIn){
+        if (rollerInputs.isObjectIn) {
             objectWasIn = true;
         }
         SmartDashboard.putBoolean("is ob in ", isObjectIn());

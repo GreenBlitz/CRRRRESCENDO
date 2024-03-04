@@ -56,5 +56,7 @@ public class NeoRoller implements IRoller {
         inputs.position = Rotation2d.fromRotations(motor.getEncoder().getPosition());
         inputs.isObjectIn = isObjectInByCurrent(inputs);
         SmartDashboard.putNumber("pos", inputs.position.getRotations());
+        SmartDashboard.putNumber("current", inputs.outputCurrent);
+        SmartDashboard.putBoolean("isisis obobob", inputs.isObjectIn);
     }
 }
