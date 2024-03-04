@@ -12,13 +12,12 @@ import edu.wpi.first.wpilibj.Timer;
 
 import java.util.Optional;
 
-
 class Limelight {
- 
+
 	private NetworkTableEntry robotPoseEntry, idEntry, tagPoseEntry;
 
 	private String name;
-	
+
 	public Limelight(String limelightName) {
 		this.name = limelightName;
 		String robotPoseQuery = FMSUtils.getAlliance() == DriverStation.Alliance.Red ? "botpose_wpired" : "botpose_wpiblue";
@@ -26,7 +25,7 @@ class Limelight {
 		tagPoseEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("targetpose_cameraspace");
 		idEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("tid");
 	}
- 
+
 	public Optional<Pair<Pose2d, Double>> getUpdatedPose2DEstimation() {
 		double[] poseArray = robotPoseEntry.getDoubleArray(new double[VisionConstants.LIMELIGHT_ENTRY_ARRAY_LENGTH]);
 		double processingLatency = poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.TOTAL_LATENCY)] / 1000;
@@ -42,23 +41,23 @@ class Limelight {
 		);
 		return Optional.of(new Pair<>(robotPose, timestamp));
 	}
-	
+
 	public double getTagHeight() {
 		double[] poseArray = tagPoseEntry.getDoubleArray(new double[VisionConstants.LIMELIGHT_ENTRY_ARRAY_LENGTH]);
 		return poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.Y_AXIS)];
 	}
-	
-	public boolean getTagConfidence(){
-		boolean tagHeightConfidence = getTagHeight() < VisionConstants.APRIL_TAG_HEIGHT_METERS + VisionConstants.APRIL_TAG_HEIGHT_TOLERANCE_METERS || getTagHeight() > VisionConstants.APRIL_TAG_HEIGHT_METERS - VisionConstants.APRIL_TAG_HEIGHT_TOLERANCE_METERS;
+
+	public boolean getTagConfidence() {
+		boolean tagHeightConfidence = getTagHeight() < VisionConstants.APRIL_TAG_HEIGHT_METERS + VisionConstants.APRIL_TAG_HEIGHT_TOLERANCE_METERS
+				|| getTagHeight() > VisionConstants.APRIL_TAG_HEIGHT_METERS - VisionConstants.APRIL_TAG_HEIGHT_TOLERANCE_METERS;
 		return tagHeightConfidence;
 	}
-	
+
 	public double getDistanceFromTag() {
 		double[] poseArray = tagPoseEntry.getDoubleArray(new double[VisionConstants.LIMELIGHT_ENTRY_ARRAY_LENGTH]);
 		return poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.Z_AXIS)];
 	}
-	
-	
+
 	public boolean hasTarget() {
 		return getUpdatedPose2DEstimation().isPresent();
 	}
