@@ -136,12 +136,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		MultiLimelight.getInstance().recordEstimatedPositions();
 		SmartDashboard.putData(getField());
 	}
-	public void setMaxPower() {
-		backLeft.setLinearPower(1);
-		backRight.setLinearPower(-1);
-		frontRight.setLinearPower(1);
-		frontLeft.setLinearPower(1);
-	}
+
 
 	public void resetChassisPosition(Pose2d pose) {
 		poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), pose);

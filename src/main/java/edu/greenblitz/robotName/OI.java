@@ -22,16 +22,9 @@ import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
-import edu.greenblitz.robotName.subsystems.swerve.modules.Comc;
-import edu.greenblitz.robotName.utils.GBCommand;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.Subsystem;
-
-import java.util.Set;
-import java.util.function.DoubleSupplier;
 
 public class OI {
 
@@ -88,13 +81,12 @@ public class OI {
 	}
 
 	public void romyButtons() {
-//		mainJoystick.R1.whileTrue(new NoteToShooterForJoystick());
+		mainJoystick.R1.whileTrue(new NoteToShooterForJoystick());
 		mainJoystick.L1.whileTrue(new CollectNoteFromFeeder());
 		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetPoseByVision()));
 
 		mainJoystick.R1.whileTrue(
 				new MoveByJoysticks(MoveByJoysticks.DriveMode.NORMAL,() -> new RotateToPoint(() -> FieldConstants.MIDDLE_OF_RED_SPEAKER_POSITION.toTranslation2d()).getAsDouble()));
-		mainJoystick.X.whileTrue(new Comc());
 
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
 	}

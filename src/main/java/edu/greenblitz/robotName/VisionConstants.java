@@ -32,7 +32,7 @@ public class VisionConstants {
 	
 	public final static double APRIL_TAG_HEIGHT_METERS = 1.2397;
 	
-	public final static double APRIL_TAG_HEIGHT_TOLERANCE_METERS = 0.7;
+	public final static double APRIL_TAG_HEIGHT_TOLERANCE_METERS = 0.07;
 	
 	public static enum LIMELIGHT_ARRAY_VALUES {
 		X_AXIS,

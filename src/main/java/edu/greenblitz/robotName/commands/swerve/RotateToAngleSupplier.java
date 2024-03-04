@@ -40,11 +40,7 @@ public class RotateToAngleSupplier implements DoubleSupplier {
 				SwerveChassis.getInstance().getChassisAngle().getRadians()
 		);
 
-		SmartDashboard.putNumber("setpoint", angleSupplier.get().getDegrees());
-		SmartDashboard.putBoolean("is at setpoint", isAtSetpoint());
-		SmartDashboard.putBoolean("is at setset", pidController.atSetpoint());
-		SmartDashboard.putNumber("angle", SwerveChassis.getInstance().getChassisAngle().getDegrees());
-		return /*isAtSetpoint() || */pidController.atSetpoint() ? 0 : pidOutput /* + feedForwardSupplier.getAsDouble()*/;
+		return pidController.atSetpoint() ? 0 : pidOutput ;
 	}
 
 	public boolean isAtSetpoint() {

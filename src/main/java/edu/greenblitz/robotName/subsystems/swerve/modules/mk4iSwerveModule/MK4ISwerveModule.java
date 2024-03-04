@@ -126,7 +126,6 @@ public class MK4ISwerveModule implements ISwerveModule {
 		}
 	}
 
-	double vel = 0;
 
 	@Override
 	public void updateInputs(SwerveModuleInputsAutoLogged inputs) {
@@ -151,10 +150,6 @@ public class MK4ISwerveModule implements ISwerveModule {
 		} else {
 			inputs.absoluteEncoderPosition = Units.rotationsToRadians(canCoder.getAbsolutePosition().getValue());
 		}
-
-		if (vel< Math.abs(inputs.linearVelocity)){
-			vel = Math.abs(inputs.linearVelocity);
-			SmartDashboard.putNumber(angularMotor.getDeviceID() + "vel", vel);
-		}
+		
 	}
 }
