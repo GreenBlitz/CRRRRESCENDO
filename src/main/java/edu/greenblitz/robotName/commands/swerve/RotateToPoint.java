@@ -7,6 +7,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import java.util.function.Supplier;
 
 public class RotateToPoint extends RotateToAngleSupplier{
+
     public RotateToPoint(Supplier<Translation2d> targetPointSupplier) {
         super(
                 () -> (targetPointSupplier.get()).minus(SwerveChassis.getInstance().getRobotPose2d().getTranslation()).getAngle(),
