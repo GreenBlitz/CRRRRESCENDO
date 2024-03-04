@@ -131,11 +131,9 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		SmartDashboard.putData(getField());
 	}
 
-
 	public void resetChassisPosition(Pose2d pose) {
 		poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), pose);
 	}
-
 
 	/**
 	 * @return returns the swerve module based on its name
