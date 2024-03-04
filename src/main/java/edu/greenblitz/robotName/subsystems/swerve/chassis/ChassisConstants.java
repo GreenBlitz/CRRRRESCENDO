@@ -81,9 +81,9 @@ public class ChassisConstants {
 	
 	public static final boolean LINEAR_JOYSTICK_INVERTED = false;
 	
-	public static final PIDConstants TRANSLATION_PID = new PIDConstants(2.2, 0, 0);
+	public static final PIDConstants TRANSLATION_PID = new PIDConstants(1.7, 0, 0);
 	
-	public static final PIDConstants ROTATION_PID = new PIDConstants(0, 0, 0);
+	public static final PIDConstants ROTATION_PID = new PIDConstants(6, 0, 0);
 	
 	public static final double TOTAL_ERROR_FOR_REPLANNING = 0.5;
 	
@@ -94,21 +94,21 @@ public class ChassisConstants {
 	public static final HolonomicPathFollowerConfig PATH_FOLLOWER_CONFIG = new HolonomicPathFollowerConfig(
 			TRANSLATION_PID,
 			ROTATION_PID,
-			MAX_VELOCITY,
+			0.5,
 			ROBOT_RADIUS,
 			new ReplanningConfig(
-					true,
-					true,
+					false,
+					false,
 					TOTAL_ERROR_FOR_REPLANNING,
 					ERROR_SPIKE_FOR_REPLANNING
 			)
 	);
 	
 	public static final PathConstraints CONSTRAINTS = new PathConstraints(
-			MAX_VELOCITY /2,
-			MAX_ACCELERATION /2,
-			MAX_ANGULAR_SPEED,
-			MAX_ANGULAR_ACCELERATION
+			0.5,
+			1,
+			7,
+			3
 	);
 	
 	public static final MoveByJoysticks.DriveMode DRIVE_MODE = MoveByJoysticks.DriveMode.NORMAL;
