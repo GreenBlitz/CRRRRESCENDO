@@ -1,11 +1,13 @@
 package edu.greenblitz.robotName.subsystems;
 
+import edu.greenblitz.robotName.ScoringModeSelector;
 import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
 import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 import edu.greenblitz.robotName.subsystems.intake.Intake;
 import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.GBSubsystem;
+import edu.greenblitz.robotName.utils.ScoringMode;
 import edu.greenblitz.robotName.utils.shootingCalculations.ShootingAngleCalculations;
 import edu.greenblitz.robotName.utils.shootingCalculations.ShootingZone;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
@@ -67,7 +69,7 @@ public class Dashboard extends GBSubsystem {
 
         //field
         driversTab.add("Field", SwerveChassis.getInstance().getField()).withPosition(5, 2).withSize(3, 2);
-        driversTab.addDouble("pose list", () -> MultiLimelight.getInstance().getAll2DEstimates().size());
+        driversTab.addString("state", () -> ScoringModeSelector.getScoringMode().toString());
     }
 
     public void swerveDashboard() {

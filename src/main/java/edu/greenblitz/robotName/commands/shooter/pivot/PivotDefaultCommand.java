@@ -2,20 +2,17 @@ package edu.greenblitz.robotName.commands.shooter.pivot;
 
 
 import edu.greenblitz.robotName.Robot;
+import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
+import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
+import edu.wpi.first.math.geometry.Rotation2d;
 
 public class PivotDefaultCommand extends PivotCommand {
-
-	@Override
-	public void initialize() {
-		pivot.setCurrentAngle();
-		pivot.standInPlace();
-	}
-
+	
 	@Override
 	public void execute() {
-		if (Robot.isSimulation()) {
-			pivot.standInPlace();
-		}
+		
+		pivot.moveToAngle(() -> ShootingStateCalculations.getTargetShooterAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE)
+				.plus(Rotation2d.fromDegrees(6)));
 	}
 
 }
