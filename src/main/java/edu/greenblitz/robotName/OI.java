@@ -1,18 +1,15 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.LED.UpdateLEDStateDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
-import edu.greenblitz.robotName.commands.arm.NoteToArm;
-import edu.greenblitz.robotName.commands.arm.ScoreToAmp;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRoller;
 import edu.greenblitz.robotName.commands.arm.roller.RollerDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.roller.runByPower.RollCounterClockwise;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.*;
-import edu.greenblitz.robotName.commands.intake.NoteToShooter;
-import edu.greenblitz.robotName.commands.intake.NoteToShooterForJoystick;
-import edu.greenblitz.robotName.commands.intake.ReverseRunIntake;
-import edu.greenblitz.robotName.commands.intake.RunIntakeByPower;
+import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
+import edu.greenblitz.robotName.commands.intake.*;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityUntilInterrupted;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
@@ -21,9 +18,11 @@ import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
+import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
 import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
 import edu.greenblitz.robotName.subsystems.Battery;
+import edu.greenblitz.robotName.subsystems.LED.LED;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
@@ -35,6 +34,7 @@ import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.ScoringMode;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -75,7 +75,6 @@ public class OI {
     public SmartJoystick getMainJoystick() {
         return mainJoystick;
     }
-
 
     public SmartJoystick getSecondJoystick() {
         return secondJoystick;
@@ -139,7 +138,7 @@ public class OI {
 
     public void thirdJoystickButtons() {
         SmartJoystick usedJoystick = thirdJoystick;
-        usedJoystick.R1.whileTrue(new NoteToShooter());
+        usedJoystick.R1.whileTrue(new NoteToShooterWithoutArm());
         usedJoystick.L1.whileTrue(new RunFunnelByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_Y));
 
     }
@@ -157,5 +156,7 @@ public class OI {
         Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
         Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
         Roller.getInstance().setDefaultCommand(new RollerDefaultCommand());
+        LED.getInstance().setDefaultCommand(new UpdateLEDStateDefaultCommand());
     }
 }
+

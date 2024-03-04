@@ -57,13 +57,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
 	private Field2d field = new Field2d();
 
-	public static final double TRANSLATION_TOLERANCE = 0.05;
-
-	public static final Rotation2d ROTATION_TOLERANCE = Rotation2d.fromDegrees(5);
-
 	private boolean doVision = true;
-
-	public final double CURRENT_TOLERANCE = 0.5;
 
 	private SwerveChassisInputsAutoLogged ChassisInputs = new SwerveChassisInputsAutoLogged();
 
@@ -199,7 +193,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 
 	public boolean isAtAngle(Rotation2d angle) {
-		return Math.abs(getChassisAngle().getRadians() - angle.getRadians()) <= ROTATION_TOLERANCE.getRadians();
+		return Math.abs(getChassisAngle().getRadians() - angle.getRadians()) <= ROTATION_TOLERANCE.getRadians()
+				|| Math.abs(getChassisAngle().getRadians() - angle.getRadians()) >= (2 * Math.PI) - ROTATION_TOLERANCE.getRadians();
 	}
 
 	public void resetChassisPose() {
@@ -289,7 +284,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				angSpeed,
 				currentAng
 		);
-//		chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
+		chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
 		SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
 		SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
 		setModuleStates(desaturatedStates);
@@ -423,8 +418,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 
 	private boolean isModuleAtFreeCurrent(SwerveModule module) {
-		return module.getLinearCurrent() > MK4iSwerveConstants.LINEAR_MOTOR_FREE_CURRENT - CURRENT_TOLERANCE
-				&& module.getLinearCurrent() < CURRENT_TOLERANCE + MK4iSwerveConstants.LINEAR_MOTOR_FREE_CURRENT;
+		return module.getLinearCurrent() > MK4iSwerveConstants.LINEAR_MOTOR_FREE_CURRENT - ChassisConstants.CURRENT_TOLERANCE
+				&& module.getLinearCurrent() < ChassisConstants.CURRENT_TOLERANCE + MK4iSwerveConstants.LINEAR_MOTOR_FREE_CURRENT;
 	}
 
 	public boolean isRobotOnGround() {
