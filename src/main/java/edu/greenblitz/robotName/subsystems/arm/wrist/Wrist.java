@@ -22,6 +22,8 @@ public class Wrist extends GBSubsystem {
 
     private Rotation2d currentAngle;
 
+    private Rotation2d pidReference;
+
     private Wrist() {
         wrist = WristFactory.create();
         wristInputs = new WristInputsAutoLogged();
@@ -29,6 +31,7 @@ public class Wrist extends GBSubsystem {
         wrist.updateInputs(wristInputs);
         wrist.resetAngleByAbsoluteEncoder();
         currentAngle = wristInputs.position;
+        pidReference = currentAngle;
     }
 
     public static void init() {
@@ -65,10 +68,12 @@ public class Wrist extends GBSubsystem {
 
     public void resetAngle(Rotation2d position) {
         wrist.resetAngle(position);
+        currentAngle = position;
     }
 
     public void moveToAngle(Rotation2d targetAngle) {
-        wrist.moveToAngle(Rotation2d.fromRadians(targetAngle.getRadians() % (2 * Math.PI)));
+        pidReference = targetAngle;
+        wrist.moveToAngle(pidReference);
     }
 
     public void setCurrentAngle() {
@@ -80,7 +85,10 @@ public class Wrist extends GBSubsystem {
     }
 
     public void standInPlace() {
-        wrist.moveToAngle(currentAngle);
+        if (pidReference != currentAngle){
+            pidReference = currentAngle;
+            wrist.moveToAngle(pidReference);
+        }
     }
 
     public double getVoltage() {
@@ -96,7 +104,7 @@ public class Wrist extends GBSubsystem {
     }
 
     public boolean isAtAngle(Rotation2d angle) {
-        return Math.abs(angle.getRadians() - getAngle().getRadians()) <= TOLERANCE.getRadians();
+        return Math.abs(getAngle().getRadians() - angle.getRadians()) <= TOLERANCE.getRadians();
     }
 
     public Pose3d getPose3D() {

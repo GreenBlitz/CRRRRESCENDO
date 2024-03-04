@@ -7,7 +7,7 @@ public class NoteToShooterWithoutArm extends SequentialCommandGroup {
     public NoteToShooterWithoutArm() {
         super(
                 new NoteToIntake(),
-                new NoteFromIntakeToShooter()
+                new NoteFromIntakeToShooterWithArm()
         );
     }
 }

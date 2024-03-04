@@ -8,13 +8,10 @@ public class ElbowDefaultCommand extends ElbowCommand {
     @Override
     public void initialize() {
         elbow.setCurrentAngle();
-        elbow.standInPlace();
     }
 
     @Override
     public void execute() {
-        if (Robot.isSimulation()) {
-            elbow.standInPlace();
-        }
+        elbow.standInPlace();
     }
 }

@@ -4,13 +4,15 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
+import edu.greenblitz.robotName.commands.intake.NoteFromIntakeToShooterWithArm;
+import edu.greenblitz.robotName.commands.intake.NoteToIntake;
 import edu.greenblitz.robotName.commands.intake.NoteToShooterWithoutArm;
 import edu.greenblitz.robotName.commands.shooter.ShootFromInFunnel;
 import edu.greenblitz.robotName.commands.shooter.ShootToSpeakerFromClose;
 import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.LED.LED;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
-import edu.greenblitz.robotName.subsystems.arm.elbow.neoElbow.NeoElbowConstants;
+import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.intake.Intake;
@@ -65,9 +67,9 @@ public class Robot extends LoggedRobot {
         initializeSubsystems();
         SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
         Dashboard.getInstance();
-        OI.init();
         Pivot.getInstance().resetAngle(PivotConstants.PresetPositions.STARTING.ANGLE);
-        Elbow.getInstance().resetAngle(NeoElbowConstants.MINIMUM_ANGLE);
+        Elbow.getInstance().resetAngle(ElbowConstants.MINIMUM_ANGLE);
+        OI.init();
     }
 
 	public void initializeSubsystems() {
@@ -92,7 +94,6 @@ public class Robot extends LoggedRobot {
     @Override
     public void teleopInit() {
         Dashboard.getInstance().activateDriversDashboard();
-        Elbow.getInstance().setCurrentAngle();
     }
 
 	@Override
