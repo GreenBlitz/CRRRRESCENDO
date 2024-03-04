@@ -13,16 +13,12 @@ public class ExtendLifter extends LifterCommand {
 
     @Override
     public void initialize() {
-        lifter.closeSolenoid();
-        timer.start();
+        lifter.goToPosition(LifterConstants.LIFTER_EXTENDED_POSITION);
     }
 
     @Override
     public void execute() {
-        if (timer.hasElapsed(LifterConstants.SECONDS_TO_CLOSE_SOLENOID)) {
-            lifter.holdSolenoid();
-            lifter.goToPosition(LifterConstants.LIFTER_EXTENDED_POSITION);
-        }
+        lifter.closeSolenoid();
     }
 
     @Override
