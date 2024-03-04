@@ -1,11 +1,10 @@
 package edu.greenblitz.robotName;
 
-import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
-import edu.greenblitz.robotName.commands.intake.NoteToShooter;
+import edu.greenblitz.robotName.commands.intake.NoteToShooterWithoutArm;
 import edu.greenblitz.robotName.commands.shooter.ShootFromInFunnel;
 import edu.greenblitz.robotName.commands.shooter.ShootToSpeakerFromClose;
 import edu.greenblitz.robotName.subsystems.Dashboard;
@@ -30,7 +29,6 @@ import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
 import org.littletonrobotics.junction.Logger;
@@ -99,12 +97,9 @@ public class Robot extends LoggedRobot {
     }
 
     private void initializeAutonomousBuilder() {
-//        NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
-//        NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
-//        NamedCommands.registerCommand("grip", new NoteToShooter());
-        NamedCommands.registerCommand("shoot", new InstantCommand());
-        NamedCommands.registerCommand("close shoot", new InstantCommand());
-        NamedCommands.registerCommand("grip", new InstantCommand());
+        NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
+        NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
+        NamedCommands.registerCommand("grip", new NoteToShooterWithoutArm());
         AutoBuilder.configureHolonomic(
                 SwerveChassis.getInstance()::getRobotPose2d,
                 SwerveChassis.getInstance()::resetChassisPose,
@@ -153,8 +148,6 @@ public class Robot extends LoggedRobot {
 
     @Override
     public void autonomousInit() {
-        Elbow.getInstance().setIdleMode(NeutralModeValue.Brake);
-        Pivot.getInstance().setIdleMode(NeutralModeValue.Brake);
         AutonomousSelector.getInstance().getChosenValue().schedule();
     }
 
