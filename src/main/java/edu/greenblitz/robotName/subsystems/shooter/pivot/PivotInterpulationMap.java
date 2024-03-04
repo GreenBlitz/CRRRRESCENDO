@@ -1,8 +1,10 @@
 package edu.greenblitz.robotName.subsystems.shooter.pivot;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.interpolation.InterpolatingTreeMap;
 import edu.wpi.first.math.interpolation.Interpolator;
 import edu.wpi.first.math.interpolation.InverseInterpolator;
+import edu.wpi.first.math.util.Units;
 
 public class PivotInterpulationMap {
 
@@ -14,5 +16,7 @@ public class PivotInterpulationMap {
 		DISTANCE_TO_ANGLE.put(0.9, PivotConstants.PresetPositions.CLOSE_SHOOTING.ANGLE.getRadians());
 		DISTANCE_TO_ANGLE.put(3.47, PivotConstants.PresetPositions.PODIUM.ANGLE.getRadians());
 		DISTANCE_TO_ANGLE.put(5.39, PivotConstants.PresetPositions.RIGHT_STAGE.ANGLE.getRadians());
+		DISTANCE_TO_ANGLE.put(3.4, Rotation2d.fromDegrees(34.75).getRadians());
+		DISTANCE_TO_ANGLE.put(4.05, Rotation2d.fromDegrees(32.5).getRadians());
 	}
 }
