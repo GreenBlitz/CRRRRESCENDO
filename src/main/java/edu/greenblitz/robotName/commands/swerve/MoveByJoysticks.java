@@ -88,6 +88,5 @@ public class MoveByJoysticks extends SwerveCommand {
 	@Override
 	public void end(boolean interrupted) {
 		super.end(interrupted);
-		swerveChassis.stop();
 	}
 }

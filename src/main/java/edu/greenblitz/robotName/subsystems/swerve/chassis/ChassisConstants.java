@@ -9,6 +9,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.util.Units;
 
 public class ChassisConstants {
 
@@ -52,11 +53,18 @@ public class ChassisConstants {
 	};
 	
 	public static final PIDController ROTATION_PID_CONTROLLER = new PIDController(5, 0, 0);
-	
+
 	static {
 		ROTATION_PID_CONTROLLER.enableContinuousInput(-Math.PI, Math.PI);
 	}
-	
+
+	public static final PIDController ROTATION_PID_CONTROLLER_RADIANS = new PIDController(0.076, 0, 0);
+
+	static {
+		ROTATION_PID_CONTROLLER_RADIANS.setTolerance(Units.degreesToRadians(2));
+		ROTATION_PID_CONTROLLER_RADIANS.enableContinuousInput(-Math.PI, Math.PI);
+	}
+
 	public static final double MAX_VELOCITY = 6.6818320981472068;
 	
 	public static final double MAX_ACCELERATION = 2;

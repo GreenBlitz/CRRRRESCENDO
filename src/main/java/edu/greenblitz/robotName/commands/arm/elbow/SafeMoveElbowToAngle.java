@@ -5,7 +5,7 @@ import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.wpi.first.math.geometry.Rotation2d;
 
-public class SafeMoveElbowToAngle extends ElbowCommand{
+public class SafeMoveElbowToAngle extends ElbowCommand {
 
     private Rotation2d targetAngle;
 
@@ -25,8 +25,7 @@ public class SafeMoveElbowToAngle extends ElbowCommand{
         if (isElbowCrashableIntoWall) {
             elbow.setCurrentAngle();
             elbow.standInPlace();
-        }
-        else {
+        } else {
             elbow.moveToAngle(targetAngle);
         }
     }
@@ -35,8 +34,7 @@ public class SafeMoveElbowToAngle extends ElbowCommand{
     public void execute() {
         if (SwerveChassis.getInstance().isRobotNearBoundsOfField()) {
             elbowStandInPlaceAccordingToRobotType();
-        }
-        else {
+        } else {
             elbowMoveToAngleAccordingToRobotType();
         }
     }

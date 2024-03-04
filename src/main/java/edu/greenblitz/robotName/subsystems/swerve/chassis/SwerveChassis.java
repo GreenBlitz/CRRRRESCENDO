@@ -5,6 +5,8 @@ import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.VisionConstants;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
+import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
+import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 import edu.greenblitz.robotName.subsystems.Photonvision;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.gyros.GyroFactory;
@@ -123,8 +125,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		Logger.recordOutput("DriveTrain/ModuleStates", getSwerveModuleStates());
 		Logger.processInputs("DriveTrain/Chassis", ChassisInputs);
 		Logger.processInputs("DriveTrain/Gyro", gyroInputs);
-
-		updatePoseEstimatorOdometry();
+		SmartDashboard.putNumber("shoot angle", ShootingStateCalculations.getTargetShooterAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE).getDegrees());
+		updatePoseEstimationLimeLight();
 		MultiLimelight.getInstance().recordEstimatedPositions();
 		SmartDashboard.putData(getField());
 	}
@@ -132,7 +134,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	public void resetChassisPosition(Pose2d pose) {
 		poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), pose);
 	}
-
 
 	/**
 	 * @return returns the swerve module based on its name
@@ -216,12 +217,12 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 
 	public void resetPoseByVision() {
-		if (MultiLimelight.getInstance().getAll2DEstimates().size() != 0) {
+		if (!MultiLimelight.getInstance().getAll2DEstimates().isEmpty()) {
 			for(Optional<Pair<Pose2d, Double>> visionPoseAndTimeStamp : MultiLimelight.getInstance().getAll2DEstimates()) {
 				if (visionPoseAndTimeStamp.isPresent()) {
 					Pose2d visionPose = visionPoseAndTimeStamp.get().getFirst();
-					getGyro().updateYaw(Rotation2d.fromRadians(0));
-					poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), visionPose);
+					poseEstimator.update(getGyroAngle(),getSwerveModulePositions());
+					poseEstimator.addVisionMeasurement(visionPose,visionPoseAndTimeStamp.get().getSecond());
 				}
 			}
 		} else {
@@ -408,7 +409,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 			for (Optional<Pair<Pose2d, Double>> target :
 					MultiLimelight.getInstance().getAll2DEstimates()
 			) {
-				target.ifPresent(this::addVisionMeasurement);
 				if (target.isPresent()) {
 					resetPoseByVision();
 				}

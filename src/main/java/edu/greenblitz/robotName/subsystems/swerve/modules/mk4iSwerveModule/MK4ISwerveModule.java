@@ -15,28 +15,35 @@ import edu.greenblitz.robotName.subsystems.swerve.modules.SwerveModuleInputsAuto
 import edu.greenblitz.robotName.utils.motors.GBTalonFXPro;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MK4ISwerveModule implements ISwerveModule {
 
 	private final GBTalonFXPro angularMotor;
+
 	private final GBTalonFXPro linearMotor;
+
 	private final CANcoder canCoder;
+
 	private final double encoderOffset;
 
 	private StatusSignal<Double> linearPositionStatusSignal;
-	private StatusSignal<Double> linearVelocityStatusSignal;
-	private StatusSignal<Double> linearAccelerationStatusSignal;
-	private StatusSignal<Double> angularPositionStatusSignal;
-	private StatusSignal<Double> angularVelocityStatusSignal;
-	private StatusSignal<Double> angularAccelerationStatusSignal;
 
+	private StatusSignal<Double> linearVelocityStatusSignal;
+
+	private StatusSignal<Double> linearAccelerationStatusSignal;
+
+	private StatusSignal<Double> angularPositionStatusSignal;
+
+	private StatusSignal<Double> angularVelocityStatusSignal;
+
+	private StatusSignal<Double> angularAccelerationStatusSignal;
 
 	public VelocityVoltage velocityVoltage = new VelocityVoltage(0).withEnableFOC(true);
 
 	public PositionVoltage positionVoltage = new PositionVoltage(0).withEnableFOC(false);
 	
 	public MK4ISwerveModule(SwerveChassis.Module module) {
-
 		SwerveModuleConfigObject configObject = switch (module) {
 			case FRONT_LEFT -> MK4iSwerveConstants.MK4I_MODULE_FRONT_LEFT;
 			case FRONT_RIGHT -> MK4iSwerveConstants.MK4I_MODULE_FRONT_RIGHT;
@@ -64,7 +71,6 @@ public class MK4ISwerveModule implements ISwerveModule {
 
 		this.encoderOffset = configObject.encoderOffset.getRotations();
 	}
-
 
 	@Override
 	public void setLinearVelocity(double speed) {
