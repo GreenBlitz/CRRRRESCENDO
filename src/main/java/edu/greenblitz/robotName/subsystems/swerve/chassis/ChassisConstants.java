@@ -51,7 +51,7 @@ public class ChassisConstants {
 			new Translation2d(BACK_RIGHT_X_POSITION, BACK_RIGHT_Y_POSITION)
 	};
 	
-	public static final PIDController ROTATION_PID_CONTROLLER = new PIDController(3, 0, 0.2);
+	public static final PIDController ROTATION_PID_CONTROLLER = new PIDController(5, 0, 0);
 	
 	static {
 		ROTATION_PID_CONTROLLER.enableContinuousInput(-Math.PI, Math.PI);
@@ -66,7 +66,13 @@ public class ChassisConstants {
 	public static final double MAX_ANGULAR_ACCELERATION = 4;
 	
 	public static final double FAST_DISCRETION_CONSTANT = 1;
-	
+
+	public static final double TRANSLATION_TOLERANCE = 0.05;
+
+	public static final Rotation2d ROTATION_TOLERANCE = Rotation2d.fromDegrees(3);
+
+	public static final double CURRENT_TOLERANCE = 0.5;
+
 	public static final double SLOW_DISCRETION_CONSTANT = FAST_DISCRETION_CONSTANT / 2;
 	
 	public static final double DRIVER_ANGULAR_SPEED_FACTOR = MAX_ANGULAR_SPEED / 2;
