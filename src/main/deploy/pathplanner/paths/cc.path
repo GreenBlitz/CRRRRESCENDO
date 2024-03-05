@@ -1,0 +1,68 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.754452527449989,
+        "y": 3.396142598276637
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.754452527449989,
+        "y": 3.396142598276637
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 4.885824778782224,
+        "y": 1.4989870778600332
+      },
+      "prevControl": {
+        "x": 3.4548474544558827,
+        "y": 1.6261850622445964
+      },
+      "nextControl": {
+        "x": 6.466787712462728,
+        "y": 1.3584570393106552
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.930642280685416,
+        "y": 2.4475648380683346
+      },
+      "prevControl": {
+        "x": 6.806401972290392,
+        "y": 2.2601914533358305
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 1.0,
+    "maxAcceleration": 0.5,
+    "maxAngularVelocity": 360.0,
+    "maxAngularAcceleration": 180.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -178.04749095060032,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "roy far obj",
+  "previewStartingState": {
+    "rotation": 148.55914789087998,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

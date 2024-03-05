@@ -1,0 +1,25 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.3842846515935527,
+      "y": 5.527514849608872
+    },
+    "rotation": -178.47247455778702
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "a"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "roy",
+  "choreoAuto": false
+}

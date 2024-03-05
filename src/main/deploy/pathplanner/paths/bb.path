@@ -1,0 +1,52 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 7.754979732498693,
+        "y": 0.7963368851131419
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 6.056908433360374,
+        "y": 0.9017344140251765
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.4499707772596704,
+        "y": 3.0799500115405367
+      },
+      "prevControl": {
+        "x": 3.2814401720101576,
+        "y": 1.8151796645961351
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 1.0,
+    "maxAcceleration": 0.5,
+    "maxAngularVelocity": 360.0,
+    "maxAngularAcceleration": 180.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 142.65065095535945,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "roy far obj",
+  "previewStartingState": {
+    "rotation": 179.86493352213967,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}
