@@ -1,25 +1,35 @@
 package edu.greenblitz.robotName.commands.arm.roller;
 
-import edu.greenblitz.robotName.commands.arm.roller.runByPower.RollClockwise;
-import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
 import edu.wpi.first.math.geometry.Rotation2d;
 
-public class RunByPowerAndCountRotations extends RollClockwise {
+public class RunByPowerAndCountRotations extends RollerCommand {
 
-    private Rotation2d rotationCounter;
+	private Rotation2d rotationCounter;
 
-    public RunByPowerAndCountRotations(Rotation2d rotationCounter){
-        super();
-        this.rotationCounter = rotationCounter;
-    }
+	private boolean isClockWise;
 
-    @Override
-    public void initialize() {
-        roller.resetEncoder(new Rotation2d(0));
-    }
+	public RunByPowerAndCountRotations(Rotation2d rotationCounter, boolean isClockWise) {
+		super();
+		this.rotationCounter = rotationCounter;
+		this.isClockWise = isClockWise;
+	}
 
-    @Override
-    public boolean isFinished() {
-        return Math.abs(roller.getAngle().getRotations()) > Math.abs(rotationCounter.getRotations());
-    }
+	@Override
+	public void initialize() {
+		roller.resetEncoder(new Rotation2d(0));
+	}
+
+	@Override
+	public void execute() {
+		if (isClockWise) {
+			roller.rollClockwise();
+		} else {
+			roller.rollCounterClockwise();
+		}
+	}
+
+	@Override
+	public boolean isFinished() {
+		return Math.abs(roller.getAngle().getRotations()) > Math.abs(rotationCounter.getRotations());
+	}
 }
