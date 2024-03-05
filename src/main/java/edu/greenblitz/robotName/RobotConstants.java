@@ -4,7 +4,7 @@ import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.wpilibj.PowerDistribution;
 
 public class RobotConstants {
-	public static final Robot.RobotType ROBOT_TYPE = Robot.RobotType.SIMULATION;
+	public static final Robot.RobotType ROBOT_TYPE = Robot.RobotType.SYNCOPA;
 
 	public static final String SIMULATION_LOG_PATH = System.getProperty("user.home") + "\\Desktop\\SimulationLogs";
 	
@@ -73,10 +73,5 @@ public class RobotConstants {
 		public static final int THIRD = 2;
 
 		public static final int FOURTH = 3;
-	}
-
-	public static class Pneumatics {
-
-		public static final int PCM_ID = 20;
 	}
 }

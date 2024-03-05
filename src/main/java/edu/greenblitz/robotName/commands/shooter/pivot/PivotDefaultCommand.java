@@ -11,7 +11,5 @@ public class PivotDefaultCommand extends PivotCommand {
 	@Override
 	public void execute() {
 		pivot.moveToAngle(() -> ShootingStateCalculations.getTargetShooterAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE));
-				//.plus(Rotation2d.fromDegrees(4)));
 	}
-
 }

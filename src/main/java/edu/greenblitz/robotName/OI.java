@@ -21,7 +21,9 @@ import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.swerve.RotateToSpeaker;
+import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
+import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.LED.LED;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
@@ -149,7 +151,7 @@ public class OI {
 	}
 
 	public void initializeDefaultCommands() {
-//		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
 		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
 		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
 		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
