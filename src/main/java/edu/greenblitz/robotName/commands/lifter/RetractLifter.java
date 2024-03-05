@@ -5,7 +5,7 @@ import edu.greenblitz.robotName.subsystems.lifter.LifterConstants;
 public class RetractLifter extends LifterCommand {
 
     @Override
-    public void execute() {
+    public void initialize() {
         lifter.goToPosition(LifterConstants.LIFTER_RETRACTED_POSITION);
     }
 
