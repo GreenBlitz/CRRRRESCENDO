@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.LED.UpdateLEDStateDefaultCommand;
+import edu.greenblitz.robotName.commands.NoteToShooterForAuto;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRoller;
@@ -8,16 +9,17 @@ import edu.greenblitz.robotName.commands.arm.roller.RollerDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
-import edu.greenblitz.robotName.commands.intake.NoteToShooterForJoystick;
-import edu.greenblitz.robotName.commands.intake.NoteToShooterWithoutArm;
+import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringModeForJoystick;
+import edu.greenblitz.robotName.commands.intake.NoteToShooterWithArm;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByPower;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityUntilInterrupted;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
+import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
-import edu.greenblitz.robotName.commands.swerve.RotateToPoint;
 import edu.greenblitz.robotName.commands.swerve.RotateToSpeaker;
 import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
@@ -91,7 +93,7 @@ public class OI {
 	}
 
 	public void romyButtons() {
-		mainJoystick.R1.whileTrue(new NoteToShooterForJoystick());
+		mainJoystick.R1.whileTrue(new CollectNoteToScoringModeForJoystick());
 		mainJoystick.X.whileTrue(new CollectNoteFromFeeder());
 		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetPoseByVision()));
 		mainJoystick.L1.whileTrue(new RotateToSpeaker());
@@ -121,11 +123,11 @@ public class OI {
 		//Pivot Poses
 		secondJoystick.POV_UP.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.RIGHT_STAGE.ANGLE));
 		secondJoystick.POV_LEFT.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.PODIUM.ANGLE));
-		secondJoystick.POV_DOWN.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.CLOSE_SHOOTING.ANGLE));
+		secondJoystick.POV_DOWN.whileTrue(new MovePivotToAngle(() -> PivotConstants.PresetPositions.CLOSE_SHOOTING.ANGLE));
 		secondJoystick.R1.whileTrue(new MovePivotByJoystick(secondJoystick, SmartJoystick.Axis.LEFT_Y));
 
 		//Funnel
-		secondJoystick.R1.whileTrue(new RunFunnelByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_Y));
+		secondJoystick.R1.whileTrue(new RunFunnelByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_Y).alongWith(new ShootSimulationNote()));
 
 		//Intake
 		secondJoystick.POV_RIGHT.whileTrue(new RunIntakeByPower(-0.4));
@@ -136,7 +138,7 @@ public class OI {
 
 	public void thirdJoystickButtons() {
 		SmartJoystick usedJoystick = thirdJoystick;
-		usedJoystick.R1.whileTrue(new NoteToShooterWithoutArm());
+		usedJoystick.R1.whileTrue(new NoteToShooterWithArm());
 		usedJoystick.L1.whileTrue(new RunFunnelByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_Y));
 
 	}

@@ -2,6 +2,8 @@ package edu.greenblitz.robotName.subsystems.shooter.pivot;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation3d;
+import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
+import edu.wpi.first.math.interpolation.InterpolatingTreeMap;
 
 public class PivotConstants {
 
@@ -27,7 +29,7 @@ public class PivotConstants {
 		}
 
 	}
-
+	
 	public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(20);
 
 	public static final Rotation2d CLOSE_RANGE_SHOOTING_ANGLE = Rotation2d.fromDegrees(113.8);

@@ -13,6 +13,7 @@ import edu.greenblitz.robotName.subsystems.gyros.GyroFactory;
 import edu.greenblitz.robotName.subsystems.gyros.GyroInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.gyros.IAngleMeasurementGyro;
 import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
+import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.modules.SwerveModule;
 import edu.greenblitz.robotName.subsystems.swerve.modules.mk4iSwerveModule.MK4iSwerveConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
