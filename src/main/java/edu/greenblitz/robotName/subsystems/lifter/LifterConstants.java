@@ -24,6 +24,10 @@ public class LifterConstants {
 
     public static final double POWER_TO_HOLD_SOLENOID = 0.2;
 
+    public static final double LIFTER_POWER_TO_RELEASES_SOLENOID = 0.1;
+
+    public static final double SECONDS_TO_RELEASE_SOLENOID = 0.2;
+
     public static final double SECONDS_TO_CLOSE_SOLENOID = 0.7;
     
     public static final double SECONDS_TO_HOLD_SOLENOID = 0.3;
