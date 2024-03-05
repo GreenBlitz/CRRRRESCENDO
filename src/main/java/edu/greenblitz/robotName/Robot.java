@@ -4,9 +4,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
-import edu.greenblitz.robotName.commands.intake.NoteFromIntakeToShooterWithArm;
-import edu.greenblitz.robotName.commands.intake.NoteToIntake;
-import edu.greenblitz.robotName.commands.intake.NoteToShooterWithoutArm;
+import edu.greenblitz.robotName.commands.intake.NoteToShooterWithArm;
 import edu.greenblitz.robotName.commands.shooter.ShootFromInFunnel;
 import edu.greenblitz.robotName.commands.shooter.ShootToSpeakerFromClose;
 import edu.greenblitz.robotName.subsystems.Dashboard;
@@ -105,7 +103,7 @@ public class Robot extends LoggedRobot {
 	private void initializeAutonomousBuilder() {
 		NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
 		NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
-		NamedCommands.registerCommand("grip", new NoteToShooterWithoutArm());
+		NamedCommands.registerCommand("grip", new NoteToShooterWithArm());
 		AutoBuilder.configureHolonomic(
 				SwerveChassis.getInstance()::getRobotPose2d,
 				SwerveChassis.getInstance()::resetChassisPose,

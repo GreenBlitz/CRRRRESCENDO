@@ -9,8 +9,8 @@ import edu.greenblitz.robotName.commands.arm.roller.RollerDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
-import edu.greenblitz.robotName.commands.intake.NoteToShooterForJoystick;
-import edu.greenblitz.robotName.commands.intake.NoteToShooterWithoutArm;
+import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringModeForJoystick;
+import edu.greenblitz.robotName.commands.intake.NoteToShooterWithArm;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByPower;
 import edu.greenblitz.robotName.commands.shooter.MoveShooterToAngle;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityUntilInterrupted;
@@ -20,11 +20,8 @@ import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
-import edu.greenblitz.robotName.commands.swerve.RotateToPoint;
 import edu.greenblitz.robotName.commands.swerve.RotateToSpeaker;
-import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
-import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.LED.LED;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
@@ -36,7 +33,6 @@ import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
@@ -95,7 +91,7 @@ public class OI {
 	}
 
 	public void romyButtons() {
-		mainJoystick.R1.whileTrue(new NoteToShooterForAuto());
+		mainJoystick.R1.whileTrue(new CollectNoteToScoringModeForJoystick());
 		mainJoystick.X.whileTrue(new CollectNoteFromFeeder());
 		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetPoseByVision()));
 		mainJoystick.L1.whileTrue(new RotateToSpeaker());
@@ -140,7 +136,7 @@ public class OI {
 
 	public void thirdJoystickButtons() {
 		SmartJoystick usedJoystick = thirdJoystick;
-		usedJoystick.R1.whileTrue(new NoteToShooterWithoutArm());
+		usedJoystick.R1.whileTrue(new NoteToShooterWithArm());
 		usedJoystick.L1.whileTrue(new RunFunnelByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_Y));
 
 	}
