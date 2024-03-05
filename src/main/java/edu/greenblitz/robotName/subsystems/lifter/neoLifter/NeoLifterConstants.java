@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.lifter.neoLifter;
 
+import com.revrobotics.CANSparkBase;
 import com.revrobotics.SparkLimitSwitch;
 import com.revrobotics.SparkMaxLimitSwitch;
 import edu.greenblitz.robotName.utils.PIDObject;
@@ -12,7 +13,10 @@ public class NeoLifterConstants {
 
     public static final int SOLENOID_ID = 55;
 
-    public static final GBSparkMax.SparkMaxConfObject CONFIG = new GBSparkMax.SparkMaxConfObject().withPID(new PIDObject(3.6, 1, 0));
+    public static final GBSparkMax.SparkMaxConfObject CONFIG =
+            new GBSparkMax.SparkMaxConfObject()
+                    .withPID(new PIDObject(3.6, 1, 0))
+                    .withIdleMode(CANSparkBase.IdleMode.kBrake);
 
     public static final int BACKWARD_SWITCH_ID = 1;
 

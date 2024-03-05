@@ -11,7 +11,7 @@ public class ExtendLifter extends LifterCommand {
 
     @Override
     public void execute() {
-        lifter.closeSolenoid();
+        lifter.holdSolenoid();
     }
 
     @Override
