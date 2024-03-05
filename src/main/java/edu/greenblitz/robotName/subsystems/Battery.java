@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.RobotController;
 
 public class Battery extends GBSubsystem {
 	
-	private static final double MIN_VOLTAGE_BATTERY = 11.97;
+	private static final double MIN_VOLTAGE_BATTERY = 11.5;
 	
 	private static Battery instance;
 	

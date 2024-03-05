@@ -21,11 +21,13 @@ import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
+import edu.greenblitz.robotName.subsystems.lifter.Lifter;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 
 public class OI {
 
@@ -94,12 +96,18 @@ public class OI {
 				ShootingStateCalculations.getTargetShooterAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE)
 		));
 		secondJoystick.R1.whileTrue(new CollectNote());
-		secondJoystick.A.whileTrue(new PanicMode());
+//		secondJoystick.A.whileTrue(new PanicMode());
 		secondJoystick.POV_LEFT.whileTrue(new ReverseRunIntake());
 		secondJoystick.X.whileTrue(new SolenoidClose());
-		secondJoystick.Y.whileTrue(new SolenoidHold());
+		secondJoystick.Y.whileTrue(new MoveLifterByPower(-0.1));
 		secondJoystick.POV_UP.whileTrue(new SolenoidAndLifter());
-		secondJoystick.POV_DOWN.whileTrue(new PrepareToClimb());
+		
+		secondJoystick.A.whileTrue(
+				new RunCommand(
+						() -> Lifter.getInstance().setPower(secondJoystick.getAxisValue(SmartJoystick.Axis.RIGHT_X))
+				)
+		);
+		secondJoystick.POV_DOWN.whileTrue(new CloseAndThenHoldSolenoid());
 	}
 
 	public void thirdJoystickButtons() {
