@@ -32,7 +32,7 @@ public class FieldConstants {
 			MIDDLE_OF_BLUE_SPEAKER_POSITION.getZ()
 	);
 	
-	public static final Translation3d MIDDLE_OF_SPEAKER_POSITION = FMSUtils.isRedAlliance() ? MIDDLE_OF_RED_SPEAKER_POSITION : MIDDLE_OF_RED_SPEAKER_POSITION;
+	public static final Translation3d MIDDLE_OF_SPEAKER_POSITION = FMSUtils.isRedAlliance() ? MIDDLE_OF_RED_SPEAKER_POSITION : MIDDLE_OF_BLUE_SPEAKER_POSITION;
 	
 	public static class FieldZones {
 		

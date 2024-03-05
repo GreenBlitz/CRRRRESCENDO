@@ -130,8 +130,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		updatePoseEstimationLimeLight();
 		MultiLimelight.getInstance().recordEstimatedPositions();
 		SmartDashboard.putData(getField());
-		SmartDashboard.putNumber("pivot", Pivot.getInstance().getAngle().getDegrees());
-		SmartDashboard.putNumber("pose", getRobotPose2d().getTranslation().getDistance(FieldConstants.MIDDLE_OF_SPEAKER_POSITION.toTranslation2d()));
 	}
 
 	public void resetChassisPosition(Pose2d pose) {
