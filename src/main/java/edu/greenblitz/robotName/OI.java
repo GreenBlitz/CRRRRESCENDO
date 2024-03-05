@@ -3,7 +3,7 @@ package edu.greenblitz.robotName;
 import edu.greenblitz.robotName.commands.LED.UpdateLEDStateDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
-import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRoller;
+import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRollerToAmp;
 import edu.greenblitz.robotName.commands.arm.roller.RollerDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
@@ -17,7 +17,6 @@ import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
-import edu.greenblitz.robotName.commands.swerve.RotateToPoint;
 import edu.greenblitz.robotName.commands.swerve.RotateToSpeaker;
 import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
@@ -105,7 +104,7 @@ public class OI {
 
 		//Arm
 		secondJoystick.BACK.onTrue(new InstantCommand(() -> Roller.getInstance().setObjectOut()));
-		secondJoystick.A.onTrue(new ReleaseNoteFromRoller());
+		secondJoystick.A.onTrue(new ReleaseNoteFromRollerToAmp());
 		secondJoystick.B.whileTrue(new MoveElbowAndWrist(
 				ElbowConstants.PresetPositions.SCORE,
 				WristConstants.PresetPositions.SCORE

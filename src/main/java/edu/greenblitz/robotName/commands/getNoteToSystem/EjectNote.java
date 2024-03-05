@@ -1,6 +1,6 @@
 package edu.greenblitz.robotName.commands.getNoteToSystem;
 
-import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRoller;
+import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRollerToAmp;
 import edu.greenblitz.robotName.commands.intake.ReverseRunIntake;
 import edu.greenblitz.robotName.commands.shooter.PushNoteToFlyWheel;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocity;
@@ -19,7 +19,7 @@ public class EjectNote extends ProxyCommand {
 
     private static Command getCommand() {
         if (Roller.getInstance().isObjectIn()) {
-            return new ReleaseNoteFromRoller();
+            return new ReleaseNoteFromRollerToAmp();
         }
         if (Intake.getInstance().isObjectIn()) {
             return new ReverseRunIntake();

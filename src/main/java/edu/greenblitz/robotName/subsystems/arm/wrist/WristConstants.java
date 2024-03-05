@@ -8,6 +8,7 @@ public class WristConstants {
 
         STARTING(Rotation2d.fromDegrees(90)),
         SCORE(Rotation2d.fromDegrees(200)),
+        SCORE_TRAP(Rotation2d.fromDegrees(390)), // find
         TRANSFER(Rotation2d.fromDegrees(195)),
         SAFE(Rotation2d.fromDegrees(180));
 
