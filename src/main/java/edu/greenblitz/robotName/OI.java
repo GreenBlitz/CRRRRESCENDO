@@ -98,7 +98,7 @@ public class OI {
 		secondJoystick.POV_LEFT.whileTrue(new ReverseRunIntake());
 		secondJoystick.X.whileTrue(new SolenoidClose());
 		secondJoystick.Y.whileTrue(new SolenoidHold());
-		secondJoystick.POV_UP.whileTrue(new CloseAndThenHoldSolenoid());
+		secondJoystick.POV_UP.whileTrue(new SolenoidAndLifter());
 		secondJoystick.POV_DOWN.whileTrue(new PrepareToClimb());
 	}
 

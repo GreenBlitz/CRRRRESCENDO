@@ -8,6 +8,7 @@ public class ExtendLifter extends LifterCommand {
     public void initialize() {
         lifter.goToPosition(LifterConstants.LIFTER_EXTENDED_POSITION);
     }
+    
     @Override
     public boolean isFinished() {
         return lifter.isAtPosition(LifterConstants.LIFTER_EXTENDED_POSITION);
