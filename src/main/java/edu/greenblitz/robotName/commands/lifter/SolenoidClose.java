@@ -9,7 +9,6 @@ public class SolenoidClose extends LifterCommand{
     Timer timer;
     
     public SolenoidClose(){
-        super();
         timer = new Timer();
     }
     

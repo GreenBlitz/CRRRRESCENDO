@@ -25,6 +25,8 @@ public class LifterConstants {
     public static final double POWER_TO_HOLD_SOLENOID = 0.2;
 
     public static final double SECONDS_TO_CLOSE_SOLENOID = 0.7;
+    
+    public static final double SECONDS_TO_HOLD_SOLENOID = 0.3;
 
     public static final Rotation2d TOLERANCE = Rotation2d.fromDegrees(4);
 
