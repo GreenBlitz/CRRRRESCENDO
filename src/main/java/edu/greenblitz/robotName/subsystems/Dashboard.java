@@ -1,17 +1,22 @@
 package edu.greenblitz.robotName.subsystems;
 
+import edu.greenblitz.robotName.FieldConstants;
+import edu.greenblitz.robotName.ScoringModeSelector;
 import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
 import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 import edu.greenblitz.robotName.subsystems.intake.Intake;
 import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
+import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.GBSubsystem;
+import edu.greenblitz.robotName.utils.ScoringMode;
 import edu.greenblitz.robotName.utils.shootingCalculations.ShootingAngleCalculations;
 import edu.greenblitz.robotName.utils.shootingCalculations.ShootingZone;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.Map;
 
@@ -59,7 +64,10 @@ public class Dashboard extends GBSubsystem {
         robotPoseWidget.addDouble("X", () -> SwerveChassis.getInstance().getRobotPose2d().getX());
         robotPoseWidget.addDouble("Y", () -> SwerveChassis.getInstance().getRobotPose2d().getY());
         robotPoseWidget.addDouble("Rotation", () -> SwerveChassis.getInstance().getRobotPose2d().getRotation().getDegrees());
-
+        SmartDashboard.putNumber("pivot angle", Pivot.getInstance().getAngle().getDegrees());
+        SmartDashboard.putNumber("distance to middle of speaker", SwerveChassis.getInstance().getRobotPose2d().getTranslation()
+                .getDistance(FieldConstants.MIDDLE_OF_SPEAKER_POSITION.toTranslation2d()));
+        
         //battery
         driversTab.addDouble("Battery", () -> Battery.getInstance().getCurrentVoltage())
                 .withPosition(9, 3);
@@ -67,7 +75,7 @@ public class Dashboard extends GBSubsystem {
 
         //field
         driversTab.add("Field", SwerveChassis.getInstance().getField()).withPosition(5, 2).withSize(3, 2);
-        driversTab.addDouble("pose list", () -> MultiLimelight.getInstance().getAll2DEstimates().size());
+        driversTab.addString("state", () -> ScoringModeSelector.getScoringMode().toString());
     }
 
     public void swerveDashboard() {

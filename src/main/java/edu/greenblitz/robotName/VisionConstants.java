@@ -18,7 +18,7 @@ public class VisionConstants {
 	
 	public static double STANDARD_DEVIATION_ODOMETRY_ANGLE = 0.01;
 	
-	public static double STANDARD_DEVIATION_VISION2D = 0;
+	public static double STANDARD_DEVIATION_VISION2D = 0.55;
 	
 	public static double STANDARD_DEVIATION_VISION_ANGLE = 0.6;
 	

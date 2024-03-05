@@ -41,8 +41,7 @@ public class SimulationPivot implements IPivot {
 		);
 		controller = SimulationPivotConstants.SIMULATION_PID.getPIDController();
 	}
-	
-	
+
 	@Override
 	public void setPower(double power) {
 		setVoltage(power * BATTERY_VOLTAGE);
@@ -87,7 +86,8 @@ public class SimulationPivot implements IPivot {
 		inputs.temperature = 0;
 		inputs.hasHitForwardLimit = pivotSimulation.hasHitLowerLimit();
 		inputs.hasHitBackwardsLimit = pivotSimulation.hasHitLowerLimit();
-		
+		inputs.positionReference = Rotation2d.fromDegrees(0); //will not run if  it doesn't have anything
+
 		lastInputs = inputs;
 	}
 }

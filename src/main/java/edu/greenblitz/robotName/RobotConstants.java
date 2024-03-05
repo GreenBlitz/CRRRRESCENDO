@@ -74,9 +74,4 @@ public class RobotConstants {
 
 		public static final int FOURTH = 3;
 	}
-
-	public static class Pneumatics {
-
-		public static final int PCM_ID = 20;
-	}
 }
