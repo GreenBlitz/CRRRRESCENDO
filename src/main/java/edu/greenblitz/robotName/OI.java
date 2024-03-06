@@ -4,8 +4,11 @@ import edu.greenblitz.robotName.commands.LED.UpdateLEDStateDefaultCommand;
 import edu.greenblitz.robotName.commands.NoteToShooterForAuto;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
+import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowByJoystick;
+import edu.greenblitz.robotName.commands.arm.roller.MoveNoteInRoller;
 import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRollerToAmp;
 import edu.greenblitz.robotName.commands.arm.roller.RollerDefaultCommand;
+import edu.greenblitz.robotName.commands.arm.wrist.MoveWristByButton;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
@@ -95,13 +98,24 @@ public class OI {
 	public void romyButtons() {
 		mainJoystick.R1.whileTrue(new CollectNoteToScoringModeForJoystick());
 		mainJoystick.X.whileTrue(new CollectNoteFromFeeder());
-		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetPoseByVision()));
+		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetChassisPose()));
 		mainJoystick.L1.whileTrue(new RotateToSpeaker());
+		//note in roller
+		mainJoystick.B.whileTrue(new MoveNoteInRoller(true));
+		mainJoystick.X.whileTrue(new MoveNoteInRoller(false));
+		//wrist
+		mainJoystick.POV_UP.whileTrue(new MoveWristByButton(true));
+		mainJoystick.POV_DOWN.whileTrue(new MoveWristByButton(false));
+		
 
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
 	}
 
 	public void shchoriButtons() {
+		//climb arm
+		secondJoystick.R2.whileTrue(new MoveElbowByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_Y)
+				.alongWith(new InstantCommand(() -> Elbow.getInstance().setClimb())));
+		
 		//ScoringMode
 		secondJoystick.START.onTrue(new ToggleScoringMode());
 

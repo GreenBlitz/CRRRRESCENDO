@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 
+import java.nio.file.attribute.FileAttribute;
+
 /**
  * This class is in charge of making the Joystick easy to assign things to buttons and invert the axes of the joystick.
  * The class uses joystick as the main joystick, and uses button values and enums in order to assign thing to those buttons.
@@ -25,8 +27,11 @@ public class SmartJoystick {
 			R1,
 			START,
 			BACK,
+			L2,
+			R2,
 			L3,
 			R3;
+	
 	
 	public final POVButton POV_UP,
 			POV_RIGHT,
@@ -75,6 +80,8 @@ public class SmartJoystick {
 		START = new JoystickButton(joystick, 8);
 		L3 = new JoystickButton(joystick, 9);
 		R3 = new JoystickButton(joystick, 10);
+		R2 = new JoystickButton(joystick, 11);
+		L2 = new JoystickButton(joystick, 12);
 		POV_UP = new POVButton(joystick, 0);
 		POV_RIGHT = new POVButton(joystick, 90);
 		POV_DOWN = new POVButton(joystick, 180);
@@ -150,7 +157,9 @@ public class SmartJoystick {
 		LEFT_TRIGGER(2, false),
 		RIGHT_TRIGGER(3, false),
 		RIGHT_X(4, false),
-		RIGHT_Y(5, true);
+		RIGHT_Y(5, true),
+		
+		L2(6, false)
 		
 		private final int axis;
 		

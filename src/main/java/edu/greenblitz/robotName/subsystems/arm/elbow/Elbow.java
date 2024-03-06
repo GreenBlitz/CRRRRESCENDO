@@ -18,6 +18,8 @@ public class Elbow extends GBSubsystem {
     private Rotation2d currentAngle;
 
     private Rotation2d pidReference;
+    
+    private boolean isClimb;
 
     private Elbow() {
         elbow = ElbowFactory.create();
@@ -25,6 +27,7 @@ public class Elbow extends GBSubsystem {
         elbow.updateInputs(elbowInputs);
         currentAngle = ElbowConstants.MINIMUM_ANGLE;
         pidReference = currentAngle;
+        isClimb = false;
     }
 
     public static void init() {
@@ -37,7 +40,7 @@ public class Elbow extends GBSubsystem {
         init();
         return instance;
     }
-
+    
     @Override
     public void periodic() {
         super.periodic();
@@ -61,6 +64,15 @@ public class Elbow extends GBSubsystem {
         elbow.setIdleMode(idleMode);
     }
 
+    public void setClimb(){
+        isClimb = true;
+    }
+    
+    public boolean isClimb(){
+        return isClimb;
+    }
+    
+    
     public void resetAngle(Rotation2d position) {
         elbow.resetAngle(position);
         currentAngle = position;
