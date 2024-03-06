@@ -41,7 +41,7 @@ public class FalconFlyWheel implements IFlyWheel {
                 RobotConstants.General.Motors.SIGNAL_FREQUENCY_HERTZ,
                 motor.getVelocity(),
                 motor.getMotorVoltage(),
-                motor.getSupplyCurrent(),
+                motor.getStatorCurrent(),
                 motor.getAcceleration()
         );
         motor.optimizeBusUtilization();
@@ -67,13 +67,13 @@ public class FalconFlyWheel implements IFlyWheel {
 
     @Override
     public void updateInputs(FlyWheelInputsAutoLogged inputs) {
-        inputs.leftFlywheelCurrent = leftMotor.getSupplyCurrent().getValue();
+        inputs.leftFlywheelCurrent = leftMotor.getStatorCurrent().getValue();
         inputs.leftFlywheelVoltage = leftMotor.getMotorVoltage().getValue();
         inputs.leftFlywheelVelocity = leftMotor.getLatencyCompensatedValue(leftMotor.getVelocity(), leftMotor.getAcceleration());
         inputs.leftWheelAcceleration = leftMotor.getAcceleration().getValue();
         inputs.leftVelocityReference = leftMotor.getClosedLoopReference().getValue();
 
-        inputs.rightFlywheelCurrent = rightMotor.getSupplyCurrent().getValue();
+        inputs.rightFlywheelCurrent = rightMotor.getStatorCurrent().getValue();
         inputs.rightFlywheelVoltage = rightMotor.getMotorVoltage().getValue();
         inputs.rightFlywheelVelocity = rightMotor.getLatencyCompensatedValue(rightMotor.getVelocity(), rightMotor.getAcceleration());
         inputs.rightWheelAcceleration = rightMotor.getAcceleration().getValue();

@@ -141,7 +141,7 @@ public class MK4ISwerveModule implements ISwerveModule {
 		inputs.linearVoltage = linearMotor.getSupplyVoltage().getValue();
 		inputs.angularVoltage = angularMotor.getSupplyVoltage().getValue();
 
-		inputs.linearCurrent = linearMotor.getSupplyCurrent().getValue();
+		inputs.linearCurrent = linearMotor.getStatorCurrent().getValue();
 		inputs.angularCurrent = angularMotor.getStatorCurrent().getValue();
 
 		inputs.linearMetersPassed = linearMotor.getPosition().getValue() * MK4iSwerveConstants.WHEEL_CIRCUMFERENCE;

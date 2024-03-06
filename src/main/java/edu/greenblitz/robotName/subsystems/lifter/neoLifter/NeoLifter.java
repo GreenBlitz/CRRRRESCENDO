@@ -4,7 +4,6 @@ import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
 import edu.greenblitz.robotName.subsystems.lifter.ILifter;
 import edu.greenblitz.robotName.subsystems.lifter.LifterConstants;
 import edu.greenblitz.robotName.subsystems.lifter.LifterInputsAutoLogged;
@@ -104,6 +103,5 @@ public class NeoLifter implements ILifter {
         inputs.currentSolenoid = solenoid.getStatorCurrent();
         inputs.voltageSolenoid = solenoid.getMotorOutputVoltage();
         inputs.isOpenSolenoid = inputs.voltageSolenoid > 0;
-
     }
 }
