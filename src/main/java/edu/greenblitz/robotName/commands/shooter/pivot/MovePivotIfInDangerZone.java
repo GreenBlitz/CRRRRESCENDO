@@ -17,7 +17,7 @@ public class MovePivotIfInDangerZone extends SequentialCommandGroup {
                         ElbowConstants.PresetPositions.SAFE.ANGLE,
                         WristConstants.PresetPositions.TRANSFER.ANGLE
                 ),
-                new MovePivotToAngle(targetAngle)
+                new MovePivotToAngle(targetAngle,false)
         );
     }
 
@@ -27,7 +27,7 @@ public class MovePivotIfInDangerZone extends SequentialCommandGroup {
                         ElbowConstants.PresetPositions.SAFE.ANGLE,
                         WristConstants.PresetPositions.TRANSFER.ANGLE
                 ),
-                new MovePivotToAngle(targetAngle)
+                new MovePivotToAngle(targetAngle,false)
         );
     }
 }

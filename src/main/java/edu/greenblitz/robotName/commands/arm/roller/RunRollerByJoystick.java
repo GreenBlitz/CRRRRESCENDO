@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.commands.arm.roller;
 
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RunRollerByJoystick extends RollerCommand {
 
@@ -14,6 +15,7 @@ public class RunRollerByJoystick extends RollerCommand {
 
     @Override
     public void execute() {
+        SmartDashboard.putNumber("powerrr",joystick.getAxisValue(SmartJoystick.Axis.LEFT_X) * RobotConstants.General.SAFETY_POWER_CONVERSION_FACTOR );
         roller.setPower(joystick.getAxisValue(SmartJoystick.Axis.LEFT_X) * RobotConstants.General.SAFETY_POWER_CONVERSION_FACTOR);
     }
 }

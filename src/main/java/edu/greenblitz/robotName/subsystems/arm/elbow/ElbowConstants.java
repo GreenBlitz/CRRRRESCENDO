@@ -11,7 +11,7 @@ public class ElbowConstants {
         SAFE(Rotation2d.fromDegrees(-67)),
         SCORE(Rotation2d.fromDegrees(55)),
         STARTING(Rotation2d.fromDegrees(0)),
-        TRANSFER(Rotation2d.fromDegrees(-78));
+        TRANSFER(Rotation2d.fromDegrees(-80));
 
         public final Rotation2d ANGLE;
 
@@ -30,7 +30,7 @@ public class ElbowConstants {
 
     public static final double ARM_MASS_KG = 0.44;
 
-    public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(-80);
+    public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(-81);
 
     public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(90);
 

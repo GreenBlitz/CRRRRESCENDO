@@ -16,7 +16,6 @@ public class Lifter extends GBSubsystem {
         lifter = LifterFactory.create();
         lifterInputs = new LifterInputsAutoLogged();
         lifter.updateInputs(lifterInputs);
-        setIdleMode(LifterConstants.IDLE_MODE);
     }
 
     public static Lifter getInstance() {

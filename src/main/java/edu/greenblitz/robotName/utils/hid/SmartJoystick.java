@@ -159,7 +159,7 @@ public class SmartJoystick {
 		RIGHT_X(4, false),
 		RIGHT_Y(5, true),
 		
-		L2(6, false)
+		L2(6, false);
 		
 		private final int axis;
 		

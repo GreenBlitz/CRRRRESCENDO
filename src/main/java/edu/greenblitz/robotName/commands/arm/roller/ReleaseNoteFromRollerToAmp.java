@@ -9,7 +9,7 @@ public class ReleaseNoteFromRollerToAmp extends SequentialCommandGroup {
 
     public ReleaseNoteFromRollerToAmp() {
         super(
-                new RunByPowerAndCountRotations(RollerConstants.SAFETY_ROTATIONS_TILL_OBJECT_OUT),
+                new RunByPowerAndCountRotations(RollerConstants.SAFETY_ROTATIONS_TILL_OBJECT_OUT, true),
                 new InstantCommand(() -> Roller.getInstance().setObjectOut())
         );
     }

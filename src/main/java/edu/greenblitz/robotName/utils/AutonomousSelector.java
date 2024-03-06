@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.utils;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import edu.greenblitz.robotName.commands.shooter.ShootToSpeakerFromClose;
+import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -20,6 +21,9 @@ public class AutonomousSelector {
         chooser = AutoBuilder.buildAutoChooser();
         ShuffleboardTab tab = Shuffleboard.getTab("auto");
         tab.add("autonomous chooser", chooser);
+        chooser.addOption("auto for q 3",
+               new ShootToSpeakerFromClose()
+        );
     }
 
     public Command getChosenValue() {

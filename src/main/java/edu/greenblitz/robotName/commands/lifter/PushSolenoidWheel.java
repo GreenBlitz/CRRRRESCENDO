@@ -13,7 +13,7 @@ public class PushSolenoidWheel extends LifterCommand{
 	@Override
 	public void initialize() {
 		timer.restart();
-		lifter.setPower(0.2);
+		lifter.setPower(0.1);
 	}
 	
 	@Override

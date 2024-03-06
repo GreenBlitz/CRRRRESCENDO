@@ -27,6 +27,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.littletonrobotics.junction.Logger;
@@ -202,6 +203,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	public void resetChassisPose() {
 		gyro.updateYaw(Rotation2d.fromRadians(0));
 		poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), new Pose2d());
+		gyro.updateYaw(Rotation2d.fromRadians(0));
+		poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), new Pose2d());
 	}
 
 	public void resetChassisAngle(Rotation2d angle) {
@@ -223,7 +226,9 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				if (visionPoseAndTimeStamp.isPresent()) {
 					Pose2d visionPose = visionPoseAndTimeStamp.get().getFirst();
 					poseEstimator.update(getGyroAngle(),getSwerveModulePositions());
-					poseEstimator.addVisionMeasurement(visionPose,visionPoseAndTimeStamp.get().getSecond());
+					if(!DriverStation.isAutonomous()){
+						poseEstimator.addVisionMeasurement(visionPose,visionPoseAndTimeStamp.get().getSecond());
+					}
 				}
 			}
 		} else {

@@ -4,6 +4,6 @@ public class RollerDefaultCommand extends RollerCommand {
 
     @Override
     public void execute() {
-        roller.setPower(-0.005);
+//        roller.setPower(-0.005);
     }
 }

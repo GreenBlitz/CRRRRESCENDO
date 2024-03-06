@@ -8,6 +8,7 @@ import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowByJoystick;
 import edu.greenblitz.robotName.commands.arm.roller.MoveNoteInRoller;
 import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRollerToAmp;
 import edu.greenblitz.robotName.commands.arm.roller.RollerDefaultCommand;
+import edu.greenblitz.robotName.commands.arm.roller.RunRollerByJoystick;
 import edu.greenblitz.robotName.commands.arm.wrist.MoveWristByButton;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
@@ -101,20 +102,20 @@ public class OI {
 		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetChassisPose()));
 		mainJoystick.L1.whileTrue(new RotateToSpeaker());
 		//note in roller
-		mainJoystick.B.whileTrue(new MoveNoteInRoller(true));
-		mainJoystick.X.whileTrue(new MoveNoteInRoller(false));
+//		mainJoystick.B.whileTrue(new MoveNoteInRoller(true));
+//		mainJoystick.X.whileTrue(new MoveNoteInRoller(false));
 		//wrist
-		mainJoystick.POV_UP.whileTrue(new MoveWristByButton(true));
-		mainJoystick.POV_DOWN.whileTrue(new MoveWristByButton(false));
+//		mainJoystick.POV_UP.whileTrue(new MoveWristByButton(true));
+//		mainJoystick.POV_DOWN.whileTrue(new MoveWristByButton(false));
 		
-
+		secondJoystick.POV_DOWN.whileTrue(new RunRollerByJoystick(secondJoystick));
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
 	}
-
+	
 	public void shchoriButtons() {
 		//climb arm
-		secondJoystick.R2.whileTrue(new MoveElbowByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_Y)
-				.alongWith(new InstantCommand(() -> Elbow.getInstance().setClimb())));
+//		secondJoystick.R2.whileTrue(new MoveElbowByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_Y)
+//				.alongWith(new InstantCommand(() -> Elbow.getInstance().setClimb())));
 		
 		//ScoringMode
 		secondJoystick.START.onTrue(new ToggleScoringMode());
@@ -135,9 +136,9 @@ public class OI {
 		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityUntilInterrupted(100, secondJoystick));
 
 		//Pivot Poses
-		secondJoystick.POV_UP.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.RIGHT_STAGE.ANGLE));
-		secondJoystick.POV_LEFT.whileTrue(new MoveShooterToAngle(PivotConstants.PresetPositions.PODIUM.ANGLE));
-		secondJoystick.POV_DOWN.whileTrue(new MovePivotToAngle(() -> PivotConstants.PresetPositions.CLOSE_SHOOTING.ANGLE));
+		secondJoystick.POV_UP.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.RIGHT_STAGE.ANGLE,true));
+		secondJoystick.POV_LEFT.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.PODIUM.ANGLE,true));
+		secondJoystick.POV_DOWN.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.CLOSE_SHOOTING.ANGLE,true));
 		secondJoystick.R1.whileTrue(new MovePivotByJoystick(secondJoystick, SmartJoystick.Axis.LEFT_Y));
 
 		//Funnel
@@ -165,12 +166,12 @@ public class OI {
 	}
 
 	public void initializeDefaultCommands() {
-		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+//		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
 		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
 		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
 		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
 		Roller.getInstance().setDefaultCommand(new RollerDefaultCommand());
-		LED.getInstance().setDefaultCommand(new UpdateLEDStateDefaultCommand());
+//		LED.getInstance().setDefaultCommand(new UpdateLEDStateDefaultCommand());
 	}
 
 }

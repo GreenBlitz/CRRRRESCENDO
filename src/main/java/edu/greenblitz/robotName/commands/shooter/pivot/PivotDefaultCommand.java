@@ -8,8 +8,17 @@ import edu.wpi.first.math.geometry.Rotation2d;
 
 public class PivotDefaultCommand extends PivotCommand {
 	
+//	@Override
+//	public void execute() {
+//		pivot.moveToAngle(() -> ShootingStateCalculations.getTargetShooterAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE));
+//	}
+	
+	public void initialize(){
+		pivot.setCurrentAngle();
+	}
+	
 	@Override
 	public void execute() {
-		pivot.moveToAngle(() -> ShootingStateCalculations.getTargetShooterAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE));
+		pivot.standInPlace();
 	}
 }

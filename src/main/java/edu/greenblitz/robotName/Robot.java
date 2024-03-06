@@ -4,6 +4,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
+import edu.greenblitz.robotName.commands.RumbleRomy;
 import edu.greenblitz.robotName.commands.intake.NoteToShooterWithArm;
 import edu.greenblitz.robotName.commands.shooter.ShootFromInFunnel;
 import edu.greenblitz.robotName.commands.shooter.ShootToSpeakerFromClose;
@@ -87,12 +88,13 @@ public class Robot extends LoggedRobot {
 		Lifter.init();
 		Intake.init();
 
-		LED.init();
+//		LED.init();
 	}
 
     @Override
     public void teleopInit() {
         Dashboard.getInstance().activateDriversDashboard();
+		new RumbleRomy(OI.getInstance().getMainJoystick()).schedule();
     }
 
 	@Override
