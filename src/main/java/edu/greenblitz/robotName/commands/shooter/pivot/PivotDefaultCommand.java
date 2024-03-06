@@ -14,6 +14,7 @@ public class PivotDefaultCommand extends PivotCommand {
 //	}
 	
 	public void initialize(){
+		super.initialize();
 		pivot.setCurrentAngle();
 	}
 	

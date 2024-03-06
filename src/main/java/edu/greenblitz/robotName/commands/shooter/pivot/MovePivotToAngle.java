@@ -26,6 +26,7 @@ public class MovePivotToAngle extends PivotCommand {
 
     @Override
     public void initialize() {
+        super.initialize();
         supplliedTargetAngle = targetAngle.get();
         pivot.moveToAngle(supplliedTargetAngle);
     }

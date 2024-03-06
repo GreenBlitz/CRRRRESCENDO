@@ -13,14 +13,14 @@ public class PivotConstants {
 	
 	public enum PresetPositions {
 
-		STARTING(Rotation2d.fromDegrees(18)),
-		TRANSFER(Rotation2d.fromDegrees(20)),
-		SAFE(Rotation2d.fromDegrees(58)),
-		PICK_UP(Rotation2d.fromDegrees(25)),
-		CLOSE_SHOOTING(Rotation2d.fromDegrees(60)),
-		PODIUM(Rotation2d.fromDegrees(36.3)),
-		RIGHT_STAGE(Rotation2d.fromDegrees(29)),
-		FEEDER(Rotation2d.fromDegrees(58.9));
+		STARTING(Rotation2d.fromDegrees(16)),
+		TRANSFER(Rotation2d.fromDegrees(18)),
+		SAFE(Rotation2d.fromDegrees(56)),
+		PICK_UP(Rotation2d.fromDegrees(23)),
+		CLOSE_SHOOTING(Rotation2d.fromDegrees(58)),
+		PODIUM(Rotation2d.fromDegrees(34.3)),
+		RIGHT_STAGE(Rotation2d.fromDegrees(27)),
+		FEEDER(Rotation2d.fromDegrees(56.9));
 
 		public final Rotation2d ANGLE;
 
@@ -30,10 +30,8 @@ public class PivotConstants {
 
 	}
 	
-	public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(20);
-
-	public static final Rotation2d CLOSE_RANGE_SHOOTING_ANGLE = Rotation2d.fromDegrees(113.8);
-
+	public static final Rotation2d BACKWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(16.5);
+	
 	public static final Rotation2d FORWARD_ANGLE_LIMIT = Rotation2d.fromDegrees(67);
 
 	public static final double GEAR_RATIO = 15 * (72 / 14.0) * 2;

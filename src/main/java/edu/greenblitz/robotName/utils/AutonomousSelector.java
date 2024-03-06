@@ -21,7 +21,7 @@ public class AutonomousSelector {
         chooser = AutoBuilder.buildAutoChooser();
         ShuffleboardTab tab = Shuffleboard.getTab("auto");
         tab.add("autonomous chooser", chooser);
-        chooser.addOption("auto for q 3",
+        chooser.addOption("only shoot",
                new ShootToSpeakerFromClose()
         );
     }

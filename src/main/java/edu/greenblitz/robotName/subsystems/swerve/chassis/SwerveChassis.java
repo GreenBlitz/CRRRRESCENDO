@@ -22,10 +22,7 @@ import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.*;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.kinematics.SwerveModulePosition;
-import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.math.kinematics.*;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
@@ -58,6 +55,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	private SwerveDriveKinematics kinematics;
 
 	private SwerveDrivePoseEstimator poseEstimator;
+	private SwerveDriveOdometry odometry;
 
 	private Field2d field = new Field2d();
 
@@ -96,6 +94,11 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 						VisionConstants.STANDARD_DEVIATION_VISION_ANGLE
 				)
 		);
+		odometry = new SwerveDriveOdometry(
+				this.kinematics,
+				getGyroAngle(),
+				getSwerveModulePositions()
+		);
 		SmartDashboard.putData("field", getField());
 	}
 
@@ -129,7 +132,15 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		Logger.processInputs("DriveTrain/Gyro", gyroInputs);
 		SmartDashboard.putNumber("shoot angle", ShootingStateCalculations.getTargetShooterAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE).getDegrees());
 		updatePoseEstimationLimeLight();
+		
 		MultiLimelight.getInstance().recordEstimatedPositions();
+		
+		odometry.update(getGyroAngle(), getSwerveModulePositions());
+		Logger.recordOutput("odometry" , odometry.getPoseMeters());
+		
+		
+		
+		
 		SmartDashboard.putData(getField());
 	}
 
@@ -203,8 +214,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	public void resetChassisPose() {
 		gyro.updateYaw(Rotation2d.fromRadians(0));
 		poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), new Pose2d());
-		gyro.updateYaw(Rotation2d.fromRadians(0));
-		poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), new Pose2d());
 	}
 
 	public void resetChassisAngle(Rotation2d angle) {
@@ -240,6 +249,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	 * returns chassis angle in radians
 	 */
 	public Rotation2d getGyroAngle() {
+		gyro.updateInputs(gyroInputs);
 		return Rotation2d.fromRadians(gyroInputs.yaw);
 	}
 

@@ -13,10 +13,10 @@ public class MoveNoteInRoller extends RollerCommand {
 	@Override
 	public void execute() {
 		if (isForward){
-			roller.setPower(0.1);
+			roller.setPower(0.2);
 		}
 		else {
-			roller.setPower(-0.1);
+			roller.setPower(-0.2);
 		}
 	}
 	

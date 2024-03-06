@@ -71,12 +71,12 @@ public class FalconFlyWheel implements IFlyWheel {
         inputs.leftFlywheelVoltage = leftMotor.getMotorVoltage().getValue();
         inputs.leftFlywheelVelocity = leftMotor.getLatencyCompensatedValue(leftMotor.getVelocity(), leftMotor.getAcceleration());
         inputs.leftWheelAcceleration = leftMotor.getAcceleration().getValue();
-        inputs.leftVelocityReference = leftMotor.getClosedLoopReference().getValue();
+        inputs.leftVelocityReference = leftMotor.getClosedLoopReference().getValueAsDouble();
 
         inputs.rightFlywheelCurrent = rightMotor.getStatorCurrent().getValue();
         inputs.rightFlywheelVoltage = rightMotor.getMotorVoltage().getValue();
         inputs.rightFlywheelVelocity = rightMotor.getLatencyCompensatedValue(rightMotor.getVelocity(), rightMotor.getAcceleration());
         inputs.rightWheelAcceleration = rightMotor.getAcceleration().getValue();
-        inputs.rightVelocityReference = rightMotor.getClosedLoopReference().getValue();
+        inputs.rightVelocityReference = rightMotor.getClosedLoopReference().getValueAsDouble();
     }
 }
