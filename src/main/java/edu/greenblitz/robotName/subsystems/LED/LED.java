@@ -129,6 +129,7 @@ public class LED extends GBSubsystem {
 
 	public void stopRumble() {
 		OI.getInstance().getSecondJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, 0);
+		OI.getInstance().getMainJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, 0);
 	}
 
 	public void restartTimerByNoteState() {
