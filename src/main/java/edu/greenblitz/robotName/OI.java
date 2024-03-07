@@ -98,10 +98,6 @@ public class OI {
 		//Intake
 		mainJoystick.R2.whileTrue(new RunIntakeByPower(0.5));
 		
-		//wrist
-//		mainJoystick.POV_UP.whileTrue(new MoveWristByButton(true));
-//		mainJoystick.POV_DOWN.whileTrue(new MoveWristByButton(false));
-		
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
 	}
 	
