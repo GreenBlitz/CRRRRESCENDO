@@ -8,7 +8,7 @@ public class ShootToSpeakerFromClose extends SequentialCommandGroup {
 
     public ShootToSpeakerFromClose() {
         super(
-                new MovePivotToAngle(PivotConstants.PresetPositions.CLOSE_SHOOTING.ANGLE,false),
+                new MovePivotToAngle(PivotConstants.PresetPositions.CLOSE_SHOOTING.ANGLE),
                 new ShootFromInFunnel()
         );
     }

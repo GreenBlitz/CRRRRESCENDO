@@ -95,10 +95,10 @@ public class OI {
 	
 	public void romyButtons() {
 		mainJoystick.R1.whileTrue(new CollectNoteToScoringModeForJoystick()
-				.alongWith(new MovePivotToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE, false)));
+				.alongWith(new MovePivotToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE)));
+		
 		mainJoystick.POV_DOWN.whileTrue(new CollectNoteFromFeeder());
 		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetChassisPose()));
-		mainJoystick.L1.whileTrue(new RotateToSpeaker());
 //		note in roller
 		mainJoystick.B.whileTrue(new MoveNoteInRoller(true));
 		mainJoystick.X.whileTrue(new MoveNoteInRoller(false));
@@ -107,13 +107,6 @@ public class OI {
 		//wrist
 //		mainJoystick.POV_UP.whileTrue(new MoveWristByButton(true));
 //		mainJoystick.POV_DOWN.whileTrue(new MoveWristByButton(false));
-//
-//
-//		mainJoystick.POV_UP.whileTrue(new RunCommand(
-//				() -> SwerveChassis.getInstance().moveByChassisSpeeds(
-//						1,0,0, Rotation2d.fromDegrees(0)
-//				)
-//		).raceWith(new WaitCommand(2)));
 		
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
 	}
@@ -149,9 +142,9 @@ public class OI {
 		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityUntilInterrupted(100, secondJoystick));
 		
 		//Pivot Poses
-		secondJoystick.POV_UP.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.RIGHT_STAGE.ANGLE, true));
-		secondJoystick.POV_LEFT.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.PODIUM.ANGLE, true));
-		secondJoystick.POV_DOWN.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.CLOSE_SHOOTING.ANGLE, true));
+		secondJoystick.POV_UP.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.RIGHT_STAGE.ANGLE));
+		secondJoystick.POV_LEFT.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.PODIUM.ANGLE));
+		secondJoystick.POV_DOWN.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.CLOSE_SHOOTING.ANGLE));
 		secondJoystick.R1.whileTrue(new MovePivotByJoystick(secondJoystick, SmartJoystick.Axis.LEFT_Y));
 		
 		//Funnel

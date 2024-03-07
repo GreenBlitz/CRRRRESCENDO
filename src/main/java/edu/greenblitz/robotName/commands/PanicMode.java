@@ -12,7 +12,7 @@ public class PanicMode extends ConditionalCommand {
     public PanicMode() {
         super(
                 new MoveShooterToAngle(PivotConstants.PresetPositions.SAFE.ANGLE),
-                new MoveElbowAndWristToSafe().alongWith(new MovePivotToAngle(PivotConstants.PresetPositions.SAFE.ANGLE,false)),
+                new MoveElbowAndWristToSafe().alongWith(new MovePivotToAngle(PivotConstants.PresetPositions.SAFE.ANGLE)),
                 () -> Elbow.getInstance().isInShooterCollisionRange()
         );
     }

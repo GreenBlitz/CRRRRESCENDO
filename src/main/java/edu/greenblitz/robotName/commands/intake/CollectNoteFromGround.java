@@ -9,7 +9,7 @@ public class CollectNoteFromGround extends ParallelCommandGroup {
 	
 	public CollectNoteFromGround(){
 		super(
-				new MovePivotToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE, false),
+				new MovePivotToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE),
 				new NoteToShooterWithArm()
 		);
 	}
