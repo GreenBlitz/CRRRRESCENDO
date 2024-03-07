@@ -28,6 +28,7 @@ import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -93,6 +94,11 @@ public class Robot extends LoggedRobot {
 
     @Override
     public void teleopInit() {
+		if (FMSUtils.isRedAlliance()){
+			SwerveChassis.getInstance().resetChassisAngle(
+					SwerveChassis.getInstance().getGyroAngle().plus(Rotation2d.fromDegrees(180))
+			);
+		}
         Dashboard.getInstance().activateDriversDashboard();
 		new RumbleRomy(OI.getInstance().getMainJoystick()).schedule();
     }

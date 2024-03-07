@@ -120,7 +120,7 @@ public class ChassisConstants {
 	
 	public static final PathConstraints CONSTRAINTS = new PathConstraints(
 			1,
-			1,
+			0.5,
 			3,
 			3
 	);

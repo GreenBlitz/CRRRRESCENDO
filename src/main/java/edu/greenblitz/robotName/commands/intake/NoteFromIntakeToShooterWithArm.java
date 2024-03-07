@@ -4,6 +4,8 @@ import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
 import edu.greenblitz.robotName.commands.arm.roller.runByPower.RollClockwise;
 import edu.greenblitz.robotName.commands.arm.roller.runByPower.RollCounterClockwise;
+import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
+import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 
 public class NoteFromIntakeToShooterWithArm extends ParallelDeadlineGroup {
@@ -11,7 +13,10 @@ public class NoteFromIntakeToShooterWithArm extends ParallelDeadlineGroup {
     public NoteFromIntakeToShooterWithArm() {
         super(
                 new NoteFromIntakeToShooter(),
-                new MoveElbowAndWristToSafe(),
+                new MoveElbowAndWrist(
+                        ElbowConstants.PresetPositions.INTAKE,
+                        WristConstants.PresetPositions.SAFE
+                ),
                 new RollCounterClockwise()
         );
     }

@@ -10,7 +10,7 @@ public class NeoRollerConstants {
 
     public static final int MOTOR_ID = 22;
 
-    public static final double NOTE_IN_CURRENT = 25;
+    public static final double NOTE_IN_CURRENT = 18;
 
     public static int CURRENT_LIMIT = 40;
 

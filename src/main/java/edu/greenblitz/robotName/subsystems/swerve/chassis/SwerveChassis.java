@@ -131,8 +131,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		Logger.processInputs("DriveTrain/Chassis", ChassisInputs);
 		Logger.processInputs("DriveTrain/Gyro", gyroInputs);
 		SmartDashboard.putNumber("shoot angle", ShootingStateCalculations.getTargetShooterAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE).getDegrees());
-//		updatePoseEstimationLimeLight();
-
+		updatePoseEstimationLimeLight();
+		
+		updatePoseEstimatorOdometry();
+		
 		MultiLimelight.getInstance().recordEstimatedPositions();
 		
 		odometry.update(getGyroAngle(), getSwerveModulePositions());
@@ -143,7 +145,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		
 		SmartDashboard.putData(getField());
 	}
-
+	
 	public void resetChassisPosition(Pose2d pose) {
 		poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), pose);
 	}
@@ -520,6 +522,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 
 	public void resetChassisPose(Pose2d pose) {
+		gyro.updateYaw(pose.getRotation());
 		poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), pose);
 	}
 

@@ -32,9 +32,12 @@ import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class OI {
 	
@@ -91,16 +94,26 @@ public class OI {
 	}
 	
 	public void romyButtons() {
-		mainJoystick.R1.whileTrue(new CollectNoteToScoringModeForJoystick());
+		mainJoystick.R1.whileTrue(new CollectNoteToScoringModeForJoystick()
+				.alongWith(new MovePivotToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE, false)));
 		mainJoystick.POV_DOWN.whileTrue(new CollectNoteFromFeeder());
 		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetChassisPose()));
 		mainJoystick.L1.whileTrue(new RotateToSpeaker());
 //		note in roller
 		mainJoystick.B.whileTrue(new MoveNoteInRoller(true));
 		mainJoystick.X.whileTrue(new MoveNoteInRoller(false));
+		
+		mainJoystick.R2.whileTrue(new RunIntakeByPower(0.5));
 		//wrist
 //		mainJoystick.POV_UP.whileTrue(new MoveWristByButton(true));
 //		mainJoystick.POV_DOWN.whileTrue(new MoveWristByButton(false));
+//
+//
+//		mainJoystick.POV_UP.whileTrue(new RunCommand(
+//				() -> SwerveChassis.getInstance().moveByChassisSpeeds(
+//						1,0,0, Rotation2d.fromDegrees(0)
+//				)
+//		).raceWith(new WaitCommand(2)));
 		
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
 	}
