@@ -95,7 +95,7 @@ public class ChassisConstants {
 	
 	public static final boolean LINEAR_JOYSTICK_INVERTED = false;
 	
-	public static final PIDConstants TRANSLATION_PID = new PIDConstants(2.2, 0, 0);
+	public static final PIDConstants TRANSLATION_PID = new PIDConstants(1, 0, 0);
 	
 	public static final PIDConstants ROTATION_PID = new PIDConstants(0.5, 0, 0);
 	
@@ -108,7 +108,7 @@ public class ChassisConstants {
 	public static final HolonomicPathFollowerConfig PATH_FOLLOWER_CONFIG = new HolonomicPathFollowerConfig(
 			TRANSLATION_PID,
 			ROTATION_PID,
-			1,
+			0.6,
 			ROBOT_RADIUS,
 			new ReplanningConfig(
 					true,
