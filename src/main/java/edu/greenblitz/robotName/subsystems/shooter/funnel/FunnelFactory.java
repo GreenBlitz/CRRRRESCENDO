@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName.subsystems.shooter.funnel;
 
 import edu.greenblitz.robotName.Robot;
-import edu.greenblitz.robotName.subsystems.shooter.funnel.bagFunnel.BagFunnel;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.neoFunnel.NeoFunnel;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.simulationFunnel.SimulationFunnel;
 

@@ -19,7 +19,6 @@ public class ScoringModeSelector {
 	}
 
 	public static void setScoringMode(ScoringMode scoringMode) {
-		SmartDashboard.putString("mode", scoringMode.name());
 		currentMode = scoringMode;
 	}
 

@@ -53,6 +53,6 @@ public class NeoRoller implements IRoller {
         inputs.outputCurrent = motor.getOutputCurrent();
         inputs.appliedOutput = motor.getAppliedOutput();
         inputs.position = Rotation2d.fromRotations(motor.getEncoder().getPosition());
-        inputs.isObjectIn = isObjectInByCurrent(inputs);
+        inputs.isObjectEntered = isObjectInByCurrent(inputs);
     }
 }

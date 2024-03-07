@@ -20,12 +20,10 @@ public class RunFunnelByVelocity extends FunnelCommand {
 	@Override
 	public void initialize() {
 		funnel.setVelocity(velocity);
-		SmartDashboard.putBoolean("yoo funnel", true);
 	}
 	
 	@Override
 	public void end(boolean interrupted) {
 		funnel.stop();
-		SmartDashboard.putBoolean("yoo funnel", false);
 	}
 }

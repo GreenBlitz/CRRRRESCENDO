@@ -23,6 +23,7 @@ public class RobotConstants {
 		public static final double SAFETY_POWER_CONVERSION_FACTOR = 1;
 		
 		public final static String CANIVORE_NAME = "*";
+		
 		public final static String CANBUS_NAME = "";
 
 		public static class Motors {

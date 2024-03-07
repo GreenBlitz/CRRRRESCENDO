@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.commands.arm.roller;
 
-import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
+import edu.greenblitz.robotName.RobotConstants;
+import edu.greenblitz.robotName.subsystems.arm.roller.RollerConstants;
 
 public class MoveNoteInRoller extends RollerCommand {
 	
@@ -13,10 +14,10 @@ public class MoveNoteInRoller extends RollerCommand {
 	@Override
 	public void execute() {
 		if (isForward){
-			roller.setPower(0.2);
+			roller.setPower(RollerConstants.HAND_CONTROL_POWER);
 		}
 		else {
-			roller.setPower(-0.2);
+			roller.setPower(-RollerConstants.HAND_CONTROL_POWER);
 		}
 	}
 	

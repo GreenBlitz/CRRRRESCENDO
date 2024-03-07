@@ -1,13 +1,11 @@
 package edu.greenblitz.robotName.commands.arm.wrist;
 
+import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 public class MoveWristByButton extends WristCommand {
 	
-	boolean isForward;
-	
-	double power = 0.2;
-	
+	private boolean isForward;
 	public MoveWristByButton(boolean isForward){
 		super();
 		this.isForward = isForward;
@@ -15,11 +13,11 @@ public class MoveWristByButton extends WristCommand {
 	
 	@Override
 	public void execute() {
-		if (!isForward) {
-			wrist.setPower(-power);
+		if (isForward) {
+			wrist.setPower(WristConstants.HAND_CONTROL_POWER);
 		}
 		else{
-			wrist.setPower(power);
+			wrist.setPower(-WristConstants.HAND_CONTROL_POWER);
 		}
 	}
 	

@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName.commands.swerve;
 
 import edu.greenblitz.robotName.OI;
-import edu.greenblitz.robotName.subsystems.swerve.SwerveChassisUtils;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 
@@ -67,9 +66,9 @@ public class MoveByJoysticks extends SwerveCommand {
 //                ChassisConstants.ANGULAR_JOYSTICK_INVERTED
 //        );
 		double leftwardSpeed = -OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_X) * linearSpeedFactor;
-
+		
 		double forwardSpeed = OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_Y) * linearSpeedFactor;
-
+		
 		double angularSpeed = angularVelocitySupplier.getAsDouble() * angularSpeedFactor;
 		
 		if (forwardSpeed == 0 && leftwardSpeed == 0 && angularSpeed == 0) {

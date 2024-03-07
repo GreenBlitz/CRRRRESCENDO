@@ -27,12 +27,7 @@ public class RunRollerByRotations extends RollerCommand {
 
     @Override
     public boolean isFinished() {
-        SmartDashboard.putBoolean("end transfer", roller.isAtAngle(rotations));
         return roller.isAtAngle(rotations);
     }
     
-    @Override
-    public void end(boolean interrupted) {
-        SmartDashboard.putBoolean("is transfer interuupted", interrupted);
-    }
 }

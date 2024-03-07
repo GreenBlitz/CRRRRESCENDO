@@ -121,7 +121,7 @@ public class FalconLifter implements ILifter {
 		inputs.velocity = motor.getVelocity().getValue();
 		inputs.isForwardSwitchPressed = motor.getForwardLimit().getValue().value == IS_SWITCH_CLOSED;
 		inputs.isBackwardSwitchPressed = motor.getReverseLimit().getValue().value == IS_SWITCH_CLOSED;
-		inputs.positionReference = Rotation2d.fromRotations(motor.getClosedLoopReference().getValue());
+		inputs.positionReference = Rotation2d.fromRotations(motor.getClosedLoopReference().getValueAsDouble());
 		inputs.currentSolenoid = solenoid.getStatorCurrent();
 		inputs.voltageSolenoid = solenoid.getMotorOutputVoltage();
 		inputs.isOpenSolenoid = inputs.voltageSolenoid > 0;

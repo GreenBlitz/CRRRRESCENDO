@@ -108,7 +108,7 @@ public class ChassisConstants {
 	public static final HolonomicPathFollowerConfig PATH_FOLLOWER_CONFIG = new HolonomicPathFollowerConfig(
 			TRANSLATION_PID,
 			ROTATION_PID,
-			0.6,
+			MAX_VELOCITY,
 			ROBOT_RADIUS,
 			new ReplanningConfig(
 					true,

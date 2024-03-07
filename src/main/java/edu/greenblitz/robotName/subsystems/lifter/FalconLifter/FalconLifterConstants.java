@@ -25,6 +25,7 @@ public class FalconLifterConstants {
 	public static final double kA = 0;
 	
 	public static final double kG = 0;
+	
 	public static final NeutralModeValue NEUTRAL_MODE_VALUE = NeutralModeValue.Brake;
 	
 	public static final int PID_SLOT = 0;
@@ -42,15 +43,6 @@ public class FalconLifterConstants {
 		SLOT_0_CONFIGS.kP = 0;
 		SLOT_0_CONFIGS.kI = 0;
 		SLOT_0_CONFIGS.kD = 0;
-	}
-	
-	public static final CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();
-	
-	static {
-		CURRENT_LIMITS_CONFIGS.StatorCurrentLimit = 40;
-		CURRENT_LIMITS_CONFIGS.StatorCurrentLimitEnable = false;
-		CURRENT_LIMITS_CONFIGS.SupplyCurrentLimit = 40;
-		CURRENT_LIMITS_CONFIGS.SupplyCurrentLimitEnable = false;
 	}
 	
 	public static final SoftwareLimitSwitchConfigs SOFTWARE_LIMIT_SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();
@@ -86,13 +78,9 @@ public class FalconLifterConstants {
 	
 	static {
 		TALON_FX_CONFIGURATION.ClosedLoopRamps = CLOSED_LOOP_RAMPS_CONFIGS;
-		TALON_FX_CONFIGURATION.CurrentLimits = CURRENT_LIMITS_CONFIGS;
 		TALON_FX_CONFIGURATION.SoftwareLimitSwitch = SOFTWARE_LIMIT_SWITCH_CONFIGS;
 		TALON_FX_CONFIGURATION.Slot0 = SLOT_0_CONFIGS;
 		TALON_FX_CONFIGURATION.Feedback = FEEDBACK_CONFIGS;
 		TALON_FX_CONFIGURATION.HardwareLimitSwitch = HARDWARE_LIMIT_SWITCH_CONFIGS;
 	}
-	
-	
-	
 }

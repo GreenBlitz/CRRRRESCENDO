@@ -22,7 +22,6 @@ public class Roller extends GBSubsystem {
         roller = RollerFactory.create();
         rollerInputs = new RollerInputsAutoLogged();
         roller.updateInputs(rollerInputs);
-        isObjectIn();
         objectWasIn = false;
     }
 

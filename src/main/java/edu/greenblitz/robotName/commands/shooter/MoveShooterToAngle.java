@@ -13,7 +13,7 @@ public class MoveShooterToAngle extends ConditionalCommand {
     public MoveShooterToAngle(Supplier<Rotation2d> targetAngle) {
         super(
                 new MovePivotIfInDangerZone(targetAngle).asProxy(),
-                new MovePivotToAngle(targetAngle,false),
+                new MovePivotToAngle(targetAngle),
                 () -> Elbow.getInstance().isInShooterCollisionRange()
         );
     }

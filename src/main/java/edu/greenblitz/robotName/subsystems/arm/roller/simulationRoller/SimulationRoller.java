@@ -74,7 +74,7 @@ public class SimulationRoller implements IRoller {
 
         inputs.appliedOutput = appliedOutput;
         inputs.outputCurrent = rollerSimulation.getCurrentDrawAmps();
-        inputs.isObjectIn = isObjectInArm.getSelected();
+        inputs.isObjectEntered = isObjectInArm.getSelected();
         inputs.position = Rotation2d.fromRadians(rollerSimulation.getAngularPositionRad());
 
         lastInputs = inputs;

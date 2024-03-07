@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.commands.shooter.pivot;
 
 import edu.greenblitz.robotName.Robot;
+import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 import java.util.function.Supplier;
@@ -11,6 +12,9 @@ public class MovePivotToAngle extends PivotCommand {
 	
 	private Rotation2d suppliedTargetAngle;
 	
+	public MovePivotToAngle(PivotConstants.PresetPositions targetAngle) {
+		this.targetAngle = () -> targetAngle;
+	}
 	
 	public MovePivotToAngle(Rotation2d targetAngle) {
 		this.targetAngle = () -> targetAngle;
