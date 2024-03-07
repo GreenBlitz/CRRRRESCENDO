@@ -106,10 +106,6 @@ public class OI {
 	}
 	
 	public void shchoriButtons() {
-		//climb arm
-//		secondJoystick.R2.whileTrue(new MoveElbowByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_Y)
-//				.alongWith(new InstantCommand(() -> Elbow.getInstance().setClimb())));
-		
 		//ScoringMode
 		secondJoystick.START.onTrue(new ToggleScoringMode());
 		
