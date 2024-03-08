@@ -23,6 +23,7 @@ import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
+import edu.greenblitz.robotName.utils.AllianceUtilities;
 import edu.greenblitz.robotName.utils.AutonomousSelector;
 import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.greenblitz.robotName.utils.RoborioUtils;
@@ -32,6 +33,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
 import org.littletonrobotics.junction.Logger;
@@ -116,10 +118,12 @@ public class Robot extends LoggedRobot {
 		AutoBuilder.configureHolonomic(
 				SwerveChassis.getInstance()::getRobotPose2d,
 				SwerveChassis.getInstance()::resetChassisPose,
-				SwerveChassis.getInstance()::getRobotRelativeChassisSpeeds,
-				SwerveChassis.getInstance()::moveByRobotRelativeSpeeds,
+//				SwerveChassis.getInstance()::getRobotRelativeChassisSpeeds,
+				SwerveChassis.getInstance()::getChassisSpeeds,
+//				SwerveChassis.getInstance()::moveByRobotRelativeSpeeds,
+				SwerveChassis.getInstance()::moveByChassisSpeeds,
 				ChassisConstants.PATH_FOLLOWER_CONFIG,
-				() -> FMSUtils.getAlliance() == DriverStation.Alliance.Red,
+				() -> !AllianceUtilities.isBlueAlliance(),
 				SwerveChassis.getInstance()
 		);
 	}

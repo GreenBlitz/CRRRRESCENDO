@@ -15,6 +15,7 @@ import edu.greenblitz.robotName.subsystems.gyros.IAngleMeasurementGyro;
 import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.swerve.modules.SwerveModule;
 import edu.greenblitz.robotName.subsystems.swerve.modules.mk4iSwerveModule.MK4iSwerveConstants;
+import edu.greenblitz.robotName.utils.AllianceUtilities;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.Pair;
@@ -63,6 +64,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
 	private GyroInputsAutoLogged gyroInputs;
 
+	private AllianceUtilities.AlliancePose2d robotPose;
+
 	public SwerveChassis() {
 		this.frontLeft = new SwerveModule(Module.FRONT_LEFT);
 		this.frontRight = new SwerveModule(Module.FRONT_RIGHT);
@@ -95,6 +98,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 						VisionConstants.STANDARD_DEVIATION_VISION_ANGLE
 				)
 		);
+
+		robotPose = AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(poseEstimator.getEstimatedPosition());
 		SmartDashboard.putData("field", getField());
 	}
 
@@ -116,8 +121,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		backLeft.periodic();
 		backRight.periodic();
 
-		field.setRobotPose(getRobotPose2d());
-
 		gyro.updateInputs(gyroInputs);
 		updateInputs(chassisInputs);
 
@@ -130,7 +133,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		
 		updatePoseEstimationLimeLight();
 		MultiLimelight.getInstance().recordEstimatedPositions();
-		
+		robotPose = AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(poseEstimator.getEstimatedPosition());
+		field.setRobotPose(getRobotPose2d());
 		SmartDashboard.putData(getField());
 	}
 	
@@ -453,10 +457,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 
 	public Pose2d getRobotPose2d() {
-		return new Pose2d(
-				poseEstimator.getEstimatedPosition().getTranslation(),
-				getGyroAngle()
-		);
+		return new Pose2d(robotPose.toBlueAlliancePose().getTranslation(), getGyroAngle());
 	}
 
 	public Pose3d getRobotPose3d() {
