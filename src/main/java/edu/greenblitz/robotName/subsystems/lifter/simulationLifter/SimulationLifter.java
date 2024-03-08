@@ -20,6 +20,7 @@ public class SimulationLifter implements ILifter {
     private ProfiledPIDController pidController;
     DCMotorSim simulationSolenoidMotor;
     double appliedSolenoidOutputs;
+    Rotation2d positionReference;
 
     public SimulationLifter() {
         lifterSimulation = new SingleJointedArmSim(
@@ -42,6 +43,7 @@ public class SimulationLifter implements ILifter {
                 SimulationLifterConstants.MOTOR_GEARING,
                 SimulationLifterConstants.MOTOR_JKG_METERS_SQUARED
         );
+        positionReference = Rotation2d.fromRadians(lifterSimulation.getAngleRads());
     }
 
     @Override
@@ -76,6 +78,7 @@ public class SimulationLifter implements ILifter {
 
     @Override
     public void goToPosition(Rotation2d position) {
+        positionReference = position;
         setVoltage(pidController.calculate(lifterSimulation.getAngleRads(), position.getRadians()));
     }
 
@@ -110,6 +113,7 @@ public class SimulationLifter implements ILifter {
         inputs.appliedOutput = appliedOutput;
         inputs.outputCurrent = lifterSimulation.getCurrentDrawAmps();
         inputs.position = Rotation2d.fromRadians(lifterSimulation.getAngleRads());
+        inputs.positionReference = positionReference;
         inputs.velocity = lifterSimulation.getVelocityRadPerSec();
 
         inputs.voltageSolenoid = appliedSolenoidOutputs;
