@@ -42,7 +42,7 @@ public class Roller extends GBSubsystem {
         roller.updateInputs(rollerInputs);
         Logger.processInputs("Roller", rollerInputs);
         Logger.recordOutput("Roller/IsObjectIn", isObjectIn());
-        if (rollerInputs.isObjectIn) {
+        if (rollerInputs.isObjectEntered) {
             objectWasIn = true;
         }
     }
@@ -85,7 +85,7 @@ public class Roller extends GBSubsystem {
 
 
     public boolean isObjectIn() {
-        return rollerInputs.isObjectIn || objectWasIn;
+        return rollerInputs.isObjectEntered || objectWasIn;
     }
 
     public Rotation2d getAngle() {

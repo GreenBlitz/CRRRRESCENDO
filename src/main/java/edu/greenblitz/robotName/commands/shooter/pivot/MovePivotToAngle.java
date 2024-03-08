@@ -13,7 +13,7 @@ public class MovePivotToAngle extends PivotCommand {
 	private Rotation2d suppliedTargetAngle;
 	
 	public MovePivotToAngle(PivotConstants.PresetPositions targetAngle) {
-		this.targetAngle = () -> targetAngle;
+		this.targetAngle = () -> targetAngle.ANGLE;
 	}
 	
 	public MovePivotToAngle(Rotation2d targetAngle) {
