@@ -18,7 +18,7 @@ public class Elbow extends GBSubsystem {
     private Rotation2d currentAngle;
 
     private Rotation2d pidReference;
-
+    
     private Elbow() {
         elbow = ElbowFactory.create();
         elbowInputs = new ElbowInputsAutoLogged();
@@ -37,7 +37,7 @@ public class Elbow extends GBSubsystem {
         init();
         return instance;
     }
-
+    
     @Override
     public void periodic() {
         super.periodic();
@@ -60,7 +60,8 @@ public class Elbow extends GBSubsystem {
     public void setIdleMode(NeutralModeValue idleMode) {
         elbow.setIdleMode(idleMode);
     }
-
+    
+    
     public void resetAngle(Rotation2d position) {
         elbow.resetAngle(position);
         currentAngle = position;

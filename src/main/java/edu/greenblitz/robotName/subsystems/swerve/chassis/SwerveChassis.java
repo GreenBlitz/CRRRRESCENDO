@@ -13,7 +13,6 @@ import edu.greenblitz.robotName.subsystems.gyros.GyroFactory;
 import edu.greenblitz.robotName.subsystems.gyros.GyroInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.gyros.IAngleMeasurementGyro;
 import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
-import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.modules.SwerveModule;
 import edu.greenblitz.robotName.subsystems.swerve.modules.mk4iSwerveModule.MK4iSwerveConstants;
 import edu.greenblitz.robotName.utils.GBSubsystem;
@@ -22,11 +21,9 @@ import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.*;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.kinematics.SwerveModulePosition;
-import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.math.kinematics.*;
 import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.littletonrobotics.junction.Logger;
@@ -57,14 +54,14 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	private SwerveDriveKinematics kinematics;
 
 	private SwerveDrivePoseEstimator poseEstimator;
-
+	
 	private Field2d field = new Field2d();
 
-	private boolean doVision = true;
+	private boolean doVision;
 
-	private SwerveChassisInputsAutoLogged ChassisInputs = new SwerveChassisInputsAutoLogged();
+	private SwerveChassisInputsAutoLogged chassisInputs;
 
-	private GyroInputsAutoLogged gyroInputs = new GyroInputsAutoLogged();
+	private GyroInputsAutoLogged gyroInputs;
 
 	public SwerveChassis() {
 		this.frontLeft = new SwerveModule(Module.FRONT_LEFT);
@@ -72,6 +69,9 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		this.backLeft = new SwerveModule(Module.BACK_LEFT);
 		this.backRight = new SwerveModule(Module.BACK_RIGHT);
 
+		this.chassisInputs = new SwerveChassisInputsAutoLogged();
+		this.gyroInputs = new GyroInputsAutoLogged();
+		
 		this.gyro = GyroFactory.create();
 
 		doVision = true;
@@ -119,19 +119,21 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		field.setRobotPose(getRobotPose2d());
 
 		gyro.updateInputs(gyroInputs);
-		updateInputs(ChassisInputs);
+		updateInputs(chassisInputs);
 
 		Logger.recordOutput("DriveTrain/RobotPose", getRobotPose2d());
 		Logger.recordOutput("DriveTrain/RobotPose3d", getRobotPose3d());
 		Logger.recordOutput("DriveTrain/ModuleStates", getSwerveModuleStates());
-		Logger.processInputs("DriveTrain/Chassis", ChassisInputs);
+		Logger.processInputs("DriveTrain/Chassis", chassisInputs);
 		Logger.processInputs("DriveTrain/Gyro", gyroInputs);
 		SmartDashboard.putNumber("shoot angle", ShootingStateCalculations.getTargetShooterAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE).getDegrees());
+		
 		updatePoseEstimationLimeLight();
 		MultiLimelight.getInstance().recordEstimatedPositions();
+		
 		SmartDashboard.putData(getField());
 	}
-
+	
 	public void resetChassisPosition(Pose2d pose) {
 		poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), pose);
 	}
@@ -223,7 +225,9 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				if (visionPoseAndTimeStamp.isPresent()) {
 					Pose2d visionPose = visionPoseAndTimeStamp.get().getFirst();
 					poseEstimator.update(getGyroAngle(),getSwerveModulePositions());
-					poseEstimator.addVisionMeasurement(visionPose,visionPoseAndTimeStamp.get().getSecond());
+					if(!DriverStation.isAutonomous()){
+						poseEstimator.addVisionMeasurement(visionPose,visionPoseAndTimeStamp.get().getSecond());
+					}
 				}
 			}
 		} else {
@@ -235,6 +239,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	 * returns chassis angle in radians
 	 */
 	public Rotation2d getGyroAngle() {
+		gyro.updateInputs(gyroInputs);
 		return Rotation2d.fromRadians(gyroInputs.yaw);
 	}
 
@@ -446,7 +451,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 
 	public Pose2d getRobotPose2d() {
-		return poseEstimator.getEstimatedPosition();
+		return new Pose2d(
+				poseEstimator.getEstimatedPosition().getTranslation(),
+				getGyroAngle()
+		);
 	}
 
 	public Pose3d getRobotPose3d() {
@@ -502,6 +510,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 
 	public void resetChassisPose(Pose2d pose) {
+		gyro.updateYaw(pose.getRotation());
 		poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), pose);
 	}
 

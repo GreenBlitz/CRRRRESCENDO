@@ -95,9 +95,9 @@ public class ChassisConstants {
 	
 	public static final boolean LINEAR_JOYSTICK_INVERTED = false;
 	
-	public static final PIDConstants TRANSLATION_PID = new PIDConstants(2.2, 0, 0);
+	public static final PIDConstants TRANSLATION_PID = new PIDConstants(1, 0, 0);
 	
-	public static final PIDConstants ROTATION_PID = new PIDConstants(0, 0, 0);
+	public static final PIDConstants ROTATION_PID = new PIDConstants(0.5, 0, 0);
 	
 	public static final double TOTAL_ERROR_FOR_REPLANNING = 0.5;
 	
@@ -119,10 +119,10 @@ public class ChassisConstants {
 	);
 	
 	public static final PathConstraints CONSTRAINTS = new PathConstraints(
-			MAX_VELOCITY /2,
-			MAX_ACCELERATION /2,
-			MAX_ANGULAR_SPEED,
-			MAX_ANGULAR_ACCELERATION
+			1,
+			0.5,
+			3,
+			3
 	);
 	
 	public static final MoveByJoysticks.DriveMode DRIVE_MODE = MoveByJoysticks.DriveMode.NORMAL;

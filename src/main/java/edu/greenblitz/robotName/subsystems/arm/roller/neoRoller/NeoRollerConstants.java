@@ -10,7 +10,7 @@ public class NeoRollerConstants {
 
     public static final int MOTOR_ID = 22;
 
-    public static final double NOTE_IN_CURRENT = 25;
+    public static final double NOTE_IN_CURRENT = 18;
 
     public static int CURRENT_LIMIT = 40;
 
@@ -18,7 +18,7 @@ public class NeoRollerConstants {
 
     public static boolean IS_INVERTED = true;
 
-    public static PIDObject PID = new PIDObject().withKp(0.7).withKd(0).withMaxPower(1);
+    public static PIDObject PID = new PIDObject().withKp(0.65).withKd(0).withMaxPower(1).withFF(0.4);
 
     public static final GBSparkMax.SparkMaxConfObject ROLLER_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
             .withIdleMode(CANSparkMax.IdleMode.kBrake)

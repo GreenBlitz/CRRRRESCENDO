@@ -41,6 +41,7 @@ public class Roller extends GBSubsystem {
 
         roller.updateInputs(rollerInputs);
         Logger.processInputs("Roller", rollerInputs);
+        Logger.recordOutput("Roller/IsObjectIn", isObjectIn());
         if (rollerInputs.isObjectIn) {
             objectWasIn = true;
         }

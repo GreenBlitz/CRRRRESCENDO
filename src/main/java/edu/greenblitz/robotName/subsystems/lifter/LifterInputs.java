@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.lifter;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import org.littletonrobotics.junction.AutoLog;
 
 @AutoLog
@@ -8,6 +9,8 @@ public class LifterInputs {
     public double appliedOutput;
 
     public double outputCurrent;
+    
+    public Rotation2d positionReference;
 
     public double position;
 

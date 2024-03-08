@@ -98,7 +98,7 @@ public class FalconElbow implements IElbow {
 
     @Override
     public void updateInputs(ElbowInputsAutoLogged inputs) {
-        inputs.outputCurrent = motor.getSupplyCurrent().getValue();
+        inputs.outputCurrent = motor.getStatorCurrent().getValue();
         inputs.appliedOutput = motor.getMotorVoltage().getValue();
         inputs.position = Rotation2d.fromRotations(motor.getLatencyCompensatedValue(motor.getPosition(), motor.getVelocity()));
         inputs.velocity = motor.getLatencyCompensatedValue(motor.getVelocity(), motor.getAcceleration());

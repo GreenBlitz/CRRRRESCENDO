@@ -44,11 +44,12 @@ public class FalconPivot implements IPivot {
 				motor.getPosition(),
 				motor.getVelocity(),
 				motor.getMotorVoltage(),
-				motor.getSupplyCurrent(),
+				motor.getStatorCurrent(),
 				motor.getDeviceTemp(),
 				motor.getAcceleration(),
 				motor.getForwardLimit(),
-				motor.getReverseLimit()
+				motor.getReverseLimit(),
+				motor.getClosedLoopReference()
 		);
 		motor.optimizeBusUtilization();
 	}
@@ -96,7 +97,7 @@ public class FalconPivot implements IPivot {
 	
 	@Override
 	public void updateInputs(PivotInputsAutoLogged inputs) {
-		inputs.outputCurrent = motor.getSupplyCurrent().getValue();
+		inputs.outputCurrent = motor.getStatorCurrent().getValue();
 		inputs.appliedOutput = motor.getMotorVoltage().getValue();
 		inputs.position = Rotation2d.fromRotations(motor.getLatencyCompensatedValue(motor.getPosition(), motor.getVelocity()));
 		inputs.velocity = motor.getLatencyCompensatedValue(motor.getPosition(), motor.getVelocity());
