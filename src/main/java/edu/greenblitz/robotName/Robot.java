@@ -5,6 +5,7 @@ import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
 import edu.greenblitz.robotName.commands.RumbleRomy;
+import edu.greenblitz.robotName.commands.intake.CollectNoteFromGround;
 import edu.greenblitz.robotName.commands.intake.NoteToShooterWithArm;
 import edu.greenblitz.robotName.commands.shooter.ShootFromInFunnel;
 import edu.greenblitz.robotName.commands.shooter.ShootToSpeakerFromClose;
@@ -94,11 +95,6 @@ public class Robot extends LoggedRobot {
 
     @Override
     public void teleopInit() {
-		if (FMSUtils.isRedAlliance()){
-			SwerveChassis.getInstance().resetChassisAngle(
-					SwerveChassis.getInstance().getGyroAngle().plus(Rotation2d.fromDegrees(180))
-			);
-		}
         Dashboard.getInstance().activateDriversDashboard();
 		new RumbleRomy(OI.getInstance().getMainJoystick()).schedule();
     }
@@ -112,7 +108,7 @@ public class Robot extends LoggedRobot {
 	private void initializeAutonomousBuilder() {
 		NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
 		NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
-		NamedCommands.registerCommand("grip", new NoteToShooterWithArm());
+		NamedCommands.registerCommand("grip", new CollectNoteFromGround());
 		AutoBuilder.configureHolonomic(
 				SwerveChassis.getInstance()::getRobotPose2d,
 				SwerveChassis.getInstance()::resetChassisPose,
@@ -130,32 +126,31 @@ public class Robot extends LoggedRobot {
 
 		NetworkTableInstance.getDefault()
 				.getStructTopic("MechanismPoses", Pose3d.struct).publish();
-		switch (getRobotType()) {
-			// Running on a real robot, log to a USB stick
-			case SYNCOPA:
-				try {
-					Logger.addDataReceiver(new WPILOGWriter(RobotConstants.USB_LOG_PATH));
-					System.out.println("initialized Logger, USB");
-				} catch (Exception e) {
-					Logger.end();
-					Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
-					System.out.println("initialized Logger, roborio");
-				}
-				Logger.addDataReceiver(new NT4Publisher());
-				break;
-			// Replaying a log, set up replay source
-			case REPLAY:
-				setUseTiming(false); // Run as fast as possible
-				String logPath = LogFileUtil.findReplayLog();
-				Logger.setReplaySource(new WPILOGReader(logPath));
-				Logger.addDataReceiver(new WPILOGWriter(LogFileUtil.addPathSuffix(logPath, "_simulation")));
-				break;
-			case SIMULATION:
-			default:
-				Logger.addDataReceiver(new NT4Publisher());
-				Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SIMULATION_LOG_PATH));
-				break;
-		}
+        switch (getRobotType()) {
+            // Running on a real robot, log to a USB stick
+            case SYNCOPA -> {
+                try {
+                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.USB_LOG_PATH));
+                    System.out.println("initialized Logger, USB");
+                } catch (Exception e) {
+                    Logger.end();
+                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
+                    System.out.println("initialized Logger, roborio");
+                }
+                Logger.addDataReceiver(new NT4Publisher());
+            }
+            // Replaying a log, set up replay source
+            case REPLAY -> {
+                setUseTiming(false); // Run as fast as possible
+                String logPath = LogFileUtil.findReplayLog();
+                Logger.setReplaySource(new WPILOGReader(logPath));
+                Logger.addDataReceiver(new WPILOGWriter(LogFileUtil.addPathSuffix(logPath, "_simulation")));
+            }
+            default -> {
+                Logger.addDataReceiver(new NT4Publisher());
+                Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SIMULATION_LOG_PATH));
+            }
+        }
 		Logger.start();
 	}
 
