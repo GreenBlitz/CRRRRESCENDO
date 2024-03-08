@@ -355,14 +355,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		);
 	}
 
-	public ChassisSpeeds getRobotRelativeChassisSpeeds() {
-		return ChassisSpeeds.fromFieldRelativeSpeeds(
-				getChassisSpeeds(),
-			
-				Rotation2d.fromRadians(gyroInputs.yaw)
-		);
-	}
-
 	public SwerveModulePosition[] getSwerveModulePositions() {
 		return new SwerveModulePosition[]{
 				frontLeft.getCurrentPosition(),
@@ -522,12 +514,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				chassisSpeeds.vyMetersPerSecond,
 				chassisSpeeds.omegaRadiansPerSecond,
 				getChassisAngle()
-		);
-	}
-
-	public void moveByRobotRelativeSpeeds(ChassisSpeeds chassisSpeeds) {
-		moveByChassisSpeeds(
-				ChassisSpeeds.fromRobotRelativeSpeeds(chassisSpeeds, getChassisAngle())
 		);
 	}
 

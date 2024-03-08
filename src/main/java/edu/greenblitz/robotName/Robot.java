@@ -118,9 +118,7 @@ public class Robot extends LoggedRobot {
 		AutoBuilder.configureHolonomic(
 				SwerveChassis.getInstance()::getRobotPose2d,
 				SwerveChassis.getInstance()::resetChassisPose,
-//				SwerveChassis.getInstance()::getRobotRelativeChassisSpeeds,
 				SwerveChassis.getInstance()::getChassisSpeeds,
-//				SwerveChassis.getInstance()::moveByRobotRelativeSpeeds,
 				SwerveChassis.getInstance()::moveByChassisSpeeds,
 				ChassisConstants.PATH_FOLLOWER_CONFIG,
 				() -> !AllianceUtilities.isBlueAlliance(),
