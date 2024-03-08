@@ -12,7 +12,7 @@ public class LifterInputs {
     
     public Rotation2d positionReference;
 
-    public double position;
+    public Rotation2d position;
 
     public double velocity;
 

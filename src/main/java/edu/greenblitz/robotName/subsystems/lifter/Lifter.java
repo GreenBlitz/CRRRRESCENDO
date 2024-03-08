@@ -70,11 +70,11 @@ public class Lifter extends GBSubsystem {
     }
 
     public boolean isAtPosition(Rotation2d targetPosition) {
-        return Math.abs(targetPosition.getRadians() - lifterInputs.position) < LifterConstants.TOLERANCE.getRadians();
+        return Math.abs(targetPosition.getRadians() - lifterInputs.position.getRadians()) < LifterConstants.TOLERANCE.getRadians();
     }
 
     public Rotation2d getPosition() {
-        return Rotation2d.fromRadians(lifterInputs.position);
+        return Rotation2d.fromRadians(lifterInputs.position.getRadians());
     }
 
     public void holdSolenoid() {
@@ -93,7 +93,7 @@ public class Lifter extends GBSubsystem {
         return new Pose3d(
                 LifterConstants.ROBOT_RELATIVE_LIFTER_POSITION,
                 new Rotation3d(
-                        -lifterInputs.position,
+                        -lifterInputs.position.getDegrees(),
                         0,
                         0
                 ).plus(LifterConstants.ROBOT_RELATIVE_LIFTER_ROTATION)

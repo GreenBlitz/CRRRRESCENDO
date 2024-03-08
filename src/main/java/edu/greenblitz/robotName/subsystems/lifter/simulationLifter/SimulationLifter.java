@@ -109,7 +109,7 @@ public class SimulationLifter implements ILifter {
         lifterSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
         inputs.appliedOutput = appliedOutput;
         inputs.outputCurrent = lifterSimulation.getCurrentDrawAmps();
-        inputs.position = lifterSimulation.getAngleRads();
+        inputs.position = Rotation2d.fromRadians(lifterSimulation.getAngleRads());
         inputs.velocity = lifterSimulation.getVelocityRadPerSec();
 
         inputs.voltageSolenoid = appliedSolenoidOutputs;
