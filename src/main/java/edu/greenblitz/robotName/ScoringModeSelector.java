@@ -1,8 +1,5 @@
 package edu.greenblitz.robotName;
 
-import edu.greenblitz.robotName.utils.ScoringMode;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 public class ScoringModeSelector {
 
 	private static ScoringMode currentMode;

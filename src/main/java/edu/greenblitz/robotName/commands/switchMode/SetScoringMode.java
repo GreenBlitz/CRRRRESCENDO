@@ -1,7 +1,7 @@
 package edu.greenblitz.robotName.commands.switchMode;
 
 import edu.greenblitz.robotName.ScoringModeSelector;
-import edu.greenblitz.robotName.utils.ScoringMode;
+import edu.greenblitz.robotName.ScoringMode;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 public class SetScoringMode extends InstantCommand {
