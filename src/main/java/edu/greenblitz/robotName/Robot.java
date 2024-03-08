@@ -43,8 +43,6 @@ import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 
 public class Robot extends LoggedRobot {
 
-
-
 	public static RobotType getRobotType() {
 		RobotType robotType = RobotConstants.ROBOT_TYPE;
 		if (isSimulation()) {
