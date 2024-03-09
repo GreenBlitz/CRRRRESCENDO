@@ -65,7 +65,7 @@ public class ChassisConstants {
 		ROTATION_PID_CONTROLLER_RADIANS.enableContinuousInput(-Math.PI, Math.PI);
 	}
 
-	public static final double MAX_VELOCITY = 6.6818320981472068;
+	public static final double MAX_VELOCITY = 5.2;
 	
 	public static final double MAX_ACCELERATION = 2;
 	
@@ -77,7 +77,7 @@ public class ChassisConstants {
 
 	public static final double TRANSLATION_TOLERANCE = 0.05;
 
-	public static final Rotation2d ROTATION_TOLERANCE = Rotation2d.fromDegrees(3);
+	public static final Rotation2d ROTATION_TOLERANCE = Rotation2d.fromDegrees(1.5);
 
 	public static final double CURRENT_TOLERANCE = 0.5;
 
@@ -95,10 +95,13 @@ public class ChassisConstants {
 	
 	public static final boolean LINEAR_JOYSTICK_INVERTED = false;
 	
-	public static final PIDConstants TRANSLATION_PID = new PIDConstants(1, 0, 0);
+	public static final PIDConstants TRANSLATION_PID = new PIDConstants(1.8, 0, 0);
 	
-	public static final PIDConstants ROTATION_PID = new PIDConstants(0.5, 0, 0);
-	
+	public static final PIDConstants ROTATION_PID_PATH_PLANNER = new PIDConstants(0.15, 0, 0);
+
+	public static final PIDConstants ROTATION_PID_OUR = new PIDConstants(5, 0, 0);
+
+
 	public static final double TOTAL_ERROR_FOR_REPLANNING = 0.5;
 	
 	public static final double ERROR_SPIKE_FOR_REPLANNING = 1;
@@ -107,14 +110,12 @@ public class ChassisConstants {
 	
 	public static final HolonomicPathFollowerConfig PATH_FOLLOWER_CONFIG = new HolonomicPathFollowerConfig(
 			TRANSLATION_PID,
-			ROTATION_PID,
+			ROTATION_PID_PATH_PLANNER,
 			MAX_VELOCITY,
 			ROBOT_RADIUS,
 			new ReplanningConfig(
-					true,
-					true,
-					TOTAL_ERROR_FOR_REPLANNING,
-					ERROR_SPIKE_FOR_REPLANNING
+					false,
+					false
 			)
 	);
 	

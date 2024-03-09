@@ -62,19 +62,19 @@ public class Robot extends LoggedRobot {
 		}
 	}
 
-    @Override
-    public void robotInit() {
-        Pathfinding.setPathfinder(new LocalADStar());
-        CommandScheduler.getInstance().enable();
-        initializeLogger();
-        initializeAutonomousBuilder();
-        initializeSubsystems();
-        SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
-        Dashboard.getInstance();
-        Pivot.getInstance().resetAngle(PivotConstants.PresetPositions.STARTING.ANGLE);
-        Elbow.getInstance().resetAngle(ElbowConstants.MINIMUM_ANGLE);
-        OI.init();
-    }
+	@Override
+	public void robotInit() {
+		Pathfinding.setPathfinder(new LocalADStar());
+		CommandScheduler.getInstance().enable();
+		initializeLogger();
+		initializeAutonomousBuilder();
+		initializeSubsystems();
+		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
+		Dashboard.getInstance();
+		Pivot.getInstance().resetAngle(PivotConstants.PresetPositions.STARTING.ANGLE);
+		Elbow.getInstance().resetAngle(ElbowConstants.MINIMUM_ANGLE);
+		OI.init();
+	}
 
 	public void initializeSubsystems() {
 		AutonomousSelector.getInstance();
@@ -90,17 +90,20 @@ public class Robot extends LoggedRobot {
 		Wrist.init();
 		Roller.init();
 
-		Lifter.init();
+//		Lifter.init();
 		Intake.init();
 
-		LED.init();
+//		LED.init();
 	}
 
-    @Override
-    public void teleopInit() {
-        Dashboard.getInstance().activateDriversDashboard();
+	@Override
+	public void teleopInit() {
+		if (autonomousCommand != null) {
+			autonomousCommand.cancel();
+		}
+		Dashboard.getInstance().activateDriversDashboard();
 		new RumbleRomy(OI.getInstance().getMainJoystick()).schedule();
-    }
+	}
 
 	@Override
 	public void robotPeriodic() {
@@ -109,13 +112,16 @@ public class Robot extends LoggedRobot {
 	}
 
 	private void initializeAutonomousBuilder() {
-		NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
-		NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
-		NamedCommands.registerCommand("grip", new CollectNoteFromGround());
+//		NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
+//		NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
+//		NamedCommands.registerCommand("grip", new CollectNoteFromGround());
+		NamedCommands.registerCommand("shoot", new InstantCommand());
+		NamedCommands.registerCommand("close shoot", new InstantCommand());
+		NamedCommands.registerCommand("grip", new InstantCommand());
 		AutoBuilder.configureHolonomic(
 				SwerveChassis.getInstance()::getRobotPose2d,
 				(pose) -> SwerveChassis.getInstance().resetChassisPose(AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(pose)),
-				SwerveChassis.getInstance()::getRobotRelativeChassisSpeeds,
+				SwerveChassis.getInstance()::getChassisSpeeds,
 				SwerveChassis.getInstance()::moveByRobotRelativeSpeeds,
 				ChassisConstants.PATH_FOLLOWER_CONFIG,
 				() -> !AllianceUtilities.isBlueAlliance(),
@@ -129,54 +135,60 @@ public class Robot extends LoggedRobot {
 
 		NetworkTableInstance.getDefault()
 				.getStructTopic("MechanismPoses", Pose3d.struct).publish();
-        switch (getRobotType()) {
-            // Running on a real robot, log to a USB stick
-            case SYNCOPA -> {
-                try {
-                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.USB_LOG_PATH));
-                    System.out.println("initialized Logger, USB");
-                } catch (Exception e) {
-                    Logger.end();
-                    Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
-                    System.out.println("initialized Logger, roborio");
-                }
-                Logger.addDataReceiver(new NT4Publisher());
-            }
-            // Replaying a log, set up replay source
-            case REPLAY -> {
-                setUseTiming(false); // Run as fast as possible
-                String logPath = LogFileUtil.findReplayLog();
-                Logger.setReplaySource(new WPILOGReader(logPath));
-                Logger.addDataReceiver(new WPILOGWriter(LogFileUtil.addPathSuffix(logPath, "_simulation")));
-            }
-            default -> {
-                Logger.addDataReceiver(new NT4Publisher());
-                Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SIMULATION_LOG_PATH));
-            }
-        }
+		switch (getRobotType()) {
+			// Running on a real robot, log to a USB stick
+			case SYNCOPA -> {
+				try {
+					Logger.addDataReceiver(new WPILOGWriter(RobotConstants.USB_LOG_PATH));
+					System.out.println("initialized Logger, USB");
+				} catch (Exception e) {
+					Logger.end();
+					Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SAFE_ROBORIO_LOG_PATH));
+					System.out.println("initialized Logger, roborio");
+				}
+				Logger.addDataReceiver(new NT4Publisher());
+			}
+			// Replaying a log, set up replay source
+			case REPLAY -> {
+				setUseTiming(false); // Run as fast as possible
+				String logPath = LogFileUtil.findReplayLog();
+				Logger.setReplaySource(new WPILOGReader(logPath));
+				Logger.addDataReceiver(new WPILOGWriter(LogFileUtil.addPathSuffix(logPath, "_simulation")));
+			}
+			default -> {
+				Logger.addDataReceiver(new NT4Publisher());
+				Logger.addDataReceiver(new WPILOGWriter(RobotConstants.SIMULATION_LOG_PATH));
+			}
+		}
 		Logger.start();
 	}
 
 	@Override
 	public void autonomousInit() {
+		//TODO - remove from here!!!
+		NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
+		NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
+		NamedCommands.registerCommand("grip", new CollectNoteFromGround());
+		AutoBuilder.configureHolonomic(
+				SwerveChassis.getInstance()::getRobotPose2d,
+				(pose) -> SwerveChassis.getInstance().resetChassisPose(AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(pose)),
+				SwerveChassis.getInstance()::getChassisSpeeds,
+				SwerveChassis.getInstance()::moveByRobotRelativeSpeeds,
+				ChassisConstants.PATH_FOLLOWER_CONFIG,
+				() -> !AllianceUtilities.isBlueAlliance(),
+				SwerveChassis.getInstance()
+		);
 		autonomousCommand = AutonomousSelector.getInstance().getChosenValue();
 		if (autonomousCommand != null){
 			autonomousCommand.schedule();
 		}
 	}
 
-	@Override
-	public void autonomousExit(){
-		if (autonomousCommand != null){
-			autonomousCommand.cancel();
-		}
+
+	public enum RobotType {
+		SYNCOPA,
+		SIMULATION,
+		PEGA_SWERVE,
+		REPLAY
 	}
-
-
-    public enum RobotType {
-        SYNCOPA,
-        SIMULATION,
-        PEGA_SWERVE,
-        REPLAY
-    }
 }

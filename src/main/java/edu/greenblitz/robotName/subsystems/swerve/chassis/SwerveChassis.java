@@ -21,10 +21,11 @@ import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.*;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.kinematics.*;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.util.sendable.Sendable;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.littletonrobotics.junction.Logger;
@@ -228,10 +229,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 			for(Optional<Pair<Pose2d, Double>> visionPoseAndTimeStamp : MultiLimelight.getInstance().getAll2DEstimates()) {
 				if (visionPoseAndTimeStamp.isPresent()) {
 					Pose2d visionPose = visionPoseAndTimeStamp.get().getFirst();
-					poseEstimator.update(getGyroAngle(),getSwerveModulePositions());
-					if(!DriverStation.isAutonomous()){
-						poseEstimator.addVisionMeasurement(visionPose,visionPoseAndTimeStamp.get().getSecond());
-					}
+					poseEstimator.update(getGyroAngle(), getSwerveModulePositions());
+//					poseEstimator.addVisionMeasurement(visionPose, visionPoseAndTimeStamp.get().getSecond());
 				}
 			}
 		} else {
@@ -317,7 +316,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		moveByChassisSpeeds(
 				0,
 				0,
-				ChassisConstants.ROTATION_PID_CONTROLLER.calculate(
+				-ChassisConstants.ROTATION_PID_CONTROLLER.calculate(
 						getChassisAngle().getRadians()
 				),
 				getChassisAngle()
@@ -505,8 +504,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 
 	public void resetChassisPose(AllianceUtilities.AlliancePose2d pose) {
-		final Pose2d currentBluePose = pose.toBlueAlliancePose();
+		Pose2d currentBluePose = pose.toBlueAlliancePose();
+		Logger.recordOutput("psoeBlue", currentBluePose);
 		gyro.updateYaw(currentBluePose.getRotation());
+		gyro.updateInputs(gyroInputs);
 		poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), currentBluePose);
 	}
 
@@ -516,7 +517,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 
 	public void moveByChassisSpeeds(ChassisSpeeds chassisSpeeds) {
-		System.out.println(chassisSpeeds.vxMetersPerSecond +", "+chassisSpeeds.vyMetersPerSecond);
 		moveByChassisSpeeds(chassisSpeeds.vxMetersPerSecond,
 				chassisSpeeds.vyMetersPerSecond,
 				chassisSpeeds.omegaRadiansPerSecond,
@@ -532,9 +532,11 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 
 	public void moveByRobotRelativeSpeeds(ChassisSpeeds chassisSpeeds) {
-		moveByChassisSpeeds(
-				ChassisSpeeds.fromRobotRelativeSpeeds(chassisSpeeds, getChassisAngle())
-		);
+		//chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
+		chassisSpeeds = new ChassisSpeeds(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond);
+		SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
+		SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
+		setModuleStates(desaturatedStates);
 	}
 
 	/**
