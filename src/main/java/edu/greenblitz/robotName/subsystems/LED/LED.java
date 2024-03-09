@@ -9,7 +9,10 @@ import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
+
+import java.sql.SQLOutput;
 
 import static edu.greenblitz.robotName.subsystems.LED.LEDConstants.*;
 
@@ -110,6 +113,7 @@ public class LED extends GBSubsystem {
 				|| Roller.getInstance().isObjectIn());
 	}
 
+
 	public void updateNoteState() {
 		wasNoteInRobot = isNoteInRobot();
 	}
@@ -141,8 +145,8 @@ public class LED extends GBSubsystem {
 	public void blinkOrRumbleByNoteState() {
 		if (isNoteInRobot() && (actionTimer.get() <= LEDConstants.BLINKING_TIME)) {
 			blink(getColorByMode());
-		} else if (actionTimer.get() <= LEDConstants.RUMBLE_TIME) {
-			rumble();
+		} else if ((getWasNoteInRobot() != isNoteInRobot()) && (actionTimer.get() <= LEDConstants.RUMBLE_TIME)) {
+ 			rumble();
 		} else {
 			stopRumble();
 		}
