@@ -9,7 +9,7 @@ import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRollerToAmp;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
-import edu.greenblitz.robotName.commands.intake.CollectNoteFromGroundWithPivotForJoystick;
+import edu.greenblitz.robotName.commands.intake.CollectNoteFromGround;
 import edu.greenblitz.robotName.commands.intake.NoteToShooterWithArm;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByPower;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityUntilInterrupted;
@@ -91,7 +91,7 @@ public class OI {
 	}
 	
 	public void romyButtons() {
-		mainJoystick.R1.whileTrue(new CollectNoteFromGroundWithPivotForJoystick());
+		mainJoystick.R1.whileTrue(new CollectNoteFromGround());
 		mainJoystick.POV_DOWN.whileTrue(new CollectNoteFromFeeder());
 		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetChassisPose()));
 		
