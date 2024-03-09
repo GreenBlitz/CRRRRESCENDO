@@ -449,7 +449,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 
 	public Pose2d getRobotPose2d() {
-		return new Pose2d(robotPose.toBlueAlliancePose().getTranslation(), getGyroAngle());
+		return robotPose.toBlueAlliancePose();
 	}
 
 	public Pose3d getRobotPose3d() {
@@ -504,16 +504,36 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		return getModule(module).isAtAngle(errorTolerance);
 	}
 
+	public void resetChassisPose(AllianceUtilities.AlliancePose2d pose) {
+		final Pose2d currentBluePose = pose.toBlueAlliancePose();
+		gyro.updateYaw(currentBluePose.getRotation());
+		poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), currentBluePose);
+	}
+
 	public void resetChassisPose(Pose2d pose) {
 		gyro.updateYaw(pose.getRotation());
 		poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), pose);
 	}
 
 	public void moveByChassisSpeeds(ChassisSpeeds chassisSpeeds) {
+		System.out.println(chassisSpeeds.vxMetersPerSecond +", "+chassisSpeeds.vyMetersPerSecond);
 		moveByChassisSpeeds(chassisSpeeds.vxMetersPerSecond,
 				chassisSpeeds.vyMetersPerSecond,
 				chassisSpeeds.omegaRadiansPerSecond,
 				getChassisAngle()
+		);
+	}
+
+	public ChassisSpeeds getRobotRelativeChassisSpeeds() {
+		return ChassisSpeeds.fromFieldRelativeSpeeds(
+				getChassisSpeeds(),
+				Rotation2d.fromRadians(gyroInputs.yaw)
+		);
+	}
+
+	public void moveByRobotRelativeSpeeds(ChassisSpeeds chassisSpeeds) {
+		moveByChassisSpeeds(
+				ChassisSpeeds.fromRobotRelativeSpeeds(chassisSpeeds, getChassisAngle())
 		);
 	}
 

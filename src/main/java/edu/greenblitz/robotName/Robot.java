@@ -33,6 +33,7 @@ import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import org.littletonrobotics.junction.LogFileUtil;
@@ -43,6 +44,8 @@ import org.littletonrobotics.junction.wpilog.WPILOGReader;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 
 public class Robot extends LoggedRobot {
+
+	private Command autonomousCommand;
 
 	public static RobotType getRobotType() {
 		RobotType robotType = RobotConstants.ROBOT_TYPE;
@@ -111,11 +114,11 @@ public class Robot extends LoggedRobot {
 		NamedCommands.registerCommand("grip", new CollectNoteFromGround());
 		AutoBuilder.configureHolonomic(
 				SwerveChassis.getInstance()::getRobotPose2d,
-				SwerveChassis.getInstance()::resetChassisPose,
-				SwerveChassis.getInstance()::getChassisSpeeds,
-				SwerveChassis.getInstance()::moveByChassisSpeeds,
+				(pose) -> SwerveChassis.getInstance().resetChassisPose(AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(pose)),
+				SwerveChassis.getInstance()::getRobotRelativeChassisSpeeds,
+				SwerveChassis.getInstance()::moveByRobotRelativeSpeeds,
 				ChassisConstants.PATH_FOLLOWER_CONFIG,
-				FMSUtils::isRedAlliance,
+				() -> !AllianceUtilities.isBlueAlliance(),
 				SwerveChassis.getInstance()
 		);
 	}
@@ -156,7 +159,17 @@ public class Robot extends LoggedRobot {
 
 	@Override
 	public void autonomousInit() {
-		AutonomousSelector.getInstance().getChosenValue().schedule();
+		autonomousCommand = AutonomousSelector.getInstance().getChosenValue();
+		if (autonomousCommand != null){
+			autonomousCommand.schedule();
+		}
+	}
+
+	@Override
+	public void autonomousExit(){
+		if (autonomousCommand != null){
+			autonomousCommand.cancel();
+		}
 	}
 
 
