@@ -115,7 +115,7 @@ public class Robot extends LoggedRobot {
 				SwerveChassis.getInstance()::getChassisSpeeds,
 				SwerveChassis.getInstance()::moveByChassisSpeeds,
 				ChassisConstants.PATH_FOLLOWER_CONFIG,
-				() -> !AllianceUtilities.isBlueAlliance(),
+				FMSUtils::isRedAlliance,
 				SwerveChassis.getInstance()
 		);
 	}
