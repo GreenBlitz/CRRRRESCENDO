@@ -18,7 +18,7 @@ public class ShootingPositionConstants {
 
 	public static final Rotation2d OPTIMAL_UPPER_ANGLE_LIMIT = Rotation2d.fromDegrees(10);
 
-	public static final double LEGAL_SHOOTING_ZONE_RADIUS_IN_METERS = 5;
+	public static final double LEGAL_SHOOTING_ZONE_RADIUS_IN_METERS = 20;
 
 	public static ShootingZone LEGAL_SHOOTING_ZONE;
 

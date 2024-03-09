@@ -239,7 +239,9 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	 * returns chassis angle in radians
 	 */
 	public Rotation2d getGyroAngle() {
-		gyro.updateInputs(gyroInputs);
+		if (Robot.isReal()) {
+			gyro.updateInputs(gyroInputs);
+		}
 		return Rotation2d.fromRadians(gyroInputs.yaw);
 	}
 

@@ -1,5 +1,7 @@
 package edu.greenblitz.robotName.commands.shooter.flyWheel;
 
+import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
+import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
@@ -36,24 +38,32 @@ public class ShootSimulationNote extends GBCommand {
     @Override
     public void execute() {
         Rotation2d shooterAngle = Pivot.getInstance().getAngle();
+        
+        
 
+        Logger.recordOutput(
+            "NoteVisualizer",
+				getNotePosition(shooterAngle),
+				getNotePosition(ShootingStateCalculations.getTargetShooterAngle(
+						ShootingPositionConstants.LEGAL_SHOOTING_ZONE)
+				)
+        );
+    }
+
+    public Pose3d getNotePosition(Rotation2d shooterAngle) {
+        
         Translation3d notePosition = new Translation3d(
                 chassisAngle.getCos() * shooterAngle.getCos(),
                 chassisAngle.getSin() * shooterAngle.getCos(),
                 shooterAngle.getSin()
         ).times(timer.get() * FlyWheelConstants.SIMULATION_SHOOTING_SPEED_METERS_PER_SECOND);
-
-        Logger.recordOutput(
-            "NoteVisualizer",
-            new Pose3d[]{
-                    new Pose3d(
-                            notePosition.plus(shooterPose3D.getTranslation()),
-                            Pivot.getInstance().getSimulationPivotPosition3d().getRotation().plus(shooterPose3D.getRotation())
-                    )
-            }
+        
+        return new Pose3d(
+                notePosition.plus(shooterPose3D.getTranslation()),
+                Pivot.getInstance().getSimulationPivotPosition3d().getRotation().plus(shooterPose3D.getRotation())
         );
     }
-
+    
     @Override
     public boolean isFinished() {
         return timer.hasElapsed(duration);

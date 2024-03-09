@@ -10,7 +10,13 @@ import edu.wpi.first.math.geometry.Translation3d;
 
 public class ShootingAngleCalculations {
 
-    public static Rotation2d getShootingAngle(Translation3d robotPosition) {
+    public static Rotation2d getShootingAngle(Translation3d shooterPosition) {
+        Translation2d relativeSpeakerPosition = getPositionOfSpeakerRelativeToShooter(shooterPosition);
+        double targetAngle = Math.atan(relativeSpeakerPosition.getY() / relativeSpeakerPosition.getX());
+        return new Rotation2d(targetAngle);
+    }
+    
+    public static Rotation2d getShootingAngleUsingInterpolation(Translation3d robotPosition) {
         return Rotation2d.fromRadians(
                 PivotInterpulationMap.DISTANCE_TO_ANGLE
                         .get(robotPosition.getDistance(FieldConstants.MIDDLE_OF_SPEAKER_POSITION))

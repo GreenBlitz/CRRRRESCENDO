@@ -32,7 +32,7 @@ public class GBCircle {
      * @param radius   The radius of the circle.
      */
     public GBCircle(Translation2d position, double radius) {
-        this(position, radius, Rotation2d.fromRotations(0), Rotation2d.fromRotations(1));
+        this(position, radius, Rotation2d.fromRotations(-0.5), Rotation2d.fromRotations(0.5));
     }
 
     /**

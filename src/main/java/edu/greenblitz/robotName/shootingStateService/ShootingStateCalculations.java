@@ -6,15 +6,13 @@ import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.shootingCalculations.ShootingAngleCalculations;
 import edu.greenblitz.robotName.utils.shootingCalculations.ShootingZone;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.geometry.Translation3d;
+import edu.wpi.first.math.geometry.*;
+import org.littletonrobotics.junction.Logger;
 
 public class ShootingStateCalculations {
 
 	public static boolean isRobotInShootingZone(ShootingZone zone) {
-		return zone.isInCircle(getRobotPose().getTranslation());
+		return zone.isInFullCircle(getRobotPose().getTranslation());
 	}
 
 	private static Pose2d getRobotPose() {
@@ -23,8 +21,11 @@ public class ShootingStateCalculations {
 
 	public static Translation2d getRobotTargetTranslation(ShootingZone zone) {
 		Translation2d closestPosition = zone.getClosestCirclePosition(getRobotPose().getTranslation());
-		if (closestPosition.getDistance(getRobotPose().getTranslation()) > ChassisConstants.TRANSLATION_TOLERANCE &&
-				closestPosition.getDistance(getRobotPose().getTranslation()) < ChassisConstants.PATHPLANNER_TRANSLATIONAL_TOLERANCE) {
+		Pose2d robotPose = getRobotPose();
+		Logger.recordOutput("Shooter/Calculations/ClosetCirclePosition",closestPosition);
+		
+		if (closestPosition.getDistance(robotPose.getTranslation()) > ChassisConstants.TRANSLATION_TOLERANCE &&
+				closestPosition.getDistance(robotPose.getTranslation()) < ChassisConstants.PATHPLANNER_TRANSLATIONAL_TOLERANCE) {
 			return zone.getCenterOfShootingZone();
 		}
 		return closestPosition;
@@ -32,22 +33,36 @@ public class ShootingStateCalculations {
 
 	public static Rotation2d getTargetRobotAngle(ShootingZone zone) {
 		double angle = zone.getTargetRobotAngle().getRadians();
+		Logger.recordOutput("Shooter/Calculations/Target Robot Angle",new Rotation2d(angle));
 		return new Rotation2d(angle);
 	}
 
 	public static Rotation2d getTargetShooterAngle(ShootingZone zone) {
 		Pose2d robotPose = isRobotInShootingZone(zone) ? getRobotPose() : getTargetRobotPosition(zone);
-		return ShootingAngleCalculations.getShootingAngle(
+		
+		Logger.recordOutput("Shooter/Calculations/Target Robot Pose",
+				robotPose
+		);
+		
+		Rotation2d angle = ShootingAngleCalculations.getShootingAngle(
 				new Translation3d(
 						robotPose.getX(),
 						robotPose.getY(),
 						PivotConstants.ROBOT_RELATIVE_PIVOT_POSITION.getZ()
 				)
 		);
+		
+		Logger.recordOutput("Shooter/Calculations/Target Shooter Angle",angle);
+		return angle;
 	}
 
 	public static Pose2d getTargetRobotPosition(ShootingZone zone) {
-		return new Pose2d(getRobotTargetTranslation(zone), getTargetRobotAngle(zone));
+		Pose2d pose = new Pose2d(getRobotTargetTranslation(zone), getTargetRobotAngle(zone));
+		
+		Logger.recordOutput("Shooter/Calculations/Border Robot Pose",
+				pose
+		);
+		return pose;
 	}
 
 	public static boolean isChassisAtPosition(ShootingZone zone) {

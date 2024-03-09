@@ -8,7 +8,7 @@ public class CollectNoteFromGroundWithPivotForJoystick extends ParallelCommandGr
 	
 	public CollectNoteFromGroundWithPivotForJoystick(){
 		super(
-				new MovePivotToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE),
+//				new MovePivotToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE),
 				new CollectNoteFromGround()
 		);
 	}

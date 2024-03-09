@@ -19,8 +19,11 @@ import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
+import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
 import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
+import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
+import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.LED.LED;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
@@ -87,7 +90,8 @@ public class OI {
 	
 	public void initButtons() {
 		romyButtons();
-		shchoriButtons();
+//		shchoriButtons();
+		thirdJoystickButtons();
 	}
 	
 	public void romyButtons() {
@@ -141,9 +145,13 @@ public class OI {
 	
 	public void thirdJoystickButtons() {
 		SmartJoystick usedJoystick = thirdJoystick;
-		usedJoystick.R1.whileTrue(new NoteToShooterWithArm());
-		usedJoystick.L1.whileTrue(new RunFunnelByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_Y));
-		
+		usedJoystick.A.whileTrue(new MovePivotToAngle(() -> ShootingStateCalculations.getTargetShooterAngle(
+				ShootingPositionConstants.LEGAL_SHOOTING_ZONE
+		)));
+		usedJoystick.Y.whileTrue(new ShootSimulationNote());
+		usedJoystick.B.whileTrue(new RotateToAngle(() -> ShootingStateCalculations.getTargetRobotAngle(
+				ShootingPositionConstants.LEGAL_SHOOTING_ZONE
+		)));
 	}
 	
 	public void fourthJoystickButtons() {
