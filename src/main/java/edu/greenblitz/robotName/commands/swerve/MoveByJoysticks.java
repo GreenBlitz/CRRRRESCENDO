@@ -77,9 +77,6 @@ public class MoveByJoysticks extends SwerveCommand {
 			return;
 		}
 
-		SmartDashboard.putNumber("right joystick x axis", angularVelocitySupplier.getAsDouble());
-		SmartDashboard.putNumber("chassis angle", swerveChassis.getChassisAngle().getDegrees());
-
 		swerveChassis.moveByChassisSpeeds(
 				forwardSpeed,
 				leftwardSpeed,
