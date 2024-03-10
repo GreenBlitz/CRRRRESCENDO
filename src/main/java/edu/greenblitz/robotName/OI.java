@@ -1,6 +1,6 @@
 package edu.greenblitz.robotName;
 
-import edu.greenblitz.robotName.commands.CollectNote;
+import edu.greenblitz.robotName.commands.intake.CollectNoteFromGround;
 import edu.greenblitz.robotName.commands.intake.NoteFromIntakeToShooter;
 import edu.greenblitz.robotName.commands.LED.UpdateLEDStateDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
