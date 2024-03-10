@@ -16,7 +16,7 @@ public class FlyWheelConstants {
 	
 	public static final double SHOOTING_POWER = 0.9;
 	
-	public static final double SHOOTING_VELOCITY = 100;
+	public static final double SHOOTING_VELOCITY = 80;// (rps) new transmission (36/40):77.13 , old transmission (42/36): 100;
 
 	public static final double FEEDER_COLLECT_VELOCITY = -15;
 
