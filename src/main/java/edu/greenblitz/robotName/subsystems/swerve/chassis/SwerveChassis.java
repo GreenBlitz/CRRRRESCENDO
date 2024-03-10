@@ -454,7 +454,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
 	public Pose2d getRobotPose2d() {
 		return new Pose2d(
-				poseEstimator.getEstimatedPosition().getTranslation(),
+				FieldConstants.MIDDLE_OF_BLUE_SPEAKER_POSITION.plus(new Translation3d(2.71,new Rotation3d())).toTranslation2d(),
 				getGyroAngle()
 		);
 	}

@@ -12,9 +12,10 @@ import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMod
 import edu.greenblitz.robotName.commands.intake.CollectNoteFromGroundWithPivotForJoystick;
 import edu.greenblitz.robotName.commands.intake.NoteToShooterWithArm;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByPower;
-import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityUntilInterrupted;
-import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
+import edu.greenblitz.robotName.commands.shooter.PushNoteToFlyWheel;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.*;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
+import edu.greenblitz.robotName.commands.shooter.funnel.runByPowerUntilCondition.RunFunnelByPower;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
@@ -36,6 +37,7 @@ import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
@@ -89,7 +91,7 @@ public class OI {
 	}
 	
 	public void initButtons() {
-		romyButtons();
+//		romyButtons();
 //		shchoriButtons();
 		thirdJoystickButtons();
 	}
@@ -145,13 +147,12 @@ public class OI {
 	
 	public void thirdJoystickButtons() {
 		SmartJoystick usedJoystick = thirdJoystick;
-		usedJoystick.A.whileTrue(new MovePivotToAngle(() -> ShootingStateCalculations.getTargetShooterAngle(
-				ShootingPositionConstants.LEGAL_SHOOTING_ZONE
-		)));
-		usedJoystick.Y.whileTrue(new ShootSimulationNote());
-		usedJoystick.B.whileTrue(new RotateToAngle(() -> ShootingStateCalculations.getTargetRobotAngle(
-				ShootingPositionConstants.LEGAL_SHOOTING_ZONE
-		)));
+		usedJoystick.A.whileTrue(new MovePivotToAngle(Rotation2d.fromDegrees(45)));
+		usedJoystick.B.whileTrue(new MovePivotToAngle(Rotation2d.fromDegrees(30)));
+		usedJoystick.X.whileTrue(new MovePivotToAngle(()-> ShootingStateCalculations.getTargetShooterAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE)));
+		usedJoystick.R1.whileTrue(new StopFlyWheel());
+		usedJoystick.L1.whileTrue(new RunFlyWheelByVelocityConstant());
+		usedJoystick.Y.whileTrue(new PushNoteToFlyWheel());
 	}
 	
 	public void fourthJoystickButtons() {

@@ -13,7 +13,7 @@ public class PivotConstants {
 	
 	public enum PresetPositions {
 
-		STARTING(Rotation2d.fromDegrees(16)),
+		STARTING(Rotation2d.fromDegrees(18)),
 		TRANSFER(Rotation2d.fromDegrees(18)),
 		SAFE(Rotation2d.fromDegrees(56)),
 		PICK_UP(Rotation2d.fromDegrees(34.3)),
@@ -36,7 +36,7 @@ public class PivotConstants {
 
 	public static final double GEAR_RATIO = 15 * (72 / 14.0) * 2;
 
-	public static final Translation3d ROBOT_RELATIVE_PIVOT_POSITION = new Translation3d(-0.1, 0, 0.21);
+	public static final Translation3d ROBOT_RELATIVE_PIVOT_POSITION = new Translation3d(-0.1, 0, 0.24);
 
 	public static final Rotation2d TOLERANCE = Rotation2d.fromDegrees(0.75);
 }
