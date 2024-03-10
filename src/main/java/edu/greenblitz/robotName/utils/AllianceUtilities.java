@@ -20,7 +20,6 @@ public class AllianceUtilities {
             IS_BLUE_ALLIANCE = DriverStation.getAlliance().orElse(DriverStation.Alliance.Red).equals(DriverStation.Alliance.Blue);
             BLUE_ALLIANCE_CHECK_TIMESTAMP = timestamp;
         }
-        System.out.println(IS_BLUE_ALLIANCE);
         return IS_BLUE_ALLIANCE;
     }
 

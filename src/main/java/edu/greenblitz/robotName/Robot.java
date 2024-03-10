@@ -165,19 +165,6 @@ public class Robot extends LoggedRobot {
 
 	@Override
 	public void autonomousInit() {
-		//TODO - remove from here!!!
-		NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
-		NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
-		NamedCommands.registerCommand("grip", new CollectNoteFromGround());
-		AutoBuilder.configureHolonomic(
-				SwerveChassis.getInstance()::getRobotPose2d,
-				(pose) -> SwerveChassis.getInstance().resetChassisPose(AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(pose)),
-				SwerveChassis.getInstance()::getChassisSpeeds,
-				SwerveChassis.getInstance()::moveByRobotRelativeSpeeds,
-				ChassisConstants.PATH_FOLLOWER_CONFIG,
-				() -> !AllianceUtilities.isBlueAlliance(),
-				SwerveChassis.getInstance()
-		);
 		autonomousCommand = AutonomousSelector.getInstance().getChosenValue();
 		if (autonomousCommand != null){
 			autonomousCommand.schedule();
