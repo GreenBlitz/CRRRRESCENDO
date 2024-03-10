@@ -10,15 +10,15 @@ import java.util.function.Supplier;
 public class FlyWheelDefaultCommand extends RunFlyWheelByVelocity {
 
 	public FlyWheelDefaultCommand() {
-		super(FlyWheelConstants.DEFAULT_VELOCITY);
+		super(getSpeed().getAsDouble());
 	}
 
-	public DoubleSupplier getSpeed(){
+	public static DoubleSupplier getSpeed(){
 		if (DriverStation.isAutonomous()){
 			return () -> FlyWheelConstants.SHOOTING_VELOCITY;
 		}
 		else {
-			return () -> FlyWheelConstants.DEFAULT_VELOCITY;
+			return () -> 0;
 		}
 	}
 }

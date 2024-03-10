@@ -11,6 +11,7 @@ import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMod
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringModeWithPivotForJoystick;
 import edu.greenblitz.robotName.commands.intake.NoteToShooterWithArm;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByPower;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.FlyWheelDefaultCommand;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocity;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityUntilInterrupted;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
@@ -28,6 +29,7 @@ import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
+import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
@@ -167,6 +169,7 @@ public class OI {
 		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
 		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
 //		LED.getInstance().setDefaultCommand(new UpdateLEDStateDefaultCommand());
+		FlyWheel.getInstance().setDefaultCommand(new FlyWheelDefaultCommand());
 	}
 	
 }
