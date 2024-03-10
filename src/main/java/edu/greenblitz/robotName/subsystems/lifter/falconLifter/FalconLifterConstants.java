@@ -38,9 +38,9 @@ public class FalconLifterConstants {
     public static final SoftwareLimitSwitchConfigs SOFTWARE_LIMIT_SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();
     static {
         SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitEnable = true;
-        SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitThreshold = LifterConstants.FORWARD_LIMIT.getRotations();
+        SOFTWARE_LIMIT_SWITCH_CONFIGS.ForwardSoftLimitThreshold = LifterConstants.FORWARD_LIMIT;
         SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitEnable = true;
-        SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitThreshold = LifterConstants.BACKWARD_LIMIT.getRotations();
+        SOFTWARE_LIMIT_SWITCH_CONFIGS.ReverseSoftLimitThreshold = LifterConstants.BACKWARD_LIMIT;
     }
 
     public static final FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();

@@ -173,8 +173,7 @@ public class OI {
 		usedJoystick.R1.whileTrue(new MoveElbowByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_X));
 		usedJoystick.POV_UP.whileTrue(new MoveWristByButton(true));
 		usedJoystick.POV_DOWN.whileTrue(new MoveWristByButton(false));
-	}//19.2046 rotations for every 11 cm
-	//174.58727272727272727272727272727 for every m
+	}
 
 	public void fourthJoystickButtons() {
 		SmartJoystick usedJoystick = fourthJoystick;

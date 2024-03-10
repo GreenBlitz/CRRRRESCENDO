@@ -9,13 +9,13 @@ public interface ILifter {
 
     void setVoltage(double voltage);
 
-    void resetEncoder(Rotation2d position);
+    void resetEncoder(double position);
 
     void stop();
 
     void setIdleMode(CANSparkMax.IdleMode idleMode);
 
-    void goToPosition(Rotation2d position);
+    void goToPosition(double position);
 
     void openSolenoid();
 

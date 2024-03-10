@@ -63,8 +63,8 @@ public class FalconLifter implements ILifter {
     }
 
     @Override
-    public void resetEncoder(Rotation2d position) {
-        motor.setPosition(position.getRotations());
+    public void resetEncoder(double position) {
+        motor.setPosition(position);
     }
 
     @Override
@@ -73,10 +73,10 @@ public class FalconLifter implements ILifter {
     }
 
     @Override
-    public void goToPosition(Rotation2d position) {
+    public void goToPosition(double position) {
         motor.setControl(
                 positionVoltage
-                        .withPosition(position.getRotations())
+                        .withPosition(position)
                         .withSlot(FalconPivotConstants.PID_SLOT)
                         .withLimitForwardMotion(true)
                         .withLimitReverseMotion(true)
@@ -116,8 +116,8 @@ public class FalconLifter implements ILifter {
     public void updateInputs(LifterInputsAutoLogged inputs) {
         inputs.appliedOutput = motor.getMotorVoltage().getValue();
         inputs.outputCurrent = motor.getStatorCurrent().getValue();
-        inputs.position = Rotation2d.fromRotations(motor.getPosition().getValue());
-        inputs.positionReference = Rotation2d.fromRotations(motor.getClosedLoopReference().getValueAsDouble());
+        inputs.position = motor.getPosition().getValue();
+        inputs.positionReference = motor.getClosedLoopReference().getValueAsDouble();
         inputs.velocity = motor.getVelocity().getValue();
         inputs.isForwardSwitchPressed = motor.getForwardLimit().getValue().value == IS_SWITCH_CLOSED;
         inputs.isBackwardSwitchPressed = motor.getReverseLimit().getValue().value == IS_SWITCH_CLOSED;

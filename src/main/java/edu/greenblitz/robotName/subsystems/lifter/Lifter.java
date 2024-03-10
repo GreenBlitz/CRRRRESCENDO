@@ -36,11 +36,11 @@ public class Lifter extends GBSubsystem {
         super.periodic();
         lifter.updateInputs(lifterInputs);
         Logger.processInputs("Lifter/Lifter", lifterInputs);
-        SmartDashboard.putNumber("Lifter Position", lifterInputs.position.getRotations());
+        SmartDashboard.putNumber("Lifter Position", lifterInputs.position);
         Logger.recordOutput("Lifter/Lifter", getLifterPose3d());
     }
 
-    public void goToPosition(Rotation2d targetPosition) {
+    public void goToPosition(double targetPosition) {
         lifter.goToPosition(targetPosition);
     }
 
@@ -52,7 +52,7 @@ public class Lifter extends GBSubsystem {
         lifter.setVoltage(voltage);
     }
 
-    public void resetEncoderPosition(Rotation2d position) {
+    public void resetEncoderPosition(double position) {
         lifter.resetEncoder(position);
     }
 
@@ -72,12 +72,12 @@ public class Lifter extends GBSubsystem {
         return lifterInputs.isBackwardSwitchPressed;
     }
 
-    public boolean isAtPosition(Rotation2d targetPosition) {
-        return Math.abs(targetPosition.getRadians() - lifterInputs.position.getRadians()) < LifterConstants.TOLERANCE.getRadians();
+    public boolean isAtPosition(double targetPosition) {
+        return Math.abs(targetPosition - lifterInputs.position) < LifterConstants.TOLERANCE;
     }
 
-    public Rotation2d getPosition() {
-        return Rotation2d.fromRadians(lifterInputs.position.getRadians());
+    public double getPosition() {
+        return lifterInputs.position;
     }
 
     public void holdSolenoid() {
@@ -101,7 +101,7 @@ public class Lifter extends GBSubsystem {
         return new Pose3d(
                 LifterConstants.ROBOT_RELATIVE_LIFTER_POSITION,
                 new Rotation3d(
-                        -lifterInputs.position.getDegrees(),
+                        -lifterInputs.position,
                         0,
                         0
                 ).plus(LifterConstants.ROBOT_RELATIVE_LIFTER_ROTATION)

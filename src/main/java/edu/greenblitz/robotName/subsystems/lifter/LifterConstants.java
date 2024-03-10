@@ -1,8 +1,5 @@
 package edu.greenblitz.robotName.subsystems.lifter;
 
-import com.revrobotics.CANSparkBase;
-import com.revrobotics.CANSparkMax;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation3d;
 
@@ -18,7 +15,7 @@ public class LifterConstants {
 
     public static final double GEAR_RATIO = 174.58727272727272727272727272727;
 
-    public static final Rotation2d ENCODER_POSITION_WHEN_RESET = Rotation2d.fromRotations(0);
+    public static final double ENCODER_POSITION_WHEN_RESET = 0;
 
     public static final double POWER_TO_OPEN_SOLENOID = 0;
 
@@ -34,17 +31,17 @@ public class LifterConstants {
     
     public static final double SECONDS_TO_HOLD_SOLENOID = 0.3;
 
-    public static final Rotation2d TOLERANCE = Rotation2d.fromDegrees(4);
+    public static final double TOLERANCE = 0.04;
 
-    public static final Rotation2d LIFTER_RETRACTED_POSITION = Rotation2d.fromDegrees(0);
+    public static final double LIFTER_RETRACTED_POSITION = 0;
 
-    public static final Rotation2d LIFTER_EXTENDED_POSITION = Rotation2d.fromDegrees(135);
+    public static final double LIFTER_EXTENDED_POSITION = 0.4;
 
-    public static final Rotation2d FORWARD_LIMIT = Rotation2d.fromDegrees(180);
+    public static final double FORWARD_LIMIT = 0.445;
 
-    public static final Rotation2d BACKWARD_LIMIT = Rotation2d.fromDegrees(-10);
+    public static final double BACKWARD_LIMIT = 0;
 
-    public static final Rotation2d STARTING_ANGLE = Rotation2d.fromDegrees(0);
+    public static final double STARTING_POSITION = 0;
 
     public static final double LENGTH_OF_LIFTER = 0.45;
 

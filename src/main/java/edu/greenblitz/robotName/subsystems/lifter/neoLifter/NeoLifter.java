@@ -27,11 +27,11 @@ public class NeoLifter implements ILifter {
                 .enableLimitSwitch(NeoLifterConstants.IS_FORWARD_LIMIT_SWITCH_ENABLED);
         motor.setSoftLimit(
                 CANSparkMax.SoftLimitDirection.kReverse,
-                LifterConstants.BACKWARD_LIMIT.getRadians()
+                LifterConstants.BACKWARD_LIMIT
         );
         motor.setSoftLimit(
                 CANSparkMax.SoftLimitDirection.kForward,
-                LifterConstants.FORWARD_LIMIT.getRadians()
+                LifterConstants.FORWARD_LIMIT
         );
     }
 
@@ -46,8 +46,8 @@ public class NeoLifter implements ILifter {
     }
 
     @Override
-    public void resetEncoder(Rotation2d position) {
-        motor.getEncoder().setPosition(position.getRadians());
+    public void resetEncoder(double position) {
+        motor.getEncoder().setPosition(position);
     }
 
     @Override
@@ -61,12 +61,12 @@ public class NeoLifter implements ILifter {
     }
 
     @Override
-    public void goToPosition(Rotation2d position) {
+    public void goToPosition(double position) {
         motor.getPIDController().setReference(
-                position.getRadians(),
+                position,
                 CANSparkMax.ControlType.kPosition,
                 NeoLifterConstants.PID_SLOT,
-                NeoLifterConstants.FEED_FORWARD.calculate(position.getRadians())
+                NeoLifterConstants.FEED_FORWARD.calculate(position)
         );
     }
 
@@ -94,7 +94,7 @@ public class NeoLifter implements ILifter {
     public void updateInputs(LifterInputsAutoLogged inputs) {
         inputs.appliedOutput = motor.getAppliedOutput();
         inputs.outputCurrent = motor.getOutputCurrent();
-        inputs.position = Rotation2d.fromRotations(motor.getEncoder().getPosition());
+        inputs.position = motor.getEncoder().getPosition();
         inputs.velocity = motor.getEncoder().getVelocity();
         inputs.isForwardSwitchPressed = motor.getForwardLimitSwitch(NeoLifterConstants.FORWARD_LIMIT_SWITCH_TYPE).isPressed();
         inputs.isBackwardSwitchPressed = motor.getReverseLimitSwitch(NeoLifterConstants.BACKWARD_LIMIT_SWITCH_TYPE).isPressed();

@@ -20,7 +20,7 @@ public class SimulationLifter implements ILifter {
     private ProfiledPIDController pidController;
     DCMotorSim simulationSolenoidMotor;
     double appliedSolenoidOutputs;
-    Rotation2d positionReference;
+    double positionReference;
 
     public SimulationLifter() {
         lifterSimulation = new SingleJointedArmSim(
@@ -31,10 +31,10 @@ public class SimulationLifter implements ILifter {
                         LifterConstants.LIFTER_MASS_KG
                 ),
                 LifterConstants.LENGTH_OF_LIFTER,
-                LifterConstants.BACKWARD_LIMIT.getRadians(),
-                LifterConstants.FORWARD_LIMIT.getRadians(),
+                LifterConstants.BACKWARD_LIMIT,
+                LifterConstants.FORWARD_LIMIT,
                 false,
-                LifterConstants.STARTING_ANGLE.getRadians()
+                LifterConstants.STARTING_POSITION
         );
         pidController = SimulationLifterConstants.SIMULATION_PID;
 
@@ -43,7 +43,7 @@ public class SimulationLifter implements ILifter {
                 SimulationLifterConstants.MOTOR_GEARING,
                 SimulationLifterConstants.MOTOR_JKG_METERS_SQUARED
         );
-        positionReference = Rotation2d.fromRadians(lifterSimulation.getAngleRads());
+        positionReference = lifterSimulation.getAngleRads();
     }
 
     @Override
@@ -62,7 +62,7 @@ public class SimulationLifter implements ILifter {
     }
 
     @Override
-    public void resetEncoder(Rotation2d position) {
+    public void resetEncoder(double position) {
         Logger.recordOutput("Lifter", "tried setting the position to " + position);
     }
 
@@ -77,9 +77,9 @@ public class SimulationLifter implements ILifter {
     }
 
     @Override
-    public void goToPosition(Rotation2d position) {
+    public void goToPosition(double position) {
         positionReference = position;
-        setVoltage(pidController.calculate(lifterSimulation.getAngleRads(), position.getRadians()));
+        setVoltage(pidController.calculate(lifterSimulation.getAngleRads(), position));
     }
 
     @Override
@@ -112,7 +112,7 @@ public class SimulationLifter implements ILifter {
         lifterSimulation.update(RobotConstants.SimulationConstants.TIME_STEP);
         inputs.appliedOutput = appliedOutput;
         inputs.outputCurrent = lifterSimulation.getCurrentDrawAmps();
-        inputs.position = Rotation2d.fromRadians(lifterSimulation.getAngleRads());
+        inputs.position = lifterSimulation.getAngleRads();
         inputs.positionReference = positionReference;
         inputs.velocity = lifterSimulation.getVelocityRadPerSec();
 
