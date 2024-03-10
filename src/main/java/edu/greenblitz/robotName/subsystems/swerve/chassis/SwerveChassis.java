@@ -141,6 +141,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         Logger.processInputs("DriveTrain/Gyro", gyroInputs);
         SmartDashboard.putNumber("shoot angle", ShootingStateCalculations.getTargetShooterAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE).getDegrees());
 
+
         updatePoseEstimationLimeLight();
         MultiLimelight.getInstance().recordEstimatedPositions();
         robotPose = AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(poseEstimator.getEstimatedPosition());
@@ -216,8 +217,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     }
 
     public void resetChassisPose() {
-        gyro.updateYaw(Rotation2d.fromRadians(0));
-        poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), new Pose2d());
+        resetChassisPose(new Pose2d());
     }
 
     public void resetChassisAngle(Rotation2d angle) {
@@ -325,9 +325,9 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         moveByChassisSpeeds(
                 0,
                 0,
-				ChassisConstants.ROTATION_PID_CONTROLLER.calculate(
-						getChassisAngle().getRadians()
-				),
+                ChassisConstants.ROTATION_PID_CONTROLLER.calculate(
+                        getChassisAngle().getRadians()
+                ),
                 getChassisAngle()
         );
     }
@@ -489,14 +489,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
     public void resetChassisPose(AllianceUtilities.AlliancePose2d pose) {
         Pose2d currentBluePose = pose.toBlueAlliancePose();
-        Logger.recordOutput("psoeBlue", currentBluePose);
-        gyro.updateYaw(currentBluePose.getRotation());
-        gyro.updateInputs(gyroInputs);
-        poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), currentBluePose);
+        resetChassisPose(currentBluePose);
     }
 
     public void resetChassisPose(Pose2d pose) {
-        gyro.updateYaw(pose.getRotation());
         poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), pose);
     }
 
