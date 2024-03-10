@@ -66,7 +66,7 @@ public class MoveByJoysticks extends SwerveCommand {
 //                angularSpeedFactor,
 //                ChassisConstants.ANGULAR_JOYSTICK_INVERTED
 //        );
-		double leftwardSpeed = -OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_X) * linearSpeedFactor;
+		double leftwardSpeed = OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_X) * linearSpeedFactor;
 		
 		double forwardSpeed = OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_Y) * linearSpeedFactor;
 		
@@ -79,8 +79,8 @@ public class MoveByJoysticks extends SwerveCommand {
 
 		swerveChassis.moveByChassisSpeeds(
 				forwardSpeed,
-				leftwardSpeed,
-				angularSpeed,
+				-leftwardSpeed,
+				-angularSpeed,
 				swerveChassis.getChassisAngle()
 		);
 	}

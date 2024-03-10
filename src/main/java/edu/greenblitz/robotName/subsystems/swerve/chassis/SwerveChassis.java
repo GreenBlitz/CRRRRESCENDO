@@ -302,7 +302,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
                 forwardSpeed,
                 leftwardSpeed,
-                angSpeed,
+                -angSpeed,
                 currentAng
         );
         chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
@@ -325,10 +325,9 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         moveByChassisSpeeds(
                 0,
                 0,
-//				-ChassisConstants.ROTATION_PID_CONTROLLER.calculate(
-//						getChassisAngle().getRadians()
-                0.5,
-//				),
+				ChassisConstants.ROTATION_PID_CONTROLLER.calculate(
+						getChassisAngle().getRadians()
+				),
                 getChassisAngle()
         );
     }
