@@ -5,6 +5,7 @@ import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.littletonrobotics.junction.Logger;
 
 public class Lifter extends GBSubsystem {
@@ -16,6 +17,7 @@ public class Lifter extends GBSubsystem {
         lifter = LifterFactory.create();
         lifterInputs = new LifterInputsAutoLogged();
         lifter.updateInputs(lifterInputs);
+        resetEncoderPosition();
     }
 
     public static Lifter getInstance() {
@@ -34,6 +36,7 @@ public class Lifter extends GBSubsystem {
         super.periodic();
         lifter.updateInputs(lifterInputs);
         Logger.processInputs("Lifter/Lifter", lifterInputs);
+        SmartDashboard.putNumber("Lifter Position", lifterInputs.position.getRotations());
         Logger.recordOutput("Lifter/Lifter", getLifterPose3d());
     }
 
@@ -80,6 +83,11 @@ public class Lifter extends GBSubsystem {
     public void holdSolenoid() {
         lifter.holdSolenoid();
     }
+
+    public void moveSolenoidByPower(double power) {
+        lifter.setPowerToSolenoid(power);
+    }
+
 
     public void openSolenoid() {
         lifter.openSolenoid();

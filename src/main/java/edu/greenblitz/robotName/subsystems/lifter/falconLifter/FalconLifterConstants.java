@@ -45,7 +45,7 @@ public class FalconLifterConstants {
 
     public static final FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();
     static {
-        FEEDBACK_CONFIGS.SensorToMechanismRatio = 1;
+        FEEDBACK_CONFIGS.SensorToMechanismRatio = LifterConstants.GEAR_RATIO;
     }
 
     public static final HardwareLimitSwitchConfigs HARDWARE_LIMIT_SWITCH_CONFIGS = new HardwareLimitSwitchConfigs();

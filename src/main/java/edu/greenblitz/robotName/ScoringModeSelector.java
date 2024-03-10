@@ -26,4 +26,9 @@ public class ScoringModeSelector {
 	public static boolean isAmpMode() {
 		return getScoringMode() == ScoringMode.AMP;
 	}
+
+	public static boolean isClimbMode() {
+		return getScoringMode() == ScoringMode.CLIMB;
+	}
+
 }

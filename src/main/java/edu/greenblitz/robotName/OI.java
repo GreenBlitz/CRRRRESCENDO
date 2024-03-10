@@ -1,5 +1,7 @@
 package edu.greenblitz.robotName;
 
+import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowByJoystick;
+import edu.greenblitz.robotName.commands.arm.wrist.MoveWristByButton;
 import edu.greenblitz.robotName.commands.intake.CollectNoteFromGround;
 import edu.greenblitz.robotName.commands.intake.NoteFromIntakeToShooter;
 import edu.greenblitz.robotName.commands.LED.UpdateLEDStateDefaultCommand;
@@ -27,6 +29,7 @@ import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
+import edu.greenblitz.robotName.commands.switchMode.SetScoringMode;
 import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.LED.LED;
@@ -96,7 +99,8 @@ public class OI {
 
 	public void initButtons() {
 		romyButtons();
-		shchoriButtons();
+//		shchoriButtons();
+		thirdJoystickButtons();
 	}
 
 	public void romyButtons() {
@@ -160,10 +164,17 @@ public class OI {
 
 	public void thirdJoystickButtons() {
 		SmartJoystick usedJoystick = thirdJoystick;
-		usedJoystick.R1.whileTrue(new NoteToShooterWithArm());
-		usedJoystick.L1.whileTrue(new RunFunnelByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_Y));
-
-	}
+		usedJoystick.A.whileTrue(new MoveLifterByPower(0.4));
+		usedJoystick.B.whileTrue(new MoveLifterByPower(-0.4));
+		usedJoystick.X.whileTrue(new MoveSolenoidByPower(0.9));
+		usedJoystick.Y.whileTrue(new MoveSolenoidByPower(-0.9));
+		usedJoystick.POV_RIGHT.whileTrue(new SetScoringMode(ScoringMode.CLIMB));
+		usedJoystick.POV_LEFT.whileTrue(new SetScoringMode(ScoringMode.SPEAKER));
+		usedJoystick.R1.whileTrue(new MoveElbowByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_X));
+		usedJoystick.POV_UP.whileTrue(new MoveWristByButton(true));
+		usedJoystick.POV_DOWN.whileTrue(new MoveWristByButton(false));
+	}//19.2046 rotations for every 11 cm
+	//174.58727272727272727272727272727 for every m
 
 	public void fourthJoystickButtons() {
 		SmartJoystick usedJoystick = fourthJoystick;

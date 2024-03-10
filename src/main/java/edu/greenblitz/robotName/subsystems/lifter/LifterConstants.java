@@ -16,7 +16,7 @@ public class LifterConstants {
 
     public static final Rotation3d ROBOT_RELATIVE_LIFTER_ROTATION = new Rotation3d(0, Math.PI, -Math.PI / 2);
 
-    public static final double GEAR_RATIO = 1;
+    public static final double GEAR_RATIO = 174.58727272727272727272727272727;
 
     public static final Rotation2d ENCODER_POSITION_WHEN_RESET = Rotation2d.fromRotations(0);
 
