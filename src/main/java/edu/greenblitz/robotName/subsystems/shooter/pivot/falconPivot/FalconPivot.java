@@ -44,11 +44,12 @@ public class FalconPivot implements IPivot {
 				motor.getPosition(),
 				motor.getVelocity(),
 				motor.getMotorVoltage(),
-				motor.getSupplyCurrent(),
+				motor.getStatorCurrent(),
 				motor.getDeviceTemp(),
 				motor.getAcceleration(),
 				motor.getForwardLimit(),
-				motor.getReverseLimit()
+				motor.getReverseLimit(),
+				motor.getClosedLoopReference()
 		);
 		motor.optimizeBusUtilization();
 	}
@@ -81,7 +82,7 @@ public class FalconPivot implements IPivot {
 						.withSlot(FalconPivotConstants.PID_SLOT)
 						.withLimitForwardMotion(true)
 						.withLimitReverseMotion(true)
-						.withEnableFOC(true)
+						.withEnableFOC(false)
 						.withOverrideBrakeDurNeutral(false)
 		);
 	}
@@ -96,7 +97,7 @@ public class FalconPivot implements IPivot {
 	
 	@Override
 	public void updateInputs(PivotInputsAutoLogged inputs) {
-		inputs.outputCurrent = motor.getSupplyCurrent().getValue();
+		inputs.outputCurrent = motor.getStatorCurrent().getValue();
 		inputs.appliedOutput = motor.getMotorVoltage().getValue();
 		inputs.position = Rotation2d.fromRotations(motor.getLatencyCompensatedValue(motor.getPosition(), motor.getVelocity()));
 		inputs.velocity = motor.getLatencyCompensatedValue(motor.getPosition(), motor.getVelocity());
@@ -105,5 +106,6 @@ public class FalconPivot implements IPivot {
 		inputs.temperature = motor.getDeviceTemp().getValue();
 		inputs.hasHitForwardLimit = motor.getForwardLimit().getValue().value == IS_SWITCH_CLOSED;
 		inputs.hasHitBackwardsLimit = motor.getReverseLimit().getValue().value == IS_SWITCH_CLOSED;
+		inputs.positionReference = Rotation2d.fromRotations(motor.getClosedLoopReference().getValue());
 	}
 }

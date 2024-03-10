@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.commands.arm.roller;
 
 import edu.greenblitz.robotName.Robot;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RunRollerByRotations extends RollerCommand {
 
@@ -28,9 +29,5 @@ public class RunRollerByRotations extends RollerCommand {
     public boolean isFinished() {
         return roller.isAtAngle(rotations);
     }
-
-    @Override
-    public void end(boolean interrupted) {
-        super.end(interrupted);
-    }
+    
 }

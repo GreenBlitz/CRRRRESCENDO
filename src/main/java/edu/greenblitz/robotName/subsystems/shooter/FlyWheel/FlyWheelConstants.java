@@ -7,13 +7,19 @@ import edu.wpi.first.math.interpolation.InverseInterpolator;
 public class FlyWheelConstants {
 	
 	public static final double EPSILON_RPM = 50;
+
+	public static final double DEFAULT_VELOCITY = 50;
+
+	public static final double COLLECT_FORM_FEEDER_POWER = -0.1;
 	
-	public static final double MINIMUM_SHOOTING_SPEED_TIME_ROBORIO_CYCLES = 50;
+	public static final double MINIMUM_SHOOTING_SPEED_TIME_ROBORIO_CYCLES = 7;
 	
 	public static final double SHOOTING_POWER = 0.9;
 	
-	public static final double SHOOTING_VELOCITY = 3000;
-	
+	public static final double SHOOTING_VELOCITY = 100;
+
+	public static final double FEEDER_COLLECT_VELOCITY = -15;
+
 	public static final double SLOW_SHOOTING_VELOCITY = 90;
 	
 	public static final double SLOW_SHOOTING_DISTANCE_METERS = 0.5;
@@ -36,7 +42,7 @@ public class FlyWheelConstants {
 		SHOOTING_VELOCITY_INTERPOLATOR.put(FAST_SHOOTING_DISTANCE_METERS, FAST_SHOOTING_VELOCITY);
 	}
 	
-	public static final double LEFT_SHOOTING_POWER_CONVERSION_FACTOR = 0.8;
+	public static final double LEFT_SHOOTING_POWER_CONVERSION_FACTOR = 0.6;
 	
-	public static final double DELAY_SECONDS_UNTIL_EXIT = 1;
+	public static final double DELAY_SECONDS_UNTIL_EXIT = 0.5;
 }

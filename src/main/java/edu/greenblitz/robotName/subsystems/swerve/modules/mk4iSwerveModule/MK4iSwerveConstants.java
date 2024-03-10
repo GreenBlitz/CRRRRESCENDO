@@ -30,7 +30,7 @@ public class MK4iSwerveConstants {
 
 	public static final double ka = 0;
 	
-	public static final double WHEEL_RADIUS = Units.inchesToMeters(2);
+	public static final double WHEEL_RADIUS = Units.inchesToMeters(1.896924);
 	
 	public static final double WHEEL_CIRCUMFERENCE = WHEEL_RADIUS * 2 * Math.PI;
 	

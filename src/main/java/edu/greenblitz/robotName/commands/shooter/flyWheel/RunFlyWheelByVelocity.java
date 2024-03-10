@@ -5,15 +5,24 @@ import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 
 public class RunFlyWheelByVelocity extends FlyWheelCommand {
 
-    private int timeInShootingSpeed;
 
     double rightWheelVelocity;
 
     double leftWheelVelocity;
 
+    private int timeInShootingSpeed;
+
+    double spin;
+
     public RunFlyWheelByVelocity(double velocity) {
         rightWheelVelocity = velocity;
         leftWheelVelocity = velocity * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR;
+    }
+
+    public RunFlyWheelByVelocity(double velocity, double spin) {
+        this.spin = spin;
+        rightWheelVelocity = velocity;
+        leftWheelVelocity = velocity * spin;
     }
 
     protected void changeVelocity(double velocity) {
@@ -32,7 +41,7 @@ public class RunFlyWheelByVelocity extends FlyWheelCommand {
         if (Robot.isSimulation()) {
             flyWheel.setVelocity(leftWheelVelocity, rightWheelVelocity);
         }
-        if (flyWheel.isAtVelocity(rightWheelVelocity, leftWheelVelocity)) {
+        if (flyWheel.isAtVelocity(leftWheelVelocity, rightWheelVelocity)) {
             timeInShootingSpeed++;
         } else {
             timeInShootingSpeed = 0;
@@ -44,9 +53,5 @@ public class RunFlyWheelByVelocity extends FlyWheelCommand {
     public boolean isFinished() {
         return flyWheel.getPreparedToShoot();
     }
-    
-    @Override
-    public void end(boolean interrupted) {
-        flyWheel.stop();
-    }
+
 }

@@ -17,11 +17,14 @@ public class Elbow extends GBSubsystem {
 
     private Rotation2d currentAngle;
 
+    private Rotation2d pidReference;
+    
     private Elbow() {
         elbow = ElbowFactory.create();
         elbowInputs = new ElbowInputsAutoLogged();
         elbow.updateInputs(elbowInputs);
-        currentAngle = elbowInputs.position;
+        currentAngle = ElbowConstants.MINIMUM_ANGLE;
+        pidReference = currentAngle;
     }
 
     public static void init() {
@@ -34,12 +37,14 @@ public class Elbow extends GBSubsystem {
         init();
         return instance;
     }
-
+    
     @Override
     public void periodic() {
         super.periodic();
-
         elbow.updateInputs(elbowInputs);
+        if (ElbowConstants.MINIMUM_ANGLE.getRadians() > elbowInputs.position.getRadians()) {
+            elbow.resetAngle(ElbowConstants.MINIMUM_ANGLE);
+        }
         Logger.processInputs("Elbow", elbowInputs);
         Logger.recordOutput("Elbow", getPose3D());
     }
@@ -55,17 +60,23 @@ public class Elbow extends GBSubsystem {
     public void setIdleMode(NeutralModeValue idleMode) {
         elbow.setIdleMode(idleMode);
     }
-
+    
+    
     public void resetAngle(Rotation2d position) {
         elbow.resetAngle(position);
+        currentAngle = position;
     }
 
     public void moveToAngle(Rotation2d targetAngle) {
-        elbow.moveToAngle(targetAngle);
+        pidReference = targetAngle;
+        elbow.moveToAngle(pidReference);
     }
 
     public void standInPlace() {
-        elbow.standInPlace(currentAngle);
+        if (currentAngle != pidReference) {
+            pidReference = currentAngle;
+            elbow.standInPlace(pidReference);
+        }
     }
 
     public void setCurrentAngle() {

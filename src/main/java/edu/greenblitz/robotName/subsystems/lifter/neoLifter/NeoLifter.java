@@ -4,7 +4,6 @@ import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
-
 import edu.greenblitz.robotName.subsystems.lifter.ILifter;
 import edu.greenblitz.robotName.subsystems.lifter.LifterConstants;
 import edu.greenblitz.robotName.subsystems.lifter.LifterInputsAutoLogged;
@@ -26,7 +25,6 @@ public class NeoLifter implements ILifter {
                 .enableLimitSwitch(NeoLifterConstants.IS_BACKWARD_LIMIT_SWITCH_ENABLED);
         motor.getForwardLimitSwitch(NeoLifterConstants.FORWARD_LIMIT_SWITCH_TYPE)
                 .enableLimitSwitch(NeoLifterConstants.IS_FORWARD_LIMIT_SWITCH_ENABLED);
-
         motor.setSoftLimit(
                 CANSparkMax.SoftLimitDirection.kReverse,
                 LifterConstants.BACKWARD_LIMIT.getRadians()
@@ -35,7 +33,6 @@ public class NeoLifter implements ILifter {
                 CANSparkMax.SoftLimitDirection.kForward,
                 LifterConstants.FORWARD_LIMIT.getRadians()
         );
-        motor.setIdleMode(LifterConstants.IDLE_MODE);
     }
 
     @Override
@@ -97,13 +94,12 @@ public class NeoLifter implements ILifter {
     public void updateInputs(LifterInputsAutoLogged inputs) {
         inputs.appliedOutput = motor.getAppliedOutput();
         inputs.outputCurrent = motor.getOutputCurrent();
-        inputs.position = motor.getEncoder().getPosition();
+        inputs.position = Rotation2d.fromRotations(motor.getEncoder().getPosition());
         inputs.velocity = motor.getEncoder().getVelocity();
         inputs.isForwardSwitchPressed = motor.getForwardLimitSwitch(NeoLifterConstants.FORWARD_LIMIT_SWITCH_TYPE).isPressed();
         inputs.isBackwardSwitchPressed = motor.getReverseLimitSwitch(NeoLifterConstants.BACKWARD_LIMIT_SWITCH_TYPE).isPressed();
         inputs.currentSolenoid = solenoid.getStatorCurrent();
         inputs.voltageSolenoid = solenoid.getMotorOutputVoltage();
         inputs.isOpenSolenoid = inputs.voltageSolenoid > 0;
-
     }
 }

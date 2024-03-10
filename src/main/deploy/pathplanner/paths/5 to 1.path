@@ -47,7 +47,7 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 1,
-      "rotationDegrees": 176.50839359447423,
+      "rotationDegrees": 179.89050031569977,
       "rotateFast": false
     }
   ],
@@ -61,7 +61,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -179.95287069751242,
+    "rotation": -178.0,
     "rotateFast": false
   },
   "reversed": false,

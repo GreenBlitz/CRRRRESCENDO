@@ -32,9 +32,9 @@ public class FalconFlyWheelConstants {
 		public static final CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();
 		
 		static {
-			CURRENT_LIMITS_CONFIGS.StatorCurrentLimit = 80;
+			CURRENT_LIMITS_CONFIGS.StatorCurrentLimit = 40;
 			CURRENT_LIMITS_CONFIGS.StatorCurrentLimitEnable = true;
-			CURRENT_LIMITS_CONFIGS.SupplyCurrentLimit = 80;
+			CURRENT_LIMITS_CONFIGS.SupplyCurrentLimit = 40;
 			CURRENT_LIMITS_CONFIGS.SupplyCurrentLimitEnable = true;
 		}
 		
@@ -85,9 +85,9 @@ public class FalconFlyWheelConstants {
 		public static final CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();
 		
 		static {
-			CURRENT_LIMITS_CONFIGS.StatorCurrentLimit = 80;
+			CURRENT_LIMITS_CONFIGS.StatorCurrentLimit = 40;
 			CURRENT_LIMITS_CONFIGS.StatorCurrentLimitEnable = true;
-			CURRENT_LIMITS_CONFIGS.SupplyCurrentLimit = 80;
+			CURRENT_LIMITS_CONFIGS.SupplyCurrentLimit = 40;
 			CURRENT_LIMITS_CONFIGS.SupplyCurrentLimitEnable = true;
 		}
 		

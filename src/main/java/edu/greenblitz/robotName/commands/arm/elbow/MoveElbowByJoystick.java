@@ -6,15 +6,18 @@ import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 public class MoveElbowByJoystick extends ElbowCommand {
 
     private SmartJoystick joystick;
+    
+    private SmartJoystick.Axis axis;
 
-    public MoveElbowByJoystick(SmartJoystick joystick) {
+    public MoveElbowByJoystick(SmartJoystick joystick, SmartJoystick.Axis axis) {
         super();
         this.joystick = joystick;
+        this.axis = axis;
     }
 
     @Override
     public void execute() {
-        double power = joystick.getAxisValue(SmartJoystick.Axis.RIGHT_Y) * RobotConstants.General.SAFETY_POWER_CONVERSION_FACTOR;
-        elbow.setPower(power);
+        double power = joystick.getAxisValue(axis);
+        elbow.setPower(power * RobotConstants.General.SAFETY_POWER_CONVERSION_FACTOR);
     }
 }

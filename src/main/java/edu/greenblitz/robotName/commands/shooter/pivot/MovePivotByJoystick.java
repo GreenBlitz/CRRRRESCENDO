@@ -7,14 +7,18 @@ public class MovePivotByJoystick extends PivotCommand {
 
     private SmartJoystick joystick;
 
-    public MovePivotByJoystick(SmartJoystick joystick) {
+    private SmartJoystick.Axis axis;
+
+    public MovePivotByJoystick(SmartJoystick joystick, SmartJoystick.Axis axis) {
         super();
         this.joystick = joystick;
+        this.axis = axis;
     }
 
     @Override
     public void execute() {
-        double power = joystick.getAxisValue(SmartJoystick.Axis.LEFT_Y) * RobotConstants.General.SAFETY_POWER_CONVERSION_FACTOR;
+        double power = joystick.getAxisValue(axis) * RobotConstants.General.SAFETY_POWER_CONVERSION_FACTOR;
         pivot.setPower(power);
     }
+
 }

@@ -1,7 +1,9 @@
 package edu.greenblitz.robotName.commands.intake;
 
-public class NoteToIntake extends IntakeCommand {
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+public class NoteToIntake extends IntakeCommand {
+    
     @Override
     public void execute() {
         intake.rollIn();

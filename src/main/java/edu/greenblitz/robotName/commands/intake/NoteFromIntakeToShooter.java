@@ -4,7 +4,6 @@ import edu.greenblitz.robotName.subsystems.intake.Intake;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.FunnelConstants;
 import edu.greenblitz.robotName.utils.GBCommand;
-import edu.wpi.first.wpilibj.Timer;
 
 public class NoteFromIntakeToShooter extends GBCommand {
 
@@ -21,8 +20,8 @@ public class NoteFromIntakeToShooter extends GBCommand {
 
     @Override
     public void initialize() {
-        funnel.setVelocity(150);
-        intake.setVelocity(150);
+        funnel.setVelocity(FunnelConstants.INTAKE_VELOCITY);
+        intake.setVelocity(FunnelConstants.INTAKE_VELOCITY * FunnelConstants.FUNNEL_TO_INTAKE_SPEED_CONVERSION);
     }
 
     @Override

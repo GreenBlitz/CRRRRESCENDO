@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.subsystems.shooter.funnel.neoFunnel;
 
+import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkLimitSwitch;
 import edu.greenblitz.robotName.RobotConstants;
@@ -16,13 +17,13 @@ public class NeoFunnelConstants {
 	
 	public static final double kS = 0.27;
 	
-	public static final double kV = 0.01025;
+	public static final double kV = 0.018;
 	
 	public static final double kA = 0.03;
 	
-	public static final double kP = 1;
+	public static final double kP = 6;
 	
-	public static final double kI = 30;
+	public static final double kI = 0;
 	
 	public static final int VELOCITY_PID_SLOT = 0;
 	
@@ -39,10 +40,10 @@ public class NeoFunnelConstants {
 	public static final int CURRENT_LIMIT = 40;
 	
 	public static final GBSparkMax.SparkMaxConfObject FUNNEL_CONFIG_OBJECT = new GBSparkMax.SparkMaxConfObject()
-			.withIdleMode(CANSparkMax.IdleMode.kBrake)
+			.withIdleMode(CANSparkMax.IdleMode.kCoast)
 			.withRampRate(RobotConstants.General.RAMP_RATE_VALUE)
 			.withCurrentLimit(CURRENT_LIMIT)
 			.withInverted(IS_INVERTED)
 			.withPID(PID_CONTROLLER)
-			.withVelocityConversionFactor(1 / 5.0);
+			.withVelocityConversionFactor(1 / 9.0);
 }
