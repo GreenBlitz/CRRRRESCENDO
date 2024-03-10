@@ -302,7 +302,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
                 forwardSpeed,
                 leftwardSpeed,
-                angSpeed,
+                -angSpeed,
                 currentAng
         );
         chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
@@ -516,6 +516,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     }
 
     public void moveByRobotRelativeSpeeds(ChassisSpeeds chassisSpeeds) {
+        chassisSpeeds.omegaRadiansPerSecond = -chassisSpeeds.omegaRadiansPerSecond;
         chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
         SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);

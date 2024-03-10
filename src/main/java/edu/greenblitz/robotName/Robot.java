@@ -69,7 +69,7 @@ public class Robot extends LoggedRobot {
 		initializeLogger();
 		initializeAutonomousBuilder();
 		initializeSubsystems();
-		SwerveChassis.getInstance().resetEncodersByCalibrationRod();
+		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
 		Dashboard.getInstance();
 		Pivot.getInstance().resetAngle(PivotConstants.PresetPositions.STARTING.ANGLE);
 		Elbow.getInstance().resetAngle(ElbowConstants.MINIMUM_ANGLE);

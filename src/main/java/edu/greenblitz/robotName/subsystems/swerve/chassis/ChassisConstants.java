@@ -95,7 +95,7 @@ public class ChassisConstants {
 	
 	public static final boolean LINEAR_JOYSTICK_INVERTED = false;
 	
-	public static final PIDConstants TRANSLATION_PID = new PIDConstants(1.7, 0, 0);
+	public static final PIDConstants TRANSLATION_PID = new PIDConstants(1.4, 0, 0);
 	
 	public static final PIDConstants ROTATION_PID_PATH_PLANNER = new PIDConstants(0.15, 0, 0);
 
