@@ -2,7 +2,6 @@ package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.CollectNote;
 import edu.greenblitz.robotName.commands.intake.NoteFromIntakeToShooter;
-import edu.greenblitz.robotName.commands.PanicMode;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.intake.ReverseRunIntake;
@@ -100,7 +99,7 @@ public class OI {
 		secondJoystick.POV_LEFT.whileTrue(new ReverseRunIntake());
 		secondJoystick.X.whileTrue(new SolenoidClose());
 		secondJoystick.Y.whileTrue(new MoveLifterByPower(-0.1));
-		secondJoystick.POV_UP.whileTrue(new SolenoidAndLifter());
+		secondJoystick.POV_UP.whileTrue(new MoveSolenoidAndLifter());
 		
 		secondJoystick.A.whileTrue(
 				new RunCommand(

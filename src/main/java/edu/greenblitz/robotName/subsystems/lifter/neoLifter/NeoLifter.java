@@ -55,7 +55,7 @@ public class NeoLifter implements ILifter {
 
     @Override
     public void stop() {
-        this.setPower(0);
+        setPower(0);
     }
 
     @Override

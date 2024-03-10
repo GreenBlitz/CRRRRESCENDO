@@ -6,7 +6,8 @@ import edu.greenblitz.robotName.subsystems.lifter.neoLifter.NeoLifterConstants;
 import edu.wpi.first.wpilibj.Timer;
 
 public class SolenoidClose extends LifterCommand{
-    Timer timer;
+
+    private Timer timer;
     
     public SolenoidClose(){
         timer = new Timer();
