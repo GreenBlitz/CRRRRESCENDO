@@ -22,7 +22,7 @@ public class WristConstants {
 
 	public static final double LENGTH_OF_ENDEFFECTOR = 0.1;
 
-	public static final double HAND_CONTROL_POWER = 0.2;
+	public static final double HAND_CONTROL_POWER = 0.3339;
 
 	public static final double WRIST_MASS_KG = 0.5;
 

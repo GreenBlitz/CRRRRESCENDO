@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.climbing.solenoid.talonSRXSolenoid;
+package edu.greenblitz.robotName.subsystems.climber.solenoid.talonSRXSolenoid;
 
 public class TalonSRXSolenoidConstants {
 

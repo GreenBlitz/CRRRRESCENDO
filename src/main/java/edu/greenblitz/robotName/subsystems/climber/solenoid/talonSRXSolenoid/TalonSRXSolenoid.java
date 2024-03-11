@@ -1,10 +1,10 @@
-package edu.greenblitz.robotName.subsystems.climbing.solenoid.talonSRXSolenoid;
+package edu.greenblitz.robotName.subsystems.climber.solenoid.talonSRXSolenoid;
 
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.greenblitz.robotName.subsystems.climbing.solenoid.ISolenoid;
-import edu.greenblitz.robotName.subsystems.climbing.solenoid.SolenoidConstants;
-import edu.greenblitz.robotName.subsystems.climbing.solenoid.SolenoidInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.climber.solenoid.ISolenoid;
+import edu.greenblitz.robotName.subsystems.climber.solenoid.SolenoidConstants;
+import edu.greenblitz.robotName.subsystems.climber.solenoid.SolenoidInputsAutoLogged;
 
 public class TalonSRXSolenoid implements ISolenoid {
 

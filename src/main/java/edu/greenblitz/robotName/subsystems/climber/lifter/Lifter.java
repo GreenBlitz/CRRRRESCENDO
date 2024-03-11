@@ -1,10 +1,9 @@
-package edu.greenblitz.robotName.subsystems.climbing.lifter;
+package edu.greenblitz.robotName.subsystems.climber.lifter;
 
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation3d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.littletonrobotics.junction.Logger;
 
 public class Lifter extends GBSubsystem {
@@ -73,6 +72,17 @@ public class Lifter extends GBSubsystem {
     public boolean isAtPosition(double targetPosition) {
         return Math.abs(targetPosition - lifterInputs.position) < LifterConstants.TOLERANCE;
     }
+
+    public boolean isPassedPosition(double targetPosition, boolean isUp){
+        if (isUp){
+            return lifterInputs.position >= targetPosition;
+        }
+        else {
+            return lifterInputs.position <= targetPosition;
+        }
+
+    }
+
 
     public double getPosition() {
         return lifterInputs.position;

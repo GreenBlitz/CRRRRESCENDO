@@ -1,9 +1,9 @@
-package edu.greenblitz.robotName.subsystems.climbing.solenoid.simulationSolenoid;
+package edu.greenblitz.robotName.subsystems.climber.solenoid.simulationSolenoid;
 
 import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.climbing.solenoid.ISolenoid;
-import edu.greenblitz.robotName.subsystems.climbing.solenoid.SolenoidConstants;
-import edu.greenblitz.robotName.subsystems.climbing.solenoid.SolenoidInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.climber.solenoid.ISolenoid;
+import edu.greenblitz.robotName.subsystems.climber.solenoid.SolenoidConstants;
+import edu.greenblitz.robotName.subsystems.climber.solenoid.SolenoidInputsAutoLogged;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 

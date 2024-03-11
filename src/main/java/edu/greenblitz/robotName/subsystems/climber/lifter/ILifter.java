@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.climbing.lifter;
+package edu.greenblitz.robotName.subsystems.climber.lifter;
 
 import com.revrobotics.CANSparkMax;
 

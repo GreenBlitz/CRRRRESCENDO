@@ -1,17 +1,13 @@
-package edu.greenblitz.robotName.subsystems.climbing.lifter.falconLifter;
+package edu.greenblitz.robotName.subsystems.climber.lifter.falconLifter;
 
-import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.climbing.lifter.ILifter;
-import edu.greenblitz.robotName.subsystems.climbing.lifter.LifterConstants;
-import edu.greenblitz.robotName.subsystems.climbing.lifter.LifterInputsAutoLogged;
-import edu.greenblitz.robotName.subsystems.climbing.lifter.neoLifter.NeoLifterConstants;
+import edu.greenblitz.robotName.subsystems.climber.lifter.ILifter;
+import edu.greenblitz.robotName.subsystems.climber.lifter.LifterInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.falconPivot.FalconPivotConstants;
 import edu.greenblitz.robotName.utils.motors.GBTalonFXPro;
 

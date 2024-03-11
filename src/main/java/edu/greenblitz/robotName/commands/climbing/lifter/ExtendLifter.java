@@ -1,21 +1,33 @@
 package edu.greenblitz.robotName.commands.climbing.lifter;
 
-import edu.greenblitz.robotName.subsystems.climbing.lifter.LifterConstants;
+import edu.greenblitz.robotName.subsystems.climber.lifter.LifterConstants;
+import edu.greenblitz.robotName.subsystems.climber.solenoid.Solenoid;
 
 public class ExtendLifter extends LifterCommand {
 
-    @Override
-    public void initialize() {
-        lifter.goToPosition(LifterConstants.LIFTER_EXTENDED_POSITION);
+    private Solenoid solenoid;
+
+    public ExtendLifter(){
+        super();
+        solenoid = Solenoid.getInstance();
+        require(solenoid);
     }
-    
+
+    @Override
+    public void execute() {
+        lifter.setPower(LifterConstants.POWER_TO_EXTEND_LIFTER);
+        solenoid.holdSolenoid();
+    }
+
+
     @Override
     public boolean isFinished() {
-        return lifter.isAtPosition(LifterConstants.LIFTER_EXTENDED_POSITION);
+        return lifter.isPassedPosition(LifterConstants.LIFTER_EXTENDED_POSITION, true);
     }
 
     @Override
     public void end(boolean interrupted) {
         lifter.stop();
+        solenoid.openSolenoid();
     }
 }

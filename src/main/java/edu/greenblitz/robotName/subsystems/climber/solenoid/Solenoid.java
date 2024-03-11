@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.climbing.solenoid;
+package edu.greenblitz.robotName.subsystems.climber.solenoid;
 
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;

@@ -1,8 +1,8 @@
-package edu.greenblitz.robotName.subsystems.climbing.lifter.neoLifter;
+package edu.greenblitz.robotName.subsystems.climber.lifter.neoLifter;
 
 import com.revrobotics.CANSparkBase;
 import com.revrobotics.SparkLimitSwitch;
-import edu.greenblitz.robotName.subsystems.climbing.lifter.LifterConstants;
+import edu.greenblitz.robotName.subsystems.climber.lifter.LifterConstants;
 import edu.greenblitz.robotName.utils.PIDObject;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;

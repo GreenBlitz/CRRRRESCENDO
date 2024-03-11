@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.climbing.solenoid;
+package edu.greenblitz.robotName.subsystems.climber.solenoid;
 
 public interface ISolenoid {
 

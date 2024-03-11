@@ -1,10 +1,10 @@
-package edu.greenblitz.robotName.subsystems.climbing.lifter.falconLifter;
+package edu.greenblitz.robotName.subsystems.climber.lifter.falconLifter;
 
 import com.ctre.phoenix6.configs.*;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.ReverseLimitTypeValue;
 import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.climbing.lifter.LifterConstants;
+import edu.greenblitz.robotName.subsystems.climber.lifter.LifterConstants;
 
 public class FalconLifterConstants {
 

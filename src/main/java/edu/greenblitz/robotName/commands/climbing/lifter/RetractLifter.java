@@ -1,17 +1,17 @@
 package edu.greenblitz.robotName.commands.climbing.lifter;
 
-import edu.greenblitz.robotName.subsystems.climbing.lifter.LifterConstants;
+import edu.greenblitz.robotName.subsystems.climber.lifter.LifterConstants;
 
 public class RetractLifter extends LifterCommand {
 
     @Override
     public void initialize() {
-        lifter.goToPosition(LifterConstants.LIFTER_RETRACTED_POSITION);
+        lifter.setPower(LifterConstants.POWER_TO_RETRACT_LIFTER);
     }
 
     @Override
     public boolean isFinished() {
-        return lifter.isAtPosition(LifterConstants.LIFTER_RETRACTED_POSITION);
+        return lifter.isPassedPosition(LifterConstants.LIFTER_RETRACTED_POSITION, false);
     }
 
     @Override

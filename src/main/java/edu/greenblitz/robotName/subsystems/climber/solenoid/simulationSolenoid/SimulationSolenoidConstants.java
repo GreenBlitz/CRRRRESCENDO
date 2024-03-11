@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.subsystems.climbing.solenoid.simulationSolenoid;
+package edu.greenblitz.robotName.subsystems.climber.solenoid.simulationSolenoid;
 
 public class SimulationSolenoidConstants {
 

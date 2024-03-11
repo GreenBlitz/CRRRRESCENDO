@@ -1,8 +1,8 @@
-package edu.greenblitz.robotName.subsystems.climbing.solenoid;
+package edu.greenblitz.robotName.subsystems.climber.solenoid;
 
 import edu.greenblitz.robotName.Robot;
-import edu.greenblitz.robotName.subsystems.climbing.solenoid.simulationSolenoid.SimulationSolenoid;
-import edu.greenblitz.robotName.subsystems.climbing.solenoid.talonSRXSolenoid.TalonSRXSolenoid;
+import edu.greenblitz.robotName.subsystems.climber.solenoid.simulationSolenoid.SimulationSolenoid;
+import edu.greenblitz.robotName.subsystems.climber.solenoid.talonSRXSolenoid.TalonSRXSolenoid;
 
 public class SolenoidFactory {
 

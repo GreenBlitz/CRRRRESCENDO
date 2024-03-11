@@ -14,12 +14,10 @@ public class ElbowDefaultCommand extends ElbowCommand {
 	@Override
 	public void execute() {
 		if (ScoringModeSelector.isClimbMode()) {
-			elbow.setIdleMode(NeutralModeValue.Brake);
-			SmartDashboard.putBoolean("is elbow running", true);
 			elbow.setPower(0);
+			elbow.setCurrentAngle();
 		}
 		else {
-			elbow.setIdleMode(NeutralModeValue.Coast);
 			elbow.standInPlace();
 		}
 	}

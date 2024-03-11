@@ -1,14 +1,13 @@
-package edu.greenblitz.robotName.subsystems.climbing.lifter.simulationLifter;
+package edu.greenblitz.robotName.subsystems.climber.lifter.simulationLifter;
 
 import com.revrobotics.CANSparkMax;
 import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.subsystems.climbing.lifter.ILifter;
-import edu.greenblitz.robotName.subsystems.climbing.lifter.LifterConstants;
-import edu.greenblitz.robotName.subsystems.climbing.lifter.LifterInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.climber.lifter.ILifter;
+import edu.greenblitz.robotName.subsystems.climber.lifter.LifterConstants;
+import edu.greenblitz.robotName.subsystems.climber.lifter.LifterInputsAutoLogged;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.system.plant.DCMotor;
-import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import org.littletonrobotics.junction.Logger;
 

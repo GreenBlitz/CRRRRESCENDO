@@ -9,7 +9,7 @@ public class MoveLifterByPower extends LifterCommand {
 	}
 
 	@Override
-	public void initialize() {
+	public void execute() {
 		lifter.setPower(power);
 	}
 

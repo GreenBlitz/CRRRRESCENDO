@@ -1,12 +1,10 @@
-package edu.greenblitz.robotName.subsystems.climbing.lifter.neoLifter;
+package edu.greenblitz.robotName.subsystems.climber.lifter.neoLifter;
 
-import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
-import edu.greenblitz.robotName.subsystems.climbing.lifter.ILifter;
-import edu.greenblitz.robotName.subsystems.climbing.lifter.LifterConstants;
-import edu.greenblitz.robotName.subsystems.climbing.lifter.LifterInputsAutoLogged;
+import edu.greenblitz.robotName.subsystems.climber.lifter.ILifter;
+import edu.greenblitz.robotName.subsystems.climber.lifter.LifterConstants;
+import edu.greenblitz.robotName.subsystems.climber.lifter.LifterInputsAutoLogged;
 import edu.greenblitz.robotName.utils.motors.GBSparkMax;
 
 public class NeoLifter implements ILifter {
