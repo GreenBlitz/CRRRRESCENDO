@@ -1,22 +1,14 @@
-package edu.greenblitz.robotName.commands.systemCheck;
+package edu.greenblitz.robotName.commands.climbing.lifter;
 
-import edu.greenblitz.robotName.subsystems.climbing.lifter.Lifter;
 import edu.greenblitz.robotName.subsystems.climbing.lifter.LifterConstants;
 
-public class CheckLiftUp extends SystemCheckCommand {
-
-    protected Lifter lifter;
-
-    public CheckLiftUp() {
-        lifter = Lifter.getInstance();
-        require(lifter);
-    }
+public class ExtendLifter extends LifterCommand {
 
     @Override
-    public void execute() {
+    public void initialize() {
         lifter.goToPosition(LifterConstants.LIFTER_EXTENDED_POSITION);
     }
-
+    
     @Override
     public boolean isFinished() {
         return lifter.isAtPosition(LifterConstants.LIFTER_EXTENDED_POSITION);
@@ -24,7 +16,6 @@ public class CheckLiftUp extends SystemCheckCommand {
 
     @Override
     public void end(boolean interrupted) {
-        super.end(interrupted);
         lifter.stop();
     }
 }
