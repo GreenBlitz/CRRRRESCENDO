@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.commands.climbing.lifter;
+package edu.greenblitz.robotName.commands.climbing;
 
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToClimb;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
