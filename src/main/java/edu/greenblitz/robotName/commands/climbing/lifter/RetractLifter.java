@@ -6,6 +6,11 @@ public class RetractLifter extends LifterCommand {
 
     @Override
     public void initialize() {
+        lifter.setMaxCurrentToZero();
+    }
+
+    @Override
+    public void execute() {
         lifter.setPower(LifterConstants.POWER_TO_RETRACT_LIFTER);
     }
 
@@ -16,6 +21,7 @@ public class RetractLifter extends LifterCommand {
 
     @Override
     public void end(boolean interrupted) {
-        lifter.stop();
+        if (interrupted)
+            lifter.stop();
     }
 }

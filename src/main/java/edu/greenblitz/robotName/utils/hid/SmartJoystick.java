@@ -32,7 +32,8 @@ public class SmartJoystick {
 	
 	public final AxisButton
 			L2,
-			R2;
+			R2,
+			LEFT_Y_AXIS;
 	
 	public final POVButton POV_UP,
 			POV_RIGHT,
@@ -83,6 +84,7 @@ public class SmartJoystick {
 		R3 = new JoystickButton(joystick, 10);
 		L2 = new AxisButton(joystick,2, 0.3);
 		R2 = new AxisButton(joystick,3, 0.3);
+		LEFT_Y_AXIS = new AxisButton(joystick, 1, 0.1);
 		POV_UP = new POVButton(joystick, 0);
 		POV_RIGHT = new POVButton(joystick, 90);
 		POV_DOWN = new POVButton(joystick, 180);

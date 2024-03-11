@@ -9,6 +9,12 @@ public class LifterConstants {
 
     public static final double POWER_TO_RETRACT_LIFTER = -0.4;
 
+    public static final double POWER_TO_RETRACT_LIFTER_SLOW = -0.1;
+
+    public static final double TIME_TO_RETRACT_SLOW = 3;
+
+    public static final double DISTANCE_TO_TRAVEL_SLOW = 5;
+
     public static final double TIME_TO_RELEASE_LIFTER = 0.2; //find
 
     public static final Translation3d ROBOT_RELATIVE_LIFTER_POSITION = new Translation3d(-0.24, 0, 0.35);
@@ -29,7 +35,7 @@ public class LifterConstants {
 
     public static final double FORWARD_LIMIT = 63;
 
-    public static final double BACKWARD_LIMIT = -1;
+    public static final double BACKWARD_LIMIT = -5;
 
     public static final double STARTING_POSITION = 0;
 

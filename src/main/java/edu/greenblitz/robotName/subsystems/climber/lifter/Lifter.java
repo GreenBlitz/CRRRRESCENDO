@@ -10,12 +10,14 @@ public class Lifter extends GBSubsystem {
     private static Lifter instance;
     private ILifter lifter;
     private LifterInputsAutoLogged lifterInputs;
+    private double maxCurrent;
 
     private Lifter() {
         lifter = LifterFactory.create();
         lifterInputs = new LifterInputsAutoLogged();
         lifter.updateInputs(lifterInputs);
         resetEncoderPosition();
+        maxCurrent = 0;
     }
 
     public static Lifter getInstance() {
@@ -35,6 +37,9 @@ public class Lifter extends GBSubsystem {
         lifter.updateInputs(lifterInputs);
         Logger.processInputs("Climbing/Lifter", lifterInputs);
         Logger.recordOutput("Climbing/Lifter", getLifterPose3d());
+        if (getCurrent() > maxCurrent){
+            maxCurrent = getCurrent();
+        }
     }
 
     public void goToPosition(double targetPosition) {
@@ -87,6 +92,19 @@ public class Lifter extends GBSubsystem {
     public double getPosition() {
         return lifterInputs.position;
     }
+
+    public double getCurrent() {
+        return lifterInputs.outputCurrent;
+    }
+
+    public double getMaxCurrent() {
+        return maxCurrent;
+    }
+
+    public void setMaxCurrentToZero(){
+        maxCurrent = 0;
+    }
+
 
     public Pose3d getLifterPose3d() {
         return new Pose3d(

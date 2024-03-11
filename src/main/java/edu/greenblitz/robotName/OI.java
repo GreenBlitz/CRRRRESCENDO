@@ -12,7 +12,9 @@ import edu.greenblitz.robotName.commands.arm.roller.MoveNoteInRoller;
 import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRollerToAmp;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.climbing.ClimbUp;
+import edu.greenblitz.robotName.commands.climbing.CloseAndThenHoldSolenoid;
 import edu.greenblitz.robotName.commands.climbing.getLifterReady;
+import edu.greenblitz.robotName.commands.climbing.lifter.MoveLifterByJoystick;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringModeWithPivotForJoystick;
@@ -41,7 +43,9 @@ import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public class OI {
 
@@ -155,6 +159,17 @@ public class OI {
 		usedJoystick.A.whileTrue(new getLifterReady());
 		usedJoystick.Y.whileTrue(new ClimbUp());
 
+		usedJoystick.LEFT_Y_AXIS.whileTrue(
+				new ConditionalCommand(
+						new SequentialCommandGroup(
+								new CloseAndThenHoldSolenoid(),
+								new MoveLifterByJoystick(usedJoystick)
+						),
+						new MoveLifterByJoystick(usedJoystick),
+						() -> (usedJoystick.getAxisValue(SmartJoystick.Axis.LEFT_Y) > 0)
+				)
+		);
+
 		//Scoring Mode Change
 		usedJoystick.START.whileTrue(new SetScoringMode(ScoringMode.CLIMB)
 				.alongWith(new InstantCommand(() -> Elbow.getInstance().setIdleMode(NeutralModeValue.Brake)))
@@ -184,11 +199,11 @@ public class OI {
 	}
 
 	public void initializeDefaultCommands() {
-		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+//		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
 		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
 		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
 		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
-		LED.getInstance().setDefaultCommand(new UpdateLEDStateDefaultCommand());
+//		LED.getInstance().setDefaultCommand(new UpdateLEDStateDefaultCommand());
 	}
 
 }

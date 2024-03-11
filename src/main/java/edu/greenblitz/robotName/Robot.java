@@ -94,13 +94,7 @@ public class Robot extends LoggedRobot {
 
     @Override
     public void teleopInit() {
-		if (FMSUtils.isRedAlliance()){
-			SwerveChassis.getInstance().resetChassisAngle(
-					SwerveChassis.getInstance().getGyroAngle().plus(Rotation2d.fromDegrees(180))
-			);
-		}
         Dashboard.getInstance().activateDriversDashboard();
-		new RumbleRomy(OI.getInstance().getMainJoystick()).schedule();
     }
 
 	@Override

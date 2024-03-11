@@ -29,10 +29,10 @@ public class FalconLifterConstants {
 
     public static final CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();
     static {
-        CURRENT_LIMITS_CONFIGS.StatorCurrentLimit = 40;
-        CURRENT_LIMITS_CONFIGS.StatorCurrentLimitEnable = false;
-        CURRENT_LIMITS_CONFIGS.SupplyCurrentLimit = 40;
-        CURRENT_LIMITS_CONFIGS.SupplyCurrentLimitEnable = false;
+        CURRENT_LIMITS_CONFIGS.StatorCurrentLimit = 50;
+        CURRENT_LIMITS_CONFIGS.StatorCurrentLimitEnable = true;
+        CURRENT_LIMITS_CONFIGS.SupplyCurrentLimit = 50;
+        CURRENT_LIMITS_CONFIGS.SupplyCurrentLimitEnable = true;
     }
 
     public static final SoftwareLimitSwitchConfigs SOFTWARE_LIMIT_SWITCH_CONFIGS = new SoftwareLimitSwitchConfigs();

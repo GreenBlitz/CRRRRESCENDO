@@ -40,5 +40,6 @@ public class PushSolenoidWheel extends LifterCommand {
 	@Override
 	public void end(boolean interrupted) {
 		lifter.stop();
+		solenoid.holdSolenoid();
 	}
 }
