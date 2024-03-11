@@ -31,9 +31,11 @@ import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
+import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotInterpulationMap;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
@@ -122,7 +124,7 @@ public class OI {
 		secondJoystick.X.whileTrue(new MoveElbowAndWristToSafe());
 		
 		//FlyWheel Run
-		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityUntilInterrupted(100, secondJoystick));
+		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityUntilInterrupted(80, secondJoystick));
 		
 		//Pivot Poses
 		secondJoystick.POV_UP.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.RIGHT_STAGE.ANGLE));
@@ -134,7 +136,7 @@ public class OI {
 		secondJoystick.R1.whileTrue(new RunFunnelByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_Y).alongWith(new ShootSimulationNote()));
 		
 		//Intake
-		secondJoystick.POV_RIGHT.whileTrue(new RunIntakeByPower(-0.4));
+		secondJoystick.POV_RIGHT.whileTrue(new MovePivotToAngle(Rotation2d.fromRadians(PivotInterpulationMap.DISTANCE_TO_ANGLE.get(5.0))));
 		
 		//Fully collect
 		secondJoystick.Y.whileTrue(new CollectNoteToScoringMode());

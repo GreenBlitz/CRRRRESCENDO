@@ -15,8 +15,7 @@ public class PivotInterpulationMap {
 	static {
 		DISTANCE_TO_ANGLE.put(0.9, PivotConstants.PresetPositions.CLOSE_SHOOTING.ANGLE.getRadians());
 		DISTANCE_TO_ANGLE.put(3.47, PivotConstants.PresetPositions.PODIUM.ANGLE.getRadians());
-		DISTANCE_TO_ANGLE.put(5.39, PivotConstants.PresetPositions.RIGHT_STAGE.ANGLE.getRadians());
-		DISTANCE_TO_ANGLE.put(3.4, Units.degreesToRadians(34.75));
-		DISTANCE_TO_ANGLE.put(4.05, Units.degreesToRadians(32.5));
+		DISTANCE_TO_ANGLE.put(4.5, Units.degreesToRadians(30));
+		DISTANCE_TO_ANGLE.put(5.9, PivotConstants.PresetPositions.RIGHT_STAGE.ANGLE.getRadians()); //not eright atage any
 	}
 }
