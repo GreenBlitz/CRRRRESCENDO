@@ -129,13 +129,14 @@ public class OI {
 		secondJoystick.POV_UP.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.RIGHT_STAGE.ANGLE));
 		secondJoystick.POV_LEFT.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.PODIUM.ANGLE));
 		secondJoystick.POV_DOWN.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.CLOSE_SHOOTING.ANGLE));
-		secondJoystick.R1.whileTrue(new MovePivotByJoystick(secondJoystick, SmartJoystick.Axis.LEFT_Y));
+//		secondJoystick.R1.whileTrue(new MovePivotByJoystick(secondJoystick, SmartJoystick.Axis.LEFT_Y));
 		
 		//Funnel
 		secondJoystick.R1.whileTrue(new RunFunnelByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_Y).alongWith(new ShootSimulationNote()));
 		
 		//Intake
-		secondJoystick.POV_RIGHT.whileTrue(new MovePivotToAngle(Rotation2d.fromRadians(PivotInterpolationMap.DISTANCE_TO_ANGLE.get(5.0))));
+		secondJoystick.POV_RIGHT.whileTrue(new MovePivotToAngle(
+				Rotation2d.fromRadians(PivotInterpolationMap.DISTANCE_TO_ANGLE.get(5.0))));
 		
 		//Fully collect
 		secondJoystick.Y.whileTrue(new CollectNoteToScoringMode());
