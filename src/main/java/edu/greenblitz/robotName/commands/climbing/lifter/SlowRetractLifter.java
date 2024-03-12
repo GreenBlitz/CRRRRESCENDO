@@ -22,7 +22,6 @@ public class SlowRetractLifter extends LifterCommand {
 		timer.restart();
 		startingPose = lifter.getPosition();
 		power = lifter.getMaxCurrent() > 25 ? LifterConstants.POWER_TO_RETRACT_LIFTER : LifterConstants.POWER_TO_RETRACT_LIFTER_SLOW;
-		SmartDashboard.putNumber("Lifter current above 10",lifter.getMaxCurrent());
 	}
 
 	@Override

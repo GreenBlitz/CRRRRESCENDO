@@ -22,7 +22,7 @@ public class ExtendLifter extends LifterCommand {
 
     @Override
     public boolean isFinished() {
-        return lifter.isPassedPosition(LifterConstants.LIFTER_EXTENDED_POSITION, true);
+        return lifter.didPassedPosition(LifterConstants.LIFTER_EXTENDED_POSITION, true);
     }
 
     @Override

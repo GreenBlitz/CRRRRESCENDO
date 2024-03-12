@@ -78,7 +78,7 @@ public class Lifter extends GBSubsystem {
         return Math.abs(targetPosition - lifterInputs.position) < LifterConstants.TOLERANCE;
     }
 
-    public boolean isPassedPosition(double targetPosition, boolean isUp){
+    public boolean didPassedPosition(double targetPosition, boolean isUp){
         if (isUp){
             return lifterInputs.position >= targetPosition;
         }

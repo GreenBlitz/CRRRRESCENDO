@@ -2,7 +2,7 @@ package edu.greenblitz.robotName.commands.climbing.lifter;
 
 import edu.greenblitz.robotName.subsystems.climber.lifter.LifterConstants;
 
-public class RetractLifter extends LifterCommand {
+public class RetractLifterWithoutStopUnlessInterrupted extends LifterCommand {
 
     @Override
     public void initialize() {
@@ -21,6 +21,8 @@ public class RetractLifter extends LifterCommand {
 
     @Override
     public void end(boolean interrupted) {
-        lifter.stop();
+        if (interrupted)
+            lifter.stop();
     }
+
 }
