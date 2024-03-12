@@ -18,15 +18,22 @@
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "speaker start to 2"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "grip"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "grip"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "speaker start to 2"
+                }
+              }
+            ]
           }
         },
         {
@@ -42,15 +49,22 @@
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "speaker to 1"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "grip"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "grip"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "speaker to 1"
+                }
+              }
+            ]
           }
         },
         {
@@ -66,15 +80,22 @@
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "speaker mid to 3"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "grip"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "grip"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "speaker mid to 3"
+                }
+              }
+            ]
           }
         },
         {
@@ -86,7 +107,7 @@
         {
           "type": "named",
           "data": {
-            "name": "shoot"
+            "name": "close shoot"
           }
         }
       ]

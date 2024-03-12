@@ -3,6 +3,7 @@ package edu.greenblitz.robotName.commands.swerve;
 import edu.greenblitz.robotName.OI;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.function.DoubleSupplier;
 
@@ -49,6 +50,7 @@ public class MoveByJoysticks extends SwerveCommand {
 	
 	@Override
 	public void execute() {
+		//todo - ask Noam
 //        double leftwardSpeed = SwerveChassisUtils.joystickValueToOutputValue(
 //                OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_X),
 //                linearSpeedFactor,
@@ -65,7 +67,7 @@ public class MoveByJoysticks extends SwerveCommand {
 //                angularSpeedFactor,
 //                ChassisConstants.ANGULAR_JOYSTICK_INVERTED
 //        );
-		double leftwardSpeed = -OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_X) * linearSpeedFactor;
+		double leftwardSpeed = OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_X) * linearSpeedFactor;
 		
 		double forwardSpeed = OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_Y) * linearSpeedFactor;
 		
@@ -75,12 +77,12 @@ public class MoveByJoysticks extends SwerveCommand {
 			swerveChassis.stop();
 			return;
 		}
-		
+
 		swerveChassis.moveByChassisSpeeds(
 				forwardSpeed,
-				leftwardSpeed,
-				angularSpeed,
-				swerveChassis.getGyroAngle()
+				-leftwardSpeed,
+				-angularSpeed,
+				swerveChassis.getChassisAngle()
 		);
 	}
 	

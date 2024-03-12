@@ -79,7 +79,7 @@ public class FalconFlyWheelConstants {
 		public static final FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();
 		
 		static {
-			FEEDBACK_CONFIGS.SensorToMechanismRatio = 36 / 42.0;
+			FEEDBACK_CONFIGS.SensorToMechanismRatio = 40 / 36.0;
 		}
 		
 		public static final CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS = new CurrentLimitsConfigs();
