@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.commands.climbing.lifter;
 
+import edu.greenblitz.robotName.subsystems.climber.lifter.Lifter;
 import edu.greenblitz.robotName.subsystems.climber.lifter.LifterConstants;
 
 public class RetractLifterWithoutStopUnlessInterrupted extends LifterCommand {
@@ -16,7 +17,7 @@ public class RetractLifterWithoutStopUnlessInterrupted extends LifterCommand {
 
     @Override
     public boolean isFinished() {
-        return lifter.didPassedPosition(LifterConstants.LIFTER_RETRACTED_POSITION, false);
+        return lifter.hasPassedPositionWhenRetractLifter(LifterConstants.LIFTER_RETRACTED_POSITION);
     }
 
     @Override

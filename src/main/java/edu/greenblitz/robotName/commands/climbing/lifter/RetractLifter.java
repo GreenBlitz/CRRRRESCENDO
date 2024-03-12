@@ -16,7 +16,7 @@ public class RetractLifter extends LifterCommand {
 
     @Override
     public boolean isFinished() {
-        return lifter.didPassedPosition(LifterConstants.LIFTER_RETRACTED_POSITION, false);
+        return lifter.hasPassedPositionWhenRetractLifter(LifterConstants.LIFTER_RETRACTED_POSITION);
     }
 
     @Override
