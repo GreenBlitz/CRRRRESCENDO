@@ -5,7 +5,9 @@ import edu.greenblitz.robotName.subsystems.climber.solenoid.SolenoidConstants;
 import edu.wpi.first.wpilibj.Timer;
 
 public class PushSolenoidWheelOnly extends LifterCommand{
+
 	private Timer timer;
+
 	public PushSolenoidWheelOnly(){
 		super();
 		timer = new Timer();

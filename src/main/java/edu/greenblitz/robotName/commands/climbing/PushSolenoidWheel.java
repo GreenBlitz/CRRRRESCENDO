@@ -1,9 +1,9 @@
-package edu.greenblitz.robotName.commands.climbing.lifter;
+package edu.greenblitz.robotName.commands.climbing;
 
+import edu.greenblitz.robotName.commands.climbing.lifter.LifterCommand;
 import edu.greenblitz.robotName.subsystems.climber.lifter.LifterConstants;
 import edu.greenblitz.robotName.subsystems.climber.solenoid.Solenoid;
 import edu.greenblitz.robotName.subsystems.climber.solenoid.SolenoidConstants;
-import edu.greenblitz.robotName.utils.GBCommand;
 import edu.wpi.first.wpilibj.Timer;
 
 public class PushSolenoidWheel extends LifterCommand {
@@ -15,8 +15,8 @@ public class PushSolenoidWheel extends LifterCommand {
 	public PushSolenoidWheel() {
 		super();
 		solenoid = Solenoid.getInstance();
-		timer = new Timer();
 		require(solenoid);
+		timer = new Timer();
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class PushSolenoidWheel extends LifterCommand {
 	@Override
 	public void execute() {
 		lifter.setPower(LifterConstants.LIFTER_POWER_TO_RELEASES_SOLENOID);
-		if (timer.hasElapsed(SolenoidConstants.SECONDS_TO_RELEASE_SOLENOID / 2)){
+		if (timer.hasElapsed(SolenoidConstants.SECONDS_TO_RELEASE_SOLENOID / 2)) {
 			solenoid.closeSolenoid();
 		}
 	}

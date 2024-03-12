@@ -79,11 +79,11 @@ public class Lifter extends GBSubsystem {
     }
 
     public boolean hasPassedPositionWhenExtendLifter(double targetPosition){
-        return lifterInputs.position>=targetPosition;
+        return lifterInputs.position >= targetPosition;
     }
 
     public boolean hasPassedPositionWhenRetractLifter(double targetPosition){
-        return lifterInputs.position<=targetPosition;
+        return lifterInputs.position <= targetPosition;
     }
 
 
