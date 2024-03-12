@@ -158,16 +158,16 @@ public class OI {
 		SmartJoystick usedJoystick = thirdJoystick;
 
 		//LifterControl
-		usedJoystick.Y.whileTrue(new ScoreToTrap());
+		usedJoystick.Y.whileTrue(new ScoreToTrap());//do this after everything is in position and dont stop until note is inside
 
-		usedJoystick.A.whileTrue(new TransferNote());
+		usedJoystick.A.whileTrue(new TransferNote());//this second
 
 		//Scoring Mode Change
-		usedJoystick.START.whileTrue(new SetScoringMode(ScoringMode.CLIMB).andThen(new getLifterReady()));
+		usedJoystick.START.whileTrue(new SetScoringMode(ScoringMode.CLIMB).andThen(new getLifterReady()));//this first and long
 		usedJoystick.BACK.whileTrue(new SetScoringMode(ScoringMode.AMP));
 
 		//Arm Control
-		usedJoystick.R1.whileTrue(new MoveElbowByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_X));
+		usedJoystick.R1.whileTrue(new MoveElbowByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_X));//move to above chassis and stop also this needs to push chain
 	}
 
 	public void fourthJoystickButtons() {
