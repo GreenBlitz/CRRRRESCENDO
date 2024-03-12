@@ -96,14 +96,15 @@ public class Robot extends LoggedRobot {
 		LED.init();
 	}
 
+
 	@Override
 	public void teleopInit() {
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
 		Dashboard.getInstance().activateDriversDashboard();
-		new RumbleRomy(OI.getInstance().getMainJoystick()).schedule();
 	}
+
 
 	@Override
 	public void robotPeriodic() {
