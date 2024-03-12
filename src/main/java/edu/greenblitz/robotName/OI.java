@@ -2,6 +2,7 @@ package edu.greenblitz.robotName;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.revrobotics.CANSparkBase;
+import edu.greenblitz.robotName.commands.arm.ScoreToTrap;
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowByJoystick;
 import edu.greenblitz.robotName.commands.arm.wrist.MoveWristByButton;
 import edu.greenblitz.robotName.commands.LED.UpdateLEDStateDefaultCommand;
@@ -156,39 +157,14 @@ public class OI {
 		SmartJoystick usedJoystick = thirdJoystick;
 
 		//LifterControl
-		usedJoystick.A.whileTrue(new getLifterReady());
-		usedJoystick.Y.whileTrue(new ClimbUp());
-
-		usedJoystick.LEFT_Y_AXIS.whileTrue(
-				new ConditionalCommand(
-						new SequentialCommandGroup(
-								new CloseAndThenHoldSolenoid(),
-								new MoveLifterByJoystick(usedJoystick)
-						),
-						new MoveLifterByJoystick(usedJoystick),
-						() -> (usedJoystick.getAxisValue(SmartJoystick.Axis.LEFT_Y) > 0)
-				)
-		);
+		usedJoystick.Y.whileTrue(new ScoreToTrap());
 
 		//Scoring Mode Change
-		usedJoystick.START.whileTrue(new SetScoringMode(ScoringMode.CLIMB)
-				.alongWith(new InstantCommand(() -> Elbow.getInstance().setIdleMode(NeutralModeValue.Brake)))
-				.alongWith(new InstantCommand(() -> Lifter.getInstance().setIdleMode(CANSparkBase.IdleMode.kBrake)))
-		);
-		usedJoystick.BACK.whileTrue(new SetScoringMode(ScoringMode.AMP)
-				.alongWith(new InstantCommand(() -> Elbow.getInstance().setIdleMode(NeutralModeValue.Coast)))
-				.alongWith(new InstantCommand(() -> Lifter.getInstance().setIdleMode(CANSparkBase.IdleMode.kCoast))));
+		usedJoystick.START.whileTrue(new SetScoringMode(ScoringMode.CLIMB).andThen(new getLifterReady()));
+		usedJoystick.BACK.whileTrue(new SetScoringMode(ScoringMode.AMP));
 
 		//Arm Control
 		usedJoystick.R1.whileTrue(new MoveElbowByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_X));
-
-		//Wrist Control
-		usedJoystick.POV_UP.whileTrue(new MoveWristByButton(true));
-		usedJoystick.POV_DOWN.whileTrue(new MoveWristByButton(false));
-
-		//Note-Roller Control
-		usedJoystick.POV_RIGHT.whileTrue(new MoveNoteInRoller(true));
-		usedJoystick.POV_LEFT.whileTrue(new MoveNoteInRoller(false));
 	}
 
 	public void fourthJoystickButtons() {
