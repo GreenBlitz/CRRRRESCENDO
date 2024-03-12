@@ -108,12 +108,6 @@ public class OI {
 		//Intake
 		mainJoystick.R2.whileTrue(new RunIntakeByPower(0.5));
 
-
-		//check
-		mainJoystick.A.whileTrue(new RotateToAngle(Rotation2d.fromDegrees(90)));
-		mainJoystick.L1.whileTrue(new RotateToAngle(Rotation2d.fromDegrees(180)));
-		mainJoystick.L2.whileTrue(new RotateToAngle(Rotation2d.fromDegrees(0)));
-
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
 	}
 	
