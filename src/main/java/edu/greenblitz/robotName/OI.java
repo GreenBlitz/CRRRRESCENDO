@@ -19,6 +19,7 @@ import edu.greenblitz.robotName.commands.climbing.lifter.MoveLifterByJoystick;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringModeWithPivotForJoystick;
+import edu.greenblitz.robotName.commands.getNoteToSystem.TransferNote;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByPower;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityUntilInterrupted;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
@@ -158,6 +159,8 @@ public class OI {
 
 		//LifterControl
 		usedJoystick.Y.whileTrue(new ScoreToTrap());
+
+		usedJoystick.A.whileTrue(new TransferNote());
 
 		//Scoring Mode Change
 		usedJoystick.START.whileTrue(new SetScoringMode(ScoringMode.CLIMB).andThen(new getLifterReady()));
