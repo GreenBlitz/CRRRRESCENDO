@@ -1,12 +1,11 @@
 package edu.greenblitz.robotName.subsystems.shooter.pivot;
 
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.interpolation.InterpolatingTreeMap;
 import edu.wpi.first.math.interpolation.Interpolator;
 import edu.wpi.first.math.interpolation.InverseInterpolator;
 import edu.wpi.first.math.util.Units;
 
-public class PivotInterpulationMap {
+public class PivotInterpolationMap {
 	
 	public static InterpolatingTreeMap<Double, Double> DISTANCE_TO_ANGLE = new InterpolatingTreeMap<>(
 			InverseInterpolator.forDouble(), Interpolator.forDouble()

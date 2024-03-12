@@ -2,7 +2,7 @@ package edu.greenblitz.robotName.utils.shootingCalculations;
 
 
 import edu.greenblitz.robotName.FieldConstants;
-import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotInterpulationMap;
+import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotInterpolationMap;
 import edu.greenblitz.robotName.utils.GBMath;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -12,7 +12,7 @@ public class ShootingAngleCalculations {
 
     public static Rotation2d getShootingAngle(Translation3d robotPosition) {
         return Rotation2d.fromRadians(
-                PivotInterpulationMap.DISTANCE_TO_ANGLE
+                PivotInterpolationMap.DISTANCE_TO_ANGLE
                         .get(robotPosition.getDistance(FieldConstants.MIDDLE_OF_SPEAKER_POSITION))
         );
     }
