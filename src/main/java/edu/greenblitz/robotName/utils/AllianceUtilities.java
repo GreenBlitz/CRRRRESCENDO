@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Timer;
 
 public class AllianceUtilities {
     private static boolean IS_BLUE_ALLIANCE = false;
+
     private static double BLUE_ALLIANCE_CHECK_TIMESTAMP = -1;
 
     /**
