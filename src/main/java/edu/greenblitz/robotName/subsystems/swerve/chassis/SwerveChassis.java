@@ -1,9 +1,6 @@
 package edu.greenblitz.robotName.subsystems.swerve.chassis;
 
-import edu.greenblitz.robotName.FieldConstants;
-import edu.greenblitz.robotName.Robot;
-import edu.greenblitz.robotName.RobotConstants;
-import edu.greenblitz.robotName.VisionConstants;
+import edu.greenblitz.robotName.*;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
 import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
@@ -18,6 +15,7 @@ import edu.greenblitz.robotName.subsystems.swerve.modules.mk4iSwerveModule.MK4iS
 import edu.greenblitz.robotName.utils.AllianceUtilities;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.greenblitz.robotName.utils.RoborioUtils;
+import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.*;
@@ -323,8 +321,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     public void rotateToAngle(Rotation2d targetAngle) {
         ROTATION_PID_CONTROLLER.setSetpoint(targetAngle.getRadians());
         moveByChassisSpeeds(
-                0,
-                0,
+                -OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_X) * DRIVER_LINEAR_SPEED_FACTOR,
+                OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_Y) * DRIVER_LINEAR_SPEED_FACTOR,
                 ChassisConstants.ROTATION_PID_CONTROLLER.calculate(
                         getChassisAngle().getRadians()
                 ),

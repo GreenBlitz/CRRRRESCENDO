@@ -26,6 +26,7 @@ public class RotateToAngle extends SwerveCommand {
 
     @Override
     public void execute() {
+        angleSetPoint = angleSetPointSupplier.get();
         swerveChassis.rotateToAngle(angleSetPoint);
     }
 

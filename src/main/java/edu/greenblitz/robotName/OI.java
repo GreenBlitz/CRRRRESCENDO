@@ -24,6 +24,8 @@ import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
 import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
+import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
+import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.LED.LED;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
@@ -98,6 +100,7 @@ public class OI {
 	
 	public void romyButtons() {
 		mainJoystick.R1.whileTrue(new CollectNoteToScoringModeWithPivotForJoystick());
+		mainJoystick.L1.whileTrue(new RotateToAngle(()-> ShootingStateCalculations.getTargetRobotAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE)));
 		mainJoystick.POV_DOWN.whileTrue(new CollectNoteFromFeeder());
 		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetChassisPose()));
 		

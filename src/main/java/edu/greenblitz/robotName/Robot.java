@@ -9,6 +9,8 @@ import edu.greenblitz.robotName.commands.intake.CollectNoteFromGround;
 import edu.greenblitz.robotName.commands.intake.NoteToShooterWithArm;
 import edu.greenblitz.robotName.commands.shooter.ShootFromInFunnel;
 import edu.greenblitz.robotName.commands.shooter.ShootToSpeakerFromClose;
+import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
+import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.LED.LED;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
@@ -33,6 +35,7 @@ import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -110,6 +113,9 @@ public class Robot extends LoggedRobot {
 	public void robotPeriodic() {
 		CommandScheduler.getInstance().run();
 		RoborioUtils.updateCurrentCycleTime();
+		SmartDashboard.putNumber("setPoint", ShootingStateCalculations.getTargetRobotAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE).getDegrees());
+		SmartDashboard.putNumber("current", SwerveChassis.getInstance().getChassisAngle().getDegrees());
+		SmartDashboard.putNumber("target", ShootingStateCalculations.getTargetRobotAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE).getDegrees());
 	}
 
 	private void initializeAutonomousBuilder() {
