@@ -71,7 +71,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
                 this.kinematics,
                 getGyroAngle(),
                 getSwerveModulePositions(),
-                new Pose2d(),
+                visionPoseStartMatch(),
                 fill(
                         VisionConstants.STANDARD_DEVIATION_ODOMETRY,
                         VisionConstants.STANDARD_DEVIATION_ODOMETRY,
@@ -239,7 +239,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
                 if (visionPoseAndTimeStamp.isPresent()) {
                     Pose2d visionPose = visionPoseAndTimeStamp.get().getFirst();
                     poseEstimator.update(getGyroAngle(), getSwerveModulePositions());
-//					poseEstimator.addVisionMeasurement(visionPose, visionPoseAndTimeStamp.get().getSecond());
+					poseEstimator.addVisionMeasurement(visionPose, visionPoseAndTimeStamp.get().getSecond());
                 }
             }
         } else {

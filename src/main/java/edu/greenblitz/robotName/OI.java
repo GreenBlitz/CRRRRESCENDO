@@ -17,6 +17,7 @@ import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocity;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityUntilInterrupted;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
+import edu.greenblitz.robotName.commands.shooter.funnel.runByPowerUntilCondition.RunFunnelByPower;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
@@ -35,12 +36,19 @@ import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
+import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotInterpolationMap;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
+import edu.greenblitz.robotName.utils.AllianceUtilities;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import org.littletonrobotics.junction.Logger;
+
+import static edu.greenblitz.robotName.FieldConstants.MIDDLE_OF_BLUE_SPEAKER_POSITION;
+import static edu.greenblitz.robotName.FieldConstants.MIDDLE_OF_RED_SPEAKER_POSITION;
 
 public class OI {
 	
@@ -95,7 +103,22 @@ public class OI {
 		romyButtons();
 		shchoriButtons();
 	}
-	
+
+	public Rotation2d getTargetRobotAngle() {
+		Translation2d robotRelative = SwerveChassis.getInstance().getRobotPose2d().getTranslation();
+		Translation2d speakerPosition = AllianceUtilities.isBlueAlliance()
+				? MIDDLE_OF_BLUE_SPEAKER_POSITION.toTranslation2d()
+				: MIDDLE_OF_RED_SPEAKER_POSITION.toTranslation2d();
+		Rotation2d angle = Rotation2d.fromRadians(Math.atan2
+				(
+						speakerPosition.getY() - robotRelative.getY(),
+						speakerPosition.getX() - robotRelative.getX()
+				)
+		);
+		Logger.recordOutput("ananana", angle.getDegrees());
+		return angle;
+	}
+
 	public void romyButtons() {
 		mainJoystick.R1.whileTrue(new CollectNoteToScoringModeWithPivotForJoystick());
 		mainJoystick.POV_DOWN.whileTrue(new CollectNoteFromFeeder());
@@ -104,9 +127,12 @@ public class OI {
 		//note in roller
 		mainJoystick.B.whileTrue(new MoveNoteInRoller(true));
 		mainJoystick.X.whileTrue(new MoveNoteInRoller(false));
-		
+
+		mainJoystick.L1.whileTrue(new RotateToAngle(() -> getTargetRobotAngle()));
+
 		//Intake
 		mainJoystick.R2.whileTrue(new RunIntakeByPower(0.5));
+		mainJoystick.A.whileTrue(new RunFunnelByPower(0.8));
 
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
 	}
@@ -127,19 +153,19 @@ public class OI {
 		secondJoystick.X.whileTrue(new MoveElbowAndWristToSafe());
 		
 		//FlyWheel Run
-		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityUntilInterrupted(FlyWheelConstants.SHOOTING_VELOCITY,secondJoystick));
-
+		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityUntilInterrupted(FlyWheelConstants.SHOOTING_VELOCITY,mainJoystick));
 		//Pivot Poses
 		secondJoystick.POV_UP.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.RIGHT_STAGE.ANGLE));
 		secondJoystick.POV_LEFT.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.PODIUM.ANGLE));
 		secondJoystick.POV_DOWN.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.CLOSE_SHOOTING.ANGLE));
-		secondJoystick.R1.whileTrue(new MovePivotByJoystick(secondJoystick, SmartJoystick.Axis.LEFT_Y));
-		
+		secondJoystick.R2.whileTrue(new MovePivotByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_X));
+
 		//Funnel
 		secondJoystick.R1.whileTrue(new RunFunnelByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_Y).alongWith(new ShootSimulationNote()));
 		
 		//Intake
-		secondJoystick.POV_RIGHT.whileTrue(new RunIntakeByPower(-0.4));
+		secondJoystick.POV_RIGHT.whileTrue(new MovePivotToAngle(
+				Rotation2d.fromRadians(PivotInterpolationMap.DISTANCE_TO_ANGLE.get(5.0))));
 		
 		//Fully collect
 		secondJoystick.Y.whileTrue(new CollectNoteToScoringMode());
@@ -160,7 +186,7 @@ public class OI {
 	}
 	
 	public void initializeDefaultCommands() {
-		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+//		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
 		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
 		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
 		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());

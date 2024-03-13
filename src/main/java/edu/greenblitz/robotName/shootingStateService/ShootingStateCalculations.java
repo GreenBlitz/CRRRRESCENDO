@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.shootingStateService;
 
+import edu.greenblitz.robotName.FieldConstants;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
@@ -10,6 +11,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ShootingStateCalculations {
 
@@ -41,7 +43,7 @@ public class ShootingStateCalculations {
 				new Translation3d(
 						robotPose.getX(),
 						robotPose.getY(),
-						PivotConstants.ROBOT_RELATIVE_PIVOT_POSITION.getZ()
+						FieldConstants.MIDDLE_OF_SPEAKER_POSITION.getZ()
 				)
 		);
 	}
