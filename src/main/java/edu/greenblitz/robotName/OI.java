@@ -37,10 +37,16 @@ import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
+import edu.greenblitz.robotName.utils.AllianceUtilities;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import org.littletonrobotics.junction.Logger;
+
+import static edu.greenblitz.robotName.FieldConstants.MIDDLE_OF_BLUE_SPEAKER_POSITION;
+import static edu.greenblitz.robotName.FieldConstants.MIDDLE_OF_RED_SPEAKER_POSITION;
 
 public class OI {
 	
@@ -94,6 +100,21 @@ public class OI {
 	public void initButtons() {
 		romyButtons();
 		shchoriButtons();
+	}
+	
+	public Rotation2d getTargetRobotAngle() {
+		Translation2d robotRelative = SwerveChassis.getInstance().getRobotPose2d().getTranslation();
+		Translation2d speakerPosition = AllianceUtilities.isBlueAlliance()
+				? MIDDLE_OF_BLUE_SPEAKER_POSITION.toTranslation2d()
+				: MIDDLE_OF_RED_SPEAKER_POSITION.toTranslation2d();
+		Rotation2d angle = Rotation2d.fromRadians(Math.atan2
+				(
+						speakerPosition.getY() - robotRelative.getY(),
+						speakerPosition.getX() - robotRelative.getX()
+				)
+		);
+		Logger.recordOutput("ananana", angle.getDegrees());
+		return angle;
 	}
 	
 	public void romyButtons() {
