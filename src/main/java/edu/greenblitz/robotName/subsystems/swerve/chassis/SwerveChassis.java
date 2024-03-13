@@ -149,10 +149,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         SmartDashboard.putData(getField());
     }
 
-    public void resetChassisPosition(Pose2d pose) {
-        poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), pose);
-    }
-
     /**
      * @return returns the swerve module based on its name
      */
@@ -220,8 +216,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         resetChassisPose(new Pose2d());
     }
 
-    public void resetChassisAngle(Rotation2d angle) {
-        gyro.updateYaw(angle);
+    public void resetChassisAngle() {
         poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), getRobotPose2d());
     }
 
@@ -433,6 +428,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
     public Pose2d getRobotPose2d() {
         return robotPose.toBlueAlliancePose();
+
     }
 
     public Pose3d getRobotPose3d() {
