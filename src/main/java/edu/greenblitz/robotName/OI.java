@@ -111,11 +111,11 @@ public class OI {
 				: MIDDLE_OF_RED_SPEAKER_POSITION.toTranslation2d();
 		Rotation2d angle = Rotation2d.fromRadians(Math.atan2
 				(
-						speakerPosition.getY() - robotRelative.getY(),
-						speakerPosition.getX() - robotRelative.getX()
+						robotRelative.getY() - speakerPosition.getY(),
+						robotRelative.getX() - speakerPosition.getX()
 				)
 		);
-		Logger.recordOutput("ananana", angle.getDegrees());
+		Logger.recordOutput("ananana", angle.getRadians());
 		return angle;
 	}
 
@@ -128,7 +128,7 @@ public class OI {
 		mainJoystick.B.whileTrue(new MoveNoteInRoller(true));
 		mainJoystick.X.whileTrue(new MoveNoteInRoller(false));
 
-		mainJoystick.L1.whileTrue(new RotateToAngle(() -> getTargetRobotAngle()));
+		mainJoystick.A.whileTrue(new RotateToAngle(this::getTargetRobotAngle));
 
 		//Intake
 		mainJoystick.R2.whileTrue(new RunIntakeByPower(0.5));
