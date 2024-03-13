@@ -105,16 +105,18 @@ public class OI {
 	}
 
 	public Rotation2d getTargetRobotAngle() {
+		double xoOffsetY = 0.25;
 		Translation2d robotRelative = SwerveChassis.getInstance().getRobotPose2d().getTranslation();
 		Translation2d speakerPosition = AllianceUtilities.isBlueAlliance()
 				? MIDDLE_OF_BLUE_SPEAKER_POSITION.toTranslation2d()
 				: MIDDLE_OF_RED_SPEAKER_POSITION.toTranslation2d();
 		Rotation2d angle = Rotation2d.fromRadians(Math.atan2
 				(
-						robotRelative.getY() - speakerPosition.getY(),
+						robotRelative.getY() - speakerPosition.getY() + xoOffsetY,
 						robotRelative.getX() - speakerPosition.getX()
 				)
 		);
+		SmartDashboard.putNumber("distance to middle of speaker", robotRelative.getDistance(speakerPosition));
 		return angle;
 	}
 

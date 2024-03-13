@@ -4,6 +4,7 @@ import edu.wpi.first.math.interpolation.InterpolatingTreeMap;
 import edu.wpi.first.math.interpolation.Interpolator;
 import edu.wpi.first.math.interpolation.InverseInterpolator;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.units.Unit;
 
 public class PivotInterpolationMap {
 	
@@ -18,5 +19,6 @@ public class PivotInterpolationMap {
 		DISTANCE_TO_ANGLE.put(3.47, PivotConstants.PresetPositions.PODIUM.ANGLE.getRadians());
 		DISTANCE_TO_ANGLE.put(4.5, Units.degreesToRadians(30));
 		DISTANCE_TO_ANGLE.put(5.9, PivotConstants.PresetPositions.RIGHT_STAGE.ANGLE.getRadians());
+		DISTANCE_TO_ANGLE.put(4.7, Units.degreesToRadians(26.103515625));
 	}
 }

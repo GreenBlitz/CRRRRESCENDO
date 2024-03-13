@@ -118,6 +118,7 @@ public class Robot extends LoggedRobot {
 		NamedCommands.registerCommand("close shoot", new PushNoteToFlyWheel());
 		NamedCommands.registerCommand("note to intake", new NoteToIntake());
 		NamedCommands.registerCommand("note from intake to shooter", new NoteFromIntakeToShooterForAuto());
+		NamedCommands.registerCommand("shooting", new ShootToSpeakerFromClose());
 		AutoBuilder.configureHolonomic(
 				SwerveChassis.getInstance()::getRobotPose2d,
 				(pose) -> SwerveChassis.getInstance().resetChassisPose(AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(pose)),

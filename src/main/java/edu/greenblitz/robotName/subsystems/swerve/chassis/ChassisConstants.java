@@ -56,6 +56,7 @@ public class ChassisConstants {
 
 	static {
 		ROTATION_PID_CONTROLLER.enableContinuousInput(-Math.PI, Math.PI);
+		ROTATION_PID_CONTROLLER.setTolerance(Units.degreesToRadians(0));
 	}
 
 	public static final PIDController ROTATION_PID_CONTROLLER_RADIANS = new PIDController(0.076, 0, 0);

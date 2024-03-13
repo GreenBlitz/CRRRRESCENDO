@@ -92,7 +92,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         init();
         return instance;
     }
-
+    
     public static void init() {
         if (instance == null) {
             instance = new SwerveChassis();
