@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.utils;
 
 import edu.greenblitz.robotName.FieldConstants;
+import edu.greenblitz.robotName.Robot;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -20,6 +21,9 @@ public class AllianceUtilities {
         if (timestamp - BLUE_ALLIANCE_CHECK_TIMESTAMP > 0.5) {
             IS_BLUE_ALLIANCE = DriverStation.getAlliance().orElse(DriverStation.Alliance.Red).equals(DriverStation.Alliance.Blue);
             BLUE_ALLIANCE_CHECK_TIMESTAMP = timestamp;
+        }
+        if (Robot.isSimulation()) {
+            return true;
         }
         return IS_BLUE_ALLIANCE;
     }

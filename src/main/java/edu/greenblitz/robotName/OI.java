@@ -112,11 +112,15 @@ public class OI {
 				: MIDDLE_OF_RED_SPEAKER_POSITION.toTranslation2d();
 		Rotation2d angle = Rotation2d.fromRadians(Math.atan2
 				(
-						robotRelative.getY() - speakerPosition.getY() + xoOffsetY,
-						robotRelative.getX() - speakerPosition.getX()
+						speakerPosition.getY() - robotRelative.getY(),
+						speakerPosition.getX() - robotRelative.getX()
 				)
 		);
-		SmartDashboard.putNumber("distance to middle of speaker", robotRelative.getDistance(speakerPosition));
+		angle = angle.plus(Rotation2d.fromDegrees(180));
+
+		Logger.recordOutput("distance to middle of speaker", robotRelative.getDistance(speakerPosition));
+		Logger.recordOutput("angle of chassis target", angle.getDegrees());
+
 		return angle;
 	}
 
@@ -129,11 +133,11 @@ public class OI {
 		mainJoystick.B.whileTrue(new MoveNoteInRoller(true));
 		mainJoystick.X.whileTrue(new MoveNoteInRoller(false));
 
-		mainJoystick.L1.whileTrue(new RotateToAngle(this::getTargetRobotAngle));
+		mainJoystick.A.whileTrue(new RotateToAngle(this::getTargetRobotAngle));
 
 		//Intake
 		mainJoystick.R2.whileTrue(new RunIntakeByPower(0.5));
-		mainJoystick.A.whileTrue(new RunFunnelByPower(0.8));
+		mainJoystick.L1.whileTrue(new RunFunnelByPower(0.8));
 
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
 	}
