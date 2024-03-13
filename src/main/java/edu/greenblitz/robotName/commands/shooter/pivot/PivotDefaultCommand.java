@@ -9,7 +9,6 @@ public class PivotDefaultCommand extends PivotCommand {
 	@Override
 	public void initialize() {
 		super.initialize();
-		pivot.setCurrentAngle();
 	}
 
 	@Override

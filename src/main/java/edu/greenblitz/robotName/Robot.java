@@ -114,8 +114,7 @@ public class Robot extends LoggedRobot {
 	}
 
 	private void initializeAutonomousBuilder() {
-//		NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
-		NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
+		NamedCommands.registerCommand("close shoot", new ShootFromInFunnel());
 		NamedCommands.registerCommand("note to intake", new NoteToIntake());
 		NamedCommands.registerCommand("note from intake to shooter", new NoteFromIntakeToShooterForAuto());
 		AutoBuilder.configureHolonomic(
