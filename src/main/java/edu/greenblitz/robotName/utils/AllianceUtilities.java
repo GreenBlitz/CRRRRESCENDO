@@ -22,9 +22,6 @@ public class AllianceUtilities {
             IS_BLUE_ALLIANCE = DriverStation.getAlliance().orElse(DriverStation.Alliance.Red).equals(DriverStation.Alliance.Blue);
             BLUE_ALLIANCE_CHECK_TIMESTAMP = timestamp;
         }
-        if (Robot.isSimulation()) {
-            return true;
-        }
         return IS_BLUE_ALLIANCE;
     }
 
