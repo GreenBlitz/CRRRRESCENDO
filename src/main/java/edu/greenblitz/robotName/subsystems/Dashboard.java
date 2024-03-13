@@ -82,9 +82,10 @@ public class Dashboard extends GBSubsystem {
             swerveTab.addDouble(module + "-linear-distance", () -> SwerveChassis.getInstance().getSwerveModulePositions()[module.ordinal()].distanceMeters)
                     .withSize(2, 1).withPosition(module.ordinal() * 2, 2);
         }
-        swerveTab.addDouble("pigeon-angle", () -> SwerveChassis.getInstance().getChassisAngle().getDegrees())
+        swerveTab.addDouble("robot-angle", () -> SwerveChassis.getInstance().getChassisAngle().getDegrees())
                 .withSize(1, 1).withPosition(0, 3);
-
+        swerveTab.addDouble("pigeon-angle", () -> SwerveChassis.getInstance().getGyroAngle().getDegrees())
+                .withSize(1, 1).withPosition(0, 3);
     }
 
 }

@@ -15,8 +15,8 @@ public class PivotConstants {
 
 		STARTING(Rotation2d.fromDegrees(16)),
 		TRANSFER(Rotation2d.fromDegrees(18)),
-		SAFE(Rotation2d.fromDegrees(58)),
-		PICK_UP(Rotation2d.fromDegrees(34.3)),
+		SAFE(Rotation2d.fromDegrees(56)),
+		PICK_UP(Rotation2d.fromDegrees(38)),
 		CLOSE_SHOOTING(Rotation2d.fromDegrees(58)),
 		PODIUM(Rotation2d.fromDegrees(34.3)),
 		RIGHT_STAGE(Rotation2d.fromDegrees(27)),

@@ -29,26 +29,26 @@ public class ChassisConstants {
 	
 	static final Pose2d INITIAL_ROBOT_POSITION = new Pose2d(0, 0, new Rotation2d(0));
 
-	public static final double FRONT_LEFT_X_POSITION = 0.34733;
+	public static final double FRONT_LEFT_Y_POSITION = 0.34733;
 
-	public static final double FRONT_LEFT_Y_POSITION = 0.27833;
+	public static final double FRONT_LEFT_X_POSITION = 0.27833;
 
-	public static final double FRONT_RIGHT_X_POSITION = -0.34733;
+	public static final double FRONT_RIGHT_Y_POSITION = -0.34733;
 
-	public static final double FRONT_RIGHT_Y_POSITION = 0.27833;
+	public static final double FRONT_RIGHT_X_POSITION = 0.27833;
 
-	public static final double BACK_RIGHT_X_POSITION = -0.34733;
+	public static final double BACK_RIGHT_Y_POSITION = -0.34733;
 
-	public static final double BACK_RIGHT_Y_POSITION = -0.27833;
+	public static final double BACK_RIGHT_X_POSITION = -0.27833;
 
-	public static final double BACK_LEFT_X_POSITION = 0.34733;
+	public static final double BACK_LEFT_Y_POSITION = 0.34733;
 
-	public static final double BACK_LEFT_Y_POSITION = -0.27833;
+	public static final double BACK_LEFT_X_POSITION = -0.27833;
 
 	public static final Translation2d[] SWERVE_LOCATIONS_IN_SWERVE_KINEMATICS_COORDINATES = new Translation2d[]{
 			new Translation2d(FRONT_LEFT_X_POSITION, FRONT_LEFT_Y_POSITION),
-			new Translation2d(BACK_LEFT_X_POSITION, BACK_LEFT_Y_POSITION),
 			new Translation2d(FRONT_RIGHT_X_POSITION, FRONT_RIGHT_Y_POSITION),
+			new Translation2d(BACK_LEFT_X_POSITION, BACK_LEFT_Y_POSITION),
 			new Translation2d(BACK_RIGHT_X_POSITION, BACK_RIGHT_Y_POSITION)
 	};
 	
@@ -65,7 +65,7 @@ public class ChassisConstants {
 		ROTATION_PID_CONTROLLER_RADIANS.enableContinuousInput(-Math.PI, Math.PI);
 	}
 
-	public static final double MAX_VELOCITY = 6.6818320981472068;
+	public static final double MAX_VELOCITY = 5.2; // TODO - ASK NOAM
 	
 	public static final double MAX_ACCELERATION = 2;
 	
@@ -77,7 +77,7 @@ public class ChassisConstants {
 
 	public static final double TRANSLATION_TOLERANCE = 0.05;
 
-	public static final Rotation2d ROTATION_TOLERANCE = Rotation2d.fromDegrees(3);
+	public static final Rotation2d ROTATION_TOLERANCE = Rotation2d.fromDegrees(1.5);
 
 	public static final double CURRENT_TOLERANCE = 0.5;
 
@@ -95,10 +95,11 @@ public class ChassisConstants {
 	
 	public static final boolean LINEAR_JOYSTICK_INVERTED = false;
 	
-	public static final PIDConstants TRANSLATION_PID = new PIDConstants(1, 0, 0);
+	public static final PIDConstants TRANSLATION_PID = new PIDConstants(1.4, 0, 0);
 	
-	public static final PIDConstants ROTATION_PID = new PIDConstants(0.5, 0, 0);
-	
+	public static final PIDConstants ROTATION_PID_PATH_PLANNER = new PIDConstants(0.15, 0, 0);
+
+
 	public static final double TOTAL_ERROR_FOR_REPLANNING = 0.5;
 	
 	public static final double ERROR_SPIKE_FOR_REPLANNING = 1;
@@ -107,14 +108,12 @@ public class ChassisConstants {
 	
 	public static final HolonomicPathFollowerConfig PATH_FOLLOWER_CONFIG = new HolonomicPathFollowerConfig(
 			TRANSLATION_PID,
-			ROTATION_PID,
+			ROTATION_PID_PATH_PLANNER,
 			MAX_VELOCITY,
 			ROBOT_RADIUS,
 			new ReplanningConfig(
-					true,
-					true,
-					TOTAL_ERROR_FOR_REPLANNING,
-					ERROR_SPIKE_FOR_REPLANNING
+					false,
+					false
 			)
 	);
 	

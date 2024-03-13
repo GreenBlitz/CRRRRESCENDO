@@ -8,7 +8,7 @@ public class FlyWheelConstants {
 	
 	public static final double EPSILON_RPM = 50;
 
-	public static final double DEFAULT_VELOCITY = 50;
+	public static final double DEFAULT_VELOCITY = 30;
 
 	public static final double COLLECT_FORM_FEEDER_POWER = -0.1;
 	
@@ -16,7 +16,7 @@ public class FlyWheelConstants {
 	
 	public static final double SHOOTING_POWER = 0.9;
 	
-	public static final double SHOOTING_VELOCITY = 100;
+	public static final double SHOOTING_VELOCITY = 80;
 
 	public static final double FEEDER_COLLECT_VELOCITY = -15;
 
