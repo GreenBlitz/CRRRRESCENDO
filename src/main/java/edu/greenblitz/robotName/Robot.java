@@ -9,6 +9,10 @@ import edu.greenblitz.robotName.commands.intake.*;
 import edu.greenblitz.robotName.commands.shooter.PushNoteToFlyWheel;
 import edu.greenblitz.robotName.commands.shooter.ShootFromInFunnel;
 import edu.greenblitz.robotName.commands.shooter.ShootToSpeakerFromClose;
+import edu.greenblitz.robotName.commands.shooter.pivot.InterruptPivot;
+import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
+import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
+import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.LED.LED;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
@@ -119,6 +123,9 @@ public class Robot extends LoggedRobot {
 		NamedCommands.registerCommand("note to intake", new NoteToIntake());
 		NamedCommands.registerCommand("note from intake to shooter", new NoteFromIntakeToShooterForAuto());
 		NamedCommands.registerCommand("shooting", new ShootToSpeakerFromClose());
+		NamedCommands.registerCommand("interupted", new MovePivotToAngle(() -> ShootingStateCalculations.getTargetShooterAngle(
+				ShootingPositionConstants.LEGAL_SHOOTING_ZONE
+		)));
 		AutoBuilder.configureHolonomic(
 				SwerveChassis.getInstance()::getRobotPose2d,
 				(pose) -> SwerveChassis.getInstance().resetChassisPose(AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(pose)),

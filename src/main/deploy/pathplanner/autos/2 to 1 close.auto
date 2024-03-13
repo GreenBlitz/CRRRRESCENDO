@@ -14,7 +14,7 @@
         {
           "type": "named",
           "data": {
-            "name": "close shoot"
+            "name": "shooting"
           }
         },
         {
@@ -66,6 +66,12 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "interupted"
           }
         },
         {
@@ -128,6 +134,12 @@
         {
           "type": "named",
           "data": {
+            "name": "interupted"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
             "name": "close shoot"
           }
         },
@@ -180,6 +192,12 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "interupted"
           }
         },
         {
