@@ -5,6 +5,7 @@ import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.greenblitz.robotName.utils.shootingCalculations.Bound;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
+import org.littletonrobotics.junction.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,5 +67,12 @@ public class FieldConstants {
 			RESTRICTED_BOUNDS.add(STAGE_ZONE);
 			RESTRICTED_BOUNDS.add(ENEMY_FEEDER_ZONE);
 		}
+		
+		
+		static {
+			Logger.recordOutput("Field/selected speaker pose", MIDDLE_OF_SPEAKER_POSITION.toTranslation2d());
+		}
 	}
+	
+	
 }

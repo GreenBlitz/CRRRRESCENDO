@@ -115,7 +115,6 @@ public class OI {
 						robotRelative.getX() - speakerPosition.getX()
 				)
 		);
-		Logger.recordOutput("ananana", angle.getRadians());
 		return angle;
 	}
 
@@ -128,7 +127,7 @@ public class OI {
 		mainJoystick.B.whileTrue(new MoveNoteInRoller(true));
 		mainJoystick.X.whileTrue(new MoveNoteInRoller(false));
 
-		mainJoystick.A.whileTrue(new RotateToAngle(this::getTargetRobotAngle));
+		mainJoystick.L1.whileTrue(new RotateToAngle(this::getTargetRobotAngle));
 
 		//Intake
 		mainJoystick.R2.whileTrue(new RunIntakeByPower(0.5));

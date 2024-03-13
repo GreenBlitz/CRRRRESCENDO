@@ -79,8 +79,8 @@ public class MoveByJoysticks extends SwerveCommand {
 		}
 
 		swerveChassis.moveByChassisSpeeds(
-				-forwardSpeed,
-				leftwardSpeed,
+				forwardSpeed,
+				-leftwardSpeed,
 				-angularSpeed,
 				swerveChassis.getChassisAngle()
 		);

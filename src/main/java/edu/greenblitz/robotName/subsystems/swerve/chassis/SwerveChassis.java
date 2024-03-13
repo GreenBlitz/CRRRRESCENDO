@@ -427,7 +427,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     }
 
     public Pose2d getRobotPose2d() {
-        return robotPose.toBlueAlliancePose();
+        return new Pose2d(
+                robotPose.toBlueAlliancePose().getTranslation(),
+                getGyroAngle()
+        );
 
     }
 
@@ -490,6 +493,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
     public void resetChassisPose(Pose2d pose) {
         poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), pose);
+        gyro.updateYaw(pose.getRotation());
     }
 
     public void moveByChassisSpeeds(ChassisSpeeds chassisSpeeds) {

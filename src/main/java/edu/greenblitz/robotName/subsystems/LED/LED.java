@@ -123,8 +123,13 @@ public class LED extends GBSubsystem {
 	}
 
 	public void  rumble() {
-		OI.getInstance().getSecondJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, LEDConstants.RUMBLE_POWER);
-		OI.getInstance().getMainJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, LEDConstants.RUMBLE_POWER);
+		if (actionTimer.get() < 2) {
+			OI.getInstance().getSecondJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, LEDConstants.RUMBLE_POWER);
+			OI.getInstance().getMainJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, LEDConstants.RUMBLE_POWER);
+		}
+		else {
+			stopRumble();
+		}
 	}
 
 	public void stopRumble() {
@@ -141,8 +146,9 @@ public class LED extends GBSubsystem {
 	public void blinkOrRumbleByNoteState() {
 		if (isNoteInRobot() && (actionTimer.get() <= LEDConstants.BLINKING_TIME)) {
 			blink(getColorByMode());
-		} else if (actionTimer.get() <= LEDConstants.RUMBLE_TIME && getWasNoteInRobot() != isNoteInRobot()) {
 			rumble();
+		} else if (actionTimer.get() <= LEDConstants.RUMBLE_TIME && getWasNoteInRobot() != isNoteInRobot()) {
+//			rumble();
 		} else {
 			stopRumble();
 		}
