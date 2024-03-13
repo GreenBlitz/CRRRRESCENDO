@@ -19,7 +19,7 @@ public class PivotConstants {
 		PICK_UP(Rotation2d.fromDegrees(38)),
 		CLOSE_SHOOTING(Rotation2d.fromDegrees(58)),
 		PODIUM(Rotation2d.fromDegrees(32.3)),
-		RIGHT_STAGE(Rotation2d.fromDegrees(24)),
+		RIGHT_STAGE(Rotation2d.fromDegrees(25)),
 		FEEDER(Rotation2d.fromDegrees(56.9));
 
 		public final Rotation2d ANGLE;
@@ -38,5 +38,5 @@ public class PivotConstants {
 
 	public static final Translation3d ROBOT_RELATIVE_PIVOT_POSITION = new Translation3d(-0.1, 0, 0.21);
 
-	public static final Rotation2d TOLERANCE = Rotation2d.fromDegrees(0.75);
+	public static final Rotation2d TOLERANCE = Rotation2d.fromDegrees(0.5);
 }

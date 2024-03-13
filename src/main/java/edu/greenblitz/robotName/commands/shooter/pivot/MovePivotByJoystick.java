@@ -17,7 +17,7 @@ public class MovePivotByJoystick extends PivotCommand {
 
     @Override
     public void execute() {
-        double power = joystick.getAxisValue(axis) * RobotConstants.General.SAFETY_POWER_CONVERSION_FACTOR;
+        double power = joystick.getAxisValue(axis) * RobotConstants.General.SAFETY_POWER_CONVERSION_FACTOR * 0.4;
         pivot.setPower(power);
     }
 
