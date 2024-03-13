@@ -2,6 +2,7 @@ package edu.greenblitz.robotName;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.revrobotics.CANSparkBase;
+import edu.greenblitz.robotName.commands.arm.ScoreToTrap;
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowByJoystick;
 import edu.greenblitz.robotName.commands.arm.wrist.MoveWristByButton;
 import edu.greenblitz.robotName.commands.LED.UpdateLEDStateDefaultCommand;
@@ -18,6 +19,7 @@ import edu.greenblitz.robotName.commands.climbing.lifter.MoveLifterByJoystick;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringModeWithPivotForJoystick;
+import edu.greenblitz.robotName.commands.getNoteToSystem.TransferNote;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByPower;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityUntilInterrupted;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
@@ -155,10 +157,6 @@ public class OI {
 	public void thirdJoystickButtons() {
 		SmartJoystick usedJoystick = thirdJoystick;
 
-		//LifterControl
-		usedJoystick.A.whileTrue(new getLifterReady());
-		usedJoystick.Y.whileTrue(new ClimbUp());
-
 		usedJoystick.LEFT_Y_AXIS.whileTrue(
 				new ConditionalCommand(
 						new SequentialCommandGroup(
@@ -170,10 +168,6 @@ public class OI {
 				)
 		);
 
-		//Scoring Mode Change
-		usedJoystick.START.whileTrue(new SetScoringMode(ScoringMode.CLIMB));
-		usedJoystick.BACK.whileTrue(new SetScoringMode(ScoringMode.AMP));
-
 		//Arm Control
 		usedJoystick.R1.whileTrue(new MoveElbowByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_X));
 
@@ -184,6 +178,26 @@ public class OI {
 		//Note-Roller Control
 		usedJoystick.POV_RIGHT.whileTrue(new MoveNoteInRoller(true));
 		usedJoystick.POV_LEFT.whileTrue(new MoveNoteInRoller(false));
+
+		usedJoystick.Y.whileTrue(new ScoreToTrap());//do this after everything is in position and dont stop until note is inside
+
+		usedJoystick.A.whileTrue(new TransferNote());//this second
+
+		//Scoring Mode Change
+		usedJoystick.START.whileTrue(new SetScoringMode(ScoringMode.CLIMB)
+				.alongWith(new InstantCommand(() -> Lifter.getInstance().setIdleMode(CANSparkBase.IdleMode.kBrake)))
+				.alongWith(new InstantCommand(() -> Elbow.getInstance().setIdleMode(NeutralModeValue.Brake)))
+				.andThen(new getLifterReady())
+		);//this first and long
+
+		usedJoystick.BACK.whileTrue(new SetScoringMode(ScoringMode.AMP)
+				.alongWith(new InstantCommand(() -> Lifter.getInstance().setIdleMode(CANSparkBase.IdleMode.kCoast)))
+				.alongWith(new InstantCommand(() -> Elbow.getInstance().setIdleMode(NeutralModeValue.Coast)))
+		);
+
+		//Arm Control
+		usedJoystick.R1.whileTrue(new MoveElbowByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_X));//move to above chassis and stop also this needs to push chain
+
 	}
 
 	public void fourthJoystickButtons() {

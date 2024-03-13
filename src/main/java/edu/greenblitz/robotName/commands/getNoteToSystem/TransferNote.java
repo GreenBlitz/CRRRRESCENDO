@@ -14,9 +14,9 @@ public class TransferNote extends SequentialCommandGroup {
 				new MoveToTransferNotePosition(),
 				new WaitCommand(0.5),
 				new ConditionalCommand(
-						new NoteToArm(),
 						new NoteToShooterFromArm(),
-						ScoringModeSelector::isAmpMode
+						new NoteToArm(),
+						ScoringModeSelector::isSpeakerMode
 				)
 		);
 	}
