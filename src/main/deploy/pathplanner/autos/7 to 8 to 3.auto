@@ -22,7 +22,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "shoot"
+                        "name": "note from intake to shooter"
                       }
                     },
                     {
@@ -34,7 +34,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "grip"
+                        "name": "note to intake"
                       }
                     },
                     {
@@ -46,7 +46,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "shoot"
+                        "name": "note from intake to shooter"
                       }
                     },
                     {
@@ -58,7 +58,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "grip"
+                        "name": "note to intake"
                       }
                     },
                     {
@@ -70,19 +70,19 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "shoot"
+                        "name": "note from intake to shooter"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "grip"
+                        "name": "note to intake"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "shoot"
+                        "name": "note from intake to shooter"
                       }
                     }
                   ]

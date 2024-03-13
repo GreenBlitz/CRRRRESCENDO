@@ -191,7 +191,7 @@ public class OI {
 		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
 		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
 		LED.getInstance().setDefaultCommand(new UpdateLEDStateDefaultCommand());
-		FlyWheel.getInstance().setDefaultCommand(new FlyWheelDefaultCommand());
+//		FlyWheel.getInstance().setDefaultCommand(new FlyWheelDefaultCommand());
 	}
 	
 }

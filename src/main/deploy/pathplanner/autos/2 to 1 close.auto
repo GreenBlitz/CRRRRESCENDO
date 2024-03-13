@@ -18,28 +18,54 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "race",
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "grip"
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "speaker start to 2"
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.5
+                      }
+                    }
+                  ]
                 }
               },
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "speaker start to 2"
+                  "name": "note to intake"
                 }
               }
             ]
           }
         },
         {
-          "type": "path",
+          "type": "deadline",
           "data": {
-            "pathName": "2 to speaker"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "2 to speaker"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "note from intake to shooter"
+                }
+              }
+            ]
           }
         },
         {
@@ -49,28 +75,54 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "race",
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "grip"
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "speaker to 1"
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.5
+                      }
+                    }
+                  ]
                 }
               },
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "speaker to 1"
+                  "name": "note to intake"
                 }
               }
             ]
           }
         },
         {
-          "type": "path",
+          "type": "deadline",
           "data": {
-            "pathName": "1 to speaker"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "1 to speaker"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "note from intake to shooter"
+                }
+              }
+            ]
           }
         },
         {
@@ -80,28 +132,54 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "race",
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "grip"
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "speaker mid to 3"
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.5
+                      }
+                    }
+                  ]
                 }
               },
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "speaker mid to 3"
+                  "name": "note to intake"
                 }
               }
             ]
           }
         },
         {
-          "type": "path",
+          "type": "deadline",
           "data": {
-            "pathName": "3 to speaker"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "3 to speaker"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "note from intake to shooter"
+                }
+              }
+            ]
           }
         },
         {
