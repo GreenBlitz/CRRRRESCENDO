@@ -33,6 +33,7 @@ import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -110,10 +111,12 @@ public class Robot extends LoggedRobot {
 	public void robotPeriodic() {
 		CommandScheduler.getInstance().run();
 		RoborioUtils.updateCurrentCycleTime();
+		SmartDashboard.putNumber("pivot", Pivot.getInstance().getAngle().getDegrees());
+//		SmartDashboard.putNumber("dis", SwerveChassis.getInstance().getRobotPose2d().)
 	}
 
 	private void initializeAutonomousBuilder() {
-		NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
+		NamedCommands.registerCommand("sho  ot", new ShootFromInFunnel());
 		NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
 		NamedCommands.registerCommand("grip", new CollectNoteFromGround());
 		AutoBuilder.configureHolonomic(
