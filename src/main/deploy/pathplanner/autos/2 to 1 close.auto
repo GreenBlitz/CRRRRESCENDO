@@ -18,11 +18,11 @@
           }
         },
         {
-          "type": "sequential",
+          "type": "race",
           "data": {
             "commands": [
               {
-                "type": "race",
+                "type": "sequential",
                 "data": {
                   "commands": [
                     {
@@ -32,31 +32,18 @@
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "wait",
                       "data": {
-                        "name": "note to intake"
+                        "waitTime": 0.5
                       }
                     }
                   ]
                 }
               },
               {
-                "type": "race",
+                "type": "named",
                 "data": {
-                  "commands": [
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.5
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "note to intake"
-                      }
-                    }
-                  ]
+                  "name": "note to intake"
                 }
               }
             ]
@@ -88,11 +75,11 @@
           }
         },
         {
-          "type": "sequential",
+          "type": "race",
           "data": {
             "commands": [
               {
-                "type": "race",
+                "type": "sequential",
                 "data": {
                   "commands": [
                     {
@@ -102,31 +89,18 @@
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "wait",
                       "data": {
-                        "name": "note to intake"
+                        "waitTime": 0.5
                       }
                     }
                   ]
                 }
               },
               {
-                "type": "race",
+                "type": "named",
                 "data": {
-                  "commands": [
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.5
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "note to intake"
-                      }
-                    }
-                  ]
+                  "name": "note to intake"
                 }
               }
             ]
@@ -158,11 +132,11 @@
           }
         },
         {
-          "type": "sequential",
+          "type": "race",
           "data": {
             "commands": [
               {
-                "type": "race",
+                "type": "sequential",
                 "data": {
                   "commands": [
                     {
@@ -172,31 +146,18 @@
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "wait",
                       "data": {
-                        "name": "note to intake"
+                        "waitTime": 0.5
                       }
                     }
                   ]
                 }
               },
               {
-                "type": "race",
+                "type": "named",
                 "data": {
-                  "commands": [
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.5
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "note to intake"
-                      }
-                    }
-                  ]
+                  "name": "note to intake"
                 }
               }
             ]
