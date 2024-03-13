@@ -112,11 +112,10 @@ public class Robot extends LoggedRobot {
 		CommandScheduler.getInstance().run();
 		RoborioUtils.updateCurrentCycleTime();
 		SmartDashboard.putNumber("pivot", Pivot.getInstance().getAngle().getDegrees());
-		SmartDashboard.putNumber("pose", SwerveChassis.getInstance().getRobotPose2d().getTranslation().getDistance(FieldConstants.MIDDLE_OF_SPEAKER_POSITION.toTranslation2d()));
 	}
 
 	private void initializeAutonomousBuilder() {
-		NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
+		NamedCommands.registerCommand("sho  ot", new ShootFromInFunnel());
 		NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
 		NamedCommands.registerCommand("grip", new CollectNoteFromGround());
 		AutoBuilder.configureHolonomic(

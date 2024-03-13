@@ -73,7 +73,7 @@ public class ChassisConstants {
 	
 	public static final double MAX_ANGULAR_ACCELERATION = 4;
 	
-	public static final double FAST_DISCRETION_CONSTANT = 1;
+	public static final double FAST_DISCRETION_CONSTANT = -10;
 
 	public static final double TRANSLATION_TOLERANCE = 0.05;
 
