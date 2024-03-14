@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.commands.auto;
 
 import edu.greenblitz.robotName.OI;
 import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
+import edu.greenblitz.robotName.commands.swerve.RotateToSpeakerByCalculation;
 import edu.greenblitz.robotName.subsystems.intake.Intake;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -10,7 +11,7 @@ public class RotateToSpeakerForAuto extends ConditionalCommand {
 
     public RotateToSpeakerForAuto() {
         super(
-                new RotateToAngle(() -> OI.getInstance().getTargetRobotAngle()),
+                new RotateToSpeakerByCalculation(),
                 new InstantCommand(),
                 () -> Intake.getInstance().isObjectIn()
         );
