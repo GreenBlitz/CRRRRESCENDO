@@ -53,54 +53,54 @@ import static edu.greenblitz.robotName.FieldConstants.MIDDLE_OF_BLUE_SPEAKER_POS
 import static edu.greenblitz.robotName.FieldConstants.MIDDLE_OF_RED_SPEAKER_POSITION;
 
 public class OI {
-	
+
 	private static OI instance;
-	
+
 	private final SmartJoystick mainJoystick;
-	
+
 	private final SmartJoystick secondJoystick;
-	
+
 	private final SmartJoystick thirdJoystick;
-	
+
 	private final SmartJoystick fourthJoystick;
-	
+
 	private OI() {
 		mainJoystick = new SmartJoystick(RobotConstants.Joystick.MAIN);
 		secondJoystick = new SmartJoystick(RobotConstants.Joystick.SECOND);
 		thirdJoystick = new SmartJoystick(RobotConstants.Joystick.THIRD);
 		fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
-		
+
 		initButtons();
 		initializeDefaultCommands();
 	}
-	
+
 	public static void init() {
 		if (instance == null) {
 			instance = new OI();
 		}
 	}
-	
+
 	public static OI getInstance() {
 		init();
 		return instance;
 	}
-	
+
 	public SmartJoystick getMainJoystick() {
 		return mainJoystick;
 	}
-	
+
 	public SmartJoystick getSecondJoystick() {
 		return secondJoystick;
 	}
-	
+
 	public SmartJoystick getThirdJoystick() {
 		return thirdJoystick;
 	}
-	
+
 	public SmartJoystick getFourthJoystick() {
 		return fourthJoystick;
 	}
-	
+
 	public void initButtons() {
 		romyButtons();
 		shchoriButtons();
@@ -113,7 +113,7 @@ public class OI {
 
 		//Reset Robot Angle
 		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetChassisPose()));
-		
+
 		//note in roller
 		mainJoystick.B.whileTrue(new MoveNoteInRoller(true));
 		mainJoystick.X.whileTrue(new MoveNoteInRoller(false));
@@ -127,11 +127,11 @@ public class OI {
 
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
 	}
-	
+
 	public void shchoriButtons() {
 		//ScoringMode
 		secondJoystick.START.onTrue(new ToggleScoringMode());
-		
+
 		//Arm
 		secondJoystick.BACK.onTrue(new InstantCommand(() -> Roller.getInstance().setObjectOut()));
 		secondJoystick.A.onTrue(new ReleaseNoteFromRollerToAmp());
@@ -142,7 +142,7 @@ public class OI {
 				)
 		);
 		secondJoystick.X.whileTrue(new MoveElbowAndWristToSafe());
-		
+
 		//FlyWheel Run
 		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityUntilInterrupted(FlyWheelConstants.SHOOTING_VELOCITY,mainJoystick));
 
@@ -154,25 +154,25 @@ public class OI {
 
 		//Funnel
 		secondJoystick.R1.whileTrue(new RunFunnelByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_Y).alongWith(new ShootSimulationNote()));
-		
+
 		//Fully collect
 		secondJoystick.Y.whileTrue(new CollectNoteToScoringMode());
 	}
-	
+
 	public void thirdJoystickButtons() {
 		SmartJoystick usedJoystick = thirdJoystick;
 		usedJoystick.R1.whileTrue(new NoteToShooterWithArm());
 		usedJoystick.L1.whileTrue(new RunFunnelByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_Y));
-		
+
 	}
-	
+
 	public void fourthJoystickButtons() {
 		SmartJoystick usedJoystick = fourthJoystick;
 		usedJoystick.B.whileTrue(new CollectNoteFromFeeder());
 		usedJoystick.R1.onTrue(new InstantCommand(() -> SmartDashboard.putNumber("Pivot angleee", Pivot.getInstance().getAngle().getDegrees())));
 		usedJoystick.Y.whileTrue(new MovePivotByJoystick(usedJoystick, SmartJoystick.Axis.LEFT_Y));
 	}
-	
+
 	public void initializeDefaultCommands() {
 //		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
 		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
@@ -181,6 +181,6 @@ public class OI {
 		LED.getInstance().setDefaultCommand(new UpdateLEDStateDefaultCommand());
 		FlyWheel.getInstance().setDefaultCommand(new FlyWheelDefaultCommand());
 	}
-	
+
 }
 

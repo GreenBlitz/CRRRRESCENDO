@@ -18,7 +18,7 @@ public class FlyWheelDefaultCommand extends RunFlyWheelByVelocity {
 			return () -> FlyWheelConstants.SHOOTING_VELOCITY;
 		}
 		else {
-			return () -> 0;
+			return () -> FlyWheelConstants.DEFAULT_VELOCITY;
 		}
 	}
 }
