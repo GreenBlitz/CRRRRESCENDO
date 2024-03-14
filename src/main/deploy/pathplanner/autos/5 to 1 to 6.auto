@@ -22,7 +22,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "note from intake to shooter"
+                        "name": null
                       }
                     },
                     {
@@ -34,7 +34,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "note to intake"
+                        "name": null
                       }
                     },
                     {
@@ -46,19 +46,19 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "note from intake to shooter"
+                        "name": null
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "note to intake"
+                        "name": null
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "note from intake to shooter"
+                        "name": null
                       }
                     },
                     {
@@ -70,7 +70,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "note to intake"
+                        "name": null
                       }
                     },
                     {
@@ -82,7 +82,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "note from intake to shooter"
+                        "name": null
                       }
                     }
                   ]

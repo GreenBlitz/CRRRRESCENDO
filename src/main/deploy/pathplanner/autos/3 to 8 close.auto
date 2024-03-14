@@ -14,7 +14,7 @@
         {
           "type": "named",
           "data": {
-            "name": "close shoot"
+            "name": null
           }
         },
         {
@@ -26,7 +26,7 @@
         {
           "type": "named",
           "data": {
-            "name": "note to intake"
+            "name": null
           }
         },
         {
@@ -38,7 +38,7 @@
         {
           "type": "named",
           "data": {
-            "name": "close shoot"
+            "name": null
           }
         },
         {
@@ -50,7 +50,7 @@
         {
           "type": "named",
           "data": {
-            "name": "note to intake"
+            "name": null
           }
         },
         {
@@ -62,7 +62,7 @@
         {
           "type": "named",
           "data": {
-            "name": "close shoot"
+            "name": null
           }
         }
       ]
