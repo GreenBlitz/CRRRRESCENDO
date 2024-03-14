@@ -21,12 +21,8 @@ import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.*;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.kinematics.SwerveModulePosition;
-import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.math.kinematics.*;
 import edu.wpi.first.util.sendable.Sendable;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.littletonrobotics.junction.Logger;
@@ -52,6 +48,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     private GyroInputsAutoLogged gyroInputs;
     private AllianceUtilities.AlliancePose2d robotPose;
 
+    private SwerveDriveOdometry odometry;
     public SwerveChassis() {
         this.frontLeft = new SwerveModule(Module.FRONT_LEFT);
         this.frontRight = new SwerveModule(Module.FRONT_RIGHT);
@@ -68,6 +65,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
         this.kinematics = new SwerveDriveKinematics(
                 ChassisConstants.SWERVE_LOCATIONS_IN_SWERVE_KINEMATICS_COORDINATES
         );
+
+        this.odometry = new SwerveDriveOdometry(this.kinematics, getGyroAngle(), getSwerveModulePositions());
         this.poseEstimator = new SwerveDrivePoseEstimator(
                 this.kinematics,
                 getGyroAngle(),
@@ -144,6 +143,9 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
 
         updatePoseEstimationLimeLight();
+//        updatePoseEstimatorOdometry();
+        odometry.update(getGyroAngle(), getSwerveModulePositions());
+        Logger.recordOutput("od", odometry.getPoseMeters());
         MultiLimelight.getInstance().recordEstimatedPositions();
         robotPose = AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(poseEstimator.getEstimatedPosition());
         field.setRobotPose(getRobotPose2d());
@@ -214,7 +216,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     }
 
     public void resetChassisPose() {
-        resetChassisPose(new Pose2d());
+        resetChassisPose(new Pose2d(
+                getRobotPose2d().getTranslation(),
+                new Rotation2d()
+        ));
     }
 
     public void resetChassisAngle() {
@@ -234,12 +239,9 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
             for (Optional<Pair<Pose2d, Double>> visionPoseAndTimeStamp : MultiLimelight.getInstance().getAll2DEstimates()) {
                 if (visionPoseAndTimeStamp.isPresent()) {
                     Pose2d visionPose = visionPoseAndTimeStamp.get().getFirst();
-                    poseEstimator.update(getGyroAngle(), getSwerveModulePositions());
-					poseEstimator.addVisionMeasurement(visionPose, visionPoseAndTimeStamp.get().getSecond());
+                    poseEstimator.addVisionMeasurement(visionPose, visionPoseAndTimeStamp.get().getSecond());
                 }
             }
-        } else {
-            resetChassisPose();
         }
     }
 
@@ -388,16 +390,11 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     }
 
     public void updatePoseEstimationLimeLight() {
+        updatePoseEstimatorOdometry();
         if (doVision) {
-            for (Optional<Pair<Pose2d, Double>> target :
-                    MultiLimelight.getInstance().getAll2DEstimates()
-            ) {
-                if (target.isPresent()) {
-                    resetPoseByVision();
-                }
-            }
-            updatePoseEstimatorOdometry();
+            resetPoseByVision();
         }
+
     }
 
     private boolean isModuleAtFreeCurrent(SwerveModule module) {
@@ -432,7 +429,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
                 robotPose.toBlueAlliancePose().getTranslation(),
                 getGyroAngle()
         );
-
     }
 
     public Pose3d getRobotPose3d() {

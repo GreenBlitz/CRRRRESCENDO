@@ -28,7 +28,7 @@ public class ShootingStateCalculations {
 				: MIDDLE_OF_RED_SPEAKER_POSITION.toTranslation2d();
 		Rotation2d angle = Rotation2d.fromRadians(Math.atan2
 				(
-						speakerPosition.getY() - robotRelative.getY(),
+						speakerPosition.getY() - robotRelative.getY() ,
 						speakerPosition.getX() - robotRelative.getX()
 				)
 		);

@@ -29,7 +29,7 @@ public class RotateToAngle extends SwerveCommand {
 
     @Override
     public void initialize() {
-        angleSetPoint = angleSetPointSupplier.get();
+        angleSetPoint = angleSetPointSupplier.get().plus(Rotation2d.fromRotations(0.5));
     }
 
     @Override

@@ -77,7 +77,7 @@ public class Robot extends LoggedRobot {
 	}
 
 	public void initializeSubsystems() {
-		AutonomousSelector.getInstance();
+//		AutonomousSelector.getInstance();
 		ScoringModeSelector.init();
 		MultiLimelight.init();
 		SwerveChassis.init();
@@ -102,6 +102,7 @@ public class Robot extends LoggedRobot {
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
+		Pivot.getInstance().setCurrentAngle();
 		Dashboard.getInstance().activateDriversDashboard();
 	}
 

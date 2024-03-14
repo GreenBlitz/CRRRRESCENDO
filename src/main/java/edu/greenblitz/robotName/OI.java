@@ -12,19 +12,13 @@ import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMod
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringModeWithPivotForJoystick;
 import edu.greenblitz.robotName.commands.intake.NoteToShooterWithArm;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByPower;
-import edu.greenblitz.robotName.commands.shooter.flyWheel.FlyWheelDefaultCommand;
-import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocity;
-import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityUntilInterrupted;
-import edu.greenblitz.robotName.commands.shooter.flyWheel.ShootSimulationNote;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.*;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.funnel.runByPowerUntilCondition.RunFunnelByPower;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
-import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
-import edu.greenblitz.robotName.commands.swerve.RotateToAngle;
-import edu.greenblitz.robotName.commands.swerve.RotateToSpeaker;
-import edu.greenblitz.robotName.commands.swerve.RotateToSpeakerByCalculation;
+import edu.greenblitz.robotName.commands.swerve.*;
 import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
 import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
 import edu.greenblitz.robotName.subsystems.Battery;
@@ -109,6 +103,7 @@ public class OI {
 	public void romyButtons() {
 		//Collect Note
 		mainJoystick.R1.whileTrue(new CollectNoteToScoringModeWithPivotForJoystick());
+		mainJoystick.L1.whileTrue(new RotateByScoringMode());
 		mainJoystick.POV_DOWN.whileTrue(new CollectNoteFromFeeder());
 
 		//Reset Robot Angle
@@ -119,11 +114,13 @@ public class OI {
 		mainJoystick.X.whileTrue(new MoveNoteInRoller(false));
 
 		//Rot
-		mainJoystick.A.whileTrue(new RotateToSpeakerByCalculation());
+		mainJoystick.A.whileTrue(new RotateToAmp());
 
 		//Intake
 		mainJoystick.R2.whileTrue(new RunIntakeByPower(0.5));
-		mainJoystick.L1.whileTrue(new RunFunnelByPower(0.8));
+//		mainJoystick.L1.whileTrue(new RunFunnelByPower(0.8));
+		mainJoystick.START.onTrue(new ToggleScoringMode());
+
 
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
 	}
@@ -144,7 +141,7 @@ public class OI {
 		secondJoystick.X.whileTrue(new MoveElbowAndWristToSafe());
 
 		//FlyWheel Run
-		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityUntilInterrupted(FlyWheelConstants.SHOOTING_VELOCITY,mainJoystick));
+		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityUntilInterrupted(FlyWheelConstants.SHOOTING_VELOCITY,secondJoystick));
 
 		//Pivot Poses
 		secondJoystick.POV_UP.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.RIGHT_STAGE.ANGLE));
@@ -179,7 +176,7 @@ public class OI {
 		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
 		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
 		LED.getInstance().setDefaultCommand(new UpdateLEDStateDefaultCommand());
-		FlyWheel.getInstance().setDefaultCommand(new FlyWheelDefaultCommand());
+//		FlyWheel.getInstance().setDefaultCommand(new FlyWheelDefaultCommand());
 	}
 
 }

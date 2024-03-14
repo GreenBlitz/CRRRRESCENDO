@@ -1,5 +1,7 @@
 package edu.greenblitz.robotName.subsystems.shooter.FlyWheel;
 
+import edu.greenblitz.robotName.FieldConstants;
+import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import org.littletonrobotics.junction.Logger;
 
@@ -41,6 +43,13 @@ public class FlyWheel extends GBSubsystem {
 	
 	public void setVelocity(double leftVelocity, double rightVelocity) {
 		flyWheel.setVelocity(rightVelocity, leftVelocity);
+	}
+
+	public double getShootingVelocityByDistance(){
+		return SwerveChassis.getInstance().getRobotPose2d().getTranslation()
+				.getDistance(FieldConstants.MIDDLE_OF_SPEAKER_POSITION.toTranslation2d()) < 5.5
+				? FlyWheelConstants.SHOOTING_VELOCITY
+				: FlyWheelConstants.FAST_SHOOTING_VELOCITY;
 	}
 	
 	public void stop() {
