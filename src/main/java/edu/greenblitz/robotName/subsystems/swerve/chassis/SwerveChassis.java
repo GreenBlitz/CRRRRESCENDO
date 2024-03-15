@@ -28,6 +28,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.littletonrobotics.junction.Logger;
 import org.photonvision.EstimatedRobotPose;
 
+import java.util.List;
 import java.util.Optional;
 
 import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.TIME_STEP;
@@ -233,10 +234,12 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     }
 
     public void resetPoseByVision() {
-        if (!MultiLimelight.getInstance().getAll2DEstimates().isEmpty()) {
-            for (Optional<Pair<Pose2d, Double>> visionPoseAndTimeStamp : MultiLimelight.getInstance().getAll2DEstimates()) {
+        List<Optional<Pair<Pose2d, Double>>> estimates = MultiLimelight.getInstance().getAll2DEstimates();
+        if (!estimates.isEmpty()) {
+            for (Optional<Pair<Pose2d, Double>> visionPoseAndTimeStamp : estimates) {
                 if (visionPoseAndTimeStamp.isPresent()) {
                     Pose2d visionPose = visionPoseAndTimeStamp.get().getFirst();
+                    Logger.recordOutput("timestampforvision", visionPoseAndTimeStamp.get().getSecond());
                     poseEstimator.addVisionMeasurement(visionPose, visionPoseAndTimeStamp.get().getSecond());
                 }
             }
