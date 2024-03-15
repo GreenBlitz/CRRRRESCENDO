@@ -56,13 +56,8 @@ public class ShootingStateCalculations {
 	}
 
 	public static Rotation2d getTargetShooterAngle() {
-		Pose2d robotPose = getRobotPose();
 		return ShootingAngleCalculations.getShootingAngle(
-				new Translation3d(
-						robotPose.getX(),
-						robotPose.getY(),
-						FieldConstants.MIDDLE_OF_SPEAKER_POSITION.getZ()
-				)
+				getRobotPose().getTranslation()
 		);
 	}
 
