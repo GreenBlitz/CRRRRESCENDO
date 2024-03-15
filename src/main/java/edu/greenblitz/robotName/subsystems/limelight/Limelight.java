@@ -2,6 +2,7 @@ package edu.greenblitz.robotName.subsystems.limelight;
 
 import edu.greenblitz.robotName.VisionConstants;
 import edu.greenblitz.robotName.utils.FMSUtils;
+import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -12,7 +13,7 @@ import edu.wpi.first.wpilibj.Timer;
 
 import java.util.Optional;
 
-class Limelight {
+public class Limelight extends GBSubsystem {
 
 	private NetworkTableEntry robotPoseEntry, idEntry, tagPoseEntry;
 
@@ -20,7 +21,7 @@ class Limelight {
 
 	public Limelight(String limelightName) {
 		this.name = limelightName;
-		String robotPoseQuery = FMSUtils.getAlliance() == DriverStation.Alliance.Red ? "botpose_wpired" : "botpose_wpiblue";
+		String robotPoseQuery =  "botpose_wpiblue";
 		robotPoseEntry = NetworkTableInstance.getDefault().getTable(name).getEntry(robotPoseQuery);
 		tagPoseEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("targetpose_cameraspace");
 		idEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("tid");

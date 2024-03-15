@@ -38,9 +38,7 @@ public class MultiLimelight extends GBSubsystem {
 		ArrayList<Optional<Pair<Pose2d, Double>>> estimates = new ArrayList<>();
 		for (Limelight limelight : limelights) {
 			if (limelight.hasTarget()) {
-				if (limelight.getTagConfidence()) {
 					estimates.add(limelight.getUpdatedPose2DEstimation());
-				}
 			}
 		}
 		return estimates;
