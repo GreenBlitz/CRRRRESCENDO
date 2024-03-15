@@ -69,7 +69,7 @@ public class Robot extends LoggedRobot {
 		initializeLogger();
 		initializeSubsystems();
 		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
-//		Dashboard.getInstance();
+		Dashboard.getInstance();
 		initializeAutonomousBuilder();
 		AutonomousSelector.getInstance();
 		Pivot.getInstance().resetAngle(PivotConstants.PresetPositions.STARTING.ANGLE);
@@ -103,7 +103,7 @@ public class Robot extends LoggedRobot {
 			autonomousCommand.cancel();
 		}
 		Pivot.getInstance().setCurrentAngle();
-//		Dashboard.getInstance().activateDriversDashboard();
+		Dashboard.getInstance().activateDriversDashboard();
 	}
 
 
@@ -111,7 +111,6 @@ public class Robot extends LoggedRobot {
 	public void robotPeriodic() {
 		CommandScheduler.getInstance().run();
 		RoborioUtils.updateCurrentCycleTime();
-//		SmartDashboard.putNumber("pivot", Pivot.getInstance().getAngle().getDegrees());
 	}
 
 	private void initializeAutonomousBuilder() {

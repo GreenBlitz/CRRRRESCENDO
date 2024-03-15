@@ -381,7 +381,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		updatePoseEstimatorOdometry();
 		if (doVision) {
 			resetPoseByVision();
-			
 		}
 	}
 	

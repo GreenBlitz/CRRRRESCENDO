@@ -12,6 +12,12 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "close shoot start"
+          }
+        },
+        {
           "type": "race",
           "data": {
             "commands": [
