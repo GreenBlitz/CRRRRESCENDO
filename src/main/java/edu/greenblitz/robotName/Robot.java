@@ -77,7 +77,7 @@ public class Robot extends LoggedRobot {
 	}
 
 	public void initializeSubsystems() {
-//		AutonomousSelector.getInstance();
+		AutonomousSelector.getInstance();
 		ScoringModeSelector.init();
 		MultiLimelight.init();
 		SwerveChassis.init();

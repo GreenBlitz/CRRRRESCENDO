@@ -9,19 +9,18 @@ import edu.wpi.first.units.Time;
 import edu.wpi.first.wpilibj.Timer;
 
 public class RumbleRomy extends GBCommand {
+
 	private SmartJoystick joystick;
+
 	private Timer timer;
 
 	private boolean wasObjectIn;
-	private boolean timerEnded;
-	private boolean started;
+
 	public RumbleRomy(SmartJoystick joystick){
 		this.joystick = joystick;
-		wasObjectIn = false;
-		timerEnded = false;
-		timer = new Timer();
+		this.wasObjectIn = false;
+		this.timer = new Timer();
 	}
-
 
 	@Override
 	public void execute() {
@@ -40,4 +39,5 @@ public class RumbleRomy extends GBCommand {
 			timer.stop();
 		}
 	}
+
 }

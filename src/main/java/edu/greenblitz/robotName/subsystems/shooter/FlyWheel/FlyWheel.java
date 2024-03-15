@@ -44,13 +44,6 @@ public class FlyWheel extends GBSubsystem {
 	public void setVelocity(double leftVelocity, double rightVelocity) {
 		flyWheel.setVelocity(rightVelocity, leftVelocity);
 	}
-
-	public double getShootingVelocityByDistance(){
-		return SwerveChassis.getInstance().getRobotPose2d().getTranslation()
-				.getDistance(FieldConstants.MIDDLE_OF_SPEAKER_POSITION.toTranslation2d()) < 5.5
-				? FlyWheelConstants.SHOOTING_VELOCITY
-				: FlyWheelConstants.FAST_SHOOTING_VELOCITY;
-	}
 	
 	public void stop() {
 		flyWheel.setPower(0, 0);

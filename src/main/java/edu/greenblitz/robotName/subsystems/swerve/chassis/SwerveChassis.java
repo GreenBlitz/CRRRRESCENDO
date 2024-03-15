@@ -143,10 +143,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
 
         updatePoseEstimationLimeLight();
-//        updatePoseEstimatorOdometry();
-        odometry.update(getGyroAngle(), getSwerveModulePositions());
-        Logger.recordOutput("od", odometry.getPoseMeters());
         MultiLimelight.getInstance().recordEstimatedPositions();
+        Logger.recordOutput("odometry", AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(odometry.getPoseMeters()).toBlueAlliancePose());
         robotPose = AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(poseEstimator.getEstimatedPosition());
         field.setRobotPose(getRobotPose2d());
         SmartDashboard.putData(getField());
@@ -386,6 +384,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
     }
 
     public void updatePoseEstimatorOdometry() {
+        odometry.update(getGyroAngle(), getSwerveModulePositions());
         poseEstimator.update(getGyroAngle(), getSwerveModulePositions());
     }
 
@@ -490,6 +489,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
     public void resetChassisPose(Pose2d pose) {
         poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), pose);
+        odometry.resetPosition(getGyroAngle(), getSwerveModulePositions(), pose);
         gyro.updateYaw(pose.getRotation());
     }
 
