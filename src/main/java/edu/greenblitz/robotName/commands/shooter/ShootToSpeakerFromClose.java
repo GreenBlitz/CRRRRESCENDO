@@ -9,7 +9,7 @@ public class ShootToSpeakerFromClose extends SequentialCommandGroup {
 
     public ShootToSpeakerFromClose() {
         super(
-                new MovePivotToAngle(PivotConstants.PresetPositions.CLOSE_SHOOTING.ANGLE).raceWith(new WaitCommand(1)),
+                new MovePivotToAngle(PivotConstants.PresetPositions.CLOSE_SHOOTING.ANGLE).raceWith(new WaitCommand(1.5)),
                 new ShootFromInFunnel()
         );
     }

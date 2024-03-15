@@ -7,7 +7,7 @@ public class RotateToSpeakerByCalculation extends RotateToAngle{
 
     public RotateToSpeakerByCalculation(){
         super(
-                () -> ShootingStateCalculations.getTargetRobotAngle()
+                ShootingStateCalculations::getTargetRobotAngle
         );
     }
 }

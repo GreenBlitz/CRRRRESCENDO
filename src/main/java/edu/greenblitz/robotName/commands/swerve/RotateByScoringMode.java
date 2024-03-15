@@ -9,7 +9,7 @@ public class RotateByScoringMode extends ConditionalCommand {
         super(
                 new RotateToSpeakerByCalculation(),
                 new RotateToAmp(),
-                () -> ScoringModeSelector.isSpeakerMode()
+                ScoringModeSelector::isSpeakerMode
         );
     }
 }

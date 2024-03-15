@@ -33,7 +33,6 @@ import static edu.greenblitz.robotName.RobotConstants.SimulationConstants.TIME_S
 import static edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants.*;
 import static edu.wpi.first.math.VecBuilder.fill;
 
-
 public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	
 	private static SwerveChassis instance;
@@ -41,15 +40,14 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	private IAngleMeasurementGyro gyro;
 	private SwerveDriveKinematics kinematics;
 	private SwerveDrivePoseEstimator poseEstimator;
-	private Field2d field = new Field2d();
-	private boolean doVision;
+	private Field2d field;
 	private SwerveChassisInputsAutoLogged chassisInputs;
 	private GyroInputsAutoLogged gyroInputs;
 	private AllianceUtilities.AlliancePose2d robotPose;
-	
-	private SwerveDriveOdometry odometry;
-	
+
 	public SwerveChassis() {
+		this.field = new Field2d();
+
 		this.frontLeft = new SwerveModule(Module.FRONT_LEFT);
 		this.frontRight = new SwerveModule(Module.FRONT_RIGHT);
 		this.backLeft = new SwerveModule(Module.BACK_LEFT);
@@ -57,17 +55,12 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		
 		this.chassisInputs = new SwerveChassisInputsAutoLogged();
 		this.gyroInputs = new GyroInputsAutoLogged();
-		
 		this.gyro = GyroFactory.create();
-		
-		doVision = true;
 		
 		this.kinematics = new SwerveDriveKinematics(
 				ChassisConstants.SWERVE_LOCATIONS_IN_SWERVE_KINEMATICS_COORDINATES
 		);
-		
-		this.odometry = new SwerveDriveOdometry(this.kinematics, getGyroAngle(), getSwerveModulePositions(), visionPoseStartMatch());
-		
+
 		this.poseEstimator = new SwerveDrivePoseEstimator(
 				this.kinematics,
 				getGyroAngle(),
@@ -373,13 +366,12 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 	
 	public void updatePoseEstimatorOdometry() {
-		odometry.update(getGyroAngle(), getSwerveModulePositions());
 		poseEstimator.update(getGyroAngle(), getSwerveModulePositions());
 	}
 	
 	public void updatePoseEstimationLimeLight() {
 		updatePoseEstimatorOdometry();
-		if (doVision) {
+		if (DO_VISION) {
 			resetPoseByVision();
 		}
 	}
@@ -390,7 +382,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 	
 	public boolean isRobotOnGround() {
-		
 		boolean frontLeft = isModuleAtFreeCurrent(this.frontLeft);
 		boolean frontRight = isModuleAtFreeCurrent(this.frontRight);
 		boolean backLeft = isModuleAtFreeCurrent(this.backLeft);
@@ -474,7 +465,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	
 	public void resetChassisPose(Pose2d pose) {
 		poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(), pose);
-		odometry.resetPosition(getGyroAngle(), getSwerveModulePositions(), pose);
 	}
 	
 	public void moveByChassisSpeeds(ChassisSpeeds chassisSpeeds) {
@@ -482,13 +472,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				chassisSpeeds.vyMetersPerSecond,
 				chassisSpeeds.omegaRadiansPerSecond,
 				getChassisAngle()
-		);
-	}
-	
-	public ChassisSpeeds getRobotRelativeChassisSpeeds() {
-		return ChassisSpeeds.fromFieldRelativeSpeeds(
-				getChassisSpeeds(),
-				Rotation2d.fromRadians(gyroInputs.yaw)
 		);
 	}
 	
@@ -539,14 +522,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		return broken;
 	}
 	
-	public void disableVision() {
-		doVision = false;
-	}
-	
-	public void enableVision() {
-		doVision = true;
-	}
-	
 	public void moveWheelsToAngleZero() {
 		frontLeft.rotateToAngle(Rotation2d.fromRadians(0));
 		frontRight.rotateToAngle(Rotation2d.fromRadians(0));
@@ -556,7 +531,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	
 	@Override
 	public void updateInputs(SwerveChassisInputsAutoLogged inputs) {
-		inputs.isVisionEnabled = doVision;
+		inputs.isVisionEnabled = DO_VISION;
 		inputs.numberOfDetectedAprilTag = MultiLimelight.getInstance().getAll2DEstimates().size();
 		inputs.omegaRadiansPerSecond = getChassisSpeeds().omegaRadiansPerSecond;
 		inputs.xAxisSpeed = getChassisSpeeds().vxMetersPerSecond;

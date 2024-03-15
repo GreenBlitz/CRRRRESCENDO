@@ -1,7 +1,6 @@
 package edu.greenblitz.robotName.utils;
 
 import edu.greenblitz.robotName.FieldConstants;
-import edu.greenblitz.robotName.Robot;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;

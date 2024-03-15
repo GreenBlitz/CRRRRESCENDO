@@ -16,6 +16,8 @@ public class ChassisConstants {
 	public static final double ROBOT_WIDTH_IN_METERS = 0.69;
 	
 	public static final double ROBOT_LENGTH_IN_METERS = 0.82;
+
+	public static final boolean DO_VISION = true;
 	
 	public static final double BUMPER_WIDTH = 0.077;
 	

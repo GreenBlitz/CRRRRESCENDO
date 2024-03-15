@@ -113,14 +113,8 @@ public class OI {
 		mainJoystick.B.whileTrue(new MoveNoteInRoller(true));
 		mainJoystick.X.whileTrue(new MoveNoteInRoller(false));
 
-		//Rot
-		mainJoystick.A.whileTrue(new RotateToAmp());
-
 		//Intake
 		mainJoystick.R2.whileTrue(new RunIntakeByPower(0.5));
-//		mainJoystick.L1.whileTrue(new RunFunnelByPower(0.8));
-		mainJoystick.START.onTrue(new ToggleScoringMode());
-
 
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
 	}
@@ -171,7 +165,7 @@ public class OI {
 	}
 
 	public void initializeDefaultCommands() {
-//		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
 		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
 		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
 		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
