@@ -5,14 +5,11 @@ import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.VisionConstants;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
-import edu.greenblitz.robotName.shootingStateService.ShootingPositionConstants;
-import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 import edu.greenblitz.robotName.subsystems.Photonvision;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.gyros.GyroFactory;
 import edu.greenblitz.robotName.subsystems.gyros.GyroInputsAutoLogged;
 import edu.greenblitz.robotName.subsystems.gyros.IAngleMeasurementGyro;
-import edu.greenblitz.robotName.subsystems.limelight.Limelight;
 import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.swerve.modules.SwerveModule;
 import edu.greenblitz.robotName.subsystems.swerve.modules.mk4iSwerveModule.MK4iSwerveConstants;
@@ -20,12 +17,10 @@ import edu.greenblitz.robotName.utils.AllianceUtilities;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.Pair;
-import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.*;
 import edu.wpi.first.math.kinematics.*;
 import edu.wpi.first.util.sendable.Sendable;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.littletonrobotics.junction.Logger;
@@ -46,9 +41,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	private IAngleMeasurementGyro gyro;
 	private SwerveDriveKinematics kinematics;
 	private SwerveDrivePoseEstimator poseEstimator;
-	private SwerveDrivePoseEstimator poseEstimatorTEST;
-	
-	private Limelight limelight;
 	private Field2d field = new Field2d();
 	private boolean doVision;
 	private SwerveChassisInputsAutoLogged chassisInputs;
@@ -65,7 +57,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		
 		this.chassisInputs = new SwerveChassisInputsAutoLogged();
 		this.gyroInputs = new GyroInputsAutoLogged();
-		this.limelight = new Limelight("limelight-front");
 		
 		this.gyro = GyroFactory.create();
 		
@@ -75,14 +66,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				ChassisConstants.SWERVE_LOCATIONS_IN_SWERVE_KINEMATICS_COORDINATES
 		);
 		
-		this.odometry = new SwerveDriveOdometry(this.kinematics, getGyroAngle(), getSwerveModulePositions());
-		
-		this.poseEstimatorTEST = new SwerveDrivePoseEstimator(
-				this.kinematics,
-				getGyroAngle(),
-				getSwerveModulePositions(),
-				visionPoseStartMatch()
-		);
+		this.odometry = new SwerveDriveOdometry(this.kinematics, getGyroAngle(), getSwerveModulePositions(), visionPoseStartMatch());
 		
 		this.poseEstimator = new SwerveDrivePoseEstimator(
 				this.kinematics,
@@ -142,17 +126,13 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		updateInputs(chassisInputs);
 		
 		Logger.recordOutput("DriveTrain/RobotPose", getRobotPose2d());
-		Logger.recordOutput("DriveTrain/poseTest", poseEstimatorTEST.getEstimatedPosition());
 		Logger.recordOutput("DriveTrain/RobotPose3d", getRobotPose3d());
 		Logger.recordOutput("DriveTrain/ModuleStates", getSwerveModuleStates());
 		Logger.processInputs("DriveTrain/Chassis", chassisInputs);
 		Logger.processInputs("DriveTrain/Gyro", gyroInputs);
-		SmartDashboard.putNumber("shoot angle", ShootingStateCalculations.getTargetShooterAngle(ShootingPositionConstants.LEGAL_SHOOTING_ZONE).getDegrees());
 		
 		
 		updatePoseEstimationLimeLight();
-		
-		Logger.recordOutput("odometry", AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(odometry.getPoseMeters()).toBlueAlliancePose());
 		robotPose = AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(poseEstimator.getEstimatedPosition());
 		field.setRobotPose(getRobotPose2d());
 		SmartDashboard.putData(getField());
@@ -246,10 +226,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 			for (Optional<Pair<Pose2d, Double>> visionPoseAndTimeStamp : estimates) {
 				if (visionPoseAndTimeStamp.isPresent()) {
 					Pose2d visionPose = visionPoseAndTimeStamp.get().getFirst();
-					Logger.recordOutput("timestampforvision", visionPoseAndTimeStamp.get().getSecond());
-					Logger.recordOutput("estimation", visionPose);
 					poseEstimator.addVisionMeasurement(visionPose, visionPoseAndTimeStamp.get().getSecond());
-					poseEstimatorTEST.addVisionMeasurement(visionPose, visionPoseAndTimeStamp.get().getSecond());
 				}
 			}
 		}
@@ -398,16 +375,13 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	public void updatePoseEstimatorOdometry() {
 		odometry.update(getGyroAngle(), getSwerveModulePositions());
 		poseEstimator.update(getGyroAngle(), getSwerveModulePositions());
-		poseEstimatorTEST.update(getGyroAngle(), getSwerveModulePositions());
 	}
 	
 	public void updatePoseEstimationLimeLight() {
 		updatePoseEstimatorOdometry();
 		if (doVision) {
-			if (limelight.getUpdatedPose2DEstimation().isPresent()) {
-				Logger.recordOutput("limelight check", limelight.getUpdatedPose2DEstimation().get().getFirst());
-				resetPoseByVision();
-			}
+			resetPoseByVision();
+			
 		}
 	}
 	
@@ -439,7 +413,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 	
 	public Pose2d getRobotPose2d() {
-		return new Pose2d(robotPose.toBlueAlliancePose().getX(), robotPose.toBlueAlliancePose().getY(), robotPose.toAlliancePose().getRotation());
+		return new Pose2d(robotPose.toBlueAlliancePose().getX(), robotPose.toBlueAlliancePose().getY(), robotPose.toBlueAlliancePose().getRotation());
 	}
 	
 	public Pose3d getRobotPose3d() {
