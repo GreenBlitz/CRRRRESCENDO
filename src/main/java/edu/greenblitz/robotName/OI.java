@@ -102,13 +102,11 @@ public class OI {
 
 	public void romyButtons() {
 		//Collect Note
-//		mainJoystick.R1.whileTrue(new CollectNoteToScoringModeWithPivotForJoystick());
-
-
-		mainJoystick.L1.whileTrue(new MoveByJoystickAndAngleSupplier(ChassisConstants.DRIVE_MODE));
-
-
+		mainJoystick.R1.whileTrue(new CollectNoteToScoringModeWithPivotForJoystick());
 		mainJoystick.POV_DOWN.whileTrue(new CollectNoteFromFeeder());
+
+		//RotateToSpeaker
+		mainJoystick.L1.whileTrue(new RotateByScoringMode());
 
 		//Reset Robot Angle
 		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetChassisPose()));

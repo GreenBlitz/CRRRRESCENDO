@@ -1,4 +1,4 @@
-package edu.greenblitz.robotName.commands.swerve;
+package edu.greenblitz.robotName.commands.swerve.moveTo;
 
 import edu.greenblitz.robotName.ScoringModeSelector;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;

@@ -1,6 +1,7 @@
-package edu.greenblitz.robotName.commands.swerve;
+package edu.greenblitz.robotName.commands.swerve.moveTo;
 
 import edu.greenblitz.robotName.Field;
+import edu.greenblitz.robotName.commands.swerve.moveTo.MoveToPosition;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.wpi.first.math.geometry.Pose2d;

@@ -1,9 +1,8 @@
-package edu.greenblitz.robotName.commands.swerve;
+package edu.greenblitz.robotName.commands.swerve.rotateTo;
 
-import edu.greenblitz.robotName.OI;
 import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 
-public class RotateToSpeakerByCalculation extends RotateToAngle{
+public class RotateToSpeakerByCalculation extends RotateToAngle {
 
     public RotateToSpeakerByCalculation(){
         super(

@@ -11,7 +11,7 @@ import java.util.function.DoubleSupplier;
 import static edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants.MAX_ANGULAR_SPEED;
 import static edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants.ROTATION_PID_CONTROLLER;
 
-public class MoveByJoystickAndAngleSupplier extends SwerveCommand {
+public class MoveByJoystickAndRotateToSpeaker extends SwerveCommand {
 
     private double angularSpeedFactor;
 
@@ -25,12 +25,12 @@ public class MoveByJoystickAndAngleSupplier extends SwerveCommand {
 
     private double factor = 1;
 
-    public MoveByJoystickAndAngleSupplier(MoveByJoysticks.DriveMode driveMode, DoubleSupplier angularVelocitySupplier) {
+    public MoveByJoystickAndRotateToSpeaker(MoveByJoysticks.DriveMode driveMode, DoubleSupplier angularVelocitySupplier) {
         this.driveMode = driveMode;
         this.angularVelocitySupplier = angularVelocitySupplier;
     }
 
-    public MoveByJoystickAndAngleSupplier(MoveByJoysticks.DriveMode driveMode) {
+    public MoveByJoystickAndRotateToSpeaker(MoveByJoysticks.DriveMode driveMode) {
         this(
                 driveMode,
                 () -> OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.RIGHT_X)

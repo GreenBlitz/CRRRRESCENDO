@@ -1,8 +1,9 @@
-package edu.greenblitz.robotName.commands.swerve;
+package edu.greenblitz.robotName.commands.swerve.rotateTo;
 
 import edu.greenblitz.robotName.FieldConstants;
+import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 
-public class RotateToSpeaker extends MoveByJoysticks{
+public class RotateToSpeaker extends MoveByJoysticks {
 
 	public RotateToSpeaker() {
 		super(
