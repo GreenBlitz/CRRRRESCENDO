@@ -7,7 +7,6 @@ import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.wpi.first.math.geometry.Rotation2d;
 
 import java.util.function.DoubleSupplier;
-import java.util.function.Supplier;
 
 import static edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants.MAX_ANGULAR_SPEED;
 import static edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants.ROTATION_PID_CONTROLLER;
@@ -68,9 +67,9 @@ public class MoveByJoystickAndAngleSupplier extends SwerveCommand {
 
         targetAngle = ShootingStateCalculations.getTargetRobotAngle();
         ROTATION_PID_CONTROLLER.setSetpoint(targetAngle.getRadians());
-        double pidVelocity =  ChassisConstants.ROTATION_PID_CONTROLLER.calculate(swerveChassis.getChassisAngle().getRadians());
+        double pidVelocity = ChassisConstants.ROTATION_PID_CONTROLLER.calculate(swerveChassis.getChassisAngle().getRadians());
         double axesSpeed = Math.abs(leftwardSpeed) + Math.abs(forwardSpeed);
-        double velocity = pidVelocity * factor/(axesSpeed + factor);
+        double velocity = pidVelocity * factor / (axesSpeed + factor);
         double angularVelocityWithJoystick = velocity + angularSpeed;
         double checkedVelocity = Math.min(angularVelocityWithJoystick, MAX_ANGULAR_SPEED);
 
