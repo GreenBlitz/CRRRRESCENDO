@@ -29,9 +29,9 @@ public class LifterConstants {
 
     public static final double LIFTER_RETRACTED_POSITION = 0;
 
-    public static final double LIFTER_EXTENDED_POSITION = 60;
+    public static final double LIFTER_EXTENDED_POSITION = 65.5;
 
-    public static final double FORWARD_LIMIT = 63;
+    public static final double FORWARD_LIMIT = 67;
 
     public static final double BACKWARD_LIMIT = -5;
 
