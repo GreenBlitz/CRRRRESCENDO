@@ -24,6 +24,15 @@ public class Field {
 		return mirroredPose;
 	}
 
+	public static Pose2d mirrorPositionToOtherSideWithoutAngle(Pose2d pose) {
+		Pose2d mirroredPose = new Pose2d(
+				FieldConstants.FIELD_LENGTH - pose.getX(),
+				pose.getY(),
+				pose.getRotation()
+		);
+		return mirroredPose;
+	}
+
 	/**
 	 * gets pose[], returns it fitted to the other alliance ("mirrored") and rotated by 180 degrees.
 	 */
@@ -98,7 +107,7 @@ public class Field {
 
 		public final static Pose2d RED_PRE_AMP_SCORE_POSITION = new Pose2d(new Translation2d(14.85, 7.3), new Rotation2d());
 
-		public final static Pose2d RED_AMP_SCORE_POSITION = new Pose2d(new Translation2d(14.85, 7.5), new Rotation2d());
+		public final static Pose2d RED_AMP_SCORE_POSITION = new Pose2d(new Translation2d(14.85, 7.5), Rotation2d.fromDegrees(90));
 
 		public final static Pose2d BLUE_SPEAKER_SCORE_POSITION = mirrorPositionToOtherSide(RED_SPEAKER_SCORE_POSITION);
 
@@ -112,7 +121,7 @@ public class Field {
 
 		public final static Pose2d BLUE_PRE_AMP_SCORE_POSITION = mirrorPositionToOtherSide(RED_PRE_AMP_SCORE_POSITION);
 
-		public final static Pose2d BLUE_AMP_SCORE_POSITION = mirrorPositionToOtherSide(RED_AMP_SCORE_POSITION);
+		public final static Pose2d BLUE_AMP_SCORE_POSITION = mirrorPositionToOtherSideWithoutAngle(RED_AMP_SCORE_POSITION);
 	}
 
 	public static class UpStairsFieldPositions {

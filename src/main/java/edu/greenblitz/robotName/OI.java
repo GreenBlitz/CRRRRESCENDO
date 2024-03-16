@@ -1,7 +1,8 @@
 package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.LED.UpdateLEDStateDefaultCommand;
-import edu.greenblitz.robotName.commands.PrepareToShoot;
+import edu.greenblitz.robotName.commands.PrepareToScore;
+import edu.greenblitz.robotName.commands.ScoreOnReady;
 import edu.greenblitz.robotName.commands.ShootOnReady;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristWithRunFunnel;
@@ -16,7 +17,6 @@ import edu.greenblitz.robotName.commands.intake.NoteToShooterWithArm;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByPower;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.*;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
-import edu.greenblitz.robotName.commands.shooter.funnel.runByPowerUntilCondition.RunFunnelByPower;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
@@ -34,19 +34,11 @@ import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
-import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotInterpolationMap;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
-import edu.greenblitz.robotName.utils.AllianceUtilities;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import org.littletonrobotics.junction.Logger;
-
-import static edu.greenblitz.robotName.FieldConstants.MIDDLE_OF_BLUE_SPEAKER_POSITION;
-import static edu.greenblitz.robotName.FieldConstants.MIDDLE_OF_RED_SPEAKER_POSITION;
 
 public class OI {
 
@@ -111,8 +103,8 @@ public class OI {
 		mainJoystick.L1.whileTrue(new RotateByScoringMode());
 
 		//Auto Shoot
-		mainJoystick.L2.whileTrue(new PrepareToShoot());
-		mainJoystick.L2_HARD.whileTrue(new ShootOnReady());
+		mainJoystick.L2.whileTrue(new PrepareToScore());
+		mainJoystick.L2_HARD.whileTrue(new ScoreOnReady());
 
 		//Reset Robot Angle
 		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetChassisPose()));
