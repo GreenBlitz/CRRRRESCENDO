@@ -7,8 +7,7 @@ public class RotateToSpeakerWhileMove extends MoveByJoystickAndAngleSupplier{
 
     public RotateToSpeakerWhileMove(){
         super(
-                ChassisConstants.DRIVE_MODE,
-                ShootingStateCalculations.getTargetRobotAngle()
+                ChassisConstants.DRIVE_MODE
         );
     }
 }
