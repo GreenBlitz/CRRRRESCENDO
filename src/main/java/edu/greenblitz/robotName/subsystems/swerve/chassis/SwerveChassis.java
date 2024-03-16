@@ -251,7 +251,16 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				tipOfArmX > FieldConstants.FIELD_LENGTH ||
 				tipOfArmX < 0;
 	}
-	
+
+
+	public boolean isRobotStanding(){
+		ChassisSpeeds currentSpeed = getChassisSpeeds();
+		boolean isNotMovingInX = currentSpeed.vxMetersPerSecond <= SPEED_TOLERANCE;
+		boolean isNotMovingInY = currentSpeed.vyMetersPerSecond <= SPEED_TOLERANCE;
+		boolean isNotMovingInAngular = currentSpeed.omegaRadiansPerSecond <= SPEED_TOLERANCE;
+		return isNotMovingInX &&  isNotMovingInY && isNotMovingInAngular;
+	}
+
 	/**
 	 * setting module states to all 4 modules
 	 */

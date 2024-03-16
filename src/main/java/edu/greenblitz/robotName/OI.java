@@ -1,6 +1,8 @@
 package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.LED.UpdateLEDStateDefaultCommand;
+import edu.greenblitz.robotName.commands.PrepareToShoot;
+import edu.greenblitz.robotName.commands.ShootOnReady;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristWithRunFunnel;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
@@ -107,6 +109,10 @@ public class OI {
 
 		//RotateToSpeaker
 		mainJoystick.L1.whileTrue(new RotateByScoringMode());
+
+		//Auto Shoot
+		mainJoystick.L2.whileTrue(new PrepareToShoot());
+		mainJoystick.L2_HARD.whileTrue(new ShootOnReady());
 
 		//Reset Robot Angle
 		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetChassisPose()));
