@@ -5,8 +5,14 @@ import edu.wpi.first.wpilibj.util.Color;
 public class LEDConstants {
 	public static final int LED_LENGTH = 500;
  
-	public static final int LED_PORT = 0;
- 
+	public static final int RIGHT_RIGHT_LED_PORT = 0;
+
+	public static final int RIGHT_LEFT_LED_PORT = 1;
+
+	public static final int LEFT_RIGHT_LED_PORT = 2;
+
+	public static final int LEFT_LEFT_LED_PORT = 3;
+
 	public static final double BLINK_DURATION = 0.5;
  
 	public static final Section FIRST_SECTION = new Section(1, 1);

@@ -30,7 +30,10 @@ public class LED extends GBSubsystem {
 	private Timer actionTimer;
 
 	private LED() {
-		this.addressableLED = new AddressableLED(LED_PORT);
+		this.addressableLED = new AddressableLED(RIGHT_RIGHT_LED_PORT);
+		this.addressableLED = new AddressableLED(RIGHT_LEFT_LED_PORT);
+		this.addressableLED = new AddressableLED(LEFT_RIGHT_LED_PORT);
+		this.addressableLED = new AddressableLED(LEFT_LEFT_LED_PORT);
 		this.addressableLEDBuffer = new AddressableLEDBuffer(LED_LENGTH);
 		this.addressableLED.setLength(LED_LENGTH);
 		this.addressableLED.start();
@@ -141,7 +144,7 @@ public class LED extends GBSubsystem {
 	public void blinkOrRumbleByNoteState() {
 		if (isNoteInRobot() && (actionTimer.get() <= LEDConstants.BLINKING_TIME)) {
 			blink(getColorByMode());
-		} else if (actionTimer.get() <= LEDConstants.RUMBLE_TIME && getWasNoteInRobot() != isNoteInRobot()) {
+		} else if ((actionTimer.get() <= LEDConstants.RUMBLE_TIME) && (getWasNoteInRobot() != isNoteInRobot())) {
 			rumble();
 		} else {
 			stopRumble();
