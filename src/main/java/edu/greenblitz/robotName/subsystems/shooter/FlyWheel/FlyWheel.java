@@ -95,5 +95,11 @@ public class FlyWheel extends GBSubsystem {
 	public void periodic() {
 		flyWheel.updateInputs(flyWheelInputs);
 		Logger.processInputs("FlyWheel", flyWheelInputs);
+		if (isAtVelocity(
+				FlyWheelConstants.SHOOTING_VELOCITY,
+				FlyWheelConstants.SHOOTING_VELOCITY * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR)
+		){
+			setPreparedToShoot(false);
+		}
 	}
 }

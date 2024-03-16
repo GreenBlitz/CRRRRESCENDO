@@ -80,9 +80,9 @@ public class ChassisConstants {
 	
 	public static final double FAST_DISCRETION_CONSTANT = -8;
 
-	public static final double TRANSLATION_TOLERANCE = 0.05;
+	public static final double TRANSLATION_TOLERANCE = 0.1;
 
-	public static final Rotation2d ROTATION_TOLERANCE = Rotation2d.fromDegrees(1.5);
+	public static final Rotation2d ROTATION_TOLERANCE = Rotation2d.fromDegrees(2.5);
 
 	public static final double CURRENT_TOLERANCE = 0.5;
 
