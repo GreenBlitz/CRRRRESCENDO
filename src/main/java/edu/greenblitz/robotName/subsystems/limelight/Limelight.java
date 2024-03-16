@@ -1,18 +1,18 @@
 package edu.greenblitz.robotName.subsystems.limelight;
 
 import edu.greenblitz.robotName.VisionConstants;
-import edu.greenblitz.robotName.utils.FMSUtils;
+import edu.greenblitz.robotName.utils.AllianceUtilities;
+import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 
 import java.util.Optional;
 
-class Limelight {
+public class Limelight extends GBSubsystem {
 
 	private NetworkTableEntry robotPoseEntry, idEntry, tagPoseEntry;
 
@@ -20,7 +20,7 @@ class Limelight {
 
 	public Limelight(String limelightName) {
 		this.name = limelightName;
-		String robotPoseQuery = FMSUtils.getAlliance() == DriverStation.Alliance.Red ? "botpose_wpired" : "botpose_wpiblue";
+		String robotPoseQuery =  "botpose_wpiblue";
 		robotPoseEntry = NetworkTableInstance.getDefault().getTable(name).getEntry(robotPoseQuery);
 		tagPoseEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("targetpose_cameraspace");
 		idEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("tid");
@@ -31,13 +31,14 @@ class Limelight {
 		double processingLatency = poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.TOTAL_LATENCY)] / 1000;
 		double timestamp = Timer.getFPGATimestamp() - processingLatency;
 		int id = (int) idEntry.getInteger(-1);
+		double angleOffset = AllianceUtilities.isBlueAlliance() ? 0 : 180;
 		if (id == -1) {
 			return Optional.empty();
 		}
 		Pose2d robotPose = new Pose2d(
 				poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.X_AXIS)],
 				poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.Y_AXIS)],
-				Rotation2d.fromDegrees(poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.YAW_ANGLE)])
+				Rotation2d.fromDegrees(poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.PITCH_ANGLE)] - angleOffset)
 		);
 		return Optional.of(new Pair<>(robotPose, timestamp));
 	}

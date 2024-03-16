@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.385354324682553,
-      "y": 5.57998439840296
+      "x": 1.38,
+      "y": 5.53
     },
     "rotation": 180.0
   },
@@ -14,7 +14,7 @@
         {
           "type": "named",
           "data": {
-            "name": null
+            "name": "close shoot start"
           }
         },
         {
@@ -28,13 +28,13 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "speaker start to 2"
+                        "pathName": "mid speaker to 2"
                       }
                     },
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.5
+                        "waitTime": 1.5
                       }
                     }
                   ]
@@ -43,26 +43,26 @@
               {
                 "type": "named",
                 "data": {
-                  "name": null
+                  "name": "note to intake"
                 }
               }
             ]
           }
         },
         {
-          "type": "deadline",
+          "type": "parallel",
           "data": {
             "commands": [
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "2 to speaker"
+                  "name": "note from intake to shooter"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": null
+                  "name": "rotate to speaker"
                 }
               }
             ]
@@ -71,13 +71,13 @@
         {
           "type": "named",
           "data": {
-            "name": null
+            "name": "interpolation"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": null
+            "name": "push note to flyWheel"
           }
         },
         {
@@ -91,13 +91,13 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "speaker to 1"
+                        "pathName": "2 to 1"
                       }
                     },
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.5
+                        "waitTime": 1.5
                       }
                     }
                   ]
@@ -106,26 +106,26 @@
               {
                 "type": "named",
                 "data": {
-                  "name": null
+                  "name": "note to intake"
                 }
               }
             ]
           }
         },
         {
-          "type": "deadline",
+          "type": "parallel",
           "data": {
             "commands": [
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "1 to speaker"
+                  "name": "note from intake to shooter"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": null
+                  "name": "rotate to speaker"
                 }
               }
             ]
@@ -134,13 +134,13 @@
         {
           "type": "named",
           "data": {
-            "name": null
+            "name": "interpolation"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": null
+            "name": "push note to flyWheel"
           }
         },
         {
@@ -154,13 +154,13 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "speaker mid to 3"
+                        "pathName": "1 to 3"
                       }
                     },
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.5
+                        "waitTime": 1.5
                       }
                     }
                   ]
@@ -169,26 +169,26 @@
               {
                 "type": "named",
                 "data": {
-                  "name": null
+                  "name": "note to intake"
                 }
               }
             ]
           }
         },
         {
-          "type": "deadline",
+          "type": "parallel",
           "data": {
             "commands": [
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "3 to speaker"
+                  "name": "note from intake to shooter"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": null
+                  "name": "rotate to speaker"
                 }
               }
             ]
@@ -197,18 +197,18 @@
         {
           "type": "named",
           "data": {
-            "name": null
+            "name": "interpolation"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": null
+            "name": "push note to flyWheel"
           }
         }
       ]
     }
   },
-  "folder": null,
+  "folder": "closeeeeeeeeeee",
   "choreoAuto": false
 }

@@ -12,15 +12,15 @@ public class VisionConstants {
 			"limelight-gb"
 	};
 	
-	public static double STANDARD_DEVIATION_ODOMETRY = 0.1;
+	public static final double STANDARD_DEVIATION_ODOMETRY = 0.55;
 	
 	public static int LIMELIGHT_ENTRY_ARRAY_LENGTH = 7;
 	
-	public static double STANDARD_DEVIATION_ODOMETRY_ANGLE = 0.01;
+	public static final double STANDARD_DEVIATION_ODOMETRY_ANGLE = 0;
 	
-	public static double STANDARD_DEVIATION_VISION2D = 0.55;
+	public static final double STANDARD_DEVIATION_VISION2D = 0.1;
 	
-	public static double STANDARD_DEVIATION_VISION_ANGLE = 0.6;
+	public static final double STANDARD_DEVIATION_VISION_ANGLE = 0.6;
 	
 	public static final int[] PORT_NUMBERS = {5800, 5801, 5802, 5803, 5804, 5805};
 	

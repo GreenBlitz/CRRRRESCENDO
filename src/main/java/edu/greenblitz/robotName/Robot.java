@@ -4,10 +4,11 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
-import edu.greenblitz.robotName.commands.RumbleRomy;
-import edu.greenblitz.robotName.commands.intake.CollectNoteFromGround;
-import edu.greenblitz.robotName.commands.intake.NoteToShooterWithArm;
-import edu.greenblitz.robotName.commands.shooter.ShootFromInFunnel;
+import edu.greenblitz.robotName.commands.auto.InterpolationForAuto;
+import edu.greenblitz.robotName.commands.auto.NoteFromIntakeToShooterForAuto;
+import edu.greenblitz.robotName.commands.auto.RotateToSpeakerForAuto;
+import edu.greenblitz.robotName.commands.intake.*;
+import edu.greenblitz.robotName.commands.shooter.PushNoteToFlyWheel;
 import edu.greenblitz.robotName.commands.shooter.ShootToSpeakerFromClose;
 import edu.greenblitz.robotName.subsystems.Dashboard;
 import edu.greenblitz.robotName.subsystems.LED.LED;
@@ -26,16 +27,13 @@ import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.AllianceUtilities;
 import edu.greenblitz.robotName.utils.AutonomousSelector;
-import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
 import org.littletonrobotics.junction.Logger;
@@ -67,17 +65,17 @@ public class Robot extends LoggedRobot {
 		Pathfinding.setPathfinder(new LocalADStar());
 		CommandScheduler.getInstance().enable();
 		initializeLogger();
-		initializeAutonomousBuilder();
 		initializeSubsystems();
 		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
 		Dashboard.getInstance();
+		initializeAutonomousBuilder();
+		AutonomousSelector.getInstance();
 		Pivot.getInstance().resetAngle(PivotConstants.PresetPositions.STARTING.ANGLE);
 		Elbow.getInstance().resetAngle(ElbowConstants.MINIMUM_ANGLE);
 		OI.init();
 	}
 
 	public void initializeSubsystems() {
-		AutonomousSelector.getInstance();
 		ScoringModeSelector.init();
 		MultiLimelight.init();
 		SwerveChassis.init();
@@ -113,9 +111,12 @@ public class Robot extends LoggedRobot {
 	}
 
 	private void initializeAutonomousBuilder() {
-		NamedCommands.registerCommand("shoot", new ShootFromInFunnel());
-		NamedCommands.registerCommand("close shoot", new ShootToSpeakerFromClose());
-		NamedCommands.registerCommand("grip", new CollectNoteFromGround());
+		NamedCommands.registerCommand("push note to flyWheel", new PushNoteToFlyWheel().raceWith(new WaitCommand(3)));
+		NamedCommands.registerCommand("rotate to speaker", new RotateToSpeakerForAuto());
+		NamedCommands.registerCommand("note to intake", new NoteToIntake());
+		NamedCommands.registerCommand("note from intake to shooter", new NoteFromIntakeToShooterForAuto());
+		NamedCommands.registerCommand("close shoot start", new ShootToSpeakerFromClose());
+		NamedCommands.registerCommand("interpolation", new InterpolationForAuto());
 		AutoBuilder.configureHolonomic(
 				SwerveChassis.getInstance()::getRobotPose2d,
 				(pose) -> SwerveChassis.getInstance().resetChassisPose(AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(pose)),
