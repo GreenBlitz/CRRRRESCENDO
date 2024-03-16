@@ -188,8 +188,8 @@ public class OI {
                 .alongWith(new InstantCommand(() -> Lifter.getInstance().setIdleMode(CANSparkBase.IdleMode.kBrake)))
                 .alongWith(new InstantCommand(() -> Elbow.getInstance().setIdleMode(NeutralModeValue.Brake)))
                 .andThen(new getLifterReady())
-        );//this first and long
-
+        );
+        //this first and long
         usedJoystick.BACK.whileTrue(new SetScoringMode(ScoringMode.AMP)
                 .alongWith(new InstantCommand(() -> Lifter.getInstance().setIdleMode(CANSparkBase.IdleMode.kCoast)))
                 .alongWith(new InstantCommand(() -> Elbow.getInstance().setIdleMode(NeutralModeValue.Coast)))
