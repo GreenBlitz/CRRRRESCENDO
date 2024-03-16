@@ -64,11 +64,11 @@ public class MoveByJoystickAndRotateToSpeaker extends SwerveCommand {
         ROTATION_PID_CONTROLLER.setSetpoint(targetAngle.getRadians());
         double pidVelocity = ChassisConstants.ROTATION_PID_CONTROLLER.calculate(swerveChassis.getChassisAngle().getRadians());
         double axesSpeed = Math.abs(leftwardSpeed) + Math.abs(forwardSpeed);
-        double velocity = pidVelocity * factor / (axesSpeed + factor);
-        double angularVelocityWithJoystick = velocity + angularSpeed;
-        double checkedVelocity = Math.min(angularVelocityWithJoystick, MAX_ANGULAR_SPEED);
+        double angularVelocity = pidVelocity * factor / (axesSpeed + factor);
+        double angularVelocityWithJoystick = angularVelocity + angularSpeed;
+        double checkedAngularVelocity = Math.min(angularVelocityWithJoystick, MAX_ANGULAR_SPEED);
 
-        if (forwardSpeed == 0 && leftwardSpeed == 0 && checkedVelocity == 0) {
+        if (forwardSpeed == 0 && leftwardSpeed == 0 && checkedAngularVelocity == 0) {
             swerveChassis.stop();
             return;
         }
@@ -76,7 +76,7 @@ public class MoveByJoystickAndRotateToSpeaker extends SwerveCommand {
         swerveChassis.moveByChassisSpeeds(
                 forwardSpeed,
                 leftwardSpeed,
-                checkedVelocity,
+                checkedAngularVelocity,
                 swerveChassis.getChassisAngle()
         );
     }
