@@ -19,7 +19,7 @@ public class PivotInterpolationMap {
 		DISTANCE_TO_ANGLE.put(2.65, Units.degreesToRadians(38.2));
 		DISTANCE_TO_ANGLE.put(2.7, Units.degreesToRadians(34.2));
 		DISTANCE_TO_ANGLE.put(3.25, Units.degreesToRadians(33.75));
-		DISTANCE_TO_ANGLE.put(3.47, PivotConstants.PresetPositions.PODIUM.ANGLE.getRadians());
+		DISTANCE_TO_ANGLE.put(3.47, Units.degreesToRadians(32.3));
 		DISTANCE_TO_ANGLE.put(4.15, Units.degreesToRadians(28.9));
 		DISTANCE_TO_ANGLE.put(4.5, Units.degreesToRadians(27.6));
 		DISTANCE_TO_ANGLE.put(5.0, Units.degreesToRadians(26.2));
