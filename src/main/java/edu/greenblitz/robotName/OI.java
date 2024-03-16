@@ -99,9 +99,6 @@ public class OI {
 		mainJoystick.R1.whileTrue(new CollectNoteToScoringModeWithPivotForJoystick());
 		mainJoystick.POV_DOWN.whileTrue(new CollectNoteFromFeeder());
 
-		//RotateToSpeaker
-		mainJoystick.L1.whileTrue(new RotateByScoringMode());
-
 		//Auto Shoot
 		mainJoystick.L2.whileTrue(new PrepareToScore());
 		mainJoystick.L2_HARD.whileTrue(new ScoreOnReady());
