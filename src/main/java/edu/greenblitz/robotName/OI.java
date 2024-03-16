@@ -8,9 +8,11 @@ import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristWithRunFunnel;
 import edu.greenblitz.robotName.commands.arm.ScoreToTrap;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowByJoystick;
+import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
 import edu.greenblitz.robotName.commands.arm.roller.MoveNoteInRoller;
 import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRollerToAmp;
 import edu.greenblitz.robotName.commands.arm.wrist.MoveWristByButton;
+import edu.greenblitz.robotName.commands.arm.wrist.MoveWristToAngle;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.climbing.CloseAndThenHoldSolenoid;
 import edu.greenblitz.robotName.commands.climbing.getLifterReady;
@@ -44,10 +46,9 @@ import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.ConditionalCommand;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.*;
 
 public class OI {
 
@@ -187,7 +188,10 @@ public class OI {
         usedJoystick.START.whileTrue(new SetScoringMode(ScoringMode.CLIMB)
                 .alongWith(new InstantCommand(() -> Lifter.getInstance().setIdleMode(CANSparkBase.IdleMode.kBrake)))
                 .alongWith(new InstantCommand(() -> Elbow.getInstance().setIdleMode(NeutralModeValue.Brake)))
-                .andThen(new getLifterReady())
+                        .andThen((new TransferNote()).raceWith(new WaitCommand(3.0))
+                        .andThen(new MoveElbowToAngle(Rotation2d.fromDegrees(-10)))
+                                .andThen(new MoveWristToAngle(Rotation2d.fromDegrees(270)))
+                        .andThen(new getLifterReady()))
         );
         //this first and long
         usedJoystick.BACK.whileTrue(new SetScoringMode(ScoringMode.AMP)
