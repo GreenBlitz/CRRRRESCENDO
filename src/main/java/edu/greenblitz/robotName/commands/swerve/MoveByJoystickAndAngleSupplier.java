@@ -24,7 +24,6 @@ public class MoveByJoystickAndAngleSupplier extends SwerveCommand {
     private Rotation2d targetAngle;
 
     private double factor = 1;
-    private double maxAngularVelocity = 6;
 
     public MoveByJoystickAndAngleSupplier(MoveByJoysticks.DriveMode driveMode, DoubleSupplier angularVelocitySupplier) {
         this.driveMode = driveMode;
@@ -60,10 +59,6 @@ public class MoveByJoystickAndAngleSupplier extends SwerveCommand {
 
         double angularSpeed = -angularVelocitySupplier.getAsDouble() * angularSpeedFactor;
 
-        if (forwardSpeed == 0 && leftwardSpeed == 0 && angularSpeed == 0) {
-            swerveChassis.stop();
-            return;
-        }
 
         targetAngle = ShootingStateCalculations.getTargetRobotAngle();
         ROTATION_PID_CONTROLLER.setSetpoint(targetAngle.getRadians());
@@ -72,6 +67,11 @@ public class MoveByJoystickAndAngleSupplier extends SwerveCommand {
         double velocity = pidVelocity * factor / (axesSpeed + factor);
         double angularVelocityWithJoystick = velocity + angularSpeed;
         double checkedVelocity = Math.min(angularVelocityWithJoystick, MAX_ANGULAR_SPEED);
+
+        if (forwardSpeed == 0 && leftwardSpeed == 0 && checkedVelocity == 0) {
+            swerveChassis.stop();
+            return;
+        }
 
         swerveChassis.moveByChassisSpeeds(
                 forwardSpeed,

@@ -102,8 +102,12 @@ public class OI {
 
 	public void romyButtons() {
 		//Collect Note
-		mainJoystick.R1.whileTrue(new CollectNoteToScoringModeWithPivotForJoystick());
-		mainJoystick.L1.whileTrue(new RotateByScoringMode());
+//		mainJoystick.R1.whileTrue(new CollectNoteToScoringModeWithPivotForJoystick());
+
+
+		mainJoystick.L1.whileTrue(new MoveByJoystickAndAngleSupplier(ChassisConstants.DRIVE_MODE));
+
+
 		mainJoystick.POV_DOWN.whileTrue(new CollectNoteFromFeeder());
 
 		//Reset Robot Angle
