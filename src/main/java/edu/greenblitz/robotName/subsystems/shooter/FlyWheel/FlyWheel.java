@@ -80,11 +80,11 @@ public class FlyWheel extends GBSubsystem {
     }
 
     public boolean isRightWheelAtVelocity(double velocity) {
-        return Math.abs(getRightSideVelocity() - velocity) < FlyWheelConstants.EPSILON_RPM;
+        return Math.abs(getRightSideVelocity() - velocity) < FlyWheelConstants.EPSILON_RPS;
     }
 
     public boolean isLeftWheelAtVelocity(double velocity) {
-        return Math.abs(getLeftSideVelocity() - velocity) < FlyWheelConstants.EPSILON_RPM;
+        return Math.abs(getLeftSideVelocity() - velocity) < FlyWheelConstants.EPSILON_RPS;
     }
 
     public boolean isAtVelocity(double rightWheelVelocity, double leftWheelVelocity) {
@@ -95,12 +95,5 @@ public class FlyWheel extends GBSubsystem {
     public void periodic() {
         flyWheel.updateInputs(flyWheelInputs);
         Logger.processInputs("FlyWheel", flyWheelInputs);
-        if (!isAtVelocity(
-                FlyWheelConstants.SHOOTING_VELOCITY,
-                FlyWheelConstants.SHOOTING_VELOCITY * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR
-        )
-        ) {
-            setPreparedToShoot(false);
-        }
     }
 }

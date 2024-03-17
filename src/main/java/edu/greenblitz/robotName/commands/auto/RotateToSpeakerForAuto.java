@@ -10,7 +10,7 @@ public class RotateToSpeakerForAuto extends ConditionalCommand {
 
     public RotateToSpeakerForAuto() {
         super(
-                new RotateToSpeakerByCalculation(),
+                new RotateToSpeakerByCalculationForAuto(),
                 new InstantCommand(),
                 () -> Intake.getInstance().isObjectIn() || Funnel.getInstance().isObjectIn()
         );
