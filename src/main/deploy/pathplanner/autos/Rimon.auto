@@ -14,7 +14,7 @@
         {
           "type": "named",
           "data": {
-            "name": null
+            "name": "close shoot start"
           }
         },
         {
@@ -43,7 +43,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": null
+                  "name": "note to intake"
                 }
               }
             ]
@@ -62,7 +62,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": null
+                  "name": "note from intake to shooter"
                 }
               }
             ]
@@ -71,7 +71,25 @@
         {
           "type": "named",
           "data": {
-            "name": null
+            "name": "rotate to speaker"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "note from intake to shooter"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "interpolation"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "push note to flyWheel"
           }
         },
         {
@@ -96,14 +114,14 @@
                     }
                   ]
                 }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": null
-                }
               }
             ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "note to intake"
           }
         },
         {
@@ -119,7 +137,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": null
+                  "name": "note from intake to shooter"
                 }
               }
             ]
@@ -128,7 +146,19 @@
         {
           "type": "named",
           "data": {
-            "name": null
+            "name": "rotate to speaker"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "interpolation"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "push note to flyWheel"
           }
         }
       ]

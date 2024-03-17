@@ -21,6 +21,7 @@ import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.*;
 import edu.wpi.first.math.kinematics.*;
 import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.littletonrobotics.junction.Logger;
@@ -380,7 +381,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	
 	public void updatePoseEstimationLimeLight() {
 		updatePoseEstimatorOdometry();
-		if (DO_VISION) {
+		if (DO_VISION && !DriverStation.isAutonomous()) {
 			resetPoseByVision();
 		}
 	}
