@@ -1,7 +1,9 @@
-package edu.greenblitz.robotName.commands.swerve;
+package edu.greenblitz.robotName.commands.swerve.MoveyJoystickWithAngle;
 
 import edu.greenblitz.robotName.FieldConstants;
 import edu.greenblitz.robotName.OI;
+import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
+import edu.greenblitz.robotName.commands.swerve.SwerveCommand;
 import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
@@ -12,7 +14,7 @@ import java.util.function.DoubleSupplier;
 import static edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants.MAX_ANGULAR_SPEED;
 import static edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants.ROTATION_PID_CONTROLLER;
 
-public class MoveByJoystickAndRotateToAmp extends SwerveCommand{
+public class MoveByJoystickAndRotateToAmp extends SwerveCommand {
 
     private double angularSpeedFactor;
 
@@ -21,10 +23,6 @@ public class MoveByJoystickAndRotateToAmp extends SwerveCommand{
     private DoubleSupplier angularVelocitySupplier;
 
     private MoveByJoysticks.DriveMode driveMode;
-
-    private Rotation2d targetAngle;
-
-    private double factor = 1;
 
     public MoveByJoystickAndRotateToAmp(MoveByJoysticks.DriveMode driveMode, DoubleSupplier angularVelocitySupplier) {
         this.driveMode = driveMode;
@@ -62,11 +60,8 @@ public class MoveByJoystickAndRotateToAmp extends SwerveCommand{
         double angularSpeed = -angularVelocitySupplier.getAsDouble() * angularSpeedFactor;
 
 
-        double pidVelocity = ChassisConstants.ROTATION_PID_CONTROLLER.calculate(swerveChassis.getChassisAngle().getRadians());
-        double axesSpeed = Math.abs(leftwardSpeed) + Math.abs(forwardSpeed);
-        double angularVelocity = pidVelocity * factor / (axesSpeed + factor);
-        double angularVelocityWithJoystick = angularVelocity + angularSpeed;
-        double checkedAngularVelocity = Math.min(angularVelocityWithJoystick, MAX_ANGULAR_SPEED);
+        double checkedAngularVelocity = MoveByJoystickWithAngleService.calculateAngularVelocity(forwardSpeed, leftwardSpeed, angularSpeed);
+
 
         if (forwardSpeed == 0 && leftwardSpeed == 0 && checkedAngularVelocity == 0) {
             swerveChassis.stop();
