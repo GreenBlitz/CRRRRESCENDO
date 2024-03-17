@@ -43,6 +43,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	private SwerveDriveKinematics kinematics;
 	private SwerveDrivePoseEstimator poseEstimator;
 	private Field2d field;
+	
+	public boolean doVision;
 	private SwerveChassisInputsAutoLogged chassisInputs;
 	private GyroInputsAutoLogged gyroInputs;
 	private AllianceUtilities.AlliancePose2d robotPose;
@@ -50,6 +52,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	public SwerveChassis() {
 		this.field = new Field2d();
 
+		this.doVision = true;
+		
 		this.frontLeft = new SwerveModule(Module.FRONT_LEFT);
 		this.frontRight = new SwerveModule(Module.FRONT_RIGHT);
 		this.backLeft = new SwerveModule(Module.BACK_LEFT);
@@ -222,6 +226,14 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		}
 	}
 	
+	public void disableLimelight(){
+		doVision = false;
+	}
+	
+	public void activateLimelight(){
+		doVision = true;
+	}
+	
 	public void resetPoseByVision() {
 		List<Optional<Pair<Pose2d, Double>>> estimates = MultiLimelight.getInstance().getAll2DEstimates();
 		if (!estimates.isEmpty()) {
@@ -389,7 +401,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	
 	public void updatePoseEstimationLimeLight() {
 		updatePoseEstimatorOdometry();
-		if (DO_VISION) {
+		if (doVision) {
 			resetPoseByVision();
 		}
 	}
@@ -549,7 +561,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	
 	@Override
 	public void updateInputs(SwerveChassisInputsAutoLogged inputs) {
-		inputs.isVisionEnabled = DO_VISION;
+		inputs.isVisionEnabled = doVision;
 		inputs.numberOfDetectedAprilTag = MultiLimelight.getInstance().getAll2DEstimates().size();
 		inputs.omegaRadiansPerSecond = getChassisSpeeds().omegaRadiansPerSecond;
 		inputs.xAxisSpeed = getChassisSpeeds().vxMetersPerSecond;

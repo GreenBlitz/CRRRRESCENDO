@@ -8,6 +8,8 @@ import edu.greenblitz.robotName.commands.auto.InterpolationForAuto;
 import edu.greenblitz.robotName.commands.auto.NoteFromIntakeToShooterForAuto;
 import edu.greenblitz.robotName.commands.auto.RotateToSpeakerForAuto;
 import edu.greenblitz.robotName.commands.intake.*;
+import edu.greenblitz.robotName.commands.limelight.ActivateLimelight;
+import edu.greenblitz.robotName.commands.limelight.DisableLimelight;
 import edu.greenblitz.robotName.commands.shooter.PushNoteToFlyWheel;
 import edu.greenblitz.robotName.commands.shooter.ShootToSpeakerFromClose;
 import edu.greenblitz.robotName.subsystems.Dashboard;
@@ -117,6 +119,8 @@ public class Robot extends LoggedRobot {
 		NamedCommands.registerCommand("note from intake to shooter", new NoteFromIntakeToShooterForAuto());
 		NamedCommands.registerCommand("close shoot start", new ShootToSpeakerFromClose());
 		NamedCommands.registerCommand("interpolation", new InterpolationForAuto());
+		NamedCommands.registerCommand("disable limelight", new DisableLimelight());
+		NamedCommands.registerCommand("activate limelight", new ActivateLimelight());
 		AutoBuilder.configureHolonomic(
 				SwerveChassis.getInstance()::getRobotPose2d,
 				(pose) -> SwerveChassis.getInstance().resetChassisPose(AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(pose)),
