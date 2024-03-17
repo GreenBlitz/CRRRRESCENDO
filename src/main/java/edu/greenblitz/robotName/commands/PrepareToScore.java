@@ -9,30 +9,33 @@ import edu.greenblitz.robotName.commands.swerve.MoveyJoystickWithAngle.MoveByJoy
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
-import edu.wpi.first.wpilibj2.command.ConditionalCommand;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.*;
 
-public class PrepareToScore extends ConditionalCommand {
+public class PrepareToScore extends ProxyCommand {
 
     public PrepareToScore() {
-        super(
-                new ParallelCommandGroup(
-                        new MoveByJoystickAndRotateToSpeaker(ChassisConstants.DRIVE_MODE),
-                        new RunFlyWheelByVelocityConstant()
-                ),
-                new ParallelCommandGroup(
-                        new MoveByJoystickAndRotateToAmp(ChassisConstants.DRIVE_MODE),
-                        new SequentialCommandGroup(
-                                new isRobotAtAngle(FieldConstants.BLUE_AMP_ANGLE),
-                                new MoveElbowAndWristWithRunFunnel(
-                                        ElbowConstants.PresetPositions.SCORE,
-                                        WristConstants.PresetPositions.SCORE
-                                )
-                        )
-                ),
-                ScoringModeSelector::isSpeakerMode
-        );
+        super(PrepareToScore::getCommand);
+    }
+
+    public static Command getCommand(){
+        if (ScoringModeSelector.isSpeakerMode()){
+            return new ParallelCommandGroup(
+                    new MoveByJoystickAndRotateToSpeaker(ChassisConstants.DRIVE_MODE),
+                    new RunFlyWheelByVelocityConstant()
+            );
+        }
+        else{
+            return new ParallelCommandGroup(
+                    new MoveByJoystickAndRotateToAmp(ChassisConstants.DRIVE_MODE),
+                    new SequentialCommandGroup(
+                            new isRobotAtAngle(FieldConstants.BLUE_AMP_ANGLE),
+                            new MoveElbowAndWristWithRunFunnel(
+                                    ElbowConstants.PresetPositions.SCORE,
+                                    WristConstants.PresetPositions.SCORE
+                            )
+                    )
+            );
+        }
     }
 
 }
