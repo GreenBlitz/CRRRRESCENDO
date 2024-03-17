@@ -95,6 +95,8 @@ public class OI {
 	}
 
 	public void romyButtons() {
+		secondJoystick.START.onTrue(new ToggleScoringMode());
+
 		//Collect Note
 		mainJoystick.R1.whileTrue(new CollectNoteToScoringModeWithPivotForJoystick());
 		mainJoystick.POV_DOWN.whileTrue(new CollectNoteFromFeeder());
