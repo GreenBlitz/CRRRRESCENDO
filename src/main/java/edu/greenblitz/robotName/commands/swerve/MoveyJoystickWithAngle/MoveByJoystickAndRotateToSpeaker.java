@@ -61,7 +61,7 @@ public class MoveByJoystickAndRotateToSpeaker extends SwerveCommand {
         double angularSpeed = -angularVelocitySupplier.getAsDouble() * angularSpeedFactor;
 
 
-        targetAngle = ShootingStateCalculations.getTargetRobotAngle().minus(Rotation2d.fromDegrees(180));
+        targetAngle = ShootingStateCalculations.getTargetRobotAngle();
         ROTATION_PID_CONTROLLER.setSetpoint(targetAngle.getRadians());
         double checkedAngularVelocity = MoveByJoystickWithAngleService.calculateAngularVelocity(forwardSpeed, leftwardSpeed, angularSpeed);
 

@@ -29,7 +29,6 @@ public class ShootingStateCalculations {
 						speakerPosition.getX() - robotRelative.getX()
 				)
 		);
-		angle = angle.plus(Rotation2d.fromDegrees(180));
 		return angle;
 	}
 
