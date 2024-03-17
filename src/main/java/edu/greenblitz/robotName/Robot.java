@@ -67,7 +67,7 @@ public class Robot extends LoggedRobot {
 		initializeLogger();
 		initializeSubsystems();
 		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
-		Dashboard.getInstance();
+//		Dashboard.getInstance();
 		initializeAutonomousBuilder();
 		AutonomousSelector.getInstance();
 		Pivot.getInstance().resetAngle(PivotConstants.PresetPositions.STARTING.ANGLE);
@@ -100,7 +100,7 @@ public class Robot extends LoggedRobot {
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
-		Dashboard.getInstance().activateDriversDashboard();
+//		Dashboard.getInstance().activateDriversDashboard();
 	}
 
 

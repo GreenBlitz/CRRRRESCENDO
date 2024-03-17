@@ -197,11 +197,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		SmartDashboard.putNumber("targetAnglelll", angle.getDegrees());
 		return Math.abs(getChassisAngle().getRadians() - angle.getRadians()) <= ROTATION_TOLERANCE.getRadians()
 				|| Math.abs(getChassisAngle().getRadians() - angle.getRadians()) >= (2 * Math.PI) - ROTATION_TOLERANCE.getRadians()
-				|| (Math.abs(getChassisAngle().getRadians()) + Math.abs(angle.getRadians())
+				/*|| (Math.abs(getChassisAngle().getRadians()) + Math.abs(angle.getRadians())
 				- Rotation2d.fromDegrees(180).getRadians() <= ROTATION_TOLERANCE.getRadians() &&
 				(Math.abs(getChassisAngle().getRadians()) + Math.abs(angle.getRadians())
-						- Rotation2d.fromDegrees(180).getRadians() >= -ROTATION_TOLERANCE.getRadians()
-		));
+						- Rotation2d.fromDegrees(180).getRadians() >= -ROTATION_TOLERANCE.getRadians()*/;
 	}
 	
 	public void resetChassisPose() {
