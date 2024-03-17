@@ -189,10 +189,9 @@ public class OI {
                 .alongWith(new InstantCommand(() -> Lifter.getInstance().setIdleMode(CANSparkBase.IdleMode.kBrake)))
                 .alongWith(new InstantCommand(() -> Elbow.getInstance().setIdleMode(NeutralModeValue.Brake)))
                         .andThen((new TransferNote()).raceWith(new WaitCommand(3.0))
-                        .andThen(new MoveElbowToAngle(Rotation2d.fromDegrees(-10)))
+                        .andThen(new MoveElbowToAngle(Rotation2d.fromDegrees(-25)))
                                 .andThen(new MoveWristToAngle(Rotation2d.fromDegrees(270)))
-                        .andThen(new getLifterReady()))
-        );
+        ).alongWith(new getLifterReady()));
         //this first and long
         usedJoystick.BACK.whileTrue(new SetScoringMode(ScoringMode.AMP)
                 .alongWith(new InstantCommand(() -> Lifter.getInstance().setIdleMode(CANSparkBase.IdleMode.kCoast)))

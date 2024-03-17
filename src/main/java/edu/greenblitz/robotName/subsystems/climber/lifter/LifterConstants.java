@@ -5,9 +5,10 @@ import edu.wpi.first.math.geometry.Translation3d;
 
 public class LifterConstants {
 
-    public static final double POWER_TO_EXTEND_LIFTER = 0.4;
+    public static final double POWER_TO_EXTEND_LIFTER = 0.7;
 
-    public static final double POWER_TO_RETRACT_LIFTER = -0.4;
+    public static final double POWER_TO_RETRACT_LIFTER = -0.6;
+    public static final double END_OF_CLIMB_POWER = -0.4; //do not increase .
 
     public static final double POWER_TO_RETRACT_LIFTER_SLOW = -0.1;
 
