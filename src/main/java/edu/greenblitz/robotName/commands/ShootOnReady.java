@@ -6,6 +6,7 @@ import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ShootOnReady extends FunnelCommand {
 
@@ -27,6 +28,11 @@ public class ShootOnReady extends FunnelCommand {
         isRobotStanding = SwerveChassis.getInstance().isRobotStanding();
         isFlyWheelAtVelocity = FlyWheel.getInstance().getPreparedToShoot();
         isNoteInFunnel = Funnel.getInstance().isObjectIn();
+        SmartDashboard.putBoolean("funnel", isNoteInFunnel);
+        SmartDashboard.putBoolean("flywhhel", isFlyWheelAtVelocity);
+        SmartDashboard.putBoolean("robotStantd", isRobotStanding);
+        SmartDashboard.putBoolean("angle", isSwerveAngleCorrect);
+        SmartDashboard.putBoolean("pivot", isPivotAngleCorrect);
         if (isRobotStanding && isPivotAngleCorrect && isSwerveAngleCorrect && isFlyWheelAtVelocity && isNoteInFunnel) {
             funnel.setPower(0.8);
         }

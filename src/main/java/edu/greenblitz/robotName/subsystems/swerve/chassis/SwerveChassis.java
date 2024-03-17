@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.littletonrobotics.junction.Logger;
+import org.opencv.core.Mat;
 import org.photonvision.EstimatedRobotPose;
 
 import java.util.List;
@@ -127,6 +128,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		
 		
 		updatePoseEstimationLimeLight();
+		MultiLimelight.getInstance().recordEstimatedPositions();
 		robotPose = AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(poseEstimator.getEstimatedPosition());
 		field.setRobotPose(getRobotPose2d());
 		SmartDashboard.putData(getField());
@@ -191,8 +193,15 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 	
 	public boolean isAtAngle(Rotation2d angle) {
+		SmartDashboard.putNumber("currentangle", getChassisAngle().getDegrees());
+		SmartDashboard.putNumber("targetAnglelll", angle.getDegrees());
 		return Math.abs(getChassisAngle().getRadians() - angle.getRadians()) <= ROTATION_TOLERANCE.getRadians()
-				|| Math.abs(getChassisAngle().getRadians() - angle.getRadians()) >= (2 * Math.PI) - ROTATION_TOLERANCE.getRadians();
+				|| Math.abs(getChassisAngle().getRadians() - angle.getRadians()) >= (2 * Math.PI) - ROTATION_TOLERANCE.getRadians()
+				|| (Math.abs(getChassisAngle().getRadians()) + Math.abs(angle.getRadians())
+				- Rotation2d.fromDegrees(180).getRadians() <= ROTATION_TOLERANCE.getRadians() &&
+				(Math.abs(getChassisAngle().getRadians()) + Math.abs(angle.getRadians())
+						- Rotation2d.fromDegrees(180).getRadians() >= -ROTATION_TOLERANCE.getRadians()
+		));
 	}
 	
 	public void resetChassisPose() {
@@ -381,7 +390,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	
 	public void updatePoseEstimationLimeLight() {
 		updatePoseEstimatorOdometry();
-		if (DO_VISION && !DriverStation.isAutonomous()) {
+		if (DO_VISION) {
 			resetPoseByVision();
 		}
 	}

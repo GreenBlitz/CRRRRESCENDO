@@ -32,6 +32,7 @@ public class RunFlyWheelByVelocity extends FlyWheelCommand {
     @Override
     public void initialize() {
         timeInShootingSpeed = 0;
+        flyWheel.setPreparedToShoot(false);
         flyWheel.setVelocity(leftWheelVelocity, rightWheelVelocity);
     }
 
