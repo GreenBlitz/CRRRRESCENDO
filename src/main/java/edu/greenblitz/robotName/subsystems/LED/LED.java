@@ -19,7 +19,14 @@ public class LED extends GBSubsystem {
 
 	private static LED instance;
 
-	private AddressableLED addressableLED;
+	private AddressableLED frontRightaddressableLED;
+
+	private AddressableLED frontLeftaddressableLED;
+
+	private AddressableLED backRightaddressableLED;
+
+	private AddressableLED backLeftaddressableLED;
+
 
 	private AddressableLEDBuffer addressableLEDBuffer;
 
@@ -29,14 +36,20 @@ public class LED extends GBSubsystem {
 
 	private Timer actionTimer;
 
+	private AddressableLED LEDarr[];
+
 	private LED() {
-		this.addressableLED = new AddressableLED(RIGHT_RIGHT_LED_PORT);
-		this.addressableLED = new AddressableLED(RIGHT_LEFT_LED_PORT);
-		this.addressableLED = new AddressableLED(LEFT_RIGHT_LED_PORT);
-		this.addressableLED = new AddressableLED(LEFT_LEFT_LED_PORT);
 		this.addressableLEDBuffer = new AddressableLEDBuffer(LED_LENGTH);
-		this.addressableLED.setLength(LED_LENGTH);
-		this.addressableLED.start();
+		LEDarr = new AddressableLED[]{
+				this.frontRightaddressableLED = new AddressableLED(FRONT_RIGHT_LED_PORT),
+				this.frontLeftaddressableLED = new AddressableLED(FRONT_LEFT_LED_PORT),
+				this.backRightaddressableLED = new AddressableLED(BACK_RIGHT_LED_PORT),
+				this.backLeftaddressableLED = new AddressableLED(BACK_LEFT_LED_PORT),
+		};
+		for (int i = 0; i < 4; i++) {
+			LEDarr[i].setLength(LED_LENGTH);
+			LEDarr[i].start();
+		}
 
 		LEDBlinkTimer = new Timer();
 		actionTimer = new Timer();
@@ -92,7 +105,10 @@ public class LED extends GBSubsystem {
 	@Override
 	public void periodic() {
 		currentColor = getColorByMode();
-		this.addressableLED.setData(addressableLEDBuffer);
+		for (int i = 0; i < 4; i++) {
+			LEDarr[i].setData(addressableLEDBuffer);
+
+		}
 	}
 
 	public void setColorByMode() {
@@ -125,13 +141,11 @@ public class LED extends GBSubsystem {
 		}
 	}
 
-	public void  rumble() {
-		OI.getInstance().getSecondJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, LEDConstants.RUMBLE_POWER);
+	public void rumble() {
 		OI.getInstance().getMainJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, LEDConstants.RUMBLE_POWER);
 	}
 
 	public void stopRumble() {
-		OI.getInstance().getSecondJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, 0);
 		OI.getInstance().getMainJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, 0);
 	}
 
@@ -144,7 +158,10 @@ public class LED extends GBSubsystem {
 	public void blinkOrRumbleByNoteState() {
 		if (isNoteInRobot() && (actionTimer.get() <= LEDConstants.BLINKING_TIME)) {
 			blink(getColorByMode());
-		} else if ((actionTimer.get() <= LEDConstants.RUMBLE_TIME) && (getWasNoteInRobot() != isNoteInRobot())) {
+		} else {
+			stopRumble();
+		}
+		if ((getWasNoteInRobot() != isNoteInRobot()) && (actionTimer.get() <= LEDConstants.RUMBLE_TIME)) {
 			rumble();
 		} else {
 			stopRumble();
