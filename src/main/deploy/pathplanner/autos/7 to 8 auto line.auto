@@ -2,39 +2,15 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.708089344106616,
-      "y": 4.354255194996877
+      "x": 0.75,
+      "y": 4.35
     },
-    "rotation": 119.98
+    "rotation": -59.455306767756014
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
-        {
-          "type": "named",
-          "data": {
-            "name": null
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "speaker to 3"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": null
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "3 to speaker"
-          }
-        },
         {
           "type": "named",
           "data": {
@@ -56,7 +32,31 @@
         {
           "type": "path",
           "data": {
-            "pathName": "8 to speaker"
+            "pathName": "8 to auto line"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": null
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "auto line to 7"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": null
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "7 to auto line"
           }
         },
         {

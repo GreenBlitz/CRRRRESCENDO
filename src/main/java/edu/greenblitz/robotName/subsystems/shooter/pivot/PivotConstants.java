@@ -38,5 +38,5 @@ public class PivotConstants {
 
 	public static final Translation3d ROBOT_RELATIVE_PIVOT_POSITION = new Translation3d(-0.1, 0, 0.21);
 
-	public static final Rotation2d TOLERANCE = Rotation2d.fromDegrees(0.75);
+	public static final Rotation2d TOLERANCE = Rotation2d.fromDegrees(0.5);
 }

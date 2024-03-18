@@ -28,19 +28,19 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "shoot"
+                        "name": null
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "grip"
+                        "name": null
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "shoot"
+                        "name": null
                       }
                     },
                     {
@@ -52,13 +52,13 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "grip"
+                        "name": null
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "shoot"
+                        "name": null
                       }
                     },
                     {
@@ -70,13 +70,13 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "grip"
+                        "name": null
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "shoot"
+                        "name": null
                       }
                     }
                   ]

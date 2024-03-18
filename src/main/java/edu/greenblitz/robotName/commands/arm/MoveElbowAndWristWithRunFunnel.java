@@ -26,7 +26,7 @@ public class MoveElbowAndWristWithRunFunnel extends ParallelDeadlineGroup {
 				new MoveElbowAndWrist(elbowAngle, wristAngle),
 				new ConditionalCommand(
 						new InstantCommand(),
-						new RunFunnelByVelocity(-30),
+						new RunFunnelByVelocity(-45),
 						() -> Funnel.getInstance().isObjectIn()
 				)
 		);

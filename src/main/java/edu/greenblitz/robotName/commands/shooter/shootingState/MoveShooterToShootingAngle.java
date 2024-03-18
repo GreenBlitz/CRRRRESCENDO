@@ -9,8 +9,8 @@ public class MoveShooterToShootingAngle extends ConditionalCommand {
 
     public MoveShooterToShootingAngle(ShootingZone zone) {
         super(
-                new MoveShooterToAngle(() -> ShootingStateCalculations.getTargetShooterAngle(zone.getWrapperZone())),
-                new MoveShooterToAngle(() -> ShootingStateCalculations.getTargetShooterAngle(zone)),
+                new MoveShooterToAngle(ShootingStateCalculations::getTargetShooterAngle),
+                new MoveShooterToAngle(ShootingStateCalculations::getTargetShooterAngle),
                 () -> ShootingStateCalculations.isRobotInShootingZone(zone.getWrapperZone())
         );
     }

@@ -16,6 +16,8 @@ public class ChassisConstants {
 	public static final double ROBOT_WIDTH_IN_METERS = 0.69;
 	
 	public static final double ROBOT_LENGTH_IN_METERS = 0.82;
+
+	public static final boolean DO_VISION = true;
 	
 	public static final double BUMPER_WIDTH = 0.077;
 	
@@ -56,6 +58,7 @@ public class ChassisConstants {
 
 	static {
 		ROTATION_PID_CONTROLLER.enableContinuousInput(-Math.PI, Math.PI);
+		ROTATION_PID_CONTROLLER.setTolerance(Units.degreesToRadians(0));
 	}
 
 	public static final PIDController ROTATION_PID_CONTROLLER_RADIANS = new PIDController(0.076, 0, 0);
@@ -73,7 +76,7 @@ public class ChassisConstants {
 	
 	public static final double MAX_ANGULAR_ACCELERATION = 4;
 	
-	public static final double FAST_DISCRETION_CONSTANT = 1;
+	public static final double FAST_DISCRETION_CONSTANT = -8;
 
 	public static final double TRANSLATION_TOLERANCE = 0.05;
 
@@ -95,9 +98,9 @@ public class ChassisConstants {
 	
 	public static final boolean LINEAR_JOYSTICK_INVERTED = false;
 	
-	public static final PIDConstants TRANSLATION_PID = new PIDConstants(1.4, 0, 0);
+	public static final PIDConstants TRANSLATION_PID = new PIDConstants(5.5, 0, 0);
 	
-	public static final PIDConstants ROTATION_PID_PATH_PLANNER = new PIDConstants(0.15, 0, 0);
+	public static final PIDConstants ROTATION_PID_PATH_PLANNER = new PIDConstants(0.2, 0, 0);
 
 
 	public static final double TOTAL_ERROR_FOR_REPLANNING = 0.5;

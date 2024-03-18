@@ -10,7 +10,7 @@ public class RollerConstants {
     
     public static final double HAND_CONTROL_POWER = 0.60;
 
-    public static final Rotation2d SAFETY_ROTATIONS_TILL_OBJECT_ENTERED = Rotation2d.fromRotations(-1);
+    public static final Rotation2d SAFETY_ROTATIONS_TILL_OBJECT_ENTERED = Rotation2d.fromRotations(-1.3);
 
     public static final Rotation2d SAFETY_ROTATIONS_TILL_OBJECT_OUT = Rotation2d.fromRotations(8);
 

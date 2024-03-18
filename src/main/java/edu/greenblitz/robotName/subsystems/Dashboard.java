@@ -59,8 +59,6 @@ public class Dashboard extends GBSubsystem {
         robotPoseWidget.addDouble("Y", () -> SwerveChassis.getInstance().getRobotPose2d().getY());
         robotPoseWidget.addDouble("Rotation", () -> SwerveChassis.getInstance().getRobotPose2d().getRotation().getDegrees());
         SmartDashboard.putNumber("pivot angle", Pivot.getInstance().getAngle().getDegrees());
-        SmartDashboard.putNumber("distance to middle of speaker", SwerveChassis.getInstance().getRobotPose2d().getTranslation()
-                .getDistance(FieldConstants.MIDDLE_OF_SPEAKER_POSITION.toTranslation2d()));
         
         //battery
         driversTab.addDouble("Battery", () -> Battery.getInstance().getCurrentVoltage())
