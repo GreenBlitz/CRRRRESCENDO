@@ -70,6 +70,18 @@ public class MultiLimelight extends GBSubsystem {
 		}
 		return Optional.empty();
 	}
+	
+	public void setLimelightsLedOff(){
+		for(Limelight limelight : limelights){
+			limelight.turnOffLed();
+		}
+	}
+	
+	public void setLimelightsLedOn(){
+		for(Limelight limelight : limelights){
+			limelight.turnOnLed();
+		}
+	}
 
 	public boolean isConnected() {
 		return limelights.get(0).hasTarget();
