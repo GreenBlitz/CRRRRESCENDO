@@ -148,8 +148,7 @@ public class OI {
 		//Fully collect
 		secondJoystick.Y.whileTrue(new CollectNoteToScoringMode());
 
-		//Shooting
-		secondJoystick.POV_DOWN.whileTrue(new ShootToAmpZone(secondJoystick));
+//		secondJoystick.POV_DOWN.whileTrue(new ShootToAmpZone(secondJoystick));
 
 	}
 
