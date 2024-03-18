@@ -159,20 +159,6 @@ public class OI {
 	public void thirdJoystickButtons() {
 		SmartJoystick usedJoystick = thirdJoystick;
 
-		usedJoystick.LEFT_Y_AXIS.whileTrue(
-				new ConditionalCommand(
-						new SequentialCommandGroup(
-								new CloseAndThenHoldSolenoid(),
-								new MoveLifterByJoystick(usedJoystick)
-						),
-						new MoveLifterByJoystick(usedJoystick),
-						() -> (usedJoystick.getAxisValue(SmartJoystick.Axis.LEFT_Y) > 0)
-				)
-		);
-
-		//Arm Control
-		usedJoystick.R1.whileTrue(new MoveElbowByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_X));
-
 		//Wrist Control
 		usedJoystick.POV_UP.whileTrue(new MoveWristByButton(true));
 		usedJoystick.POV_DOWN.whileTrue(new MoveWristByButton(false));
