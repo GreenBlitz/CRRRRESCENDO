@@ -24,7 +24,7 @@ public class FieldConstants {
 
     public final static Rotation2d RED_AMP_ANGLE = Rotation2d.fromDegrees(270);
 
-    public final static Rotation2d BLUE_AMP_ANGLE = Rotation2d.fromDegrees(90);
+    public final static Rotation2d BLUE_AMP_ANGLE = Rotation2d.fromDegrees(270);
 
     public static final Translation3d MIDDLE_OF_BLUE_SPEAKER_POSITION = new Translation3d(
             0.23,

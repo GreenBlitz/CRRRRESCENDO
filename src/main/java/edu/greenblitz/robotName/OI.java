@@ -96,7 +96,7 @@ public class OI {
 	}
 
 	public void romyButtons() {
-		secondJoystick.START.onTrue(new ToggleScoringMode());
+		mainJoystick.START.onTrue(new ToggleScoringMode());
 
 		//Collect Note
 		mainJoystick.R1.whileTrue(new CollectNoteToScoringModeWithPivotForJoystick());
@@ -104,7 +104,7 @@ public class OI {
 
 		//Auto Shoot
 		mainJoystick.L2.whileTrue(new PrepareToScore());
-		mainJoystick.L2_HARD.whileTrue(new ScoreOnReady());
+		mainJoystick.L2_HARD.whileTrue(new ShootOnReady());
 
 		//Reset Robot Angle
 		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetChassisPose()));

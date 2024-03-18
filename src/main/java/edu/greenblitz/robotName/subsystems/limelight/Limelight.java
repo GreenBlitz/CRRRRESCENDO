@@ -35,7 +35,7 @@ public class Limelight extends GBSubsystem {
 		double processingLatency = poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.TOTAL_LATENCY)] / 1000;
 		double timestamp = Timer.getFPGATimestamp() - processingLatency;
 		int id = (int) idEntry.getInteger(-1);
-		double angleOffset = AllianceUtilities.isBlueAlliance() ? 0 : 180;
+		double angleOffset = 180;
 		if (id == -1) {
 			return Optional.empty();
 		}

@@ -33,6 +33,7 @@ import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -102,6 +103,7 @@ public class Robot extends LoggedRobot {
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
+		SwerveChassis.getInstance().activateLimelight();
 //		Dashboard.getInstance().activateDriversDashboard();
 	}
 
@@ -110,6 +112,7 @@ public class Robot extends LoggedRobot {
 	public void robotPeriodic() {
 		CommandScheduler.getInstance().run();
 		RoborioUtils.updateCurrentCycleTime();
+		SmartDashboard.putString("mode", ScoringModeSelector.getScoringMode().name());
 	}
 
 	private void initializeAutonomousBuilder() {
@@ -168,6 +171,7 @@ public class Robot extends LoggedRobot {
 
 	@Override
 	public void autonomousInit() {
+		SwerveChassis.getInstance().disableLimelight();
 		autonomousCommand = AutonomousSelector.getInstance().getChosenValue();
 		if (autonomousCommand != null){
 			autonomousCommand.schedule();

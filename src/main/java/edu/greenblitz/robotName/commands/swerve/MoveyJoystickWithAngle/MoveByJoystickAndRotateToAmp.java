@@ -4,14 +4,11 @@ import edu.greenblitz.robotName.FieldConstants;
 import edu.greenblitz.robotName.OI;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.swerve.SwerveCommand;
-import edu.greenblitz.robotName.shootingStateService.ShootingStateCalculations;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
-import edu.wpi.first.math.geometry.Rotation2d;
 
 import java.util.function.DoubleSupplier;
 
-import static edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants.MAX_ANGULAR_SPEED;
 import static edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants.ROTATION_PID_CONTROLLER;
 
 public class MoveByJoystickAndRotateToAmp extends SwerveCommand {
@@ -19,6 +16,8 @@ public class MoveByJoystickAndRotateToAmp extends SwerveCommand {
     private double angularSpeedFactor;
 
     private double linearSpeedFactor;
+
+    private double leftwardSpeedFactor;
 
     private DoubleSupplier angularVelocitySupplier;
 
@@ -41,11 +40,13 @@ public class MoveByJoystickAndRotateToAmp extends SwerveCommand {
         ROTATION_PID_CONTROLLER.setSetpoint(FieldConstants.BLUE_AMP_ANGLE.getRadians());
         switch (driveMode) {
             case SLOW -> {
-                linearSpeedFactor = ChassisConstants.DRIVER_LINEAR_SPEED_FACTOR_SLOW;
-                angularSpeedFactor = ChassisConstants.DRIVER_ANGULAR_SPEED_FACTOR_SLOW;
+                linearSpeedFactor = MoveByJoystickWithAngleService.getForwardFactor(MoveByJoysticks.DriveMode.SLOW);
+                leftwardSpeedFactor = -linearSpeedFactor;
+                angularSpeedFactor = ChassisConstants.DRIVER_ANGULAR_SPEED_FACTOR;
             }
             case NORMAL -> {
-                linearSpeedFactor = ChassisConstants.DRIVER_LINEAR_SPEED_FACTOR;
+                linearSpeedFactor = MoveByJoystickWithAngleService.getForwardFactor(MoveByJoysticks.DriveMode.NORMAL);
+                leftwardSpeedFactor = -linearSpeedFactor;
                 angularSpeedFactor = ChassisConstants.DRIVER_ANGULAR_SPEED_FACTOR;
             }
         }
@@ -53,9 +54,9 @@ public class MoveByJoystickAndRotateToAmp extends SwerveCommand {
 
     @Override
     public void execute() {
-        double leftwardSpeed = OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_X) * linearSpeedFactor;
+        double leftwardSpeed = OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_X) * leftwardSpeedFactor;
 
-        double forwardSpeed = -OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_Y) * linearSpeedFactor;
+        double forwardSpeed = OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_Y) * linearSpeedFactor;
 
         double angularSpeed = -angularVelocitySupplier.getAsDouble() * angularSpeedFactor;
 

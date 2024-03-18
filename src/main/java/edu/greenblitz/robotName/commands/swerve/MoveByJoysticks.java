@@ -1,7 +1,9 @@
 package edu.greenblitz.robotName.commands.swerve;
 
 import edu.greenblitz.robotName.OI;
+import edu.greenblitz.robotName.commands.swerve.MoveyJoystickWithAngle.MoveByJoystickWithAngleService;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
+import edu.greenblitz.robotName.utils.AllianceUtilities;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 
 import java.util.function.DoubleSupplier;
@@ -14,7 +16,9 @@ public class MoveByJoysticks extends SwerveCommand {
 	}
 	
 	private double angularSpeedFactor;
-	
+
+	private double leftwardSpeedFactor;
+
 	private double linearSpeedFactor;
 	
 	private DoubleSupplier angularVelocitySupplier;
@@ -36,14 +40,16 @@ public class MoveByJoysticks extends SwerveCommand {
 	@Override
 	public void initialize() {
 		switch (driveMode) {
-			case SLOW:
-				linearSpeedFactor = ChassisConstants.DRIVER_LINEAR_SPEED_FACTOR_SLOW;
-				angularSpeedFactor = ChassisConstants.DRIVER_ANGULAR_SPEED_FACTOR_SLOW;
-				break;
-			case NORMAL:
-				linearSpeedFactor = ChassisConstants.DRIVER_LINEAR_SPEED_FACTOR;
+			case SLOW -> {
+				linearSpeedFactor = MoveByJoystickWithAngleService.getForwardFactor(DriveMode.SLOW);
+				leftwardSpeedFactor = -linearSpeedFactor;
 				angularSpeedFactor = ChassisConstants.DRIVER_ANGULAR_SPEED_FACTOR;
-				break;
+			}
+			case NORMAL -> {
+				linearSpeedFactor = MoveByJoystickWithAngleService.getForwardFactor(DriveMode.NORMAL);
+				leftwardSpeedFactor = -linearSpeedFactor;
+				angularSpeedFactor = ChassisConstants.DRIVER_ANGULAR_SPEED_FACTOR;
+			}
 		}
 	}
 	
@@ -66,7 +72,7 @@ public class MoveByJoysticks extends SwerveCommand {
 //                angularSpeedFactor,
 //                ChassisConstants.ANGULAR_JOYSTICK_INVERTED
 //        );
-		double leftwardSpeed = OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_X) * linearSpeedFactor;
+		double leftwardSpeed = OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_X) * leftwardSpeedFactor;
 		
 		double forwardSpeed = OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_Y) * linearSpeedFactor;
 		
@@ -78,7 +84,7 @@ public class MoveByJoysticks extends SwerveCommand {
 		}
 
 		swerveChassis.moveByChassisSpeeds(
-				-forwardSpeed,
+				forwardSpeed,
 				leftwardSpeed,
 				-angularSpeed,
 				swerveChassis.getChassisAngle()
