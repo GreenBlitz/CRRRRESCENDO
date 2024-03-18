@@ -46,9 +46,9 @@ public class RobotConstants {
 	
 	public static class Syncopa {
 
-		public static final double ROBOT_LENGTH_IN_METERS = 0.89;
+		public static final double ROBOT_LENGTH_IN_METERS = 0.69;
 
-		public static final double BUMPER_LENGTH = 0.05;
+		public static final double BUMPER_LENGTH = 0.1;
 	}
 
 	public static class SimulationConstants {

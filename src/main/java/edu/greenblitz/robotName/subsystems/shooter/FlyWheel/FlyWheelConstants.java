@@ -17,6 +17,7 @@ public class FlyWheelConstants {
 	public static final double SHOOTING_POWER = 0.9;
 	
 	public static final double SHOOTING_VELOCITY = 80;
+	public static final double SHOOTING_AMP_ZONE_VELOCITY = 60;
 
 	public static final double FEEDER_COLLECT_VELOCITY = -15;
 

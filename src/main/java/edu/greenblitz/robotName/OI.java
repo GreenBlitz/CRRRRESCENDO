@@ -4,6 +4,7 @@ import edu.greenblitz.robotName.commands.LED.UpdateLEDStateDefaultCommand;
 import edu.greenblitz.robotName.commands.PrepareToScore;
 import edu.greenblitz.robotName.commands.ScoreOnReady;
 import edu.greenblitz.robotName.commands.ShootOnReady;
+import edu.greenblitz.robotName.commands.ShootToAmpZone;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristWithRunFunnel;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
@@ -139,14 +140,17 @@ public class OI {
 		//Pivot Poses
 		secondJoystick.POV_UP.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.RIGHT_STAGE.ANGLE));
 		secondJoystick.POV_LEFT.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.PODIUM.ANGLE));
-		secondJoystick.POV_DOWN.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.CLOSE_SHOOTING.ANGLE));
 		secondJoystick.R2.whileTrue(new MovePivotByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_X));
 
 		//Funnel
-		secondJoystick.R1.whileTrue(new RunFunnelByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_Y).alongWith(new ShootSimulationNote()));
+		secondJoystick.R1.whileTrue(new RunFunnelByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_Y));
 
 		//Fully collect
 		secondJoystick.Y.whileTrue(new CollectNoteToScoringMode());
+
+		//Shooting
+		secondJoystick.POV_DOWN.whileTrue(new ShootToAmpZone(secondJoystick));
+
 	}
 
 	public void thirdJoystickButtons() {

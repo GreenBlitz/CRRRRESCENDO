@@ -240,6 +240,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 			for (Optional<Pair<Pose2d, Double>> visionPoseAndTimeStamp : estimates) {
 				if (visionPoseAndTimeStamp.isPresent()) {
 					Pose2d visionPose = visionPoseAndTimeStamp.get().getFirst();
+					if (!(visionPose.getTranslation().getDistance(getRobotPose2d().getTranslation()) > VisionConstants.MIN_DISTANCE_TO_FILTER_OUT_METERS))
 					poseEstimator.addVisionMeasurement(visionPose, visionPoseAndTimeStamp.get().getSecond());
 				}
 			}
