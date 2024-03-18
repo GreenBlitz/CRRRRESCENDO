@@ -4,6 +4,7 @@ import edu.greenblitz.robotName.Field;
 import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRollerToAmp;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
+import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
@@ -19,6 +20,8 @@ public class ReleaseNoteFromArmOnReady extends GBCommand {
 
     private boolean isRobotInPlace;
 
+    private boolean isNoteInRoller;
+
     private Pose2d ampScoringPose;
 
 
@@ -33,11 +36,12 @@ public class ReleaseNoteFromArmOnReady extends GBCommand {
         isElbowReady = Elbow.getInstance().isAtAngle(ElbowConstants.PresetPositions.SCORE.ANGLE);
         isWristReady = Wrist.getInstance().isAtAngle(WristConstants.PresetPositions.SCORE.ANGLE);
         isRobotInPlace = SwerveChassis.getInstance().isAtPose(ampScoringPose);
+        isNoteInRoller = Roller.getInstance().isObjectIn();
     }
 
     @Override
     public boolean isFinished() {
-        return isElbowReady &&  isWristReady && isRobotInPlace;
+        return isElbowReady &&  isWristReady && isRobotInPlace && isNoteInRoller;
     }
 
     @Override

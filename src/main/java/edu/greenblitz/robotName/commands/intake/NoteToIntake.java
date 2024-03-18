@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.commands.intake;
 
+import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class NoteToIntake extends IntakeCommand {
@@ -11,7 +12,7 @@ public class NoteToIntake extends IntakeCommand {
 
     @Override
     public boolean isFinished() {
-        return intake.isObjectIn();
+        return intake.isObjectIn() || Funnel.getInstance().isObjectIn();
     }
 
     @Override
