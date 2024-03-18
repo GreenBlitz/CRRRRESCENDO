@@ -10,9 +10,7 @@ public class ScoreToTrap extends SequentialCommandGroup {
 
 	public ScoreToTrap() {
 		super(
-				new ClimbUp(),
-				new MoveWristToAngle(WristConstants.PresetPositions.SCORE_TRAP),
-				new ReleaseNoteFromRollerToTrap()
+				new ClimbUp()
 		);
 	}
 

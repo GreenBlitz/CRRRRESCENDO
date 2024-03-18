@@ -74,7 +74,6 @@ public class SRXWrist implements IWrist {
         inputs.velocity = motor.getSelectedSensorVelocity();
         inputs.hasReachedBackwardLimit = motor.isRevLimitSwitchClosed() == 1;
         inputs.hasReachedForwardLimit = motor.isFwdLimitSwitchClosed() == 1;
-        System.out.println(inputs.position.getDegrees());
     }
 
 }

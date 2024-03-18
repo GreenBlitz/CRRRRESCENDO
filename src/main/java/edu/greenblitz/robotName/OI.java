@@ -11,6 +11,7 @@ import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowByJoystick;
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowToAngle;
 import edu.greenblitz.robotName.commands.arm.roller.MoveNoteInRoller;
 import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRollerToAmp;
+import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRollerToTrap;
 import edu.greenblitz.robotName.commands.arm.wrist.MoveWristByButton;
 import edu.greenblitz.robotName.commands.arm.wrist.MoveWristToAngle;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
@@ -69,8 +70,7 @@ public class OI {
         fourthJoystick = new SmartJoystick(RobotConstants.Joystick.FOURTH);
 
         thirdJoystickButtons();
-        romyButtons();
-//		initButtons();
+		initButtons();
         initializeDefaultCommands();
     }
 
@@ -112,8 +112,8 @@ public class OI {
         mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetChassisPose()));
 
         //note in roller
-        mainJoystick.B.whileTrue(new MoveNoteInRoller(true));
-        mainJoystick.X.whileTrue(new MoveNoteInRoller(false));
+        mainJoystick.A.whileTrue(new ReleaseNoteFromRollerToTrap());
+        mainJoystick.B.whileTrue(new MoveWristToAngle(WristConstants.PresetPositions.SCORE_TRAP));
 
         //Intake
         mainJoystick.R2.whileTrue(new RunIntakeByPower(0.5));
@@ -182,20 +182,14 @@ public class OI {
 
         usedJoystick.Y.whileTrue(new ScoreToTrap());//do this after everything is in position and dont stop until note is inside
 
-        usedJoystick.A.whileTrue(new TransferNote());//this second
-
         //Scoring Mode Change
         usedJoystick.START.whileTrue(new SetScoringMode(ScoringMode.CLIMB)
-                .alongWith(new InstantCommand(() -> Lifter.getInstance().setIdleMode(CANSparkBase.IdleMode.kBrake)))
-                .alongWith(new InstantCommand(() -> Elbow.getInstance().setIdleMode(NeutralModeValue.Brake)))
                         .andThen((new TransferNote()).raceWith(new WaitCommand(3.0))
                         .andThen(new MoveElbowToAngle(Rotation2d.fromDegrees(-25)))
                                 .andThen(new MoveWristToAngle(Rotation2d.fromDegrees(270)))
         ).alongWith(new getLifterReady()));
         //this first and long
         usedJoystick.BACK.whileTrue(new SetScoringMode(ScoringMode.AMP)
-                .alongWith(new InstantCommand(() -> Lifter.getInstance().setIdleMode(CANSparkBase.IdleMode.kCoast)))
-                .alongWith(new InstantCommand(() -> Elbow.getInstance().setIdleMode(NeutralModeValue.Coast)))
         );
 
         //Arm Control

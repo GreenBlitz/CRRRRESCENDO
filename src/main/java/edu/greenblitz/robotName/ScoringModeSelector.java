@@ -1,5 +1,8 @@
 package edu.greenblitz.robotName;
 
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+
 public class ScoringModeSelector {
 
 	private static ScoringMode currentMode;
@@ -7,6 +10,8 @@ public class ScoringModeSelector {
 	public static void init() {
 		if (currentMode == null) {
 			currentMode = ScoringMode.SPEAKER;
+			ShuffleboardTab tab = Shuffleboard.getTab("auto");
+			tab.addString("Scoring Mode",  () -> currentMode.name());
 		}
 	}
 
