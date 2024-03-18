@@ -22,10 +22,10 @@ public class LED extends GBSubsystem {
 	private AddressableLED frontRightaddressableLED;
 
 	private AddressableLED frontLeftaddressableLED;
-
-	private AddressableLED backRightaddressableLED;
-
-	private AddressableLED backLeftaddressableLED;
+//
+//	private AddressableLED backRightaddressableLED;
+//
+//	private AddressableLED backLeftaddressableLED;
 
 
 	private AddressableLEDBuffer addressableLEDBuffer;
@@ -36,20 +36,26 @@ public class LED extends GBSubsystem {
 
 	private Timer actionTimer;
 
-	private AddressableLED LEDarr[];
 
-	private LED() {
+	private LED(){
 		this.addressableLEDBuffer = new AddressableLEDBuffer(LED_LENGTH);
-		LEDarr = new AddressableLED[]{
-				this.frontRightaddressableLED = new AddressableLED(FRONT_RIGHT_LED_PORT),
-				this.frontLeftaddressableLED = new AddressableLED(FRONT_LEFT_LED_PORT),
-				this.backRightaddressableLED = new AddressableLED(BACK_RIGHT_LED_PORT),
-				this.backLeftaddressableLED = new AddressableLED(BACK_LEFT_LED_PORT),
-		};
-		for (int i = 0; i < 4; i++) {
-			LEDarr[i].setLength(LED_LENGTH);
-			LEDarr[i].start();
-		}
+
+		this.frontRightaddressableLED = new AddressableLED(FRONT_RIGHT_LED_PORT);
+//		this.frontLeftaddressableLED = new AddressableLED(FRONT_LEFT_LED_PORT);
+//		this.backRightaddressableLED = new AddressableLED(BACK_RIGHT_LED_PORT);
+//		this.backLeftaddressableLED = new AddressableLED(BACK_LEFT_LED_PORT);
+
+		this.frontRightaddressableLED.setLength(LED_LENGTH);
+		this.frontRightaddressableLED.start();
+
+//		this.frontLeftaddressableLED.setLength(LED_LENGTH);
+//		this.frontLeftaddressableLED.start();
+
+//		this.backRightaddressableLED.setLength(LED_LENGTH);
+//		this.backRightaddressableLED.start();
+//
+//		this.backLeftaddressableLED.setLength(LED_LENGTH);
+//		this.backLeftaddressableLED.start();
 
 		LEDBlinkTimer = new Timer();
 		actionTimer = new Timer();
@@ -105,10 +111,12 @@ public class LED extends GBSubsystem {
 	@Override
 	public void periodic() {
 		currentColor = getColorByMode();
-		for (int i = 0; i < 4; i++) {
-			LEDarr[i].setData(addressableLEDBuffer);
 
-		}
+		frontLeftaddressableLED.setData(addressableLEDBuffer);
+//		frontRightaddressableLED.setData(addressableLEDBuffer);
+//		backLeftaddressableLED.setData(addressableLEDBuffer);
+//		backRightaddressableLED.setData(addressableLEDBuffer);
+
 	}
 
 	public void setColorByMode() {

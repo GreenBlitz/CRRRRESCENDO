@@ -3,12 +3,12 @@ package edu.greenblitz.robotName.subsystems.LED;
 import edu.wpi.first.wpilibj.util.Color;
 
 public class LEDConstants {
-	.Math
 	public static final int LED_LENGTH = 50;
  
 	public static final int FRONT_RIGHT_LED_PORT = 8;
 
-	public static final int FRONT_LEFT_LED_PORT = 7;
+
+	public static final int FRONT_LEFT_LED_PORT = 0;
 
 	public static final int BACK_RIGHT_LED_PORT = 6;
 
