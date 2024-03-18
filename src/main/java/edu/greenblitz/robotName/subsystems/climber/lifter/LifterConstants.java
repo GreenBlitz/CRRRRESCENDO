@@ -8,6 +8,7 @@ public class LifterConstants {
     public static final double POWER_TO_EXTEND_LIFTER = 0.7;
 
     public static final double POWER_TO_RETRACT_LIFTER = -0.6;
+
     public static final double END_OF_CLIMB_POWER = -0.4; //do not increase .
 
     public static final double POWER_TO_RETRACT_LIFTER_SLOW = -0.1;
@@ -41,4 +42,10 @@ public class LifterConstants {
     public static final double LENGTH_OF_LIFTER = 0.45;
 
     public static final double LIFTER_MASS_KG = 7;
+
+    public static final double END_OF_CLIMB_CURRENT = 25;
+
+    public static final double LIFTER_JOYSTICK_OFFSET = 0.1;
+
+    public static final double LIFTER_JOYSTICK_NORMALIZER = 4 / 9.0;
 }

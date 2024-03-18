@@ -14,7 +14,7 @@ public class TransferNote extends SequentialCommandGroup {
 	public TransferNote() {
 		super(
 				new MoveToTransferNotePosition(),
-				new WaitCommand(0.5).andThen(new InstantCommand(() -> SmartDashboard.putNumber("chahchah", 1))),
+				new WaitCommand(0.5),
 				new ConditionalCommand(
 						new NoteToShooterFromArm(),
 						new NoteToArm(),

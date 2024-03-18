@@ -10,8 +10,6 @@ public class ScoringModeSelector {
 	public static void init() {
 		if (currentMode == null) {
 			currentMode = ScoringMode.SPEAKER;
-			ShuffleboardTab tab = Shuffleboard.getTab("auto");
-			tab.addString("Scoring Mode",  () -> currentMode.name());
 		}
 	}
 

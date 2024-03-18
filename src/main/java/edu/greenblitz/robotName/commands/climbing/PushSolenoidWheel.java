@@ -27,7 +27,7 @@ public class PushSolenoidWheel extends LifterCommand {
 	@Override
 	public void execute() {
 		lifter.setPower(LifterConstants.LIFTER_POWER_TO_RELEASES_SOLENOID);
-		if (timer.hasElapsed(SolenoidConstants.SECONDS_TO_RELEASE_SOLENOID / 2)) {
+		if (timer.hasElapsed(SolenoidConstants.SHORTER_SECONDS_TO_RELEASE_SOLENOID / 2)) {
 			solenoid.closeSolenoid();
 		}
 	}

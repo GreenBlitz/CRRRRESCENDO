@@ -1,5 +1,6 @@
 package edu.greenblitz.robotName.commands.climbing.lifter;
 
+import edu.greenblitz.robotName.subsystems.climber.lifter.LifterConstants;
 import edu.greenblitz.robotName.subsystems.climber.solenoid.Solenoid;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 
@@ -16,7 +17,7 @@ public class MoveLifterByJoystick extends LifterCommand {
 
 	@Override
 	public void execute() {
-		lifter.setPower((joystick.getAxisValue(SmartJoystick.Axis.LEFT_Y) - 0.1) * (4 / 9.0));
+		lifter.setPower((joystick.getAxisValue(SmartJoystick.Axis.LEFT_Y) - LifterConstants.LIFTER_JOYSTICK_OFFSET) * (LifterConstants.LIFTER_JOYSTICK_NORMALIZER));
 	}
 
 	@Override

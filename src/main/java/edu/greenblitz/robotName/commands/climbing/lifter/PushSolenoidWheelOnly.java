@@ -25,7 +25,7 @@ public class PushSolenoidWheelOnly extends LifterCommand{
 
 	@Override
 	public boolean isFinished() {
-		return timer.hasElapsed(SolenoidConstants.SECONDS_TO_RELEASE_SOLENOID / 2);
+		return timer.hasElapsed(SolenoidConstants.SHORTER_SECONDS_TO_RELEASE_SOLENOID / 2);
 	}
 
 }

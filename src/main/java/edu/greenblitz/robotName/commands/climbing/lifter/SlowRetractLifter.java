@@ -21,7 +21,7 @@ public class SlowRetractLifter extends LifterCommand {
 	public void initialize() {
 		timer.restart();
 		startingPose = lifter.getPosition();
-		power = lifter.getMaxCurrent() > 25 ? LifterConstants.END_OF_CLIMB_POWER: LifterConstants.POWER_TO_RETRACT_LIFTER_SLOW;
+		power = lifter.getMaxCurrent() > LifterConstants.END_OF_CLIMB_CURRENT ? LifterConstants.END_OF_CLIMB_POWER: LifterConstants.POWER_TO_RETRACT_LIFTER_SLOW;
 	}
 
 	@Override
