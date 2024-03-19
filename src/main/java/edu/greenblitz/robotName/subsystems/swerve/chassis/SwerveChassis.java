@@ -42,6 +42,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	private IAngleMeasurementGyro gyro;
 	private SwerveDriveKinematics kinematics;
 	private SwerveDrivePoseEstimator poseEstimator;
+	private SwerveDriveOdometry odometry;
 	private Field2d field;
 	
 	public boolean doVision;
@@ -73,6 +74,14 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				getSwerveModulePositions(),
 				visionPoseStartMatch()
 		);
+
+		this.odometry = new SwerveDriveOdometry(
+				this.kinematics,
+				getGyroAngle(),
+				getSwerveModulePositions(),
+				visionPoseStartMatch()
+		);
+
 		
 		robotPose = AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(poseEstimator.getEstimatedPosition());
 		SmartDashboard.putData("field", getField());
@@ -398,7 +407,11 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	public void updatePoseEstimatorOdometry() {
 		poseEstimator.update(getGyroAngle(), getSwerveModulePositions());
 	}
-	
+
+	public void updateOdometry(){
+		odometry.update(getGyroAngle(),getSwerveModulePositions());
+	}
+
 	public void updatePoseEstimationLimeLight() {
 		updatePoseEstimatorOdometry();
 		if (doVision) {
