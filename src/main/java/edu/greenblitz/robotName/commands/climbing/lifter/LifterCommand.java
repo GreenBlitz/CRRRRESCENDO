@@ -9,5 +9,6 @@ public abstract class LifterCommand extends GBCommand {
 
     public LifterCommand() {
         lifter = Lifter.getInstance();
+        require(lifter);
     }
 }
