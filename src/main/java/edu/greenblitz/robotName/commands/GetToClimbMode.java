@@ -10,6 +10,7 @@ import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class GetToClimbMode extends SequentialCommandGroup {
     public GetToClimbMode(){
@@ -18,7 +19,7 @@ public class GetToClimbMode extends SequentialCommandGroup {
                 new ParallelCommandGroup(
                         new getLifterReady(),
                         new SequentialCommandGroup(
-                                new TransferNote(),
+                                new TransferNote().raceWith(new WaitCommand(3)),
                                 new MoveElbowToAngle(ElbowConstants.PresetPositions.CLIMB_MODE_ANGLE),
                                 new MoveWristToAngle(WristConstants.PresetPositions.BEFORE_AND_AFTER_SCORE_TRAP)
                         )

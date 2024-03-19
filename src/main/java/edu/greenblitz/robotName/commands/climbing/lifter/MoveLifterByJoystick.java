@@ -19,7 +19,7 @@ public class MoveLifterByJoystick extends LifterCommand {
 
 	@Override
 	public void execute() {
-		lifter.setPower((joystick.getAxisValue(SmartJoystick.Axis.LEFT_Y) - LifterConstants.LIFTER_JOYSTICK_OFFSET) * (LifterConstants.LIFTER_JOYSTICK_NORMALIZER));
+		lifter.setPower(axis.getValue(joystick) * 0.7);
 	}
 
 	@Override

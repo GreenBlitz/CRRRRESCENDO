@@ -7,16 +7,18 @@ import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 
 public class PivotDefaultCommand extends PivotCommand {
 
-	@Override
-	public void initialize() {
-		super.initialize();
-	}
+    @Override
+    public void initialize() {
+        super.initialize();
+    }
 
-	@Override
-	public void execute() {
-		if (ScoringModeSelector.isClimbMode()) {
-			pivot.setCurrentAngle(PivotConstants.PresetPositions.SAFE.ANGLE);
-		}
-		pivot.moveToAngle(ShootingStateCalculations.getTargetShooterAngle());
-	}
+    @Override
+    public void execute() {
+        if (ScoringModeSelector.isClimbMode()) {
+            pivot.setCurrentAngle(PivotConstants.PresetPositions.SAFE.ANGLE);
+            pivot.standInPlace();
+        } else {
+            pivot.moveToAngle(ShootingStateCalculations.getTargetShooterAngle());
+        }
+    }
 }

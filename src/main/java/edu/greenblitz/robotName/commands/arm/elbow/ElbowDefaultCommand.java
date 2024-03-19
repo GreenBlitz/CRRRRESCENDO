@@ -8,7 +8,7 @@ public class ElbowDefaultCommand extends ElbowCommand {
 	
 	@Override
 	public void initialize() {
-		elbow.setCurrentAngle(ElbowConstants.PresetPositions.SAFE.ANGLE);
+		elbow.setCurrentAngle();
 	}
 	
 	@Override
@@ -17,7 +17,7 @@ public class ElbowDefaultCommand extends ElbowCommand {
 			elbow.setPower(0);
 			elbow.setCurrentAngle();
 		}
-		else if (!SwerveChassis.getInstance().isRobotNearBoundsOfField()) {
+		else {
 			elbow.standInPlace();
 		}
 	}

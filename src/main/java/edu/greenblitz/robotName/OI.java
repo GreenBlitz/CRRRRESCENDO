@@ -23,6 +23,7 @@ import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringModeWithPivotForJoystick;
 import edu.greenblitz.robotName.commands.getNoteToSystem.TransferNote;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByPower;
+import edu.greenblitz.robotName.commands.shchori.ClimbOrArmDown;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.FlyWheelDefaultCommand;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityUntilInterrupted;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
@@ -158,7 +159,7 @@ public class OI {
         secondJoystick.R1.whileTrue(new RunFunnelByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_Y));
 
         //Climbing
-        secondJoystick.Y.whileTrue(new ClimbUp());
+        secondJoystick.Y.whileTrue(new ClimbOrArmDown());
         secondJoystick.R2.whileTrue(new MoveLifterByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_TRIGGER));
         secondJoystick.L2.whileTrue(
                 new SequentialCommandGroup(

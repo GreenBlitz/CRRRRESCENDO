@@ -10,7 +10,7 @@ public class ElbowConstants {
     public enum PresetPositions {
         SAFE(Rotation2d.fromDegrees(-67)),
         CLIMB_MODE_ANGLE(Rotation2d.fromDegrees(-25)),
-        INTAKE(Rotation2d.fromDegrees(-76)),
+        INTAKE(Rotation2d.fromDegrees(-80)),
         SCORE(Rotation2d.fromDegrees(55)),
         STARTING(Rotation2d.fromDegrees(0)),
         TRANSFER(Rotation2d.fromDegrees(-80)),
