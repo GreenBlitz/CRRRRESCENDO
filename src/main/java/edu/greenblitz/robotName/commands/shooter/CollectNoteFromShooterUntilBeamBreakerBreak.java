@@ -1,8 +1,12 @@
 package edu.greenblitz.robotName.commands.shooter;
 
+import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByPower;
+import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByVelocity;
+import edu.greenblitz.robotName.commands.shooter.funnel.runByPowerUntilCondition.ReverseRunFunnelUntilObjectOut;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
+import edu.greenblitz.robotName.subsystems.shooter.funnel.FunnelConstants;
 import edu.greenblitz.robotName.utils.GBCommand;
 
 public class CollectNoteFromShooterUntilBeamBreakerBreak extends GBCommand {
@@ -37,5 +41,9 @@ public class CollectNoteFromShooterUntilBeamBreakerBreak extends GBCommand {
 	public void end(boolean interrupted) {
 		funnel.stop();
 		flyWheel.stop();
+		new ReverseRunFunnelUntilObjectOut()
+				.deadlineWith(new RunFlyWheelByPower(FlyWheelConstants.COLLECT_FORM_FEEDER_POWER))
+				.andThen(new RunFunnelByVelocity(FunnelConstants.FEEDER_COLLECT_SPEED)).until(() -> Funnel.getInstance().isObjectIn())
+				.schedule();
 	}
 }
