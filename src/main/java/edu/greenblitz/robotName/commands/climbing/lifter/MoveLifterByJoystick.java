@@ -7,19 +7,17 @@ import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 public class MoveLifterByJoystick extends LifterCommand {
 
 	private SmartJoystick joystick;
-	private SmartJoystick.Axis axis;
-	private Solenoid solenoid;
+	Solenoid solenoid;
 
-	public MoveLifterByJoystick(SmartJoystick joystick, SmartJoystick.Axis axis) {
+	public MoveLifterByJoystick(SmartJoystick joystick) {
 		super();
 		this.joystick = joystick;
-		this.axis = axis;
 		solenoid = Solenoid.getInstance();
 	}
 
 	@Override
 	public void execute() {
-		lifter.setPower(axis.getValue(joystick) * 0.7);
+		lifter.setPower((joystick.getAxisValue(SmartJoystick.Axis.LEFT_Y) - LifterConstants.LIFTER_JOYSTICK_OFFSET) * (LifterConstants.LIFTER_JOYSTICK_NORMALIZER));
 	}
 
 	@Override

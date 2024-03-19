@@ -48,6 +48,7 @@ import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -143,7 +144,8 @@ public class OI {
         //Arm
         secondJoystick.BACK.onTrue(new InstantCommand(() -> Roller.getInstance().setObjectOut()));
         secondJoystick.A.onTrue(new ReleaseNoteFromRollerToAmp());
-        secondJoystick.R1.whileTrue(new MoveElbowByJoystick(secondJoystick, SmartJoystick.Axis.LEFT_Y));
+        secondJoystick.R2.whileTrue(new MoveElbowByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_TRIGGER, true));
+        secondJoystick.L2.whileTrue(new MoveElbowByJoystick(secondJoystick, SmartJoystick.Axis.LEFT_TRIGGER, false));
 
         //FlyWheel Run
         secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityUntilInterrupted(FlyWheelConstants.SHOOTING_VELOCITY, secondJoystick));
@@ -161,11 +163,14 @@ public class OI {
 
         //Climbing
         secondJoystick.Y.whileTrue(new ClimbOrArmDown());
-        secondJoystick.R2.whileTrue(new MoveLifterByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_TRIGGER));
-        secondJoystick.L2.whileTrue(
-                new SequentialCommandGroup(
-                        new CloseAndThenHoldSolenoid(),
-                        new MoveLifterByJoystick(secondJoystick, SmartJoystick.Axis.LEFT_TRIGGER)
+        secondJoystick.LEFT_Y_AXIS.whileTrue(
+                new ConditionalCommand(
+                        new SequentialCommandGroup(
+                                new CloseAndThenHoldSolenoid(),
+                                new MoveLifterByJoystick(secondJoystick)
+                        ),
+                        new MoveLifterByJoystick(secondJoystick),
+                        () -> (secondJoystick.getAxisValue(SmartJoystick.Axis.LEFT_Y) > 0)
                 )
         );
     }

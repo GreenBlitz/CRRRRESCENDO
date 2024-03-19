@@ -18,7 +18,7 @@ public class CollectNoteToScoringModeForJoystick extends IntakeCommand {
 
     @Override
     public boolean isFinished() {
-        return intake.isObjectIn() || Funnel.getInstance().isObjectIn();
+        return intake.isObjectIn();
     }
 
     @Override
