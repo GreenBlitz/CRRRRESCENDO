@@ -109,7 +109,7 @@ public class OI {
 
     public void romyButtons() {
         //Collect Note
-        mainJoystick.R1.onTrue(new CollectNoteToScoringModeWithPivotForJoystick());
+        mainJoystick.R1.whileTrue(new CollectNoteToScoringModeWithPivotForJoystick());
         mainJoystick.POV_DOWN.whileTrue(new CollectNoteFromFeeder());
 
         //Auto Aim For Speaker Or Amp
