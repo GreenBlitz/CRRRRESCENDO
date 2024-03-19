@@ -3,6 +3,7 @@ package edu.greenblitz.robotName;
 import edu.greenblitz.robotName.commands.GetToClimbMode;
 import edu.greenblitz.robotName.commands.LED.UpdateLEDStateDefaultCommand;
 import edu.greenblitz.robotName.commands.PrepareToScore;
+import edu.greenblitz.robotName.commands.ScoreOnReady;
 import edu.greenblitz.robotName.commands.ShootOnReady;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
 import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristWithRunFunnel;
@@ -115,7 +116,7 @@ public class OI {
         mainJoystick.L2.whileTrue(new PrepareToScore());
 
         //Shoot
-        mainJoystick.L2_HARD.whileTrue(new ShootOnReady());
+        mainJoystick.L2_HARD.whileTrue(new ScoreOnReady());
 
         //Reset Robot Angle
         mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetChassisPose()));
@@ -137,7 +138,7 @@ public class OI {
         secondJoystick.X.whileTrue(new GetToClimbMode());
 
         //Reverse Intake
-        mainJoystick.B.whileTrue(new RunIntakeByPower(-0.5));
+        secondJoystick.B.whileTrue(new RunIntakeByPower(-0.5));
 
         //Arm
         secondJoystick.BACK.onTrue(new InstantCommand(() -> Roller.getInstance().setObjectOut()));
