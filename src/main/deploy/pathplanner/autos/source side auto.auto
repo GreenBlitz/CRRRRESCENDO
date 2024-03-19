@@ -14,19 +14,7 @@
         {
           "type": "named",
           "data": {
-            "name": "activate limelight"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
             "name": "close shoot start"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "disable limelight"
           }
         },
         {
@@ -91,12 +79,6 @@
                 }
               },
               {
-                "type": "named",
-                "data": {
-                  "name": "activate limelight"
-                }
-              },
-              {
                 "type": "parallel",
                 "data": {
                   "commands": [
@@ -113,12 +95,6 @@
                       }
                     }
                   ]
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "disable limelight"
                 }
               }
             ]
@@ -192,12 +168,6 @@
                 }
               },
               {
-                "type": "named",
-                "data": {
-                  "name": "activate limelight"
-                }
-              },
-              {
                 "type": "parallel",
                 "data": {
                   "commands": [
@@ -214,12 +184,6 @@
                       }
                     }
                   ]
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "disable limelight"
                 }
               }
             ]

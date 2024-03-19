@@ -124,7 +124,7 @@ public class Robot extends LoggedRobot {
 		NamedCommands.registerCommand("disable limelight", new DisableLimelight());
 		NamedCommands.registerCommand("activate limelight", new ActivateLimelight());
 		AutoBuilder.configureHolonomic(
-				SwerveChassis.getInstance()::getOdometryPose,
+				SwerveChassis.getInstance()::getRobotPose2d,
 				(pose) -> SwerveChassis.getInstance().resetChassisPose(AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(pose)),
 				SwerveChassis.getInstance()::getChassisSpeeds,
 				SwerveChassis.getInstance()::moveByRobotRelativeSpeeds,

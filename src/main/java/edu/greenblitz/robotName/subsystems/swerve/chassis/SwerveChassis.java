@@ -237,6 +237,15 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	public void activateLimelight(){
 		doVision = true;
 	}
+
+	public boolean distanceFilterVision(Pose2d visionPose){
+		if(DriverStation.isAutonomous()){
+			return !(visionPose.getTranslation().getDistance(getRobotPose2d().getTranslation()) > VisionConstants.MIN_DISTANCE_TO_FILTER_OUT_METERS_AUTO);
+		}
+		else {
+			return !(visionPose.getTranslation().getDistance(getRobotPose2d().getTranslation()) > VisionConstants.MIN_DISTANCE_TO_FILTER_OUT_METERS_TELEOP);
+		}
+	}
 	
 	public void resetPoseByVision() {
 		List<Optional<Pair<Pose2d, Double>>> estimates = MultiLimelight.getInstance().getAll2DEstimates();
@@ -244,8 +253,9 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 			for (Optional<Pair<Pose2d, Double>> visionPoseAndTimeStamp : estimates) {
 				if (visionPoseAndTimeStamp.isPresent()) {
 					Pose2d visionPose = visionPoseAndTimeStamp.get().getFirst();
-					if (!(visionPose.getTranslation().getDistance(getRobotPose2d().getTranslation()) > VisionConstants.MIN_DISTANCE_TO_FILTER_OUT_METERS))
-					poseEstimator.addVisionMeasurement(visionPose, visionPoseAndTimeStamp.get().getSecond());
+					if (distanceFilterVision(visionPose)) {
+						poseEstimator.addVisionMeasurement(visionPose, visionPoseAndTimeStamp.get().getSecond());
+					}
 				}
 			}
 		}
@@ -433,13 +443,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				|| (frontLeft && backRight)
 				|| (frontRight && backLeft));
 	}
-	
-	private void addVisionMeasurement(Pair<Pose2d, Double> poseTimestampPair) {
-		Pose2d visionPose = poseTimestampPair.getFirst();
-		if (!(visionPose.getTranslation().getDistance(getRobotPose2d().getTranslation()) > VisionConstants.MIN_DISTANCE_TO_FILTER_OUT_METERS)) {
-			resetToVision();
-		}
-	}
+
 	
 	public Pose2d getRobotPose2d() {
 		return new Pose2d(robotPose.toBlueAlliancePose().getX(), robotPose.toBlueAlliancePose().getY(), robotPose.toBlueAlliancePose().getRotation());

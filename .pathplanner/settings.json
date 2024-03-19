@@ -9,7 +9,7 @@
     "closeeeeeeeeeee"
   ],
   "defaultMaxVel": 5.0,
-  "defaultMaxAccel": 1.5,
+  "defaultMaxAccel": 2.75,
   "defaultMaxAngVel": 540.0,
   "defaultMaxAngAccel": 270.0,
   "maxModuleSpeed": 4.5

@@ -20,7 +20,8 @@ public class PrepareToScore extends ProxyCommand {
     public static Command getCommand(){
         if (ScoringModeSelector.isSpeakerMode()){
             return new ParallelCommandGroup(
-                    new MoveByJoystickAndRotateToSpeaker(ChassisConstants.DRIVE_MODE)
+                    new MoveByJoystickAndRotateToSpeaker(ChassisConstants.DRIVE_MODE),
+                    new RunFlyWheelByVelocityConstant()
             );
         }
         else{
@@ -33,6 +34,7 @@ public class PrepareToScore extends ProxyCommand {
                                     WristConstants.PresetPositions.SCORE
                             )
                     )
+
             );
         }
     }
