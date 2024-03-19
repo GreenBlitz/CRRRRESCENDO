@@ -137,7 +137,7 @@ public class OI {
         secondJoystick.X.whileTrue(new GetToClimbMode());
 
         //Reverse Intake
-        mainJoystick.B.whileTrue(new RunIntakeByPower(-0.5));
+        secondJoystick.B.whileTrue(new RunIntakeByPower(-0.5));
 
         //Arm
         secondJoystick.BACK.onTrue(new InstantCommand(() -> Roller.getInstance().setObjectOut()));
