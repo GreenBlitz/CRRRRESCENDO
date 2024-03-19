@@ -103,7 +103,6 @@ public class Robot extends LoggedRobot {
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
-		SwerveChassis.getInstance().activateLimelight();
 //		Dashboard.getInstance().activateDriversDashboard();
 	}
 
@@ -125,7 +124,7 @@ public class Robot extends LoggedRobot {
 		NamedCommands.registerCommand("disable limelight", new DisableLimelight());
 		NamedCommands.registerCommand("activate limelight", new ActivateLimelight());
 		AutoBuilder.configureHolonomic(
-				SwerveChassis.getInstance()::getRobotPose2d,
+				SwerveChassis.getInstance()::getOdometryPose,
 				(pose) -> SwerveChassis.getInstance().resetChassisPose(AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(pose)),
 				SwerveChassis.getInstance()::getChassisSpeeds,
 				SwerveChassis.getInstance()::moveByRobotRelativeSpeeds,
@@ -171,7 +170,6 @@ public class Robot extends LoggedRobot {
 
 	@Override
 	public void autonomousInit() {
-		SwerveChassis.getInstance().disableLimelight();
 		autonomousCommand = AutonomousSelector.getInstance().getChosenValue();
 		if (autonomousCommand != null){
 			autonomousCommand.schedule();

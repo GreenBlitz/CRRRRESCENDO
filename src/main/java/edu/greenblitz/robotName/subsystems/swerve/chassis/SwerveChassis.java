@@ -141,6 +141,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		Logger.processInputs("DriveTrain/Gyro", gyroInputs);
 
 		updatePoseEstimationLimeLight();
+		updateOdometry();
 		MultiLimelight.getInstance().recordEstimatedPositions();
 		robotPose = AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(poseEstimator.getEstimatedPosition());
 		field.setRobotPose(getRobotPose2d());
@@ -442,6 +443,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	
 	public Pose2d getRobotPose2d() {
 		return new Pose2d(robotPose.toBlueAlliancePose().getX(), robotPose.toBlueAlliancePose().getY(), robotPose.toBlueAlliancePose().getRotation());
+	}
+
+	public Pose2d getOdometryPose(){
+		return odometry.getPoseMeters();
 	}
 
 	public Pose3d getRobotPose3d() {
