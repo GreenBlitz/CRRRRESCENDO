@@ -130,9 +130,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		Logger.recordOutput("DriveTrain/ModuleStates", getSwerveModuleStates());
 		Logger.processInputs("DriveTrain/Chassis", chassisInputs);
 		Logger.processInputs("DriveTrain/Gyro", gyroInputs);
-		
-		SmartDashboard.putNumber("Chassis Speeds x", SwerveChassis.getInstance().getChassisSpeeds().vxMetersPerSecond);
-		SmartDashboard.putNumber("Chassis Speeds y", SwerveChassis.getInstance().getChassisSpeeds().vyMetersPerSecond);
 
 		updatePoseEstimationLimeLight();
 		MultiLimelight.getInstance().recordEstimatedPositions();
