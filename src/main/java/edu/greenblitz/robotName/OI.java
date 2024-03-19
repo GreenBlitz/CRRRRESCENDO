@@ -1,13 +1,11 @@
 package edu.greenblitz.robotName;
 
-import edu.greenblitz.robotName.commands.GetToClimbMode;
 import edu.greenblitz.robotName.commands.LED.UpdateLEDStateDefaultCommand;
 import edu.greenblitz.robotName.commands.PrepareToScore;
 import edu.greenblitz.robotName.commands.ScoreOnReady;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowByJoystick;
 import edu.greenblitz.robotName.commands.arm.roller.MoveNoteInRoller;
-import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRollerToAmp;
 import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRollerToTrap;
 import edu.greenblitz.robotName.commands.arm.wrist.MoveWristByButton;
 import edu.greenblitz.robotName.commands.arm.wrist.MoveWristToAngle;
@@ -17,13 +15,15 @@ import edu.greenblitz.robotName.commands.climbing.lifter.MoveLifterByJoystick;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringModeWithPivotForJoystick;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByPower;
-import edu.greenblitz.robotName.commands.shchori.ClimbOrArmDown;
+import edu.greenblitz.robotName.commands.shchoriModeDependButtons.ClimbOrCollectFromFeeder;
+import edu.greenblitz.robotName.commands.shchoriModeDependButtons.GetReadyForClimbOrArmToSafe;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.FlyWheelDefaultCommand;
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityUntilInterrupted;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
+import edu.greenblitz.robotName.commands.switchMode.SetScoringMode;
 import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
 import edu.greenblitz.robotName.subsystems.LED.LED;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
@@ -123,43 +123,51 @@ public class OI {
     }
 
     public void shchoriButtons() {
-        //ScoringMode
-        secondJoystick.START.onTrue(new ToggleScoringMode());
-        secondJoystick.X.whileTrue(new GetToClimbMode());
+        SmartJoystick usedJoystick = secondJoystick;
 
-        //Reverse Intake
-        secondJoystick.B.whileTrue(new RunIntakeByPower(-0.5));
+        //Scoring Mode Change - With Idle mode sets
+        usedJoystick.START.onTrue(new ToggleScoringMode());//Doing Transfer Also
+        usedJoystick.BACK.onTrue(new SetScoringMode(ScoringMode.CLIMB));
 
-        //Arm
-        secondJoystick.BACK.onTrue(new InstantCommand(() -> Roller.getInstance().setObjectOut()));
-        secondJoystick.A.onTrue(new ReleaseNoteFromRollerToAmp());
-        secondJoystick.R2.whileTrue(new MoveElbowByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_TRIGGER, true));
-        secondJoystick.L2.whileTrue(new MoveElbowByJoystick(secondJoystick, SmartJoystick.Axis.LEFT_TRIGGER, false));
+        //Wrist Hand Control
+        usedJoystick.POV_UP.whileTrue(new MoveWristByButton(true));
+        usedJoystick.POV_DOWN.whileTrue(new MoveWristByButton(false));
 
-        //FlyWheel Run
-        secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityUntilInterrupted(FlyWheelConstants.SHOOTING_VELOCITY, secondJoystick));
+        //Note-Roller Hand Control
+        usedJoystick.POV_RIGHT.whileTrue(new MoveNoteInRoller(true));
+        usedJoystick.POV_LEFT.whileTrue(new MoveNoteInRoller(false));
 
-        //Wrist Control
-        secondJoystick.POV_UP.whileTrue(new MoveWristByButton(true));
-        secondJoystick.POV_DOWN.whileTrue(new MoveWristByButton(false));
+        //Hand Control Arm
+        usedJoystick.R2.whileTrue(new MoveElbowByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_TRIGGER, true));
+        usedJoystick.L2.whileTrue(new MoveElbowByJoystick(secondJoystick, SmartJoystick.Axis.LEFT_TRIGGER, false));
 
-        //Note-Roller Control
-        secondJoystick.POV_RIGHT.whileTrue(new MoveNoteInRoller(true));
-        secondJoystick.POV_LEFT.whileTrue(new MoveNoteInRoller(false));
+        //No Object In Arm
+        usedJoystick.X.onTrue(new InstantCommand(() -> Roller.getInstance().setObjectOut()));
 
-        //Funnel
-        secondJoystick.R1.whileTrue(new RunFunnelByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_Y));
+        //Intake Reverse Roll
+        usedJoystick.B.whileTrue(new RunIntakeByPower(-0.5));
 
-        //Climbing
-        secondJoystick.Y.whileTrue(new ClimbOrArmDown());
-        secondJoystick.LEFT_Y_AXIS.whileTrue(
+        //Climb Mode -> Climbing : AMP or SPEAKER -> Collect Note From Feeder
+        usedJoystick.Y.whileTrue(new ClimbOrCollectFromFeeder());
+
+        //Climb Mode -> Lifter Up, Note To Arm, Move Arm a bit Up : AMP or SPEAKER -> Move Arm To Safe
+        usedJoystick.A.whileTrue(new GetReadyForClimbOrArmToSafe());
+
+        //Run FlyWheel For Shooting
+        usedJoystick.L1.whileTrue(new RunFlyWheelByVelocityUntilInterrupted(FlyWheelConstants.SHOOTING_VELOCITY, usedJoystick));
+
+        //Funnel Joystick Control
+        usedJoystick.R1.whileTrue(new RunFunnelByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_Y));
+
+        //Hand Control On Lifter
+        usedJoystick.LEFT_Y_AXIS.whileTrue(
                 new ConditionalCommand(
                         new SequentialCommandGroup(
                                 new CloseAndThenHoldSolenoid(),
-                                new MoveLifterByJoystick(secondJoystick)
+                                new MoveLifterByJoystick(usedJoystick)
                         ),
-                        new MoveLifterByJoystick(secondJoystick),
-                        () -> (secondJoystick.getAxisValue(SmartJoystick.Axis.LEFT_Y) > 0)
+                        new MoveLifterByJoystick(usedJoystick),
+                        () -> (usedJoystick.getAxisValue(SmartJoystick.Axis.LEFT_Y) > 0)
                 )
         );
     }
