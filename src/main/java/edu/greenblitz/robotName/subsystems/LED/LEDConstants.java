@@ -19,7 +19,7 @@ public class LEDConstants {
  
 	public static final double BLINKING_TIME = 5.0;
  
-	public static final double RUMBLE_POWER = 0.5;
+	public static final double RUMBLE_POWER = 1;
  
 	public static final boolean RUMBLE_LEFT_MOTOR = true;
  

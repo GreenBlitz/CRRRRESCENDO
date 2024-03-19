@@ -28,7 +28,8 @@ public class ShootOnReady extends FunnelCommand {
         isPivotAngleCorrect = Pivot.getInstance().isAtAngle(ShootingStateCalculations.getTargetShooterAngle());
         isRobotStanding = SwerveChassis.getInstance().isRobotStanding();
         isFlyWheelAtVelocity = FlyWheel.getInstance().getPreparedToShoot();
-        isNoteInFunnel = Funnel.getInstance().isObjectIn();
+//        isNoteInFunnel = Funnel.getInstance().isObjectIn();
+        isNoteInFunnel = true;
         SmartDashboard.putBoolean("funnel", isNoteInFunnel);
         SmartDashboard.putBoolean("flywhhel", isFlyWheelAtVelocity);
         SmartDashboard.putBoolean("robotStantd", isRobotStanding);

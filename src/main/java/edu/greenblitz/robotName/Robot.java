@@ -4,6 +4,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
+import edu.greenblitz.robotName.commands.RumbleRomy;
 import edu.greenblitz.robotName.commands.auto.InterpolationForAuto;
 import edu.greenblitz.robotName.commands.auto.NoteFromIntakeToShooterForAuto;
 import edu.greenblitz.robotName.commands.auto.RotateToSpeakerForAuto;
