@@ -23,13 +23,11 @@ public class MoveByJoystickWithAngleService {
 	}
 
 	public static double calculateAngularVelocity(double forwardSpeed, double leftwardSpeed, double angularSpeed) {
-		SmartDashboard.putNumber("currentAngle", SwerveChassis.getInstance().getChassisAngle().getDegrees());
 		double pidVelocity = ChassisConstants.ROTATION_PID_CONTROLLER.calculate(SwerveChassis.getInstance().getChassisAngle().getRadians());
 		double axesSpeed = Math.sqrt((forwardSpeed * forwardSpeed) + (leftwardSpeed * leftwardSpeed));
 		double angularVelocity = pidVelocity * FACTOR / (axesSpeed + FACTOR);
 		double angularVelocityWithJoystick = angularVelocity + angularSpeed;
 		double checkedAngularVelocity = MathUtil.clamp(angularVelocityWithJoystick, -MAX_ANGULAR_SPEED, MAX_ANGULAR_SPEED);
-		SmartDashboard.putNumber("checkangular", checkedAngularVelocity);
 		return checkedAngularVelocity;
 	}
 }

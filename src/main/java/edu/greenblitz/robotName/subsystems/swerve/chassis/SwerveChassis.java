@@ -200,8 +200,6 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 	
 	public boolean isAtAngle(Rotation2d angle) {
-		SmartDashboard.putNumber("currentangle", getChassisAngle().getDegrees());
-		SmartDashboard.putNumber("targetAnglelll", angle.getDegrees());
 		return Math.abs(getChassisAngle().getRadians() - angle.getRadians()) <= ROTATION_TOLERANCE.getRadians()
 				|| Math.abs(getChassisAngle().getRadians() - angle.getRadians()) >= (2 * Math.PI) - ROTATION_TOLERANCE.getRadians();
 	}
