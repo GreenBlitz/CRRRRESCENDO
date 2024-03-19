@@ -75,7 +75,11 @@ public class Pivot extends GBSubsystem {
 	public void setCurrentAngle() {
 		currentAngle = getAngle();
 	}
-	
+
+	public void setCurrentAngle(Rotation2d angle) {
+		currentAngle = angle;
+	}
+
 	public void standInPlace() {
 		pivot.moveToAngle(currentAngle);
 	}

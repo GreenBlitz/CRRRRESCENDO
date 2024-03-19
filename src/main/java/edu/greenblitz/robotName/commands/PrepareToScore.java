@@ -20,8 +20,7 @@ public class PrepareToScore extends ProxyCommand {
     public static Command getCommand(){
         if (ScoringModeSelector.isSpeakerMode()){
             return new ParallelCommandGroup(
-                    new MoveByJoystickAndRotateToSpeaker(ChassisConstants.DRIVE_MODE),
-                    new RunFlyWheelByVelocityConstant()
+                    new MoveByJoystickAndRotateToSpeaker(ChassisConstants.DRIVE_MODE)
             );
         }
         else{

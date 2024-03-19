@@ -8,7 +8,8 @@ public class WristConstants {
 
 		STARTING(Rotation2d.fromDegrees(90)),
 		SCORE(Rotation2d.fromDegrees(190)),
-		SCORE_TRAP(Rotation2d.fromDegrees(390)), // find
+		SCORE_TRAP(Rotation2d.fromDegrees(410)),
+		BEFORE_AND_AFTER_SCORE_TRAP(Rotation2d.fromDegrees(270)),
 		TRANSFER(Rotation2d.fromDegrees(185)),
 		SAFE(Rotation2d.fromDegrees(180)),
 		INTAKE(Rotation2d.fromDegrees(180));
@@ -21,8 +22,8 @@ public class WristConstants {
 	}
 
 	public static final double LENGTH_OF_ENDEFFECTOR = 0.1;
-	
-	public static final double HAND_CONTROL_POWER = 0.2;
+
+	public static final double HAND_CONTROL_POWER = 0.3339;
 
 	public static final double WRIST_MASS_KG = 0.5;
 

@@ -1,5 +1,8 @@
 package edu.greenblitz.robotName;
 
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+
 public class ScoringModeSelector {
 
 	private static ScoringMode currentMode;
@@ -26,4 +29,9 @@ public class ScoringModeSelector {
 	public static boolean isAmpMode() {
 		return getScoringMode() == ScoringMode.AMP;
 	}
+
+	public static boolean isClimbMode() {
+		return getScoringMode() == ScoringMode.CLIMB;
+	}
+
 }

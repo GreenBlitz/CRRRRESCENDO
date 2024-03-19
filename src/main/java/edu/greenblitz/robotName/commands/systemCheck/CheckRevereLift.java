@@ -1,7 +1,7 @@
 package edu.greenblitz.robotName.commands.systemCheck;
 
-import edu.greenblitz.robotName.subsystems.lifter.Lifter;
-import edu.greenblitz.robotName.subsystems.lifter.LifterConstants;
+import edu.greenblitz.robotName.subsystems.climber.lifter.Lifter;
+import edu.greenblitz.robotName.subsystems.climber.lifter.LifterConstants;
 
 public class CheckRevereLift extends SystemCheckCommand {
 

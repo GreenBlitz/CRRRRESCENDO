@@ -42,6 +42,7 @@ public class Dashboard extends GBSubsystem {
     public void openDriversDashboard() {
         Shuffleboard.getTab("Drivers");
         swerveDashboard();
+        autoDashboard();
     }
 
     /**
@@ -84,6 +85,11 @@ public class Dashboard extends GBSubsystem {
                 .withSize(1, 1).withPosition(0, 3);
         swerveTab.addDouble("pigeon-angle", () -> SwerveChassis.getInstance().getGyroAngle().getDegrees())
                 .withSize(1, 1).withPosition(0, 3);
+    }
+
+    public void autoDashboard() {
+        ShuffleboardTab autoTab = Shuffleboard.getTab("auto");
+        autoTab.addString("Scoring Mode",  () -> ScoringModeSelector.getScoringMode().name());
     }
 
 }
