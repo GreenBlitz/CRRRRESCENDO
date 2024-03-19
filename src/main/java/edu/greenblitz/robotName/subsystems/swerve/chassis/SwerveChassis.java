@@ -68,6 +68,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				ChassisConstants.SWERVE_LOCATIONS_IN_SWERVE_KINEMATICS_COORDINATES
 		);
 
+
 		this.poseEstimator = new SwerveDrivePoseEstimator(
 				this.kinematics,
 				getGyroAngle(),
@@ -82,7 +83,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				visionPoseStartMatch()
 		);
 
-		
+
 		robotPose = AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(poseEstimator.getEstimatedPosition());
 		SmartDashboard.putData("field", getField());
 	}
@@ -138,8 +139,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		Logger.recordOutput("DriveTrain/ModuleStates", getSwerveModuleStates());
 		Logger.processInputs("DriveTrain/Chassis", chassisInputs);
 		Logger.processInputs("DriveTrain/Gyro", gyroInputs);
-		
-		
+
 		updatePoseEstimationLimeLight();
 		MultiLimelight.getInstance().recordEstimatedPositions();
 		robotPose = AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(poseEstimator.getEstimatedPosition());
@@ -206,14 +206,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	}
 	
 	public boolean isAtAngle(Rotation2d angle) {
-		SmartDashboard.putNumber("currentangle", getChassisAngle().getDegrees());
-		SmartDashboard.putNumber("targetAnglelll", angle.getDegrees());
 		return Math.abs(getChassisAngle().getRadians() - angle.getRadians()) <= ROTATION_TOLERANCE.getRadians()
-				|| Math.abs(getChassisAngle().getRadians() - angle.getRadians()) >= (2 * Math.PI) - ROTATION_TOLERANCE.getRadians()
-				/*|| (Math.abs(getChassisAngle().getRadians()) + Math.abs(angle.getRadians())
-				- Rotation2d.fromDegrees(180).getRadians() <= ROTATION_TOLERANCE.getRadians() &&
-				(Math.abs(getChassisAngle().getRadians()) + Math.abs(angle.getRadians())
-						- Rotation2d.fromDegrees(180).getRadians() >= -ROTATION_TOLERANCE.getRadians()*/;
+				|| Math.abs(getChassisAngle().getRadians() - angle.getRadians()) >= (2 * Math.PI) - ROTATION_TOLERANCE.getRadians();
 	}
 	
 	public void resetChassisPose() {
@@ -249,6 +243,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 			for (Optional<Pair<Pose2d, Double>> visionPoseAndTimeStamp : estimates) {
 				if (visionPoseAndTimeStamp.isPresent()) {
 					Pose2d visionPose = visionPoseAndTimeStamp.get().getFirst();
+					if (!(visionPose.getTranslation().getDistance(getRobotPose2d().getTranslation()) > VisionConstants.MIN_DISTANCE_TO_FILTER_OUT_METERS))
 					poseEstimator.addVisionMeasurement(visionPose, visionPoseAndTimeStamp.get().getSecond());
 				}
 			}
@@ -448,7 +443,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	public Pose2d getRobotPose2d() {
 		return new Pose2d(robotPose.toBlueAlliancePose().getX(), robotPose.toBlueAlliancePose().getY(), robotPose.toBlueAlliancePose().getRotation());
 	}
-	
+
 	public Pose3d getRobotPose3d() {
 		Pose2d swervePose2d = getRobotPose2d();
 		return new Pose3d(

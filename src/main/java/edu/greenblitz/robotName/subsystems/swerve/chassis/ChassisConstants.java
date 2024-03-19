@@ -15,17 +15,17 @@ public class ChassisConstants {
 
 	public static final double SPEED_TOLERANCE = 0.05;
 
-	public static final double ROBOT_WIDTH_IN_METERS = 0.69;
+	public static final double ROBOT_WIDTH_IN_METERS = 0.82;
 	
-	public static final double ROBOT_LENGTH_IN_METERS = 0.82;
+	public static final double ROBOT_LENGTH_IN_METERS = 0.69;
 	
 	public static final double BUMPER_WIDTH = 0.077;
 	
 	public static final Rotation2d CLOSE_RANGE_SHOOTING_ANGLE = Rotation2d.fromDegrees(180);
 	
-	public static final double ROBOT_WIDTH_WITH_BUMPER = ROBOT_WIDTH_IN_METERS + BUMPER_WIDTH;
+	public static final double ROBOT_WIDTH_WITH_BUMPER = ROBOT_WIDTH_IN_METERS + 2 * BUMPER_WIDTH;
 	
-	public static final double ROBOT_LENGTH_WITH_BUMPER = ROBOT_LENGTH_IN_METERS + BUMPER_WIDTH;
+	public static final double ROBOT_LENGTH_WITH_BUMPER = ROBOT_LENGTH_IN_METERS + 2 * BUMPER_WIDTH;
 	
 	public static final double ROBOT_RADIUS = Math.sqrt(Math.pow(ROBOT_WIDTH_WITH_BUMPER / 2, 2) + Math.pow(ROBOT_LENGTH_WITH_BUMPER / 2, 2));
 	
@@ -115,8 +115,8 @@ public class ChassisConstants {
 			MAX_VELOCITY,
 			ROBOT_RADIUS,
 			new ReplanningConfig(
-					false,
-					false
+					true,
+					true
 			)
 	);
 	

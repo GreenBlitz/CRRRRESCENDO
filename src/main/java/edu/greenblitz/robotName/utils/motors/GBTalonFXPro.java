@@ -37,6 +37,7 @@ public class GBTalonFXPro extends TalonFX implements IPingable {
 		return super.getConfigurator().apply(configuration);
 	}
 
+
 	@Override
 	public boolean isConnected() {
 		return isAlive();

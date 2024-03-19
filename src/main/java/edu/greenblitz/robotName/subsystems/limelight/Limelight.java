@@ -2,7 +2,6 @@ package edu.greenblitz.robotName.subsystems.limelight;
 
 import edu.greenblitz.robotName.VisionConstants;
 import edu.greenblitz.robotName.utils.AllianceUtilities;
-import edu.greenblitz.robotName.utils.FMSUtils;
 import edu.greenblitz.robotName.utils.GBSubsystem;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -15,7 +14,7 @@ import java.util.Optional;
 
 public class Limelight extends GBSubsystem {
 
-	private NetworkTableEntry robotPoseEntry, idEntry, tagPoseEntry;
+	private NetworkTableEntry robotPoseEntry, idEntry, tagPoseEntry,ledEntry;
 
 	private String name;
 
@@ -27,6 +26,7 @@ public class Limelight extends GBSubsystem {
 		robotPoseEntry = NetworkTableInstance.getDefault().getTable(name).getEntry(robotPoseQuery);
 		tagPoseEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("targetpose_cameraspace");
 		idEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("tid");
+		ledEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("ledMode");
 		counter = 0;
 	}
 
@@ -35,7 +35,7 @@ public class Limelight extends GBSubsystem {
 		double processingLatency = poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.TOTAL_LATENCY)] / 1000;
 		double timestamp = Timer.getFPGATimestamp() - processingLatency;
 		int id = (int) idEntry.getInteger(-1);
-		double angleOffset = AllianceUtilities.isBlueAlliance() ? 0 : 180;
+		double angleOffset = 180;
 		if (id == -1) {
 			return Optional.empty();
 		}
@@ -71,6 +71,14 @@ public class Limelight extends GBSubsystem {
 
 	public boolean hasTarget() {
 		return getUpdatedPose2DEstimation().isPresent();
+	}
+	
+	public void turnOffLed(){
+		ledEntry.setNumber(VisionConstants.LED_OFF_NETWORKTABLE_VALUE);
+	}
+	
+	public void turnOnLed(){
+		ledEntry.setNumber(VisionConstants.LED_ON_NETWORKTABLE_VALUE);
 	}
 
 

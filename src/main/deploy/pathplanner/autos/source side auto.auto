@@ -1,0 +1,245 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.7411921905996789,
+      "y": 4.3604619787143255
+    },
+    "rotation": 120.71890426402918
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "activate limelight"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "close shoot start"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "disable limelight"
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "RIP1"
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 1.0
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "note to intake"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "RIP2"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "note from intake to shooter"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "note from intake to shooter"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "activate limelight"
+                }
+              },
+              {
+                "type": "parallel",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "interpolation"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "rotate to speaker"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "disable limelight"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "push note to flyWheel"
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "RIP3"
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 1.0
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "note to intake"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "RIP4"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "note from intake to shooter"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "note from intake to shooter"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "activate limelight"
+                }
+              },
+              {
+                "type": "parallel",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "interpolation"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "rotate to speaker"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "disable limelight"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "push note to flyWheel"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RIP5"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "closeeeeeeeeeee",
+  "choreoAuto": false
+}

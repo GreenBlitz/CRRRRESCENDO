@@ -19,6 +19,8 @@ public class MoveByJoystickAndRotateToSpeaker extends SwerveCommand {
 
     private double linearSpeedFactor;
 
+    private double leftwardSpeedFactor;
+
     private DoubleSupplier angularVelocitySupplier;
 
     private MoveByJoysticks.DriveMode driveMode;
@@ -42,11 +44,13 @@ public class MoveByJoystickAndRotateToSpeaker extends SwerveCommand {
     public void initialize() {
         switch (driveMode) {
             case SLOW -> {
-                linearSpeedFactor = ChassisConstants.DRIVER_LINEAR_SPEED_FACTOR_SLOW;
-                angularSpeedFactor = ChassisConstants.DRIVER_ANGULAR_SPEED_FACTOR_SLOW;
+                linearSpeedFactor = MoveByJoystickWithAngleService.getForwardFactor(MoveByJoysticks.DriveMode.SLOW);
+                leftwardSpeedFactor = -linearSpeedFactor;
+                angularSpeedFactor = ChassisConstants.DRIVER_ANGULAR_SPEED_FACTOR;
             }
             case NORMAL -> {
-                linearSpeedFactor = ChassisConstants.DRIVER_LINEAR_SPEED_FACTOR;
+                linearSpeedFactor = MoveByJoystickWithAngleService.getForwardFactor(MoveByJoysticks.DriveMode.NORMAL);
+                leftwardSpeedFactor = -linearSpeedFactor;
                 angularSpeedFactor = ChassisConstants.DRIVER_ANGULAR_SPEED_FACTOR;
             }
         }
@@ -54,9 +58,9 @@ public class MoveByJoystickAndRotateToSpeaker extends SwerveCommand {
 
     @Override
     public void execute() {
-        double leftwardSpeed = OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_X) * linearSpeedFactor;
+        double leftwardSpeed = OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_X) * leftwardSpeedFactor;
 
-        double forwardSpeed = -OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_Y) * linearSpeedFactor;
+        double forwardSpeed = OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.LEFT_Y) * linearSpeedFactor;
 
         double angularSpeed = -angularVelocitySupplier.getAsDouble() * angularSpeedFactor;
 

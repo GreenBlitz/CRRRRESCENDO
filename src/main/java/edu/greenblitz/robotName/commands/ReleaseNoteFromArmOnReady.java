@@ -11,6 +11,7 @@ import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.AllianceUtilities;
 import edu.greenblitz.robotName.utils.GBCommand;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ReleaseNoteFromArmOnReady extends GBCommand {
 
@@ -37,6 +38,10 @@ public class ReleaseNoteFromArmOnReady extends GBCommand {
         isWristReady = Wrist.getInstance().isAtAngle(WristConstants.PresetPositions.SCORE.ANGLE);
         isRobotInPlace = SwerveChassis.getInstance().isAtPose(ampScoringPose);
         isNoteInRoller = Roller.getInstance().isObjectIn();
+        SmartDashboard.putBoolean("isElbowReady", isElbowReady);
+        SmartDashboard.putBoolean("isWristReady", isWristReady);
+        SmartDashboard.putBoolean("isRobotInPlace", isRobotInPlace);
+        SmartDashboard.putBoolean("isNoteInRoller", isNoteInRoller);
     }
 
     @Override
@@ -46,6 +51,8 @@ public class ReleaseNoteFromArmOnReady extends GBCommand {
 
     @Override
     public void end(boolean interrupted) {
-        new ReleaseNoteFromRollerToAmp().schedule();
+        if (!interrupted) {
+            new ReleaseNoteFromRollerToAmp().schedule();
+        }
     }
 }

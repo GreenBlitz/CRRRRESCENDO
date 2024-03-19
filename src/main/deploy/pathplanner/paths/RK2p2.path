@@ -1,0 +1,58 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.6166844786519756,
+        "y": 6.989518884698147
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.7122783009779963,
+        "y": 7.087876276291563
+      },
+      "isLocked": false,
+      "linkedName": "rk2p1 end point"
+    },
+    {
+      "anchor": {
+        "x": 8.105683381178084,
+        "y": 5.85686831751022
+      },
+      "prevControl": {
+        "x": 7.186009843717801,
+        "y": 6.39899166590786
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "rk2p2 end point"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.75,
+      "rotationDegrees": 160.0,
+      "rotateFast": false
+    }
+  ],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 5.0,
+    "maxAcceleration": 1.5,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 270.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 155.87159706973225,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "close",
+  "previewStartingState": {
+    "rotation": -170.77539557360294,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}
