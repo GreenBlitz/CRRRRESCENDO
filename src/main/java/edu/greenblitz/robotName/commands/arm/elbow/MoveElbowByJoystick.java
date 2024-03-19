@@ -9,15 +9,21 @@ public class MoveElbowByJoystick extends ElbowCommand {
     
     private SmartJoystick.Axis axis;
 
-    public MoveElbowByJoystick(SmartJoystick joystick, SmartJoystick.Axis axis) {
+    private boolean isForward;
+
+    public MoveElbowByJoystick(SmartJoystick joystick, SmartJoystick.Axis axis, boolean isForward) {
         super();
         this.joystick = joystick;
         this.axis = axis;
+        this.isForward = isForward;
     }
 
     @Override
     public void execute() {
         double power = joystick.getAxisValue(axis);
+        if (!isForward){
+            power = -power;
+        }
         elbow.setPower(power * RobotConstants.General.SAFETY_POWER_CONVERSION_FACTOR);
     }
 }
