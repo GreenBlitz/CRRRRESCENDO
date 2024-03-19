@@ -5,6 +5,7 @@ import edu.greenblitz.robotName.commands.intake.IntakeCommand;
 import edu.greenblitz.robotName.commands.intake.NoteFromIntakeToShooterWithArm;
 import edu.greenblitz.robotName.commands.shooter.funnel.AlignNoteInFunnel;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
+import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
@@ -17,7 +18,7 @@ public class CollectNoteToScoringModeForJoystick extends IntakeCommand {
 
     @Override
     public boolean isFinished() {
-        return intake.isObjectIn();
+        return intake.isObjectIn() || Funnel.getInstance().isObjectIn();
     }
 
     @Override
