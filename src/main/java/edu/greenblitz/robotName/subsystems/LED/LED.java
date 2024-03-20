@@ -19,14 +19,7 @@ public class LED extends GBSubsystem {
 
 	private static LED instance;
 
-	private AddressableLED frontRightaddressableLED;
-
-	private AddressableLED frontLeftaddressableLED;
-//
-//	private AddressableLED backRightaddressableLED;
-//
-//	private AddressableLED backLeftaddressableLED;
-
+	private AddressableLED addressableLED;
 
 	private AddressableLEDBuffer addressableLEDBuffer;
 
@@ -39,23 +32,9 @@ public class LED extends GBSubsystem {
 
 	private LED(){
 		this.addressableLEDBuffer = new AddressableLEDBuffer(LED_LENGTH);
-
-		this.frontRightaddressableLED = new AddressableLED(FRONT_RIGHT_LED_PORT);
-//		this.frontLeftaddressableLED = new AddressableLED(FRONT_LEFT_LED_PORT);
-//		this.backRightaddressableLED = new AddressableLED(BACK_RIGHT_LED_PORT);
-//		this.backLeftaddressableLED = new AddressableLED(BACK_LEFT_LED_PORT);
-
-		this.frontRightaddressableLED.setLength(LED_LENGTH);
-		this.frontRightaddressableLED.start();
-
-//		this.frontLeftaddressableLED.setLength(LED_LENGTH);
-//		this.frontLeftaddressableLED.start();
-
-//		this.backRightaddressableLED.setLength(LED_LENGTH);
-//		this.backRightaddressableLED.start();
-//
-//		this.backLeftaddressableLED.setLength(LED_LENGTH);
-//		this.backLeftaddressableLED.start();
+		this.addressableLED = new AddressableLED(LED_PORT);
+		this.addressableLED.setLength(LED_LENGTH);
+		this.addressableLED.start();
 
 		LEDBlinkTimer = new Timer();
 		actionTimer = new Timer();
@@ -111,12 +90,7 @@ public class LED extends GBSubsystem {
 	@Override
 	public void periodic() {
 		currentColor = getColorByMode();
-
-		frontLeftaddressableLED.setData(addressableLEDBuffer);
-//		frontRightaddressableLED.setData(addressableLEDBuffer);
-//		backLeftaddressableLED.setData(addressableLEDBuffer);
-//		backRightaddressableLED.setData(addressableLEDBuffer);
-
+		addressableLED.setData(addressableLEDBuffer);
 	}
 
 	public void setColorByMode() {
@@ -169,7 +143,7 @@ public class LED extends GBSubsystem {
 		} else {
 			stopRumble();
 		}
-		if ((getWasNoteInRobot() != isNoteInRobot()) && (actionTimer.get() <= LEDConstants.RUMBLE_TIME)) {
+		if (getWasNoteInRobot() && (!isNoteInRobot()) && (actionTimer.get() <= LEDConstants.RUMBLE_TIME)) {
 			rumble();
 		} else {
 			stopRumble();

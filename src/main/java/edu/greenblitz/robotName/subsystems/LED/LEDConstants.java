@@ -5,15 +5,7 @@ import edu.wpi.first.wpilibj.util.Color;
 public class LEDConstants {
 	public static final int LED_LENGTH = 50;
  
-	public static final int FRONT_RIGHT_LED_PORT = 8;
-
-
-	public static final int FRONT_LEFT_LED_PORT = 0;
-
-	public static final int BACK_RIGHT_LED_PORT = 6;
-
-	public static final int BACK_LEFT_LED_PORT = 9;
-
+	public static final int LED_PORT = 0;
 	public static final double BLINK_DURATION = 0.5;
  
 	public static final Section FIRST_SECTION = new Section(1, 1);
@@ -30,6 +22,6 @@ public class LEDConstants {
  
 	public static final boolean RUMBLE_LEFT_MOTOR = true;
  
-	public static final double RUMBLE_TIME = 1.0;
+	public static final double RUMBLE_TIME = 0.75;
 	
 }
