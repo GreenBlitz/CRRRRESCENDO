@@ -18,7 +18,12 @@ public class CollectNoteFromFeeder extends SequentialCommandGroup {
 	public CollectNoteFromFeeder(){
 		super(
 				new MovePivotToAngle(PivotConstants.PresetPositions.FEEDER.ANGLE),
-				new CollectNoteFromShooterUntilBeamBreakerBreak()
+				new CollectNoteFromShooterUntilBeamBreakerBreak(),
+				new ReverseRunFunnelUntilObjectOut()
+						.deadlineWith(new RunFlyWheelByPower(FlyWheelConstants.COLLECT_FROM_FEEDER_POWER))
+						.andThen(
+								new RunFunnelByVelocity(FunnelConstants.FEEDER_COLLECT_SPEED)
+						).until(() -> Funnel.getInstance().isObjectIn())
 		);
 	}
 }

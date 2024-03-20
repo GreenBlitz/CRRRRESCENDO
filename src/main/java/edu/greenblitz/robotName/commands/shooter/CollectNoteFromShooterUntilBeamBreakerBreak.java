@@ -41,9 +41,5 @@ public class CollectNoteFromShooterUntilBeamBreakerBreak extends GBCommand {
 	public void end(boolean interrupted) {
 		funnel.stop();
 		flyWheel.stop();
-		new ReverseRunFunnelUntilObjectOut()
-				.deadlineWith(new RunFlyWheelByPower(FlyWheelConstants.COLLECT_FROM_FEEDER_POWER))
-				.andThen(new RunFunnelByVelocity(FunnelConstants.FEEDER_COLLECT_SPEED)).until(() -> Funnel.getInstance().isObjectIn())
-				.schedule();
 	}
 }

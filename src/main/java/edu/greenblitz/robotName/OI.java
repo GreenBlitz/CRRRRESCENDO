@@ -104,7 +104,6 @@ public class OI {
 
         //Collect Note
         usedJoystick.R1.whileTrue(new CollectNoteToScoringModeWithPivotForJoystick());
-        usedJoystick.POV_DOWN.whileTrue(new CollectNoteFromFeeder());
 
         //Auto Aim For Speaker Or Amp
         usedJoystick.L2.whileTrue(new PrepareToScore());

@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.subsystems.LED;
 
 import edu.greenblitz.robotName.OI;
+import edu.greenblitz.robotName.ScoringMode;
 import edu.greenblitz.robotName.ScoringModeSelector;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
 import edu.greenblitz.robotName.subsystems.intake.Intake;
@@ -99,9 +100,10 @@ public class LED extends GBSubsystem {
 	public Color getColorByMode() {
 		if (ScoringModeSelector.isAmpMode()) {
 			return LEDConstants.AMP_MODE_COLOR;
-		} else {
+		} else if (ScoringModeSelector.isSpeakerMode()){
 			return LEDConstants.SPEAKER_MODE_COLOR;
 		}
+		return LEDConstants.CLIMB_MODE_COLOR;
 	}
 	
 	public boolean isNoteInRobot() {
@@ -127,7 +129,6 @@ public class LED extends GBSubsystem {
 	}
 	
 	public void stopRumble() {
-		OI.getInstance().getSecondJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, 0);
 		OI.getInstance().getMainJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, 0);
 	}
 	
@@ -144,7 +145,7 @@ public class LED extends GBSubsystem {
 		else {
 			stopRumble();
 		}
-		if ((actionTimer.get() <= LEDConstants.RUMBLE_TIME) && (getWasNoteInRobot() != isNoteInRobot())) {
+		if ((actionTimer.get() <= LEDConstants.RUMBLE_TIME) && (getWasNoteInRobot()) && (!isNoteInRobot())) {
 			rumble();
 		} else {
 			stopRumble();
