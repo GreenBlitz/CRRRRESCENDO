@@ -1,6 +1,8 @@
 package edu.greenblitz.robotName.commands.shooter;
 
 import edu.greenblitz.robotName.commands.arm.roller.runByPower.RollClockwise;
+import edu.greenblitz.robotName.commands.arm.roller.runByPower.RunRollerByPower;
+import edu.greenblitz.robotName.commands.intake.RunIntakeByVelocityConstant;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByVelocity;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
@@ -15,7 +17,8 @@ public class NoteToShooterFromArm extends SequentialCommandGroup {
         super(
                 new ParallelDeadlineGroup(
                         new RunFunnelByVelocity(FunnelConstants.INTAKE_VELOCITY).until(() -> Funnel.getInstance().isObjectIn()),
-                        new RollClockwise()
+                        new RunIntakeByVelocityConstant(),
+                        new RunRollerByPower(0.6)
                 ),
                 new InstantCommand(() -> Roller.getInstance().setObjectOut())
         );

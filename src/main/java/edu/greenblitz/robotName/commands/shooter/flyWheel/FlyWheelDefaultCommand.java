@@ -37,7 +37,12 @@ public class FlyWheelDefaultCommand extends FlyWheelCommand {
             rightWheelVelocity = FlyWheelConstants.DEFAULT_VELOCITY;
             leftWheelVelocity = FlyWheelConstants.DEFAULT_VELOCITY * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR;
         }
-        flyWheel.setVelocity(leftWheelVelocity, rightWheelVelocity);
+        if (rightWheelVelocity == 0) {
+            flyWheel.stop();
+        }
+        else {
+            flyWheel.setVelocity(leftWheelVelocity, rightWheelVelocity);
+        }
     }
 
 }
