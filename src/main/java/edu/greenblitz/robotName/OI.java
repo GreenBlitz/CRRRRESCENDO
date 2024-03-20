@@ -112,8 +112,9 @@ public class OI {
         //Shoot
         usedJoystick.L2_HARD.whileTrue(new ScoreOnReady());
 
-        //Reset Robot Angle
+        //Reset Robot Pose
         usedJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetPoseByVision()));
+        usedJoystick.POV_DOWN.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().hardResetPoseByVision()));
 
         //Climbing
         usedJoystick.A.whileTrue(new ReleaseNoteFromRollerToTrap());//Release note from roller and take wrist back

@@ -260,6 +260,18 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 			}
 		}
 	}
+
+	public void hardResetPoseByVision() {
+		List<Optional<Pair<Pose2d, Double>>> estimates = MultiLimelight.getInstance().getAll2DEstimates();
+		if (!estimates.isEmpty()) {
+			for (Optional<Pair<Pose2d, Double>> visionPoseAndTimeStamp : estimates) {
+				if (visionPoseAndTimeStamp.isPresent()) {
+					Pose2d visionPose = visionPoseAndTimeStamp.get().getFirst();
+					poseEstimator.addVisionMeasurement(visionPose, visionPoseAndTimeStamp.get().getSecond());
+				}
+			}
+		}
+	}
 	
 	/**
 	 * returns chassis angle in radians
