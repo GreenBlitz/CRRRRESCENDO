@@ -43,6 +43,13 @@ public class MoveByJoystickAndRotateToStage extends SwerveCommand {
         );
     }
 
+    public MoveByJoystickAndRotateToStage() {
+        this(
+                ChassisConstants.DRIVE_MODE,
+                () -> OI.getInstance().getMainJoystick().getAxisValue(SmartJoystick.Axis.RIGHT_X)
+        );
+    }
+
     @Override
     public void initialize() {
         switch (driveMode) {
@@ -68,7 +75,7 @@ public class MoveByJoystickAndRotateToStage extends SwerveCommand {
         double angularSpeed = -angularVelocitySupplier.getAsDouble() * angularSpeedFactor;
 
 
-        targetAngle = getClosestClimbPosition();
+        targetAngle = getClosestClimbPosition().plus(Rotation2d.fromDegrees(180));
         ROTATION_PID_CONTROLLER.setSetpoint(targetAngle.getRadians());
         double checkedAngularVelocity = MoveByJoystickWithAngleService.calculateAngularVelocity(forwardSpeed, leftwardSpeed, angularSpeed);
 

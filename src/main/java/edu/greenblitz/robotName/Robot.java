@@ -115,12 +115,6 @@ public class Robot extends LoggedRobot {
 		SmartDashboard.putString("mode", ScoringModeSelector.getScoringMode().name());
 		SmartDashboard.putBoolean("is object in arm", Roller.getInstance().isObjectIn());
 		Logger.recordOutput("ScoringMode", ScoringModeSelector.getScoringMode().name());
-		Logger.recordOutput("RED_MID_CLIMB_POSITION", RED_MID_CLIMB_POSITION);
-		Logger.recordOutput("RED_UPPER_CLIMB_POSITION", RED_AMP_CLIMB_POSITION);
-		Logger.recordOutput("RED_LOWER_CLIMB_POSITION", RED_SOURCE_CLIMB_POSITION);
-		Logger.recordOutput("BLUE_LOWER_CLIMB_POSITION", BLUE_SOURCE_CLIMB_POSITION);
-		Logger.recordOutput("BLUE_MID_CLIMB_POSITION", BLUE_MID_CLIMB_POSITION);
-		Logger.recordOutput("BLUE_UPPER_CLIMB_POSITION", BLUE_AMP_CLIMB_POSITION);
 	}
 
 	private void initializeAutonomousBuilder() {
