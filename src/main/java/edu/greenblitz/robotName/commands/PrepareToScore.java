@@ -21,17 +21,13 @@ public class PrepareToScore extends ProxyCommand {
         super(PrepareToScore::getCommand);
     }
 
-    public static Command getCommand(){
-        if (ScoringModeSelector.isSpeakerMode()){
+    public static Command getCommand() {
+        if (ScoringModeSelector.isSpeakerMode()) {
             return new ParallelCommandGroup(
                     new MoveByJoystickAndRotateToSpeaker(ChassisConstants.DRIVE_MODE),
                     new RunFlyWheelByVelocityUntilInterrupted(FlyWheelConstants.SHOOTING_VELOCITY)
             );
-        }
-        else if (ScoringModeSelector.isSpeakerMode()) {
-            return new MoveByJoystickAndRotateToStage(ChassisConstants.DRIVE_MODE);
-        }
-        else{
+        } else if (ScoringModeSelector.isAmpMode()){
             return new ParallelCommandGroup(
                     new MoveByJoystickAndRotateToAmp(ChassisConstants.DRIVE_MODE),
                     new SequentialCommandGroup(
@@ -44,6 +40,7 @@ public class PrepareToScore extends ProxyCommand {
 
             );
         }
+        else return new InstantCommand();
     }
 
 }
