@@ -16,12 +16,9 @@ public class FlyWheelDefaultCommand extends FlyWheelCommand {
 
     double leftWheelVelocity;
 
-    private int timeInShootingSpeed;
-
 
     @Override
     public void initialize() {
-        timeInShootingSpeed = 0;
         if (DriverStation.isAutonomous()) {
             rightWheelVelocity = FlyWheelConstants.SHOOTING_VELOCITY;
             leftWheelVelocity = FlyWheelConstants.SHOOTING_VELOCITY * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR;
@@ -39,18 +36,6 @@ public class FlyWheelDefaultCommand extends FlyWheelCommand {
         if (Robot.isSimulation()) {
             flyWheel.setVelocity(leftWheelVelocity, rightWheelVelocity);
         }
-        if (flyWheel.isAtVelocity(leftWheelVelocity, rightWheelVelocity)) {
-            timeInShootingSpeed++;
-        } else {
-            timeInShootingSpeed = 0;
-        }
-        flyWheel.setPreparedToShoot(timeInShootingSpeed >= FlyWheelConstants.MINIMUM_SHOOTING_SPEED_TIME_ROBORIO_CYCLES);
     }
-
-    @Override
-    public boolean isFinished() {
-        return flyWheel.getPreparedToShoot();
-    }
-
 
 }

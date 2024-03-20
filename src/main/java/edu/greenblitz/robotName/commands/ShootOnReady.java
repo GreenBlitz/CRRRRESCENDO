@@ -19,8 +19,6 @@ public class ShootOnReady extends FunnelCommand {
 
     private boolean isFlyWheelAtVelocity;
 
-    private boolean isNoteInFunnel;
-
 
     @Override
     public void execute() {
@@ -28,14 +26,11 @@ public class ShootOnReady extends FunnelCommand {
         isPivotAngleCorrect = Pivot.getInstance().isAtAngle(ShootingStateCalculations.getTargetShooterAngle());
         isRobotStanding = SwerveChassis.getInstance().isRobotStanding();
         isFlyWheelAtVelocity = FlyWheel.getInstance().getPreparedToShoot();
-//        isNoteInFunnel = Funnel.getInstance().isObjectIn();
-        isNoteInFunnel = true;
-        SmartDashboard.putBoolean("funnel", isNoteInFunnel);
         SmartDashboard.putBoolean("flywhhel", isFlyWheelAtVelocity);
         SmartDashboard.putBoolean("robotStantd", isRobotStanding);
         SmartDashboard.putBoolean("angle", isSwerveAngleCorrect);
         SmartDashboard.putBoolean("pivot", isPivotAngleCorrect);
-        if (isRobotStanding && isPivotAngleCorrect && isSwerveAngleCorrect && isFlyWheelAtVelocity && isNoteInFunnel) {
+        if (isRobotStanding && isPivotAngleCorrect && isSwerveAngleCorrect && isFlyWheelAtVelocity) {
             funnel.setPower(0.8);
         }
     }

@@ -29,6 +29,7 @@ public class RunFlyWheelByVelocityUntilInterrupted extends FlyWheelCommand {
     public void initialize() {
         timeInShootingSpeed = 0;
         flyWheel.setVelocity(leftWheelVelocity, rightWheelVelocity);
+        flyWheel.setPreparedToShoot(false);
     }
 
     @Override
