@@ -33,6 +33,8 @@ import edu.greenblitz.robotName.utils.AutonomousSelector;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -44,6 +46,8 @@ import org.littletonrobotics.junction.Logger;
 import org.littletonrobotics.junction.networktables.NT4Publisher;
 import org.littletonrobotics.junction.wpilog.WPILOGReader;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
+
+import static edu.greenblitz.robotName.Field.ScoringPositions.*;
 
 public class Robot extends LoggedRobot {
 
@@ -108,7 +112,6 @@ public class Robot extends LoggedRobot {
 		new RumbleRomy(OI.getInstance().getMainJoystick(),OI.getInstance().getSecondJoystick()).schedule();
 	}
 
-
 	@Override
 	public void robotPeriodic() {
 		CommandScheduler.getInstance().run();
@@ -116,6 +119,12 @@ public class Robot extends LoggedRobot {
 		SmartDashboard.putString("mode", ScoringModeSelector.getScoringMode().name());
 		SmartDashboard.putBoolean("is object in arm", Roller.getInstance().isObjectIn());
 		Logger.recordOutput("ScoringMode", ScoringModeSelector.getScoringMode().name());
+		Logger.recordOutput("RED_MID_CLIMB_POSITION", RED_MID_CLIMB_POSITION);
+		Logger.recordOutput("RED_UPPER_CLIMB_POSITION", RED_UPPER_CLIMB_POSITION);
+		Logger.recordOutput("RED_LOWER_CLIMB_POSITION", RED_LOWER_CLIMB_POSITION);
+		Logger.recordOutput("BLUE_LOWER_CLIMB_POSITION", BLUE_LOWER_CLIMB_POSITION);
+		Logger.recordOutput("BLUE_MID_CLIMB_POSITION", BLUE_MID_CLIMB_POSITION);
+		Logger.recordOutput("BLUE_UPPER_CLIMB_POSITION", BLUE_UPPER_CLIMB_POSITION);
 	}
 
 	private void initializeAutonomousBuilder() {
