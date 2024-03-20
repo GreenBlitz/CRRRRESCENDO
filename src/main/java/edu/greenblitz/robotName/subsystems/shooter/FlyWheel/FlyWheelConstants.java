@@ -6,17 +6,18 @@ import edu.wpi.first.math.interpolation.InverseInterpolator;
 
 public class FlyWheelConstants {
 	
-	public static final double EPSILON_RPS = 5;
+	public static final double EPSILON_RPS = 6.5;
 
 	public static final double DEFAULT_VELOCITY = 30;
 
 	public static final double COLLECT_FROM_FEEDER_POWER = -0.1;
 	
-	public static final double MINIMUM_SHOOTING_SPEED_TIME_ROBORIO_CYCLES = 8;
+	public static final double MINIMUM_SHOOTING_SPEED_TIME_ROBORIO_CYCLES = 5;
 	
 	public static final double SHOOTING_POWER = 0.9;
 	
-	public static final double SHOOTING_VELOCITY = 70;
+	public static final double SHOOTING_VELOCITY = 80;
+
 	public static final double SHOOTING_AMP_ZONE_VELOCITY = 60;
 
 	public static final double FEEDER_COLLECT_VELOCITY = -15;

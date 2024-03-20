@@ -15,10 +15,10 @@ public class MoveByJoystickWithAngleService {
 
 	public static double getForwardFactor(MoveByJoysticks.DriveMode mode){
 		if (!AllianceUtilities.isBlueAlliance()) {
-			return mode == MoveByJoysticks.DriveMode.SLOW ? -ChassisConstants.DRIVER_LINEAR_SPEED_FACTOR_SLOW :-ChassisConstants.DRIVER_LINEAR_SPEED_FACTOR;
+			return mode == MoveByJoysticks.DriveMode.SLOW ? -ChassisConstants.DRIVER_LINEAR_SPEED_FACTOR_SLOW :-ChassisConstants.MAX_VELOCITY;
 		}
 		else{
-			return mode == MoveByJoysticks.DriveMode.SLOW ? ChassisConstants.DRIVER_LINEAR_SPEED_FACTOR_SLOW : ChassisConstants.DRIVER_LINEAR_SPEED_FACTOR;
+			return mode == MoveByJoysticks.DriveMode.SLOW ? ChassisConstants.DRIVER_LINEAR_SPEED_FACTOR_SLOW : ChassisConstants.MAX_VELOCITY;
 		}
 	}
 

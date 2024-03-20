@@ -26,7 +26,9 @@ public class VisionConstants {
 	
 	public static final Transform3d ROBOT_TO_CAMERA = new Transform3d(new Translation3d(), new Rotation3d());
 	
-	public final static double MIN_DISTANCE_TO_FILTER_OUT_METERS_TELEOP = 10;
+	public final static double MIN_DISTANCE_TO_FILTER_OUT_METERS_TELEOP = 1.75;
+
+	public final static double MIN_DISTANCE_FROM_TAG_TO_DELETE = 4;
 
 	public final static double MIN_DISTANCE_TO_FILTER_OUT_METERS_AUTO = 0.3;
 	

@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.commands.shooter.flyWheel;
 
 import edu.greenblitz.robotName.Robot;
+import edu.greenblitz.robotName.ScoringModeSelector;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -19,23 +20,24 @@ public class FlyWheelDefaultCommand extends FlyWheelCommand {
 
     @Override
     public void initialize() {
+        flyWheel.setPreparedToShoot(false);
+    }
+
+    @Override
+    public void execute() {
         if (DriverStation.isAutonomous()) {
             rightWheelVelocity = FlyWheelConstants.SHOOTING_VELOCITY;
             leftWheelVelocity = FlyWheelConstants.SHOOTING_VELOCITY * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR;
+        }
+        else if (ScoringModeSelector.isClimbMode()){
+            rightWheelVelocity = 0;
+            leftWheelVelocity = 0;
         }
         else {
             rightWheelVelocity = FlyWheelConstants.DEFAULT_VELOCITY;
             leftWheelVelocity = FlyWheelConstants.DEFAULT_VELOCITY * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR;
         }
         flyWheel.setVelocity(leftWheelVelocity, rightWheelVelocity);
-        flyWheel.setPreparedToShoot(false);
-    }
-
-    @Override
-    public void execute() {
-        if (Robot.isSimulation()) {
-            flyWheel.setVelocity(leftWheelVelocity, rightWheelVelocity);
-        }
     }
 
 }

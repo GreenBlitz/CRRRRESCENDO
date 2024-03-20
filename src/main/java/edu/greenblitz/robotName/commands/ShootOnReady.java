@@ -8,6 +8,7 @@ import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.littletonrobotics.junction.Logger;
 
 public class ShootOnReady extends FunnelCommand {
 
@@ -26,10 +27,10 @@ public class ShootOnReady extends FunnelCommand {
         isPivotAngleCorrect = Pivot.getInstance().isAtAngle(ShootingStateCalculations.getTargetShooterAngle());
         isRobotStanding = SwerveChassis.getInstance().isRobotStanding();
         isFlyWheelAtVelocity = FlyWheel.getInstance().getPreparedToShoot();
-        SmartDashboard.putBoolean("flywhhel", isFlyWheelAtVelocity);
-        SmartDashboard.putBoolean("robotStantd", isRobotStanding);
-        SmartDashboard.putBoolean("angle", isSwerveAngleCorrect);
-        SmartDashboard.putBoolean("pivot", isPivotAngleCorrect);
+        Logger.recordOutput("Shootingg/isFlyWheelAtVelocity", isFlyWheelAtVelocity);
+        Logger.recordOutput("Shootingg/isRobotStanding", isRobotStanding);
+        Logger.recordOutput("Shootingg/isSwerveAngleCorrect", isSwerveAngleCorrect);
+        Logger.recordOutput("Shootingg/isPivotAngleCorrect", isPivotAngleCorrect);
         if (isRobotStanding && isPivotAngleCorrect && isSwerveAngleCorrect && isFlyWheelAtVelocity) {
             funnel.setPower(0.8);
         }

@@ -68,8 +68,7 @@ public class ChassisConstants {
 		ROTATION_PID_CONTROLLER_RADIANS.enableContinuousInput(-Math.PI, Math.PI);
 	}
 
-	public static final double MAX_VELOCITY = 5.2; // TODO - ASK NOAM
-	
+	public static final double MAX_VELOCITY = 5.2;
 	public static final double MAX_ACCELERATION = 2;
 	
 	public static final double MAX_ANGULAR_SPEED = 10.454580245368017;

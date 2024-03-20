@@ -108,7 +108,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	private static SwerveModuleState[] desaturateSwerveModuleStates(SwerveModuleState[] states) {
 		double desaturationFactor = 1;
 		for (SwerveModuleState state : states) {
-			desaturationFactor = Math.max(desaturationFactor, state.speedMetersPerSecond / ChassisConstants.MAX_VELOCITY);
+			desaturationFactor = Math.max(desaturationFactor, state.speedMetersPerSecond / MAX_VELOCITY);
 		}
 		SwerveModuleState[] desaturatedStates = new SwerveModuleState[states.length];
 		for (int i = 0; i < states.length; i++) {
@@ -536,6 +536,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	
 	public void moveByRobotRelativeSpeeds(ChassisSpeeds chassisSpeeds) {
 		chassisSpeeds.omegaRadiansPerSecond = -chassisSpeeds.omegaRadiansPerSecond;
+		Logger.recordOutput("angular velocity", chassisSpeeds.omegaRadiansPerSecond);
 		chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
 		SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
 		SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);

@@ -40,7 +40,7 @@ public class FlyWheel extends GBSubsystem {
     }
 
     public void setVelocity(double leftVelocity, double rightVelocity) {
-        flyWheel.setVelocity(rightVelocity, leftVelocity);
+        flyWheel.setVelocity(leftVelocity, rightVelocity);
     }
 
     public void stop() {

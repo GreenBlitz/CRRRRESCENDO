@@ -20,6 +20,12 @@ public class RunFlyWheelByVelocityUntilInterrupted extends FlyWheelCommand {
         this.joystick = joystick;
     }
 
+    public RunFlyWheelByVelocityUntilInterrupted(double velocity) {
+        rightWheelVelocity = velocity;
+        leftWheelVelocity = velocity * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR;
+        this.joystick = null;
+    }
+
     protected void changeVelocity(double velocity) {
         rightWheelVelocity = velocity;
         leftWheelVelocity = velocity * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR;
@@ -48,14 +54,16 @@ public class RunFlyWheelByVelocityUntilInterrupted extends FlyWheelCommand {
     @Override
     public boolean isFinished() {
         if (flyWheel.getPreparedToShoot()) {
-            joystick.rumble(true, 0.4);
+            if (joystick!= null)
+                joystick.rumble(true, 0.4);
         }
         return false;
     }
 
     @Override
     public void end(boolean interrupted) {
-        joystick.rumble(true, 0);
+        if (joystick!= null)
+            joystick.rumble(true, 0);
         flyWheel.stop();
     }
 

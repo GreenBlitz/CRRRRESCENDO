@@ -46,9 +46,6 @@ public class Limelight extends GBSubsystem {
 				Rotation2d.fromDegrees(poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.PITCH_ANGLE)] - angleOffset)
 		);
 
-//		if(!isSpeakerMiddleTagTrustable(id, robotPose)){
-//			return Optional.empty();
-//		}
 
 		return Optional.of(new Pair<>(robotPose, timestamp));
 	}
@@ -58,9 +55,9 @@ public class Limelight extends GBSubsystem {
 		return poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.Y_AXIS)];
 	}
 
+
 	public boolean getTagConfidence() {
-		boolean tagHeightConfidence = getTagHeight() < VisionConstants.APRIL_TAG_HEIGHT_METERS + VisionConstants.APRIL_TAG_HEIGHT_TOLERANCE_METERS
-				|| getTagHeight() > VisionConstants.APRIL_TAG_HEIGHT_METERS - VisionConstants.APRIL_TAG_HEIGHT_TOLERANCE_METERS;
+		boolean tagHeightConfidence = getDistanceFromTag() <= VisionConstants.MIN_DISTANCE_FROM_TAG_TO_DELETE;
 		return tagHeightConfidence;
 	}
 

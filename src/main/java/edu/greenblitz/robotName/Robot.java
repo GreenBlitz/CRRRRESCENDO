@@ -95,7 +95,7 @@ public class Robot extends LoggedRobot {
 		Lifter.init();
 		Intake.init();
 
-		LED.init();
+//		LED.init();
 	}
 
 
@@ -105,6 +105,7 @@ public class Robot extends LoggedRobot {
 			autonomousCommand.cancel();
 		}
 //		Dashboard.getInstance().activateDriversDashboard();
+		new RumbleRomy(OI.getInstance().getMainJoystick(),OI.getInstance().getSecondJoystick()).schedule();
 	}
 
 
@@ -113,6 +114,8 @@ public class Robot extends LoggedRobot {
 		CommandScheduler.getInstance().run();
 		RoborioUtils.updateCurrentCycleTime();
 		SmartDashboard.putString("mode", ScoringModeSelector.getScoringMode().name());
+		SmartDashboard.putBoolean("is object in arm", Roller.getInstance().isObjectIn());
+		Logger.recordOutput("ScoringMode", ScoringModeSelector.getScoringMode().name());
 	}
 
 	private void initializeAutonomousBuilder() {
@@ -171,6 +174,7 @@ public class Robot extends LoggedRobot {
 
 	@Override
 	public void autonomousInit() {
+		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
 		autonomousCommand = AutonomousSelector.getInstance().getChosenValue();
 		if (autonomousCommand != null){
 			autonomousCommand.schedule();
