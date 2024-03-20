@@ -13,8 +13,6 @@ import edu.greenblitz.robotName.commands.limelight.ActivateLimelight;
 import edu.greenblitz.robotName.commands.limelight.DisableLimelight;
 import edu.greenblitz.robotName.commands.shooter.PushNoteToFlyWheel;
 import edu.greenblitz.robotName.commands.shooter.ShootToSpeakerFromClose;
-import edu.greenblitz.robotName.subsystems.Dashboard;
-import edu.greenblitz.robotName.subsystems.LED.LED;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
@@ -33,8 +31,6 @@ import edu.greenblitz.robotName.utils.AutonomousSelector;
 import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -120,11 +116,11 @@ public class Robot extends LoggedRobot {
 		SmartDashboard.putBoolean("is object in arm", Roller.getInstance().isObjectIn());
 		Logger.recordOutput("ScoringMode", ScoringModeSelector.getScoringMode().name());
 		Logger.recordOutput("RED_MID_CLIMB_POSITION", RED_MID_CLIMB_POSITION);
-		Logger.recordOutput("RED_UPPER_CLIMB_POSITION", RED_UPPER_CLIMB_POSITION);
-		Logger.recordOutput("RED_LOWER_CLIMB_POSITION", RED_LOWER_CLIMB_POSITION);
-		Logger.recordOutput("BLUE_LOWER_CLIMB_POSITION", BLUE_LOWER_CLIMB_POSITION);
+		Logger.recordOutput("RED_UPPER_CLIMB_POSITION", RED_AMP_CLIMB_POSITION);
+		Logger.recordOutput("RED_LOWER_CLIMB_POSITION", RED_SOURCE_CLIMB_POSITION);
+		Logger.recordOutput("BLUE_LOWER_CLIMB_POSITION", BLUE_SOURCE_CLIMB_POSITION);
 		Logger.recordOutput("BLUE_MID_CLIMB_POSITION", BLUE_MID_CLIMB_POSITION);
-		Logger.recordOutput("BLUE_UPPER_CLIMB_POSITION", BLUE_UPPER_CLIMB_POSITION);
+		Logger.recordOutput("BLUE_UPPER_CLIMB_POSITION", BLUE_AMP_CLIMB_POSITION);
 	}
 
 	private void initializeAutonomousBuilder() {

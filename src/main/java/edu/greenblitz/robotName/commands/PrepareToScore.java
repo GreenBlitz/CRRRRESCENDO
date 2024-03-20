@@ -8,6 +8,7 @@ import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityC
 import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityUntilInterrupted;
 import edu.greenblitz.robotName.commands.swerve.MoveyJoystickWithAngle.MoveByJoystickAndRotateToAmp;
 import edu.greenblitz.robotName.commands.swerve.MoveyJoystickWithAngle.MoveByJoystickAndRotateToSpeaker;
+import edu.greenblitz.robotName.commands.swerve.MoveyJoystickWithAngle.MoveByJoystickAndRotateToStage;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
@@ -26,6 +27,9 @@ public class PrepareToScore extends ProxyCommand {
                     new MoveByJoystickAndRotateToSpeaker(ChassisConstants.DRIVE_MODE),
                     new RunFlyWheelByVelocityUntilInterrupted(FlyWheelConstants.SHOOTING_VELOCITY)
             );
+        }
+        else if (ScoringModeSelector.isSpeakerMode()) {
+            return new MoveByJoystickAndRotateToStage(ChassisConstants.DRIVE_MODE);
         }
         else{
             return new ParallelCommandGroup(
