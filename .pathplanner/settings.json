@@ -3,9 +3,11 @@
   "robotLength": 0.9,
   "holonomicMode": true,
   "pathFolders": [
+    "closeReal",
     "close"
   ],
   "autoFolders": [
+    "CloseAutos",
     "closeeeeeeeeeee"
   ],
   "defaultMaxVel": 5.0,
