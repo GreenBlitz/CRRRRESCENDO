@@ -105,7 +105,7 @@ public class Robot extends LoggedRobot {
 			autonomousCommand.cancel();
 		}
 //		Dashboard.getInstance().activateDriversDashboard();
-		new RumbleRomy(OI.getInstance().getMainJoystick(),OI.getInstance().getSecondJoystick()).schedule();
+//		new RumbleRomy(OI.getInstance().getMainJoystick(),OI.getInstance().getSecondJoystick()).schedule();
 	}
 
 	@Override

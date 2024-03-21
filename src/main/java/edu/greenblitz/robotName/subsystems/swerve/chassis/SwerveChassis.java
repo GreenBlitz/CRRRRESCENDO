@@ -240,10 +240,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 
 	public boolean distanceFilterVision(Pose2d visionPose){
 		if(DriverStation.isAutonomous()){
-			return !(visionPose.getTranslation().getDistance(getRobotPose2d().getTranslation()) > VisionConstants.MIN_DISTANCE_TO_FILTER_OUT_METERS_AUTO);
+			return !(visionPose.getTranslation().getDistance(getRobotPose2d().getTranslation()) >= VisionConstants.MIN_DISTANCE_TO_FILTER_OUT_METERS_AUTO);
 		}
 		else {
-			return !(visionPose.getTranslation().getDistance(getRobotPose2d().getTranslation()) > VisionConstants.MIN_DISTANCE_TO_FILTER_OUT_METERS_TELEOP);
+			return !(visionPose.getTranslation().getDistance(getRobotPose2d().getTranslation()) >= VisionConstants.MIN_DISTANCE_TO_FILTER_OUT_METERS_TELEOP);
 		}
 	}
 	

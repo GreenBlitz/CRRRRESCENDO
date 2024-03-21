@@ -39,6 +39,8 @@ public class PrepareToScore extends ProxyCommand {
                     )
 
             );
+        } else if (ScoringModeSelector.isClimbMode()) {
+            return new MoveByJoystickAndRotateToStage();
         }
         else return new InstantCommand();
     }

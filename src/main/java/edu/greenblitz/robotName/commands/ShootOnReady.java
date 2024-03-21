@@ -7,7 +7,9 @@ import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import jdk.swing.interop.SwingInterOpUtils;
 import org.littletonrobotics.junction.Logger;
 
 public class ShootOnReady extends FunnelCommand {
@@ -20,6 +22,9 @@ public class ShootOnReady extends FunnelCommand {
 
     private boolean isFlyWheelAtVelocity;
 
+    private final Timer TIMER = new Timer();
+
+    private boolean hasTimerStarted = false;
 
     @Override
     public void execute() {
@@ -32,13 +37,17 @@ public class ShootOnReady extends FunnelCommand {
         Logger.recordOutput("Shootingg/isSwerveAngleCorrect", isSwerveAngleCorrect);
         Logger.recordOutput("Shootingg/isPivotAngleCorrect", isPivotAngleCorrect);
         if (isRobotStanding && isPivotAngleCorrect && isSwerveAngleCorrect && isFlyWheelAtVelocity) {
+            if (!hasTimerStarted){
+                hasTimerStarted = true;
+                TIMER.restart();
+            }
             funnel.setPower(0.8);
         }
     }
 
     @Override
     public boolean isFinished() {
-        return !funnel.isObjectIn();
+        return !funnel.isObjectIn() && TIMER.hasElapsed(1.5);
     }
 
 }

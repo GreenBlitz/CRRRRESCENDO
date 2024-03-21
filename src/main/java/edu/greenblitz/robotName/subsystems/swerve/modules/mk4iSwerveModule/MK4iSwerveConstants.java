@@ -83,10 +83,7 @@ public class MK4iSwerveConstants {
 		CURRENT_LIMITS_CONFIGS.StatorCurrentLimitEnable = true;
 		CURRENT_LIMITS_CONFIGS.StatorCurrentLimit = 40;
 		CURRENT_LIMITS_CONFIGS.SupplyCurrentThreshold = 2;
-		
-		ClosedLoopRampsConfigs CLOSED_LOOP_RAMPS_CONFIGS = new ClosedLoopRampsConfigs();
-		CLOSED_LOOP_RAMPS_CONFIGS.VoltageClosedLoopRampPeriod = 0.1;
-		
+
 		TorqueCurrentConfigs TORQUE_CURRENT_CONFIGS = new TorqueCurrentConfigs();
 		TORQUE_CURRENT_CONFIGS.PeakForwardTorqueCurrent = 60;
 		TORQUE_CURRENT_CONFIGS.PeakReverseTorqueCurrent = -60;
@@ -99,7 +96,6 @@ public class MK4iSwerveConstants {
 		
 		LINEAR_FALCON_CONFIG_OBJECT.Slot0 = PID_CONFIGS;
 		LINEAR_FALCON_CONFIG_OBJECT.CurrentLimits = CURRENT_LIMITS_CONFIGS;
-		LINEAR_FALCON_CONFIG_OBJECT.ClosedLoopRamps = CLOSED_LOOP_RAMPS_CONFIGS;
 		LINEAR_FALCON_CONFIG_OBJECT.TorqueCurrent = TORQUE_CURRENT_CONFIGS;
 		LINEAR_FALCON_CONFIG_OBJECT.MotorOutput = MOTOR_OUTPUT_CONFIGS;
 		LINEAR_FALCON_CONFIG_OBJECT.Feedback = FEEDBACK_CONFIGS;
