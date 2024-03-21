@@ -13,7 +13,7 @@ import edu.wpi.first.math.util.Units;
 
 public class ChassisConstants {
 
-	public static final double SPEED_TOLERANCE = 0.05;
+	public static final double SPEED_TOLERANCE = 0.15;
 
 	public static final double ROBOT_WIDTH_IN_METERS = 0.82;
 	
