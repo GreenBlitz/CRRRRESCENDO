@@ -84,7 +84,7 @@ public class SmartJoystick {
 		START = new JoystickButton(joystick, 8);
 		L3 = new JoystickButton(joystick, 9);
 		R3 = new JoystickButton(joystick, 10);
-		L2 = new AxisButton(joystick,2, 0.3);
+		L2 = new AxisButton(joystick,2, 0.15);
 		L2_HARD = new AxisButton(joystick,2, 0.9);
 		LEFT_Y_AXIS = new AxisButton(joystick, 1, 0.1);
 		R2 = new AxisButton(joystick,3, 0.3);
