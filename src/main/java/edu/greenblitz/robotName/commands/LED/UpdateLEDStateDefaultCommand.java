@@ -14,6 +14,8 @@ public class UpdateLEDStateDefaultCommand extends GBCommand {
 	
 	@Override
 	public void execute() {
+		if (!led.shouldWork())
+			return;
 		led.setColorByNoteState();
 		led.restartTimerByNoteState();
 		led.blinkOrRumbleByNoteState();

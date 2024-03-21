@@ -75,7 +75,7 @@ public class MoveByJoystickAndRotateToStage extends SwerveCommand {
         double angularSpeed = -angularVelocitySupplier.getAsDouble() * angularSpeedFactor;
 
 
-        targetAngle = getClosestClimbPosition().plus(Rotation2d.fromDegrees(180));
+        targetAngle = getClosestClimbPosition();
         ROTATION_PID_CONTROLLER.setSetpoint(targetAngle.getRadians());
         double checkedAngularVelocity = MoveByJoystickWithAngleService.calculateAngularVelocity(forwardSpeed, leftwardSpeed, angularSpeed);
 

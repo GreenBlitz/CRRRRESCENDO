@@ -5,6 +5,8 @@ import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.VisionConstants;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
+import edu.greenblitz.robotName.subsystems.LED.LED;
+import edu.greenblitz.robotName.subsystems.LED.LEDConstants;
 import edu.greenblitz.robotName.subsystems.Photonvision;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.gyros.GyroFactory;
@@ -24,10 +26,12 @@ import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Color;
 import org.littletonrobotics.junction.Logger;
 import org.opencv.core.Mat;
 import org.photonvision.EstimatedRobotPose;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -140,7 +144,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		Logger.processInputs("DriveTrain/Chassis", chassisInputs);
 		Logger.processInputs("DriveTrain/Gyro", gyroInputs);
 
-		updatePoseEstimationLimeLight();
+		updatePoseEstimator();
 		updateOdometry();
 		MultiLimelight.getInstance().recordEstimatedPositions();
 		robotPose = AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(poseEstimator.getEstimatedPosition());
@@ -255,6 +259,11 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 					Pose2d visionPose = visionPoseAndTimeStamp.get().getFirst();
 					if (distanceFilterVision(visionPose)) {
 						poseEstimator.addVisionMeasurement(visionPose, visionPoseAndTimeStamp.get().getSecond());
+						LED.getInstance().setShouldWork(true);
+					}
+					else {
+						LED.getInstance().setLEDColor(Color.kDarkRed,0, LEDConstants.LED_LENGTH);
+						LED.getInstance().setShouldWork(false);
 					}
 				}
 			}
@@ -270,6 +279,15 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 					poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(),visionPose);
 				}
 			}
+		}
+	}
+
+	public void updatePoseEstimator(){
+		if(poseEstimator.getEstimatedPosition().getX() > FieldConstants.FIELD_LENGTH || poseEstimator.getEstimatedPosition().getY() > FieldConstants.FIELD_WIDTH || poseEstimator.getEstimatedPosition().getY() < 0 || poseEstimator.getEstimatedPosition().getX() < 0){
+			hardResetPoseByVision();
+		}
+		else{
+			updatePoseEstimationLimeLight();
 		}
 	}
 	

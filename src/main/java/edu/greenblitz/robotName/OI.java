@@ -109,6 +109,8 @@ public class OI {
 		//Shoot
 		usedJoystick.L2_HARD.whileTrue(new ScoreOnReady());
 
+		usedJoystick.R2.whileTrue(new MoveByJoystickAndRotateToStage());
+
 		//Reset Robot Pose
 		usedJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetPoseByVision()));
 		usedJoystick.POV_DOWN.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().hardResetPoseByVision()));

@@ -29,7 +29,9 @@ public class LED extends GBSubsystem {
 	private boolean wasNoteInRobot;
 	
 	private Timer actionTimer;
-	
+
+	private boolean shouldWork;
+
 	private LED() {
 		this.addressableLED = new AddressableLED(LED_PORT);
 		this.addressableLEDBuffer = new AddressableLEDBuffer(LED_LENGTH);
@@ -155,5 +157,13 @@ public class LED extends GBSubsystem {
 		if (!isNoteInRobot()) {
 			setColorByMode();
 		}
+	}
+
+	public void setShouldWork(boolean shouldWork) {
+		this.shouldWork = shouldWork;
+	}
+
+	public boolean shouldWork() {
+		return this.shouldWork;
 	}
 }

@@ -11,7 +11,7 @@ import static edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstant
 
 public class MoveByJoystickWithAngleService {
 	
-	private static double FACTOR = 1;
+	private static final double FACTOR = 1.25;
 
 	public static double getForwardFactor(MoveByJoysticks.DriveMode mode){
 		if (!AllianceUtilities.isBlueAlliance()) {
