@@ -14,9 +14,11 @@ import java.util.Optional;
 
 public class Limelight extends GBSubsystem {
 
-	private NetworkTableEntry robotPoseEntry, idEntry, tagPoseEntry;
+	private NetworkTableEntry robotPoseEntry, idEntry, tagPoseEntry,ledEntry;
 
 	private String name;
+
+	private double  counter;
 
 	public Limelight(String limelightName) {
 		this.name = limelightName;
@@ -24,6 +26,8 @@ public class Limelight extends GBSubsystem {
 		robotPoseEntry = NetworkTableInstance.getDefault().getTable(name).getEntry(robotPoseQuery);
 		tagPoseEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("targetpose_cameraspace");
 		idEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("tid");
+		ledEntry = NetworkTableInstance.getDefault().getTable(name).getEntry("ledMode");
+		counter = 0;
 	}
 
 	public Optional<Pair<Pose2d, Double>> getUpdatedPose2DEstimation() {
@@ -31,15 +35,18 @@ public class Limelight extends GBSubsystem {
 		double processingLatency = poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.TOTAL_LATENCY)] / 1000;
 		double timestamp = Timer.getFPGATimestamp() - processingLatency;
 		int id = (int) idEntry.getInteger(-1);
-		double angleOffset = AllianceUtilities.isBlueAlliance() ? 0 : 180;
+		double angleOffset = 180;
 		if (id == -1) {
 			return Optional.empty();
 		}
+
 		Pose2d robotPose = new Pose2d(
 				poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.X_AXIS)],
 				poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.Y_AXIS)],
 				Rotation2d.fromDegrees(poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.PITCH_ANGLE)] - angleOffset)
 		);
+
+
 		return Optional.of(new Pair<>(robotPose, timestamp));
 	}
 
@@ -48,9 +55,9 @@ public class Limelight extends GBSubsystem {
 		return poseArray[VisionConstants.getValue(VisionConstants.LIMELIGHT_ARRAY_VALUES.Y_AXIS)];
 	}
 
+
 	public boolean getTagConfidence() {
-		boolean tagHeightConfidence = getTagHeight() < VisionConstants.APRIL_TAG_HEIGHT_METERS + VisionConstants.APRIL_TAG_HEIGHT_TOLERANCE_METERS
-				|| getTagHeight() > VisionConstants.APRIL_TAG_HEIGHT_METERS - VisionConstants.APRIL_TAG_HEIGHT_TOLERANCE_METERS;
+		boolean tagHeightConfidence = getDistanceFromTag() <= VisionConstants.MIN_DISTANCE_FROM_TAG_TO_DELETE;
 		return tagHeightConfidence;
 	}
 
@@ -61,5 +68,46 @@ public class Limelight extends GBSubsystem {
 
 	public boolean hasTarget() {
 		return getUpdatedPose2DEstimation().isPresent();
+	}
+	
+	public void turnOffLed(){
+		ledEntry.setNumber(VisionConstants.LED_OFF_NETWORKTABLE_VALUE);
+	}
+	
+	public void turnOnLed(){
+		ledEntry.setNumber(VisionConstants.LED_ON_NETWORKTABLE_VALUE);
+	}
+
+
+
+
+	private static Pose2d lastPositionForTag4 = new Pose2d();
+	private static Pose2d lastPositionForTag8 = new Pose2d();
+	public boolean isSpeakerMiddleTagTrustable (int id, Pose2d currentPose){
+		counter++;
+		if(id == 8 || id == 7){
+			if(Math.abs(lastPositionForTag8.getRotation().getDegrees() + currentPose.getRotation().getDegrees() ) <= 90){
+				if (counter > 40) {
+					lastPositionForTag8 = currentPose;
+					counter = 0;
+					return false;
+				}
+			}
+			lastPositionForTag8 = currentPose;
+			counter = 0;
+			return true;
+		}else if (id == 4 || id == 3){
+			if(Math.abs(lastPositionForTag4.getRotation().getDegrees() + currentPose.getRotation().getDegrees() ) <= 90){
+				if (counter < 40) {
+					lastPositionForTag4 = currentPose;
+					counter = 0;
+					return false;
+				}
+			}
+			lastPositionForTag4 = currentPose;
+			counter = 0;
+			return true;
+		}
+		return true;
 	}
 }

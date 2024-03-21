@@ -1,50 +1,47 @@
 package edu.greenblitz.robotName;
 
 import edu.greenblitz.robotName.commands.LED.UpdateLEDStateDefaultCommand;
-import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristToSafe;
-import edu.greenblitz.robotName.commands.arm.MoveElbowAndWristWithRunFunnel;
+import edu.greenblitz.robotName.commands.PrepareToScore;
+import edu.greenblitz.robotName.commands.ScoreOnReady;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
+import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowByJoystick;
 import edu.greenblitz.robotName.commands.arm.roller.MoveNoteInRoller;
-import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRollerToAmp;
+import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRollerToTrap;
+import edu.greenblitz.robotName.commands.arm.wrist.MoveWristToAngle;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
+import edu.greenblitz.robotName.commands.climbing.CloseAndThenHoldSolenoid;
+import edu.greenblitz.robotName.commands.climbing.lifter.MoveLifterByJoystick;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
-import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringMode;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteToScoringModeWithPivotForJoystick;
-import edu.greenblitz.robotName.commands.intake.NoteToShooterWithArm;
 import edu.greenblitz.robotName.commands.intake.RunIntakeByPower;
-import edu.greenblitz.robotName.commands.shooter.flyWheel.*;
+import edu.greenblitz.robotName.commands.shchoriModeDependButtons.ClimbOrCollectFromFeeder;
+import edu.greenblitz.robotName.commands.shchoriModeDependButtons.GetReadyForClimbOrArmToSafe;
+import edu.greenblitz.robotName.commands.shchoriModeDependButtons.MoveWristBackwardOrPivotForClose;
+import edu.greenblitz.robotName.commands.shchoriModeDependButtons.MoveWristForwardOrPivotForPodium;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.FlyWheelDefaultCommand;
+import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityUntilInterrupted;
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
-import edu.greenblitz.robotName.commands.shooter.funnel.runByPowerUntilCondition.RunFunnelByPower;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
-import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
-import edu.greenblitz.robotName.commands.swerve.*;
-import edu.greenblitz.robotName.commands.swerve.battery.BatteryLimiter;
+import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
+import edu.greenblitz.robotName.commands.swerve.MoveyJoystickWithAngle.MoveByJoystickAndRotateToStage;
+import edu.greenblitz.robotName.commands.switchMode.SetScoringMode;
 import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
-import edu.greenblitz.robotName.subsystems.Battery;
 import edu.greenblitz.robotName.subsystems.LED.LED;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
-import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
+import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
-import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
-import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotInterpolationMap;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
-import edu.greenblitz.robotName.utils.AllianceUtilities;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import org.littletonrobotics.junction.Logger;
+import edu.wpi.first.wpilibj2.command.*;
 
-import static edu.greenblitz.robotName.FieldConstants.MIDDLE_OF_BLUE_SPEAKER_POSITION;
-import static edu.greenblitz.robotName.FieldConstants.MIDDLE_OF_RED_SPEAKER_POSITION;
 
 public class OI {
 
@@ -101,60 +98,93 @@ public class OI {
 	}
 
 	public void romyButtons() {
+		SmartJoystick usedJoystick = mainJoystick;
+
 		//Collect Note
-		mainJoystick.R1.whileTrue(new CollectNoteToScoringModeWithPivotForJoystick());
-		mainJoystick.L1.whileTrue(new RotateByScoringMode());
-		mainJoystick.POV_DOWN.whileTrue(new CollectNoteFromFeeder());
+		usedJoystick.R1.whileTrue(new CollectNoteToScoringModeWithPivotForJoystick());
 
-		//Reset Robot Angle
-		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetChassisPose()));
+		//Auto Aim For Speaker Or Amp
+		usedJoystick.L2.whileTrue(new PrepareToScore());
 
-		//note in roller
-		mainJoystick.B.whileTrue(new MoveNoteInRoller(true));
-		mainJoystick.X.whileTrue(new MoveNoteInRoller(false));
+		//Shoot
+		usedJoystick.L2_HARD.whileTrue(new ScoreOnReady());
 
-		//Intake
-		mainJoystick.R2.whileTrue(new RunIntakeByPower(0.5));
+		usedJoystick.R2.whileTrue(new MoveByJoystickAndRotateToStage());
+
+		//Reset Robot Pose
+		usedJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetPoseByVision()));
+		usedJoystick.POV_DOWN.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().hardResetPoseByVision()));
+
+		//Climbing
+		usedJoystick.A.whileTrue(new ReleaseNoteFromRollerToTrap());//Release note from roller and take wrist back
+		usedJoystick.B.whileTrue(new MoveWristToAngle(WristConstants.PresetPositions.SCORE_TRAP));
+
+		//disable and enable the limelight led
+		usedJoystick.BACK.onTrue(new InstantCommand(() -> MultiLimelight.getInstance().setLimelightsLedOff()));
+		usedJoystick.START.onTrue(new InstantCommand(() -> MultiLimelight.getInstance().setLimelightsLedOn()));
 
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
 	}
 
 	public void shchoriButtons() {
-		//ScoringMode
-		secondJoystick.START.onTrue(new ToggleScoringMode());
+		SmartJoystick usedJoystick = secondJoystick;
 
-		//Arm
-		secondJoystick.BACK.onTrue(new InstantCommand(() -> Roller.getInstance().setObjectOut()));
-		secondJoystick.A.onTrue(new ReleaseNoteFromRollerToAmp());
-		secondJoystick.B.whileTrue(
-				new MoveElbowAndWristWithRunFunnel(
-						ElbowConstants.PresetPositions.SCORE,
-						WristConstants.PresetPositions.SCORE
+		//Scoring Mode Change - With Idle mode sets
+		usedJoystick.START.onTrue(new ToggleScoringMode());//Doing Transfer Also
+		usedJoystick.BACK.onTrue(new SetScoringMode(ScoringMode.CLIMB));
+
+		//Speaker Mode -> Move Pivot to Angle : CLIMB, AMP -> Hand Control Wrist
+		usedJoystick.POV_UP.whileTrue(new MoveWristForwardOrPivotForPodium());
+		usedJoystick.POV_DOWN.whileTrue(new MoveWristBackwardOrPivotForClose());
+
+		//Note-Roller Hand Control
+		usedJoystick.POV_RIGHT.whileTrue(new MoveNoteInRoller(true));
+		usedJoystick.POV_LEFT.whileTrue(new MoveNoteInRoller(false));
+
+		//Hand Control Arm
+		usedJoystick.R2.whileTrue(new MoveElbowByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_TRIGGER, true));
+		usedJoystick.L2.whileTrue(new MoveElbowByJoystick(usedJoystick, SmartJoystick.Axis.LEFT_TRIGGER, false));
+
+		//No Object In Arm
+		usedJoystick.X.onTrue(new InstantCommand(() -> Roller.getInstance().setObjectOut()));
+
+		//Intake Reverse Roll
+		usedJoystick.B.whileTrue(new RunIntakeByPower(-0.5));
+
+		//Climb Mode -> Climbing : AMP or SPEAKER -> Collect Note From Feeder
+		usedJoystick.Y.whileTrue(new ClimbOrCollectFromFeeder());
+
+		//Climb Mode -> Lifter Up, Note To Arm, Move Arm a bit Up : AMP or SPEAKER -> Move Arm To Safe
+		usedJoystick.A.whileTrue(new GetReadyForClimbOrArmToSafe()
+						.andThen(new RunCommand(() -> secondJoystick.rumble(true, 0.8))
+								.raceWith(new WaitCommand(2))
+						)
+						.andThen(new RunCommand(() -> secondJoystick.rumble(true, 0))
+								.raceWith(new WaitCommand(2))
+						)
+		);
+
+		//Run FlyWheel For Shooting
+		usedJoystick.L1.whileTrue(new RunFlyWheelByVelocityUntilInterrupted(FlyWheelConstants.SHOOTING_VELOCITY, usedJoystick));
+
+		//Funnel Joystick Control
+		usedJoystick.R1.whileTrue(new RunFunnelByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_Y));
+
+		//Hand Control On Lifter
+		usedJoystick.LEFT_Y_AXIS.whileTrue(
+				new ConditionalCommand(
+						new SequentialCommandGroup(
+								new CloseAndThenHoldSolenoid(),
+								new MoveLifterByJoystick(usedJoystick)
+						),
+						new MoveLifterByJoystick(usedJoystick),
+						() -> (usedJoystick.getAxisValue(SmartJoystick.Axis.LEFT_Y) > 0)
 				)
 		);
-		secondJoystick.X.whileTrue(new MoveElbowAndWristToSafe());
-
-		//FlyWheel Run
-		secondJoystick.L1.whileTrue(new RunFlyWheelByVelocityUntilInterrupted(FlyWheelConstants.SHOOTING_VELOCITY,secondJoystick));
-
-		//Pivot Poses
-		secondJoystick.POV_UP.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.RIGHT_STAGE.ANGLE));
-		secondJoystick.POV_LEFT.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.PODIUM.ANGLE));
-		secondJoystick.POV_DOWN.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.CLOSE_SHOOTING.ANGLE));
-		secondJoystick.R2.whileTrue(new MovePivotByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_X));
-
-		//Funnel
-		secondJoystick.R1.whileTrue(new RunFunnelByJoystick(secondJoystick, SmartJoystick.Axis.RIGHT_Y).alongWith(new ShootSimulationNote()));
-
-		//Fully collect
-		secondJoystick.Y.whileTrue(new CollectNoteToScoringMode());
 	}
 
 	public void thirdJoystickButtons() {
 		SmartJoystick usedJoystick = thirdJoystick;
-		usedJoystick.R1.whileTrue(new NoteToShooterWithArm());
-		usedJoystick.L1.whileTrue(new RunFunnelByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_Y));
-
 	}
 
 	public void fourthJoystickButtons() {
@@ -165,12 +195,11 @@ public class OI {
 	}
 
 	public void initializeDefaultCommands() {
-		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
+//		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
 		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
 		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
 		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
 		LED.getInstance().setDefaultCommand(new UpdateLEDStateDefaultCommand());
 		FlyWheel.getInstance().setDefaultCommand(new FlyWheelDefaultCommand());
 	}
-
 }

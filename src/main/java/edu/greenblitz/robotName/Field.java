@@ -24,6 +24,15 @@ public class Field {
 		return mirroredPose;
 	}
 
+	public static Pose2d mirrorPositionToOtherSideWithoutAngle(Pose2d pose) {
+		Pose2d mirroredPose = new Pose2d(
+				FieldConstants.FIELD_LENGTH - pose.getX(),
+				pose.getY(),
+				pose.getRotation()
+		);
+		return mirroredPose;
+	}
+
 	/**
 	 * gets pose[], returns it fitted to the other alliance ("mirrored") and rotated by 180 degrees.
 	 */
@@ -90,29 +99,41 @@ public class Field {
 
 		public final static Pose2d RED_SCORE_POSITION = new Pose2d(new Translation2d(14.85, 7.5), new Rotation2d());
 
-		public final static Pose2d RED_UPPER_CLIMB_POSITION = new Pose2d(new Translation2d(12.2, 5), new Rotation2d());
+		public final static Rotation2d RED_MID_CLIMB_ANGLE = Rotation2d.fromDegrees(180);
 
-		public final static Pose2d RED_LOWER_CLIMB_POSITION = new Pose2d(new Translation2d(12.2, 3.2), new Rotation2d());
+		public final static Rotation2d RED_SOURCE_CLIMB_ANGLE = Rotation2d.fromDegrees(-60);
 
-		public final static Pose2d RED_MID_CLIMB_POSITION = new Pose2d(new Translation2d(10.6, 4), new Rotation2d());
+		public final static Rotation2d RED_AMP_CLIMB_ANGLE =Rotation2d.fromDegrees(60);
 
-		public final static Pose2d RED_PRE_AMP_SCORE_POSITION = new Pose2d(new Translation2d(14.85, 7.3), new Rotation2d());
+		public final static Rotation2d BLUE_MID_CLIMB_ANGLE = RED_MID_CLIMB_ANGLE.minus(Rotation2d.fromDegrees(180));
 
-		public final static Pose2d RED_AMP_SCORE_POSITION = new Pose2d(new Translation2d(14.85, 7.5), new Rotation2d());
+		public final static Rotation2d BLUE_SOURCE_CLIMB_ANGLE = RED_SOURCE_CLIMB_ANGLE.minus(Rotation2d.fromDegrees(60));
 
-		public final static Pose2d BLUE_SPEAKER_SCORE_POSITION = mirrorPositionToOtherSide(RED_SPEAKER_SCORE_POSITION);
+		public final static Rotation2d BLUE_AMP_CLIMB_ANGLE = RED_AMP_CLIMB_ANGLE.plus(Rotation2d.fromDegrees(60));
+
+		public final static Pose2d RED_AMP_CLIMB_POSITION = new Pose2d(new Translation2d(12.2, 5), RED_AMP_CLIMB_ANGLE);
+
+		public final static Pose2d RED_SOURCE_CLIMB_POSITION = new Pose2d(new Translation2d(12.2, 3.2), RED_SOURCE_CLIMB_ANGLE);
+
+		public final static Pose2d RED_MID_CLIMB_POSITION = new Pose2d(new Translation2d(10.6, 4), RED_MID_CLIMB_ANGLE);
 
 		public final static Pose2d BLUE_SCORE_POSITION = mirrorPositionToOtherSide(RED_SCORE_POSITION);
 
-		public final static Pose2d BLUE_UPPER_CLIMB_POSITION = mirrorPositionToOtherSide(RED_UPPER_CLIMB_POSITION);
+		public final static Pose2d BLUE_AMP_CLIMB_POSITION = new Pose2d(mirrorPositionToOtherSide(RED_AMP_CLIMB_POSITION).getTranslation(), BLUE_AMP_CLIMB_ANGLE);
 
-		public final static Pose2d BLUE_LOWER_CLIMB_POSITION = mirrorPositionToOtherSide(RED_LOWER_CLIMB_POSITION);
+		public final static Pose2d BLUE_SOURCE_CLIMB_POSITION = new Pose2d(mirrorPositionToOtherSide(RED_SOURCE_CLIMB_POSITION).getTranslation(), BLUE_SOURCE_CLIMB_ANGLE);
 
-		public final static Pose2d BLUE_MID_CLIMB_POSITION = mirrorPositionToOtherSide(RED_MID_CLIMB_POSITION);
+		public final static Pose2d BLUE_MID_CLIMB_POSITION = new Pose2d(mirrorPositionToOtherSide(RED_MID_CLIMB_POSITION).getTranslation(), BLUE_MID_CLIMB_ANGLE);
+
+		public final static Pose2d RED_PRE_AMP_SCORE_POSITION = new Pose2d(new Translation2d(14.85, 7.3), new Rotation2d());
+
+		public final static Pose2d RED_AMP_SCORE_POSITION = new Pose2d(new Translation2d(14.85, 7.5), Rotation2d.fromDegrees(90));
+
+		public final static Pose2d BLUE_SPEAKER_SCORE_POSITION = mirrorPositionToOtherSide(RED_SPEAKER_SCORE_POSITION);
 
 		public final static Pose2d BLUE_PRE_AMP_SCORE_POSITION = mirrorPositionToOtherSide(RED_PRE_AMP_SCORE_POSITION);
 
-		public final static Pose2d BLUE_AMP_SCORE_POSITION = mirrorPositionToOtherSide(RED_AMP_SCORE_POSITION);
+		public final static Pose2d BLUE_AMP_SCORE_POSITION = mirrorPositionToOtherSideWithoutAngle(RED_AMP_SCORE_POSITION);
 	}
 
 	public static class UpStairsFieldPositions {

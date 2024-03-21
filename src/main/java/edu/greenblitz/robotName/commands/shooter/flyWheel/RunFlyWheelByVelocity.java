@@ -33,6 +33,7 @@ public class RunFlyWheelByVelocity extends FlyWheelCommand {
     public void initialize() {
         timeInShootingSpeed = 0;
         flyWheel.setVelocity(leftWheelVelocity, rightWheelVelocity);
+        flyWheel.setPreparedToShoot(false);
     }
 
     @Override
@@ -40,7 +41,7 @@ public class RunFlyWheelByVelocity extends FlyWheelCommand {
         if (Robot.isSimulation()) {
             flyWheel.setVelocity(leftWheelVelocity, rightWheelVelocity);
         }
-        if (flyWheel.isAtVelocity(leftWheelVelocity, rightWheelVelocity)) {
+        if (flyWheel.isAtVelocity(rightWheelVelocity, leftWheelVelocity)) {
             timeInShootingSpeed++;
         } else {
             timeInShootingSpeed = 0;

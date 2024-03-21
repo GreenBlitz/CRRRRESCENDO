@@ -1,6 +1,7 @@
 package edu.greenblitz.robotName.subsystems.LED;
 
 import edu.greenblitz.robotName.OI;
+import edu.greenblitz.robotName.ScoringMode;
 import edu.greenblitz.robotName.ScoringModeSelector;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
 import edu.greenblitz.robotName.subsystems.intake.Intake;
@@ -28,7 +29,9 @@ public class LED extends GBSubsystem {
 	private boolean wasNoteInRobot;
 	
 	private Timer actionTimer;
-	
+
+	private boolean shouldWork;
+
 	private LED() {
 		this.addressableLED = new AddressableLED(LED_PORT);
 		this.addressableLEDBuffer = new AddressableLEDBuffer(LED_LENGTH);
@@ -99,9 +102,10 @@ public class LED extends GBSubsystem {
 	public Color getColorByMode() {
 		if (ScoringModeSelector.isAmpMode()) {
 			return LEDConstants.AMP_MODE_COLOR;
-		} else {
+		} else if (ScoringModeSelector.isSpeakerMode()){
 			return LEDConstants.SPEAKER_MODE_COLOR;
 		}
+		return LEDConstants.CLIMB_MODE_COLOR;
 	}
 	
 	public boolean isNoteInRobot() {
@@ -124,11 +128,12 @@ public class LED extends GBSubsystem {
 	
 	public void rumble() {
 		OI.getInstance().getMainJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, LEDConstants.RUMBLE_POWER);
+		OI.getInstance().getSecondJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, LEDConstants.RUMBLE_POWER);
 	}
 	
 	public void stopRumble() {
-		OI.getInstance().getSecondJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, 0);
 		OI.getInstance().getMainJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, 0);
+		OI.getInstance().getSecondJoystick().rumble(LEDConstants.RUMBLE_LEFT_MOTOR, 0);
 	}
 	
 	public void restartTimerByNoteState() {
@@ -138,13 +143,10 @@ public class LED extends GBSubsystem {
 	}
 	
 	public void blinkOrRumbleByNoteState() {
-		if (isNoteInRobot() && (actionTimer.get() <= LEDConstants.BLINKING_TIME)) {
+		if (isNoteInRobot()) {
 			blink(getColorByMode());
 		}
-		else {
-			stopRumble();
-		}
-		if ((actionTimer.get() <= LEDConstants.RUMBLE_TIME) && (getWasNoteInRobot() != isNoteInRobot())) {
+		else if ((actionTimer.get() <= LEDConstants.RUMBLE_TIME) && ((getWasNoteInRobot()) && (!isNoteInRobot())||(isNoteInRobot()))) {
 			rumble();
 		} else {
 			stopRumble();
@@ -155,5 +157,13 @@ public class LED extends GBSubsystem {
 		if (!isNoteInRobot()) {
 			setColorByMode();
 		}
+	}
+
+	public void setShouldWork(boolean shouldWork) {
+		this.shouldWork = shouldWork;
+	}
+
+	public boolean shouldWork() {
+		return this.shouldWork;
 	}
 }

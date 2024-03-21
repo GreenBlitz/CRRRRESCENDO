@@ -19,8 +19,7 @@ public class SwitchingScoringModeMovement {
             );
         } else {
             return new ParallelCommandGroup(
-                    new SetScoringMode(mode),
-                    new MoveShooterToAngle(PivotConstants.PresetPositions.PICK_UP.ANGLE)
+                    new SetScoringMode(mode)
             );
         }
     }

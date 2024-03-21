@@ -1,25 +1,39 @@
 package edu.greenblitz.robotName.commands;
 
-import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
 import edu.greenblitz.robotName.subsystems.intake.Intake;
-import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
 import edu.greenblitz.robotName.utils.GBCommand;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
-import edu.wpi.first.units.Time;
 import edu.wpi.first.wpilibj.Timer;
 
 public class RumbleRomy extends GBCommand {
 
-	private SmartJoystick joystick;
+	private SmartJoystick joystick0;
+
+	private SmartJoystick joystick1;
 
 	private Timer timer;
 
 	private boolean wasObjectIn;
 
-	public RumbleRomy(SmartJoystick joystick){
-		this.joystick = joystick;
+	private boolean isJoystick1Connected;
+
+	public RumbleRomy(SmartJoystick joystick0){
+		this.joystick0 = joystick0;
+		this.joystick1 = null;
 		this.wasObjectIn = false;
 		this.timer = new Timer();
+	}
+
+	public RumbleRomy(SmartJoystick joystick0, SmartJoystick joystick1){
+		this.joystick0 = joystick0;
+		this.joystick1 = joystick1;
+		this.wasObjectIn = false;
+		this.timer = new Timer();
+	}
+
+	@Override
+	public void initialize() {
+		isJoystick1Connected = joystick1 != null;
 	}
 
 	@Override
@@ -32,10 +46,16 @@ public class RumbleRomy extends GBCommand {
 			timer.restart();
 		}
 		if (wasObjectIn && timer.get() < 1.5) {
-			joystick.rumble(true,1);
+			joystick0.rumble(true,1);
+			if (isJoystick1Connected) {
+				joystick1.rumble(true, 1);
+			}
 		}
 		else {
-			joystick.rumble(true,0);
+			joystick0.rumble(true,0);
+			if (isJoystick1Connected) {
+				joystick1.rumble(true, 0);
+			}
 			timer.stop();
 		}
 	}

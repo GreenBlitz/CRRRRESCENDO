@@ -4,20 +4,21 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
+import edu.greenblitz.robotName.commands.RumbleRomy;
 import edu.greenblitz.robotName.commands.auto.InterpolationForAuto;
 import edu.greenblitz.robotName.commands.auto.NoteFromIntakeToShooterForAuto;
 import edu.greenblitz.robotName.commands.auto.RotateToSpeakerForAuto;
 import edu.greenblitz.robotName.commands.intake.*;
+import edu.greenblitz.robotName.commands.limelight.ActivateLimelight;
+import edu.greenblitz.robotName.commands.limelight.DisableLimelight;
 import edu.greenblitz.robotName.commands.shooter.PushNoteToFlyWheel;
 import edu.greenblitz.robotName.commands.shooter.ShootToSpeakerFromClose;
-import edu.greenblitz.robotName.subsystems.Dashboard;
-import edu.greenblitz.robotName.subsystems.LED.LED;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.intake.Intake;
-import edu.greenblitz.robotName.subsystems.lifter.Lifter;
+import edu.greenblitz.robotName.subsystems.climber.lifter.Lifter;
 import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.funnel.Funnel;
@@ -31,6 +32,7 @@ import edu.greenblitz.robotName.utils.RoborioUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -40,6 +42,8 @@ import org.littletonrobotics.junction.Logger;
 import org.littletonrobotics.junction.networktables.NT4Publisher;
 import org.littletonrobotics.junction.wpilog.WPILOGReader;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
+
+import static edu.greenblitz.robotName.Field.ScoringPositions.*;
 
 public class Robot extends LoggedRobot {
 
@@ -67,7 +71,7 @@ public class Robot extends LoggedRobot {
 		initializeLogger();
 		initializeSubsystems();
 		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
-		Dashboard.getInstance();
+//		Dashboard.getInstance();
 		initializeAutonomousBuilder();
 		AutonomousSelector.getInstance();
 		Pivot.getInstance().resetAngle(PivotConstants.PresetPositions.STARTING.ANGLE);
@@ -91,7 +95,7 @@ public class Robot extends LoggedRobot {
 		Lifter.init();
 		Intake.init();
 
-		LED.init();
+//		LED.init();
 	}
 
 
@@ -100,14 +104,17 @@ public class Robot extends LoggedRobot {
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
-		Dashboard.getInstance().activateDriversDashboard();
+//		Dashboard.getInstance().activateDriversDashboard();
+		new RumbleRomy(OI.getInstance().getMainJoystick(),OI.getInstance().getSecondJoystick()).schedule();
 	}
-
 
 	@Override
 	public void robotPeriodic() {
 		CommandScheduler.getInstance().run();
 		RoborioUtils.updateCurrentCycleTime();
+		SmartDashboard.putString("mode", ScoringModeSelector.getScoringMode().name());
+		SmartDashboard.putBoolean("is object in arm", Roller.getInstance().isObjectIn());
+		Logger.recordOutput("ScoringMode", ScoringModeSelector.getScoringMode().name());
 	}
 
 	private void initializeAutonomousBuilder() {
@@ -117,6 +124,8 @@ public class Robot extends LoggedRobot {
 		NamedCommands.registerCommand("note from intake to shooter", new NoteFromIntakeToShooterForAuto());
 		NamedCommands.registerCommand("close shoot start", new ShootToSpeakerFromClose());
 		NamedCommands.registerCommand("interpolation", new InterpolationForAuto());
+		NamedCommands.registerCommand("disable limelight", new DisableLimelight());
+		NamedCommands.registerCommand("activate limelight", new ActivateLimelight());
 		AutoBuilder.configureHolonomic(
 				SwerveChassis.getInstance()::getRobotPose2d,
 				(pose) -> SwerveChassis.getInstance().resetChassisPose(AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(pose)),
@@ -164,6 +173,7 @@ public class Robot extends LoggedRobot {
 
 	@Override
 	public void autonomousInit() {
+		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
 		autonomousCommand = AutonomousSelector.getInstance().getChosenValue();
 		if (autonomousCommand != null){
 			autonomousCommand.schedule();

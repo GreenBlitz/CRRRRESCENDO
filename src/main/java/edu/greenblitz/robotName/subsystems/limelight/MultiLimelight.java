@@ -38,12 +38,14 @@ public class MultiLimelight extends GBSubsystem {
 		ArrayList<Optional<Pair<Pose2d, Double>>> estimates = new ArrayList<>();
 		for (Limelight limelight : limelights) {
 			if (limelight.hasTarget()) {
-				if (limelight.getTagConfidence())
+				if (limelight.getTagConfidence()) {
 					estimates.add(limelight.getUpdatedPose2DEstimation());
+				}
 			}
 		}
 		return estimates;
 	}
+
 
 	public void recordEstimatedPositions() {
 		int i = 0;
@@ -69,6 +71,18 @@ public class MultiLimelight extends GBSubsystem {
 			}
 		}
 		return Optional.empty();
+	}
+	
+	public void setLimelightsLedOff(){
+		for(Limelight limelight : limelights){
+			limelight.turnOffLed();
+		}
+	}
+	
+	public void setLimelightsLedOn(){
+		for(Limelight limelight : limelights){
+			limelight.turnOnLed();
+		}
 	}
 
 	public boolean isConnected() {

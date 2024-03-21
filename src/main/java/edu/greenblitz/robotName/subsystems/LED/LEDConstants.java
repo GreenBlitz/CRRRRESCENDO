@@ -13,16 +13,17 @@ public class LEDConstants {
  
 	public static final Color AMP_MODE_COLOR = Color.kDeepPink;
  
-	public static final Color SPEAKER_MODE_COLOR = Color.kYellow;
+	public static final Color SPEAKER_MODE_COLOR = Color.kBlue;
  
 	public static final Section ALL_LEDS = new Section(0, LED_LENGTH);
  
 	public static final double BLINKING_TIME = 5.0;
  
-	public static final double RUMBLE_POWER = 0.5;
+	public static final double RUMBLE_POWER = 1;
  
 	public static final boolean RUMBLE_LEFT_MOTOR = true;
  
 	public static final double RUMBLE_TIME = 1.0;
-	
+
+	public static final Color CLIMB_MODE_COLOR = Color.kYellow;
 }

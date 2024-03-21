@@ -16,6 +16,7 @@ import edu.greenblitz.robotName.utils.motors.GBTalonFXPro;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Commands;
 
 public class MK4ISwerveModule implements ISwerveModule {
 
@@ -52,13 +53,7 @@ public class MK4ISwerveModule implements ISwerveModule {
 			default -> throw new IllegalArgumentException("Invalid swerve module");
 		};
 
-		angularMotor = new GBTalonFXPro(configObject.angleMotorID, configObject.canbusChain);
-		angularMotor.applyConfiguration(MK4iSwerveConstants.ANGULAR_FALCON_CONFIG_OBJECT);
-		angularMotor.setInverted(configObject.angularInverted);
 
-		linearMotor = new GBTalonFXPro(configObject.linearMotorID, configObject.canbusChain);
-		linearMotor.applyConfiguration(MK4iSwerveConstants.LINEAR_FALCON_CONFIG_OBJECT);
-		linearMotor.setInverted(configObject.linearInverted);
 
 		canCoder = new CANcoder(configObject.AbsoluteEncoderID, configObject.canbusChain);
 
@@ -67,7 +62,16 @@ public class MK4ISwerveModule implements ISwerveModule {
 		FEEDBACK_CONFIGS.FeedbackSensorSource = FeedbackSensorSourceValue.FusedCANcoder;
 		FEEDBACK_CONFIGS.RotorToSensorRatio = MK4iSwerveConstants.ANGULAR_GEAR_RATIO;
 
+		Commands.waitSeconds(0.02);
+
+		angularMotor = new GBTalonFXPro(configObject.angleMotorID, configObject.canbusChain);
+		angularMotor.applyConfiguration(MK4iSwerveConstants.ANGULAR_FALCON_CONFIG_OBJECT);
+		angularMotor.setInverted(configObject.angularInverted);
 		angularMotor.getConfigurator().refresh(FEEDBACK_CONFIGS);
+
+		linearMotor = new GBTalonFXPro(configObject.linearMotorID, configObject.canbusChain);
+		linearMotor.applyConfiguration(MK4iSwerveConstants.LINEAR_FALCON_CONFIG_OBJECT);
+		linearMotor.setInverted(configObject.linearInverted);
 
 		this.encoderOffset = configObject.encoderOffset.getRotations();
 	}

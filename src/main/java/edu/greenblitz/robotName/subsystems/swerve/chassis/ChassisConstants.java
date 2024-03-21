@@ -13,19 +13,19 @@ import edu.wpi.first.math.util.Units;
 
 public class ChassisConstants {
 
-	public static final double ROBOT_WIDTH_IN_METERS = 0.69;
-	
-	public static final double ROBOT_LENGTH_IN_METERS = 0.82;
+	public static final double SPEED_TOLERANCE = 0.15;
 
-	public static final boolean DO_VISION = true;
+	public static final double ROBOT_WIDTH_IN_METERS = 0.82;
+	
+	public static final double ROBOT_LENGTH_IN_METERS = 0.69;
 	
 	public static final double BUMPER_WIDTH = 0.077;
 	
 	public static final Rotation2d CLOSE_RANGE_SHOOTING_ANGLE = Rotation2d.fromDegrees(180);
 	
-	public static final double ROBOT_WIDTH_WITH_BUMPER = ROBOT_WIDTH_IN_METERS + BUMPER_WIDTH;
+	public static final double ROBOT_WIDTH_WITH_BUMPER = ROBOT_WIDTH_IN_METERS + 2 * BUMPER_WIDTH;
 	
-	public static final double ROBOT_LENGTH_WITH_BUMPER = ROBOT_LENGTH_IN_METERS + BUMPER_WIDTH;
+	public static final double ROBOT_LENGTH_WITH_BUMPER = ROBOT_LENGTH_IN_METERS + 2 * BUMPER_WIDTH;
 	
 	public static final double ROBOT_RADIUS = Math.sqrt(Math.pow(ROBOT_WIDTH_WITH_BUMPER / 2, 2) + Math.pow(ROBOT_LENGTH_WITH_BUMPER / 2, 2));
 	
@@ -68,8 +68,7 @@ public class ChassisConstants {
 		ROTATION_PID_CONTROLLER_RADIANS.enableContinuousInput(-Math.PI, Math.PI);
 	}
 
-	public static final double MAX_VELOCITY = 5.2; // TODO - ASK NOAM
-	
+	public static final double MAX_VELOCITY = 5.2;
 	public static final double MAX_ACCELERATION = 2;
 	
 	public static final double MAX_ANGULAR_SPEED = 10.454580245368017;
@@ -78,9 +77,9 @@ public class ChassisConstants {
 	
 	public static final double FAST_DISCRETION_CONSTANT = -8;
 
-	public static final double TRANSLATION_TOLERANCE = 0.05;
+	public static final double TRANSLATION_TOLERANCE = 0.1;
 
-	public static final Rotation2d ROTATION_TOLERANCE = Rotation2d.fromDegrees(1.5);
+	public static final Rotation2d ROTATION_TOLERANCE = Rotation2d.fromDegrees(2.5);
 
 	public static final double CURRENT_TOLERANCE = 0.5;
 
@@ -100,7 +99,7 @@ public class ChassisConstants {
 	
 	public static final PIDConstants TRANSLATION_PID = new PIDConstants(5.5, 0, 0);
 	
-	public static final PIDConstants ROTATION_PID_PATH_PLANNER = new PIDConstants(0.2, 0, 0);
+	public static final PIDConstants ROTATION_PID_PATH_PLANNER = new PIDConstants(1, 0, 0);
 
 
 	public static final double TOTAL_ERROR_FOR_REPLANNING = 0.5;
@@ -115,8 +114,8 @@ public class ChassisConstants {
 			MAX_VELOCITY,
 			ROBOT_RADIUS,
 			new ReplanningConfig(
-					false,
-					false
+					true,
+					true
 			)
 	);
 	

@@ -5,6 +5,8 @@ import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.RobotConstants;
 import edu.greenblitz.robotName.VisionConstants;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
+import edu.greenblitz.robotName.subsystems.LED.LED;
+import edu.greenblitz.robotName.subsystems.LED.LEDConstants;
 import edu.greenblitz.robotName.subsystems.Photonvision;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.gyros.GyroFactory;
@@ -21,11 +23,15 @@ import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.*;
 import edu.wpi.first.math.kinematics.*;
 import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Color;
 import org.littletonrobotics.junction.Logger;
+import org.opencv.core.Mat;
 import org.photonvision.EstimatedRobotPose;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +46,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	private IAngleMeasurementGyro gyro;
 	private SwerveDriveKinematics kinematics;
 	private SwerveDrivePoseEstimator poseEstimator;
+	private SwerveDriveOdometry odometry;
 	private Field2d field;
+	
+	public boolean doVision;
 	private SwerveChassisInputsAutoLogged chassisInputs;
 	private GyroInputsAutoLogged gyroInputs;
 	private AllianceUtilities.AlliancePose2d robotPose;
@@ -48,6 +57,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	public SwerveChassis() {
 		this.field = new Field2d();
 
+		this.doVision = true;
+		
 		this.frontLeft = new SwerveModule(Module.FRONT_LEFT);
 		this.frontRight = new SwerveModule(Module.FRONT_RIGHT);
 		this.backLeft = new SwerveModule(Module.BACK_LEFT);
@@ -61,13 +72,22 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				ChassisConstants.SWERVE_LOCATIONS_IN_SWERVE_KINEMATICS_COORDINATES
 		);
 
+
 		this.poseEstimator = new SwerveDrivePoseEstimator(
 				this.kinematics,
 				getGyroAngle(),
 				getSwerveModulePositions(),
 				visionPoseStartMatch()
 		);
-		
+
+		this.odometry = new SwerveDriveOdometry(
+				this.kinematics,
+				getGyroAngle(),
+				getSwerveModulePositions(),
+				visionPoseStartMatch()
+		);
+
+
 		robotPose = AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(poseEstimator.getEstimatedPosition());
 		SmartDashboard.putData("field", getField());
 	}
@@ -92,7 +112,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	private static SwerveModuleState[] desaturateSwerveModuleStates(SwerveModuleState[] states) {
 		double desaturationFactor = 1;
 		for (SwerveModuleState state : states) {
-			desaturationFactor = Math.max(desaturationFactor, state.speedMetersPerSecond / ChassisConstants.MAX_VELOCITY);
+			desaturationFactor = Math.max(desaturationFactor, state.speedMetersPerSecond / MAX_VELOCITY);
 		}
 		SwerveModuleState[] desaturatedStates = new SwerveModuleState[states.length];
 		for (int i = 0; i < states.length; i++) {
@@ -123,9 +143,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		Logger.recordOutput("DriveTrain/ModuleStates", getSwerveModuleStates());
 		Logger.processInputs("DriveTrain/Chassis", chassisInputs);
 		Logger.processInputs("DriveTrain/Gyro", gyroInputs);
-		
-		
-		updatePoseEstimationLimeLight();
+
+		updatePoseEstimator();
+		updateOdometry();
+		MultiLimelight.getInstance().recordEstimatedPositions();
 		robotPose = AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(poseEstimator.getEstimatedPosition());
 		field.setRobotPose(getRobotPose2d());
 		SmartDashboard.putData(getField());
@@ -213,15 +234,60 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		}
 	}
 	
+	public void disableLimelight(){
+		doVision = false;
+	}
+	
+	public void activateLimelight(){
+		doVision = true;
+	}
+
+	public boolean distanceFilterVision(Pose2d visionPose){
+		if(DriverStation.isAutonomous()){
+			return !(visionPose.getTranslation().getDistance(getRobotPose2d().getTranslation()) >= VisionConstants.MIN_DISTANCE_TO_FILTER_OUT_METERS_AUTO);
+		}
+		else {
+			return !(visionPose.getTranslation().getDistance(getRobotPose2d().getTranslation()) >= VisionConstants.MIN_DISTANCE_TO_FILTER_OUT_METERS_TELEOP);
+		}
+	}
+	
 	public void resetPoseByVision() {
 		List<Optional<Pair<Pose2d, Double>>> estimates = MultiLimelight.getInstance().getAll2DEstimates();
 		if (!estimates.isEmpty()) {
 			for (Optional<Pair<Pose2d, Double>> visionPoseAndTimeStamp : estimates) {
 				if (visionPoseAndTimeStamp.isPresent()) {
 					Pose2d visionPose = visionPoseAndTimeStamp.get().getFirst();
-					poseEstimator.addVisionMeasurement(visionPose, visionPoseAndTimeStamp.get().getSecond());
+					if (distanceFilterVision(visionPose)) {
+						poseEstimator.addVisionMeasurement(visionPose, visionPoseAndTimeStamp.get().getSecond());
+						LED.getInstance().setShouldWork(true);
+					}
+					else {
+						LED.getInstance().setLEDColor(Color.kDarkRed,0, LEDConstants.LED_LENGTH);
+						LED.getInstance().setShouldWork(false);
+					}
 				}
 			}
+		}
+	}
+
+	public void hardResetPoseByVision() {
+		List<Optional<Pair<Pose2d, Double>>> estimates = MultiLimelight.getInstance().getAll2DEstimates();
+		if (!estimates.isEmpty()) {
+			for (Optional<Pair<Pose2d, Double>> visionPoseAndTimeStamp : estimates) {
+				if (visionPoseAndTimeStamp.isPresent()) {
+					Pose2d visionPose = visionPoseAndTimeStamp.get().getFirst();
+					poseEstimator.resetPosition(getGyroAngle(), getSwerveModulePositions(),visionPose);
+				}
+			}
+		}
+	}
+
+	public void updatePoseEstimator(){
+		if(poseEstimator.getEstimatedPosition().getX() > FieldConstants.FIELD_LENGTH || poseEstimator.getEstimatedPosition().getY() > FieldConstants.FIELD_WIDTH || poseEstimator.getEstimatedPosition().getY() < 0 || poseEstimator.getEstimatedPosition().getX() < 0){
+			hardResetPoseByVision();
+		}
+		else{
+			updatePoseEstimationLimeLight();
 		}
 	}
 	
@@ -251,7 +317,16 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				tipOfArmX > FieldConstants.FIELD_LENGTH ||
 				tipOfArmX < 0;
 	}
-	
+
+
+	public boolean isRobotStanding(){
+		ChassisSpeeds currentSpeed = getChassisSpeeds();
+		boolean isNotMovingInX = currentSpeed.vxMetersPerSecond <= SPEED_TOLERANCE;
+		boolean isNotMovingInY = currentSpeed.vyMetersPerSecond <= SPEED_TOLERANCE;
+		boolean isNotMovingInAngular = currentSpeed.omegaRadiansPerSecond <= SPEED_TOLERANCE;
+		return isNotMovingInX &&  isNotMovingInY && isNotMovingInAngular;
+	}
+
 	/**
 	 * setting module states to all 4 modules
 	 */
@@ -368,10 +443,14 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	public void updatePoseEstimatorOdometry() {
 		poseEstimator.update(getGyroAngle(), getSwerveModulePositions());
 	}
-	
+
+	public void updateOdometry(){
+		odometry.update(getGyroAngle(),getSwerveModulePositions());
+	}
+
 	public void updatePoseEstimationLimeLight() {
 		updatePoseEstimatorOdometry();
-		if (DO_VISION) {
+		if (doVision) {
 			resetPoseByVision();
 		}
 	}
@@ -394,18 +473,16 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 				|| (frontLeft && backRight)
 				|| (frontRight && backLeft));
 	}
-	
-	private void addVisionMeasurement(Pair<Pose2d, Double> poseTimestampPair) {
-		Pose2d visionPose = poseTimestampPair.getFirst();
-		if (!(visionPose.getTranslation().getDistance(getRobotPose2d().getTranslation()) > VisionConstants.MIN_DISTANCE_TO_FILTER_OUT_METERS)) {
-			resetToVision();
-		}
-	}
+
 	
 	public Pose2d getRobotPose2d() {
 		return new Pose2d(robotPose.toBlueAlliancePose().getX(), robotPose.toBlueAlliancePose().getY(), robotPose.toBlueAlliancePose().getRotation());
 	}
-	
+
+	public Pose2d getOdometryPose(){
+		return odometry.getPoseMeters();
+	}
+
 	public Pose3d getRobotPose3d() {
 		Pose2d swervePose2d = getRobotPose2d();
 		return new Pose3d(
@@ -477,6 +554,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	
 	public void moveByRobotRelativeSpeeds(ChassisSpeeds chassisSpeeds) {
 		chassisSpeeds.omegaRadiansPerSecond = -chassisSpeeds.omegaRadiansPerSecond;
+		Logger.recordOutput("angular velocity", chassisSpeeds.omegaRadiansPerSecond);
 		chassisSpeeds = ChassisSpeeds.discretize(chassisSpeeds, getDiscretizedTimeStep());
 		SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
 		SwerveModuleState[] desaturatedStates = desaturateSwerveModuleStates(states);
@@ -531,7 +609,7 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 	
 	@Override
 	public void updateInputs(SwerveChassisInputsAutoLogged inputs) {
-		inputs.isVisionEnabled = DO_VISION;
+		inputs.isVisionEnabled = doVision;
 		inputs.numberOfDetectedAprilTag = MultiLimelight.getInstance().getAll2DEstimates().size();
 		inputs.omegaRadiansPerSecond = getChassisSpeeds().omegaRadiansPerSecond;
 		inputs.xAxisSpeed = getChassisSpeeds().vxMetersPerSecond;

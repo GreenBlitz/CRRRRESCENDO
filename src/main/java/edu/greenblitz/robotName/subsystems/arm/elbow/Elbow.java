@@ -103,6 +103,10 @@ public class Elbow extends GBSubsystem {
         return Math.abs(targetAngle.getRadians() - getAngle().getRadians()) <= ElbowConstants.TOLERANCE.getRadians();
     }
 
+    public boolean isAtAngleTolerance(Rotation2d targetAngle) {
+        return Math.abs(targetAngle.getRadians() - getAngle().getRadians()) <= ElbowConstants.TOLERANCE.getRadians();
+    }
+
     public boolean isInShooterCollisionRange() {
         return elbowInputs.position.getRadians() >= ElbowConstants.SHOOTER_COLLISION_RANGE.getFirst().getRadians() &&
                 elbowInputs.position.getRadians() <= ElbowConstants.SHOOTER_COLLISION_RANGE.getSecond().getRadians();

@@ -1,16 +1,18 @@
 {
-  "robotWidth": 0.9,
+  "robotWidth": 1.0,
   "robotLength": 0.9,
   "holonomicMode": true,
   "pathFolders": [
+    "closeReal",
     "close"
   ],
   "autoFolders": [
+    "CloseAutos",
     "closeeeeeeeeeee"
   ],
-  "defaultMaxVel": 3.0,
-  "defaultMaxAccel": 1.5,
-  "defaultMaxAngVel": 360.0,
-  "defaultMaxAngAccel": 180.0,
+  "defaultMaxVel": 5.0,
+  "defaultMaxAccel": 2.75,
+  "defaultMaxAngVel": 540.0,
+  "defaultMaxAngAccel": 270.0,
   "maxModuleSpeed": 4.5
 }
