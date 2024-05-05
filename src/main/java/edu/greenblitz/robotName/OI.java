@@ -103,7 +103,8 @@ public class OI {
         SmartJoystick usedJoystick = mainJoystick;
 
         //Collect Note
-        usedJoystick.R1.whileTrue(new CollectNoteToScoringModeWithPivotForJoystick());
+        usedJoystick.R1.whileTrue(new CollectNoteToScoringModeWithPiv
+                otForJoystick());
         usedJoystick.POV_DOWN.whileTrue(new CollectNoteFromFeeder());
 
         //Auto Aim For Speaker Or Amp

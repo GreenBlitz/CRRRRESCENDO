@@ -11,15 +11,40 @@ import edu.wpi.first.math.util.Units;
 import static edu.greenblitz.robotName.RobotConstants.General.CANIVORE_NAME;
 
 public class MK4iSwerveConstants {
-	
-	public static SwerveModuleConfigObject MK4I_MODULE_FRONT_LEFT = new SwerveModuleConfigObject(CANIVORE_NAME, 7, 6, 3, false, true);
-	
-	public static SwerveModuleConfigObject MK4I_MODULE_FRONT_RIGHT = new SwerveModuleConfigObject(CANIVORE_NAME, 1, 43, 2, false, false);
-	
-	public static SwerveModuleConfigObject MK4I_MODULE_BACK_LEFT = new SwerveModuleConfigObject(CANIVORE_NAME, 3, 2, 1, true, true);
-	
-	public static SwerveModuleConfigObject MK4I_MODULE_BACK_RIGHT = new SwerveModuleConfigObject(CANIVORE_NAME, 5, 4, 0, false, true);
-	
+
+	public static SwerveModuleConfigObject MK4I_MODULE_FRONT_LEFT =
+			new SwerveModuleConfigObject(
+					CANIVORE_NAME,
+					0,
+					1,
+					0,
+					false, true);
+
+	public static SwerveModuleConfigObject MK4I_MODULE_FRONT_RIGHT =
+			new SwerveModuleConfigObject(
+					CANIVORE_NAME,
+					2,
+					3,
+					1,
+					true, true);
+
+	public static SwerveModuleConfigObject MK4I_MODULE_BACK_LEFT =
+			new SwerveModuleConfigObject(
+					CANIVORE_NAME,
+					4,
+					5,
+					2,
+					false, false);
+
+	public static SwerveModuleConfigObject MK4I_MODULE_BACK_RIGHT =
+			new SwerveModuleConfigObject(
+					CANIVORE_NAME,
+					6,
+					7,
+					3,
+					false, true);
+
+
 	public static final double ANGULAR_GEAR_RATIO = (150.0 / 7);
 	
 	public static final double LINEAR_GEAR_RATIO = 6.12;

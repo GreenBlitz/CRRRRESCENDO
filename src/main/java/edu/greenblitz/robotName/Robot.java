@@ -104,6 +104,7 @@ public class Robot extends LoggedRobot {
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
+		SwerveChassis.getInstance().resetAngularEncodersByAbsoluteEncoder();
 //		Dashboard.getInstance().activateDriversDashboard();
 	}
 

@@ -3,6 +3,7 @@ package edu.greenblitz.robotName.subsystems.swerve.modules.mk4iSwerveModule;
 import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.FeedbackConfigs;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.CANcoder;
@@ -53,10 +54,12 @@ public class MK4ISwerveModule implements ISwerveModule {
 		};
 
 		angularMotor = new GBTalonFXPro(configObject.angleMotorID, configObject.canbusChain);
+		angularMotor.getConfigurator().apply(new TalonFXConfiguration());
 		angularMotor.applyConfiguration(MK4iSwerveConstants.ANGULAR_FALCON_CONFIG_OBJECT);
 		angularMotor.setInverted(configObject.angularInverted);
 
 		linearMotor = new GBTalonFXPro(configObject.linearMotorID, configObject.canbusChain);
+		linearMotor.getConfigurator().apply(new TalonFXConfiguration());
 		linearMotor.applyConfiguration(MK4iSwerveConstants.LINEAR_FALCON_CONFIG_OBJECT);
 		linearMotor.setInverted(configObject.linearInverted);
 
@@ -64,12 +67,13 @@ public class MK4ISwerveModule implements ISwerveModule {
 
 		FeedbackConfigs FEEDBACK_CONFIGS = new FeedbackConfigs();
 		FEEDBACK_CONFIGS.FeedbackRemoteSensorID = canCoder.getDeviceID();
-		FEEDBACK_CONFIGS.FeedbackSensorSource = FeedbackSensorSourceValue.FusedCANcoder;
+		FEEDBACK_CONFIGS.FeedbackSensorSource = FeedbackSensorSourceValue.SyncCANcoder;
 		FEEDBACK_CONFIGS.RotorToSensorRatio = MK4iSwerveConstants.ANGULAR_GEAR_RATIO;
 
-		angularMotor.getConfigurator().refresh(FEEDBACK_CONFIGS);
+		angularMotor.getConfigurator().apply(FEEDBACK_CONFIGS);
 
 		this.encoderOffset = configObject.encoderOffset.getRotations();
+		angularMotor.setPosition(canCoder.getAbsolutePosition().getValue());
 	}
 
 	@Override
