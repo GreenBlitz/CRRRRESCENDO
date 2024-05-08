@@ -3,6 +3,7 @@ package edu.greenblitz.robotName;
 import edu.greenblitz.robotName.commands.LED.UpdateLEDStateDefaultCommand;
 import edu.greenblitz.robotName.commands.PrepareToScore;
 import edu.greenblitz.robotName.commands.ScoreOnReady;
+import edu.greenblitz.robotName.commands.arm.MoveElbowAndWrist;
 import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowByJoystick;
 import edu.greenblitz.robotName.commands.arm.roller.MoveNoteInRoller;
@@ -29,6 +30,7 @@ import edu.greenblitz.robotName.commands.switchMode.SetScoringMode;
 import edu.greenblitz.robotName.commands.switchMode.ToggleScoringMode;
 import edu.greenblitz.robotName.subsystems.LED.LED;
 import edu.greenblitz.robotName.subsystems.arm.elbow.Elbow;
+import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.roller.Roller;
 import edu.greenblitz.robotName.subsystems.arm.wrist.Wrist;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
@@ -103,16 +105,9 @@ public class OI {
         SmartJoystick usedJoystick = mainJoystick;
 
         //Collect Note
-        usedJoystick.R1.whileTrue(new CollectNoteToScoringModeWithPiv
-                otForJoystick());
+        usedJoystick.R1.whileTrue(new CollectNoteToScoringModeWithPivotForJoystick());
         usedJoystick.POV_DOWN.whileTrue(new CollectNoteFromFeeder());
-
-        //Auto Aim For Speaker Or Amp
-        usedJoystick.L2.whileTrue(new PrepareToScore());
-
-        //Shoot
-        usedJoystick.L2_HARD.whileTrue(new ScoreOnReady());
-
+        
         //Reset Robot Pose
         usedJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetPoseByVision()));
         usedJoystick.POV_DOWN.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().hardResetPoseByVision()));
@@ -149,33 +144,35 @@ public class OI {
 
         //No Object In Arm
         usedJoystick.X.onTrue(new InstantCommand(() -> Roller.getInstance().setObjectOut()));
-
+        usedJoystick.L3.whileTrue(new CollectNoteToScoringModeWithPivotForJoystick()); //remove if now wanted
         //Intake Reverse Roll
-        usedJoystick.B.whileTrue(new RunIntakeByPower(-0.5));
+//        usedJoystick.B.whileTrue(new RunIntakeByPower(-0.5));
 
-        //Climb Mode -> Climbing : AMP or SPEAKER -> Collect Note From Feeder
-        usedJoystick.Y.whileTrue(new ClimbOrCollectFromFeeder());
-
-        //Climb Mode -> Lifter Up, Note To Arm, Move Arm a bit Up : AMP or SPEAKER -> Move Arm To Safe
-        usedJoystick.A.whileTrue(new GetReadyForClimbOrArmToSafe());
-
+//        //Climb Mode -> Climbing : AMP or SPEAKER -> Collect Note From Feeder
+//        usedJoystick.Y.whileTrue(new ClimbOrCollectFromFeeder());
+//
+//        //Climb Mode -> Lifter Up, Note To Arm, Move Arm a bit Up : AMP or SPEAKER -> Move Arm To Safe
+//        usedJoystick.A.whileTrue(new GetReadyForClimbOrArmToSafe());
+        usedJoystick.Y.whileTrue(new MoveElbowAndWrist(ElbowConstants.PresetPositions.SAFE, WristConstants.PresetPositions.SAFE));
+        usedJoystick.B.whileTrue(new MoveElbowAndWrist(ElbowConstants.PresetPositions.SCORE, WristConstants.PresetPositions.SCORE));
         //Run FlyWheel For Shooting
         usedJoystick.L1.whileTrue(new RunFlyWheelByVelocityUntilInterrupted(FlyWheelConstants.SHOOTING_VELOCITY, usedJoystick));
 
         //Funnel Joystick Control
+        
         usedJoystick.R1.whileTrue(new RunFunnelByJoystick(usedJoystick, SmartJoystick.Axis.RIGHT_Y));
 
         //Hand Control On Lifter
-        usedJoystick.LEFT_Y_AXIS.whileTrue(
-                new ConditionalCommand(
-                        new SequentialCommandGroup(
-                                new CloseAndThenHoldSolenoid(),
-                                new MoveLifterByJoystick(usedJoystick)
-                        ),
-                        new MoveLifterByJoystick(usedJoystick),
-                        () -> (usedJoystick.getAxisValue(SmartJoystick.Axis.LEFT_Y) > 0)
-                )
-        );
+//        usedJoystick.LEFT_Y_AXIS.whileTrue(
+//                new ConditionalCommand(
+//                        new SequentialCommandGroup(
+//                                new CloseAndThenHoldSolenoid(),
+//                                new MoveLifterByJoystick(usedJoystick)
+//                        ),
+//                        new MoveLifterByJoystick(usedJoystick),
+//                        () -> (usedJoystick.getAxisValue(SmartJoystick.Axis.LEFT_Y) > 0)
+//                )
+//        );
     }
 
     public void thirdJoystickButtons() {
