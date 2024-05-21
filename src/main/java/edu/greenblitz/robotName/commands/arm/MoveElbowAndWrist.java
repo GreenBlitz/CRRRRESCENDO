@@ -6,20 +6,28 @@ import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.greenblitz.robotName.subsystems.arm.wrist.WristConstants;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-public class MoveElbowAndWrist extends ParallelCommandGroup {
+public class MoveElbowAndWrist extends ParallelRaceGroup {
 
-    public MoveElbowAndWrist(Rotation2d elbowAngle, Rotation2d wristAngle) {
-        super(
-                new MoveElbowToAngle(elbowAngle),
-                new MoveWristToAngle(wristAngle)
-        );
-    }
+	public MoveElbowAndWrist(Rotation2d elbowAngle, Rotation2d wristAngle) {
+		super(
+                new WaitCommand(4),
+				new ParallelCommandGroup(
+						new MoveElbowToAngle(elbowAngle),
+						new MoveWristToAngle(wristAngle)
+                )
+		);
+	}
 
-    public MoveElbowAndWrist(ElbowConstants.PresetPositions elbowAngle, WristConstants.PresetPositions wristAngle) {
-        super(
-                new MoveElbowToAngle(elbowAngle),
-                new MoveWristToAngle(wristAngle)
-        );
-    }
+	public MoveElbowAndWrist(ElbowConstants.PresetPositions elbowAngle, WristConstants.PresetPositions wristAngle) {
+		super(
+                new WaitCommand(4),
+                new ParallelCommandGroup(
+                        new MoveElbowToAngle(elbowAngle),
+                        new MoveWristToAngle(wristAngle)
+                )
+		);
+	}
 }

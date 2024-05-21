@@ -17,9 +17,4 @@ public class RunFlyWheelByPower extends FlyWheelCommand {
                 power * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR
         );
     }
-
-    @Override
-    public void end(boolean interrupted) {
-        flyWheel.stop();
-    }
 }

@@ -6,6 +6,7 @@ import edu.greenblitz.robotName.commands.arm.elbow.ElbowDefaultCommand;
 import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowByJoystick;
 import edu.greenblitz.robotName.commands.arm.roller.MoveNoteInRoller;
 import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRollerToTrap;
+import edu.greenblitz.robotName.commands.arm.roller.runByPower.RollClockwise;
 import edu.greenblitz.robotName.commands.arm.wrist.MoveWristToAngle;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
@@ -105,6 +106,21 @@ public class OI {
 		Trigger pushNoteOnFlyWheelReady = new Trigger(() -> FlyWheel.getInstance().isAtVelocity(FlyWheelConstants.SHOOTING_VELOCITY * FlyWheelConstants.LEFT_SHOOTING_POWER_CONVERSION_FACTOR, FlyWheelConstants.SHOOTING_VELOCITY));
 		pushNoteOnFlyWheelReady.whileTrue(new RunFunnelByPower(0.5));
 
+		usedJoystick.A.whileTrue(new MoveElbowAndWrist(
+				ElbowConstants.PresetPositions.SAFE, WristConstants.PresetPositions.SAFE
+		));
+
+
+		usedJoystick.Y.whileTrue(new MoveElbowAndWrist(
+				ElbowConstants.PresetPositions.SCORE, WristConstants.PresetPositions.SCORE
+		));
+
+		usedJoystick.B.whileTrue(new CollectNoteFromFeeder());
+
+		usedJoystick.POV_UP.whileTrue(new RollClockwise());
+		usedJoystick.POV_DOWN.whileTrue(new RollClockwise());
+
+
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
 	}
 
@@ -122,6 +138,7 @@ public class OI {
 		//Climbing
 		usedJoystick.A.whileTrue(new ReleaseNoteFromRollerToTrap());//Release note from roller and take wrist back
 		usedJoystick.B.whileTrue(new MoveWristToAngle(WristConstants.PresetPositions.SCORE_TRAP));
+		usedJoystick.X.onTrue(new InstantCommand(() -> Roller.getInstance().setObjectOut()));
 
 		//disable and enable the limelight led
 		usedJoystick.BACK.onTrue(new InstantCommand(() -> MultiLimelight.getInstance().setLimelightsLedOff()));
