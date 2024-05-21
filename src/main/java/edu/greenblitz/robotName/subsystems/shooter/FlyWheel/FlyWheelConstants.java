@@ -6,7 +6,7 @@ import edu.wpi.first.math.interpolation.InverseInterpolator;
 
 public class FlyWheelConstants {
 	
-	public static final double EPSILON_RPS = 5;
+	public static final double EPSILON_RPS = 10;
 
 	public static final double DEFAULT_VELOCITY = 30;
 
