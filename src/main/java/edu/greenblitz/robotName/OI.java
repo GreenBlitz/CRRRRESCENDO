@@ -35,6 +35,7 @@ import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -98,6 +99,7 @@ public class OI {
 
 	public void oneControllerButtons() {
 		SmartJoystick usedJoystick = mainJoystick;
+		usedJoystick.R2.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetChassisPose(new Pose2d())));
 
 		usedJoystick.R1.whileTrue(new CollectNoteToScoringModeWithPivotForJoystick());
 		usedJoystick.START.onTrue(new ToggleScoringMode());//Doing Transfer Also
