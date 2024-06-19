@@ -2,8 +2,9 @@ package edu.greenblitz.robotName.commands.shooter.flyWheel;
 
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
+import edu.greenblitz.robotName.utils.systemCheck.SystemCheckCommand;
 
-public class RunFlyWheelByVelocity extends FlyWheelCommand {
+public class RunFlyWheelByVelocity extends FlyWheelCommand implements SystemCheckCommand {
 
     double rightWheelVelocity;
 
@@ -52,5 +53,9 @@ public class RunFlyWheelByVelocity extends FlyWheelCommand {
     public boolean isFinished() {
         return flyWheel.getPreparedToShoot();
     }
-
+    
+    @Override
+    public boolean hasFinished() {
+        return false;
+    }
 }

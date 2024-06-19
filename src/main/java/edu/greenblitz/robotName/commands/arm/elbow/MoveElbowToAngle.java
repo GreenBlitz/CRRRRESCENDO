@@ -3,8 +3,9 @@ package edu.greenblitz.robotName.commands.arm.elbow;
 import edu.greenblitz.robotName.Robot;
 import edu.greenblitz.robotName.subsystems.arm.elbow.ElbowConstants;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.greenblitz.robotName.utils.systemCheck.SystemCheckCommand;
 
-public class MoveElbowToAngle extends ElbowCommand {
+public class MoveElbowToAngle extends ElbowCommand implements SystemCheckCommand {
 
     private Rotation2d targetAngle;
 
@@ -36,5 +37,10 @@ public class MoveElbowToAngle extends ElbowCommand {
     @Override
     public void end(boolean interrupted) {
         elbow.setCurrentAngle();
+    }
+    
+    @Override
+    public boolean hasFinished() {
+        return false;
     }
 }
