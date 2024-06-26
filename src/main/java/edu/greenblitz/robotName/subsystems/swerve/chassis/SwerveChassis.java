@@ -129,6 +129,10 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		robotPose = AllianceUtilities.AlliancePose2d.fromBlueAlliancePose(poseEstimator.getEstimatedPosition());
 		field.setRobotPose(getRobotPose2d());
 		SmartDashboard.putData(getField());
+		SmartDashboard.putNumber("front_left", (frontLeft.getModuleAngle()).getDegrees());
+		SmartDashboard.putNumber("front_right", (frontRight.getModuleAngle()).getDegrees());
+		SmartDashboard.putNumber("back_left", (backLeft.getModuleAngle()).getDegrees());
+		SmartDashboard.putNumber("back_right", (backRight.getModuleAngle()).getDegrees());
 	}
 	
 	/**

@@ -102,19 +102,19 @@ public class OI {
 
 	public void romyButtons() {
 		//Collect Note
-		mainJoystick.R1.whileTrue(new CollectNoteToScoringModeWithPivotForJoystick());
-		mainJoystick.L1.whileTrue(new RotateByScoringMode());
-		mainJoystick.POV_DOWN.whileTrue(new CollectNoteFromFeeder());
+//		mainJoystick.R1.whileTrue(new CollectNoteToScoringModeWithPivotForJoystick());
+//		mainJoystick.L1.whileTrue(new RotateByScoringMode());
+//		mainJoystick.POV_DOWN.whileTrue(new CollectNoteFromFeeder());
 
 		//Reset Robot Angle
 		mainJoystick.Y.onTrue(new InstantCommand(() -> SwerveChassis.getInstance().resetChassisPose()));
 
 		//note in roller
-		mainJoystick.B.whileTrue(new MoveNoteInRoller(true));
-		mainJoystick.X.whileTrue(new MoveNoteInRoller(false));
+//		mainJoystick.B.whileTrue(new MoveNoteInRoller(true));
+//		mainJoystick.X.whileTrue(new MoveNoteInRoller(false));
 
 		//Intake
-		mainJoystick.R2.whileTrue(new RunIntakeByPower(0.5));
+//		mainJoystick.R2.whileTrue(new RunIntakeByPower(0.5));
 
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
 	}
@@ -170,7 +170,7 @@ public class OI {
 		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
 		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
 		LED.getInstance().setDefaultCommand(new UpdateLEDStateDefaultCommand());
-		FlyWheel.getInstance().setDefaultCommand(new FlyWheelDefaultCommand());
+//		FlyWheel.getInstance().setDefaultCommand(new FlyWheelDefaultCommand());
 	}
 
 }
