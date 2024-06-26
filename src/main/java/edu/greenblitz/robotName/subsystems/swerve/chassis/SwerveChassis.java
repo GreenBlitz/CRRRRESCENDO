@@ -133,6 +133,8 @@ public class SwerveChassis extends GBSubsystem implements ISwerveChassis {
 		SmartDashboard.putNumber("front_right", (frontRight.getModuleAngle()).getDegrees());
 		SmartDashboard.putNumber("back_left", (backLeft.getModuleAngle()).getDegrees());
 		SmartDashboard.putNumber("back_right", (backRight.getModuleAngle()).getDegrees());
+		if (getCurrentCommand() != null)
+			SmartDashboard.putData("swerve command", getCurrentCommand());
 	}
 	
 	/**
