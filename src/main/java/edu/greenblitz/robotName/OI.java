@@ -7,6 +7,7 @@ import edu.greenblitz.robotName.commands.arm.elbow.MoveElbowByJoystick;
 import edu.greenblitz.robotName.commands.arm.roller.MoveNoteInRoller;
 import edu.greenblitz.robotName.commands.arm.roller.ReleaseNoteFromRollerToTrap;
 import edu.greenblitz.robotName.commands.arm.roller.runByPower.RollClockwise;
+import edu.greenblitz.robotName.commands.arm.roller.runByPower.RollCounterClockwise;
 import edu.greenblitz.robotName.commands.arm.wrist.MoveWristToAngle;
 import edu.greenblitz.robotName.commands.arm.wrist.WristDefaultCommand;
 import edu.greenblitz.robotName.commands.getNoteToSystem.CollectNoteFromFeeder;
@@ -112,7 +113,6 @@ public class OI {
 				ElbowConstants.PresetPositions.SAFE, WristConstants.PresetPositions.SAFE
 		));
 
-
 		usedJoystick.Y.whileTrue(new MoveElbowAndWrist(
 				ElbowConstants.PresetPositions.SCORE, WristConstants.PresetPositions.SCORE
 		));
@@ -120,7 +120,8 @@ public class OI {
 		usedJoystick.B.whileTrue(new CollectNoteFromFeeder());
 
 		usedJoystick.POV_UP.whileTrue(new RollClockwise());
-		usedJoystick.POV_DOWN.whileTrue(new RollClockwise());
+		usedJoystick.POV_DOWN.whileTrue(new RollCounterClockwise());
+		usedJoystick.L2.onTrue(new InstantCommand(() -> Roller.getInstance().setObjectOut()));
 
 
 		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
