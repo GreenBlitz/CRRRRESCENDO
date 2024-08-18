@@ -96,8 +96,8 @@ public class OI {
 	}
 
 	public void initButtons() {
-		romyButtons();
-		shchoriButtons();
+//		romyButtons();
+//		shchoriButtons();
 	}
 
 	public void romyButtons() {
@@ -165,12 +165,7 @@ public class OI {
 	}
 
 	public void initializeDefaultCommands() {
-		Battery.getInstance().setDefaultCommand(new BatteryLimiter());
-		Elbow.getInstance().setDefaultCommand(new ElbowDefaultCommand());
-		Wrist.getInstance().setDefaultCommand(new WristDefaultCommand());
-		Pivot.getInstance().setDefaultCommand(new PivotDefaultCommand());
-		LED.getInstance().setDefaultCommand(new UpdateLEDStateDefaultCommand());
-		FlyWheel.getInstance().setDefaultCommand(new FlyWheelDefaultCommand());
+
 	}
 
 }
