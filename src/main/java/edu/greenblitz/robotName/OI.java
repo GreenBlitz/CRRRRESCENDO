@@ -124,7 +124,7 @@ public class OI {
 		usedJoystick.L2.onTrue(new InstantCommand(() -> Roller.getInstance().setObjectOut()));
 
 
-		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
+//		SwerveChassis.getInstance().setDefaultCommand(new MoveByJoysticks(ChassisConstants.DRIVE_MODE));
 	}
 
 	public void romyButtons() {
