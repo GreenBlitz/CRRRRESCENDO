@@ -92,10 +92,10 @@ public class OI {
 	}
 
 	public void initButtons() {
-//        romyButtons();
-//        shchoriButtons();
+        romyButtons();
+        shchoriButtons();
 
-		oneControllerButtons();
+//		oneControllerButtons();
 	}
 
 	public void oneControllerButtons() {
