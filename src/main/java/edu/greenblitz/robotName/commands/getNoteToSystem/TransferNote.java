@@ -13,7 +13,7 @@ public class TransferNote extends SequentialCommandGroup {
 	
 	public TransferNote() {
 		super(
-				new MoveToTransferNotePosition(),
+				new MoveToTransferNotePosition().raceWith(new WaitCommand(1.5)),
 				new WaitCommand(0.5),
 				new ConditionalCommand(
 						new NoteToShooterFromArm(),

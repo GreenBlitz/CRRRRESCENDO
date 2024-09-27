@@ -19,6 +19,7 @@ import edu.greenblitz.robotName.commands.shooter.flyWheel.RunFlyWheelByVelocityU
 import edu.greenblitz.robotName.commands.shooter.funnel.RunFunnelByJoystick;
 import edu.greenblitz.robotName.commands.shooter.funnel.runByPowerUntilCondition.RunFunnelByPower;
 import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotByJoystick;
+import edu.greenblitz.robotName.commands.shooter.pivot.MovePivotToAngle;
 import edu.greenblitz.robotName.commands.shooter.pivot.PivotDefaultCommand;
 import edu.greenblitz.robotName.commands.swerve.MoveByJoysticks;
 import edu.greenblitz.robotName.commands.switchMode.SetScoringMode;
@@ -33,12 +34,14 @@ import edu.greenblitz.robotName.subsystems.limelight.MultiLimelight;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheel;
 import edu.greenblitz.robotName.subsystems.shooter.FlyWheel.FlyWheelConstants;
 import edu.greenblitz.robotName.subsystems.shooter.pivot.Pivot;
+import edu.greenblitz.robotName.subsystems.shooter.pivot.PivotConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.ChassisConstants;
 import edu.greenblitz.robotName.subsystems.swerve.chassis.SwerveChassis;
 import edu.greenblitz.robotName.utils.hid.SmartJoystick;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 
@@ -158,7 +161,7 @@ public class OI {
 		usedJoystick.BACK.onTrue(new SetScoringMode(ScoringMode.CLIMB));
 
 		//Wrist Hand Control
-		usedJoystick.POV_UP.whileTrue(new MoveWristForwardOrPivotForPodium());
+		usedJoystick.POV_UP.whileTrue(new MovePivotToAngle(PivotConstants.PresetPositions.CLOSE_SHOOTING).andThen(new WaitCommand(1000)));
 		usedJoystick.POV_DOWN.whileTrue(new MoveWristBackwardOrPivotForClose());
 
 		//Note-Roller Hand Control
